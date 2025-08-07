@@ -8,13 +8,13 @@ Your Firebase configuration for the "End of Time" game is properly set up and re
 
 | Setting | Value | Status |
 |---------|-------|--------|
-| **Project ID** | `end-of-time` | ✅ Valid |
-| **Auth Domain** | `end-of-time.firebaseapp.com` | ✅ Valid |
-| **API Key** | `AIzaSyAKExnN5p_QiS7iX-2x4S8Ttf7cPQ_U72E` | ✅ Valid |
-| **Storage Bucket** | `end-of-time.appspot.com` | ✅ Valid |
-| **Messaging Sender ID** | `361998196975` | ✅ Valid |
-| **App ID** | `1:361998196975:web:a2c3dabc5c8a760868bb1a` | ✅ Valid |
-| **Measurement ID** | `G-53MF5JWV2V` | ✅ Valid |
+| **Project ID** | `end-of-time-94cd3` | ✅ Valid |
+| **Auth Domain** | `end-of-time-94cd3.firebaseapp.com` | ✅ Valid |
+| **API Key** | `AIzaSyA78bvzjP-b7K9TPCbIL3ttzPJr07VR8kY` | ✅ Valid |
+| **Storage Bucket** | `end-of-time-94cd3.firebasestorage.app` | ✅ Valid |
+| **Messaging Sender ID** | `628602476853` | ✅ Valid |
+| **App ID** | `1:628602476853:web:181df03c3374465811147c` | ✅ Valid |
+| **Measurement ID** | `G-E5R3NG1533` | ✅ Valid |
 
 ## 🔧 Technical Setup Verification
 

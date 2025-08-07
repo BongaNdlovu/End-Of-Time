@@ -3219,18 +3219,18 @@ if (deepInsightNextBtn) {
 }
 
 // --- Firebase Config & Auth ---
-// Firebase project: "End of Time" (end-of-time)
-// Project number: 361998196975
+// Firebase project: "End of Time" (end-of-time-94cd3)
+// Project number: 628602476853
 // TODO: You need to create a Web App in your Firebase project to get the API key and other credentials
 // Go to https://console.firebase.google.com/ → Your Project → Project Settings → General → Your Apps → Add Web App
 const firebaseConfig = {
-  apiKey: "AIzaSyAKExnN5p_QiS7iX-2x4S8Ttf7cPQ_U72E",
-  authDomain: "end-of-time.firebaseapp.com",
-  projectId: "end-of-time",
-  storageBucket: "end-of-time.appspot.com",
-  messagingSenderId: "361998196975",
-  appId: "1:361998196975:web:a2c3dabc5c8a760868bb1a",
-  measurementId: "G-53MF5JWV2V"
+  apiKey: "AIzaSyA78bvzjP-b7K9TPCbIL3ttzPJr07VR8kY",
+  authDomain: "end-of-time-94cd3.firebaseapp.com",
+  projectId: "end-of-time-94cd3",
+  storageBucket: "end-of-time-94cd3.firebasestorage.app",
+  messagingSenderId: "628602476853",
+  appId: "1:628602476853:web:181df03c3374465811147c",
+  measurementId: "G-E5R3NG1533"
 };
 // Only initialize Firebase if not running locally
 let auth, db, currentUser = null;

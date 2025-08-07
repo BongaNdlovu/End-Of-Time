@@ -3462,9 +3462,73 @@ function formatLeaderboardTime(seconds) {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
+// Helper function to format Firebase timestamps
+function formatFirebaseDate(timestamp) {
+  if (!timestamp) return 'Recent';
+  
+  try {
+    let jsDate;
+    
+    if (timestamp.toDate && typeof timestamp.toDate === 'function') {
+      // Firebase Timestamp object (v8)
+      jsDate = timestamp.toDate();
+    } else if (timestamp.seconds !== undefined) {
+      // Firebase Timestamp object (v9) - convert seconds to milliseconds
+      jsDate = new Date(timestamp.seconds * 1000);
+    } else if (timestamp instanceof Date) {
+      // Regular Date object
+      jsDate = timestamp;
+    } else if (typeof timestamp === 'string') {
+      // String date
+      jsDate = new Date(timestamp);
+      if (isNaN(jsDate.getTime())) return 'Recent';
+    } else if (typeof timestamp === 'number') {
+      // Timestamp number (milliseconds)
+      jsDate = new Date(timestamp);
+    } else {
+      return 'Recent';
+    }
+    
+    // Check if date is valid
+    if (isNaN(jsDate.getTime())) return 'Recent';
+    
+    // Format the date
+    const now = new Date();
+    const diffInHours = (now - jsDate) / (1000 * 60 * 60);
+    
+    if (diffInHours < 1) {
+      return 'Just now';
+    } else if (diffInHours < 24) {
+      const hours = Math.floor(diffInHours);
+      return `${hours}h ago`;
+    } else if (diffInHours < 168) { // 7 days
+      const days = Math.floor(diffInHours / 24);
+      return `${days}d ago`;
+    } else {
+      return jsDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return 'Recent';
+  }
+}
+
 // Submit score to leaderboard
 function submitToLeaderboard(score, time) {
-  if (!currentUser || optoutCheckbox.checked) return;
+  // Check if user is authenticated
+  if (!currentUser) {
+    console.log('⚠️ No user signed in - skipping leaderboard submission');
+    return;
+  }
+  
+  if (optoutCheckbox && optoutCheckbox.checked) {
+    console.log('⚠️ User opted out of leaderboard - skipping submission');
+    return;
+  }
   
   // Ensure score and time are valid numbers
   const finalScore = parseInt(score, 10) || 0;
@@ -3476,26 +3540,56 @@ function submitToLeaderboard(score, time) {
     finalScore: finalScore, 
     finalTime: finalTime, 
     user: currentUser.displayName,
+    uid: currentUser.uid,
     currentPlayerScore: playerScore,
     timeAttackBlueTeamFinalScore: timeAttackBlueTeamFinalScore
   });
   
+  // Validate user data
+  if (!currentUser.uid) {
+    console.error('❌ User UID is missing');
+    return;
+  }
+  
   const entry = {
     uid: currentUser.uid,
-    displayName: currentUser.displayName,
-    photoURL: currentUser.photoURL,
+    displayName: currentUser.displayName || 'Anonymous',
+    photoURL: currentUser.photoURL || 'https://via.placeholder.com/24x24',
     score: finalScore,
     time: finalTime,
     date: firebase.firestore.FieldValue.serverTimestamp()
   };
   
-  // Always submit the current score - let the leaderboard ranking handle the display
+  // Validate entry data
+  if (!entry.uid || typeof entry.score !== 'number' || typeof entry.time !== 'number') {
+    console.error('❌ Invalid entry data:', entry);
+    return;
+  }
+  
+  console.log('📝 Submitting entry to Firestore:', entry);
+  
+  // Submit to leaderboard with enhanced error handling
   db.collection('leaderboard').doc(currentUser.uid).set(entry)
     .then(() => {
       console.log('✅ Score submitted successfully:', finalScore);
     })
     .catch(error => {
-      console.error('Error submitting score:', error);
+      console.error('❌ Error submitting score:', error);
+      
+      // Handle specific error cases
+      if (error.code === 'permission-denied') {
+        console.error('🔒 Permission denied - check Firestore security rules');
+        showFirebaseErrorMessage('Permission denied. Please check if you are signed in correctly.', false);
+      } else if (error.code === 'unauthenticated') {
+        console.error('🔐 User not authenticated');
+        showFirebaseErrorMessage('Please sign in to save your score.', false);
+      } else if (error.code === 'invalid-argument') {
+        console.error('📝 Invalid data format');
+        showFirebaseErrorMessage('Invalid score data. Please try again.', true);
+      } else {
+        console.error('🌐 Network or server error:', error.message);
+        showFirebaseErrorMessage('Failed to save score. Please check your connection and try again.', true);
+      }
     });
 }
 
@@ -3554,47 +3648,9 @@ function fetchAndDisplayLeaderboard() {
         const photoURL = d.photoURL || 'https://via.placeholder.com/24x24';
         const score = parseInt(d.score, 10) || 0;
         const time = parseInt(d.time, 10) || 0;
-        // Handle Firebase timestamp properly
-        let date = 'Unknown';
-        console.log('🗓️ Debug: Raw date field:', { 
-            date: d.date, 
-            type: typeof d.date, 
-            hasToDate: d.date && typeof d.date.toDate === 'function',
-            isDate: d.date instanceof Date 
-        });
-        
-        if (d.date) {
-            if (d.date.toDate && typeof d.date.toDate === 'function') {
-                // Firebase Timestamp object
-                try {
-                    date = d.date.toDate().toLocaleDateString();
-                    console.log('🗓️ Debug: Firebase timestamp converted to:', date);
-                } catch (error) {
-                    console.error('🗓️ Error converting Firebase timestamp:', error);
-                    date = 'Recent';
-                }
-            } else if (d.date instanceof Date) {
-                // Regular Date object
-                date = d.date.toLocaleDateString();
-                console.log('🗓️ Debug: Date object converted to:', date);
-            } else if (typeof d.date === 'string') {
-                // String date
-                const parsedDate = new Date(d.date);
-                if (!isNaN(parsedDate.getTime())) {
-                    date = parsedDate.toLocaleDateString();
-                    console.log('🗓️ Debug: String date converted to:', date);
-                }
-            } else if (typeof d.date === 'number') {
-                // Timestamp number
-                date = new Date(d.date).toLocaleDateString();
-                console.log('🗓️ Debug: Number timestamp converted to:', date);
-            } else {
-                console.log('🗓️ Debug: Unhandled date type, using fallback');
-                date = 'Recent';
-            }
-        } else {
-            console.log('🗓️ Debug: No date field found');
-        }
+        // Handle Firebase timestamp properly using the helper function
+        const date = formatFirebaseDate(d.date);
+        console.log('🗓️ Debug: Formatted date:', date, 'from:', d.date);
         
         console.log('Displaying leaderboard entry:', { rank, displayName, score, time, date, isCurrent });
         

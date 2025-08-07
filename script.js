@@ -417,9 +417,32 @@ function updateSoloStats() {
     const streak = st ? st.currentStreak : currentStreak;
     const idx = st ? st.currentQuestionIndex : currentQuestionIndex;
     const qsLen = st && Array.isArray(st.questions) ? st.questions.length : questions.length;
-    scoreSolo.children[0].innerText = `Score: ${score}`;
-    scoreSolo.children[1].innerText = `Streak: ${streak}`;
-    scoreSolo.children[2].innerText = `${idx + 1} / ${qsLen}`;
+    const scoreEl = document.getElementById('score-value') || scoreSolo.children[0];
+    const streakEl = document.getElementById('streak-value') || scoreSolo.children[1];
+    const qProgEl = document.getElementById('question-progress') || scoreSolo.children[2];
+    if (scoreEl) scoreEl.innerText = `Score: ${score}`;
+    if (streakEl) streakEl.innerText = `Streak: ${streak}`;
+    if (qProgEl) qProgEl.innerText = `${idx + 1} / ${qsLen}`;
+    updateStreakTiers(streak);
+}
+
+// Update visible streak tier progress bars (3/5/10/15)
+function updateStreakTiers(streakCount) {
+  const tiers = [
+    { id: 'bronze', target: 3 },
+    { id: 'silver', target: 5 },
+    { id: 'gold', target: 10 },
+    { id: 'platinum', target: 15 },
+  ];
+  tiers.forEach(t => {
+    const bar = document.getElementById(`${t.id}-bar`);
+    const count = document.getElementById(`${t.id}-count`);
+    if (!bar || !count) return;
+    const progress = Math.max(0, Math.min(1, streakCount / t.target));
+    bar.style.width = `${progress * 100}%`;
+    const shown = Math.min(streakCount, t.target);
+    count.innerText = `${shown}/${t.target}`;
+  });
 }
 
 function resetState() {
@@ -441,6 +464,10 @@ function resetState() {
         lightningStartTime: null,
         lightningAnswers: 0
     };
+    // Reset visible streak tiers
+    if (typeof updateStreakTiers === 'function') {
+        updateStreakTiers(0);
+    }
 }
 
 // --- Animation Functions ---

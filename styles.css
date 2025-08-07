@@ -351,6 +351,60 @@ h1.glitch-effect {
     font-weight: 600;
 }
 
+/* Streak tiers */
+#streak-tiers {
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+}
+
+#streak-tiers .tier {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+#streak-tiers .tier-label {
+    font-size: 0.9rem;
+    color: #ddd;
+    min-width: 88px;
+    text-align: right;
+}
+
+#streak-tiers .tier-progress {
+    position: relative;
+    height: 8px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#streak-tiers .tier-progress-bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.35s ease;
+}
+
+#streak-tiers .tier-count {
+    font-size: 0.9rem;
+    color: #bbb;
+    min-width: 52px;
+    text-align: left;
+}
+
+/* Tier colors */
+#streak-tiers .tier[data-tier="bronze"] .tier-progress-bar { background: linear-gradient(90deg, #cd7f32, #f1c27d); box-shadow: 0 0 10px #cd7f32aa; }
+#streak-tiers .tier[data-tier="silver"] .tier-progress-bar { background: linear-gradient(90deg, #c0c0c0, #e0e0e0); box-shadow: 0 0 10px #c0c0c0aa; }
+#streak-tiers .tier[data-tier="gold"] .tier-progress-bar { background: linear-gradient(90deg, #ffd700, #fff0a6); box-shadow: 0 0 10px #ffd700aa; }
+#streak-tiers .tier[data-tier="platinum"] .tier-progress-bar { background: linear-gradient(90deg, #e5e4e2, #ffffff); box-shadow: 0 0 10px #e5e4e2aa; }
+
+@media (max-width: 600px) {
+  #streak-tiers .tier-label { min-width: 70px; font-size: 0.85rem; }
+  #streak-tiers .tier-count { min-width: 44px; font-size: 0.85rem; }
+}
+
 /* Enhanced timer with better visual feedback */
 .timer p {
     font-size: 2rem;

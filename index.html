@@ -169,11 +169,33 @@
         </div>
         
         <!-- Game Main: Score, Question, Options -->
-        <div class="game-main">
+            <div class="game-main">
             <div class="score-solo" id="score-solo">
-                <p>Score: 0</p>
-                <p>Streak: 0</p>
-                <p>1 / 50</p>
+                <p id="score-value">Score: 0</p>
+                <p id="streak-value">Streak: 0</p>
+                <p id="question-progress">1 / 50</p>
+                <div id="streak-tiers" aria-label="Streak Tier Progress">
+                  <div class="tier" data-tier="bronze">
+                    <span class="tier-label">Bronze 3</span>
+                    <div class="tier-progress"><div class="tier-progress-bar" id="bronze-bar"></div></div>
+                    <span class="tier-count" id="bronze-count">0/3</span>
+                  </div>
+                  <div class="tier" data-tier="silver">
+                    <span class="tier-label">Silver 5</span>
+                    <div class="tier-progress"><div class="tier-progress-bar" id="silver-bar"></div></div>
+                    <span class="tier-count" id="silver-count">0/5</span>
+                  </div>
+                  <div class="tier" data-tier="gold">
+                    <span class="tier-label">Gold 10</span>
+                    <div class="tier-progress"><div class="tier-progress-bar" id="gold-bar"></div></div>
+                    <span class="tier-count" id="gold-count">0/10</span>
+                  </div>
+                  <div class="tier" data-tier="platinum">
+                    <span class="tier-label">Platinum 15</span>
+                    <div class="tier-progress"><div class="tier-progress-bar" id="platinum-bar"></div></div>
+                    <span class="tier-count" id="platinum-count">0/15</span>
+                  </div>
+                </div>
             </div>
             <div class="question-options-container">
                 <div class="question">

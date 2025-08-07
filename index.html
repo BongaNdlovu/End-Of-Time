@@ -60,6 +60,7 @@
     <!-- Remove Google Fonts, we will use local Montserrat fonts -->
     <script src="questions.js" defer></script>
     <script src="script.js" defer></script>
+    <script type="module" src="/src/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/confetti-js/dist/index.min.js"></script>
     <!-- Manifest only loaded when not running locally -->
     <script>
@@ -100,7 +101,6 @@
                 <option value="10">10</option>
                 <option value="20" selected>20</option>
                 <option value="50">50</option>
-                <option value="100">100</option>
             </select>
         </div>
         <div id="time-attack-container" style="margin-bottom: 1.2rem; text-align: center; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
@@ -173,7 +173,7 @@
             <div class="score-solo" id="score-solo">
                 <p>Score: 0</p>
                 <p>Streak: 0</p>
-                <p>1 / 100</p>
+                <p>1 / 50</p>
             </div>
             <div class="question-options-container">
                 <div class="question">
@@ -185,10 +185,10 @@
         
         <!-- Team elements -->
         <h3 id="team-turn-indicator" style="text-align:center; font-family:'Bangers', cursive; color:#ffffff; display:none;"></h3>
-        <div class="score-teams" id="score-teams" style="display:none;">
+            <div class="score-teams" id="score-teams" style="display:none;">
             <div>
                 <p>Blue: 0</p>
-                <p>1 / 100</p>
+                    <p>1 / 25</p>
                 <p>Black: 0</p>
             </div>
         </div>
@@ -212,7 +212,7 @@
         <div id="fun-fact-box-end"></div>
         <div class="results-solo" id="results-solo">
             <p>Your Score: 0</p>
-            <p>Correct Answers: 0/100</p>
+            <p>Correct Answers: 0/50</p>
             <p>Longest Streak: 0</p>
             <p id="results-solo-time" style="display: none;"></p>
             <div class="stars">★ ★ ★ ★ ★</div>
@@ -231,7 +231,6 @@
                 <option value="10">10 Questions</option>
                 <option value="20">20 Questions</option>
                 <option value="50">50 Questions</option>
-                <option value="100">100 Questions</option>
             </select>
         </div>
         <div id="leaderboard" class="leaderboard-section" style="margin: 1.5em 0; display: none;">

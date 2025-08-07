@@ -437,12 +437,71 @@ function updateStreakTiers(streakCount) {
   tiers.forEach(t => {
     const bar = document.getElementById(`${t.id}-bar`);
     const count = document.getElementById(`${t.id}-count`);
+    const row = document.querySelector(`#streak-tiers .tier[data-tier="${t.id}"]`);
     if (!bar || !count) return;
     const progress = Math.max(0, Math.min(1, streakCount / t.target));
     bar.style.width = `${progress * 100}%`;
     const shown = Math.min(streakCount, t.target);
     count.innerText = `${shown}/${t.target}`;
+    // Mark completed state
+    if (shown >= t.target) {
+      bar.classList.add('completed');
+      if (row) row.classList.add('completed');
+    } else {
+      bar.classList.remove('completed');
+      if (row) row.classList.remove('completed');
+    }
   });
+}
+
+function getTierForStreak(streak) {
+  if (streak >= 15) return { id: 'platinum', label: 'Platinum', target: 15 };
+  if (streak >= 10) return { id: 'gold', label: 'Gold', target: 10 };
+  if (streak >= 5) return { id: 'silver', label: 'Silver', target: 5 };
+  if (streak >= 3) return { id: 'bronze', label: 'Bronze', target: 3 };
+  return null;
+}
+
+function showStreakToast(streak, tier) {
+  const toast = document.createElement('div');
+  toast.className = 'streak-toast';
+  toast.innerHTML = `🔥 ${tier.label} Streak ${tier.target}!`;
+  document.body.appendChild(toast);
+  // Animate with existing fadeInOut keyframes
+  toast.style.position = 'fixed';
+  toast.style.top = '20%';
+  toast.style.left = '50%';
+  toast.style.transform = 'translateX(-50%)';
+  toast.style.background = 'rgba(255,215,0,0.95)';
+  toast.style.color = '#222';
+  toast.style.padding = '0.8rem 1.2rem';
+  toast.style.borderRadius = '14px';
+  toast.style.fontFamily = "'Bangers', cursive";
+  toast.style.fontSize = '1.4rem';
+  toast.style.zIndex = '2000';
+  toast.style.boxShadow = '0 8px 24px rgba(0,0,0,0.3)';
+  toast.style.animation = 'fadeInOut 1.8s ease-out forwards';
+  setTimeout(() => toast.remove(), 1900);
+}
+
+// Trigger milestone animation when streak hits 3/5/10/15
+function handleStreakMilestone(streak) {
+  if (![3,5,10,15].includes(streak)) return;
+  const tier = getTierForStreak(streak);
+  // Play tier-specific sound
+  if (typeof playStreakSound === 'function') playStreakSound(streak);
+  // Visuals: confetti + fireworks
+  triggerConfetti('streak');
+  triggerComicFireworks(streak >= 10);
+  // Highlight the tier row
+  if (tier) {
+    const row = document.querySelector(`#streak-tiers .tier[data-tier="${tier.id}"]`);
+    if (row) {
+      row.classList.add('tier-unlocked');
+      setTimeout(() => row.classList.remove('tier-unlocked'), 1200);
+    }
+    showStreakToast(streak, tier);
+  }
 }
 
 function resetState() {
@@ -2077,6 +2136,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     st.addPlayerScore(points);
                     st.incStreak();
                     st.incCorrectAnswers();
+                    // Streak milestone animations (3/5/10/15)
+                    try {
+                        const newStreak = (st.GameState && st.GameState.currentStreak) ?? currentStreak;
+                        if ([3,5,10,15].includes(newStreak)) handleStreakMilestone(newStreak);
+                    } catch (_) {}
                     // Earn token on streak milestones
                     if (gs.currentStreak > 0 && gs.currentStreak % 3 === 0) {
                         st.incFaithTokens();
@@ -2092,6 +2156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const oldScore = playerScore;
                     playerScore += points;
                     currentStreak++;
+                    if ([3,5,10,15].includes(currentStreak)) handleStreakMilestone(currentStreak);
                     correctAnswers++;
                     if (currentStreak > longestStreak) longestStreak = currentStreak;
                     if (currentStreak > 0 && currentStreak % 3 === 0) {
@@ -3734,31 +3799,54 @@ function submitToLeaderboard(score, time) {
     return;
   }
   
-  console.log('📝 Submitting entry to Firestore:', entry);
+  console.log('📝 Submitting entry to Firestore (best-score only):', entry);
   
-  // Submit to leaderboard with enhanced error handling
-  db.collection('leaderboard').doc(currentUser.uid).set(entry)
-    .then(() => {
-      console.log('✅ Score submitted successfully:', finalScore);
-    })
-    .catch(error => {
-      console.error('❌ Error submitting score:', error);
-      
-      // Handle specific error cases
-      if (error.code === 'permission-denied') {
-        console.error('🔒 Permission denied - check Firestore security rules');
-        showFirebaseErrorMessage('Permission denied. Please check if you are signed in correctly.', false);
-      } else if (error.code === 'unauthenticated') {
-        console.error('🔐 User not authenticated');
-        showFirebaseErrorMessage('Please sign in to save your score.', false);
-      } else if (error.code === 'invalid-argument') {
-        console.error('📝 Invalid data format');
-        showFirebaseErrorMessage('Invalid score data. Please try again.', true);
-      } else {
-        console.error('🌐 Network or server error:', error.message);
-        showFirebaseErrorMessage('Failed to save score. Please check your connection and try again.', true);
-      }
-    });
+  // Only update if this score beats the existing best (keep previous if lower or equal)
+  const docRef = db.collection('leaderboard').doc(currentUser.uid);
+  db.runTransaction(async (tx) => {
+    const snap = await tx.get(docRef);
+    if (!snap.exists) {
+      tx.set(docRef, entry, { merge: true });
+      return { updated: true, previous: null, previousTime: null };
+    }
+    const data = snap.data() || {};
+    const prevScore = parseInt(data.score, 10) || 0;
+    const prevTimeParsed = parseInt(data.time, 10);
+    const prevTime = Number.isFinite(prevTimeParsed) && prevTimeParsed > 0 ? prevTimeParsed : Number.POSITIVE_INFINITY;
+    const finalTimeEff = finalTime > 0 ? finalTime : Number.POSITIVE_INFINITY;
+    if (finalScore > prevScore) {
+      tx.set(docRef, entry, { merge: true });
+      return { updated: true, previous: prevScore, previousTime: prevTime };
+    } else if (finalScore === prevScore && finalTimeEff < prevTime) {
+      tx.set(docRef, entry, { merge: true });
+      return { updated: true, previous: prevScore, previousTime: prevTime };
+    }
+    return { updated: false, previous: prevScore, previousTime: prevTime };
+  })
+  .then((result) => {
+    if (result && result.updated) {
+      console.log(`✅ New personal best saved: ${finalScore} (prev: ${result.previous ?? 'none'})`);
+    } else {
+      console.log(`ℹ️ Kept previous best score: ${result ? result.previous : 'unknown'} (new ${finalScore} not higher)`);
+    }
+  })
+  .catch(error => {
+    console.error('❌ Error submitting score (transaction):', error);
+    // Handle specific error cases
+    if (error.code === 'permission-denied') {
+      console.error('🔒 Permission denied - check Firestore security rules');
+      showFirebaseErrorMessage('Permission denied. Please check if you are signed in correctly.', false);
+    } else if (error.code === 'unauthenticated') {
+      console.error('🔐 User not authenticated');
+      showFirebaseErrorMessage('Please sign in to save your score.', false);
+    } else if (error.code === 'invalid-argument') {
+      console.error('📝 Invalid data format');
+      showFirebaseErrorMessage('Invalid score data. Please try again.', true);
+    } else {
+      console.error('🌐 Network or server error:', error.message);
+      showFirebaseErrorMessage('Failed to save score. Please check your connection and try again.', true);
+    }
+  });
 }
 
 // Fetch and display Top 100 leaderboard

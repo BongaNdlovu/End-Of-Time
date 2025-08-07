@@ -387,11 +387,39 @@ h1.glitch-effect {
     transition: width 0.35s ease;
 }
 
+#streak-tiers .tier-progress-bar.completed {
+    animation: tierShimmer 1.2s ease-in-out 2;
+    filter: drop-shadow(0 0 6px currentColor);
+}
+
+@keyframes tierShimmer {
+  0% { opacity: 0.9; }
+  50% { opacity: 1; box-shadow: 0 0 18px currentColor; }
+  100% { opacity: 0.9; }
+}
+
 #streak-tiers .tier-count {
     font-size: 0.9rem;
     color: #bbb;
     min-width: 52px;
     text-align: left;
+}
+
+/* Row unlock pulse */
+#streak-tiers .tier.tier-unlocked {
+  animation: tierUnlockPulse 0.8s ease-out 1;
+}
+
+@keyframes tierUnlockPulse {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.03); filter: brightness(1.2); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* Completed row subtle state */
+#streak-tiers .tier.completed .tier-label,
+#streak-tiers .tier.completed .tier-count {
+  color: #eee;
 }
 
 /* Tier colors */

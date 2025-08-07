@@ -3232,8 +3232,27 @@ const firebaseConfig = {
   appId: "1:628602476853:web:181df03c3374465811147c",
   measurementId: "G-E5R3NG1533"
 };
+
 // Only initialize Firebase if not running locally
 let auth, db, currentUser = null;
+
+// Page visibility handling to prevent async errors
+let isPageActive = true;
+document.addEventListener('visibilitychange', () => {
+  isPageActive = !document.hidden;
+  if (!isPageActive) {
+    console.log('⚠️ Page became hidden - pausing async operations');
+  } else {
+    console.log('✅ Page became visible - resuming operations');
+  }
+});
+
+// Handle page unload to clean up async operations
+window.addEventListener('beforeunload', () => {
+  isPageActive = false;
+  console.log('🔄 Page unloading - cleaning up async operations');
+});
+
 if (window.location.protocol !== 'file:') {
     firebase.initializeApp(firebaseConfig);
     auth = firebase.auth();
@@ -3334,38 +3353,64 @@ function updateUserInfoUI() {
     if (mainSignoutBtn) mainSignoutBtn.style.display = 'none';
   }
 }
+
+// Enhanced Google sign-in with proper error handling
 googleSigninBtn.onclick = function() {
   console.log('Attempting Google sign-in...');
+  
+  // Check if page is still active
+  if (document.hidden) {
+    console.log('⚠️ Page is hidden, skipping sign-in');
+    return;
+  }
+  
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).then(result => {
-    console.log('✅ Google sign-in successful:', result.user.displayName);
-    currentUser = result.user;
-    updateUserInfoUI();
-  }).catch(error => {
-    console.error('❌ Google sign-in failed:', error);
-    console.error('Error code:', error.code);
-    console.error('Error message:', error.message);
-    
-    // More specific error messages
-    let errorMessage = 'Failed to sign in with Google. ';
-    switch(error.code) {
-      case 'auth/popup-closed-by-user':
-        errorMessage += 'Sign-in was cancelled.';
-        break;
-      case 'auth/popup-blocked':
-        errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
-        break;
-      case 'auth/unauthorized-domain':
-        errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
-        break;
-      case 'auth/operation-not-allowed':
-        errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
-        break;
-      default:
-        errorMessage += 'Please try again.';
-    }
-    alert(errorMessage);
+  
+  // Add timeout to prevent hanging
+  const signInPromise = auth.signInWithPopup(provider);
+  const timeoutPromise = new Promise((_, reject) => {
+    setTimeout(() => reject(new Error('Sign-in timeout')), 30000); // 30 second timeout
   });
+  
+  Promise.race([signInPromise, timeoutPromise])
+    .then(result => {
+      // Check if page is still active before updating UI
+      if (!document.hidden) {
+        console.log('✅ Google sign-in successful:', result.user.displayName);
+        currentUser = result.user;
+        updateUserInfoUI();
+      } else {
+        console.log('⚠️ Page became hidden during sign-in, skipping UI update');
+      }
+    })
+    .catch(error => {
+      // Only log errors if page is still active
+      if (!document.hidden) {
+        console.error('❌ Google sign-in failed:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        
+        // More specific error messages
+        let errorMessage = 'Failed to sign in with Google. ';
+        switch(error.code) {
+          case 'auth/popup-closed-by-user':
+            errorMessage += 'Sign-in was cancelled.';
+            break;
+          case 'auth/popup-blocked':
+            errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
+            break;
+          case 'auth/unauthorized-domain':
+            errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
+            break;
+          case 'auth/operation-not-allowed':
+            errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
+            break;
+          default:
+            errorMessage += 'Please try again.';
+        }
+        alert(errorMessage);
+      }
+    });
 };
 googleSignoutBtn.onclick = function() {
   auth.signOut().then(() => {

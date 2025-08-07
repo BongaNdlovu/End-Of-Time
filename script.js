@@ -2018,9 +2018,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const correct = selectedBtn.innerText === questions[currentQuestionIndex].answer;
         showFeedback(correct);
         
+        // Determine wager and clamp to valid bounds
         let wager = parseInt(wagerInput.value, 10) || 1;
-        const isFriday = (new Date().getDay() === 5);
-        if (isFriday) wager *= 2;
+        if (wager < 1) wager = 1;
+        if (wager > maxWagerValue) wager = maxWagerValue;
+        // Compute points to award on correct answers (double points tool applies here only)
+        const points = doublePointsActive ? wager * 2 : wager;
         
         // Track achievement stats
         const currentQuestion = questions[currentQuestionIndex];
@@ -2038,7 +2041,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedBtn.classList.add('correct', 'highlight-correct');
             console.log('🎯 Debug: Added highlight to correct answer:', selectedBtn.innerText);
             
-            let points = wager * (doublePointsActive ? 2 : 1);
+            // Use computed points to ensure the awarded score matches the wager (with double points tool if active)
             if (gameMode === 'solo') {
                 const oldScore = playerScore;
                 playerScore += points;
@@ -2059,6 +2062,13 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 selectedBtn.style.transform = '';
             }, 300);
+            // Visual feedback for wager result
+            wagerInput.classList.remove('wager-success', 'wager-failure');
+            wagerInput.classList.add('wager-success');
+            if (typeof wagerFeedback !== 'undefined' && wagerFeedback) {
+                wagerFeedback.textContent = `Great bet! +${points} points`;
+                wagerFeedback.style.color = '#4caf50';
+            }
         } else {
             playSound(audioWrong);
             shakeElement(selectedBtn);
@@ -2073,6 +2083,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentStreak = 0;
             }
             selectedBtn.classList.add('incorrect');
+            // Visual feedback for wager result
+            wagerInput.classList.remove('wager-success', 'wager-failure');
+            wagerInput.classList.add('wager-failure');
+            if (typeof wagerFeedback !== 'undefined' && wagerFeedback) {
+                wagerFeedback.textContent = `Risky bet! -${wager} points`;
+                wagerFeedback.style.color = '#f44336';
+            }
             // Show correct answer with highlight
         const correctAnswer = questions[currentQuestionIndex].answer;
         console.log('🎯 Debug: Correct answer should be:', correctAnswer);

@@ -1,0 +1,28 @@
+[debug] [2025-07-25T19:46:55.734Z] ----------------------------------------------------------------------
+[debug] [2025-07-25T19:46:55.736Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\fanel\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-07-25T19:46:55.737Z] CLI Version:   14.11.1
+[debug] [2025-07-25T19:46:55.737Z] Platform:      win32
+[debug] [2025-07-25T19:46:55.737Z] Node Version:  v24.4.1
+[debug] [2025-07-25T19:46:55.737Z] Time:          Fri Jul 25 2025 21:46:55 GMT+0200 (South Africa Standard Time)
+[debug] [2025-07-25T19:46:55.737Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-25T19:46:55.741Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-25T19:46:55.741Z] > authorizing via signed-in user (fanelesibonge50@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\fanel\Downloads\SDA-Trivia-main\SDA-Trivia-main
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 

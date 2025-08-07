@@ -22,7 +22,7 @@ const gameDiv = document.getElementById('game');
 const gameOverDiv = document.getElementById('game-over');
 const scoreSolo = document.getElementById('score-solo');
 const scoreTeams = document.getElementById('score-teams');
-const timerDiv = document.querySelector('.timer-value') || document.querySelector('.timer p');
+const timerDiv = document.querySelector('.timer-value');
 const questionDiv = document.querySelector('.question p');
 const optionsDiv = document.querySelector('.options');
 const nextBtn = document.getElementById('next');
@@ -217,10 +217,6 @@ function startTicking() {
     stopTicking();
     
     try {
-        if (window.__audio && typeof window.__audio.startTick === 'function') {
-            window.__audio.startTick();
-            return;
-        }
         // Reset and prepare the audio
     audioTickingTime.currentTime = 0;
     audioTickingTime.loop = true;
@@ -259,10 +255,6 @@ function stopTicking() {
     }
     
     try {
-        if (window.__audio && typeof window.__audio.stopTick === 'function') {
-            window.__audio.stopTick();
-            return;
-        }
         if (audioTickingTime) {
         audioTickingTime.pause();
         audioTickingTime.currentTime = 0;
@@ -275,16 +267,29 @@ function stopTicking() {
 // Mute/unmute logic with better error handling
 muteToggle.addEventListener('click', () => {
     isMuted = !isMuted;
-    if (window.__audio && typeof window.__audio.setMuted === 'function') {
-        window.__audio.setMuted(isMuted);
-    }
+    
+    // Create an array of all audio elements
+    const allAudioElements = [
+        audioCorrect1, audioCorrect2, audioWrong, audioTimeup,
+        audioRiser, ...audioBgTracks, audioTimerTick, audioTickingTime,
+        audioStreakWowza, audioStreakZing, audioStreakKawabanga,
+        audioStreakLetsGo, audioStreakNice,
+        audioTransition, audioTransition2
+    ];
+    
+    // Set muted state for all audio elements
+    allAudioElements.forEach(a => {
+        if(a) a.muted = isMuted;
+    });
+    
+    // Update mute button UI
     muteToggle.innerText = isMuted ? '🔇' : '🔊';
+    
+    // Handle background music
     if (isMuted) {
-        if (window.__audio && typeof window.__audio.pauseBg === 'function') window.__audio.pauseBg();
-        else pauseBgMusic();
+        pauseBgMusic();
     } else {
-        if (window.__audio && typeof window.__audio.playBg === 'function') window.__audio.playBg();
-        else playBgMusic();
+        playBgMusic();
     }
 });
 // Show mute button after first user interaction with improved implementation
@@ -297,12 +302,37 @@ function ensureUserInteraction() {
         console.log('Ensuring audio elements are ready...');
         
         // Pre-load audio files after user interaction
-        if (window.__audio && typeof window.__audio.warmup === 'function') {
-            window.__audio.warmup();
-        }
-        // Start background music
-        if (window.__audio && typeof window.__audio.playBg === 'function') window.__audio.playBg();
-        else playBgMusic();
+        const allAudioElements = [
+            audioCorrect1, audioCorrect2, audioWrong, audioTimeup,
+            audioRiser, ...audioBgTracks, audioTimerTick, audioTickingTime,
+            audioStreakWowza, audioStreakZing, audioStreakKawabanga,
+            audioStreakLetsGo, audioStreakNice,
+            audioTransition, audioTransition2
+        ];
+        
+        // Touch all audio elements to prepare them
+        allAudioElements.forEach(audio => {
+            if (audio) {
+                try {
+                    // Create a silent buffer and play it to "warm up" the audio context
+                    const originalVolume = audio.volume;
+                    audio.volume = 0;
+                    audio.play().then(() => {
+                        audio.pause();
+                        audio.currentTime = 0;
+                        audio.volume = isMuted ? 0 : originalVolume;
+                    }).catch(() => {
+                        // Silently fail - this is just pre-loading
+                        audio.volume = isMuted ? 0 : originalVolume;
+                    });
+                } catch (e) {
+                    // Ignore errors during preloading
+                }
+            }
+        });
+        
+        // Start background music with normal volume
+        playBgMusic();
     }
 }
 
@@ -327,8 +357,6 @@ let playerScore = 0;
 let currentStreak = 0;
 let longestStreak = 0;
 let correctAnswers = 0;
-// Track last streak milestone we already animated to prevent double triggers
-let lastTriggeredMilestone = 0; // 0, 3, 5, 10, 15
 let timer;
 let timeLeft = 10;
 
@@ -404,124 +432,15 @@ function clearOptions() {
 }
 
 function updateScore() {
-    const blue = (window.__state && window.__state.GameState.teamBlueScore) ?? teamBlueScore;
-    const black = (window.__state && window.__state.GameState.teamBlackScore) ?? teamBlackScore;
-    const idx = (window.__state && window.__state.GameState.currentQuestionIndex) ?? currentQuestionIndex;
-    const qsLen = (window.__state && window.__state.GameState.questions && window.__state.GameState.questions.length) ?? questions.length;
-    scoreTeams.querySelector('div').children[0].innerText = `Blue: ${blue}`;
-    scoreTeams.querySelector('div').children[1].innerText = `${idx + 1} / ${qsLen}`;
-    scoreTeams.querySelector('div').children[2].innerText = `Black: ${black}`;
+    scoreTeams.querySelector('div').children[0].innerText = `Blue: ${teamBlueScore}`;
+    scoreTeams.querySelector('div').children[1].innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
+    scoreTeams.querySelector('div').children[2].innerText = `Black: ${teamBlackScore}`;
 }
 
 function updateSoloStats() {
-    const st = (window.__state && window.__state.GameState) || null;
-    const score = st ? st.playerScore : playerScore;
-    const streak = st ? st.currentStreak : currentStreak;
-    const idx = st ? st.currentQuestionIndex : currentQuestionIndex;
-    const qsLen = st && Array.isArray(st.questions) ? st.questions.length : questions.length;
-    const scoreEl = document.getElementById('score-value') || scoreSolo.children[0];
-    const streakEl = document.getElementById('streak-value') || scoreSolo.children[1];
-    const qProgEl = document.getElementById('question-progress') || scoreSolo.children[2];
-    if (scoreEl) scoreEl.innerText = `Score: ${score}`;
-    if (streakEl) streakEl.innerText = `Streak: ${streak}`;
-    if (qProgEl) qProgEl.innerText = `${idx + 1} / ${qsLen}`;
-    updateStreakTiers(streak);
-    maybeTriggerStreakMilestone(streak);
-}
-
-// Update visible streak tier progress bars (3/5/10/15)
-function updateStreakTiers(streakCount) {
-  const tiers = [
-    { id: 'bronze', target: 3 },
-    { id: 'silver', target: 5 },
-    { id: 'gold', target: 10 },
-    { id: 'platinum', target: 15 },
-  ];
-  tiers.forEach(t => {
-    const bar = document.getElementById(`${t.id}-bar`);
-    const count = document.getElementById(`${t.id}-count`);
-    const row = document.querySelector(`#streak-tiers .tier[data-tier="${t.id}"]`);
-    if (!bar || !count) return;
-    const progress = Math.max(0, Math.min(1, streakCount / t.target));
-    bar.style.width = `${progress * 100}%`;
-    const shown = Math.min(streakCount, t.target);
-    count.innerText = `${shown}/${t.target}`;
-    // Mark completed state
-    if (shown >= t.target) {
-      bar.classList.add('completed');
-      if (row) row.classList.add('completed');
-    } else {
-      bar.classList.remove('completed');
-      if (row) row.classList.remove('completed');
-    }
-  });
-  // Reset milestone tracker if streak drops below bronze
-  if (streakCount < 3) {
-    lastTriggeredMilestone = 0;
-  }
-}
-
-function getTierForStreak(streak) {
-  if (streak >= 15) return { id: 'platinum', label: 'Platinum', target: 15 };
-  if (streak >= 10) return { id: 'gold', label: 'Gold', target: 10 };
-  if (streak >= 5) return { id: 'silver', label: 'Silver', target: 5 };
-  if (streak >= 3) return { id: 'bronze', label: 'Bronze', target: 3 };
-  return null;
-}
-
-function showStreakToast(streak, tier) {
-  const toast = document.createElement('div');
-  toast.className = 'streak-toast';
-  toast.innerHTML = `🔥 ${tier.label} Streak ${tier.target}!`;
-  document.body.appendChild(toast);
-  // Animate with existing fadeInOut keyframes
-  toast.style.position = 'fixed';
-  toast.style.top = '20%';
-  toast.style.left = '50%';
-  toast.style.transform = 'translateX(-50%)';
-  toast.style.background = 'rgba(255,215,0,0.95)';
-  toast.style.color = '#222';
-  toast.style.padding = '0.8rem 1.2rem';
-  toast.style.borderRadius = '14px';
-  toast.style.fontFamily = "'Bangers', cursive";
-  toast.style.fontSize = '1.4rem';
-  toast.style.zIndex = '2000';
-  toast.style.boxShadow = '0 8px 24px rgba(0,0,0,0.3)';
-  toast.style.animation = 'fadeInOut 1.8s ease-out forwards';
-  setTimeout(() => toast.remove(), 1900);
-}
-
-// Trigger milestone animation when streak hits 3/5/10/15
-function handleStreakMilestone(streak) {
-  if (![3,5,10,15].includes(streak)) return;
-  const tier = getTierForStreak(streak);
-  // Play tier-specific sound
-  if (typeof playStreakSound === 'function') playStreakSound(streak);
-  // Visuals: confetti + fireworks
-  triggerConfetti('streak');
-  triggerComicFireworks(streak >= 10);
-  // Highlight the tier row
-  if (tier) {
-    const row = document.querySelector(`#streak-tiers .tier[data-tier="${tier.id}"]`);
-    if (row) {
-      row.classList.add('tier-unlocked');
-      setTimeout(() => row.classList.remove('tier-unlocked'), 1200);
-    }
-    showStreakToast(streak, tier);
-  }
-}
-
-// Trigger milestone once when passing thresholds (3/5/10/15), avoids duplicate firings
-function maybeTriggerStreakMilestone(streak) {
-  const thresholds = [3, 5, 10, 15];
-  let reached = 0;
-  for (const th of thresholds) {
-    if (streak >= th) reached = th;
-  }
-  if (reached > 0 && reached > lastTriggeredMilestone) {
-    lastTriggeredMilestone = reached;
-    handleStreakMilestone(reached);
-  }
+    scoreSolo.children[0].innerText = `Score: ${playerScore}`;
+    scoreSolo.children[1].innerText = `Streak: ${currentStreak}`;
+    scoreSolo.children[2].innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
 }
 
 function resetState() {
@@ -543,10 +462,6 @@ function resetState() {
         lightningStartTime: null,
         lightningAnswers: 0
     };
-    // Reset visible streak tiers
-    if (typeof updateStreakTiers === 'function') {
-        updateStreakTiers(0);
-    }
 }
 
 // --- Animation Functions ---
@@ -893,7 +808,7 @@ function playStreakSound(streak) {
 }
 
 // --- Category to icon mapping
-const CATEGORY_ICONS = (window.__config && window.__config.CATEGORY_ICONS) || {
+const CATEGORY_ICONS = {
     'Bible People': '📖',
     'Prophecy': '👓',
     'General SDA': '🌍',
@@ -904,7 +819,7 @@ const CATEGORY_ICONS = (window.__config && window.__config.CATEGORY_ICONS) || {
 };
 
 // Fun facts, Bible verses, and health tips
-const FUN_FACTS = (window.__config && window.__config.FUN_FACTS) || [
+const FUN_FACTS = [
     // Bible Verses
     '"I can do all things through Christ who strengthens me." — Philippians 4:13',
     '"Trust in the Lord with all your heart and lean not on your own understanding." — Proverbs 3:5',
@@ -1833,18 +1748,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Start Game ---
     window.startGame = function(mode) {
         ensureUserInteraction();
-        // Audio feedback
-        if (window.__audio && typeof window.__audio.playSoundById === 'function') window.__audio.playSoundById('audio-riser');
-        else playSound(audioRiser);
-        setTimeout(() => {
-            if (window.__audio && typeof window.__audio.playBg === 'function') window.__audio.playBg();
-            else playBgMusic();
-        }, 800);
+        playSound(audioRiser);
+        setTimeout(playBgMusic, 800);
         gameMode = mode;
-        // Prefer module state reset
-        if (window.__state && typeof window.__state.resetForNewGame === 'function') {
-            window.__state.resetForNewGame(mode, 15);
-        }
         playerScore = 0;
         currentStreak = 0;
         longestStreak = 0;
@@ -1864,18 +1770,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- NEW: CHECK FOR TIME ATTACK MODE ---
         isTimeAttackMode = false; // Force disable time attack mode
 
-        // Get game length (cap at 50 overall)
+        // Get game length
         let numQuestions = 20;
         const gameLengthSelect = document.getElementById('game-length-select');
         if (gameLengthSelect && !isNaN(parseInt(gameLengthSelect.value, 10))) {
             numQuestions = parseInt(gameLengthSelect.value, 10);
-        }
-        // Enforce maximums
-        numQuestions = Math.min(numQuestions, 50);
-        // Determine per-team question count when in teams mode (equal split, max 25)
-        let perTeamQuestionCount = null;
-        if (mode === 'teams') {
-            perTeamQuestionCount = Math.max(1, Math.min(25, Math.floor(numQuestions / 2)));
         }
 
         // Filter questions by category and COMPLETELY RANDOMIZE
@@ -1894,15 +1793,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // - Category order
         // - Previous game history
         // - Team assignments
-            questions = shuffle(availableQuestions).slice(0, (gameMode === 'teams' ? perTeamQuestionCount : numQuestions));
-            if (window.__state && typeof window.__state.GameState === 'object') {
-                window.__state.GameState.questions = questions;
-                window.__state.GameState.currentQuestionIndex = 0;
-                window.__state.GameState.maxWagerValue = 20;
-                window.__state.GameState.currentWager = 5;
-            }
-            // Track question count: for teams, this is per-team
-            gameQuestionCount = (gameMode === 'teams' ? perTeamQuestionCount : numQuestions);
+            questions = shuffle(availableQuestions).slice(0, numQuestions);
+            gameQuestionCount = numQuestions;
             maxWagerValue = 20;
             currentWager = 5;
 
@@ -2002,8 +1894,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Question display
         if (gameMode === 'teams') {
-            // For team mode, keep the same team for the entire round
-            currentTeam = timeAttackTeamTurn;
+            if (isTimeAttackMode) {
+                // In Time Attack, the turn is fixed for the whole round
+                currentTeam = timeAttackTeamTurn; 
+            } else {
+                // In normal mode, teams alternate questions
+                currentTeam = (currentQuestionIndex % 2 === 0) ? 'blue' : 'black';
+            }
         }
         
         if (!questions[currentQuestionIndex]) {
@@ -2102,10 +1999,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             fadeIn(document.querySelector('.options'));
         }, 50);
-
-        // Attach ripple effects to newly created buttons and reset Next glow
-        if (typeof attachRippleToButtons === 'function') attachRippleToButtons();
-        if (typeof setNextButtonGlow === 'function') setNextButtonGlow(false);
     }
 
     // --- Show Question (Updated for Two-Phase) ---
@@ -2122,8 +2015,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const selectedBtn = e.target;
-        // Pop/bounce visual feedback for the pressed button
-        if (typeof popButton === 'function') popButton(selectedBtn);
         const correct = selectedBtn.innerText === questions[currentQuestionIndex].answer;
         showFeedback(correct);
         
@@ -2148,67 +2039,20 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('🎯 Debug: Added highlight to correct answer:', selectedBtn.innerText);
             
             let points = wager * (doublePointsActive ? 2 : 1);
-            if (isLightningRound) points *= 2;
             if (gameMode === 'solo') {
-                if (window.__state && window.__state.GameState) {
-                    const st = window.__state;
-                    const gs = st.GameState;
-                    st.addPlayerScore(points);
-                    st.incStreak();
-                    st.incCorrectAnswers();
-                    // Streak milestone animations (3/5/10/15)
-                    try {
-                        const immediateStreak = (st.GameState && st.GameState.currentStreak) ?? currentStreak;
-                        if ([3,5,10,15].includes(immediateStreak)) handleStreakMilestone(immediateStreak);
-                        // Re-check on next tick in case state updates asynchronously
-                        setTimeout(() => {
-                            try {
-                                const refreshedStreak = (st.GameState && st.GameState.currentStreak) ?? currentStreak;
-                                if ([3,5,10,15].includes(refreshedStreak)) handleStreakMilestone(refreshedStreak);
-                            } catch(_) {}
-                        }, 0);
-                    } catch (_) {}
-                    // Earn token on streak milestones
-                    if (gs.currentStreak > 0 && gs.currentStreak % 3 === 0) {
-                        st.incFaithTokens();
-                        faithTokens = gs.faithTokens;
-                        updateFaithTokens(true);
-                    }
-                    // Mirror for legacy UI reads
-                    playerScore = gs.playerScore;
-                    currentStreak = gs.currentStreak;
-                    longestStreak = gs.longestStreak;
-                    correctAnswers = gs.correctAnswers;
-                } else {
-                    const oldScore = playerScore;
-                    playerScore += points;
-                    currentStreak++;
-                    if ([3,5,10,15].includes(currentStreak)) handleStreakMilestone(currentStreak);
-                    correctAnswers++;
-                    if (currentStreak > longestStreak) longestStreak = currentStreak;
-                    if (currentStreak > 0 && currentStreak % 3 === 0) {
-                        faithTokens++;
-                        updateFaithTokens(true);
-                    }
-                    console.log(`Score updated: ${oldScore} + ${points} = ${playerScore}`);
+                const oldScore = playerScore;
+                playerScore += points;
+                currentStreak++;
+                correctAnswers++;
+                if (currentStreak > longestStreak) longestStreak = currentStreak;
+                if (currentStreak > 0 && currentStreak % 3 === 0) {
+                    faithTokens++;
+                    updateFaithTokens(true);
                 }
+                console.log(`Score updated: ${oldScore} + ${points} = ${playerScore}`);
             } else { // Teams
-                if (window.__state && typeof window.__state.setTeamScore === 'function') {
-                    const st = window.__state.GameState;
-                    if (currentTeam === 'blue') {
-                        window.__state.setTeamScore('blue', (st.teamBlueScore ?? teamBlueScore) + points);
-                        teamBlueScore = window.__state.GameState.teamBlueScore;
-                    } else {
-                        window.__state.setTeamScore('black', (st.teamBlackScore ?? teamBlackScore) + points);
-                        teamBlackScore = window.__state.GameState.teamBlackScore;
-                    }
-                } else {
-                    if (currentTeam === 'blue') teamBlueScore += points;
-                    else teamBlackScore += points;
-                    // Track streak in team mode as well
-                    currentStreak++;
-                    if ([3,5,10,15].includes(currentStreak)) handleStreakMilestone(currentStreak);
-                }
+                if (currentTeam === 'blue') teamBlueScore += points;
+                else teamBlackScore += points;
             }
             selectedBtn.classList.add('correct');
             selectedBtn.style.transform = 'scale(1.05)';
@@ -2218,36 +2062,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             playSound(audioWrong);
             shakeElement(selectedBtn);
-            let penalty = wager;
-            if (isLightningRound) penalty *= 2;
             if (gameMode === 'solo') {
-                if (window.__state && window.__state.GameState) {
-                    const st = window.__state;
-                    const gs = st.GameState;
-                    st.setPlayerScore(Math.max(0, (gs.playerScore ?? playerScore) - penalty));
-                    st.resetStreak();
-                    playerScore = gs.playerScore;
-                    currentStreak = gs.currentStreak;
-                } else {
-                    const oldScore = playerScore;
-                    playerScore = Math.max(0, playerScore - penalty);
-                    currentStreak = 0;
-                    console.log(`Score updated: ${oldScore} - ${penalty} = ${playerScore}`);
-                }
+                const oldScore = playerScore;
+                playerScore = Math.max(0, playerScore - wager);
+                currentStreak = 0;
+                console.log(`Score updated: ${oldScore} - ${wager} = ${playerScore}`);
             } else { // Teams
-                if (window.__state && typeof window.__state.setTeamScore === 'function') {
-                    const gs = window.__state.GameState;
-                    if (currentTeam === 'blue') {
-                        window.__state.setTeamScore('blue', Math.max(0, (gs.teamBlueScore ?? teamBlueScore) - penalty));
-                        teamBlueScore = window.__state.GameState.teamBlueScore;
-                    } else {
-                        window.__state.setTeamScore('black', Math.max(0, (gs.teamBlackScore ?? teamBlackScore) - penalty));
-                        teamBlackScore = window.__state.GameState.teamBlackScore;
-                    }
-                } else {
-                    if (currentTeam === 'blue') teamBlueScore = Math.max(0, teamBlueScore - penalty);
-                    else teamBlackScore = Math.max(0, teamBlackScore - penalty);
-                }
+                if (currentTeam === 'blue') teamBlueScore = Math.max(0, teamBlueScore - wager);
+                else teamBlackScore = Math.max(0, teamBlackScore - wager);
                 currentStreak = 0;
             }
             selectedBtn.classList.add('incorrect');
@@ -2264,11 +2086,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         }
         
-            if (gameMode === 'solo') updateSoloStats();
-            else updateScoreDisplay();
-            
-            // If we have UI tier bars, ensure they reflect current streak for all modes
-            if (typeof updateStreakTiers === 'function') updateStreakTiers(currentStreak);
+        if (gameMode === 'solo') updateSoloStats();
+        else updateScoreDisplay();
 
         doublePointsActive = false;
 
@@ -2321,7 +2140,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Show next button for manual advancement
             nextBtn.style.display = 'block';
-            if (typeof setNextButtonGlow === 'function') setNextButtonGlow(true);
         }
 
         hintBtn.disabled = true;
@@ -2445,43 +2263,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Timer Functions ---
     function startTimer() {
         timeLeft = TIME_LIMIT;
-        updateTimerDisplay(timeLeft);
-        startTicking();
-        // Prefer module timer if available
-        if (window.__timer && typeof window.__timer.startTimer === 'function') {
-            window.__timer.startTimer(timeLeft, {
-                onTick: (remaining) => {
-                    timeLeft = remaining;
-                    updateTimerDisplay(timeLeft);
-                    if (timeLeft <= 3 && timeLeft > 0) {
-                if (window.__ui && typeof window.__ui.showCountdownOverlay === 'function') {
-                    window.__ui.showCountdownOverlay(timeLeft);
-                } else {
-                    showCountdownNumber(timeLeft);
-                }
-                    }
-                },
-                onEnd: () => {
-                    handleTimeUp();
-                }
-            });
-        } else {
-            timer = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay(timeLeft);
-                if (timeLeft <= 3 && timeLeft > 0) {
-                if (window.__ui && typeof window.__ui.showCountdownOverlay === 'function') {
-                    window.__ui.showCountdownOverlay(timeLeft);
-                } else {
-                    showCountdownNumber(timeLeft);
-                }
-                }
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    handleTimeUp();
-                }
-            }, 1000);
-        }
+        updateTimerDisplay(timeLeft); // Use the new function
+        startTicking(); // Start ticking for the whole timer
+        timer = setInterval(() => {
+            timeLeft--;
+            updateTimerDisplay(timeLeft); // Use the new function
+            // Show countdown numbers for last 3 seconds
+            if (timeLeft <= 3 && timeLeft > 0) {
+                showCountdownNumber(timeLeft);
+            }
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                handleTimeUp();
+            }
+        }, 1000);
     }
 
     // --- NEW: Global Timer Functions for Time Attack ---
@@ -2489,31 +2284,17 @@ document.addEventListener('DOMContentLoaded', () => {
     globalTimeLeft = TOTAL_TIME_LIMIT;
     timerDiv.innerText = formatTime(globalTimeLeft);
     timerDiv.parentElement.parentElement.classList.add('global-timer');
-    if (window.__timer && typeof window.__timer.startTimer === 'function') {
-        window.__timer.startTimer(globalTimeLeft, {
-            onTick: (remaining) => {
-                globalTimeLeft = remaining;
-                timerDiv.innerText = formatTime(globalTimeLeft);
-            },
-            onEnd: () => {
-                handleGlobalTimeUp();
-            }
-        });
-    } else {
-        globalTimer = setInterval(() => {
-            globalTimeLeft--;
-            timerDiv.innerText = formatTime(globalTimeLeft);
-            if (globalTimeLeft <= 0) {
-                handleGlobalTimeUp();
-            }
-        }, 1000);
-    }
+    
+    globalTimer = setInterval(() => {
+        globalTimeLeft--;
+        timerDiv.innerText = formatTime(globalTimeLeft);
+        if (globalTimeLeft <= 0) {
+            handleGlobalTimeUp();
+        }
+    }, 1000);
 }
 
     function stopGlobalTimer() {
-    if (window.__timer && typeof window.__timer.stopTimer === 'function') {
-        window.__timer.stopTimer();
-    }
     clearInterval(globalTimer);
     timerDiv.parentElement.parentElement.classList.remove('global-timer');
 }
@@ -2986,22 +2767,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Attach event listeners for game start
     soloBtn.onclick = () => {
-        if (typeof checkSignInAndStartGame === 'function') {
-            checkSignInAndStartGame('solo');
-        } else if (typeof startGame === 'function') {
-            startGame('solo');
-        } else if (window.startGame) {
-            window.startGame('solo');
-        }
+        checkSignInAndStartGame('solo');
     };
     teamsBtn.onclick = () => {
-        if (typeof checkSignInAndStartGame === 'function') {
-            checkSignInAndStartGame('teams');
-        } else if (typeof startGame === 'function') {
-            startGame('teams');
-        } else if (window.startGame) {
-            window.startGame('teams');
-        }
+        checkSignInAndStartGame('teams');
     };
     
     // Exit button event handler - set up once and reuse
@@ -3195,22 +2964,17 @@ if (contrastToggle) {
 
 // --- Timer pulse for low time ---
 function updateTimerDisplay(timeLeft) {
-    // Prefer UI module if available
-    if (window.__ui && typeof window.__ui.updateTimer === 'function') {
-        window.__ui.updateTimer(timeLeft);
-        return;
-    }
-    // Fallback legacy update
+    // Format time as two digits (e.g., "08" instead of "8")
     const formattedTime = timeLeft.toString().padStart(2, '0');
-    if (timerDiv) timerDiv.innerText = formattedTime;
-    if (timerDiv && timerDiv.parentElement && timerDiv.parentElement.parentElement) {
-        if (timeLeft <= 3) {
-            timerDiv.classList.add('low-time');
-            timerDiv.parentElement.parentElement.classList.add('urgent');
-        } else {
-            timerDiv.classList.remove('low-time');
-            timerDiv.parentElement.parentElement.classList.remove('urgent');
-        }
+    timerDiv.innerText = formattedTime;
+    
+    // Add low-time class for urgent styling
+    if (timeLeft <= 3) {
+        timerDiv.classList.add('low-time');
+        timerDiv.parentElement.parentElement.classList.add('urgent');
+    } else {
+        timerDiv.classList.remove('low-time');
+        timerDiv.parentElement.parentElement.classList.remove('urgent');
     }
 }
 
@@ -3272,7 +3036,22 @@ if (document.readyState === 'loading') {
 } else {
     attachRippleToButtons();
 }
-// Ensure initial ripple effects are attached on load
+// Patch showQuestion to call attachRippleToButtons
+const origShowQuestion = window.showQuestion;
+window.showQuestion = function() {
+    origShowQuestion.apply(this, arguments);
+    attachRippleToButtons();
+    setNextButtonGlow(false);
+};
+// Patch answer selection to pop/bounce and enable Next button glow
+const origSelectAnswer = window.selectAnswer;
+window.selectAnswer = function(e) {
+    const btn = e.target;
+    popButton(btn);
+    origSelectAnswer.apply(this, arguments);
+    setNextButtonGlow(true);
+};
+// Patch Next button to remove glow on click
 nextBtn.addEventListener('click', () => setNextButtonGlow(false));
 
 // --- Animated backgrounds and category-based backgrounds ---
@@ -3832,54 +3611,31 @@ function submitToLeaderboard(score, time) {
     return;
   }
   
-  console.log('📝 Submitting entry to Firestore (best-score only):', entry);
+  console.log('📝 Submitting entry to Firestore:', entry);
   
-  // Only update if this score beats the existing best (keep previous if lower or equal)
-  const docRef = db.collection('leaderboard').doc(currentUser.uid);
-  db.runTransaction(async (tx) => {
-    const snap = await tx.get(docRef);
-    if (!snap.exists) {
-      tx.set(docRef, entry, { merge: true });
-      return { updated: true, previous: null, previousTime: null };
-    }
-    const data = snap.data() || {};
-    const prevScore = parseInt(data.score, 10) || 0;
-    const prevTimeParsed = parseInt(data.time, 10);
-    const prevTime = Number.isFinite(prevTimeParsed) && prevTimeParsed > 0 ? prevTimeParsed : Number.POSITIVE_INFINITY;
-    const finalTimeEff = finalTime > 0 ? finalTime : Number.POSITIVE_INFINITY;
-    if (finalScore > prevScore) {
-      tx.set(docRef, entry, { merge: true });
-      return { updated: true, previous: prevScore, previousTime: prevTime };
-    } else if (finalScore === prevScore && finalTimeEff < prevTime) {
-      tx.set(docRef, entry, { merge: true });
-      return { updated: true, previous: prevScore, previousTime: prevTime };
-    }
-    return { updated: false, previous: prevScore, previousTime: prevTime };
-  })
-  .then((result) => {
-    if (result && result.updated) {
-      console.log(`✅ New personal best saved: ${finalScore} (prev: ${result.previous ?? 'none'})`);
-    } else {
-      console.log(`ℹ️ Kept previous best score: ${result ? result.previous : 'unknown'} (new ${finalScore} not higher)`);
-    }
-  })
-  .catch(error => {
-    console.error('❌ Error submitting score (transaction):', error);
-    // Handle specific error cases
-    if (error.code === 'permission-denied') {
-      console.error('🔒 Permission denied - check Firestore security rules');
-      showFirebaseErrorMessage('Permission denied. Please check if you are signed in correctly.', false);
-    } else if (error.code === 'unauthenticated') {
-      console.error('🔐 User not authenticated');
-      showFirebaseErrorMessage('Please sign in to save your score.', false);
-    } else if (error.code === 'invalid-argument') {
-      console.error('📝 Invalid data format');
-      showFirebaseErrorMessage('Invalid score data. Please try again.', true);
-    } else {
-      console.error('🌐 Network or server error:', error.message);
-      showFirebaseErrorMessage('Failed to save score. Please check your connection and try again.', true);
-    }
-  });
+  // Submit to leaderboard with enhanced error handling
+  db.collection('leaderboard').doc(currentUser.uid).set(entry)
+    .then(() => {
+      console.log('✅ Score submitted successfully:', finalScore);
+    })
+    .catch(error => {
+      console.error('❌ Error submitting score:', error);
+      
+      // Handle specific error cases
+      if (error.code === 'permission-denied') {
+        console.error('🔒 Permission denied - check Firestore security rules');
+        showFirebaseErrorMessage('Permission denied. Please check if you are signed in correctly.', false);
+      } else if (error.code === 'unauthenticated') {
+        console.error('🔐 User not authenticated');
+        showFirebaseErrorMessage('Please sign in to save your score.', false);
+      } else if (error.code === 'invalid-argument') {
+        console.error('📝 Invalid data format');
+        showFirebaseErrorMessage('Invalid score data. Please try again.', true);
+      } else {
+        console.error('🌐 Network or server error:', error.message);
+        showFirebaseErrorMessage('Failed to save score. Please check your connection and try again.', true);
+      }
+    });
 }
 
 // Fetch and display Top 100 leaderboard

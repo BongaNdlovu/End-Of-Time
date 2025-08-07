@@ -327,6 +327,8 @@ let playerScore = 0;
 let currentStreak = 0;
 let longestStreak = 0;
 let correctAnswers = 0;
+// Track last streak milestone we already animated to prevent double triggers
+let lastTriggeredMilestone = 0; // 0, 3, 5, 10, 15
 let timer;
 let timeLeft = 10;
 
@@ -424,6 +426,7 @@ function updateSoloStats() {
     if (streakEl) streakEl.innerText = `Streak: ${streak}`;
     if (qProgEl) qProgEl.innerText = `${idx + 1} / ${qsLen}`;
     updateStreakTiers(streak);
+    maybeTriggerStreakMilestone(streak);
 }
 
 // Update visible streak tier progress bars (3/5/10/15)
@@ -452,6 +455,10 @@ function updateStreakTiers(streakCount) {
       if (row) row.classList.remove('completed');
     }
   });
+  // Reset milestone tracker if streak drops below bronze
+  if (streakCount < 3) {
+    lastTriggeredMilestone = 0;
+  }
 }
 
 function getTierForStreak(streak) {
@@ -501,6 +508,19 @@ function handleStreakMilestone(streak) {
       setTimeout(() => row.classList.remove('tier-unlocked'), 1200);
     }
     showStreakToast(streak, tier);
+  }
+}
+
+// Trigger milestone once when passing thresholds (3/5/10/15), avoids duplicate firings
+function maybeTriggerStreakMilestone(streak) {
+  const thresholds = [3, 5, 10, 15];
+  let reached = 0;
+  for (const th of thresholds) {
+    if (streak >= th) reached = th;
+  }
+  if (reached > 0 && reached > lastTriggeredMilestone) {
+    lastTriggeredMilestone = reached;
+    handleStreakMilestone(reached);
   }
 }
 
@@ -2138,8 +2158,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     st.incCorrectAnswers();
                     // Streak milestone animations (3/5/10/15)
                     try {
-                        const newStreak = (st.GameState && st.GameState.currentStreak) ?? currentStreak;
-                        if ([3,5,10,15].includes(newStreak)) handleStreakMilestone(newStreak);
+                        const immediateStreak = (st.GameState && st.GameState.currentStreak) ?? currentStreak;
+                        if ([3,5,10,15].includes(immediateStreak)) handleStreakMilestone(immediateStreak);
+                        // Re-check on next tick in case state updates asynchronously
+                        setTimeout(() => {
+                            try {
+                                const refreshedStreak = (st.GameState && st.GameState.currentStreak) ?? currentStreak;
+                                if ([3,5,10,15].includes(refreshedStreak)) handleStreakMilestone(refreshedStreak);
+                            } catch(_) {}
+                        }, 0);
                     } catch (_) {}
                     // Earn token on streak milestones
                     if (gs.currentStreak > 0 && gs.currentStreak % 3 === 0) {
@@ -2178,6 +2205,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     if (currentTeam === 'blue') teamBlueScore += points;
                     else teamBlackScore += points;
+                    // Track streak in team mode as well
+                    currentStreak++;
+                    if ([3,5,10,15].includes(currentStreak)) handleStreakMilestone(currentStreak);
                 }
             }
             selectedBtn.classList.add('correct');
@@ -2234,8 +2264,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         }
         
-        if (gameMode === 'solo') updateSoloStats();
-        else updateScoreDisplay();
+            if (gameMode === 'solo') updateSoloStats();
+            else updateScoreDisplay();
+            
+            // If we have UI tier bars, ensure they reflect current streak for all modes
+            if (typeof updateStreakTiers === 'function') updateStreakTiers(currentStreak);
 
         doublePointsActive = false;
 

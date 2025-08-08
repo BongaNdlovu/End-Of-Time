@@ -400,6 +400,165 @@ function shuffle(array) {
     return shuffled;
 }
 
+/**
+ * Animation Effects Module
+ * Handles all visual feedback animations without affecting core game logic
+ */
+class AnimationEffects {
+  constructor() {
+    this.activeAnimations = new Set();
+    this.cleanupTimeouts = new Set();
+  }
+
+  /**
+   * Token Earn Animation
+   * @param {number} amount - Number of tokens earned
+   */
+  animateTokenEarn(amount = 1) {
+    const tokenElement = document.getElementById('faith-tokens');
+    if (!tokenElement) return;
+
+    // 1. Pulse the token display
+    this.addTemporaryClass(tokenElement, 'token-pulse', 800);
+
+    // 2. Spawn floating chip
+    this.spawnTokenChip(tokenElement, amount);
+
+    // 3. Optional: Play sound if audio system is available
+    if (window.playSound && window.audioRiser) {
+      window.playSound(window.audioRiser);
+    }
+  }
+
+  /**
+   * Spawn floating token chip
+   */
+  spawnTokenChip(anchorElement, amount) {
+    const chip = document.createElement('div');
+    chip.className = 'token-chip';
+    chip.textContent = `+${amount} Token${amount > 1 ? 's' : ''}`;
+    
+    // Position relative to anchor element
+    const rect = anchorElement.getBoundingClientRect();
+    chip.style.left = `${rect.left + rect.width / 2 - 40}px`;
+    chip.style.top = `${rect.top}px`;
+    
+    document.body.appendChild(chip);
+    
+    // Auto cleanup after animation
+    const timeout = setTimeout(() => {
+      chip.remove();
+      this.cleanupTimeouts.delete(timeout);
+    }, 1500);
+    
+    this.cleanupTimeouts.add(timeout);
+  }
+
+  /**
+   * Double Points Badge Animation
+   */
+  showDoublePointsBadge() {
+    const wagerContainer = document.getElementById('wager-container');
+    if (!wagerContainer) return;
+
+    // Check if badge already exists
+    if (wagerContainer.querySelector('.wager-x2-badge')) return;
+
+    // Create badge
+    const badge = document.createElement('span');
+    badge.className = 'wager-x2-badge';
+    badge.textContent = 'x2';
+    badge.setAttribute('aria-label', 'Double points active');
+    
+    // Make wager container relative positioned if not already
+    const currentPosition = window.getComputedStyle(wagerContainer).position;
+    if (currentPosition === 'static') {
+      wagerContainer.style.position = 'relative';
+    }
+    
+    wagerContainer.appendChild(badge);
+    
+    // Update wager feedback
+    this.updateWagerFeedback(true);
+  }
+
+  /**
+   * Remove Double Points Badge
+   */
+  removeDoublePointsBadge() {
+    const badge = document.querySelector('.wager-x2-badge');
+    if (badge) {
+      badge.style.animation = 'badge-pop 0.3s reverse';
+      setTimeout(() => badge.remove(), 300);
+    }
+    
+    // Reset wager feedback
+    this.updateWagerFeedback(false);
+  }
+
+  /**
+   * Update wager feedback text
+   */
+  updateWagerFeedback(isDoubled) {
+    const feedback = document.getElementById('wager-feedback');
+    if (!feedback) return;
+    
+    const currentText = feedback.textContent;
+    if (isDoubled && !currentText.includes('(x2 active)')) {
+      feedback.textContent += ' (x2 active)';
+      feedback.style.color = '#ffd700';
+    } else if (!isDoubled) {
+      feedback.textContent = feedback.textContent.replace(' (x2 active)', '');
+      feedback.style.color = '';
+    }
+  }
+
+  /**
+   * Helper: Add temporary class with auto-removal
+   */
+  addTemporaryClass(element, className, duration) {
+    element.classList.add(className);
+    const timeout = setTimeout(() => {
+      element.classList.remove(className);
+      this.cleanupTimeouts.delete(timeout);
+    }, duration);
+    this.cleanupTimeouts.add(timeout);
+  }
+
+  /**
+   * Cleanup all active animations
+   */
+  cleanup() {
+    // Clear all timeouts
+    this.cleanupTimeouts.forEach(timeout => clearTimeout(timeout));
+    this.cleanupTimeouts.clear();
+    
+    // Remove any lingering elements
+    document.querySelectorAll('.token-chip').forEach(chip => chip.remove());
+    document.querySelectorAll('.wager-x2-badge').forEach(badge => badge.remove());
+  }
+}
+
+// Export for use in main game
+window.AnimationEffects = AnimationEffects;
+let animationEffects = null;
+
+// Add this test function to verify animations work
+window.testAnimations = function testAnimations() {
+  console.log('Testing animations...');
+  if (animationEffects) {
+    animationEffects.animateTokenEarn(1);
+    setTimeout(() => {
+      animationEffects.showDoublePointsBadge();
+      setTimeout(() => {
+        animationEffects.removeDoublePointsBadge();
+      }, 3000);
+    }, 2000);
+  } else {
+    console.warn('animationEffects is not initialized yet. Wait for DOMContentLoaded.');
+  }
+};
+
 // Function to verify question randomization
 function verifyQuestionRandomization(questions, category) {
     console.log(`=== Question Randomization Verification for ${category} ===`);
@@ -600,16 +759,20 @@ const doublePointsBtn = document.getElementById('double-points-btn');
 
 function updateFaithTokens(animate = false) {
     faithTokensDiv.innerText = `Faith Tokens: ${faithTokens}`;
-    freezeTimeBtn.disabled = faithTokens < 1 || freezeTimeActive;
-    if (doublePointsBtn) {
-        doublePointsBtn.disabled = faithTokens < 1 || doublePointsActive;
-    }
+    // Guard DOM elements
+    if (freezeTimeBtn) freezeTimeBtn.disabled = faithTokens < 1 || freezeTimeActive;
+    if (doublePointsBtn) doublePointsBtn.disabled = faithTokens < 1 || doublePointsActive;
+    
     // Animate faith tokens change if requested
     if (animate) {
         faithTokensDiv.classList.remove('token-change');
         void faithTokensDiv.offsetWidth; // Force reflow
         faithTokensDiv.classList.add('token-change');
         setTimeout(() => faithTokensDiv.classList.remove('token-change'), 1000);
+        // Fire token earn animation system
+        if (animationEffects) {
+            animationEffects.animateTokenEarn(1);
+        }
     }
 }
 
@@ -621,7 +784,11 @@ if (doublePointsBtn) {
         powerUpsUsed++;
         doublePointsActive = true;
         updateFaithTokens(true);
+        if (typeof animationEffects !== 'undefined') {
+            animationEffects.showDoublePointsBadge();
+        }
         doublePointsBtn.classList.add('hint-highlight');
+        setTimeout(() => doublePointsBtn.classList.remove('hint-highlight'), 1200);
     };
 }
 
@@ -1640,6 +1807,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Debug audio elements to check if they're properly loaded
     debugAudioElements();
     
+    // Initialize animation effects
+    try {
+        animationEffects = new AnimationEffects();
+    } catch (e) {
+        console.warn('AnimationEffects initialization failed:', e);
+    }
+    
     // Initialize DOM elements
     categoryDropdown = document.getElementById('category-dropdown');
     
@@ -2052,6 +2226,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (currentStreak > 0 && currentStreak % 3 === 0) {
                     faithTokens++;
                     updateFaithTokens(true);
+                    if (typeof animationEffects !== 'undefined') {
+                        animationEffects.animateTokenEarn(1);
+                    }
                 }
                 console.log(`Score updated: ${oldScore} + ${points} = ${playerScore}`);
             } else { // Teams
@@ -2063,6 +2240,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (currentStreak > 0 && currentStreak % 3 === 0) {
                     faithTokens++;
                     updateFaithTokens(true);
+                    if (typeof animationEffects !== 'undefined') {
+                        animationEffects.animateTokenEarn(1);
+                    }
                 }
             }
             selectedBtn.classList.add('correct');
@@ -2119,6 +2299,9 @@ document.addEventListener('DOMContentLoaded', () => {
             doublePointsActive = false;
             if (doublePointsBtn) doublePointsBtn.classList.remove('hint-highlight');
             updateFaithTokens();
+            if (typeof animationEffects !== 'undefined') {
+                animationEffects.removeDoublePointsBadge();
+            }
         }
 
         // Disable all buttons (highlighting already done above)
@@ -2836,6 +3019,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Hide exit button
         exitBtn.style.display = 'none';
+
+        // Cleanup animations
+        if (typeof animationEffects !== 'undefined' && animationEffects) {
+            animationEffects.cleanup();
+        }
 
         // Stop music
         pauseBgMusic();

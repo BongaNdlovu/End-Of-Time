@@ -272,8 +272,6 @@ muteToggle.addEventListener('click', () => {
     const allAudioElements = [
         audioCorrect1, audioCorrect2, audioWrong, audioTimeup,
         audioRiser, ...audioBgTracks, audioTimerTick, audioTickingTime,
-        audioStreakWowza, audioStreakZing, audioStreakKawabanga,
-        audioStreakLetsGo, audioStreakNice,
         audioTransition, audioTransition2
     ];
     
@@ -305,8 +303,6 @@ function ensureUserInteraction() {
         const allAudioElements = [
             audioCorrect1, audioCorrect2, audioWrong, audioTimeup,
             audioRiser, ...audioBgTracks, audioTimerTick, audioTickingTime,
-            audioStreakWowza, audioStreakZing, audioStreakKawabanga,
-            audioStreakLetsGo, audioStreakNice,
             audioTransition, audioTransition2
         ];
         
@@ -625,8 +621,6 @@ function resetState() {
 
 // --- Animation Functions ---
 const RIGHT_OVERLAYS = [
-    { text: 'KAPOW!', color: '#ffd700', fontSize: '3.7rem', rotate: -8 },
-    { text: 'ZING!', color: '#4caf50', fontSize: '3.2rem', rotate: 6 },
     { text: 'BOOM!', color: '#ff4b5c', fontSize: '3.9rem', rotate: 12 },
     { text: 'YES!', color: '#2196f3', fontSize: '3.3rem', rotate: -14 },
     { text: 'NAILED IT!', color: '#ff9800', fontSize: '3.4rem', rotate: 8 },
@@ -951,12 +945,7 @@ function fadeOut(el, cb) {
     }, 500);
 }
 
-// --- Audio Streak Sounds ---
-const audioStreakWowza = document.getElementById('audio-streak-wowza');
-const audioStreakZing = document.getElementById('audio-streak-zing');
-const audioStreakKawabanga = document.getElementById('audio-streak-kawabanga');
-const audioStreakLetsGo = document.getElementById('audio-streak-letsgo');
-const audioStreakNice = document.getElementById('audio-streak-nice');
+// --- Transition Sounds (streak sounds removed) ---
 const audioTransition = document.getElementById('audio-transition');
 const audioTransition2 = document.getElementById('audio-transition2');
 
@@ -965,16 +954,7 @@ const audioTransition2 = document.getElementById('audio-transition2');
  * @param {number} streak - The current streak count
  */
 function playStreakSound(streak) {
-    let audio = null;
-    if (streak === 3) audio = audioStreakWowza;
-    else if (streak === 5) audio = audioStreakZing;
-    else if (streak === 7) audio = audioStreakKawabanga;
-    else if (streak === 10) audio = audioStreakLetsGo;
-    else if (streak >= 15) audio = audioStreakNice;
-    
-    if (audio) {
-        playSound(audio);
-    }
+    return; // disabled
 }
 
 // --- Category to icon mapping
@@ -1730,7 +1710,6 @@ function setLoadingProgress(percent) {
 const audioElements = [
     'audio-correct-1','audio-correct-2','audio-wrong','audio-timeup','audio-riser',
     'audio-bg-1','audio-bg-2','audio-bg-3','audio-bg-4','audio-bg-5','audio-timer-tick','audio-ticking-time',
-    'audio-streak-wowza','audio-streak-zing','audio-streak-kawabanga','audio-streak-letsgo','audio-streak-nice',
     'audio-transition', 'audio-transition2'
 ].map(id => document.getElementById(id)).filter(Boolean);
 
@@ -2553,12 +2532,12 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'perfect':
                 triggerConfetti('perfect');
                 triggerComicFireworks(true);
-                playStreakSound(10); // Epic sound
+                // streak sounds disabled
                 break;
             case 'excellent':
                 triggerConfetti('streak');
                 triggerComicFireworks(false);
-                playStreakSound(5);
+                // streak sounds disabled
                 break;
             case 'good':
                 triggerConfetti('default');

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sda-trivia-v2';
+const CACHE_NAME = 'sda-trivia-v3';
 const ASSETS = [
   '/',
   '/index.html',
@@ -15,13 +15,7 @@ const ASSETS = [
   '/WRONG BUZZER 7.wav',
   '/Motionarray_Floraphonic_Gameshow_Buzzer_1.wav',
   '/Semi Impact Risers-001.wav',
-  '/2024-12-08_-_Detective_Revelation_-_www.FesliyanStudios.com.mp3',
   '/ticking_time.wav',
-  '/wowza.mp3',
-  '/zing.mp3',
-  '/kawabanga.mp3',
-  '/lets_go.mp3',
-  '/nice.mp3',
   // '/offline.html', // Uncomment if you add an offline fallback page
 ];
 self.addEventListener('install', event => {

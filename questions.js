@@ -61,2512 +61,2644 @@ function validateQuestion(question) {
 const gameQuestions = [{
     
 
-        
-            "id": "BP001",
-            "question": "The Psalmist David, surrounded by nations worshipping gods of wood and stone, looks to the heavens and the earth. He seeks the ultimate truth about origins, a foundation for true worship that counters the chaotic myths of his neighbors. What foundational declaration in the Law of Moses establishes the singular, purposeful origin of the universe?",
-            "options": [
-                "Genesis 1:1 - In the beginning God made the heaven and the earth",
-                "Genesis 1:1 - In the beginning God formed the heaven and the earth",
-                "Genesis 1:1 - In the beginning God created the heaven and the earth",
-                "Genesis 1:1 - In the beginning the Lord created the heaven and the earth"
-            ],
-            "answer": "Genesis 1:1 - In the beginning God created the heaven and the earth",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse directly provides the foundational truth about origins. It provides the ultimate answer to the chaotic and polytheistic creation myths of surrounding nations by establishing that the universe had a single, definitive 'beginning' and that a specific, all-powerful agent, 'God,' was the sole cause. The act of creation is presented as a deliberate, orderly event, providing a direct contradiction to pagan cosmogonies and laying the foundation for monotheistic worship.",
-                "Importance_of_Wording": "The specific words are critical. The correct answer uses 'created' (Hebrew: bara'), which signifies creating something new out of nothing, an act unique to God. This is more precise than 'made' or 'formed,' which can imply shaping pre-existing materials. For the core question about origins, 'created' is the most accurate term. The title 'God' (Elohim) is used to emphasize divine power and majesty as the Creator of all things, whereas 'LORD' (Yahweh) is the covenant name, typically used to emphasize God's personal relationship with His people. 'God' is the specific title used in this context to show His role as the universal Designer.",
-                "Factual_Explanation": "Genesis 1:1 establishes that God created the heavens and the earth through a divine act. The Hebrew verb for 'created,' bara' (בָּרָא - Strong's H1254), signifies creating something new out of nothing, an act unique to God. This directly refutes the idea that life emerged by chance.",
-                "Theological_Meaning": "This verse anchors all of Scripture in God's sovereignty as Creator, establishing the foundation for the Sabbath, which commemorates creation (Exodus 20:11). It stands as the ultimate rebuttal to atheism and materialism and is central to the final call to 'worship him that made heaven, and earth, and the sea' (Revelation 14:7).",
-                "Christ_Centered_Meaning": "The New Testament reveals that Christ was the agent of creation. 'All things were made by him; and without him was not any thing made that was made' (John 1:3; Colossians 1:16). The same divine Word that spoke the universe into existence has the power to recreate a sinner's heart (2 Corinthians 5:17) and will ultimately restore the earth (2 Peter 3:13)."
-            }
-        },
-        {
-            "id": "BP002",
-            "question": "An ancient Israelite philosopher observes the beasts of the field and the birds of the air. He sees they have life, but he contemplates the unique nature of humanity—our capacity for reason, worship, and moral choice. What account from Genesis explains the special, intimate act of creation that distinguishes humanity from all other living creatures on earth?",
-            "options": [
-                "Genesis 2:7 - And the LORD God made man of the soil of the earth, and breathed into his nose the breath of life; and man became a living being.",
-                "Genesis 2:7 - And the LORD God shaped man of the clay of the ground, and blew into his nostrils the spirit of life; and man became a living soul.",
-                "Genesis 2:7 - And the LORD God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.",
-                "Genesis 2:7 - And the LORD God created man of the dirt of the land, and puffed into his face the air of life; and man became a living person."
-            ],
-            "answer": "Genesis 2:7 - And the LORD God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse directly answers the contemplation about humanity's unique origin. It describes man's creation as a deliberate, two-part, and intimate act. First, God personally 'formed' his physical body, like a potter with clay. Second, He imparted life directly through His own 'breath.' This intimate, purposeful act establishes human uniqueness not in our material substance ('dust'), which we share with the earth, but in our divine origin and the special life imparted by God, setting humanity apart from all other animals.",
-                "Importance_of_Wording": "'Formed' (Hebrew: yatsar) is the word used for a potter shaping clay, implying intimate care and design. 'Dust of the ground' humbly acknowledges our material composition, but the 'breath of life' (neshamah) is a direct impartation from God. The result, a 'living soul' (nephesh chayyah), denotes a complete, unified being. This specific language highlights the dual nature of humanity—earthly in substance but divine in life—which is the source of our unique value.",
-                "Factual_Explanation": "Genesis 2:7 details the intimate creation of Adam. God 'formed' (יָצַר - yatsar - Strong's H3335) man from dust, then breathed into his nostrils the 'breath of life' (נְשָׁמָה - neshamah - Strong's H5397), resulting in a 'living soul' (נֶפֶשׁ חַיָּה - nephesh chayyah - Strong's H5315, H2416). This distinguishes humanity's creation from all other life.",
-                "Theological_Meaning": "This verse establishes the holistic nature of humanity—a physical body and life-giving spirit united as one soul. It refutes the idea of an immortal soul separate from the body. At death, the breath returns to God, and the body returns to dust, awaiting the resurrection, when God will breathe life into His people again.",
-                "Christ_Centered_Meaning": "Christ, the second Adam, was also formed in a unique way (in the womb of a virgin). He came to give us not just the 'breath of life,' but 'abundant life' (John 10:10). Through the resurrection, He who first breathed life into man will recreate us, giving us glorified bodies no longer subject to the dust of death (1 Corinthians 15:45-49)."
-            }
-        },
-        {
-            "id": "BP003",
-            "question": "Moses, tasked with establishing a just society for Israel, needs a foundational principle to ensure that every person, male and female, is treated with inherent dignity, unlike the exploitative practices of Egypt and Canaan. What truth from the creation account establishes this universal human value?",
-            "options": [
-                "Genesis 1:27 - By God man was shaped in his own visage, in the visage of God shaped he him; male and female shaped he them.",
-                "Genesis 1:27 - So God created man in his own image, in the image of God created he him; male and female created he them.",
-                "Genesis 1:27 - In God made man with his own likeness, with the likeness of God made he him; male and female made he them.",
-                "Genesis 1:27 - So the Lord formed man in his own figure, in the figure of Lord formed he him; male and female formed he them."
-            ],
-            "answer": "Genesis 1:27 - So God created man in his own image, in the image of God created he him; male and female created he them.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse directly provides the foundational legal and moral principle for a just society. It establishes the reason for universal human worth: every person, male and female alike, is created in the 'image of God.' This bestows an inherent and equal dignity that is independent of a person's utility, status, or strength. It is the ultimate basis for laws that protect the vulnerable and a direct rebuttal to the objectification and slavery common in surrounding cultures.",
-                "Importance_of_Wording": "The introductory word 'So' is significant. It links this verse directly to the preceding divine counsel in verse 26 ('Let us make man in our image'). It shows that the creation of humanity was the deliberate fulfillment of a divine plan. This emphasizes the intentionality behind giving humanity this special status. Other conjunctions like 'And' or 'Then' do not convey this strong sense of purpose and fulfillment as effectively.",
-                "Factual_Explanation": "Genesis 1:27 declares that every human being is created in the 'image' (צֶלֶם - tselem - Strong's H6754) of God. This bestows inherent, equal, and inalienable worth upon every person, male and female, regardless of status, ability, or background.",
-                "Theological_Meaning": "Bearing God's image means humanity was created to reflect God's character. This truth is foundational to all morality and justice, compelling believers to defend the vulnerable and stand against all forms of objectification and exploitation. How we treat others reveals our true understanding of the Creator.",
-                "Christ_Centered_Meaning": "Christ is the perfect 'image of the invisible God' (Colossians 1:15). Sin marred the image of God in humanity, but through Christ's redemptive work, that image is restored in those who believe (Romans 8:29)."
-            }
-        },
-        {
-            "id": "BP004",
-            "question": "As the Israelites prepare to receive the law at Sinai, they are reminded of a weekly rhythm that sets them apart from their Egyptian slave masters who demanded ceaseless labor. What divine action at the close of creation week provides the eternal precedent for this sacred cycle of work and rest?",
-            "options": [
-                "Genesis 2:2 - By the seventh day God closed his work which he had built; and he rested by the seventh day from all his work which he had built.",
-                "Genesis 2:2 - And at the seventh day Lord stopped his deed which he had made; and he halted at the seventh day from all his deed which he had made.",
-                "Genesis 2:2 - And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made.",
-                "Genesis 2:2 - On the seventh day God ceased his task which he had done; and he paused on the seventh day from all his task which he had done."
-            ],
-            "answer": "Genesis 2:2 - And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse provides the foundational origin for the Sabbath rhythm. It establishes a divine precedent for ceasing from work. God, who does not experience fatigue, 'rested' to create a pattern and institution for humanity. By resting on the seventh day after six days of work, God Himself embedded this cycle into the very fabric of time. This divine example is the basis for the later commandment, providing the remedy for the relentless toil of slavery and a model for a life of holy rhythm.",
-                "Importance_of_Wording": "The word 'rested' (Hebrew: shabath) is key; it means 'to cease' and is the root of the word 'Sabbath.' It is a deliberate cessation from labor. While God also 'sanctified' the day (set it apart), the concept of 'blessing' it is crucial. A blessing is a divine favor for well-being. The combination of 'rested' and 'blessed' shows that this is not just an absence of work but a positive, God-given gift for human flourishing.",
-                "Factual_Explanation": "God 'rested' (שָׁבַת - shabath - Strong's H7673), meaning He ceased from His creative works. He then 'blessed' (בָּרַךְ - barak - Strong's H1288) the seventh day and 'sanctified' (קָדַשׁ - qadash - Strong's H6942) it, setting it apart for a holy purpose. This establishes a divine rhythm of work and rest.",
-                "Theological_Meaning": "The Sabbath is a perpetual sign of loyalty to the Creator (Ezekiel 20:12, 20) and a weekly memorial of His authority. It serves as a reminder that we are saved by grace through faith, not by our own works. In the final conflict over worship, the Sabbath will be a key point of distinction for God's faithful people.",
-                "Christ_Centered_Meaning": "Christ declared Himself 'Lord even of the sabbath day' (Mark 2:28) and offers true spiritual rest to all who are weary (Matthew 11:28). The Sabbath points not only to the finished work of creation but to the finished work of redemption accomplished at the cross and the eternal rest to come (Hebrews 4:9-10)."
-            }
-        },
-        {
-            "id": "BP005",
-            "question": "In the perfect environment of Eden, Eve is confronted by a serpent. Before any command is broken, a seed of rebellion must be planted. What was the serpent's original, subtle tactic designed to undermine Eve's trust in God's goodness and the clarity of His command?",
-            "options": [
-                "Genesis 3:1 - Now the serpent was more subtil than any beast of the field which the LORD God had made. And he said unto the woman, Yea, hath God said, Ye shall not eat of every tree of the garden?",
-                "Genesis 3:1 - Then the snake was more clever than any animal of the land which the LORD God had crafted. And he asked unto the woman, Aye, hath God stated, Ye shall not eat of every shrub of the garden?",
-                "Genesis 3:1 - Now the viper was more crafty than any beast of the field which the Lord God had shaped. And he said unto the female, Yes, hath God told, Ye shall not touch of every tree of the Eden?",
-                "Genesis 3:1 - Now the serpent was more cunning than any creature of the plain which the Lord God had formed. And he spoke unto the lady, Lo, hath God spoken, Ye shall not taste of every plant of the orchard?"
-            ],
-            "answer": "Genesis 3:1 - Now the serpent was more subtil than any beast of the field which the LORD God had made. And he said unto the woman, Yea, hath God said, Ye shall not eat of every tree of the garden?",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is directly relevant because it reveals the original strategy of temptation. The serpent's first attack on humanity was not a direct command to disobey, but a subtle question designed to create doubt about God's character and Word. 'Yea, hath God said?' is a question loaded with insinuation, making God appear unreasonable and restrictive. Recognizing this original tactic is key to understanding the nature of all subsequent temptation, which almost always begins with questioning God's word and goodness.",
-                "Importance_of_Wording": "The King James Version's phrasing 'Yea, hath God said?' is uniquely precise. The word 'Yea,' (Hebrew: 'aph ki) conveys a tone of feigned surprise and insinuation. It’s not a simple request for information ('Truly?' or 'Indeed?') but a subtle mockery designed to make God's command appear unreasonable. This exact tone of casting doubt and questioning God's character is the essence of the temptation.",
-                "Factual_Explanation": "Satan's first attack was a question designed to create doubt: 'Yea, hath God said?' (אַף כִּי־אָמַר אֱלֹהִים - 'aph ki-'amar 'Elohim - Strong's H637, H3588, H559, H430). This tactic subtly undermines God's character and the authority of His Word.",
-                "Theological_Meaning": "This reveals Satan's primary strategy throughout history: to mix truth with error and cause confusion regarding God's commands. This method of deception will intensify in the last days, preparing the world to accept falsehoods accompanied by miracles (2 Thessalonians 2:9-11) when he appears as an angel of light (2 Corinthians 11:14).",
-                "Christ_Centered_Meaning": "Christ met each of Satan's temptations with the definitive statement, 'It is written' (Matthew 4:4, 7, 10), demonstrating that absolute trust in God's Word is the only path to victory. Jesus, as the living Word (John 1:14), is the embodiment of the truth that Satan seeks to obscure."
-            }
-        },
-        {
-            "id": "BP006",
-            "question": "After pronouncing the curse upon the serpent, God gives a glimpse of hope to the fallen Adam and Eve. What is the very first prophecy in the Bible, containing the promise of a future conflict and the ultimate defeat of evil?",
-            "options": [
-                "Genesis 3:15 - And I will cause hatred between thee and the woman, and between thy heirs and her heirs; it shall strike thy head, and thou shalt strike his heel.",
-                "Genesis 3:15 - I will place strife between thee and the female, and between thy line and her line; it shall wound thy crown, and thou shalt wound his sole.",
-                "Genesis 3:15 - And I will put enmity between thee and the woman, and between thy seed and her seed; it shall bruise thy head, and thou shalt bruise his heel.",
-                "Genesis 3:15 - And I will set discord between thee and the lady, and between thy kin and her kin; it shall crush thy skull, and thou shalt crush his foot."
-            ],
-            "answer": "Genesis 3:15 - And I will put enmity between thee and the woman, and between thy seed and her seed; it shall bruise thy head, and thou shalt bruise his heel.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This promise, known as the protoevangelium (first gospel), is the direct answer. It is the first ray of hope given to humanity after the fall. It provides the framework for the entire cosmic conflict, assuring Adam and Eve from the very beginning of the Bible that while evil (the serpent) will inflict a painful wound (a bruised heel), the ultimate outcome is its total defeat (a bruised or crushed head). This gives the first human family the hope needed to endure a world now corrupted by sin.",
-                "Importance_of_Wording": "The use of the same verb 'bruise' (Hebrew: shuph) for both parties is critical, but the location of the wound changes the meaning entirely. A 'bruised heel' is a painful but non-lethal injury, representing Christ's suffering and death. A 'bruised head' is a fatal, decisive blow, representing the final destruction of Satan. Using a more generic word like 'wound' would lose this vital distinction. The specific wording perfectly encapsulates that the victory will be costly but ultimate and final.",
-                "Factual_Explanation": "Genesis 3:15, known as the protoevangelium, is the first gospel promise. It foretells a deep 'enmity' (אֵיבָה - 'eybah - Strong's H342) between the serpent's seed and the woman's seed. While Satan would wound the Messiah (a heel bruise), the Messiah would deliver a fatal blow to Satan's authority (a head crush). The Hebrew word for 'bruise,' shuph (שׁוּף - Strong's H7779), implies a decisive crushing.",
-                "Theological_Meaning": "This verse introduces the cosmic conflict, or Great Controversy, between Christ and Satan that frames the entire biblical narrative (Revelation 12:7-9). It assures believers that while evil may appear to win temporary victories, its ultimate doom is certain.",
-                "Christ_Centered_Meaning": "This is the first prophecy of Christ's victory. The 'bruising of the heel' was Christ's suffering and death on the cross. The 'bruising of the head' is the final destruction of Satan, guaranteed by Christ's resurrection (Hebrews 2:14)."
-            }
-        },
-        {
-            "id": "BP007",
-            "question": "After Cain murders Abel, God confronts him. In his response, Cain utters a defiant, rhetorical question that has echoed through history as the classic expression of apathy and the denial of human responsibility. What was this question?",
-            "options": [
-                "Genesis 4:9 - Am I my brother's guardian?",
-                "Genesis 4:9 - Am I my brother's keeper?",
-                "Genesis 4:9 - Am I my brother's protector?",
-                "Genesis 4:9 - Am I my brother's watchman?"
-            ],
-            "answer": "Genesis 4:9 - Am I my brother's keeper?",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "Cain's defiant words, 'Am I my brother's keeper?', are the direct answer and the classic biblical expression of shirking responsibility. His question, intended to deflect guilt, instead reveals the depth of his sin-hardened heart. It is the archetype of denying responsibility for the welfare of others, a mindset that stands in direct opposition to the law of love.",
-                "Importance_of_Wording": "The word 'keeper' (Hebrew: shomer) is the most accurate and encompassing term. It implies a watchman, a guardian, and a protector all in one—someone who takes active, ongoing responsibility for the well-being of another. While the other options are synonyms, 'keeper' is the traditional KJV translation and carries the broadest sense of personal duty, which is precisely what Cain rejected.",
-                "Factual_Explanation": "When God inquired about Abel, Cain's defiant question, 'Am I my brother's keeper?' (הֲשֹׁמֵר אָחִי אָנֹכִי - hashomer 'achi 'anoki - Strong's H8104, H251, H595), revealed a heart hardened by sin and a rejection of his God-given responsibility.",
-                "Theological_Meaning": "God's implicit answer is a resounding 'Yes.' This principle refutes individualism and apathy, forming the basis for the 'pure religion' described in James 1:27. This care for one another will be a distinguishing mark of God's people in the final days.",
-                "Christ_Centered_Meaning": "Christ is the ultimate answer to Cain's question. He became our Brother (Hebrews 2:11) to be our Keeper, giving His life to save us. His parable of the Good Samaritan (Luke 10:25-37) redefines 'neighbor' and commands us to be keepers of all who are in need."
-            }
-        },
-        {
-            "id": "BP008",
-            "question": "The book of Genesis describes the world before the flood as reaching a point of utter corruption, prompting divine judgment. How does the Bible describe the depth of this depravity, providing a benchmark for the moral state of the world just before God's intervention?",
-            "options": [
-                "Genesis 6:5 - And God saw that the corruption of man was large in the earth, and that every vision of the dreams of his heart was only foul evermore.",
-                "Genesis 6:5 - And GOD saw that the wickedness of man was great in the earth, and that every imagination of the thoughts of his heart was only evil continually.",
-                "Genesis 6:5 - Then GOD noted that the sinfulness of man was huge in the world, and that every idea of the musings of his mind was only bad constantly.",
-                "Genesis 6:5 - And Lord saw that the evilness of man was vast in the land, and that every conception of the notions of his soul was only vile always."
-            ],
-            "answer": "Genesis 6:5 - And GOD saw that the wickedness of man was great in the earth, and that every imagination of the thoughts of his heart was only evil continually.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is relevant because it provides a divine diagnosis of a society at its lowest point, just before judgment. Jesus specifically likened the time before His return to the 'days of Noah' (Matthew 24:37). This description of total wickedness serves as a prophetic benchmark, indicating that widespread moral decline is a sign of the end times.",
-                "Importance_of_Wording": "The wording of the KJV is exceptionally comprehensive and absolute, making the parallel to the last days more powerful. 'Every imagination' covers all purposes and plans. 'Of the thoughts of his heart' points to the very core of human motivation. 'Only evil' excludes any mixture of good, and 'continually' means without interruption. This specific, layered phrasing describes a total and pervasive corruption that serves as a stark prophetic benchmark.",
-                "Factual_Explanation": "The pre-flood world was characterized by pervasive wickedness, where 'every imagination of the thoughts of his heart was only evil continually' (כָּל־יֵצֶר מַחְשְׁבֹת לִבּוֹ רַק רַע כָּל־הַיּוֹם - kol-yetser machsheboth libbo raq ra' kol-hayyom - Strong's H3605, H3336, H4284, H3820, H7535, H7227, H3605, H3117).",
-                "Theological_Meaning": "Jesus explicitly stated, 'as the days of Noe were, so shall also the coming of the Son of man be' (Matthew 24:37). Therefore, widespread moral decline is not a sign of God's defeat but a fulfillment of prophecy indicating Christ's near return. Scripture warns that in the last days 'evil men and seducers shall wax worse and worse' (2 Timothy 3:13).",
-                "Christ_Centered_Meaning": "Noah found 'grace' (חֵן - chen - Strong's H2580) in the eyes of the Lord (Genesis 6:8). Just as God provided an ark of safety for Noah, Christ is our Ark of refuge from the coming judgment. He preserves a faithful remnant through times of overwhelming corruption."
-            }
-        },
-        {
-            "id": "BP009",
-            "question": "Faced with a global flood that will destroy all flesh, Noah is given a divine commission. Beyond saving his own family, what command from God demonstrates the Creator's care for preserving the animal kingdom through the catastrophe?",
-            "options": [
-                "Genesis 6:19 - And of all moving beings of each body, two of each class shalt thou bring into the boat, to keep them safe with thee; they shall be male and female.",
-                "Genesis 6:19 - And of every living thing of all flesh, two of every sort shalt thou bring into the ark, to keep them alive with thee; they shall be male and female.",
-                "Genesis 6:19 - Of all living creatures of every flesh, two of every form shalt thou take into the ark, to guard them living with thee; they shall be male and female.",
-                "Genesis 6:19 - And of every breathing thing of all kind, two of every type shalt thou lead into the ship, to save them alive with thee; they shall be male and female."
-            ],
-            "answer": "Genesis 6:19 - And of every living thing of all flesh, two of every sort shalt thou bring into the ark, to keep them alive with thee; they shall be male and female.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This command directly answers the question by showing God's plan for ecological preservation. In the face of a global catastrophe, God instructed Noah to preserve not only humanity but a diverse array of animal life, demonstrating His comprehensive care for His entire creation and His intent to repopulate the earth after the flood.",
-                "Importance_of_Wording": "The phrase 'of every living thing of all flesh' and 'two of every sort' (Hebrew: min, meaning 'kind') emphasizes the broad scope of preservation. It wasn't selective but inclusive, ensuring biodiversity. This universality shows God's intent to maintain the fullness of His creation.",
-                "Factual_Explanation": "God's command to Noah, 'of every living thing of all flesh, two of every sort' (שְׁנַיִם מִכֹּל - shenayim mikkol - Strong's H8147, H3605), ensures the survival of diverse species, reflecting His care for all creation through the flood's judgment.",
-                "Theological_Meaning": "This act underscores God's commitment to preserving life through judgment, prefiguring the ultimate renewal of creation in a 'new earth, wherein dwelleth righteousness' (2 Peter 3:13). It assures believers of God's redemptive plan for the world.",
-                "Christ_Centered_Meaning": "The ark symbolizes Christ, the refuge from judgment. The command to include 'every sort' foreshadows the gathering of all nations into God's kingdom (Revelation 14:6), where diverse peoples find salvation through Christ, the true ark of safety."
-            }
-        },
-        {
-            "id": "BP010",
-            "question": "After Noah, his family, and all the animals have obediently entered the ark, a final, decisive action takes place that seals them in safety and commences the judgment. What action in Genesis illustrates God's perfect timing and His sovereign control over salvation and judgment?",
-            "options": [
-                "Genesis 7:16 - And those that entered, came in male and female of all kind, as Lord had ordered him: and the Lord sealed him in.",
-                "Genesis 7:16 - And they that went in, went in male and female of all flesh, as God had commanded him: and the LORD shut him in.",
-                "Genesis 7:16 - And all that passed in, went in male and female of all body, as Lord had bidden him: and the Lord locked him in.",
-                "Genesis 7:16 - They that moved in, went in male and female of each flesh, as God had directed him: and the LORD closed him in."
-            ],
-            "answer": "Genesis 7:16 - And they that went in, went in male and female of all flesh, as God had commanded him: and the LORD shut him in.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse directly answers the question by describing the final, decisive act. Noah's role was to obey by building and entering the ark, but it was God who controlled the critical moment of shutting the door. This divine action demonstrates God's sovereignty, securing the righteous in safety with perfect timing just before judgment begins.",
-                "Importance_of_Wording": "The phrase 'the LORD shut him in' (Hebrew: vayyisgor YHWH ba'ado) emphasizes divine initiative. 'Shut' implies both finality (the time for repentance was over) and protection (nothing could harm those inside). This highlights God's absolute control over timing and security.",
-                "Factual_Explanation": "After Noah's obedience, 'the LORD shut him in' (וַיִּסְגֹּר יְהוָה בַּעֲדוֹ - vayyisgor YHWH ba'ado - Strong's H5462, H3068), marking the divine act of sealing the ark, ensuring safety and timing the judgment perfectly.",
-                "Theological_Meaning": "This illustrates God's sovereignty over timing and outcomes, teaching believers to trust Him after obedient action. It prefigures the close of probation (Matthew 25:10-12), where God secures His faithful before judgment.",
-                "Christ_Centered_Meaning": "Christ, who 'shutteth, and no man openeth' (Revelation 3:7), is the ultimate security. Being 'shut in' with Him ensures eternal safety, as He promises no one can pluck His sheep from His hand (John 10:28-29)."
-            }
-        },
-        {
-            "id": "BP011",
-            "question": "After surviving the flood and stepping out onto a cleansed earth, Noah and his family face the monumental task of starting civilization anew. What was Noah's very first recorded action, revealing the foundational priority of a life lived in covenant with God?",
-            "options": [
-                "Genesis 8:20 - And Noah raised an altar unto the Lord; and chose of every pure beast, and of every pure bird, and presented burnt sacrifices on the altar.",
-                "Genesis 8:20 - And Noah built an altar unto the Lord; and took of every good beast, and of every good fowl, and offered burnt gifts on the altar.",
-                "Genesis 8:20 - And Noah builded an altar unto the LORD; and took of every clean beast, and of every clean fowl, and offered burnt offerings on the altar.",
-                "Genesis 8:20 - Then Noah made an altar unto the LORD; and picked of every clean animal, and of every clean fowl, and gave burnt offerings on the altar."
-            ],
-            "answer": "Genesis 8:20 - And Noah builded an altar unto the LORD; and took of every clean beast, and of every clean fowl, and offered burnt offerings on the altar.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "Noah's first act of building an altar and offering sacrifices immediately after the flood establishes worship as the top priority. Before building a house or planting a field, Noah expressed gratitude and devotion to God. This demonstrates that for a covenant people, a right relationship with God is the foundation upon which all other life activities must be built.",
-                "Importance_of_Wording": "The term 'builded an altar' (Hebrew: mizbeach) denotes a deliberate, worship-specific act. 'Unto the LORD' emphasizes God-centered devotion, and 'burnt offerings' signifies complete surrender and atonement. This models the proper, worshipful response to God's salvation.",
-                "Factual_Explanation": "Noah's first act was to build an 'altar' (מִזְבֵּחַ - mizbeach - Strong's H4196) and offer burnt offerings, prioritizing worship and gratitude to God before addressing personal needs in a new world.",
-                "Theological_Meaning": "Worship is the foundation of a faithful life, equipping believers for challenges. This priority prepares God's people to resist false worship systems (Revelation 13:15) by rooting their lives in devotion to God.",
-                "Christ_Centered_Meaning": "Noah's altar points to Christ's sacrifice, the 'sweetsmelling savour' (Ephesians 5:2). Worship through Christ makes our offerings acceptable, transforming our devotional life into a joyful act of surrender rather than a burden."
-            }
-        },
-        {
-            "id": "BP012",
-            "question": "The story of faith in the Old Testament takes a pivotal turn with the call of one man, who is told to leave his home and family for a destination unknown. What was the Lord's foundational command to Abram, initiating the covenant that would form the nation of Israel and eventually bless the entire world?",
-            "options": [
-                "Genesis 12:1 - Now the LORD had told unto Abram, Go thou out of thy homeland, and from thy kinfolk, and from thy father’s dwelling, unto a land that I will guide thee:",
-                "Genesis 12:1 - Now the LORD had said unto Abram, Get thee out of thy country, and from thy kindred, and from thy father's house, unto a land that I will shew thee:",
-                "Genesis 12:1 - And the Lord had said unto Abram, Move thou out of thy country, and from thy people, and from thy father’s house, unto a region that I will lead thee:",
-                "Genesis 12:1 - Then the Lord had spoken unto Abram, Leave thou out of thy nation, and from thy family, and from thy father’s home, unto a place that I will show thee:"
-            ],
-            "answer": "Genesis 12:1 - Now the LORD had said unto Abram, Get thee out of thy country, and from thy kindred, and from thy father's house, unto a land that I will shew thee:",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This command is the starting point of the biblical narrative of redemption through a specific covenant people. It is the call that requires Abram to leave all earthly security—country, kindred, and father's house—and step out in pure faith in God's promise. This call to radical obedience based on God's word alone is the foundational test of faith.",
-                "Importance_of_Wording": "The phrase 'Get thee out' (לֶךְ־לְךָ - lekh lekha - Strong's H3212, H1980) is an emphatic, personal command, urging decisive separation. 'Unto a land that I will shew thee' highlights the nature of faith, which is trusting God's unseen plan over present, tangible realities.",
-                "Factual_Explanation": "God's command, 'Get thee out' (לֶךְ־לְךָ - lekh lekha), demanded Abram leave his country and kindred for a land God would reveal, testing his faith in God's promises over earthly security.",
-                "Theological_Meaning": "This call to radical obedience prefigures the final separation from worldly systems (Revelation 18:4). It teaches that faith prioritizes God's will, preparing believers for ultimate tests of loyalty.",
-                "Christ_Centered_Meaning": "Christ left heaven to fulfill God's call (Philippians 2:6-8). His example calls believers to forsake worldly attachments, seeking the eternal city 'whose builder and maker is God' (Hebrews 11:10)."
-            }
-        },
-        {
-            "id": "BP013",
-            "question": "After rescuing his nephew Lot from an alliance of kings, Abram is met by Melchizedek, the mysterious priest-king of Salem. What act of worship did Abram perform, establishing a precedent for acknowledging God's ownership and provision that existed even before the Law of Moses?",
-            "options": [
-                "Genesis 14:20 - And honored be the most high Lord, which hath sent thine enemies into thy palm. And he paid him tributes of all.",
-                "Genesis 14:20 - Blessed be the most high God, which hath given thine rivals into thy hold. And he offered him portions of all.",
-                "Genesis 14:20 - And blessed be the most high God, which hath delivered thine enemies into thy hand. And he gave him tithes of all.",
-                "Genesis 14:20 - And praised be the most high Lord, which hath handed thine foes into thy grasp. And he gave him shares of all."
-            ],
-            "answer": "Genesis 14:20 - And blessed be the most high God, which hath delivered thine enemies into thy hand. And he gave him tithes of all.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "Abram's tithing to Melchizedek is the first recorded instance of tithing in the Bible, establishing it as an act of worship and gratitude. Given in response to victory and blessing, it demonstrates that returning a tenth is a timeless act of acknowledging God's provision, not merely a legalistic requirement of the later Mosaic code.",
-                "Importance_of_Wording": "The word 'tithes' (מַעֲשֵׂר - ma'aser - Strong's H4643) denotes a specific tenth, not just a random gift. The phrase 'of all' indicates he gave a tenth of all the spoils of war, showing comprehensive stewardship. This deliberate act of worship establishes a principle of faithful financial return to God.",
-                "Factual_Explanation": "Abraham gave 'tithes of all' (מַעֲשֵׂר - ma'aser) to Melchizedek, acknowledging God's provision and victory, establishing tithing as a voluntary act of worship before the Mosaic law.",
-                "Theological_Meaning": "Tithing reflects God's ownership (Psalm 24:1), building trust in His provision. It prepares believers for economic challenges, as seen in Revelation 13:17, where loyalty to God overrides worldly pressures.",
-                "Christ_Centered_Meaning": "Melchizedek, a type of Christ (Hebrews 7), received Abraham's tithe, symbolizing worship to our eternal High Priest. Tithing to Christ acknowledges His lordship, aligning our priorities with God's kingdom."
-            }
-        },
-        {
-            "id": "BP014",
-            "question": "The Lord appears to Abraham before the destruction of Sodom and Gomorrah. Instead of simply announcing the judgment, God asks a rhetorical question that reveals a profound principle about His relationship with His faithful servants. What did God say that shows His desire to share His plans with His friends?",
-            "options": [
-                "Genesis 18:17 - And the LORD said, Shall I conceal from Abraham that thing which I do; seeing that Abraham shall surely become a great and mighty nation?",
-                "Genesis 18:17 - And the LORD said, Shall I hide from Abraham that thing which I do; seeing that Abraham shall surely become a great and mighty nation?",
-                "Genesis 18:17 - And the LORD said, Shall I keep from Abraham that thing which I do; seeing that Abraham shall surely become a great and mighty nation?",
-                "Genesis 18:17 - And the LORD said, Shall I withhold from Abraham that thing which I do; seeing that Abraham shall surely become a great and mighty nation?"
-            ],
-            "answer": "Genesis 18:17 - And the LORD said, Shall I hide from Abraham that thing which I do; seeing that Abraham shall surely become a great and mighty nation?",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse reveals God's intimate and communicative relationship with his followers. It answers the question of whether God is distant or involved. By asking 'Shall I hide from Abraham...', God establishes the principle that He takes His faithful servants into His confidence, revealing His plans and purposes to them, thus enabling them to intercede and participate in His work.",
-                "Importance_of_Wording": "The word 'hide' (כָּסָה - kasah - Strong's H3680) implies intentional withholding of information. God's rhetorical question suggests that openness is the norm in His relationship with Abraham, His 'friend' (Isaiah 41:8). This establishes a model of relational transparency that counters the idea of a distant, unknowable God.",
-                "Factual_Explanation": "God's question, 'Shall I hide (כָּסָה - kasah) from Abraham that thing which I do?' reflects His intent to share His plans, affirming His intimate relationship with those who seek Him (Amos 3:7).",
-                "Theological_Meaning": "God reveals His secrets to His servants (Amos 3:7), providing prophetic insight to navigate chaos. This principle assures believers that current events align with God's plan, preparing them for the end times.",
-                "Christ_Centered_Meaning": "Christ, calling His disciples 'friends' (John 15:15), fulfills this principle by revealing God's plan through the Holy Spirit (John 16:13). Believers can trust Christ to provide clarity and purpose amidst global turmoil."
-            }
-        },
-        {
-            "id": "BP015",
-            "question": "As Lot and his family are being led out of the doomed city of Sodom, the angels give them a final, urgent command for their salvation. What was this command, which illustrates the necessity of a decisive and complete separation from condemned, worldly influences?",
-            "options": [
-                "Genesis 19:17 - And it came to pass, when they had brought them forth abroad, that he said, Escape for thy life; look not behind thee, neither stay thou in all the plain; escape to the mountain, lest thou be consumed.",
-                "Genesis 19:17 - And it occurred, when they had brought them out abroad, that he stated, Hasten for thy being; peek not behind thee, nor stay thou in all the land; hasten to the mount, lest thou be consumed.",
-                "Genesis 19:17 - It came to pass, when they had taken them forth abroad, that he said, Run for thy life; look not behind thee, neither pause thou in all the plain; run to the ridge, lest thou be ruined.",
-                "Genesis 19:17 - And it happened, when they had led them out abroad, that he spoke, Flee for thy soul; glance not behind thee, nor linger thou in all the field; flee to the hill, lest thou be destroyed."
-            ],
-            "answer": "Genesis 19:17 - And it came to pass, when they had brought them forth abroad, that he said, Escape for thy life; look not behind thee, neither stay thou in all the plain; escape to the mountain, lest thou be consumed.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This command directly addresses the need for decisive action when fleeing moral corruption. The angels give a three-part instruction: 'Escape for thy life' (urgency), 'look not behind thee' (no lingering affection for the past), and 'neither stay thou in all the plain' (complete separation). This provides a clear, divine directive for how to deal with overwhelming worldly corruption: flee without compromise or regret.",
-                "Importance_of_Wording": "The phrases 'Escape for thy life' (הִמָּלֵט עַל־נַפְשֶׁךָ - himmalet 'al-naphshekha - Strong's H4422, H5315) and 'look not behind thee' are critical. The first conveys life-or-death urgency, the second forbids any lingering affection for sin. The final command to 'escape to the mountain' points to a place of safety designated by God, not by human convenience.",
-                "Factual_Explanation": "The angel's urgent command to Lot, 'Escape for thy life; look not behind thee,' demanded immediate, uncompromising flight from Sodom's corruption, warning against any attachment to the doomed city.",
-                "Theological_Meaning": "This command underscores the need for complete separation from sin, prefiguring the call to 'come out of Babylon' (Revelation 18:4). It teaches that half-hearted commitment is fatal, preparing believers for end-time moral challenges.",
-                "Christ_Centered_Meaning": "Jesus warns, 'Remember Lot's wife' (Luke 17:32), highlighting the danger of a divided heart. The call to escape mirrors looking to Christ alone, the only safe refuge from a morally corrupt world."
-            }
-        },
-        {
-            "id": "BP016",
-            "question": "God puts Abraham's faith to the ultimate test, a test that seems to contradict His own promises. After Abraham shows his willingness to obey, the Angel of the LORD stops him. What does the angel say that reveals the purpose of the test and the evidence of true faith?",
-            "options": [
-                "Genesis 22:12 - And he stated, Touch not thy hand upon the child, nor do thou any harm unto him: for now I grasp that thou lovest Lord, seeing thou hast not held thy son, thine only son from me.",
-                "Genesis 22:12 - And he said, Lay not thine hand upon the lad, neither do thou any thing unto him: for now I know that thou fearest God, seeing thou hast not withheld thy son, thine only son from me.",
-                "Genesis 22:12 - He said, Set not thine arm upon the youth, neither do thou any act unto him: for now I know that thou reverest God, as thou hast not kept back thy son, thine only son from me.",
-                "Genesis 22:12 - And he spoke, Place not thy hand upon the boy, nor do thou any deed unto him: for now I see that thou honorest Lord, since thou hast not spared thy son, thine only son from me."
-            ],
-            "answer": "Genesis 22:12 - And he said, Lay not thine hand upon the lad, neither do thou any thing unto him: for now I know that thou fearest God, seeing thou hast not withheld thy son, thine only son from me.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is the climax and explanation of the greatest test of faith in the Old Testament. The angel's words reveal the test's purpose: 'for now I know that thou fearest God.' The evidence of this God-fearing faith was that Abraham had 'not withheld' what was most precious to him. This shows that the core of the test was about ultimate allegiance and the willingness to surrender everything to God, trusting Him even when His commands seem incomprehensible.",
-                "Importance_of_Wording": "The key word is 'withheld' (Hebrew: chasak), which means to hold back, restrain, or keep for oneself. The test wasn't just about obedience; it was about whether Abraham would cling to and prioritize anything above God. The phrase 'not withheld' signifies a complete and total release of what was most precious, proving his absolute surrender and trust.",
-                "Factual_Explanation": "The test's climax was the declaration: 'for now I know that thou fearest God, seeing thou hast not withheld (חָשַׂךְ - chasak - Strong's H2820) thy son, thine only son from me.' Abraham's willingness to surrender what was most precious proved his supreme love and loyalty.",
-                "Theological_Meaning": "This test reveals the character of true faith that will be required of the 144,000, who 'follow the Lamb whithersoever he goeth' (Revelation 14:4). The final generation will face tests that demand they surrender everything—family, security, life itself—out of supreme love for God, demonstrating their fitness for heaven.",
-                "Christ_Centered_Meaning": "This entire event is a profound type of the gospel. Abraham's willingness to sacrifice his son prefigures the Father's love in giving His Son (John 3:16). Isaac carrying the wood prefigures Christ carrying His cross. The ram caught in the thicket and offered instead represents Christ as our substitute, the Lamb that 'God will provide' (Genesis 22:8)."
-            }
-        },
-        {
-            "id": "BP017",
-            "question": "Fleeing from his brother Esau, Jacob is alone, afraid, and sleeping in the wilderness. God gives him a dream and a promise that becomes the foundation of his faith for the rest of his life. What is this comprehensive promise of divine presence and protection for those who are in exile and peril?",
-            "options": [
-                "Genesis 28:15 - And, behold, I am with thee, and will keep thee in all places whither thou goest, and will bring thee again into this land; for I will not leave thee, until I have done that which I have spoken to thee of.",
-                "Genesis 28:15 - And, see, I am near thee, and will shield thee in all paths whither thou wanderest, and will return thee unto this soil; for I will not abandon thee, until I have completed that which I have vowed to thee of.",
-                "Genesis 28:15 - Lo, I am beside thee, and will guard thee in all lands whither thou travelest, and will lead thee back into this place; for I will not forsake thee, until I have finished that which I have promised to thee of.",
-                "Genesis 28:15 - Behold, I am with thee, and will watch thee in all regions whither thou movest, and will guide thee again to this ground; for I will not leave thee, until I have fulfilled that which I have spoken to thee of."
-            ],
-            "answer": "Genesis 28:15 - And, behold, I am with thee, and will keep thee in all places whither thou goest, and will bring thee again into this land; for I will not leave thee, until I have done that which I have spoken to thee of.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This promise is the perfect answer to Jacob's desperate situation as a fugitive. It addresses every aspect of his fear: loneliness ('I am with thee'), physical danger ('will keep thee in all places'), and the uncertainty of his future ('will bring thee again... will not leave thee, until I have done that which I have spoken'). It is a complete assurance of God's personal care and covenant faithfulness.",
-                "Importance_of_Wording": "The promise has several essential parts. 'I am with thee' establishes God's personal, abiding presence. 'Keep thee' (Hebrew: shamar) means to guard and preserve vigilantly. The phrase 'in all places' makes the promise universal, not tied to a specific holy site. The final clause guarantees the fulfillment of God's larger covenant plan, providing long-term hope.",
-                "Factual_Explanation": "As Jacob fled, a fugitive, God gave him this unconditional promise: 'I am with thee, and will keep (שָׁמַר - shamar - Strong's H8104) thee in all places whither thou goest.' The word shamar implies guarding and protecting vigilantly.",
-                "Theological_Meaning": "This promise of God's abiding presence is the believer's security in a hostile world. As persecution and global crises intensify, this assurance empowers God's people to fulfill their mission. It is the foundation for the courage needed when earthly support systems fail.",
-                "Christ_Centered_Meaning": "The ladder Jacob saw, connecting heaven and earth, was a direct symbol of Christ (John 1:51), the only bridge between a sinful world and a holy God. Christ's parting promise, 'lo, I am with you alway, even unto the end of the world' (Matthew 28:20), is the fulfillment of the promise made to Jacob."
-            }
-        },
-        {
-            "id": "BP018",
-            "question": "After twenty years in exile, Jacob is about to face his estranged brother Esau and is terrified for his life. He spends a night alone in desperate prayer, physically wrestling with a mysterious man until daybreak. What desperate, persistent plea does Jacob make that illustrates the nature of a faith that will not be denied a divine blessing?",
-            "options": [
-                "Genesis 32:26 - And he said, Let me go, for the day breaketh. And he said, I will not let thee go, except thou bless me.",
-                "Genesis 32:26 - He said, Release me, for the morn shineth. And he said, I will not release thee, except thou favor me.",
-                "Genesis 32:26 - And he stated, Let me pass, for the light dawneth. And he stated, I will not let thee pass, until thou bless me.",
-                "Genesis 32:26 - And he spoke, Free me now, for the dawn riseth. And he spoke, I will not free thee now, unless thou grace me."
-            ],
-            "answer": "Genesis 32:26 - And he said, Let me go, for the day breaketh. And he said, I will not let thee go, except thou bless me.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is perfectly relevant because it models the kind of earnest, wrestling prayer that often precedes a spiritual breakthrough. Jacob, at his most desperate moment, physically clings to God and refuses to be put off with a superficial encounter. His cry is not for physical deliverance, but for a genuine blessing—an assurance of God's favor. This illustrates the holy persistence and desperation that can transform a life of fear into a life of faith.",
-                "Importance_of_Wording": "The phrase 'I will not let thee go' conveys an active, tenacious, and determined faith. It is not passive waiting. The condition, 'except thou bless me,' shows that the goal was not merely to win a fight, but to receive a divine blessing that he knew he desperately needed to face the future. This specific wording captures the combination of human desperation and persistent faith that is necessary for a spiritual breakthrough.",
-                "Factual_Explanation": "Jacob's desperate plea, 'I will not let thee go, except thou bless me' (לֹא אֲשַׁלֵּחֲךָ כִּי אִם־בֵּרַכְתָּנִי - lo' 'ashallechekha ki 'im-berakhtani), demonstrates a holy persistence born of deep self-awareness of his sin and his total dependence on God for deliverance.",
-                "Theological_Meaning": "This wrestling represents the 'time of Jacob's trouble' (Jeremiah 30:7), a period of intense anguish God's people will experience just before their deliverance at the Second Coming. It is a struggle not with human foes, but an agonizing wrestle in prayer, confessing sin and clinging to God's promises while Satan accuses them.",
-                "Christ_Centered_Meaning": "Jacob wrestled with the pre-incarnate Christ. His limp was a permanent reminder that spiritual victory comes not through human strength, but through surrender and clinging to Christ. Our spiritual struggles lead to a new name and identity, just as Jacob became Israel, 'a prince with God.'"
-            }
-        },
-        {
-            "id": "BP019",
-            "question": "Joseph, a trusted servant in Potiphar's house, is solicited by his master's wife. He faces a choice between yielding to temptation for personal pleasure and advancement, or maintaining his integrity at great personal risk. What is Joseph's powerful question that reveals his ultimate standard for moral decision-making?",
-            "options": [
-                "Genesis 39:9 - There is none grander in this hall than I; neither hath he barred any good from me but thee, for thou art his wife: how then can I do this vast sin, and stray against God?",
-                "Genesis 39:9 - None is higher in this home than I; nor hath he withheld any item from me but thee, since thou art his spouse: how then can I commit this grave evil, and err against Lord?",
-                "Genesis 39:9 - There is none greater in this house than I; neither hath he kept back any thing from me but thee, because thou art his wife: how then can I do this great wickedness, and sin against God?",
-                "Genesis 39:9 - No one is greater in this place than I; nor hath he saved any thing from me but thee, as thou art his bride: how then can I perform this great wrong, and fault against Lord?"
-            ],
-            "answer": "Genesis 39:9 - There is none greater in this house than I; neither hath he kept back any thing from me but thee, because thou art his wife: how then can I do this great wickedness, and sin against God?",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "Joseph's response provides the ultimate moral framework for resisting temptation. He weighs the decision not against the risk of getting caught or the potential for pleasure, but against a higher allegiance. His question reveals that his primary concern was not the horizontal sin against his master, but the vertical sin against God. This principle elevates any moral decision from a cost-benefit analysis to a matter of ultimate loyalty.",
-                "Importance_of_Wording": "The wording is crucial. Joseph first defines the act in absolute terms as 'this great wickedness.' But the ultimate reason for his refusal is in the final clause: 'and sin against God?' This shows that his loyalty was not to his master or even his own conscience in isolation, but to God Himself. He understood that all sin is ultimately vertical. This specific two-part reasoning provides the most powerful motivation for choosing integrity regardless of the consequences.",
-                "Factual_Explanation": "Joseph's defining question was not about the social or personal consequences, but the spiritual one: 'how then can I do this great wickedness, and sin (חָטָא - chata' - Strong's H2398) against God?' He understood that all sin is ultimately a transgression against God's authority and character.",
-                "Theological_Meaning": "This represents the standard of integrity for God's remnant people. In a world that redefines sin and prioritizes self-preservation, their loyalty is to God's law alone. This unwavering faithfulness, even unto death, is what prepares them to stand through the final crisis without an intercessor.",
-                "Christ_Centered_Meaning": "Joseph's purity in the face of temptation, his unjust suffering, and his ultimate exaltation to a position of authority make him one of the most complete types of Christ in Scripture. He prefigures Christ's perfect righteousness, His vicarious suffering, and His resurrection and glorification."
-            }
-        },
-        {
-            "id": "BP020",
-            "question": "After being brought from prison to interpret Pharaoh's dreams, Joseph stands before the most powerful monarch on earth. Pharaoh attributes great wisdom to him. How does Joseph respond, demonstrating perfect humility and deflecting all credit from himself to God?",
-            "options": [
-                "Genesis 41:16 - And Joseph spoke to Pharaoh, noting, It is not with me: Lord shall give Pharaoh a note of peace.",
-                "Genesis 41:16 - And Joseph answered Pharaoh, saying, It is not in me: God shall give Pharaoh an answer of peace.",
-                "Genesis 41:16 - And Joseph replied to Pharaoh, stating, It is not mine: Lord shall grant Pharaoh a word of calm.",
-                "Genesis 41:16 - Joseph answered Pharaoh, saying, It lies not in me: God shall offer Pharaoh a reply of rest."
-            ],
-            "answer": "Genesis 41:16 - And Joseph answered Pharaoh, saying, It is not in me: God shall give Pharaoh an answer of peace.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is the perfect model for giving God the glory. Joseph is presented with a prime opportunity to promote himself and gain favor. Instead, he immediately and completely deflects all credit, pointing directly to God as the source of wisdom. This provides a clear, practical example of how to handle praise and success: deny personal credit and attribute the ability and positive outcomes to God.",
-                "Importance_of_Wording": "The phrase 'It is not in me' (Hebrew: bil'aday) is a stark and absolute negation of self-ability. Joseph doesn't say 'God helps me' or 'I couldn't do it without God.' He removes himself from the equation entirely. This is followed immediately by the positive declaration: 'God shall give...' This specific two-part structure—total self-negation followed by complete attribution to God—is the most powerful and unambiguous expression of humility.",
-                "Factual_Explanation": "Joseph immediately deflected praise, stating, 'It is not in me' (בִּלְעָדָי - bil'aday - Strong's H1107). This Hebrew word expresses a complete negation of self-ability. He explicitly credited God for the wisdom he possessed.",
-                "Theological_Meaning": "Humility is the prerequisite for receiving the power of the Holy Spirit. Pride prevents God from working through an individual. The final generation, tasked with giving the Loud Cry, must be empty of self so they can be filled with God's power, reflecting His character to the world, not their own talents.",
-                "Christ_Centered_Meaning": "Joseph's humility perfectly mirrors that of Christ, who repeatedly stated, 'I can of mine own self do nothing' (John 5:30) and 'the Father that dwelleth in me, he doeth the works' (John 14:10). True discipleship means becoming a pure channel for Christ's power and wisdom."
-            }
-        },
-        {
-            "id": "BP021",
-            "question": "After years of suffering caused by his brothers' betrayal, Joseph finally reveals himself to them in Egypt. They are terrified, expecting retribution. What perspective does Joseph give them that reframes their malicious act as part of God's sovereign, benevolent plan?",
-            "options": [
-                "Genesis 45:5 - So now be not saddened, nor upset with yourselves, that ye sent me here: for Lord did place me before you to save souls.",
-                "Genesis 45:5 - Now therefore be not grieved, nor angry with yourselves, that ye sold me hither: for God did send me before you to preserve life.",
-                "Genesis 45:5 - Now then be not troubled, nor vexed with yourselves, that ye traded me hither: for God did lead me before you to guard life.",
-                "Genesis 45:5 - Therefore be not mournful, nor wroth with yourselves, that ye gave me here: for Lord did bring me before you to keep lives."
-            ],
-            "answer": "Genesis 45:5 - Now therefore be not grieved, nor angry with yourselves, that ye sold me hither: for God did send me before you to preserve life.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse offers a profound perspective on suffering and providence. Joseph, who suffered immense injustice, reframes the entire narrative. He looks past his brothers' malicious act ('ye sold me hither') and sees God's sovereign, benevolent purpose ('God did send me... to preserve life'). This principle helps believers reinterpret tragedy through the lens of faith, which is essential for overcoming bitterness and anger.",
-                "Importance_of_Wording": "Joseph’s wording is critical. He says, 'God did send me,' attributing the ultimate agency not to his brothers' sin but to God's sovereign plan. He does not say 'God allowed you to send me.' He then gives the divine motive: 'to preserve life.' This specific wording—asserting God's agency and a life-saving purpose—is what transforms a story of betrayal and suffering into a story of salvation and providence.",
-                "Factual_Explanation": "Joseph revealed a profound understanding of divine providence: 'God did send me before you to preserve life (לְמִחְיָה - lemichyah - Strong's H4241).' He saw God's sovereign hand orchestrating events, turning a malicious human act into a means of salvation.",
-                "Theological_Meaning": "This is a core principle for understanding the Great Controversy. Satan's most vicious attacks against God's people are overruled by divine providence to purify their character, demonstrate God's power, and ultimately accomplish His good purposes. This perspective is essential for enduring end-time persecution with faith instead of bitterness.",
-                "Christ_Centered_Meaning": "Joseph's experience is a microcosm of the plan of salvation. The evil intentions of men (and Satan) in crucifying Christ were turned by God into the greatest good: the preservation of eternal life for all humanity. Christ's suffering at the hands of His brethren brought salvation to the world."
-            }
-        },
-        {
-            "id": "BP022",
-            "question": "On his deathbed, the patriarch Jacob gives a series of prophecies about the future of his twelve sons. When he comes to Judah, he gives a prophecy that points far beyond the tribe's earthly future to the coming of a specific Messianic figure. Who is this figure, and what will be His effect on the peoples of the world?",
-            "options": [
-                "Genesis 49:10 - The rod shall not stray from Judah, nor a leader from between his feet, until Shiloh enters; and unto him shall the union of the people be.",
-                "Genesis 49:10 - The crown shall not leave from Judah, nor a ruler from between his knees, until Shiloh arrive; and unto him shall the assembly of the folk be.",
-                "Genesis 49:10 - A staff shall not part from Judah, nor a judge from between his legs, until Shiloh comes; and unto him shall the meeting of the tribes be.",
-                "Genesis 49:10 - The sceptre shall not depart from Judah, nor a lawgiver from between his feet, until Shiloh come; and unto him shall the gathering of the people be."
-            ],
-            "answer": "Genesis 49:10 - The sceptre shall not depart from Judah, nor a lawgiver from between his feet, until Shiloh come; and unto him shall the gathering of the people be.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This prophecy is a direct answer, pinpointing the Messianic hope. It foretells that the royal authority ('sceptre') will remain with the tribe of Judah until the arrival of a specific person: 'Shiloh,' a title for the Messiah. The prophecy then states His ultimate purpose: 'unto him shall the gathering of the people be.' This reveals that the true solution for the unity of all people is found in allegiance to this promised King.",
-                "Importance_of_Wording": "The wording is highly specific. 'Shiloh' is a Messianic title meaning 'He to whom it belongs' or 'Tranquility.' The prophecy states the 'gathering' (obedience or allegiance) of the people will be 'unto him.' This focus on a person as the center of unity is critical. The archaic KJV phrasing 'Until Shiloh come' adds to the sense of a long-awaited, prophesied event that will be the ultimate solution to the scattering and division of God's people.",
-                "Factual_Explanation": "Jacob's prophecy points to a time when the scepter would not depart from Judah until 'Shiloh' (שִׁילֹה - Shiloh - Strong's H7886) comes. This name means 'He to whom it belongs' or 'Tranquility,' and is a direct messianic title. Unto Him shall the 'gathering of the people be.'",
-                "Theological_Meaning": "True unity for God's diverse and scattered people is found only in allegiance to their rightful king. This prophecy points to the final gathering of the remnant from every nation under the banner of Christ, united by their loyalty to His law and testimony before He returns.",
-                "Christ_Centered_Meaning": "Christ is Shiloh, the Prince of Peace, to whom all authority belongs. His mission is to gather a people for His name (Acts 15:14). At the cross, He broke down the dividing walls of hostility, creating one new body (Ephesians 2:14-16), a foreshadowing of the final, glorious gathering of the redeemed around His throne."
-            }
-        },
-        {
-            "id": "BP023",
-            "question": "After their father Jacob's death, Joseph's brothers are once again terrified that Joseph will finally take revenge on them for their past cruelty. What is Joseph's final, profound statement on the matter, which has become the ultimate summary of God's power to overrule human evil for good?",
-            "options": [
-                "Genesis 50:20 - But as for you, ye thought evil against me; but God meant it unto good, to bring to pass, as it is this day, to save much people alive.",
-                "Genesis 50:20 - As for you, ye sought ill against me; but God shaped it unto good, to cause it to be, as it is this day, to spare much folk alive.",
-                "Genesis 50:20 - Yet as for you, ye planned harm against me; but Lord turned it unto good, to make it happen, as it is this day, to keep many souls alive.",
-                "Genesis 50:20 - But for you, ye wished evil against me; but Lord made it unto good, to bring it about, as it is this day, to save many lives alive."
-            ],
-            "answer": "Genesis 50:20 - But as for you, ye thought evil against me; but God meant it unto good, to bring to pass, as it is this day, to save much people alive.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is the most powerful biblical principle for combating bitterness in the face of injustice. Joseph acknowledges the evil intent of others ('ye thought evil against me') but immediately counters it with God's greater, sovereign intent ('God meant it unto good'). This principle allows one to reframe suffering, not as a meaningless attack, but as something God can overrule for a redemptive purpose. This perspective is the key to forgiveness and enduring faith.",
-                "Importance_of_Wording": "The power of the verse lies in its direct contrast, using the same Hebrew verb (chashab - to think, intend, devise) for both human malice and divine providence. 'You intended evil, but God intended good.' This direct parallel is crucial. It shows that God's plan is not just a secondary reaction; it is a primary purpose that is more powerful than the evil intended by humans. The word 'meant' or 'intended' captures this sense of purpose and design.",
-                "Factual_Explanation": "Joseph articulates one of the most profound truths in scripture: 'But as for you, ye thought (חָשַׁב - chashab - Strong's H2803) evil against me; but God thought (חָשַׁב - chashab - Strong's H2803) it unto good.' The same verb is used to contrast humanity's malicious intent with God's redemptive purpose.",
-                "Theological_Meaning": "This is the believer's defense against despair. In the Great Controversy, every act of malice from Satan and his agents is permitted by God only if He can use it to further His plan and purify His people. This truth allows believers to endure injustice and persecution with forgiveness, knowing that God remains sovereign.",
-                "Christ_Centered_Meaning": "This principle finds its ultimate expression at the cross. What Satan intended as his greatest victory—the death of the Son of God—God meant for the greatest good: the salvation of the world. This divine reversal is the heart of the gospel and the guarantee of evil's final defeat."
-            }
-        },
-        {
-            "id": "BP024",
-            "question": "Forty years after fleeing Egypt, Moses is a humble shepherd in Midian. He encounters a miraculous sight that is also a prophetic sign, revealing God's holy nature and His ability to empower a human vessel without destroying it. What was this sign?",
-            "options": [
-                "Exodus 3:2 - The angel of the LORD came unto him in a spark of fire out of the center of a bush: and he saw, and, behold, the bush blazed with fire, and the bush was not destroyed.",
-                "Exodus 3:2 - And the messenger of the Lord appeared to him in a glow of flame out of the core of a plant: and he looked, and, see, the plant burned with flame, and the plant was not consumed.",
-                "Exodus 3:2 - And the spirit of the Lord showed unto him in a blaze of flame out of the heart of a shrub: and he gazed, and, lo, the shrub glowed with flame, and the shrub was not devoured.",
-                "Exodus 3:2 - And the angel of the LORD appeared unto him in a flame of fire out of the midst of a bush: and he looked, and, behold, the bush burned with fire, and the bush was not consumed."
-            ],
-            "answer": "Exodus 3:2 - And the angel of the LORD appeared unto him in a flame of fire out of the midst of a bush: and he looked, and, behold, the bush burned with fire, and the bush was not consumed.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This sign is a perfect metaphor for God's call. The humble bush represents the human servant (Moses). The fire represents God's holy, all-consuming presence. The miracle is that the bush, though filled with divine fire, was 'not consumed.' This is a direct prophetic picture of how God's call and presence do not lead to destruction but provide supernatural sustenance, enabling a person to endure impossible circumstances without being burned out.",
-                "Importance_of_Wording": "The key to the sign is the paradox in the specific wording: 'the bush burned... and was not consumed.' Both clauses are essential. If it only glowed, the power would be less evident. If it burned up, it would be a warning. The fact that it was actively 'burning' yet simultaneously 'not consumed' illustrates the core principle: God's power sustains, rather than destroys, the vessel He inhabits.",
-                "Factual_Explanation": "The miracle was that the bush burned with fire, yet 'was not consumed' (אֵינֶנּוּ אֻכָּל - 'eynennu 'ukkal - Strong's H369, H398). The fire, a symbol of God's holy presence, did not destroy the humble bush but energized it.",
-                "Theological_Meaning": "This illustrates God's sustaining power. He does not call His servants only to see them consumed by the trials of their work. His presence provides the power. This is a promise for the end-time church, which will face the fire of persecution but, filled with God's glory, will not be consumed but will instead give the final message to the world.",
-                "Christ_Centered_Meaning": "The burning bush is a beautiful type of the incarnation. In Christ, the fire of divinity dwelt in the bush of humanity, yet the humanity was not consumed. It also represents the believer, who, when filled with the fire of the Holy Spirit, is empowered for service rather than being destroyed by God's holiness."
-            }
-        },
-        {
-            "id": "BP025",
-            "question": "When God calls Moses to deliver Israel, Moses asks for God's name, seeking a new revelation of His character to share with the enslaved people. What divine name did God reveal that establishes His eternal, self-existent, and active nature as the foundation of all reality?",
-            "options": [
-                "Exodus 3:14 - And Lord spoke unto Moses, I BE WHO I BE: and he spoke, Thus shalt thou tell unto the people of Israel, I BE hath sent me unto you.",
-                "Exodus 3:14 - And God said unto Moses, I AM THAT I AM: and he said, Thus shalt thou say unto the children of Israel, I AM hath sent me unto you.",
-                "Exodus 3:14 - And Lord told unto Moses, I EXIST AS I EXIST: and he said, Thus shalt thou say unto the tribes of Israel, I EXIST hath sent me unto you.",
-                "Exodus 3:14 - God said unto Moses, I AM WHAT I AM: and he stated, Thus shalt thou speak unto the sons of Israel, I AM hath dispatched me unto you."
-            ],
-            "answer": "Exodus 3:14 - And God said unto Moses, I AM THAT I AM: and he said, Thus shalt thou say unto the children of Israel, I AM hath sent me unto you.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This divine name is the ultimate philosophical and theological anchor. In a world of gods with limited power and fleeting existence, God reveals His name as the very definition of absolute, self-existent reality. 'I AM' is the ground of all being. This provides the ultimate assurance that God's promises are backed by His unchanging, eternal nature.",
-                "Importance_of_Wording": "The phrase 'I AM THAT I AM' (Hebrew: 'ehyeh 'asher 'ehyeh) is profound. It denotes continuous, active, self-determining existence. It is not a static title but a declaration of being itself. It means His existence is determined only by His own nature. For a people in bondage, the shortened form, 'I AM hath sent me unto you,' is a promise that the eternally-existing One is now acting on their behalf.",
-                "Factual_Explanation": "God revealed His covenant name as 'I AM THAT I AM' (אֶהְיֶה אֲשֶׁר אֶהְיֶה - 'ehyeh 'asher 'ehyeh - Strong's H1961). This name denotes eternal, self-existent, and active being—the unchangeable reality upon which everything else depends.",
-                "Theological_Meaning": "In an age of relativism and skepticism, the name 'I AM' is the anchor of all truth. It establishes God as the only absolute in the universe, the foundation for His unchangeable law, and the guarantee that His promises are sure.",
-                "Christ_Centered_Meaning": "Jesus took this sacred name for Himself when He declared, 'Before Abraham was, I am' (John 8:58), a direct claim to be the eternal God of the Old Testament. Each of His 'I am' statements (the bread of life, the light of the world, etc.) reveals another facet of how this self-existent God meets every human need."
-            }
-        },
-        {
-            "id": "BP026",
-            "question": "As God sends plagues upon Egypt, the Bible describes a terrifying spiritual process occurring in the nation's leader. What principle does the Bible state, showing how God confirms the rebellious choice of a person who persistently resists His will?",
-            "options": [
-                "Exodus 7:3 - I will toughen Pharaoh’s mind, and expand my signs and my miracles in the realm of Egypt.",
-                "Exodus 7:3 - And I will firm Pharaoh’s heart, and grow my tokens and my wonders in the nation of Egypt.",
-                "Exodus 7:3 - And I will harden Pharaoh's heart, and multiply my signs and my wonders in the land of Egypt.",
-                "Exodus 7:3 - And I will stiffen Pharaoh’s soul, and increase my marks and my marvels in the land of Egypt."
-            ],
-            "answer": "Exodus 7:3 - And I will harden Pharaoh's heart, and multiply my signs and my wonders in the land of Egypt.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse introduces the principle of judicial hardening. The story of Pharaoh shows a process: a person repeatedly resists God's will and hardens their own heart (Exodus 8:15, 32), and in response, God judicially confirms that choice, giving them over to the hardness they have chosen. This explains how a person can become so calloused that they are immune to reason, empathy, and evidence of God's power.",
-                "Importance_of_Wording": "The term 'harden' is significant. It describes a process of becoming stubborn, stiff-necked, and unresponsive. The Bible shows a two-way action: Pharaoh hardens his own heart, and God hardens it. The phrase 'I will harden' reveals a solemn spiritual law: God respects human choice to the point that if a person persistently chooses rebellion, God will eventually withdraw His Spirit and confirm them in that state.",
-                "Factual_Explanation": "The text says God will 'harden' (קָשָׁה - qashah - Strong's H7185) Pharaoh's heart. This is best understood as a judicial act. Pharaoh first hardened his own heart (Exodus 8:15, 32) by persistently rejecting the light God gave him. God's act was to confirm the choice Pharaoh had already made, withdrawing His Spirit and giving him over to his own rebellion.",
-                "Theological_Meaning": "This reveals a solemn principle of the Great Controversy. Those who persistently resist the convictions of the Holy Spirit will eventually be left to the hardness of heart they have chosen. This process will be seen on a global scale as many reject God's final message of mercy, solidifying their allegiance with the powers of darkness.",
-                "Christ_Centered_Meaning": "Pharaoh's hardened heart, which led to his destruction, stands in stark contrast to the new, soft heart that Christ promises to give through the New Covenant: 'A new heart also will I give you... and I will take away the stony heart out of your flesh, and I will give you an heart of flesh' (Ezekiel 36:26). Pharaoh represents the path of resistance to God's will, while Christ offers the path of surrender and life."
-            }
-        },
-        {
-            "id": "BP027",
-            "question": "Pharaoh's court magicians are able to replicate the first two plagues through their secret arts. But when the third plague arrives, they are powerless and forced to admit the true source of the miracle. What do the magicians say, acknowledging the limits of their occult power in the face of divine power?",
-            "options": [
-                "Exodus 8:19 - And the sorcerers spoke to Pharaoh, This is the work of God: yet Pharaoh's mind was made firm, and he did not heed them; as the LORD had spoken.",
-                "Exodus 8:19 - Then the wise men said unto Pharaoh, This is the hand of the Lord: but Pharaoh's soul was stiffened, and he listened not unto them; as God had declared.",
-                "Exodus 8:19 - Then the magicians said unto Pharaoh, This is the finger of God: but Pharaoh's heart was hardened, and he hearkened not unto them; as the LORD had said.",
-                "Exodus 8:19 - And the magicians declared to Pharaoh, This is the power of the Almighty: yet Pharaoh's will was unyielding, and he obeyed them not; as the LORD had commanded."
-            ],
-            "answer": "Exodus 8:19 - Then the magicians said unto Pharaoh, This is the finger of God: but Pharaoh's heart was hardened, and he hearkened not unto them; as the LORD had said.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is directly relevant because it shows that even secular experts (the magicians) can recognize an act as being undeniably from God. Their confession, 'This is the finger of God,' is a pivotal moment. Yet, this intellectual acknowledgment does not lead to Pharaoh's submission, showing that pride and a hardened heart can override clear evidence, even from one's own advisors.",
-                "Importance_of_Wording": "The specific phrase 'This is the finger of God' is a direct, unambiguous attribution of supernatural power that the magicians could not replicate. The outcome, 'but Pharaoh's heart was hardened, and he hearkened not,' is crucial because it demonstrates that even expert testimony is not enough to convert a rebellious heart.",
-                "Factual_Explanation": "After failing to replicate the plague of lice, Pharaoh's own magicians concede, 'This is the finger of God.' This is a pivotal moment where human occult power admits its limits before divine power. Despite this, Pharaoh's rebellion continues, showing that his hardness was now a fixed choice.",
-                "Theological_Meaning": "This event reveals that evidence alone is insufficient to produce faith. A humble, submissive will is required. This principle is vital for understanding the end times, when God's final signs will be so powerful that many will recognize His intervention, yet some will still reject the truth out of pride and allegiance to other powers.",
-                "Christ_Centered_Meaning": "The 'finger of God' is linked in the New Testament to the power of the Holy Spirit (Luke 11:20). The magicians recognized God's power externally, but without the internal work of the Spirit on the heart, it led to no change in Pharaoh. This contrasts with believers who not only see God's power but are transformed by it through the Holy Spirit."
-            }
-        },
-        {
-            "id": "BP028",
-            "question": "Amidst the plagues, God sends a message to Pharaoh that reveals His ultimate, sovereign purpose for allowing the rebellious king to remain in power. What principle does God state, showing that even defiant rulers can unwittingly serve to glorify God's name on a global scale?",
-            "options": [
-                "Exodus 9:16 - And in very deed for this cause have I raised thee up, for to shew in thee my power; and that my name may be declared throughout all the earth.",
-                "Exodus 9:16 - Truly for this reason have I allowed thee to stand, to demonstrate in thee my strength; and that my name may be spoken throughout all the world.",
-                "Exodus 9:16 - And for this purpose have I established thee, to make known in thee my might; and that my glory may be proclaimed in all the lands.",
-                "Exodus 9:16 - For this very reason have I let thee remain, to display through thee my authority; and that my name might be told across the entire globe."
-            ],
-            "answer": "Exodus 9:16 - And in very deed for this cause have I raised thee up, for to shew in thee my power; and that my name may be declared throughout all the earth.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse directly reveals God's sovereign perspective on world events. God explicitly tells Pharaoh that his position as a world leader, even in his rebellion, serves a divine purpose: to demonstrate God's power and make His name known globally. This assures believers that no ruler operates outside of God's ultimate plan, providing a framework to trust in divine control despite apparent chaos.",
-                "Importance_of_Wording": "The phrase 'for this cause have I raised thee up' is a powerful declaration of divine sovereignty. It's not that God merely permitted Pharaoh, but that He actively established him for this specific purpose. The dual goals—'to shew in thee my power' and 'that my name may be declared'—are specific and global in scope. This wording provides the most robust affirmation of God's control over history and its leaders.",
-                "Factual_Explanation": "In this statement, God reveals His ultimate purpose in the contest with Pharaoh. The king's stubbornness was not thwarting God's plan but was, in fact, the very vehicle through which God intended to display His supreme power over all earthly kingdoms and their gods.",
-                "Theological_Meaning": "This principle of sovereignty is key to understanding Bible prophecy. World leaders and political powers, whether righteous or wicked, fulfill specific roles in God's unfolding plan for the Great Controversy. This gives believers peace and confidence that history is moving toward God's intended conclusion, not spiraling out of control.",
-                "Christ_Centered_Meaning": "Pharaoh was 'raised up' to show God's power in judgment. Christ was 'lifted up' (John 12:32) to show God's power in salvation. Just as Pharaoh's defeat declared God's name, Christ's victory at the cross declares God's name and character—both powerful and merciful—throughout all the earth and for all eternity."
-            }
-        },
-        {
-            "id": "BP029",
-            "question": "On the night of the final plague in Egypt, the Israelites are given a specific instruction to save their firstborn from the destroying angel. What was the command that pointed to the ultimate source of protection during a time of national judgment?",
-            "options": [
-                "Exodus 12:13 - And the blood will be for you a symbol on the houses where you stay: and when I observe the blood, I will pass you by, and the affliction shall not be on you to ruin you, when I strike the realm of Egypt.",
-                "Exodus 12:13 - And the blood shall be to you for a token upon the houses where ye are: and when I see the blood, I will pass over you, and the plague shall not be upon you to destroy you, when I smite the land of Egypt.",
-                "Exodus 12:13 - The blood shall be to you for a sign on the dwellings where you reside: and when I see the blood, I will move past you, and no pestilence shall be upon you for destruction, when I judge the nation of Egypt.",
-                "Exodus 12:13 - And the blood is for you as a mark upon the homes where you are: and when I perceive the blood, I will go over you, and the scourge will not be upon you to end you, when I hit the ground of Egypt."
-            ],
-            "answer": "Exodus 12:13 - And the blood shall be to you for a token upon the houses where ye are: and when I see the blood, I will pass over you, and the plague shall not be upon you to destroy you, when I smite the land of Egypt.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse directly answers the question by presenting God's model of protection. The Israelites' safety during a national catastrophe did not depend on their own defenses but on the application of a 'token'—the lamb's blood. This teaches that ultimate security from judgment is not found in human effort but in the provision God has made, which must be personally applied by faith.",
-                "Importance_of_Wording": "The specific wording is critical. The blood is a 'token' or sign for the Israelites. The decisive action is God's: 'when I see the blood, I will pass over you.' Protection is not based on the occupants' merit but on their obedience in applying the blood. The promise is absolute: 'the plague shall not be upon you to destroy you.'",
-                "Factual_Explanation": "This verse establishes the core principle of the Passover: the shed blood of a lamb, when applied to the home, served as the sign that triggered God's act of 'passing over,' sparing the firstborn inside from the final plague. The protection was conditional upon this act of faith and obedience.",
-                "Theological_Meaning": "The Passover is the foundational type of salvation and deliverance in the Old Testament. It provides the pattern for how God's people are protected during final judgments, particularly the seven last plagues described in Revelation. Security comes from being covered by the sign of redemption that God has appointed.",
-                "Christ_Centered_Meaning": "The Passover lamb is the most direct Old Testament type of Christ, 'our passover sacrificed for us' (1 Corinthians 5:7). Its blood is a symbol of Christ's atoning blood. Just as the lamb's blood protected Israel from physical death, the applied blood of Christ protects believers from eternal death and the final judgment. It is the only true security."
-            }
-        },
-        {
-            "id": "BP030",
-            "question": "To ensure that the mighty act of the Exodus would never be forgotten, God established the Passover feast as a perpetual ordinance. What principle from this story commands the establishment of a memorial to ensure future generations remember God's faithfulness and deliverance?",
-            "options": [
-                "Exodus 12:42 - It is a night to be greatly remembered to the LORD for leading them forth from the land of Egypt: this is that night of the LORD to be remembered by all the sons of Israel in their ages.",
-                "Exodus 12:42 - It is a night of watching unto the LORD for taking them out from the nation of Egypt: this is that night of the LORD to be watched by all the people of Israel in their time.",
-                "Exodus 12:42 - It is a night to be much observed unto the LORD for bringing them out from the land of Egypt: this is that night of the LORD to be observed of all the children of Israel in their generations.",
-                "Exodus 12:42 - This is a night of great observance to the LORD for guiding them from the realm of Egypt: this is the LORD's night to be observed by all of Israel's descendants throughout their history."
-            ],
-            "answer": "Exodus 12:42 - It is a night to be much observed unto the LORD for bringing them out from the land of Egypt: this is that night of the LORD to be observed of all the children of Israel in their generations.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse directly addresses the need for memorializing God's acts. It establishes a divine command not just to experience deliverance but to perpetually 'observe' it as a memorial. The purpose is to prevent future generations from taking God's mighty acts for granted. This principle teaches the importance of intentional remembrance to cultivate gratitude and maintain spiritual perspective.",
-                "Importance_of_Wording": "The phrase 'a night to be much observed' emphasizes the importance and solemnity of the remembrance. The command's repetition—'to be observed of all the children of Israel in their generations'—makes it a perpetual, binding ordinance. This specific, command-oriented language highlights that remembrance is not an optional feeling but a required discipline to prevent spiritual complacency.",
-                "Factual_Explanation": "This verse institutes the Passover as a perpetual ordinance. It was not to be a one-time event but a recurring memorial ('in their generations') specifically designed to recount the story of God's deliverance from Egyptian bondage to future generations, ensuring they would not forget.",
-                "Theological_Meaning": "The principle of remembrance is central to maintaining a covenant relationship with God. Forgetting God's past acts of salvation leads to apostasy and taking grace for granted. Regular, intentional remembrance builds faith and gratitude, which are essential for enduring future trials.",
-                "Christ_Centered_Meaning": "Just as the Passover was the great memorial of the Old Covenant, the communion service is the great memorial of the New Covenant. When Jesus said, 'this do in remembrance of me' (Luke 22:19), He was establishing a new 'night to be much observed.' It reminds believers of their deliverance from the bondage of sin and points forward to the final exodus from this world at His second coming."
-            }
-        },
-        {
-            "id": "BP031",
-            "question": "Trapped between the Egyptian army and the Red Sea, the terrified Israelites see no way of escape. What divine instruction does Moses give them that provides a strategy for when human effort is futile and divine intervention is the only hope?",
-            "options": [
-                "Exodus 14:13 - And Moses told the people, Be not afraid, stay put, and witness the deliverance of the LORD, which he will perform for you today: for the Egyptians whom you have witnessed today, you shall witness them again no more.",
-                "Exodus 14:13 - And Moses said unto the people, Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day: for the Egyptians whom ye have seen to day, ye shall see them again no more for ever.",
-                "Exodus 14:13 - And Moses spoke to the people, Have no fear, be still, and observe the rescue of the LORD, which he will do for you this day: for the Egyptians whom you have observed this day, you will observe them again nevermore.",
-                "Exodus 14:13 - And Moses addressed the people, Do not worry, remain firm, and watch the victory of the LORD, which he will provide to you this day: for the Egyptians whom you have seen this day, you shall see them again never."
-            ],
-            "answer": "Exodus 14:13 - And Moses said unto the people, Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day: for the Egyptians whom ye have seen to day, ye shall see them again no more for ever.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is the perfect response to a situation of being trapped and overwhelmed. The Israelites were in a completely impossible situation with no human solution. Moses' command—'Fear ye not, stand still'—is a radical counter-intuitive strategy. It teaches that there are moments when the most faith-filled action is to cease frantic human striving and wait expectantly for God's miraculous intervention.",
-                "Importance_of_Wording": "The sequence of commands is critical: 'Fear ye not' addresses the emotion. 'Stand still' addresses the futile impulse to act. 'And see the salvation of the LORD' directs focus from the problem to the divine solution. The final promise, 'ye shall see them again no more for ever,' provides absolute assurance of a complete and final deliverance. This specific progression is a divine prescription for a faith-based response to overwhelming crisis.",
-                "Factual_Explanation": "Trapped between the Red Sea and the advancing Egyptian army, Israel's only instruction was to stop and watch God work. This moment defines faith as trusting God to act when all human options are exhausted. God's subsequent parting of the sea was a direct response to this posture of faith.",
-                "Theological_Meaning": "This event is a type for the 'time of trouble' that God's people will face before the Second Coming. During that crisis, human solutions will fail, and earthly support systems will be gone. The only recourse will be to 'stand still' in faith and await divine deliverance. Learning to do this in smaller crises now is preparation for that final test.",
-                "Christ_Centered_Meaning": "Christ is the 'salvation of the LORD.' The call to 'stand still and see' it is a call to cease from trying to earn salvation by our own works and to simply receive the deliverance Christ accomplished at the cross. He fights the battle for us against sin and death, our ultimate 'Egyptians,' and wins a victory we could never win for ourselves."
-            }
-        },
-        {
-            "id": "BP032",
-            "question": "After the miraculous deliverance at the Red Sea, the people of Israel, led by Moses, erupt in spontaneous praise. What is the opening line of their song, modeling the correct priority of worship and testimony immediately following a great salvation?",
-            "options": [
-                "Exodus 15:2 - The LORD is my might and my hymn, and he is now my deliverance: he is my God, and I will make for him a sanctuary; my father's God, and I will praise him.",
-                "Exodus 15:2 - The LORD is my strength and song, and he is become my salvation: he is my God, and I will prepare him an habitation; my father's God, and I will exalt him.",
-                "Exodus 15:2 - The LORD is my power and melody, and he has become my victory: he is my God, and I will build him a dwelling; my father's God, and I will honor him.",
-                "Exodus 15:2 - The LORD is my fortitude and music, and he is my rescuer: he is my God, and I will set up for him a residence; my father's God, and I will magnify him."
-            ],
-            "answer": "Exodus 15:2 - The LORD is my strength and song, and he is become my salvation: he is my God, and I will prepare him an habitation; my father's God, and I will exalt him.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse provides the perfect model of worship after deliverance. Immediately after their impossible victory, the first thing the Israelites did was sing a song of worship that attributed everything—strength, salvation, and the victory itself—to God. This shows that the primary response to any great act of God should not be self-congratulation but God-exaltation, turning achievement into an act of worship.",
-                "Importance_of_Wording": "The verse is a comprehensive statement of worship. 'Strength and song' connects God's power with the worshiper's response. 'He is become my salvation' is a personal testimony. 'I will prepare him an habitation' shows a desire for God's presence. 'I will exalt him' is the ultimate goal. This rich, multi-faceted language of worship provides a complete template for acknowledging God as the source of all success.",
-                "Factual_Explanation": "This is one of the first verses of the 'Song of Moses,' the spontaneous hymn of praise sung by Israel after safely crossing the Red Sea and seeing their enemies destroyed. Their first act in freedom was worship, setting a precedent for all future victories.",
-                "Theological_Meaning": "This principle teaches that every deliverance, whether personal or corporate, is a foretaste of the final, eternal deliverance. The proper response to victory is always worship and testimony, which reinforces faith and gives glory to God. This prepares the heart for the ultimate celebration of the redeemed.",
-                "Christ_Centered_Meaning": "The redeemed in heaven sing the 'song of Moses the servant of God, and the song of the Lamb' (Revelation 15:3). This shows that the worship following the Red Sea deliverance is a direct type of the worship that will follow the final deliverance of God's people through Christ, the Lamb. Present victories are opportunities to rehearse the song of eternal praise."
-            }
-        },
-        {
-            "id": "BP033",
-            "question": "In the wilderness, God provides manna for the Israelites. The rules for gathering it were not arbitrary, but were a divine object lesson. What principle did God state was the specific purpose for the daily provision, testing their faith and obedience?",
-            "options": [
-                "Exodus 16:4 - Then spoke the LORD to Moses, Look, I shall send food from the sky for you; and the people will go forth and take a portion each day, that I may test them, if they will follow my rule, or not.",
-                "Exodus 16:4 - Then said the LORD unto Moses, Behold, I will rain bread from heaven for you; and the people shall go out and gather a certain rate every day, that I may prove them, whether they will walk in my law, or no.",
-                "Exodus 16:4 - Then the LORD said to Moses, See, I will shower bread from above for you; and the folk shall go out and collect a daily amount, that I might try them, whether they will live by my instruction, or not.",
-                "Exodus 16:4 - And the LORD said to Moses, Attend, I will send down loaves from the heavens for you; and the people must go and gather their share for the day, so I may challenge them, if they will abide by my decree, or no."
-            ],
-            "answer": "Exodus 16:4 - Then said the LORD unto Moses, Behold, I will rain bread from heaven for you; and the people shall go out and gather a certain rate every day, that I may prove them, whether they will walk in my law, or no.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse directly states the purpose behind the manna. God's provision was explicitly designed as a test ('that I may prove them') centered on daily dependence. The prohibition against gathering for more than one day (except before the Sabbath) was a direct challenge to the human impulse to hoard and secure one's own future. This provides a clear biblical principle about trusting God for daily needs.",
-                "Importance_of_Wording": "The key elements are God's promise ('I will rain bread'), the specific instruction ('gather a certain rate every day'), and the stated purpose ('that I may prove them, whether they will walk in my law, or no'). This shows that the daily-ness of the provision was not arbitrary but was the very mechanism of the test of faith and obedience.",
-                "Factual_Explanation": "The manna was God's supernatural provision for Israel in the wilderness. The rules surrounding its collection—gathering only enough for one day, with a double portion before the Sabbath, and none on the Sabbath—were a daily lesson in trust, dependence, and Sabbath observance.",
-                "Theological_Meaning": "This principle of daily dependence is crucial preparation for the final crisis. The Bible indicates a time is coming when God's people will not be able to 'buy or sell' (Revelation 13:17). At that time, they will have to depend on God for their daily provision in a way that mirrors the manna experience. Learning this trust now prepares the character for that time.",
-                "Christ_Centered_Meaning": "Jesus identified Himself as the true 'bread from heaven' (John 6:32-35). He taught His disciples to pray for 'daily bread' (Matthew 6:11), reinforcing this principle of dependence. Just as Israel needed daily physical bread from heaven, believers need daily spiritual nourishment from Christ to live. The manna experience was a physical type of this deeper spiritual reality."
-            }
-        },
-        {
-            "id": "BP034",
-            "question": "Before giving the Ten Commandments at Sinai, God makes a covenant proposal to the nation of Israel. What divine calling does He give them, explaining that their obedience will set them apart from all other nations for a special purpose?",
-            "options": [
-                "Exodus 19:5-6 - Now then, if you will listen to my voice truly, and hold my agreement, then you shall be a special jewel to me above all nations: for all the world is mine: And you shall be to me a kingdom of ministers, and a consecrated people.",
-                "Exodus 19:5-6 - So now, if you will hear my voice forsooth, and follow my pact, then you shall be a private holding to me above all folk: for all the globe is mine: And you shall be unto me a realm of priests, and a sacred nation.",
-                "Exodus 19:5-6 - Now therefore, if ye will obey my voice indeed, and keep my covenant, then ye shall be a peculiar treasure unto me above all people: for all the earth is mine: And ye shall be unto me a kingdom of priests, and an holy nation.",
-                "Exodus 19:5-6 - Therefore, if you will hearken to my call in truth, and guard my contract, then you shall be a valued possession to me above all humanity: for all the land is mine: And you will be to me a dominion of servants, and a sanctified nation."
-            ],
-            "answer": "Exodus 19:5-6 - Now therefore, if ye will obey my voice indeed, and keep my covenant, then ye shall be a peculiar treasure unto me above all people: for all the earth is mine: And ye shall be unto me a kingdom of priests, and an holy nation.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This passage directly answers the question by defining Israel's unique calling. God's offer is conditional: 'if ye will obey... and keep my covenant,' then their distinction will make them a 'peculiar treasure.' This shows that being set apart for God is not a burden but the very source of their value and special status. It provides a powerful motivation to embrace their unique calling as a 'kingdom of priests' to the world.",
-                "Importance_of_Wording": "The term 'peculiar treasure' (Hebrew: segullah) means a special, valued, personal possession. It’s not just different, but precious *because* it's different and belongs to the king. The call to be a 'kingdom of priests' and a 'holy nation' further defines this distinction as one of purpose and character, not arbitrary rules.",
-                "Factual_Explanation": "At Mount Sinai, before giving the Ten Commandments, God outlined the purpose of His covenant with Israel. Their role was to be a nation set apart from all others, not through ethnicity alone, but through obedience to His law, thereby acting as priests to represent Him to the world.",
-                "Theological_Meaning": "This is the calling of the church throughout all ages. God's people are called out of the world to be distinct, demonstrating His character and the superiority of His law. In the end times, this distinction becomes paramount as the remnant stands apart from the worldwide apostasy of Babylon.",
-                "Christ_Centered_Meaning": "The Apostle Peter applies this exact language to the Christian church, calling believers a 'chosen generation, a royal priesthood, an holy nation, a peculiar people' (1 Peter 2:9). Our status as God's treasure is not earned but is given to us in Christ. Our obedience is the grateful response to this new identity, allowing us to 'shew forth the praises of him who hath called you out of darkness into his marvellous light.'"
-            }
-        },
-        {
-            "id": "BP035",
-            "question": "The Ten Commandments are given at Sinai, establishing the foundation of God's moral government. What is the very first commandment, which addresses the problem of divided loyalties and establishes the principle of exclusive allegiance to the one true God?",
-            "options": [
-                "Exodus 20:3 - Thou shalt have no other gods before me.",
-                "Exodus 20:3 - Thou shalt possess no strange gods in my sight.",
-                "Exodus 20:3 - Thou shalt place no foreign gods in my presence.",
-                "Exodus 20:3 - Thou shalt keep no other deities ahead of me."
-            ],
-            "answer": "Exodus 20:3 - Thou shalt have no other gods before me.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This commandment is the direct answer. The problem of 'other gods' is not limited to ancient idols but includes anything that demands ultimate loyalty over God—be it power, money, or self. The command's placement as the very first of the ten shows that absolute, singular loyalty to God is the foundation for all other morality.",
-                "Importance_of_Wording": "The phrase 'before me' (Hebrew: al panay) literally means 'in my face' or 'in my presence.' It is a deeply personal and confrontational command. It's not just about prioritizing; it's about refusing to allow any rival to stand in the presence of the one true God. This stark, absolute, and personal wording forces a clear choice and exposes all forms of idolatry.",
-                "Factual_Explanation": "As the first of the Ten Commandments, this law establishes the basis of the covenant relationship: exclusive monotheism. All other commands flow from this primary allegiance. Any other ultimate loyalty is, by definition, idolatry.",
-                "Theological_Meaning": "This principle of supreme loyalty becomes the central issue in the final conflict. The command to worship the beast and his image (Revelation 13) is a direct assault on the First Commandment. The final test for humanity will be to choose who holds the position of 'God' in their lives: the Creator or a created power.",
-                "Christ_Centered_Meaning": "Jesus summarized this command when He said, 'Thou shalt love the Lord thy God with all thy heart, and with all thy soul, and with all thy mind' (Matthew 22:37). He is the perfect embodiment of this undivided loyalty to the Father. For the believer, Christ Himself is the visible image of the invisible God, and having 'no other gods' means giving Him supreme allegiance over every other claim in our lives."
-            }
-        },
-        {
-            "id": "BP036",
-            "question": "The fourth commandment at Sinai is the longest and most detailed, setting apart a specific portion of time for holy use. Which commandment addresses the conflict between worldly demands and loyalty to God's established time for worship, anchoring it in the creation story?",
-            "options": [
-                "Exodus 20:8-10 - Recall the sabbath day, to treat it as sacred. Six days shalt thou perform, and do all thy business: But the seventh day is the sabbath of the LORD thy God: in it thou shalt not do any business...",
-                "Exodus 20:8-10 - Remember the sabbath day, to keep it holy. Six days shalt thou labour, and do all thy work: But the seventh day is the sabbath of the LORD thy God: in it thou shalt not do any work, thou, nor thy son, nor thy daughter, thy manservant, nor thy maidservant, nor thy cattle, nor thy stranger that is within thy gates:",
-                "Exodus 20:8-10 - Mark the sabbath day, to hold it as hallowed. Six days mayest thou toil, and complete all thy tasks: Yet the seventh day is the sabbath of the LORD thy God: on it thou shalt not perform any task...",
-                "Exodus 20:8-10 - Observe the sabbath day, to sanctify it. Six days shalt thou strive, and finish all thy occupation: But the seventh day is the sabbath of the LORD thy God: in it thou shalt not engage in any occupation..."
-            ],
-            "answer": "Exodus 20:8-10 - Remember the sabbath day, to keep it holy. Six days shalt thou labour, and do all thy work: But the seventh day is the sabbath of the LORD thy God: in it thou shalt not do any work, thou, nor thy son, nor thy daughter, thy manservant, nor thy maidservant, nor thy cattle, nor thy stranger that is within thy gates:",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This commandment is the direct biblical instruction that defines the Sabbath. It explicitly sets apart the seventh day as holy, forbidding regular work ('thou shalt not do any work'). It establishes a divine rhythm that directly challenges any demand for ceaseless labor. It is not a suggestion but a core command, providing a non-negotiable basis for prioritizing God's sacred time.",
-                "Importance_of_Wording": "The command begins with 'Remember,' uniquely suggesting it is a truth that humanity is prone to forget. The text defines both the work week ('Six days shalt thou labour') and the holy day ('the seventh day is the sabbath of the LORD thy God'). The comprehensive list of who shall not work—from son to stranger to cattle—shows the all-encompassing nature of this holy rest.",
-                "Factual_Explanation": "The fourth commandment is the longest and most detailed of the ten, anchoring the Sabbath in creation (Exodus 20:11). It is not merely a day off but a day 'holy' to 'the LORD thy God,' making its observance an act of loyalty and worship directed toward the Creator.",
-                "Theological_Meaning": "The Sabbath is the great sign of loyalty to God as the Creator. Christians believe that in the final conflict described in Revelation, the central issue of worship will pivot on this very commandment. A global power will enforce a counterfeit day of worship (Sunday), making the choice to keep God's seventh-day Sabbath the ultimate test of allegiance to God's law over human laws.",
-                "Christ_Centered_Meaning": "Jesus declared Himself 'Lord even of the sabbath day' (Mark 2:28), showing it is His day. He is the one who gives true 'rest' (Matthew 11:28). The Sabbath is a weekly celebration not only of the finished work of Creation but also of the finished work of Redemption accomplished by Christ on the cross. It is a sign of our rest from trying to save ourselves by our own works."
-            }
-        },
-        {
-            "id": "BP037",
-            "question": "The laws given to ancient Israel included specific social ethics. What divine command in the book of Exodus explicitly warns against letting popular opinion, mob mentality, or the pressure of the majority sway one's moral judgment and actions?",
-            "options": [
-                "Exodus 23:2 - Thou shalt not follow a crowd to perform wrong; neither shalt thou testify in a matter to lean after many to distort justice.",
-                "Exodus 23:2 - Thou shalt not go with a group to commit evil; nor shalt thou declare in a case to side with the majority to bend the law.",
-                "Exodus 23:2 - Thou shalt not follow a multitude to do evil; neither shalt thou speak in a cause to decline after many to wrest judgment.",
-                "Exodus 23:2 - Thou shalt not accompany the masses to do wickedness; neither shalt thou state in a dispute to agree with the crowd to twist the verdict."
-            ],
-            "answer": "Exodus 23:2 - Thou shalt not follow a multitude to do evil; neither shalt thou speak in a cause to decline after many to wrest judgment.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is a direct and explicit command addressing the danger of group pressure. It forbids two things: joining the 'multitude to do evil' (participating in wrong actions) and speaking in a way that sides with the majority to distort truth ('wrest judgment'). It provides a clear biblical mandate for individual conscience to stand against group pressure.",
-                "Importance_of_Wording": "The term 'multitude' is key, as it specifically refers to the power and pressure of a large group or a majority. The command not to 'follow' them is a command to break ranks. The second clause, not to 'decline after many to wrest judgment,' is a prohibition against allowing popular opinion to become the standard for truth and justice.",
-                "Factual_Explanation": "This command is part of the 'Book of the Covenant' (Exodus 21-23), which applies the principles of the Ten Commandments to specific civil and social situations. It acknowledges the powerful human tendency toward groupthink and mob mentality and legislates against it, prioritizing individual moral responsibility.",
-                "Theological_Meaning": "This principle is essential preparation for the end times. Prophecy clearly indicates that the majority of the world will be deceived and will 'follow' the beast (Revelation 13:3). God's remnant people will be defined by their refusal to 'follow a multitude to do evil,' even when it means standing virtually alone against the entire world.",
-                "Christ_Centered_Meaning": "Christ is the ultimate example of one who refused to 'follow a multitude to do evil.' He stood against the religious and political crowds of his day, even when it led to His crucifixion. His followers are called to the same courage, trusting in Him rather than in the validation of the crowd. He is the truth, and our judgment must align with Him, not with the many."
-            }
-        },
-        {
-            "id": "BP038",
-            "question": "In the midst of Israel's apostasy with the golden calf, Moses returns from the mountain. He does not call for a committee or a compromise, but for a clear, decisive choice of allegiance. What was Moses's critical question that forced every person to declare their loyalty?",
-            "options": [
-                "Exodus 32:26 - Then Moses stood in the gate of the camp, and said, Who is on the LORD'S side? let him come unto me. And all the sons of Levi gathered themselves together unto him.",
-                "Exodus 32:26 - And Moses waited at the entrance of the camp, and called, Whoever is for the LORD, let him join me. And all the men of Levi came together unto him.",
-                "Exodus 32:26 - Then Moses stood at the opening of the camp, and spoke, Whosoever stands with the LORD, let him arrive to me. And all of the tribe of Levi assembled themselves unto him.",
-                "Exodus 32:26 - And Moses paused at the doorway of the camp, and cried, He that is of the LORD, let him come to my side. And the whole of the sons of Levi rallied themselves unto him."
-            ],
-            "answer": "Exodus 32:26 - Then Moses stood in the gate of the camp, and said, Who is on the LORD'S side? let him come unto me. And all the sons of Levi gathered themselves together unto him.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This event provides a powerful model for moments of moral crisis. In a time of deep national apostasy, Moses's question, 'Who is on the LORD'S side?' forced a decisive choice. It reframed the situation from one of confusion to one of fundamental allegiance, demonstrating that in moments of rebellion against God, there is no neutral ground.",
-                "Importance_of_Wording": "The question 'Who is on the LORD'S side?' is a stark, binary choice that eliminates any middle ground. Moses' physical action—'stood in the gate'—and his command—'let him come unto me'—demanded a physical separation, a visible act of commitment. This combination of a clear question and a call to decisive action is what makes this verse so powerful.",
-                "Factual_Explanation": "After witnessing the idolatry with the golden calf, Moses called for a clear division among the people. The tribe of Levi responded, separating themselves from the apostasy and dedicating themselves to God's cause, which led to their consecration as priests.",
-                "Theological_Meaning": "This moment is a type of the final 'shaking' and separation that God's church will experience. A time is coming when compromise will no longer be possible, and every individual will have to make a clear, public decision for or against God and His commandments. These smaller crises are preparation for that ultimate test of loyalty.",
-                "Christ_Centered_Meaning": "Jesus made a similar call, stating, 'He that is not with me is against me; and he that gathereth not with me scattereth abroad' (Matthew 12:30). He is the one to whom we must 'gather.' The call to be 'on the LORD'S side' is ultimately a call to be on Christ's side, to identify with Him and His truth, even when the majority of our community chooses another path."
-            }
-        },
-        {
-            "id": "BP039",
-            "question": "After the golden calf incident, Moses feels the overwhelming weight of his leadership and declares he cannot go on without a specific assurance from God. What simple, powerful promise did God give to Moses that provides the ultimate assurance of sustenance and peace for those engaged in overwhelming, God-given tasks?",
-            "options": [
-                "Exodus 33:14 - And he replied, My spirit shall walk with thee, and I will grant thee comfort.",
-                "Exodus 33:14 - And he said, My presence shall go with thee, and I will give thee rest.",
-                "Exodus 33:14 - And he answered, My own self shall journey with thee, and I will provide thee peace.",
-                "Exodus 33:14 - And he spoke, My face shall be with thee, and I will bring thee ease."
-            ],
-            "answer": "Exodus 33:14 - And he said, My presence shall go with thee, and I will give thee rest.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This promise directly answers Moses's desperation. He felt the overwhelming weight of leading an entire nation and declared he could not go on without God's personal presence. God's response is the perfect antidote: a promise of His own companionship ('My presence shall go with thee') and the direct result of that companionship ('I will give thee rest'). It assures the believer that true rest is not found in the absence of work but in the presence of God during the work.",
-                "Importance_of_Wording": "The promise is profoundly personal. God says 'My presence,' not 'an angel' or 'my power.' It is a promise of His own self. The result, 'I will give thee rest,' is a divine gift, not something to be achieved. This specific pairing of divine companionship leading to divine peace is the core of the assurance that can sustain anyone in an overwhelming task.",
-                "Factual_Explanation": "In response to Moses' desperate plea not to be sent on his mission without God's personal assurance, God gives this intimate promise. This was the turning point that gave Moses the confidence to continue his overwhelming task of leading Israel through the wilderness.",
-                "Theological_Meaning": "This is the foundational promise for every believer engaged in God's mission. It assures us that God does not send us out alone. This promise is especially critical for God's people during the final time of trouble, when all human support systems may fail and reliance on His presence will be their only source of strength and rest.",
-                "Christ_Centered_Meaning": "Jesus is 'Immanuel,' which means 'God with us' (Matthew 1:23). He is the ultimate fulfillment of God's promised presence. His parting words were, 'lo, I am with you alway, even unto the end of the world' (Matthew 28:20). His invitation, 'Come unto me... and I will give you rest' (Matthew 11:28), is the direct echo and fulfillment of the promise made to Moses. True rest is found only in His presence."
-            }
-        },
-        {
-            "id": "BP040",
-            "question": "After the apostasy with the golden calf, Moses pleads to see God's glory. God agrees to make His 'goodness pass before' him and proclaims His name, which is His character. What is this divine proclamation, which reveals God's own perfect, yet complex, nature and provides the ultimate balance of mercy and justice?",
-            "options": [
-                "Exodus 34:6-7 - And the LORD went by before him, and announced, The LORD, The LORD God, kind and good, patient, and full of grace and honesty, Showing kindness to millions, pardoning crime and offense and wrong, and that will in no way acquit the sinful.",
-                "Exodus 34:6-7 - And the LORD passed by before him, and proclaimed, The LORD, The LORD God, merciful and gracious, longsuffering, and abundant in goodness and truth, Keeping mercy for thousands, forgiving iniquity and transgression and sin, and that will by no means clear the guilty.",
-                "Exodus 34:6-7 - And the LORD moved by in front of him, and declared, The LORD, The LORD God, compassionate and benevolent, slow to anger, and rich in love and faithfulness, Maintaining love for thousands, absolving lawlessness and rebellion and wickedness, and that will never let the wicked go unpunished.",
-                "Exodus 34:6-7 - And the LORD came by before him, and stated, The LORD, The LORD God, tender and caring, waiting, and overflowing in kindness and reality, Holding mercy for multitudes, excusing rebellion and trespass and error, and that will not at all vindicate the unrighteous."
-            ],
-            "answer": "Exodus 34:6-7 - And the LORD passed by before him, and proclaimed, The LORD, The LORD God, merciful and gracious, longsuffering, and abundant in goodness and truth, Keeping mercy for thousands, forgiving iniquity and transgression and sin, and that will by no means clear the guilty.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This passage is God's own self-revelation, providing the ultimate model for the balance of mercy and justice. It presents a character that is profoundly merciful, gracious, and forgiving, yet simultaneously just, refusing to 'clear the guilty.' It shows that mercy and justice are not contradictory aspects to be balanced, but are coexisting truths within God's perfect character, providing the ultimate standard for all moral questions.",
-                "Importance_of_Wording": "The richness of the description is its power. The string of merciful attributes—'merciful and gracious, longsuffering, and abundant in goodness and truth'—is extensive. The description of forgiveness is comprehensive—'forgiving iniquity and transgression and sin.' This is immediately followed by the stark, absolute statement of justice: 'and that will by no means clear the guilty.' The specific, detailed, and uncompromised presentation of both facets of God's character makes this the most complete and authoritative statement on the subject.",
-                "Factual_Explanation": "After the golden calf incident, Moses asked to see God's glory. In response, God placed him in a cleft of the rock and proclaimed His name, which is His character. This is the most direct and detailed description of God's character found in the Old Testament.",
-                "Theological_Meaning": "This revelation of God's character is the foundation of the gospel and the final judgment. God's plan of salvation is the ultimate expression of how He can be both just (sin must be punished) and the justifier of those who have faith (sin is punished in a substitute). The final judgment will vindicate this perfect character before the universe.",
-                "Christ_Centered_Meaning": "The cross of Christ is the ultimate display of this character. At the cross, God's mercy, grace, and longsuffering were poured out for humanity, forgiving iniquity, transgression, and sin. Simultaneously, God's justice was satisfied as He did 'by no means clear the guilty' but laid the punishment upon His own Son. Jesus is the living embodiment of this proclaimed name."
-            }
-        },
-        {
-            "id": "BP041",
-            "question": "After the Tabernacle is completed, with every detail finished exactly as God had commanded, a spectacular event occurs that signals God's acceptance of the work and the fulfillment of His promise to dwell among His people. What event from Exodus demonstrates that God's glorious presence fills the space that His people have built in exact obedience to His instructions?",
-            "options": [
-                "Exodus 40:34 - Then a mist enveloped the tent of meeting, and the splendor of the LORD filled the holy place.",
-                "Exodus 40:34 - Then a fog covered the tabernacle of the assembly, and the majesty of the LORD filled the sanctuary.",
-                "Exodus 40:34 - Then a cloud covered the tent of the congregation, and the glory of the LORD filled the tabernacle.",
-                "Exodus 40:34 - Then the haze settled on the tent of worship, and the brightness of the LORD filled the holy tent."
-            ],
-            "answer": "Exodus 40:34 - Then a cloud covered the tent of the congregation, and the glory of the LORD filled the tabernacle.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is the climatic event of the book of Exodus. The spectacular infilling of the tabernacle with God's glory was the divine seal of approval, occurring only after the Israelites had completed every detail 'as the LORD commanded Moses' (Exodus 40:16, 19, 21, etc.). It demonstrates that God's manifest presence is the result of faithful obedience to His revealed will.",
-                "Importance_of_Wording": "The two distinct phenomena are key: 'a cloud covered the tent' (the external sign of presence) and 'the glory of the LORD filled the tabernacle' (the internal reality of His presence). This shows a complete and overwhelming divine occupation of the space. It was so total that 'Moses was not able to enter' (v. 35). This dramatic, specific language illustrates the powerful connection between obedience and the manifest presence of God.",
-                "Factual_Explanation": "This event marks the climax of the book of Exodus. After receiving the law at Sinai and constructing the tabernacle exactly according to the divine blueprint, God takes up residence among His people in a visible and glorious way, fulfilling His promise to dwell among them.",
-                "Theological_Meaning": "This is a type for how God dwells with His church. When His people order their lives and worship according to His Word, His presence and glory will fill them individually and corporately. This is the promise of the 'latter rain,' the final outpouring of the Holy Spirit that will fill God's church with glory to prepare them for Christ's return.",
-                "Christ_Centered_Meaning": "The tabernacle itself is a detailed type of Christ, who 'dwelt [literally, tabernacled] among us, and we beheld his glory' (John 1:14). The church, as the 'body of Christ,' is now God's temple (1 Corinthians 3:16). The ultimate fulfillment will be in the New Earth, when 'the tabernacle of God is with men, and he will dwell with them' (Revelation 21:3) in a final, glorious, and eternal way."
-            }
-        },
-        {
-            "id": "BP042",
-            "question": "In the creation account, after the making of woman, the Bible lays out God's original design for marriage. What foundational principle from Genesis establishes the primary human relationship and the proper order of loyalties for a married couple?",
-            "options": [
-                "Genesis 2:24 - Therefore shall a man leave his father and his mother, and shall cleave unto his wife: and they shall be one flesh.",
-                "Genesis 2:24 - For this cause shall a man depart from his father and his mother, and shall join unto his wife: and they shall become one body.",
-                "Genesis 2:24 - Thus shall a man separate from his father and his mother, and shall hold fast to his wife: and they shall be one being.",
-                "Genesis 2:24 - So shall a man go from his father and his mother, and shall be united with his wife: and they shall be as one person."
-            ],
-            "answer": "Genesis 2:24 - Therefore shall a man leave his father and his mother, and shall cleave unto his wife: and they shall be one flesh.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse provides the divine mandate for building a strong marriage. It gives clear instructions: 'leaving' the former primary family unit and 'cleaving' to create a new one. This principle establishes the marital bond as the highest human relationship, superseding the parent-child bond, and provides the blueprint for a new, unified family.",
-                "Importance_of_Wording": "The three verbs are critical. 'Leave' (azab) implies a decisive severance of primary dependence. 'Cleave' (dabaq) means to cling to, to be joined with, implying a permanent and passionate connection. The result, 'one flesh' ('eḥāḏ bāśār), signifies a total unity—not just physical, but emotional, spiritual, and relational. This specific three-fold description provides a complete model for marriage.",
-                "Factual_Explanation": "This verse establishes God's original blueprint for marriage. It involves three actions: 'leave' (עָזַב - azab - Strong's H5800) the family of origin, 'cleave' (דָּבַק - dabaq - Strong's H1692) to one's spouse, and become 'one flesh' (בָּשָׂר אֶחָד - basar 'echad - Strong's H1320, H259). This creates a new, primary family unit.",
-                "Theological_Meaning": "This principle elevates the marriage covenant as the foundational institution of human society. It is the earthly representation of a higher spiritual reality. Its sacredness is why violations of the marriage covenant are treated so seriously throughout Scripture.",
-                "Christ_Centered_Meaning": "The Apostle Paul quotes this verse in Ephesians 5:31-32 and then reveals its ultimate meaning: 'This is a great mystery: but I speak concerning Christ and the church.' The union of husband and wife is a living symbol of the covenant relationship between Christ (the bridegroom) and His church (the bride). He 'left' His Father's throne to 'cleave' to humanity and become 'one flesh' with us through the incarnation."
-            }
-        },
-        {
-            "id": "BP043",
-            "question": "After the great flood, God makes a covenant with Noah and all living creatures. What beautiful, natural phenomenon did God establish as the perpetual sign of His promise never again to destroy the earth by a flood?",
-            "options": [
-                "Genesis 9:13 - I have placed my rainbow in the sky, and it shall be for the token of a promise between me and the world.",
-                "Genesis 9:13 - I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth.",
-                "Genesis 9:13 - I will put my arc in the heavens, and it will be for a sign of an agreement between me and the planet.",
-                "Genesis 9:13 - I establish my colorful bow in the vapor, and it will be a mark of a pact between myself and the land."
-            ],
-            "answer": "Genesis 9:13 - I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse identifies the rainbow as the 'token of a covenant.' It reframes a natural phenomenon that appears during storms into a beautiful, tangible sign of God's grace and His specific promise of safety from another global flood, providing assurance to all future generations.",
-                "Importance_of_Wording": "The term 'bow' (qesheth) is the same Hebrew word used for a weapon of war (a battle bow). God is symbolically hanging up His weapon in the clouds, turning an instrument of judgment into a sign of peace. Setting it 'in the cloud' connects the promise directly to the storm itself. 'Token of a covenant' establishes it not as a natural phenomenon but as a divinely appointed symbol of a binding promise.",
-                "Factual_Explanation": "The rainbow is the sign of the Noahic Covenant. God set his 'bow' (קֶשֶׁת - qesheth - Strong's H7198) in the cloud as a 'token' (אוֹת - 'oth - Strong's H226) of His covenant promise that He would never again destroy all flesh with a flood (Genesis 9:15).",
-                "Theological_Meaning": "This covenant is universal, made with 'every living creature' (Genesis 9:12). The sign serves as a constant reminder to humanity, and even to God Himself ('I will look upon it, that I may remember' v. 16), of His promise. It reveals a God who binds Himself by His word and offers grace even after judgment.",
-                "Christ_Centered_Meaning": "The throne of God in heaven is encircled by a rainbow (Revelation 4:3), signifying that God's rule is founded on covenant faithfulness and that mercy and justice surround Him. Christ, our covenant head, is the ultimate assurance of God's promises. The storm of God's wrath against sin fell upon Him at the cross, so that for those who are in Him, the clouds of life are now arched with the rainbow of mercy."
-            }
-        },
-        {
-            "id": "BP044",
-            "question": "The apostle Paul, in his letter to the Romans, builds his entire argument for the gospel on a foundational principle from the life of Abraham. What pivotal statement from Genesis demonstrates that righteousness is credited on the basis of faith, not on works?",
-            "options": [
-                "Genesis 15:6 - And he had faith in the LORD; and he considered it to him for goodness.",
-                "Genesis 15:6 - And he trusted in the LORD; and he saw it in him as righteousness.",
-                "Genesis 15:6 - And he believed in the LORD; and he counted it to him for righteousness.",
-                "Genesis 15:6 - And he relied on the LORD; and he credited it to him as justice."
-            ],
-            "answer": "Genesis 15:6 - And he believed in the LORD; and he counted it to him for righteousness.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is the cornerstone of the doctrine of justification by faith. It shows that Abram was declared righteous by God not because of his works (he had not yet been circumcised or done many of the things for which he is famous), but because he simply 'believed' God's seemingly impossible promise. This establishes faith as the sole basis of one's right standing with God.",
-                "Importance_of_Wording": "The wording is precise and critical. 'Believed in the LORD' shows that the object of faith is a person, not just a set of doctrines. 'He counted it to him' (chashab) is an accounting term meaning to impute or to credit to one's account. God credited Abram's account with 'righteousness,' something Abram did not possess on his own. This legal crediting is the heart of the doctrine.",
-                "Factual_Explanation": "This is a pivotal moment in salvation history. Abram 'believed' (אָמַן - 'aman - Strong's H539) in the Lord's promise, and God 'counted' (חָשַׁב - chashab - Strong's H2803) this faith to him as 'righteousness' (צְדָקָה - tsedaqah - Strong's H6666). This is the first explicit statement of justification by faith in the Bible.",
-                "Theological_Meaning": "This verse, quoted three times in the New Testament (Romans 4:3, Galatians 3:6, James 2:23), forms the bedrock of the gospel. It proves that salvation has always been by grace through faith, not by works. It shows that the righteousness that God requires is a gift He imputes, not a character we achieve on our own.",
-                "Christ_Centered_Meaning": "What did Abram believe? He believed God's promise about a 'seed' (Genesis 15:5), which ultimately pointed to Christ. The righteousness credited to Abram is the righteousness of Christ. Our faith is the hand that accepts the gift of Christ's perfect life and atoning death, which is counted to us as if it were our own. This is the only way a person can be secure in their salvation."
-            }
-        },
-        {
-            "id": "BP045",
-            "question": "After centuries of slavery in Egypt, the children of Israel cry out in their suffering. The book of Exodus describes a turning point in heaven, where God takes note of their plight. What series of divine actions shows that God sees, hears, and remembers His people, even in prolonged suffering?",
-            "options": [
-                "Exodus 2:24-25 - And God noticed their pain, and God recalled his pact with Abraham, with Isaac, and with Jacob. And God saw the people of Israel, and God had concern for them.",
-                "Exodus 2:24-25 - And God heard their groaning, and God remembered his covenant with Abraham, with Isaac, and with Jacob. And God looked upon the children of Israel, and God had respect unto them.",
-                "Exodus 2:24-25 - And God perceived their sighing, and God recollected his promise to Abraham, to Isaac, and to Jacob. And God perceived the children of Israel, and God had knowledge of them.",
-                "Exodus 2:24-25 - And God paid attention to their cry, and God brought to mind his deal with Abraham, with Isaac, and with Jacob. And God watched the sons of Israel, and God knew them."
-            ],
-            "answer": "Exodus 2:24-25 - And God heard their groaning, and God remembered his covenant with Abraham, with Isaac, and with Jacob. And God looked upon the children of Israel, and God had respect unto them.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This passage directly answers the question of God's awareness. It presents a five-fold response from God to suffering: He 'heard,' 'remembered,' 'looked upon,' and 'had respect unto' them. This accumulation of divine actions provides powerful assurance that God is not distant or forgetful but is intimately aware of and moved by the suffering of His people, providing hope that intervention is coming.",
-                "Importance_of_Wording": "The sequence of verbs is crucial. 'Heard their groaning' shows His attention to their pain. 'Remembered his covenant' shows that His action is based on His faithfulness to His promises. 'Looked upon' them signifies His direct observation of their plight. Finally, 'had respect unto them' (or 'knew' them) implies a deep, personal, and compassionate understanding of their situation.",
-                "Factual_Explanation": "After years of silence in the narrative, these verses mark the divine turning point. God's response is described with four key verbs: He heard, He remembered His covenant, He looked upon the people, and He 'had respect unto them' (a translation of the Hebrew verb יָדַע - yada' - Strong's H3045, meaning to know intimately and with concern). This initiates the events of the Exodus.",
-                "Theological_Meaning": "This passage reveals God's faithfulness to His covenant promises, even when generations pass in silence and suffering. It teaches believers that God's timing is not our own, but His awareness and compassion are constant. It is a promise that every cry from the oppressed is heard in heaven.",
-                "Christ_Centered_Meaning": "God's response was to send a deliverer, Moses. This prefigures the ultimate fulfillment when, at the right time, God sent His Son, Jesus, to deliver all humanity from the bondage of sin because He heard our groaning and remembered His promise of a Redeemer. Jesus is the ultimate expression of God 'looking upon' humanity and having 'respect' unto our desperate state."
-            }
-        },
-        {
-            "id": "BP046",
-            "question": "When God calls Moses from the burning bush, Moses objects that he is inadequate for the task, specifically that he is not an eloquent speaker. What question does God ask Moses in response, challenging his focus on human inability and redirecting it to divine sovereignty?",
-            "options": [
-                "Exodus 4:11 - And the LORD said unto him, Who hath made man's mouth? or who maketh the dumb, or deaf, or the seeing, or the blind? have not I the LORD?",
-                "Exodus 4:11 - And the LORD asked him, Who has formed a person's mouth? or who creates the mute, or the deaf, or the seeing, or the blind? is it not I the LORD?",
-                "Exodus 4:11 - And the LORD spoke to him, Who shaped the mouth of man? or who makes one unable to speak, or hear, or see? is it not I, the LORD?",
-                "Exodus 4:11 - And the LORD said to him, Who designed the mouth for people? or who designs the silent, or the unhearing, or the sighted, or the unsighted? have not I, the LORD, done it?"
-            ],
-            "answer": "Exodus 4:11 - And the LORD said unto him, Who hath made man's mouth? or who maketh the dumb, or deaf, or the seeing, or the blind? have not I the LORD?",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is the perfect response to feelings of inadequacy. Moses' excuse was his 'slow of speech.' God's response is a series of rhetorical questions that completely reframe the issue. He doesn't deny Moses' weakness; He points to His own sovereignty as the Creator of both abilities and disabilities. This teaches that the God who made us is also the one who calls us, and He is more than able to empower us, regardless of our perceived weaknesses.",
-                "Importance_of_Wording": "The power lies in the rhetorical questions. 'Who hath made man's mouth?' shifts the focus from the flawed instrument to the all-powerful Creator. By including not just the 'seeing' but also the 'dumb, or deaf, or the blind,' God asserts His sovereignty over all conditions. The final declaration, 'have not I the LORD?', is an unanswerable statement of His identity and power, making any excuse based on human limitation irrelevant.",
-                "Factual_Explanation": "When Moses objected to his calling by pleading a lack of eloquence (Exodus 4:10), God responded with this powerful question, asserting His sovereignty as the creator of all human faculties, whether functional or impaired. This was meant to assure Moses that his perceived inability was no obstacle to God's power.",
-                "Theological_Meaning": "This principle teaches that God's call is not based on our inherent abilities but on His power to work through us. He often chooses the weak things of the world to shame the strong, so that no human can boast in His presence (1 Corinthians 1:27-29). Our inadequacy is the canvas on which He paints His power.",
-                "Christ_Centered_Meaning": "The God who asked 'Who hath made man's mouth?' is the same God who, in the person of Christ, opened the mouths of the dumb and the ears of the deaf (Mark 7:37). The promise He gave to Moses, 'I will be with thy mouth, and teach thee what thou shalt say' (Exodus 4:12), is fulfilled for believers through the Holy Spirit, who gives us the words to speak when we testify for Christ (Luke 12:12)."
-            }
-        },
-        {
-            "id": "BP047",
-            "question": "After the Israelites complain about bitter water at Marah, God provides a miraculous healing for the water. Immediately following this, God reveals a new covenant name for Himself that defines His very character as a restorer. What is this name?",
-            "options": [
-                "Exodus 15:26 - ...I will put none of these diseases upon thee, which I have brought upon the Egyptians: for I am the LORD that healeth thee.",
-                "Exodus 15:26 - ...I will place none of these sicknesses on thee, which I have placed on the Egyptians: for I am the LORD your doctor.",
-                "Exodus 15:26 - ...I will send none of these plagues upon thee, which I have sent upon the Egyptians: because I am the LORD who restores thee.",
-                "Exodus 15:26 - ...I will allow none of these afflictions on thee, which I have allowed on the Egyptians: for I am the LORD thy physician."
-            ],
-            "answer": "Exodus 15:26 - ...I will put none of these diseases upon thee, which I have brought upon the Egyptians: for I am the LORD that healeth thee.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse reveals a core aspect of God's character. After miraculously healing the bitter waters of Marah, God introduces Himself by a new name: 'Jehovah-Rapha,' or 'the LORD that healeth thee.' This isn't just something God *does*; it's who He *is*. This truth provides a solid foundation for faith, anchoring prayers for healing and restoration in the very nature of God.",
-                "Importance_of_Wording": "The declaration 'I am the LORD that healeth thee' is a statement of identity. The Hebrew uses a participle, implying a continuous, ongoing characteristic. He is the 'healing One.' It is not just a promise for the future but a description of His present nature. This provides a level of assurance that a simple promise to act might not.",
-                "Factual_Explanation": "After the Israelites complained about the bitter waters at Marah, God showed Moses a tree to make the water sweet. Immediately following this act of healing, God revealed His covenant name, 'Yahweh Rophe' (יְהוָה רֹפְאֶךָ), which translates to 'The LORD that healeth thee' or 'The LORD, your healer' (Strong's H7495).",
-                "Theological_Meaning": "This revelation shows that physical healing and restoration are integral to God's covenant relationship with His people, conditioned on their obedience. It broadens the understanding of salvation to include the well-being of the whole person—body, mind, and spirit.",
-                "Christ_Centered_Meaning": "Christ is the perfect embodiment of Jehovah-Rapha. His earthly ministry was filled with healing miracles, demonstrating the compassion of God. The ultimate healing He provides is spiritual, as 'with his stripes we are healed' from the disease of sin (Isaiah 53:5). His work is a foretaste of the final restoration when there will be no more sickness or pain in the new earth (Revelation 21:4)."
-            }
-        },
-        {
-            "id": "BP048",
-            "question": "The Ten Commandments bridge the duties to God (the first four) and duties to fellow humans (the last six). What is the fifth commandment, which serves as this bridge and is uniquely identified as the first commandment with a specific, positive promise attached?",
-            "options": [
-                "Exodus 20:12 - Respect thy father and thy mother: so thy days may be extended upon the ground which the LORD thy God gives thee.",
-                "Exodus 20:12 - Honour thy father and thy mother: that thy days may be long upon the land which the LORD thy God giveth thee.",
-                "Exodus 20:12 - Value thy father and thy mother: that thy life may be prolonged in the land which the LORD thy God provides thee.",
-                "Exodus 20:12 - Obey thy father and thy mother: so thy time may be increased upon the earth which the LORD thy God allots thee."
-            ],
-            "answer": "Exodus 20:12 - Honour thy father and thy mother: that thy days may be long upon the land which the LORD thy God giveth thee.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse answers the question by identifying the fifth commandment and its unique promise. It reframes the command from a mere duty to a principle linked with a promise of blessing ('that thy days may be long'). This suggests that the very act of honoring parents, which is the foundation of a stable society, is designed by God for the well-being and longevity of His people.",
-                "Importance_of_Wording": "The word 'Honour' (kabed) is richer than 'obey'; it means to give weight or gravity to someone, to treat them with respect and dignity, a command that applies throughout life. It is uniquely identified by the Apostle Paul as 'the first commandment with promise' (Ephesians 6:2), highlighting its significance and the positive outcome linked to it.",
-                "Factual_Explanation": "The fifth commandment, 'Honour (כַּבֵּד - kabbed - Strong's H3513) thy father and thy mother,' serves as a bridge between the first four commands (duties to God) and the last five (duties to others). It is distinguished by its accompanying promise of long life in the land God provides.",
-                "Theological_Meaning": "This command is foundational to social stability. The family is the basic unit of society, and respect for parental authority is the training ground for respect for all authority, including God's. The breakdown of this principle leads to societal chaos, which is described as a sign of the last days (2 Timothy 3:2).",
-                "Christ_Centered_Meaning": "Christ provided the perfect example of honoring his earthly parents (Luke 2:51) and His heavenly Father. Even from the cross, in immense suffering, He made provision for His mother's care (John 19:26-27), demonstrating that this honor transcends circumstances. For believers, honoring parents is one way we reflect the character of Christ, who submitted Himself to the Father's will."
-            }
-        },
-        {
-            "id": "BP049",
-            "question": "When God gives Moses the instructions for the Tabernacle, He reveals His primary motivation for wanting a sanctuary built. What divine command from Exodus reveals God's ultimate desire to be in close proximity to His people?",
-            "options": [
-                "Exodus 25:8 - And tell them to build me a holy place; that I may be with them.",
-                "Exodus 25:8 - And command them to make me a sacred place; that I may come to them.",
-                "Exodus 25:8 - And let them make me a sanctuary; that I may dwell among them.",
-                "Exodus 25:8 - And have them construct me a house of worship; so I can reside with them."
-            ],
-            "answer": "Exodus 25:8 - And let them make me a sanctuary; that I may dwell among them.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse gets to the very heart of the sanctuary's purpose. God's stated reason was not for the people's programs or even for their worship services, primarily. It was for His own purpose: 'that I may dwell among them.' This principle shows that the ultimate goal of any church building or activity is to facilitate and honor the presence of God.",
-                "Importance_of_Wording": "The word 'sanctuary' (miqdash) comes from a root meaning 'to be set apart' or 'holy.' It was to be a special place. The purpose clause, 'that I may dwell (shakan) among them,' is the key. The word 'shakan' is the root for the later term 'Shekinah,' which refers to the glorious, visible presence of God. The instruction is profoundly simple and God-centered.",
-                "Factual_Explanation": "This command marks the beginning of the detailed instructions for the tabernacle. God's desire was to have a dwelling place, a 'sanctuary' (מִקְדָּשׁ - miqdash - Strong's H4720), so that He could 'dwell' (שָׁכַן - shakan - Strong's H7931) in the midst of His people, making His presence central to their national life.",
-                "Theological_Meaning": "The sanctuary system is the gospel in miniature, a detailed illustration of the plan of salvation. God's desire to dwell with humanity is the central theme of the entire Bible, from Eden to the sanctuary, to the incarnation, to the church, and finally, to the New Earth.",
-                "Christ_Centered_Meaning": "The sanctuary is a type of Christ. He is the true sanctuary, the place where God's presence dwelt fully among humanity (John 1:14). The church, as His body, is now the temple of the Holy Spirit (1 Corinthians 3:16). The ultimate fulfillment of this desire is found in Revelation 21:3: 'Behold, the tabernacle of God is with men, and he will dwell with them.'"
-            }
-        },
-        {
-            "id": "BP050",
-            "question": "After having been promised God's presence, Moses is emboldened to make the most audacious request of his life. What desperate plea from Moses in Exodus expresses the ultimate spiritual longing for a direct, authentic experience of God's character?",
-            "options": [
-                "Exodus 33:18 - And he said, I ask thee, reveal to me thy majesty.",
-                "Exodus 33:18 - And he said, I beseech thee, shew me thy glory.",
-                "Exodus 33:18 - And he said, I pray thee, let me see thy splendor.",
-                "Exodus 33:18 - And he said, I beg thee, unveil for me thy presence."
-            ],
-            "answer": "Exodus 33:18 - And he said, I beseech thee, shew me thy glory.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This plea is the cry of a heart that refuses to be satisfied with a second-hand or superficial relationship with God. Moses had seen God's power and heard His voice, but he longed for more—a direct revelation of God's very essence. This expresses the desire that moves a believer from mere belief to a profound, transformative encounter with the divine.",
-                "Importance_of_Wording": "The word 'beseech' conveys a deep, humble, and urgent pleading. The request is not for more power or more blessings, but for God Himself: 'shew me thy glory.' 'Glory' (kabod) in Hebrew means weight, substance, and intrinsic worth. Moses was asking to see the very character and reality of God. This specific, God-centered request is the model for any believer seeking a deeper spiritual life.",
-                "Factual_Explanation": "After receiving the promise of God's presence (Exodus 33:14), Moses, in an act of profound spiritual hunger, made this audacious request: 'I beseech thee, shew me thy glory' (כָּבוֹד - kabod - Strong's H3519). God responded by proclaiming His name, which is His character (Exodus 34:6-7).",
-                "Theological_Meaning": "This reveals that the ultimate goal of the Christian life is not just to be saved from sin but to know God Himself. True spiritual growth is marked by an ever-increasing desire to behold the glory of God's character. This is the knowledge that is eternal life (John 17:3).",
-                "Christ_Centered_Meaning": "Jesus Christ is the answer to Moses' prayer. He is the 'brightness of his glory, and the express image of his person' (Hebrews 1:3). The Apostle John states, 'we beheld his glory, the glory as of the only begotten of the Father, full of grace and truth' (John 1:14). For all believers, the path to seeing God's glory is to behold Jesus Christ."
-            }
-        },
-        {
-            "id": "BP051",
-            "question": "After the flood, a united humanity speaking one language gathers on the plain of Shinar. Fearing to be scattered and desiring to establish their own fame and security, they embark on a great technological project. What was their stated plan, revealing a motive of human pride and rebellion against God's command to fill the earth?",
-            "options": [
-                "Genesis 11:4 - And they said, Come, let us make a city and a building, whose height may touch the sky; and let us achieve fame, so we are not spread across the whole world.",
-                "Genesis 11:4 - And they said, Go to, let us build us a city and a tower, whose top may reach unto heaven; and let us make us a name, lest we be scattered abroad upon the face of the whole earth.",
-                "Genesis 11:4 - They said, Let's construct a town and a skyscraper, so high it goes to heaven; and let's get famous, or we'll be scattered everywhere.",
-                "Genesis 11:4 - And they said, Go to, let us build a city and a fortress, whose walls may reach the clouds; and let us make a monument, lest we be separated across the lands."
-            ],
-            "answer": "Genesis 11:4 - And they said, Go to, let us build us a city and a tower, whose top may reach unto heaven; and let us make us a name, lest we be scattered abroad upon the face of the whole earth.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is the direct answer, stating the builders' explicit plan. Their stated motives were pride ('let us make us a name') and rebellion against God's command to fill the earth ('lest we be scattered abroad'). This serves as the primary scriptural warning against humanistic projects that seek to achieve unity and salvation through technology and self-glorification, independent of God.",
-                "Importance_of_Wording": "The key phrase is 'let us make us a name,' which perfectly captures the motive of human pride and the desire for self-exaltation. The goal, 'a tower, whose top may reach unto heaven,' signifies the hubris of attempting to ascend to God's level through human effort. This specific language of self-aggrandizing rebellion is what makes it a timeless warning.",
-                "Factual_Explanation": "The people in Shinar united to build a 'city and a tower' (מִגְדָּל - migdal - Strong's H4026) with the express purpose of making a 'name' (שֵׁם - shem - Strong's H8034) for themselves and resisting God's command to scatter (פּוּץ - puts - Strong's H6327). Their ambition was an act of collective pride and defiance.",
-                "Theological_Meaning": "The Tower of Babel is the archetype of human-centered religion and a confederacy united in rebellion against God. This represents the spirit of 'Babylon,' a global system of false worship that appears throughout Scripture and culminates in the end-time power that opposes God (Revelation 14:8, 17:5). God's judgment of confusing the languages was an act of mercy to halt the progress of organized evil.",
-                "Christ_Centered_Meaning": "Babel represents humanity's futile attempt to build its own way to heaven. God's way is the opposite: He comes down to us. This is prefigured in Jacob's ladder (a connection from heaven to earth) and ultimately fulfilled in Christ, who is the only 'way' to the Father (John 14:6). The confusion of tongues at Babel finds its divine reversal at Pentecost (Acts 2), where the Holy Spirit unites people from all nations not through human pride, but through the proclamation of the gospel of Christ."
-            }
-        },
-        {
-            "id": "BP052",
-            "question": "Faint with hunger after a day in the field, Esau is confronted with a choice: his future inheritance as the firstborn, or an immediate bowl of lentil stew. What is the stark, concluding summary of this transaction, revealing the character of one who prioritizes momentary gratification over eternal blessings?",
-            "options": [
-                "Genesis 25:34 - Then Jacob gave Esau bread and stew of beans; and he ate and drank, and got up, and left: so Esau looked down on his birthright.",
-                "Genesis 25:34 - Then Jacob gave Esau bread and pottage of lentiles; and he did eat and drink, and rose up, and went his way: thus Esau despised his birthright.",
-                "Genesis 25:34 - Then Jacob gave Esau food and a meal of vegetables; and he ate and drank, and stood up, and departed: thereby Esau rejected his birthright.",
-                "Genesis 25:34 - Then Jacob gave Esau bread and pottage of lentiles; and he did eat and drink, and rose up, and went his way: thus Esau scorned his birthright."
-            ],
-            "answer": "Genesis 25:34 - Then Jacob gave Esau bread and pottage of lentiles; and he did eat and drink, and rose up, and went his way: thus Esau despised his birthright.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is the direct and powerful summary of Esau's choice. Driven by immediate physical hunger, he trades his entire future inheritance—the birthright—for a single meal. This account provides a sobering illustration of the folly of prioritizing momentary gratification over long-term, priceless blessings, defining the character of the 'profane person' (Hebrews 12:16).",
-                "Importance_of_Wording": "The concluding phrase, 'thus Esau despised his birthright,' is the critical moral summary of the event. The verb 'despised' (Hebrew: bazah) means to hold in contempt or to treat as worthless. It's not just that he sold it; he fundamentally devalued it. This word choice perfectly captures the mindset of someone who is willing to treat a precious future as insignificant compared to a present craving.",
-                "Factual_Explanation": "Driven by hunger, Esau sold his birthright, which included spiritual leadership and a double portion of the inheritance, for a meal. The text culminates with the divine assessment: 'thus Esau despised (בָּזָה - bazah - Strong's H959) his birthright.' This act demonstrated a character that prioritized the temporal over the eternal.",
-                "Theological_Meaning": "Esau represents a class of people who are controlled by appetite and immediate desire. In the context of the Great Controversy, this story is a warning against trading our heavenly birthright—the promise of eternal life—for the fleeting pleasures and securities of this world. Especially in the last days, many will be tempted to make small compromises for immediate comfort, ultimately despising their inheritance.",
-                "Christ_Centered_Meaning": "Esau's choice stands in stark contrast to that of Christ, the second Adam. After fasting for forty days, Christ was tempted by Satan to turn stones into bread, a temptation to satisfy a legitimate appetite through illegitimate means. Unlike Esau, Christ refused to trade His divine mission and dependence on God for a moment of physical satisfaction, proving that man shall not live by bread alone, but by every word of God (Matthew 4:4)."
-            }
-        },
-        {
-            "id": "BP053",
-            "question": "As Lot and his family flee the destruction of Sodom, they are given one strict command: 'look not behind thee.' One member of the family fails this test of wholehearted obedience. What is the stark, one-sentence account of her fate, serving as a perpetual warning against a divided heart that longs for a condemned world?",
-            "options": [
-                "Genesis 19:26 - But his wife looked back from behind him, and she became a pillar of salt.",
-                "Genesis 19:26 - But his wife glanced back from after him, and she turned into a statue of salt.",
-                "Genesis 19:26 - But his spouse looked behind him, and she was made into a monument of salt.",
-                "Genesis 19:26 - But his lady gazed back after him, and she became a column of sodium."
-            ],
-            "answer": "Genesis 19:26 - But his wife looked back from behind him, and she became a pillar of salt.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is a stark and direct warning. Lot's wife was physically leaving Sodom but her heart was still there, demonstrated by her 'looking back.' This act of longing for the condemned world resulted in her immediate destruction. It provides a sobering illustration that half-hearted obedience or lingering affection for a sinful past is spiritually fatal.",
-                "Importance_of_Wording": "The phrase 'looked back from behind him' is significant. She was following her husband out but was not aligned with him in spirit. The result, becoming a 'pillar of salt,' is a symbol of preservation in judgment—a permanent monument to the consequence of a divided heart. This specific and vivid outcome serves as a powerful deterrent.",
-                "Factual_Explanation": "Despite the angel's explicit command, 'look not behind thee' (Genesis 19:17), Lot's wife disobeyed. Her backward look was not one of idle curiosity, but of regret, longing, and a heart that still treasured what was being destroyed. Her fate, being turned into a pillar of salt, stands as a perpetual warning.",
-                "Theological_Meaning": "This event illustrates the principle that there is no neutrality in the final conflict. God's call to 'come out of Babylon' (Revelation 18:4) requires a complete and final separation, not just physically but in heart and affection. Lingering desires for the world's pleasures and values will result in sharing in its plagues.",
-                "Christ_Centered_Meaning": "Jesus used this very event as a solemn warning for the last days, commanding His followers, 'Remember Lot's wife' (Luke 17:32). He was teaching that those who, in the final crisis, prioritize their earthly possessions and affections ('his stuff in the house') over immediate, wholehearted obedience will be lost. It is a call to forsake all for Christ, looking forward to His coming and not backward to a perishing world."
-            }
-        },
-        {
-            "id": "BP054",
-            "question": "Cast out into the wilderness of Beersheba, the single mother Hagar places her dying son under a shrub and weeps in utter despair, unable to watch him die. In this moment of complete hopelessness, how does the narrative describe God's intervention, demonstrating His compassion for the outcast?",
-            "options": [
-                "Genesis 21:17 - And God heard the voice of the lad; and the angel of God called to Hagar out of heaven, and said unto her, What aileth thee, Hagar? fear not; for God hath heard the voice of the lad where he is.",
-                "Genesis 21:17 - And God listened to the boy's cry; and the messenger of God spoke to Hagar from the sky, and said to her, What troubles you, Hagar? do not worry; for God has listened to the boy's cry from his place.",
-                "Genesis 21:17 - And God perceived the sound of the child; and the spirit of God called to Hagar from above, and said unto her, What is wrong, Hagar? be not afraid; for God has perceived the sound of the child where he lies.",
-                "Genesis 21:17 - And God took note of the lad's voice; and the angel of God hailed Hagar from heaven, and said to her, What vexes thee, Hagar? fear not; for God hath taken note of the voice of the lad in his spot."
-            ],
-            "answer": "Genesis 21:17 - And God heard the voice of the lad; and the angel of God called to Hagar out of heaven, and said unto her, What aileth thee, Hagar? fear not; for God hath heard the voice of the lad where he is.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This story is a perfect source of comfort for the hopeless. Hagar, a single mother cast out and left to die with her son, is in a situation of complete despair. This verse shows that precisely in that moment, God intervenes. He not only hears the cry of the child but speaks directly to Hagar by name, validating her pain ('What aileth thee?') and replacing her fear with a promise. It shows that God is attentive to the most desperate and forgotten.",
-                "Importance_of_Wording": "The passage emphasizes that God 'heard the voice of the lad.' Even when Hagar had given up hope, the cry of the helpless child reached heaven. The angel's question, 'What aileth thee, Hagar?' is one of tender compassion, acknowledging her personal distress. The command 'fear not' is the divine antidote to her despair, followed by the assurance that God is aware of their exact location ('where he is').",
-                "Factual_Explanation": "After being cast out by Abraham at Sarah's insistence, Hagar and Ishmael ran out of water in the wilderness of Beersheba. At the point of death, God intervened. He 'heard' (שָׁמַע - shama' - Strong's H8085) the boy's cry, and the angel of God called to Hagar, opened her eyes to a well of water, and reaffirmed His promise concerning Ishmael.",
-                "Theological_Meaning": "This story reveals that God's compassion is not limited to the formal covenant line. He is the God of the outcast, the abandoned, and the desperate. It demonstrates that He responds to cries of need regardless of social status or origin, a key aspect of His universal love and mercy.",
-                "Christ_Centered_Meaning": "The angel of the Lord who speaks to Hagar is identified by Christians as the pre-incarnate Christ. It is Christ who seeks out the lost and abandoned. He is the one who opens our eyes to the 'well of water'—the water of life—when we are perishing in the wilderness of sin (John 4:14). The story shows that even before the formal covenant of salvation was fully revealed, the Son of God was actively ministering to those in need."
-            }
-        },
-        {
-            "id": "BP055",
-            "question": "Rebekah and Jacob, knowing God's prophecy that the elder would serve the younger, decide to secure the blessing through their own means. What is the pivotal lie Jacob tells his blind father, Isaac, an act of deception that brought decades of sorrow and exile?",
-            "options": [
-                "Genesis 27:19 - And Jacob said unto his father, I am Esau thy firstborn; I have done according as thou badest me: arise, I pray thee, sit and eat of my venison, that thy soul may bless me.",
-                "Genesis 27:19 - And Jacob spoke to his father, I am Esau your eldest; I have acted as you instructed me: get up, I ask you, sit and eat of my game, so your soul may favor me.",
-                "Genesis 27:19 - And Jacob told his father, I am Esau your primary son; I have performed what you commanded me: stand, I beg you, sit and eat of my hunt, that your soul may approve me.",
-                "Genesis 27:19 - And Jacob said to his father, I am Esau your first son; I have done as you told me: arise, please, sit and eat of my meat, so that you will bless me."
-            ],
-            "answer": "Genesis 27:19 - And Jacob said unto his father, I am Esau thy firstborn; I have done according as thou badest me: arise, I pray thee, sit and eat of my venison, that thy soul may bless me.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is a direct warning against using unrighteous means to achieve a desired end, even a prophesied one. Jacob's bald-faced lie, 'I am Esau,' demonstrates the moral compromise that occurs when one tries to 'help' God's will. It shows that a good motive does not justify sinful methods and that such actions bring long-term tragic consequences, a timeless lesson on the importance of integrity.",
-                "Importance_of_Wording": "Jacob's statement is not a slight bending of the truth; it is a direct lie ('I am Esau') compounded by a claim of false obedience ('I have done according as thou badest me'). He then invokes a spiritual outcome ('that thy soul may bless me') based on this deception. This shows a profane mixing of the sacred and the sinful.",
-                "Factual_Explanation": "Encouraged by his mother, Rebekah, Jacob deceived his blind father, Isaac, to receive the birthright blessing intended for Esau. This act of deception, while fulfilling God's prophecy (Genesis 25:23), was a manifestation of unbelief in God's ability to bring about His own will. The consequences were severe: a broken family, decades of exile for Jacob, and immense sorrow.",
-                "Theological_Meaning": "This story is a powerful lesson that God's ends never justify sinful means. Faith trusts God to fulfill His promises in His own way and in His own time. Trying to 'help God' through manipulation or deceit reveals a lack of faith and always leads to suffering. God's cause must be advanced only by means that align with His righteous character.",
-                "Christ_Centered_Meaning": "Jacob, the 'supplanter' who grasped and deceived, stands in stark contrast to Christ. Jacob sought a blessing through lies; Christ secured our blessing through His absolute truthfulness. Jacob impersonated his brother to gain an inheritance; Christ, our brother, took our place on the cross, not to gain for Himself but to give His inheritance to us. The entire narrative shows the painful path of a man learning to stop striving and to rest in the grace that Christ provides freely."
-            }
-        },
-        {
-            "id": "BP056",
-            "question": "Fleeing his home after deceiving his brother, Jacob stops for the night at a place he would later name Bethel. In a dream, he sees a ladder to heaven and receives God's promise of protection. What covenant commitment does Jacob make in response, providing a model for a life pledged to God at a pivotal, life-changing moment?",
-            "options": [
-                "Genesis 28:20-21 - And Jacob pledged a pledge, saying, If God will be with me, and will guard me in this path that I go, and will give me bread to eat, and raiment to put on, So that I come again to my father's house in peace; then shall the LORD be my God.",
-                "Genesis 28:20-21 - And Jacob promised a promise, saying, If God will walk with me, and will keep me in this way that I walk, and will provide me food to eat, and clothes to wear, So that I return to my father's home in safety; then shall the LORD be my God.",
-                "Genesis 28:20-21 - And Jacob made a solemn promise, saying, If God will be present with me, and will watch over me on this journey that I take, and will give me food to consume, and garments to wear, So that I come back to my father's household in tranquility; then shall the LORD be my God.",
-                "Genesis 28:20-21 - And Jacob vowed a vow, saying, If God will be with me, and will keep me in this way that I go, and will give me bread to eat, and raiment to put on, So that I come again to my father's house in peace; then shall the LORD be my God."
-            ],
-            "answer": "Genesis 28:20-21 - And Jacob vowed a vow, saying, If God will be with me, and will keep me in this way that I go, and will give me bread to eat, and raiment to put on, So that I come again to my father's house in peace; then shall the LORD be my God.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is a perfect model for a covenant commitment. Jacob, a fugitive starting a new life, makes a formal vow that establishes a personal relationship with God. His vow is a direct response to God's promise, outlining his commitment to recognize God's guidance and provision, and culminating in a pledge of allegiance. It provides a scriptural pattern for formalizing one's commitment, covering provision, protection, and ultimate loyalty.",
-                "Importance_of_Wording": "The structure is conditional: 'If... then...' It's not Jacob dictating terms, but him verbalizing his trust in God's prior promise (Gen 28:15) and stating his resulting commitment. The phrase 'vowed a vow' signifies a solemn, binding promise. The climax, 'then shall the LORD be my God,' is a declaration of personal allegiance. The vow also includes a commitment to stewardship, promising a tenth back to God (v. 22), providing a complete framework for a life of faith.",
-                "Factual_Explanation": "After his vision of the ladder at Bethel, Jacob set up the stone as a pillar and 'vowed a vow' (נָדַר נֶדֶר - nadar neder - Strong's H5087, H5088). This was his response to God's gracious promise of presence and protection. The vow included conditions that were really just echoes of God's promise, and it culminated in a pledge of allegiance and tithe.",
-                "Theological_Meaning": "This act demonstrates the proper response to God's grace: a commitment of loyalty and faithful stewardship. While salvation is a free gift, our response involves a conscious choice to make the Lord our God and to honor Him with our lives and resources. This principle of covenant response is foundational to the believer's walk.",
-                "Christ_Centered_Meaning": "Jacob's vision was of a ladder connecting earth and heaven, which Jesus identified as a symbol of Himself (John 1:51). He is the only way to the Father. Jacob's vow, made in response to seeing this connection, is a type of the believer's commitment to Christ. Having seen the way of salvation through Jesus, the believer responds by vowing that the LORD will be their God, trusting in His promise to be with us 'alway, even unto the end of the world' (Matthew 28:20)."
-            }
-        },
-        {
-            "id": "BP057",
-            "question": "The story of Jacob's two wives, Leah and Rachel, is one of painful family rivalry. Though deeply loved by her husband, Rachel is barren and consumed with jealousy of her fertile sister. What desperate cry does Rachel make to Jacob that reveals the destructive nature of envy and basing one's happiness on another's perceived blessings?",
-            "options": [
-                "Genesis 30:1 - And when Rachel saw that she bare Jacob no children, Rachel envied her sister; and said unto Jacob, Give me children, or else I die.",
-                "Genesis 30:1 - And when Rachel perceived she had no sons for Jacob, Rachel was jealous of her sister; and said to Jacob, Give me sons, or I will perish.",
-                "Genesis 30:1 - And when Rachel noted she gave Jacob no children, Rachel coveted her sister; and said unto Jacob, Give me sons, or I am dead.",
-                "Genesis 30:1 - And when Rachel saw that she was not bearing children for Jacob, Rachel envied her sister; and said to Jacob, Grant me children, otherwise I will die."
-            ],
-            "answer": "Genesis 30:1 - And when Rachel saw that she bare Jacob no children, Rachel envied her sister; and said unto Jacob, Give me children, or else I die.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is a raw and honest depiction of the poison of envy. Rachel, though deeply loved by her husband, could not enjoy her blessings because she was consumed by envy of her sister's fertility. Her dramatic and irrational cry, 'Give me children, or else I die,' shows how envy distorts reality and makes one's own life seem worthless, providing a powerful warning about the dangers of comparison and jealousy.",
-                "Importance_of_Wording": "The text explicitly states the cause and effect: 'when Rachel saw... Rachel envied her sister.' The demand 'Give me children' is directed at her husband, blaming him for a situation he cannot control, which is typical of envy's irrationality. The ultimate despair, 'or else I die,' reveals the spiritual and emotional dead-end that envy leads to. It is not a request; it is an ultimatum born of desperation.",
-                "Factual_Explanation": "The rivalry between Leah and Rachel is a central theme in the story of Jacob's family. Rachel's envy (קָנָא - qana' - Strong's H7065) of her sister's ability to have children consumed her, leading to strife, unhappiness, and the introduction of surrogate mothers, which caused even more conflict.",
-                "Theological_Meaning": "Envy is a work of the flesh that is fundamentally at odds with the Spirit of God (Galatians 5:19-21). It is a form of idolatry where another person's blessing becomes the object of our worship and desire. It denies the goodness and sovereignty of God, implying He has been unfair in His dealings. This spirit of rivalry is destructive to personal peace and church unity.",
-                "Christ_Centered_Meaning": "Rachel's desperate cry for a child she cannot produce is a picture of humanity's desperate state. Spiritually barren, we cannot produce the righteousness required by God. We are spiritually dead. Christ, the 'everlasting Father,' is the only one who can give us spiritual life and make us fruitful (Isaiah 9:6). He delivers us from the destructive envy of the world and gives us a contentment that is not based on comparing ourselves to others, but on our secure position as children of God."
-            }
-        },
-        {
-            "id": "BP058",
-            "question": "Joseph, testing his brothers in Egypt, demands that Benjamin be kept as a slave. This would be a death blow to their father, Jacob. Which brother steps forward, offering himself as a substitute slave in a powerful display of intercession and sacrificial love?",
-            "options": [
-                "Genesis 44:33-34 - Now therefore, I pray thee, let thy servant abide instead of the lad a bondman to my lord; and let the lad go up with his brethren. For how shall I go up to my father, and the lad be not with me? lest peradventure I see the evil that shall come on my father.",
-                "Genesis 44:33-34 - Please let your servant remain as a slave to my lord in place of the boy, and let the boy go with his brothers. For how can I return to my father, if the boy is not with me? I could not bear to see the sorrow that would befall my father.",
-                "Genesis 44:33-34 - Permit thy servant, I ask thee, to stay in place of the young man as a servant to my master, and let him go with his brothers. For how could I go back to my father, and the young man not be with me? lest I witness the harm that shall befall my father.",
-                "Genesis 44:33-34 - Let your servant, I beg you, stay here instead of the boy as a slave to my lord, and let him go with his brothers. How shall I go to my father, and the boy not be with me? I fear I would see the tragedy that will find my father."
-            ],
-            "answer": "Genesis 44:33-34 - Now therefore, I pray thee, let thy servant abide instead of the lad a bondman to my lord; and let the lad go up with his brethren. For how shall I go up to my father, and the lad be not with me? lest peradventure I see the evil that shall come on my father.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This plea from Judah is one of the clearest Old Testament examples of voluntary substitution. To save his brother Benjamin and spare his father from death-bringing sorrow, Judah offers himself as a substitute slave. He is willing to take the punishment ('a bondman') upon himself. This tangible story makes the abstract doctrine of Christ's substitution understandable and deeply moving.",
-                "Importance_of_Wording": "Judah's argument is based on love for his father ('lest... I see the evil that shall come on my father'). His offer is explicit: 'let thy servant... abide instead of the lad.' The phrase 'instead of' is the very language of substitution. This is not a bargain, but a heartfelt plea to take the place of the one who was condemned.",
-                "Factual_Explanation": "When Joseph, whose identity was still hidden, demanded that Benjamin remain in Egypt as a slave, Judah stepped forward. In a moving speech, he recounts the family's story and offers himself as a substitute, a 'bondman' (עֶבֶד - 'ebed - Strong's H5650), in Benjamin's place. This act of self-sacrifice is what finally causes Joseph to break down and reveal himself.",
-                "Theological_Meaning": "Judah's transformation from the one who callously suggested selling Joseph into slavery (Genesis 37:26-27) to the one willing to become a slave for his brother is a picture of true repentance and conversion. His willingness to be a substitute demonstrates a character refined by suffering and filled with genuine love. This is a model of the self-sacrificing love that should characterize God's people.",
-                "Christ_Centered_Meaning": "Judah's action is a profound type of Christ. Jesus, from the tribe of Judah, saw that humanity was condemned and that the sorrow of our loss would grieve the heart of His Father. He willingly said, 'let thy servant abide instead.' He became a 'bondman,' taking the form of a servant (Philippians 2:7), and took our punishment upon Himself to set us free. Judah's intercession saved his brother from slavery; Christ's intercession saves us from eternal death."
-            }
-        },
-        {
-            "id": "BP059",
-            "question": "The Passover required a sacrificial lamb, but not just any lamb would do. What specific instruction regarding the quality of the lamb defined its primary qualification, pointing forward to the nature of the true, perfect sacrifice for sin?",
-            "options": [
-                "Exodus 12:5 - Your lamb shall be without blemish, a male of the first year: ye shall take it out from the sheep, or from the goats:",
-                "Exodus 12:5 - Your lamb must be perfect, a male one year old: you may take it from the sheep, or from the goats:",
-                "Exodus 12:5 - Your lamb should be flawless, a male of one year: you shall select it from the sheep, or from the goats:",
-                "Exodus 12:5 - Your lamb will be unblemished, a male in its first year: you will take it from among the sheep, or the goats:"
-            ],
-            "answer": "Exodus 12:5 - Your lamb shall be without blemish, a male of the first year: ye shall take it out from the sheep, or from the goats:",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse directly answers the question by shifting the focus from the sinner's flaws to the quality of the sacrifice. The absolute requirement for the Passover lamb was that it be 'without blemish.' This teaches that salvation does not depend on our own goodness, but on the perfection of the substitute provided for us. It is the lamb's perfection, not our own, that makes deliverance possible.",
-                "Importance_of_Wording": "The term 'without blemish' (Hebrew: tamim) means complete, whole, perfect, and without any defect. It signifies perfection. This was not a minor detail but the primary qualification. It had to be a 'male of the first year,' signifying it was in the prime of its life. These specific requirements underscore the preciousness and perfection of the sacrifice.",
-                "Factual_Explanation": "The instructions for the first Passover were detailed and specific. The lamb, a type of Christ, had to be 'without blemish' (תָּמִים - tamim - Strong's H8549). This physical perfection symbolized the spiritual and moral perfection required of the true sacrifice for sin. The family was to inspect the lamb for days to ensure it met this standard.",
-                "Theological_Meaning": "The sanctuary service and its sacrifices consistently teach that sin can only be atoned for by the death of a perfect, innocent substitute. This principle refutes any idea that we can earn salvation or contribute to it with our own flawed works. The focus is always on the perfection of the offering, which God Himself provides.",
-                "Christ_Centered_Meaning": "This verse points directly to Jesus Christ. Peter calls Him 'a lamb without blemish and without spot' (1 Peter 1:19). His sinless life was the fulfillment of this type. While we are flawed and full of blemish, He was the perfect sacrifice. Our acceptance with God is not based on our character, but on our faith in the 'without blemish' character and sacrifice of Jesus Christ, our Passover Lamb."
-            }
-        },
-        {
-            "id": "BP060",
-            "question": "After Moses leads the men of Israel in a song of victory at the Red Sea, the women respond with their own celebration. Who is identified as leading the women in this act of worship, affirming the role of women in the spiritual leadership of God's people?",
-            "options": [
-                "Exodus 15:20 - And Miriam the prophetess, the sister of Aaron, took a timbrel in her hand; and all the women went out after her with timbrels and with dances.",
-                "Exodus 15:20 - And Miriam the seer, the sister of Aaron, took a tambourine in her hand; and all the women followed her with tambourines and with dancing.",
-                "Exodus 15:20 - And Miriam the visionary, sister to Aaron, took a small drum in her hand; and all the women went forth behind her with small drums and with movement.",
-                "Exodus 15:20 - And Miriam the oracle, Aaron's sister, held a drum in her hand; and all the women came out behind her with drums and with celebration."
-            ],
-            "answer": "Exodus 15:20 - And Miriam the prophetess, the sister of Aaron, took a timbrel in her hand; and all the women went out after her with timbrels and with dances.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This verse is a powerful affirmation of women's leadership in worship. Immediately following the 'Song of Moses,' Miriam, identified as a 'prophetess,' leads the women in their own responsive celebration. This validates the importance of women's voices and their role in leading praise, showing that their contribution is not only valued but is a recorded and honored part of salvation history.",
-                "Importance_of_Wording": "Miriam is given the official title 'the prophetess,' affirming her spiritual authority. She 'took a timbrel,' initiating the worship. The response, 'all the women went out after her,' shows her recognized leadership. This was not a disorderly celebration; it was a structured, responsive act of praise led by a woman, providing a strong biblical precedent.",
-                "Factual_Explanation": "Immediately after the men, led by Moses, sang their song of victory (Exodus 15:1-18), Miriam led the women in a antiphonal response (Exodus 15:21). Her title as 'prophetess' (נְבִיאָה - nebiy'ah - Strong's H5031) is significant, placing her in a category with other inspired figures.",
-                "Theological_Meaning": "This event demonstrates that God calls and equips both men and women for spiritual leadership roles within His people. It shows a pattern of inclusive worship where all members of the community have a voice and a role in celebrating God's mighty acts. This is a model for the church today to recognize and encourage the spiritual gifts of all its members.",
-                "Christ_Centered_Meaning": "The song of Moses and Miriam is a type of the song of the redeemed in heaven, who sing the 'song of Moses... and the song of the Lamb' (Revelation 15:3). This heavenly choir will be composed of men and women from every nation. The story of Miriam leading the women in praise is a foretaste of that final, glorious celebration where all voices, male and female, will unite to praise Christ for His great work of redemption."
-            }
-        },
-        {
-            "id": "BP061",
-            "question": "Near the end of his life, Moses is provoked by the constant complaining of the Israelites at Meribah. He acts in anger, disobeying God's specific command. What was his sin, and what was God's stated reason for the severe judgment that followed?",
-            "options": [
-                "Numbers 20:11-12 - And Moses lifted up his hand, and with his rod he smote the rock twice: and the water came out abundantly... And the LORD spake unto Moses and Aaron, Because ye believed me not, to sanctify me in the eyes of the children of Israel, therefore ye shall not bring this congregation into the land which I have given them.",
-                "Numbers 20:11-12 - And Moses raised his hand, and with his staff he struck the rock two times: and water gushed out... And the LORD said to Moses and Aaron, Because you did not trust me, to honor me before the people of Israel, you will not lead this people into the land I have given them.",
-                "Numbers 20:11-12 - And Moses lifted his hand, and with his rod he hit the rock twice: and water flowed out... And the LORD spoke to Moses and Aaron, Because you did not have faith in me, to treat me as holy in the sight of the sons of Israel, thus you shall not take this assembly into the land I have given them.",
-                "Numbers 20:11-12 - And Moses' hand was lifted, and with his staff he beat the rock two times: and the water poured out... And the LORD addressed Moses and Aaron, Because you failed to believe me, to hallow me in the vision of the children of Israel, therefore you will not bring this assembly into the land which I have provided them."
-            ],
-            "answer": "Numbers 20:11-12 - And Moses lifted up his hand, and with his rod he smote the rock twice: and the water came out abundantly... And the LORD spake unto Moses and Aaron, Because ye believed me not, to sanctify me in the eyes of the children of Israel, therefore ye shall not bring this congregation into the land which I have given them.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This story is a direct and sobering warning for spiritual leaders. Moses, provoked by the people, acted in anger ('Hear now, ye rebels'). He disobeyed God's specific command to 'speak' to the rock and instead 'smote' it twice. God's judgment reveals the severity of the sin: it was a failure of belief and a failure to 'sanctify' God—to represent His character correctly. This warns that how leaders act in moments of provocation has eternal consequences and reflects directly on the God they serve.",
-                "Importance_of_Wording": "The specific sin was unbelief expressed through disobedience. God said 'speak,' but Moses 'smote.' The stated reason for the punishment is crucial: 'Because ye believed me not, to sanctify me in the eyes of the children of Israel.' To 'sanctify' God means to set Him apart, to show Him as holy and distinct from the angry, impatient gods of the heathen. By acting in anger, Moses misrepresented God, making this a sin of the highest order for a leader.",
-                "Factual_Explanation": "At Meribah, when the people complained for water, God told Moses to 'speak ye unto the rock.' Instead, Moses, in anger, struck the rock twice. While water still came, God immediately pronounced judgment: because Moses and Aaron had failed to honor Him publicly, they would not lead Israel into Canaan. This one act of frustrated disobedience had a devastating consequence.",
-                "Theological_Meaning": "This is a solemn lesson for all who are in positions of spiritual leadership. The primary duty of a leader is to accurately represent the character of God. Acting in pride, anger, or unbelief dishonors God and can mislead His people. The standard is higher for leaders because their actions carry more weight and have a greater impact on how others perceive God.",
-                "Christ_Centered_Meaning": "The rock was a symbol of Christ (1 Corinthians 10:4). In the first instance (Exodus 17), the rock was to be smitten, typifying Christ's crucifixion. In this second instance, it was only to be spoken to, signifying that the one sacrifice was sufficient and that we now come to Christ through prayer, speaking our needs to Him. By smiting the rock a second time, Moses marred this beautiful type, symbolically crucifying Christ afresh. This shows how seriously God guards the symbols that point to His Son's work of salvation."
-            }
-        },
-        {
-            "id": "BP062",
-            "question": "Moses, attempting to judge all the disputes of the Israelite people by himself, is on the verge of burnout. His father-in-law, Jethro, observes this and gives him wise counsel. What was Jethro's diagnosis of Moses's leadership style and his practical solution for it?",
-            "options": [
-                "Exodus 18:17-18 - And Moses' father in law said unto him, The thing that thou doest is not good. Thou wilt surely wear away, both thou, and this people that is with thee: for this thing is too heavy for thee; thou art not able to perform it thyself alone.",
-                "Exodus 18:17-18 - And Moses' father in law told him, What you are doing is not right. You will certainly exhaust yourself, you and these people with you: for this task is too weighty for you; you cannot do it by yourself.",
-                "Exodus 18:17-18 - And Moses' kinsman said to him, The action you take is not wise. You will definitely tire out, both you, and this nation that is with you: because this matter is too burdensome for you; you are not capable of doing it all alone.",
-                "Exodus 18:17-18 - And Jethro said to Moses, This that you do is not ideal. You will wear yourself out, you and this people: for this is too heavy for you; you cannot perform it alone."
-            ],
-            "answer": "Exodus 18:17-18 - And Moses' father in law said unto him, The thing that thou doest is not good. Thou wilt surely wear away, both thou, and this people that is with thee: for this thing is too heavy for thee; thou art not able to perform it thyself alone.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This passage is a direct diagnosis and prescription for overburdened leadership. Jethro's counsel to Moses is blunt: 'The thing that thou doest is not good.' He identifies the problem (the task is 'too heavy'), the consequence ('Thou wilt surely wear away'), and proposes a solution: a system of delegated authority (v. 21-22). This provides a divine model for leadership that protects the leader from burnout and empowers others.",
-                "Importance_of_Wording": "Jethro's diagnosis is comprehensive. 'Thou wilt surely wear away' speaks to the personal cost of burnout. 'Both thou, and this people' shows that this leadership style harms everyone, not just the leader. The statement, 'thou art not able to perform it thyself alone,' is a crucial lesson in humility and interdependence that every leader must learn.",
-                "Factual_Explanation": "Jethro, Moses' father-in-law, observed Moses judging the people from morning to evening and identified it as an unsustainable model. He proposed a system of hierarchical leadership, appointing 'able men' to judge smaller matters, freeing Moses to handle only the most difficult cases and to focus on teaching. Moses heeded this wise counsel, and it became the foundation of Israel's judiciary.",
-                "Theological_Meaning": "This story shows that God works through practical wisdom and organized structure. It is a biblical principle for sound church administration. The New Testament church followed this model by appointing deacons to handle practical matters, freeing the apostles to focus on prayer and the ministry of the word (Acts 6:1-4). It teaches that effective ministry is a shared responsibility, not a solo performance.",
-                "Christ_Centered_Meaning": "Moses, the great lawgiver, humbly receives counsel from a Midianite priest, showing that wisdom can come from unexpected sources. This points to Christ, who, though perfect in wisdom, established a church on earth to be His body, with many members having different functions (1 Corinthians 12:12-27). He does not do the work alone but empowers and entrusts His followers to be co-laborers with Him, each using their gifts to build up the whole body."
-            }
-        },
-        {
-            "id": "BP063",
-            "question": "At Mount Sinai, after the people of Israel hear the Ten Commandments, a formal ceremony is held to ratify the covenant between them and God. What solemn act and declaration does Moses perform to seal this binding agreement?",
-            "options": [
-                "Exodus 24:7-8 - And he took the book of the covenant, and read in the audience of the people: and they said, All that the LORD hath said will we do, and be obedient. And Moses took the blood, and sprinkled it on the people, and said, Behold the blood of the covenant, which the LORD hath made with you concerning all these words.",
-                "Exodus 24:7-8 - He took the scroll of the agreement, and read it to the people: and they said, All that the LORD has spoken we will do, and obey. And Moses took the blood, and cast it on the people, and said, See the blood of the agreement, which the LORD has made with you about all these things.",
-                "Exodus 24:7-8 - He took the book of the pact, and read it where the people could hear: and they said, Everything the LORD has said we will perform, and be compliant. And Moses took the blood, and threw it on the people, and said, Look at the blood of the pact, which the LORD has established with you regarding all these statements.",
-                "Exodus 24:7-8 - He took the book of the agreement, and read it aloud to the people: and they said, All that the LORD has commanded we will do, and we will be obedient. And Moses took the blood, and sprinkled it upon the people, and said, This is the blood of the covenant, which the LORD has made with you in accordance with all these words."
-            ],
-            "answer": "Exodus 24:7-8 - And he took the book of the covenant, and read in the audience of the people: and they said, All that the LORD hath said will we do, and be obedient. And Moses took the blood, and sprinkled it on the people, and said, Behold the blood of the covenant, which the LORD hath made with you concerning all these words.",
-            "category": "Bible People",
-            "explanation": {
-                "Relevance_and_Correctness": "This passage describes the formal ceremony ratifying the Sinaitic covenant. It involves reading the terms, the people's verbal assent, and a blood ritual that seals the agreement. The declaration, 'Behold the blood of the covenant,' brings all the elements together, demonstrating that a covenant with God is a life-and-death commitment, sealed in blood.",
-                "Importance_of_Wording": "The sequence is critical. First comes the word ('the book of the covenant'), then the response ('All that the LORD hath said will we do'), and finally the seal ('the blood of the covenant'). The blood is sprinkled on both the altar (representing God) and the people, signifying a binding agreement between both parties. Moses' declaration, 'Behold the blood of the covenant,' is a formal, legal pronouncement of this sacred transaction.",
-                "Factual_Explanation": "This ceremony in Exodus 24 formally established the Old Covenant. It involved sacrifice, the sprinkling of blood (דָּם - dam - Strong's H1818) to seal the agreement, and the people's unanimous verbal acceptance of its terms. This ritual bound both God and Israel to the terms of the covenant.",
-                "Theological_Meaning": "This event demonstrates that a covenant with God is not a casual agreement but a sacred bond established by God's grace and entered into by the believer's choice. It is sealed by blood, signifying that life has been pledged. This underscores the seriousness of the commitment made at baptism.",
-                "Christ_Centered_Meaning": "This ceremony is a direct type of the New Covenant. At the Last Supper, Jesus took the cup and used Moses' exact words, saying, 'For this is my blood of the new testament [covenant], which is shed for many for the remission of sins' (Matthew 26:28). The blood of animals sealed the old covenant; the precious blood of Christ Himself seals the new and better covenant. For believers, understanding this connection shows that baptism is an entrance into a covenant sealed by the very blood of the Son of God."
-            }
-        },
-        {
-          "id": "PR001",
-          "question": "In Matthew's account, what prophetic reason did the angel give to Joseph for naming the child JESUS, identifying the mission He was born to fulfill?",
-          "options": [
-          "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall redeem his people from their foes.",
-          "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall save his people from their sins.",
-          "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall guide his people in all their ways.",
-          "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall govern his people in their land."
-          ],
-          "answer": "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall save his people from their sins.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This verse is the most direct answer to the contemplation. While other verses confirm His divine nature (like 'Emmanuel'), this verse explicitly states the prophetic mission embedded in His name. It defines His purpose not as political liberation or mere comfort, but as salvation from the root cause of all human misery: sin.",
-          "Importance_of_Wording": "The name 'JESUS' (Greek: Iēsous) is the Greek form of the Hebrew name 'Joshua' (Yehoshua), which means 'Yahweh is salvation.' The name itself is a prophetic declaration. The verse explains why he is to have this name: 'for he shall save his people from their sins.' The word 'from' is critical; it implies deliverance from the power and presence of sin itself, not just from the punishment for sin.",
-          "Factual_Explanation": "An angel delivered this prophetic command to Joseph in a dream, explaining the identity and mission of the child Mary was carrying. The name Jesus (Ἰησοῦς - Iesous - Strong's G2424) means 'Yahweh saves.' His mission was to 'save' (σώζω - sōzō - Strong's G4982) His people from their 'sins' (ἁμαρτία - hamartia - Strong's G266).",
-          "Theological_Meaning": "This verse establishes the central theme of the Great Controversy: God's plan to solve the sin problem. It refutes the idea of a purely political messiah and defines salvation in spiritual terms. This is the foundation of the gospel that will be proclaimed to the world, a message of freedom from the guilt and dominion of sin.",
-          "Christ_Centered_Meaning": "Christ's entire life was the unfolding of this prophetic name. His teachings addressed the root of sin in the heart. His death provided the atonement for sin. His resurrection broke the power of sin. His ministry in the heavenly sanctuary now applies the benefits of His sacrifice to save us from sin. His Second Coming will be the final act of saving His people from the very presence of sin."
-          }
-          },
-          {
-          "id": "PR002",
-          "question": "When King Herod demanded to know where the Christ should be born, what prophecy did the chief priests and scribes quote from the scriptures to identify the town?",
-          "options": [
-          "Matthew 2:6 - And thou Bethlehem, in the land of Juda, art a blessed place among the hamlets of Juda: for in thee shall be born a Priest, that shall bless my people Israel.",
-          "Matthew 2:6 - And thou Bethlehem, in the land of Juda, art not the least among the princes of Juda: for out of thee shall come a Governor, that shall rule my people Israel.",
-          "Matthew 2:6 - And thou Bethlehem, in the land of Juda, art the chosen one among the thousands of Juda: for from thee shall arise a Prophet, that shall teach my people Israel.",
-          "Matthew 2:6 - And thou Bethlehem, in the land of Juda, art truly the greatest among the cities of Juda: for out of thee shall come a King, that shall vanquish all of Israel's foes."
-          ],
-          "answer": "Matthew 2:6 - And thou Bethlehem, in the land of Juda, art not the least among the princes of Juda: for out of thee shall come a Governor, that shall rule my people Israel.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This verse is the direct answer to the query. When Herod asked where the Messiah was to be born, the religious leaders didn't guess; they quoted the prophet Micah (Micah 5:2). This demonstrates the precision of biblical prophecy and shows that the location of Christ's birth was not accidental but was a specific fulfillment of a divine timetable and plan.",
-          "Importance_of_Wording": "Matthew's quotation emphasizes two key roles of the Messiah: He will be a 'Governor' (a leader with authority) and He will 'rule' (literally 'shepherd') His people. This combines the concepts of kingship and tender care. The phrase 'art not the least' highlights the paradox that great power would come from a small, seemingly insignificant town, a common theme in God's workings.",
-          "Factual_Explanation": "In response to Herod's question, the chief priests and scribes correctly quoted the prophecy of Micah 5:2. Their knowledge of the letter of prophecy was perfect, yet they lacked the spiritual discernment to recognize its fulfillment, even as it was happening. This highlights the difference between academic knowledge of prophecy and a heart prepared to receive the Messiah.",
-          "Theological_Meaning": "This event shows that a correct intellectual understanding of prophecy is not sufficient for salvation. The religious leaders of Jerusalem knew where to find the Messiah but made no effort to go and worship Him. In contrast, the Magi from a gentile nation knew less but followed the light they had, and they found the King. This is a warning for those in the last days who may have a perfect theoretical knowledge of end-time prophecy but fail to have a personal relationship with the Christ of prophecy.",
-          "Christ_Centered_Meaning": "The prophecy itself is Christ-centered, pointing to His role as our divine Ruler and gentle Shepherd-King. His humble birth in the small 'house of bread' (the meaning of Bethlehem) prefigured His role as the 'bread of life' (John 6:35) who came from a humble origin to nourish the world. The fulfillment of this prophecy demonstrates that Christ's life was divinely orchestrated from the very beginning."
-          }
-          },
-          {
-          "id": "PR003",
-          "question": "Regarding the ministry of John the Baptist, what specific prophecy from Isaiah did the Gospel of Matthew apply to him to define his God-given role?",
-          "options": [
-          "Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Repent, for the kingdom of God is at hand.",
-          "Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Behold the Lamb of God, which taketh away sin.",
-          "Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight.",
-          "Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Announce ye the coming judgment of the Lord."
-          ],
-          "answer": "Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This verse explicitly defines John's prophetic role. His purpose wasn't just to be a social critic, but to be the direct fulfillment of Isaiah's prophecy (Isaiah 40:3). His mission was to 'prepare the way of the Lord.' This gives a deeper understanding: John's 'truth to power' was not an end in itself, but was intended to prepare hearts for the arrival of the Messiah.",
-          "Importance_of_Wording": "The imagery is of preparing a road for a royal procession. To 'prepare the way' and 'make his paths straight' involved removing obstacles. For John, these obstacles were not rocks and trees, but sins like pride, hypocrisy, and selfishness. His call to repentance was the spiritual roadwork needed for people to be able to receive Jesus. The 'voice... in the wilderness' emphasizes his separation from the corrupt religious centers of his day.",
-          "Factual_Explanation": "Matthew directly applies the prophecy of Isaiah 40:3 to John the Baptist. John's message of repentance and his baptism were the divinely appointed means of preparing the Jewish nation for the first advent of Christ. He was the prophesied forerunner.",
-          "Theological_Meaning": "John the Baptist is a type of the end-time remnant people who are to give God's final message. Like John, their work is to 'prepare the way of the Lord' for His Second Coming. This is done by calling people to repentance and to turn back to the 'straight paths' of God's commandments, just before the final appearance of the King. The Three Angels' Messages of Revelation 14 are the modern fulfillment of this preparatory work.",
-          "Christ_Centered_Meaning": "John's entire ministry was Christ-centered, though in a preparatory way. His goal was to decrease so that Christ could increase (John 3:30). He understood that his purpose was to point people away from himself and toward 'the Lamb of God, which taketh away the sin of the world' (John 1:29). His work of 'making paths straight' was about clearing the way for a personal encounter with Jesus Christ."
-          }
-          },
-          {
-          "id": "PR004",
-          "question": "To explain why Jesus began his ministry in Galilee, what prophecy from Isaiah did Matthew cite to show that God's light appears brightest in the darkest of places?",
-          "options": [
-          "Matthew 4:15-16 - The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles; The people which were in bondage saw a great freedom; and to them which were in the place and shadow of tyranny a light has come.",
-          "Matthew 4:15-16 - The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles; The people which sought for truth found a great teacher; and to them which sat in the region and shadow of ignorance a law is given.",
-          "Matthew 4:15-16 - The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles; The people which sat in darkness saw great light; and to them which sat in the region and shadow of death light is sprung up.",
-          "Matthew 4:15-16 - The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles; The people which suffered affliction saw a great comfort; and to them which sat in the region and shadow of sorrow a new hope is born."
-          ],
-          "answer": "Matthew 4:15-16 - The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles; The people which sat in darkness saw great light; and to them which sat in the region and shadow of death light is sprung up.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This passage directly counters worldly fear. Matthew quotes Isaiah's prophecy (Isaiah 9:1-2) to explain why Jesus began His ministry in Galilee. This region was historically a place of darkness and despair, having been ravaged by invaders. The prophecy shows that it is God's deliberate plan to bring the 'great light' of His presence precisely into the places that are in the greatest 'darkness' and 'shadow of death.' It gives assurance that darkness does not signal God's absence but is the very place where God's light is destined to shine brightest.",
-          "Importance_of_Wording": "The imagery is powerful. The people were not just in twilight; they 'sat in darkness,' a state of settled despair. They were in the 'region and shadow of death,' a place of utter hopelessness. The prophecy says that to them, a 'great light is sprung up'—a sudden, glorious dawning. This is not a gradual brightening but a decisive, divine intervention.",
-          "Factual_Explanation": "Jesus moved His base of ministry from Nazareth to Capernaum, in the region of Galilee. Matthew sees this as a direct fulfillment of Isaiah's prophecy. Galilee was a diverse, cosmopolitan area often looked down upon by the Judean religious elite, making it a symbolic place of spiritual 'darkness.'",
-          "Theological_Meaning": "This principle shows that God does not abandon the world to darkness. The gospel's power is most evident when it penetrates the darkest corners of human society and the human heart. This is a promise for the last days, that even as 'darkness shall cover the earth, and gross darkness the people,' the Lord's light will arise upon His faithful people (Isaiah 60:2) to give the final message of hope to a dying world.",
-          "Christ_Centered_Meaning": "Jesus Himself is the 'great light.' He declared, 'I am the light of the world: he that followeth me shall not walk in darkness, but shall have the light of life' (John 8:12). This prophecy reveals His mission: to enter into our darkest experiences—our sin, our despair, our fear of death—and to bring the dawning light of His presence and salvation."
-          }
-          },
-          {
-          "id": "PR005",
-          "question": "In the Sermon on the Mount, what two prophetic declarations did Jesus make to define the essential identity and purpose of His followers in the world?",
-          "options": [
-          "Matthew 5:13-14 - Ye are the salt of the earth... Ye are the light of the world.",
-          "Matthew 5:13-14 - Ye are the hope of the earth... Ye are the joy of the world.",
-          "Matthew 5:13-14 - Ye are the leaven of the earth... Ye are the water of the world.",
-          "Matthew 5:13-14 - Ye are the strength of the earth... Ye are the voice of the world."
-          ],
-          "answer": "Matthew 5:13-14 - Ye are the salt of the earth... Ye are the light of the world.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This answer provides the prophetic identity that a church needs to reclaim. Jesus doesn't say 'You should be salt and light'; He declares 'Ye are...' This is a statement of their fundamental purpose and nature as His followers. Salt preserves and adds flavor, while light dispels darkness and guides. These two metaphors perfectly define the church's mission to be a preserving, positive influence and a beacon of truth in a decaying, dark world.",
-          "Importance_of_Wording": "The two metaphors are distinct and complementary. 'Salt of the earth' implies an internal, penetrating influence, preserving society from total moral corruption. 'Light of the world' implies an external, visible witness, showing the way to God. Jesus immediately follows both with a warning: salt can lose its savor and light can be hidden, losing its purpose. This combination of a high calling and a solemn warning is a powerful charge to the church.",
-          "Factual_Explanation": "In the beginning of the Sermon on the Mount, immediately after the Beatitudes, Jesus defines the identity of His disciples in relation to the world. He doesn't give them a new law here, but a new identity. This is their prophetic calling.",
-          "Theological_Meaning": "This is the mission of the church in every age. The church is God's appointed agency for the salvation of men. Its purpose is to be a preserving influence (salt) and to reveal the character of God (light) to a world lost in sin. In the end times, as the world's corruption (saltlessness) and spiritual darkness (lightlessness) increases, the prophetic calling of God's remnant church to be pure salt and bright light becomes even more critical.",
-          "Christ_Centered_Meaning": "Christ is the true 'light of the world' (John 8:12). We are only light as we reflect Him. He is the one who brings the 'savour' of grace. Our ability to fulfill this prophetic calling depends entirely on our connection to Him. When a church is in conflict and discouraged, the solution is to reconnect with Christ, the source of all light and savor, so they can once again fulfill their divine purpose."
-          }
-          },
-          {
-          "id": "PR006",
-          "question": "What prophetic declaration did Jesus make in the Sermon on the Mount to establish the eternal authority of the law and the prophets, countering any idea that He came to abolish them?",
-          "options": [
-          "Matthew 5:17-18 - Think not that I am come to change the law, or the prophets: I am not come to change, but to establish. For verily I say unto you, Till all is fulfilled, the law shall be a guide for all people.",
-          "Matthew 5:17-18 - Think not that I am come to destroy the law, or the prophets: I am not come to destroy, but to fulfil. For verily I say unto you, Till heaven and earth pass, one jot or one tittle shall in no wise pass from the law, till all be fulfilled.",
-          "Matthew 5:17-18 - Think not that I am come to ignore the law, or the prophets: I am not come to ignore, but to honor. For verily I say unto you, A new commandment I give unto you, that ye love one another.",
-          "Matthew 5:17-18 - Think not that I am come to replace the law, or the prophets: I am not come to replace, but to build upon. For verily I say unto you, The law is a shadow of good things to come, but the substance is of me."
-          ],
-          "answer": "Matthew 5:17-18 - Think not that I am come to destroy the law, or the prophets: I am not come to destroy, but to fulfil. For verily I say unto you, Till heaven and earth pass, one jot or one tittle shall in no wise pass from the law, till all be fulfilled.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This two-verse statement is Jesus's most direct and comprehensive refutation of the argument that the law is obsolete. He first states His purpose negatively ('not to destroy') and positively ('but to fulfil'). He then follows with a powerful prophetic statement declaring the law's permanence, that not even the smallest part of it ('one jot or one tittle') will pass away until the end of time ('Till heaven and earth pass'). This combination leaves no room for the idea that He abolished the commandments.",
-          "Importance_of_Wording": "'Destroy' (kataluō) means to demolish or tear down. 'Fulfil' (plēroō) means to fill up to the full, to make complete. Jesus came to show the law's full and deep meaning. A 'jot' (iota) was the smallest letter of the Hebrew alphabet; a 'tittle' was a tiny decorative mark on a letter. By using this phrasing, Jesus was saying in the strongest possible terms that every minute detail of God's law is permanent and eternally significant.",
-          "Factual_Explanation": "In the Sermon on the Mount, Jesus corrects popular misconceptions about His ministry. Anticipating the charge that His teachings on grace would undermine God's law, He makes this definitive statement about His relationship to the 'law and the prophets' (a term for the entire Old Testament).",
-          "Theological_Meaning": "This passage is foundational to the Adventist understanding of the law. The moral law, the Ten Commandments, is a transcript of God's character and is as eternal as He is. In the final conflict of the Great Controversy, the central issue will be loyalty to God's law, specifically the Sabbath commandment, versus loyalty to human traditions that seek to change it. Revelation describes the remnant saints as those 'which keep the commandments of God, and have the testimony of Jesus Christ' (Revelation 12:17).",
-          "Christ_Centered_Meaning": "Christ fulfilled the law in multiple ways. He fulfilled its prophecies. He obeyed its precepts perfectly. He taught its deep spiritual meaning. He paid its penalty for us on the cross. His life of perfect righteousness is credited to the believer, enabling us to be seen as righteous before the law. Through the Holy Spirit, He writes the law on our hearts (Hebrews 8:10), empowering us to obey it out of love, not just duty."
-          }
-          },
-          {
-          "id": "PR007",
-          "question": "In His Sermon on the Mount, what prophetic principle did Jesus teach to guarantee a divine response to those who pray with persistence and earnestness?",
-          "options": [
-          "Matthew 7:7-8 - Hope, and it shall be granted you; believe, and ye shall see; wait, and it shall be opened unto you: For every one that hopeth receiveth; and he that believeth seeth; and to him that waiteth it shall be opened.",
-          "Matthew 7:7-8 - Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you: For every one that asketh receiveth; and he that seeketh findeth; and to him that knocketh it shall be opened.",
-          "Matthew 7:7-8 - Desire, and it shall be shown you; learn, and ye shall know; call, and the door shall be opened unto you: For every one that desireth receiveth; and he that learneth knoweth; and to him that calleth it shall be opened.",
-          "Matthew 7:7-8 - Repent, and ye shall be forgiven; trust, and ye shall have peace; obey, and it shall be opened unto you: For every one that repenteth is forgiven; and he that trusteth hath peace; and to him that obeyeth it shall be opened."
-          ],
-          "answer": "Matthew 7:7-8 - Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you: For every one that asketh receiveth; and he that seeketh findeth; and to him that knocketh it shall be opened.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This passage directly addresses discouragement in prayer. Jesus gives a three-fold command for persistence ('Ask, seek, knock') and then follows it with a three-fold prophetic promise of a guaranteed outcome ('it shall be given... ye shall find... it shall be opened'). He then reinforces this promise in verse 8. This is not a suggestion, but a statement of divine law—a prophetic principle that persistent, faith-filled prayer will be answered.",
-          "Importance_of_Wording": "The verbs 'Ask, seek, knock' represent an increasing intensity of earnestness. Asking is vocal. Seeking is active, involving effort. Knocking is persistent, refusing to be turned away. The promises are absolute and use the divine passive ('it shall be given'), implying God is the one doing the acting. The repetition in verse 8—'every one that asketh receiveth'—serves to remove all doubt and underscore the certainty of the promise.",
-          "Factual_Explanation": "In the Sermon on the Mount, after teaching about God's care and not worrying, Jesus gives this foundational instruction on prayer. It is presented as a law of the kingdom: earnest, persistent prayer is the means by which God's children receive the blessings He is waiting to give them.",
-          "Theological_Meaning": "This principle is especially important for the end-time church. The Bible describes a 'time of Jacob's trouble' for God's people, a period of intense, agonizing prayer where they will have to 'knock' and 'seek' with all their hearts, pleading for deliverance while clinging to God's promises. The promise that 'to him that knocketh it shall be opened' is the assurance that will sustain them through that final crisis.",
-          "Christ_Centered_Meaning": "Christ is the one who makes this promise possible. He is the door upon which we knock (Revelation 3:20). He is the 'good things' that the Father gives (Luke 11:13 specifies the 'good gift' is the Holy Spirit). Our asking, seeking, and knocking are all directed toward Him and are answered because of His merit, not our own. His life of prayer was a perfect example of persistent communion with the Father."
-          }
-          },
-          {
-          "id": "PR008",
-          "question": "What prophetic warning did Jesus give at the end of the Sermon on the Mount to show that on judgment day, claims of doing 'wonderful works' in His name will be worthless without a true, obedient relationship with Him?",
-          "options": [
-          "Matthew 7:22-23 - Many will say to me in that day, Lord, Lord, have we not been zealous in thy name? and in thy name been faithful? and in thy name done many wonderful works? And then will I profess unto them, I never knew you: depart from me, ye that follow falsehood.",
-          "Matthew 7:22-23 - Many will say to me in that day, Lord, Lord, have we not preached in thy name? and in thy name taught the people? and in thy name done many wonderful works? And then will I profess unto them, I never knew you: depart from me, ye that seek glory.",
-          "Matthew 7:22-23 - Many will say to me in that day, Lord, Lord, have we not prophesied in thy name? and in thy name have cast out devils? and in thy name done many wonderful works? And then will I profess unto them, I never knew you: depart from me, ye that work iniquity.",
-          "Matthew 7:22-23 - Many will say to me in that day, Lord, Lord, have we not believed in thy name? and in thy name called upon thee? and in thy name done many wonderful works? And then will I profess unto them, I never knew you: depart from me, ye that are full of pride."
-          ],
-          "answer": "Matthew 7:22-23 - Many will say to me in that day, Lord, Lord, have we not prophesied in thy name? and in thy name have cast out devils? and in thy name done many wonderful works? And then will I profess unto them, I never knew you: depart from me, ye that work iniquity.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This passage is the most direct and startling answer to the dilemma of false teachers. It prophesies a scene at the final judgment where people will present a list of impressive, supernatural works done 'in Jesus' name' as their evidence of salvation. Jesus's shocking reply, 'I never knew you,' reveals that miraculous works are not the test of truth. This provides a clear, authoritative teaching to warn against being deceived by signs and wonders.",
-          "Importance_of_Wording": "The people's plea is based entirely on their works: 'have we not prophesied... cast out devils... done many wonderful works?' Christ's rejection is not based on their lack of works, but on a lack of relationship: 'I never knew you.' His final condemnation is 'depart from me, ye that work iniquity,' showing that despite their miraculous deeds, their lives were characterized by lawlessness. This distinction between works and relationship, and works and obedience, is critical.",
-          "Factual_Explanation": "At the conclusion of the Sermon on the Mount, Jesus gives a series of sharp warnings about the two ways, the two trees, and the two foundations. This prophecy about the judgment day serves as a final, solemn caution against self-deception and false religion.",
-          "Theological_Meaning": "This is a key end-time prophecy. Revelation 13 prophesies that the final deceptive power will perform 'great wonders' and miracles to deceive the inhabitants of the earth (Revelation 13:13-14). Jesus warns here that Satan can counterfeit spiritual gifts. The ultimate test of truth is not supernatural phenomena, but faithfulness to the Word of God and a life that is in harmony with His law ('doeth the will of my Father').",
-          "Christ_Centered_Meaning": "The core of the issue is relationship. To 'know' Christ is to have a saving relationship with Him, which naturally leads to a love for Him and a desire to obey His will. The false teachers may use Christ's name, but they do not have His character. True discipleship is not about using Jesus's name for power, but about being so connected to Jesus that His character is reproduced in us."
-          }
-          },
-          {
-          "id": "PR009",
-          "question": "In the parable of the wheat and the tares, what prophetic command does the householder give his servants that explains why true believers and false believers must coexist in the world until the final judgment?",
-          "options": [
-          "Matthew 13:30 - Let both grow together until the harvest: and in the time of harvest I will say to the reapers, Gather ye together first the tares, and bind them in bundles to burn them: but gather the wheat into my barn.",
-          "Matthew 13:30 - Let both be watered until the summer: and in the time of summer I will say to the servants, Pluck ye up first the tares, and cast them into the fire to be burned: but the wheat shall be for my barn.",
-          "Matthew 13:30 - Let the good and bad remain until the season: and in the time of season I will say to the angels, Separate ye first the bad, and set them aside for burning: but keep the good within my house.",
-          "Matthew 13:30 - Let them both stand until the reaping: and in the time of reaping I will command the workers, Take ye together first the tares, and save them in piles for the fire: but place the wheat into my house."
-          ],
-          "answer": "Matthew 13:30 - Let both grow together until the harvest: and in the time of harvest I will say to the reapers, Gather ye together first the tares, and bind them in bundles to burn them: but gather the wheat into my barn.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This verse from the Parable of the Wheat and Tares directly refutes the idea that belief doesn't matter. It prophesies that two distinct groups—wheat (true believers, based on the 'good seed' of truth) and tares (false believers, based on the enemy's counterfeit seed)—will coexist within the church ('the field' is the world, but the context is the visible kingdom). The command to 'let both grow together' until the harvest, followed by a final, decisive separation with opposite eternal destinies, shows that what one believes and who one follows has ultimate consequences.",
-          "Importance_of_Wording": "The word 'tares' refers to a poisonous weed that closely resembles wheat in its early stages, making premature separation impossible without harming the true crop. The command to 'let both grow together' is a lesson against human-led purges and persecution. The key prophetic element is 'until the harvest,' which Jesus identifies as 'the end of the world' (v. 39). The final action is a separation ('Gather ye together first the tares... but gather the wheat'), proving that the two are not the same and will not share the same fate.",
-          "Factual_Explanation": "In this parable, Jesus explains the problem of evil within the church. The sower is the Son of man, the good seed is the word of the kingdom, and the tares are the children of the wicked one, sown by the devil. The parable prophesies the mixed state of the church throughout its history until the final judgment.",
-          "Theological_Meaning": "This parable is a prophecy of church history. It predicts that error and apostasy would be introduced early ('while men slept') and that truth and error would coexist side-by-side. It warns against trying to 'purify' the church by force, as was attempted during the persecutions of the Dark Ages. Christians see the final 'harvest' as the time of the final judgment, when the angels will separate the true from the false based on their response to God's final testing truths.",
-          "Christ_Centered_Meaning": "Christ is the Sower of the good seed. He is also the Lord of the harvest. He is patient, allowing both to grow together, giving every opportunity for the tares to potentially become wheat through repentance. The final separation is based on one's relationship to Him—whether one is truly a 'child of the kingdom.' Our security lies not in judging the field, but in ensuring we are genuine wheat, firmly rooted in Christ, the Word of God."
-          }
-          },
-          {
-          "id": "PR010",
-          "question": "On the Mount of Olives, what was the disciples' two-part question to Jesus that prompted Him to give a dual prophecy, mingling the signs of Jerusalem's destruction with the signs of His final return?",
-          "options": [
-          "Matthew 24:3 - Tell us, when shall the temple fall? and what shall be the sign of thy kingdom, and of the judgment of the world?",
-          "Matthew 24:3 - Tell us, when shall these things be? and what shall be the sign of thy coming, and of the end of the world?",
-          "Matthew 24:3 - Tell us, when shall this city be destroyed? and what shall be the sign of thy glory, and of the harvest of the world?",
-          "Matthew 24:3 - Tell us, when shall these stones be cast down? and what shall be the sign of thy victory, and of the last days of the world?"
-          ],
-          "answer": "Matthew 24:3 - Tell us, when shall these things be? and what shall be the sign of thy coming, and of the end of the world?",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This verse is the key that unlocks the structure of the entire Olivet Discourse. The disciples asked a two-part question, but they mistakenly believed the events were one and the same. They asked (1) 'when shall these things be?' (referring to the temple's destruction) and (2) 'what shall be the sign of thy coming, and of the end of the world?' Because they blended the two events in their question, Jesus blended them in His answer, giving signs that had a local, immediate fulfillment in the fall of Jerusalem and a larger, global fulfillment before His second coming.",
-          "Importance_of_Wording": "The disciples' question links three distinct concepts: the destruction of the temple ('these things'), Christ's personal, glorious return ('thy coming' - Greek: parousia), and the final consummation of all things ('the end of the world'). Understanding that they asked about all three as a single event is crucial to interpreting Christ's prophetic response.",
-          "Factual_Explanation": "After Jesus prophesied that not one stone of the temple would be left upon another (v. 2), the disciples came to Him privately on the Mount of Olives. Their question fused the local catastrophe of Jerusalem's fall with the global catastrophe of the world's end, prompting Jesus's dual-application prophecy.",
-          "Theological_Meaning": "This is a foundational principle of Adventist prophetic interpretation. The destruction of Jerusalem in A.D. 70 is a historical type, or small-scale model, of the end of the world. The principles of deception, the warnings to flee, and the judgment upon a people who rejected God's truth were all demonstrated in that event. By studying what happened to Jerusalem, believers can understand what will happen on a global scale just before the Second Coming.",
-          "Christ_Centered_Meaning": "Christ's great prophetic discourse demonstrates His love and care for His people. He gave them specific signs so they could escape the destruction of Jerusalem, and not one Christian is known to have perished in the siege. Likewise, He has given us signs of His return so we will not be caught unaware but will be prepared to meet Him in peace. The prophecy is a manifestation of His desire to protect and save His own."
-          }
-          },
-          {
-          "id": "PR011",
-          "question": "In the Olivet Discourse, what prophetic counsel did Jesus give concerning events like wars and famines to distinguish them from the actual end of the age?",
-          "options": [
-          "Matthew 24:6, 8 - And ye shall hear of wars and rumours of wars... but the end is not yet... All these are the beginning of sorrows.",
-          "Matthew 24:6, 8 - And ye shall hear of wars and rumours of wars... be ye not afraid... All these are the signs of the end.",
-          "Matthew 24:6, 8 - And ye shall hear of wars and rumours of wars... and the end shall be soon... All these are the final sorrows.",
-          "Matthew 24:6, 8 - And ye shall hear of wars and rumours of wars... see that ye be watchful... All these are but the last days."
-          ],
-          "answer": "Matthew 24:6, 8 - And ye shall hear of wars and rumours of wars... but the end is not yet... All these are the beginning of sorrows.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This answer gives the exact perspective needed to counter panic. Jesus does prophesy that 'wars and rumours of wars,' famines, and earthquakes will occur. However, He immediately gives two crucial qualifications. First, He explicitly states, 'the end is not yet.' Second, he defines these events not as the end itself, but as 'the beginning of sorrows.' This reframes these tragedies from being the final spasms of history into the early birth pangs, indicating that the end is coming but is not immediate, thus calling for watchfulness, not panic.",
-          "Importance_of_Wording": "The command 'see that ye be not troubled' is a direct antidote to fear. The phrase 'the end is not yet' provides a clear timeline marker. The metaphor 'the beginning of sorrows' (literally 'birth pains') is profoundly insightful. Birth pains start small and infrequent, then grow in intensity and frequency as the birth approaches. This tells us to expect these calamities to continue and intensify as we near the end of the age.",
-          "Factual_Explanation": "In response to the disciples' question about the signs of the end, Jesus begins by listing these general calamities. He warns them not to be deceived into thinking that any single war or earthquake signals the immediate end of the world.",
-          "Theological_Meaning": "This is a prophecy that spans the entire Christian era. These events have characterized history since Christ's ascension. From an Adventist perspective, these are not the final, definitive signs, but rather ongoing indicators of a world broken by sin. They should drive us to a state of preparedness and missionary urgency, not alarmist date-setting or fear. The definitive signs come later in the chapter (v. 29).",
-          "Christ_Centered_Meaning": "Christ's prophecy demonstrates His sovereignty over history. He was not surprised by the tragic course of this world. He foretold it. His command 'be not troubled' is rooted in the assurance that He is in control, even amidst chaos. He is our peace in a world of wars and our stability in a world of earthquakes. The 'sorrows' of this world should make us long for His return, when He will wipe away every tear."
-          }
-          },
-          {
-          "id": "PR012",
-          "question": "When prophesying about the great tribulation in Matthew 24, what unique description did Jesus use to signify a period of persecution unparalleled in all of human history?",
-          "options": [
-          "Matthew 24:21 - For then shall be great tribulation, as the prophets have foretold from the beginning of the world until this time, and for all time.",
-          "Matthew 24:21 - For then shall be great tribulation, such as was not since the beginning of the world to this time, no, nor ever shall be.",
-          "Matthew 24:21 - For then shall be great tribulation, like the flood which was in the beginning of the world, and which shall not be again.",
-          "Matthew 24:21 - For then shall be great tribulation, of a kind which was not known to the fathers, no, nor shall be known by the sons."
-          ],
-          "answer": "Matthew 24:21 - For then shall be great tribulation, such as was not since the beginning of the world to this time, no, nor ever shall be.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This verse directly addresses the debate by defining the nature of the tribulation. Jesus uses absolute, superlative language: 'such as was not since the beginning of the world... no, nor ever shall be.' This description of a unique and unparalleled time of trouble is the key to identifying the period He is referencing. While the fall of Jerusalem was horrific, this language points to a specific, long-term period of persecution that has no historical equal.",
-          "Importance_of_Wording": "The phrase 'great tribulation' sets this period apart. The qualifier 'such as was not... no, nor ever shall be' is a Hebrew idiom for something absolutely unique and unprecedented in its severity. This prevents us from limiting it to just any difficult time. The subsequent verse, which states the days 'shall be shortened' for the sake of the elect, confirms that this is a specific, time-limited period of intense persecution against God's people.",
-          "Factual_Explanation": "In the Olivet Discourse, Jesus prophesies a period of intense persecution against His followers. While this had a partial fulfillment in the Roman siege of Jerusalem, the absolute language points to a greater fulfillment.",
-          "Theological_Meaning": "Many historicist interpreters, identify this 'great tribulation' with the 1260-year period of papal supremacy prophesied in Daniel 7:25 and Revelation 12:6, 14, stretching from A.D. 538 to 1798. This was a time of intense persecution against those who held to the Bible against church tradition. The prophecy that the days would be 'shortened' is seen as fulfilled by the events of the Protestant Reformation and the Enlightenment, which curtailed the persecuting power before the prophetic period officially ended.",
-          "Christ_Centered_Meaning": "Christ's prophecy shows His foreknowledge of the suffering His church would endure. He did not promise a life free from trouble, but He did promise His presence through it. The assurance 'for the elect's sake those days shall be shortened' is a profound statement of His love and sovereign control. He sets the limits on the power of evil and preserves His people through even the darkest times of history."
-          }
-          },
-          {
-          "id": "PR013",
-          "question": "In the Olivet Discourse, what specific sequence of cosmic signs did Jesus prophesy would follow the great tribulation, heralding the nearness of His return?",
-          "options": [
-          "Matthew 24:29 - Immediately after the tribulation of those days shall the powers of the heavens be shaken: and the sun shall be darkened, and the moon shall not give her light, and the stars shall fall from heaven.",
-          "Matthew 24:29 - Before the tribulation of those days shall the sun be darkened, and the moon shall not give her light, and the stars shall fall from heaven, and the powers of the heavens shall be shaken:",
-          "Matthew 24:29 - Immediately after the tribulation of those days shall the earth be shaken, and the sea shall give up her dead, and the heavens shall be rolled up as a scroll, and the stars shall fall to the earth:",
-          "Matthew 24:29 - Immediately after the tribulation of those days shall the sun be darkened, and the moon shall not give her light, and the stars shall fall from heaven, and the powers of the heavens shall be shaken:"
-          ],
-          "answer": "Matthew 24:29 - Immediately after the tribulation of those days shall the sun be darkened, and the moon shall not give her light, and the stars shall fall from heaven, and the powers of the heavens shall be shaken:",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This verse is the precise answer to the question. It provides a clear chronological marker ('Immediately after the tribulation of those days') and then lists a specific sequence of celestial events: a darkening of the sun, the moon not giving her light, and a spectacular falling of the stars. This is the key text for the historicist interpretation of the heavenly signs.",
-          "Importance_of_Wording": "The timing, 'Immediately after the tribulation,' is crucial. It places these signs in a specific historical context, not at the very moment of the Second Coming. The sequence is also important: sun, moon, and then stars. The final clause, 'the powers of the heavens shall be shaken,' points to the final cosmic upheaval at the moment of Christ's return, distinguishing the preceding signs from the final event itself.",
-          "Factual_Explanation": "In the Olivet Discourse, Jesus gives a sequence of signs that herald His return. This verse specifically describes celestial phenomena that would mark the end of the long period of tribulation and signal that the Second Coming is near.",
-          "Theological_Meaning": "Adventist pioneers, and other Christians of the Second Great Awakening, saw this prophecy as having been fulfilled in a remarkable sequence of historical events. They identified the 'great tribulation' with the 1260 years of papal persecution (538-1798). They saw the darkening of the sun fulfilled in the 'Dark Day' of May 19, 1780, in New England. The moon not giving her light was observed that same night, appearing as blood. The 'stars shall fall from heaven' was seen as fulfilled in the spectacular Leonid meteor storm of November 13, 1833. These events were understood as the fulfillment that awakened the world to the nearness of Christ's return.",
-          "Christ_Centered_Meaning": "These signs are not meant to be objects of worship or fear in themselves. They are signposts, lovingly given by Christ to His people to awaken them and give them hope that the long night of waiting is almost over. They are celestial announcements that the King is coming. They point away from themselves to the ultimate event: the glorious appearing of our Lord and Savior, Jesus Christ."
-          }
-          },
-          {
-          "id": "PR014",
-          "question": "To counter prophecies of a secret or localized return, what two descriptions did Jesus give in Matthew 24 to define His second coming as a universally visible and glorious event?",
-          "options": [
-          "Matthew 24:27, 30 - For as the fire cometh out of the furnace... so shall also the coming of the Son of man be... and they shall see the Son of man coming in the clouds of heaven with fire and great glory.",
-          "Matthew 24:27, 30 - For as a thief cometh in the night... so shall also the coming of the Son of man be... and they that are ready shall see the Son of man coming in the clouds of heaven with power and great glory.",
-          "Matthew 24:27, 30 - For as the lightning cometh out of the east, and shineth even unto the west; so shall also the coming of the Son of man be... and they shall see the Son of man coming in the clouds of heaven with power and great glory.",
-          "Matthew 24:27, 30 - For as the sun cometh out of the darkness... so shall also the coming of the Son of man be... and all the saints of the earth shall see the Son of man coming in the clouds of heaven with angels and great glory."
-          ],
-          "answer": "Matthew 24:27, 30 - For as the lightning cometh out of the east, and shineth even unto the west; so shall also the coming of the Son of man be... and they shall see the Son of man coming in the clouds of heaven with power and great glory.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This combination of verses provides a comprehensive biblical answer to debates about the manner of the second coming. Verse 27 uses the analogy of lightning—a sudden, universally visible phenomenon—to describe the manner of His coming. This directly refutes any 'secret' or localized event. Verse 30 adds that 'all the tribes of the earth... shall see the Son of man,' confirming its global visibility, and describes it as an event of 'power and great glory,' countering any idea of a quiet, spiritual return. Together, these verses prove the Second Coming will be a literal, personal, visible, and glorious event.",
-          "Importance_of_Wording": "The simile 'as the lightning' is perfect for conveying both visibility and speed. The phrase 'all the tribes of the earth shall see' is unambiguous and global in scope. The description 'coming in the clouds of heaven with power and great glory' contrasts sharply with His first coming in humility. These specific details are designed to prevent deception about the manner of His return.",
-          "Factual_Explanation": "In the context of warning against false prophets who would claim Christ has already returned secretly ('he is in the desert... in the secret chambers'), Jesus gives these definitive descriptions of His actual return to ensure His followers are not deceived.",
-          "Theological_Meaning": "The doctrine of a literal, visible Second Coming is a cornerstone of Adventist belief. It is the 'blessed hope' of the church. The teaching of a secret rapture or a spiritual coming is seen as one of the end-time deceptions that Jesus warned about. The Bible is clear: His return will be the most spectacular and universally witnessed event in human history, leaving no room for doubt.",
-          "Christ_Centered_Meaning": "The manner of Christ's return is a vindication of His character and mission. He who came once in humility as a suffering servant will return as the King of kings and Lord of lords. The glory that was veiled in humanity at His first advent will be on full display for the entire universe to see at His second advent. It is the final, glorious triumph of the plan of salvation."
-          }
-          },
-          {
-          "id": "PR015",
-          "question": "According to Jesus's prophecy in the Olivet Discourse, what great work must be completed throughout the entire world just before 'the end' can come?",
-          "options": [
-          "Matthew 24:14 - And this law of the kingdom shall be written in all hearts for a witness unto all nations; and then shall the end come.",
-          "Matthew 24:14 - And this gospel of the kingdom shall be preached in all the world for a witness unto all nations; and then shall the end come.",
-          "Matthew 24:14 - And this sign of the kingdom shall be shown in all the world for a witness unto all nations; and then shall the end come.",
-          "Matthew 24:14 - And this mystery of the kingdom shall be revealed in all the world for a witness unto all nations; and then shall the end come."
-          ],
-          "answer": "Matthew 24:14 - And this gospel of the kingdom shall be preached in all the world for a witness unto all nations; and then shall the end come.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This verse provides the definitive answer for the church's ultimate mission. Jesus gives one final sign that must be fulfilled before 'the end come': the global proclamation of the 'gospel of the kingdom.' This places worldwide missionary work and proclamation of the gospel at the very center of the church's end-time purpose. It shows that while social programs are a vital expression of the gospel, the explicit preaching of the good news to every nation is the final, critical task.",
-          "Importance_of_Wording": "The gospel is defined as 'this gospel of the kingdom,' the good news of Christ's saving grace and His coming reign. Its scope is universal: 'in all the world... unto all nations.' Its purpose is 'for a witness,' meaning everyone will have had a chance to hear and make a decision. The final clause, 'and then shall the end come,' makes the completion of this task the immediate precursor to Christ's return.",
-          "Factual_Explanation": "In the midst of describing the trials and tribulations leading up to His return, Jesus inserts this great missionary command as a sign of hope and purpose for His church. It is the one sign that His followers are directly responsible for helping to fulfill.",
-          "Theological_Meaning": "For many historicist interpreters, this verse is the core of their mission identity. The 'gospel of the kingdom' to be preached in the last days is identified with the 'everlasting gospel' of the Three Angels' Messages in Revelation 14:6-12. This is a special, final presentation of the gospel in the context of the judgment hour, calling people to worship the Creator and to come out of fallen Babylon. Fulfilling this prophecy is the primary reason for the existence of the Adventist church.",
-          "Christ_Centered_Meaning": "The 'gospel of the kingdom' is entirely about Christ. It is the good news of His life, death, resurrection, high-priestly ministry, and promised return. Preaching the gospel is lifting up Christ before the world. Our mission is to present Him as the only hope for a dying planet, so that as many as possible can be ready for the end."
-          }
-          },
-          {
-          "id": "PR016",
-          "question": "In His prophecy regarding Jerusalem's fall, what specific, observable event did Jesus identify as the 'abomination of desolation,' which would be the final sign for His followers to flee?",
-          "options": [
-          "Mark 13:14 - But when ye shall see the abomination of desolation, spoken of by Daniel the prophet, entering the holy place, (let him that readeth understand,) then let them that be in Judaea flee to the mountains:",
-          "Mark 13:14 - But when ye shall see the abomination of desolation, spoken of by Daniel the prophet, sitting upon the holy hill, (let him that readeth understand,) then let them that be in Judaea flee to the mountains:",
-          "Mark 13:14 - But when ye shall see the abomination of desolation, spoken of by Daniel the prophet, standing where it ought not, (let him that readeth understand,) then let them that be in Judaea flee to the mountains:",
-          "Mark 13:14 - But when ye shall see the abomination of desolation, spoken of by Daniel the prophet, set up near the temple, (let him that readeth understand,) then let them that be in Judaea flee to the mountains:"
-          ],
-          "answer": "Mark 13:14 - But when ye shall see the abomination of desolation, spoken of by Daniel the prophet, standing where it ought not, (let him that readeth understand,) then let them that be in Judaea flee to the mountains:",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This verse gives the precise signal that was to be observed. Jesus gave His followers a specific, observable sign: the 'abomination of desolation' standing in a place it shouldn't be. This was their cue to flee immediately. The parenthetical comment, 'let him that readeth understand,' is a direct instruction to pay close attention to this particular prophecy, highlighting its critical importance for their survival.",
-          "Importance_of_Wording": "'The abomination of desolation' is a specific term from the book of Daniel, referring to a pagan power that defiles God's sacred things. 'Standing where it ought not' was the signal. For the first-century Christians, this was understood to be the idolatrous standards of the Roman armies standing on the holy ground surrounding Jerusalem. The command to 'flee to the mountains' was an urgent, life-saving instruction.",
-          "Factual_Explanation": "Jesus here quotes from the prophet Daniel (Daniel 9:27, 11:31, 12:11). The Christians in Jerusalem understood this prophecy to refer to the Roman armies. When the armies under Cestus Gallus surrounded the city in A.D. 66 and then suddenly withdrew, the Christians recognized their signal, fled the city (mostly to Pella), and were spared the horrific siege under Titus in A.D. 70.",
-          "Theological_Meaning": "This prophecy has a dual application. The first fulfillment in A.D. 70 serves as a type for a future, end-time fulfillment. Just as the pagan Roman standards were the 'abomination' for ancient Jerusalem, a future religious-political power will enact a law—widely understood by many historicist interpreters to be a universal Sunday law in defiance of the Sabbath—that will be the final 'abomination of desolation.' When this sign is seen, God's people will know that their time of probation is closing and they must flee from the corrupting influence of 'Babylon.'",
-          "Christ_Centered_Meaning": "This prophecy is a profound demonstration of Christ's love and protective care for His people. He did not leave them without warning. He gave them a clear sign so they could be saved from destruction. Likewise, He has given us clear signs in His word to warn us of the final crisis and to prepare us for His return. The entire purpose of prophecy is not to satisfy curiosity, but to lead people to the safety found only in Christ."
-          }
-          },
-          {
-          "id": "PR017",
-          "question": "Given that the exact time of the Second Coming is unknowable, what prophetic command did Jesus give in Matthew 24 to define the Christian's proper state of mind?",
-          "options": [
-          "Matthew 24:36, 42 - But of that day and hour knoweth no man... Therefore be ye also patient: for in such an hour as ye think not the Son of man cometh.",
-          "Matthew 24:36, 42 - But of that day and hour knoweth no man... Therefore be at peace: for in such an hour as ye think not the Son of man cometh.",
-          "Matthew 24:36, 42 - But of that day and hour knoweth no man... Watch therefore: for ye know not what hour your Lord doth come.",
-          "Matthew 24:36, 42 - But of that day and hour knoweth no man... Pray therefore: for ye know not what hour your Lord doth come."
-          ],
-          "answer": "Matthew 24:36, 42 - But of that day and hour knoweth no man... Watch therefore: for ye know not what hour your Lord doth come.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This combination of verses provides the perfect counsel for anxious planning. Verse 36 states definitively that the exact time of the end is unknowable to humans ('of that day and hour knoweth no man'). This directly challenges the attempt to control every future contingency. Verse 42 gives the logical conclusion and command: because you don't know the hour, the only proper response is to 'Watch therefore,' meaning to live in a state of constant spiritual readiness. This shifts the focus from anxious long-term provision to faithful daily living.",
-          "Importance_of_Wording": "The absolute statement 'knoweth no man, no, not the angels... but my Father only' closes the door on all date-setting and speculation. The command 'Watch' (grēgoreuō) means to be vigilant, awake, and spiritually alert. It is not passive waiting, but an active state of readiness. The reason is personal: 'for ye know not what hour your Lord doth come,' making it a matter of personal relationship and accountability.",
-          "Factual_Explanation": "After giving the signs of His coming, Jesus makes it clear that these signs indicate nearness, not the exact date. He uses this unknowability to pivot to a series of parables and warnings about the necessity of constant vigilance.",
-          "Theological_Meaning": "This principle is a safeguard against two extremes: the panic and date-setting that comes from thinking one knows the day, and the spiritual apathy that comes from thinking the end is far away. God has intentionally withheld this information to develop a character of daily trust and faithfulness in His people. Our spiritual life should not be dependent on a crisis, but on a constant, living connection with God. This is the character needed to stand in the last days.",
-          "Christ_Centered_Meaning": "Our 'watching' is not a fearful scanning of the headlines, but a joyful looking for our Lord. It means keeping our eyes on Jesus, our hearts in communion with Him, and our lives busy in His service. If our focus is on our relationship with Christ today, we will always be ready for His return, no matter when it occurs. The command to 'watch' is a call to a moment-by-moment relationship with Him."
-          }
-          },
-          {
-          "id": "PR018",
-          "question": "What prophetic parable did Jesus tell to warn that the long delay before His return would test the hearts of His servants, revealing the difference between the faithful and the wicked?",
-          "options": [
-          "Matthew 24:48-51 - But and if that evil servant shall say in his heart, My lord is not coming; And shall begin to neglect his fellowservants, and to live like the worldly; The lord of that servant shall come in a day when he thinketh not... and appoint him his portion with the faithless.",
-          "Matthew 24:48-51 - But and if that evil servant shall say in his heart, My lord delayeth his coming; And shall begin to smite his fellowservants, and to eat and drink with the drunken;... The lord of that servant shall come... and appoint him his portion with the hypocrites:",
-          "Matthew 24:48-51 - But and if that careless servant shall say in his heart, My lord will not come soon; And shall begin to argue with his fellowservants, and to feast and make merry; The lord of that servant shall come in a day he is not ready... and appoint him his portion with the unprepared.",
-          "Matthew 24:48-51 - But and if that foolish servant shall say in his heart, My lord is long in coming; And shall begin to command his fellowservants, and to take his ease with the idle; The lord of that servant shall come in an hour he is not expecting... and appoint him his portion with the unrighteous."
-          ],
-          "answer": "Matthew 24:48-51 - But and if that evil servant shall say in his heart, My lord delayeth his coming;... [and misbehaves]... The lord of that servant shall come... and appoint him his portion with the hypocrites.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This parable directly explains how a long-serving person could fall away. The root of the servant's apostasy is a conclusion he reaches in his heart: 'My lord delayeth his coming.' This thought leads to a change in behavior: he becomes abusive to fellow believers ('smite his fellowservants') and joins the world in its pleasures ('eat and drink with the drunken'). This prophetic parable shows that the passage of time is a test that reveals whether one's service is based on a genuine love for the master or on a fear of imminent reward and punishment.",
-          "Importance_of_Wording": "The problem begins 'in his heart.' The specific sins that emerge—abuse of power over fellow believers and worldly indulgence—are signs of a heart that has lost its connection to the lord. The prophecy of his end is terrifying: the lord comes unexpectedly and appoints him his portion with the 'hypocrites,' showing that his long service was a sham. The phrase 'weeping and gnashing of teeth' describes the anguish of eternal loss.",
-          "Factual_Explanation": "Continuing his theme of watchfulness, Jesus tells this parable to illustrate the difference between a faithful servant and an unfaithful one. The key variable that reveals their true character is the perceived delay of the master's return.",
-          "Theological_Meaning": "This is a prophecy about the effect that the long waiting period since Christ's ascension would have on the church. Many who start well may grow weary and careless. Their love can grow cold, and their character can deteriorate if their faith is not grounded in a genuine love for Christ. It is a powerful warning against a 'professional' Christianity that maintains an outward form of service while the heart has grown distant from God. It explains how apostasy can occur even in positions of high trust.",
-          "Christ_Centered_Meaning": "The faithful servant is one whose actions are motivated by love for his lord and a genuine care for the household of faith. He is focused on his master's business regardless of when he returns. The evil servant is motivated by self-interest. The parable is a call to examine our own hearts: Are we serving Christ because we love Him and His people, or are we just going through the motions? True faithfulness is sustained by a living connection to Jesus, not by a date on a calendar."
-          }
-          },
-          {
-          "id": "PR019",
-          "question": "In the prophetic parable of the ten virgins, what single, crucial difference separated the wise from the foolish, revealing the true nature of spiritual readiness?",
-          "options": [
-          "Matthew 25:1-4 - Then shall the kingdom of heaven be likened unto ten virgins... And five of them were wise, and five were foolish. They that were foolish took their lamps, but forgot to trim the wicks: But the wise trimmed the wicks in their vessels with their lamps.",
-          "Matthew 25:1-4 - Then shall the kingdom of heaven be likened unto ten virgins... And five of them were wise, and five were foolish. They that were foolish took their lamps, and took no oil with them: But the wise took oil in their vessels with their lamps.",
-          "Matthew 25:1-4 - Then shall the kingdom of heaven be likened unto ten virgins... And five of them were wise, and five were foolish. They that were foolish took their lamps, but their lights were dim: But the wise had bright lights in their vessels with their lamps.",
-          "Matthew 25:1-4 - Then shall the kingdom of heaven be likened unto ten virgins... And five of them were wise, and five were foolish. They that were foolish took their lamps, but did not have enough: But the wise had more than enough in their vessels with their lamps."
-          ],
-          "answer": "Matthew 25:1-4 - Then shall the kingdom of heaven be likened unto ten virgins... And five of them were wise, and five were foolish. They that were foolish took their lamps, and took no oil with them: But the wise took oil in their vessels with their lamps.",
-          "category": "Prophecy",
-          "explanation": {
-          "Relevance_and_Correctness": "This parable of the Ten Virgins is the most precise answer to the question of what readiness means. Both groups of virgins look identical on the outside: they all have lamps (the Word of God), they are all waiting for the bridegroom (expecting Christ's return), and they all fall asleep (representing the church during a time of delay). The one crucial difference that separates the 'wise' from the 'foolish' is the extra 'oil in their vessels.' This oil represents the Holy Spirit, a personal, abiding relationship with God that cannot be borrowed at the last minute. This shows that readiness is an internal state of being, not just an external profession.",
-          "Importance_of_Wording": "The foolish 'took no oil with them,' while the wise took 'oil in their vessels with their lamps.' The lamp itself is not enough. The 'vessel' represents the individual character, and the 'oil' is the indwelling Spirit that keeps the light of truth burning. The foolish virgins' attempt to buy oil at the last minute shows that this preparation cannot be made in a crisis; it must be a daily experience.",
-          "Factual_Explanation": "Jesus tells this parable immediately after the parable of the faithful and evil servant to further illustrate the nature of end-time readiness. It focuses on the internal spiritual condition of those awaiting His return.",
-          "Theological_Meaning": "Many historicist interpreters have historically applied this parable to the experience of the church leading up to 1844 and see it as having a continuing application for the church awaiting the Second Coming. The 'midnight cry' ('Behold, the bridegroom cometh') represents the final proclamation that awakens the sleeping church. The parable is a solemn warning that a theoretical knowledge of the truth (the lamp) is useless without the genuine, heart-transforming power of the Holy Spirit (the oil), which is obtained through a daily surrender to God.",
-          "Christ_Centered_Meaning": "The oil, representing the Holy Spirit, is a gift purchased for us by Christ. He is the one who baptizes us with the Holy Ghost (Matthew 3:11). Our part is to empty our vessels (our hearts) of self and sin and to ask for this divine gift. The readiness of the wise virgins comes from a constant dependence on Christ for the supply of His Spirit. The tragedy of the foolish virgins is that they were content with the theory of religion without the life-giving relationship with Christ Himself."
-          }
-          },
-        {
-          "id": "PR020",
-          "question": "In Jesus's prophecy of the final judgment, what is the King's solemn declaration that identifies selfless service to the needy as direct service to Himself?",
-          "options": [
-            "Matthew 25:40 - And the King shall answer and say unto them, Verily I say unto you, Inasmuch as ye have preached to one of the least of these my brethren, ye have preached unto me.",
-            "Matthew 25:40 - And the King shall answer and say unto them, Verily I say unto you, Inasmuch as ye have prayed for one of the least of these my brethren, ye have prayed unto me.",
-            "Matthew 25:40 - And the King shall answer and say unto them, Verily I say unto you, Inasmuch as ye have done it unto one of the least of these my brethren, ye have done it unto me.",
-            "Matthew 25:40 - And the King shall answer and say unto them, Verily I say unto you, Inasmuch as ye have given unto the greatest of these my brethren, ye have given unto me."
-          ],
-          "answer": "Matthew 25:40 - And the King shall answer and say unto them, Verily I say unto you, Inasmuch as ye have done it unto one of the least of these my brethren, ye have done it unto me.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse provides the profound, guiding principle for any church's mission. In this prophecy of the final judgment, Jesus reveals the criterion for separation: practical acts of love shown to the needy. The stunning revelation is that He personally identifies with the hungry, the thirsty, the stranger, the naked, and the prisoner. This teaches the church that their service to the 'least of these' is not just social work, but is a direct act of service and worship to the King Himself, giving their outreach profound, eternal significance.",
-            "Importance_of_Wording": "The phrase 'Inasmuch as' creates a direct equivalence. The term 'the least of these my brethren' refers to the most humble, overlooked, and needy people, both within and outside the church. The declaration 'ye have done it unto me' is the central point of the parable. It elevates simple acts of kindness—giving a cup of water, a piece of bread, a word of comfort—into acts of ultimate spiritual significance.",
-            "Factual_Explanation": "This is the climax of Jesus's final parable in the Olivet Discourse. After describing the surprise of both the righteous and the wicked at the basis of their judgment, the King (Jesus) gives this principle as the eternal standard. The judgment is based on the practical fruits of a faith that works by love.",
-            "Theological_Meaning": "This prophecy reveals that our professed faith will be judged by our practical compassion. It is a powerful rebuke to a dead orthodoxy that has correct beliefs but lacks love. For many historicist interpreters, this is linked to the concept of 'pure religion' in James 1:27. In the final judgment, how we have treated the suffering and marginalized will be revealed as the truest indicator of our relationship with God. Our actions toward others reveal our true character and whether we have been transformed by the grace we claim to believe.",
-            "Christ_Centered_Meaning": "Christ, who left the glory of heaven to become one of 'the least of these,' completely identifies with suffering humanity. He sees every act of kindness done to the needy as done to Himself, and every act of neglect as a neglect of Himself. This principle gives infinite value to Christian service. When we minister to others, we are literally ministering to Jesus. This makes our service not a burden, but the highest privilege."
-          }
-        },
-        {
-          "id": "PR021",
-          "question": "When Judas Iscariot conspired with the chief priests, what specific price was agreed upon for the betrayal of Jesus, fulfilling a prophecy from Zechariah?",
-          "options": [
-            "Matthew 26:15 - And said unto them, What will ye give me, and I will deliver him unto you? And they covenanted with him for forty pieces of silver.",
-            "Matthew 26:15 - And said unto them, What will ye give me, and I will deliver him unto you? And they covenanted with him for a hundred pieces of silver.",
-            "Matthew 26:15 - And said unto them, What will ye give me, and I will deliver him unto you? And they covenanted with him for thirty pieces of silver.",
-            "Matthew 26:15 - And said unto them, What will ye give me, and I will deliver him unto you? And they covenanted with him for twenty pieces of silver."
-          ],
-          "answer": "Matthew 26:15 - And said unto them, What will ye give me, and I will deliver him unto you? And they covenanted with him for thirty pieces of silver.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse directly recounts the fulfillment of the prophecy being studied. The bargaining question from Judas ('What will ye give me?') and the specific agreement ('they covenanted with him for thirty pieces of silver') set the stage for one of the most precise fulfillments of Old Testament prophecy in the passion narrative.",
-            "Importance_of_Wording": "The phrase 'they covenanted with him' shows this was a formal, agreed-upon transaction. The amount, 'thirty pieces of silver,' is not arbitrary. It was the specific price of a gored slave according to the Law of Moses (Exodus 21:32), showing the contemptible value the religious leaders placed upon the Son of God. This specific amount is the key to the prophetic fulfillment.",
-            "Factual_Explanation": "This price, thirty pieces of silver, is a direct fulfillment of the prophecy in Zechariah 11:12-13, where the prophet, representing God's rejected shepherd, asks for his wages and is insultingly valued at 'thirty pieces of silver,' which he is then told to cast 'to the potter.' The connection is made even more explicit when the blood money is later used to buy the 'potter's field' (Matthew 27:7).",
-            "Theological_Meaning": "The fulfillment of this prophecy demonstrates God's sovereignty over events, even in the midst of human betrayal and wickedness. It shows that the passion of Christ was not a series of random, tragic events, but the unfolding of a divine plan foretold long before. It also reveals the depths of human sin and the low value placed on the divine Shepherd by those He came to save.",
-            "Christ_Centered_Meaning": "Christ, the Good Shepherd, was valued at the price of a slave. This demonstrates the depth of His humiliation. He willingly allowed Himself to be sold for this insulting price to purchase our freedom. The blood money, used to buy a burial place for strangers (the potter's field), becomes a symbol of how His betrayal and death ultimately provide a place of rest and hope for the 'strangers' and outcasts of this world."
-          }
-        },
-        {
-          "id": "PR022",
-          "question": "On the night He was betrayed, what prophecy from Zechariah did Jesus quote to foretell that all His disciples would abandon Him when He, their Shepherd, was arrested?",
-          "options": [
-            "Matthew 26:31 - Then saith Jesus unto them, All ye shall be offended because of me this night: for it is written, I will hide the shepherd, and the sheep of the flock shall be protected from the wolves.",
-            "Matthew 26:31 - Then saith Jesus unto them, All ye shall be offended because of me this night: for it is written, I will call the shepherd, and the sheep of the flock shall be gathered together.",
-            "Matthew 26:31 - Then saith Jesus unto them, All ye shall be offended because of me this night: for it is written, I will smite the shepherd, and the sheep of the flock shall be scattered abroad.",
-            "Matthew 26:31 - Then saith Jesus unto them, All ye shall be offended because of me this night: for it is written, I will spare the shepherd, and the sheep of the flock shall be kept safe from harm."
-          ],
-          "answer": "Matthew 26:31 - Then saith Jesus unto them, All ye shall be offended because of me this night: for it is written, I will smite the shepherd, and the sheep of the flock shall be scattered abroad.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is the direct answer. Jesus doesn't just predict the disciples' failure; He grounds His prediction in Old Testament scripture ('for it is written'). He prophesies that 'All ye shall be offended' (stumble and fall away) and cites Zechariah 13:7 as the reason. This shows that the disciples' failure, while tragic, was a foreseen part of God's redemptive plan.",
-            "Importance_of_Wording": "The word 'offended' (skandalisthēsesthe) means to be tripped up or to fall into a trap—it describes a catastrophic failure of faith. The prophecy itself—'I will smite the shepherd'—is crucial. It shows that the central event is the attack on the Shepherd (Christ), and the scattering of the sheep (the disciples) is the direct result. This takes some of the focus off the disciples' weakness and places it on the cosmic significance of the attack on their leader.",
-            "Factual_Explanation": "On the way to the Garden of Gethsemane, Jesus prepared His disciples for their impending failure by quoting the prophecy from Zechariah 13:7. His foreknowledge of their desertion demonstrates His divinity and His understanding of the painful path that lay just ahead.",
-            "Theological_Meaning": "This event is a powerful lesson on the weakness of human nature, even among those closest to Jesus. It shows that without a constant connection to the Shepherd, the sheep are helpless and prone to scattering. It also reveals that God can incorporate even human failure into His sovereign plan. The disciples' scattering and subsequent restoration became a powerful testimony to the grace of God.",
-            "Christ_Centered_Meaning": "The prophecy is profoundly Christ-centered. The Shepherd is 'smitten' so that the sheep might ultimately be saved. Christ willingly went into the crisis alone, bearing the full force of the attack so that His disciples, though temporarily scattered, would not be destroyed. His promise to 'go before you into Galilee' after His resurrection (v. 32) is a promise that He, the Good Shepherd, would seek out His scattered sheep and gather them once again."
-          }
-        },
-        {
-          "id": "PR023",
-          "question": "During his trial before Pontius Pilate, how did Jesus fulfill the prophecy of Isaiah 53 regarding His response to His accusers?",
-          "options": [
-            "Matthew 27:12, 14 - And when he was accused of the chief priests and elders, he answered boldly... And he answered him with a single word; insomuch that the governor marvelled greatly.",
-            "Matthew 27:12, 14 - And when he was accused of the chief priests and elders, he answered wisely... And he answered him with a question; insomuch that the governor marvelled greatly.",
-            "Matthew 27:12, 14 - And when he was accused of the chief priests and elders, he answered meekly... And he answered him with a gentle word; insomuch that the governor marvelled greatly.",
-            "Matthew 27:12, 14 - And when he was accused of the chief priests and elders, he answered nothing... And he answered him to never a word; insomuch that the governor marvelled greatly."
-          ],
-          "answer": "Matthew 27:12, 14 - And when he was accused of the chief priests and elders, he answered nothing... And he answered him to never a word; insomuch that the governor marvelled greatly.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This combination of verses provides the clearest answer to the question. Matthew highlights Jesus's silence in two separate instances during His trial before Pilate. First, before the religious leaders, and second, before the governor himself. This repeated emphasis on His silence ('he answered nothing... he answered him to never a word') shows it was a deliberate choice, fulfilling a specific prophetic role.",
-            "Importance_of_Wording": "The phrase 'he answered nothing' is a stark statement of inaction in a context where every accused person would be fighting for their life. Pilate's own amazement ('the governor marvelled greatly') underscores how unnatural and stunning this silence was. It was not the silence of guilt or fear, but the silence of majestic, willed submission.",
-            "Factual_Explanation": "Throughout His trials, Jesus spoke very little, and only to bear witness to the truth of His identity and kingdom (e.g., 'Thou sayest'). But in the face of the specific, false accusations, He remained silent. This was a direct fulfillment of the prophecy in Isaiah 53:7: 'He was oppressed, and he was afflicted, yet he opened not his mouth: he is brought as a lamb to the slaughter, and as a sheep before her shearers is dumb, so he openeth not his mouth.'",
-            "Theological_Meaning": "Jesus's silence was a demonstration of His complete trust in His Father's will. He was not trying to save Himself; He was committed to the plan of saving humanity. His silence was also a form of judgment on His accusers; their charges were so baseless and their hearts so closed that a defense would have been pointless. He had already given them all the evidence they needed.",
-            "Christ_Centered_Meaning": "As the Lamb of God, Jesus fulfilled the type of the sacrificial lamb that was silent before its shearers. He took upon Himself our guilt, and so He bore the accusations in silence. He could have summoned legions of angels with a word, but instead, He answered 'to never a word' so that we, the guilty, could have a plea before the throne of God. His silence purchased our right to speak and be heard by the Father."
-          }
-        },
-        {
-          "id": "PR024",
-          "question": "At the crucifixion, what action did the Roman soldiers take with Jesus's clothing that literally fulfilled the prophecy of Psalm 22:18?",
-          "options": [
-            "Mark 15:24 - And when they had crucified him, they parted his garments, casting lots upon them, what every man should take.",
-            "Mark 15:24 - And when they had crucified him, they burned his garments, scattering the ashes, what every man should take.",
-            "Mark 15:24 - And when they had crucified him, they tore his garments, giving a piece of them, what every man should take.",
-            "Mark 15:24 - And when they had crucified him, they sold his garments, dividing the money, what every man should take."
-          ],
-          "answer": "Mark 15:24 - And when they had crucified him, they parted his garments, casting lots upon them, what every man should take.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse describes the specific action that fulfilled the prophecy. The soldiers, oblivious to the significance of their actions, divided up the clothing of the executed man as was their custom. Mark records that they 'parted his garments, casting lots' for them, an act that directly corresponds to an ancient prophecy.",
-            "Importance_of_Wording": "The verse mentions two distinct actions: 'parted his garments' and 'casting lots upon them.' This is important because the prophecy itself has two parts. John's gospel clarifies that they divided his outer garments into four parts but cast lots for his seamless inner tunic (John 19:23-24). Mark's summary captures the essence of the prophetic fulfillment.",
-            "Factual_Explanation": "This action by the Roman soldiers is a direct and literal fulfillment of the prophecy in Psalm 22:18: 'They part my garments among them, and cast lots upon my vesture.' These soldiers, acting out of greed and custom, unwittingly played their part in fulfilling God's ordained script for the Messiah's suffering.",
-            "Theological_Meaning": "The fulfillment of such a minute, specific detail demonstrates the divine inspiration of Scripture and God's absolute sovereignty over history. It shows that the crucifixion was not a tragedy that spun out of control, but an event foreknown and described by God. This builds faith that God's promises of future deliverance are just as certain as His prophecies of past events.",
-            "Christ_Centered_Meaning": "Christ was stripped of everything—His dignity, His friends, and finally His very clothes—leaving Him naked and shamed upon the cross. He endured this ultimate humiliation to provide us with the robe of His own perfect righteousness. He who was stripped bare now clothes His people in garments of salvation and priestly honor, so that we will not be found naked in the day of judgment."
-          }
-        },
-        {
-          "id": "PR025",
-          "question": "What prophetic cry did Jesus utter from the cross, quoting the opening of Psalm 22 to express the agony of being forsaken by God as He bore the sins of the world?",
-          "options": [
-            "Matthew 27:46 - And about the ninth hour Jesus cried with a loud voice, saying, Father, Father, into thy hands I commend my spirit?",
-            "Matthew 27:46 - And about the ninth hour Jesus cried with a loud voice, saying, My soul, my soul, why art thou so disquieted within me?",
-            "Matthew 27:46 - And about the ninth hour Jesus cried with a loud voice, saying, Eli, Eli, lama sabachthani? that is to say, My God, my God, why hast thou forsaken me?",
-            "Matthew 27:46 - And about the ninth hour Jesus cried with a loud voice, saying, It is finished, it is finished, my work on earth is done?"
-          ],
-          "answer": "Matthew 27:46 - And about the ninth hour Jesus cried with a loud voice, saying, Eli, Eli, lama sabachthani? that is to say, My God, my God, why hast thou forsaken me?",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is the direct answer. It is the prophetic cry that expresses the central mystery of the atonement. Jesus is quoting the opening line of Psalm 22, a Messianic psalm that details the suffering of the crucifixion. By speaking these words, Jesus was identifying Himself as the prophesied sufferer and was experiencing the ultimate horror of sin: separation from the presence of God.",
-            "Importance_of_Wording": "Matthew provides both the Aramaic phrase, 'Eli, Eli, lama sabachthani?', and the translation, 'My God, my God, why hast thou forsaken me?' This emphasizes the reality and agony of the moment. The cry begins with 'My God, my God,' showing that even in this ultimate darkness, His faith in His relationship with the Father did not completely fail. It is a cry of questioning anguish, not of final despair.",
-            "Factual_Explanation": "This cry from the cross is the climax of Christ's suffering. As the sins of the world were laid upon Him, the Father's presence was withdrawn, a separation He had never known. This mental and spiritual agony was a far greater suffering than the physical pain of the cross. By quoting Psalm 22:1, He was signaling the fulfillment of this entire prophetic chapter.",
-            "Theological_Meaning": "This is the heart of the atonement. For sin to be punished, the sinner must be separated from God, the source of life. Christ, our substitute, took upon Himself that separation. He experienced the 'second death'—death in a state of separation from God—on behalf of every human being. He was forsaken so that we would never have to be.",
-            "Christ_Centered_Meaning": "The entire psalm that Jesus quotes begins with this cry of dereliction but ends in a triumphant proclamation of deliverance and praise (Psalm 22:22-31). By quoting the first line, Jesus was likely encompassing the meaning of the entire psalm in His mind. He was expressing His current agony while holding onto the prophetic promise of future victory and the salvation of a people who would declare His righteousness. He endured the forsaking to bring about the final triumph."
-          }
-        },
-        {
-          "id": "PR026",
-          "question": "What is the final prophetic command of the resurrected Christ in Matthew's gospel, which serves as the mission statement for His church until the end of time?",
-          "options": [
-            "Matthew 28:19-20 - Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost: Teaching them to observe all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen.",
-            "Matthew 28:19-20 - Go ye therefore, and heal the sick in all nations, anointing them in the name of the Father, and of the Son, and of the Holy Ghost: Comforting them in all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen.",
-            "Matthew 28:19-20 - Go ye therefore, and build churches in all nations, dedicating them in the name of the Father, and of the Son, and of the Holy Ghost: Establishing them in all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen.",
-            "Matthew 28:19-20 - Go ye therefore, and judge all nations, rebuking them in the name of the Father, and of the Son, and of the Holy Ghost: Correcting them in all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen."
-          ],
-          "answer": "Matthew 28:19-20 - Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost: Teaching them to observe all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This passage is the church's ultimate mission statement, directly from Jesus. It is prophetic because it outlines the entire scope of the church's work ('teach all nations') and provides the divine promise that guarantees its success ('lo, I am with you alway'). It moves the church from a small group of disciples in Galilee to a global movement, prophesying what they, empowered by Him, would become.",
-            "Importance_of_Wording": "The command is multi-faceted: 'Go,' 'teach' (make disciples), 'baptizing,' and 'teaching them to observe.' It's a comprehensive process. The scope is universal: 'all nations.' The authority is Trinitarian: 'in the name of the Father, and of the Son, and of the Holy Ghost.' The concluding promise, 'I am with you alway, even unto the end of the world,' is the prophetic guarantee that makes the fulfillment of the command possible.",
-            "Factual_Explanation": "These are the final recorded words of Jesus in the Gospel of Matthew. Given after His resurrection, they constitute the marching orders for His church throughout all subsequent history.",
-            "Theological_Meaning": "This commission is the fulfillment of the promise made to Abraham that in him 'all families of the earth shall be blessed' (Genesis 12:3). It is the means by which the prophecy of Matthew 24:14 ('this gospel of the kingdom shall be preached in all the world') will be accomplished. The church's mission is not optional; it is the very reason for its existence during the time between Christ's ascension and His return.",
-            "Christ_Centered_Meaning": "The commission is bookended by Christ. It begins with His statement of authority ('All power is given unto me') and ends with His promise of presence ('I am with you alway'). Our ability to fulfill this great task is based not on our own strength or resources, but entirely on the power and presence of the risen Christ. The mission is His, the power is His, and the glory will be His."
-          }
-        },
-        {
-          "id": "PR027",
-          "question": "What prophetic promise did Jesus give in Mark's gospel, listing the supernatural signs that would confirm the word preached by true believers?",
-          "options": [
-            "Mark 16:17-18 - And these signs shall follow them that believe; In my name shall they give to the poor; they shall love their enemies; They shall visit the prisoner; and if they see any sick, it shall not hurt them; they shall lay hands on the needy, and they shall be blessed.",
-            "Mark 16:17-18 - And these signs shall follow them that believe; In my name shall they argue with devils; they shall speak with great wisdom; They shall interpret dreams; and if they drink any strong drink, it shall not hurt them; they shall lay hands on the proud, and they shall be humbled.",
-            "Mark 16:17-18 - And these signs shall follow them that believe; In my name shall they cast out devils; they shall speak with new tongues; They shall take up serpents; and if they drink any deadly thing, it shall not hurt them; they shall lay hands on the sick, and they shall recover.",
-            "Mark 16:17-18 - And these signs shall follow them that believe; In my name shall they build great churches; they shall speak with many parables; They shall take up gold and silver; and if they have any enemies, they shall not be hurt; they shall lay hands on the kings, and they shall be converted."
-          ],
-          "answer": "Mark 16:17-18 - And these signs shall follow them that believe; In my name shall they cast out devils; they shall speak with new tongues; They shall take up serpents; and if they drink any deadly thing, it shall not hurt them; they shall lay hands on the sick, and they shall recover.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This passage is a prophecy from Jesus about the supernatural power that would accompany the preaching of the gospel. However, it's crucial to note that the text says these signs 'follow them that believe'; the signs are not the primary goal but a confirmation of the Word. This provides a framework for testing claims: true signs confirm the preached Word; they do not replace it or contradict it.",
-            "Importance_of_Wording": "The signs are varied, including power over demons, new tongues (the ability to preach the gospel in other languages, as at Pentecost), divine protection, and healing. The key phrase is 'In my name,' indicating that the power is not inherent in the believer but is derived from Christ. The purpose of these signs is given in verse 20: 'confirming the word,' which is the ultimate test.",
-            "Factual_Explanation": "These verses, found in the longer ending of Mark, are part of Jesus's Great Commission instructions in that gospel. They prophesy the miraculous expansion of the early church, and many of these signs are demonstrated in the book of Acts (e.g., Paul and the serpent in Acts 28).",
-            "Theological_Meaning": "Many historicist interpreters believe that the gifts of the Spirit, including miraculous signs, are for the church in all ages. However, they also strongly emphasize Jesus's warning about false prophets showing 'great signs and wonders' (Matthew 24:24). Therefore, any modern claim of miracles must be tested by the Word of God. If a miracle worker teaches things contrary to the Bible, the miracle is a counterfeit, a 'lying wonder' (2 Thessalonians 2:9) designed to deceive.",
-            "Christ_Centered_Meaning": "The power to perform these signs comes solely from Christ. They are manifestations of the power of His resurrection and His victory over Satan. Their purpose is never to glorify a human instrument, but to glorify God and to confirm the truth of the gospel of Jesus Christ. Any sign or wonder that draws attention to a person rather than to Christ and His written Word is to be regarded with suspicion."
-          }
-        },
-        {
-          "id": "PR028",
-          "question": "What was Jesus's explicit and detailed prophecy to Peter, given in response to his boast of loyalty, which foretold the precise nature of his denial?",
-          "options": [
-            "Mark 14:30 - And Jesus saith unto him, Verily I say unto thee, That this day, even in this night, before the cock crow twice, thou shalt deny me thrice.",
-            "Mark 14:30 - And Jesus saith unto him, Verily I say unto thee, That this day, even in this night, before the sun shall rise, thou shalt deny me once.",
-            "Mark 14:30 - And Jesus saith unto him, Verily I say unto thee, That tomorrow, when the cock shall crow, thou shalt deny me twice.",
-            "Mark 14:30 - And Jesus saith unto him, Verily I say unto thee, That this day, even in this night, after the cock crow once, thou shalt deny me twice."
-          ],
-          "answer": "Mark 14:30 - And Jesus saith unto him, Verily I say unto thee, That this day, even in this night, before the cock crow twice, thou shalt deny me thrice.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is the direct, personal prophecy that is stunningly specific: it gives the timeframe ('this day, even in this night'), the signal ('before the cock crow twice'), and the precise number of failures ('thou shalt deny me thrice'). This detailed foreknowledge serves as an irrefutable sign to Peter later, breaking his heart and leading to true repentance.",
-            "Importance_of_Wording": "Mark's account is uniquely detailed with the 'twice' crowing of the rooster. The word 'Verily' (Amen) signifies a solemn, certain declaration. The specificity of 'thrice' shows the depth of Peter's impending failure. This prophecy was not a vague warning, but a precise statement of fact, designed to show Peter that Jesus knew him better than he knew himself.",
-            "Factual_Explanation": "In response to Peter's boastful claim of loyalty, Jesus gives this humbling and precise prophecy. Peter's vehement denial of this possibility only highlights the depth of his self-confidence and his need to learn utter dependence on Christ.",
-            "Theological_Meaning": "This event is a powerful lesson on the danger of self-reliance. Peter was sincere, but he was trusting in his own love for Jesus, not in Jesus's power to keep him. The prophecy's fulfillment was necessary to break Peter's pride and transform him from a self-confident boaster into a humble, Spirit-filled leader who would strengthen his brethren (Luke 22:32).",
-            "Christ_Centered_Meaning": "Jesus's prophecy was not given to condemn Peter, but to save him. It was a severe mercy, an instrument to bring about repentance. The look of love that Jesus gave Peter after the third denial (Luke 22:61) was the look of a Savior who had already made provision for his failure and restoration. Christ's foreknowledge is used not to predestine us to fail, but to prepare us for His grace when we do."
-          }
-        },
-        {
-          "id": "PR029",
-          "question": "At Jesus's trial, what accusation did the false witnesses bring against him, twisting an earlier prophecy He had made about His own death and resurrection?",
-          "options": [
-            "Mark 14:58 - We heard him say, I will destroy this temple that is made with hands, and within three days I will build another made without hands.",
-            "Mark 14:58 - We heard him say, Ye will destroy this temple that is made with hands, and within forty days I will build another made without hands.",
-            "Mark 14:58 - We heard him say, God will destroy this temple that is made with hands, and within three years I will build another made without hands.",
-            "Mark 14:58 - We heard him say, I will destroy this city that is made with hands, and within three days I will build another made without hands."
-          ],
-          "answer": "Mark 14:58 - We heard him say, I will destroy this temple that is made with hands, and within three days I will build another made without hands.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse recounts the testimony of the false witnesses, who twist Jesus's words. While their testimony was false (He didn't say 'I will destroy'), it points back to the original prophecy. The core elements they get right—a destroyed temple and a new one built in three days—are the keys. This shows how a central prophecy of His death and resurrection was misunderstood by His enemies and used as a tool of accusation.",
-            "Importance_of_Wording": "The false witnesses add the phrase 'made with hands' and 'made without hands,' trying to frame Jesus as being against the physical temple. The original statement, recorded in John 2:19, was 'Destroy this temple, and in three days I will raise it up.' He was speaking of the 'temple of his body.' The misunderstanding, and the twisting of His words, was itself a fulfillment of the prophecies of His rejection.",
-            "Factual_Explanation": "Early in His ministry, Jesus cleansed the temple and, when asked for a sign of His authority, gave this cryptic prophecy. His enemies remembered it, and the false witnesses at His trial distorted it to make a capital charge. The disciples themselves only understood its true meaning after His resurrection (John 2:22).",
-            "Theological_Meaning": "This prophecy signifies the replacement of the earthly temple system with a new, spiritual reality. The physical temple and its sacrifices were made obsolete by Christ's death. The 'temple made without hands' is His resurrected body, and by extension, the Christian church, which is His body on earth (1 Corinthians 3:16).",
-            "Christ_Centered_Meaning": "This is one of Jesus's most profound and central prophecies about Himself. He prophesied that His enemies would 'destroy' the temple of His body, but that He had the divine power to 'raise it up' in three days. The resurrection is the ultimate sign of His Messiahship and His victory over death. It is the foundation of the Christian faith. The fact that His enemies remembered this prophecy, even in a distorted form, shows the impact it had and the centrality of the resurrection to His entire ministry."
-          }
-        },
-        {
-          "id": "PR030",
-          "question": "When Jesus entered Jerusalem, what prophecy did He fulfill that identified Him not as a conquering general on a warhorse, but as a meek and peaceful King?",
-          "options": [
-            "Matthew 21:5 - Tell ye the daughter of Sion, Behold, thy King cometh unto thee, mighty, and sitting upon a horse, and a stallion the foal of a mare.",
-            "Matthew 21:5 - Tell ye the daughter of Sion, Behold, thy Priest cometh unto thee, holy, and sitting upon an ass, and a colt the foal of an ass.",
-            "Matthew 21:5 - Tell ye the daughter of Sion, Behold, thy King cometh unto thee, meek, and sitting upon an ass, and a colt the foal of an ass.",
-            "Matthew 21:5 - Tell ye the daughter of Sion, Behold, thy Judge cometh unto thee, righteous, and sitting upon a mule, and a foal the offspring of a mule."
-          ],
-          "answer": "Matthew 21:5 - Tell ye the daughter of Sion, Behold, thy King cometh unto thee, meek, and sitting upon an ass, and a colt the foal of an ass.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Matthew explicitly quotes the prophecy from Zechariah 9:9 to explain the significance of Jesus's actions. It shows that His choice of animal was not random but was a deliberate prophetic statement. He was presenting Himself as the prophesied King, but the prophecy itself defines His character: He is 'meek' and comes on a donkey, the animal of peace, not on a warhorse, the symbol of a conquering general. This refutes the idea that He was a political revolutionary in the typical sense.",
-            "Importance_of_Wording": "The declaration 'Behold, thy King cometh unto thee' is a formal presentation of the Messiah. The key descriptor is 'meek,' which defines the nature of His kingdom as spiritual, not military. Riding on a 'colt the foal of an ass' upon which no one had ever sat (Mark 11:2) also signified the sacredness of the occasion.",
-            "Factual_Explanation": "As Jesus prepared to enter Jerusalem for the final time, He gave His disciples specific instructions to procure a donkey and her colt. Matthew states plainly that this was a direct fulfillment of Zechariah's prophecy, confirming Jesus's Messianic claim while simultaneously defining the peaceful nature of His kingship.",
-            "Theological_Meaning": "This event was Jesus's formal presentation to the nation of Israel as their long-awaited King. The nation was placed on probation. Their choice to accept or reject Him during this final week would seal their destiny. The crowd's shouts of 'Hosanna' (meaning 'Save, we pray!') showed a temporary acceptance, but their desire was for a political savior, not the meek and lowly King of the prophecy.",
-            "Christ_Centered_Meaning": "Christ presented Himself as King, but His kingdom is not of this world. His weapons are not swords and spears, but truth and love. He comes to conquer hearts, not territories. The Triumphal Entry is a beautiful picture of His first advent—He came in humility and peace. This contrasts sharply with the prophecy of His second advent, when He will return on a white horse as King of kings and Lord of lords, the conquering general, to execute judgment (Revelation 19:11-16)."
-          }
-        },
-        {
-          "id": "PR031",
-          "question": "In the Parable of the Sower, what prophecy describes the spiritual failure of those who hear the word but allow worldly cares and the love of money to make them unfruitful?",
-          "options": [
-            "Matthew 13:22 - He also that received seed among the thorns is he that heareth the word; and the care of this world, and the deceitfulness of riches, choke the word, and he becometh unfruitful.",
-            "Matthew 13:22 - He also that received seed on stony ground is he that heareth the word; and anon with joy receiveth it; Yet hath he not root in himself, and dureth for a while: for when tribulation or persecution ariseth because of the word, by and by he is offended.",
-            "Matthew 13:22 - He also that received seed by the way side is he that heareth the word; and then cometh the wicked one, and catcheth away that which was sown in his heart.",
-            "Matthew 13:22 - He also that received seed among the thorns is he that heareth the word; and the fear of this world, and the desire for power, choke the word, and he becometh unfruitful."
-          ],
-          "answer": "Matthew 13:22 - He also that received seed among the thorns is he that heareth the word; and the care of this world, and the deceitfulness of riches, choke the word, and he becometh unfruitful.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is the direct answer. It describes the third category of hearers in Jesus's prophetic parable. These people hear and accept the word, but their spiritual growth is stunted and ultimately made 'unfruitful' by two specific competing powers: 'the care of this world' and 'the deceitfulness of riches.' This is a prophetic warning about the danger of a divided heart that is particularly relevant in an affluent, busy society.",
-            "Importance_of_Wording": "The key verb is 'choke,' which vividly pictures the life of the gospel being squeezed out. The two 'thorns' are precisely identified. 'The care of this world' refers to the anxieties and distractions of everyday life. 'The deceitfulness of riches' refers to the false promise that wealth brings security and happiness. The end result is not immediate rejection, but becoming 'unfruitful,' which is a state of spiritual uselessness.",
-            "Factual_Explanation": "In the Parable of the Sower, Jesus outlines four different responses to the preaching of the 'word of the kingdom.' He Himself gives the detailed interpretation to His disciples, explaining that the different soils represent different heart conditions.",
-            "Theological_Meaning": "This parable is a prophecy of the reception of the gospel in every age. It predicts that many will hear, but not all will be saved. It serves as a diagnostic tool for self-examination. It is especially a prophecy for the last days, when the cares of the world and the love of money are predicted to be dominant forces, choking out the spiritual life of many within the church. It is a call to ruthlessly uproot the 'thorns' from the soil of our hearts.",
-            "Christ_Centered_Meaning": "Christ is the Sower, and the 'word of the kingdom' is the gospel about Him. The only way to become 'good ground' is to surrender our hearts completely to Him. He is the one who can break up the hard-packed soil, remove the stones of selfishness, and uproot the thorns of worldliness. A fruitful life is not the result of our own efforts, but the result of abiding in Him, the true vine (John 15:5)."
-          }
-        },
-        {
-          "id": "PR032",
-          "question": "How did the Apostle Peter describe the Transfiguration, confirming it was not a myth, but a prophetic eyewitness account of Christ's majestic power and future coming?",
-          "options": [
-            "2 Peter 1:16-18 - For we have followed our own reasoning, when we made known unto you the power and coming of our Lord Jesus Christ, but were eyewitnesses of his majesty... when we were with him in the holy mount.",
-            "2 Peter 1:16-18 - For we have not followed cunningly devised fables, when we made known unto you the power and coming of our Lord Jesus Christ, but were eyewitnesses of his majesty... when we were with him in the holy mount.",
-            "2 Peter 1:16-18 - For we have not followed ancient traditions, when we made known unto you the power and coming of our Lord Jesus Christ, but were dreamers of his majesty... when we slept near him in the holy mount.",
-            "2 Peter 1:16-18 - For we have not followed the words of the prophets, when we made known unto you the power and coming of our Lord Jesus Christ, but were eyewitnesses of his majesty... when we were with him in the holy mount."
-          ],
-          "answer": "2 Peter 1:16-18 - For we have not followed cunningly devised fables, when we made known unto you the power and coming of our Lord Jesus Christ, but were eyewitnesses of his majesty... when we were with him in the holy mount.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "While this verse is from 2 Peter, it is the inspired commentary on the prophetic meaning of the Transfiguration recorded in Matthew 17 and Mark 9. Peter explicitly states that the event was not a 'fable' but a real preview of Christ's 'power and coming.' He calls himself an 'eyewitness of his majesty.' This confirms that the apostles understood the Transfiguration as a prophetic vision of the future kingdom of glory.",
-            "Importance_of_Wording": "Peter connects the event directly to the 'power and coming (parousia) of our Lord Jesus Christ.' The word 'majesty' points to Christ's royal, divine glory. By referencing the voice from the 'excellent glory' and the location ('the holy mount'), Peter firmly grounds this prophetic understanding in the historical event. His conclusion is that this experience makes the 'word of prophecy' even more certain (v. 19).",
-            "Factual_Explanation": "The Transfiguration, recorded in Matthew 17 and Mark 9, was a literal event where Jesus's divine glory was revealed to Peter, James, and John. He appeared with Moses (representing those who die in Christ and are resurrected) and Elijah (representing those who are alive at the Second Coming and are translated). The event was a miniature model of the Second Coming.",
-            "Theological_Meaning": "The Transfiguration was given to the disciples to strengthen their faith for the trial of the crucifixion. They had seen His glory and heard the Father's testimony, which would sustain them through the darkness ahead. For the church today, it stands as a prophetic promise of the reality and glory of the Second Coming. It shows the future state of the redeemed—some resurrected, some translated, all glorified with Christ.",
-            "Christ_Centered_Meaning": "The focus of the event is Christ's divine glory. The Father's command, 'hear ye him,' establishes Christ's supreme authority over the law (represented by Moses) and the prophets (represented by Elijah). He is the fulfillment of all that they pointed to. The Transfiguration is a glimpse of the glory Christ had with the Father before the world began, a glory He set aside to become human, and a glory that will be fully revealed to all at His return."
-          }
-        },
-        {
-          "id": "PR033",
-          "question": "What prophecy did Jesus give in the Parable of the Wicked Husbandmen to foretell the transfer of spiritual privilege from the unfaithful leaders of Israel to a new body of believers?",
-          "options": [
-            "Matthew 21:43 - Therefore say I unto you, The kingdom of God shall be taken from you, and given to a nation bringing forth the fruits thereof.",
-            "Matthew 21:43 - Therefore say I unto you, The kingdom of God shall be destroyed with you, and given to the angels for the fruits thereof.",
-            "Matthew 21:43 - Therefore say I unto you, The kingdom of God shall remain with you, and also given to a nation bringing forth the fruits thereof.",
-            "Matthew 21:43 - Therefore say I unto you, The kingdom of God shall be taken from you, and there shall be no nation bringing forth the fruits thereof."
-          ],
-          "answer": "Matthew 21:43 - Therefore say I unto you, The kingdom of God shall be taken from you, and given to a nation bringing forth the fruits thereof.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is the direct prophetic pronouncement from Jesus that explains the consequence of the religious leaders' rejection. The 'kingdom of God'—the privilege of being God's chosen representative on earth—would be 'taken from' the national leadership of Israel. However, it was not destroyed, but 'given to a nation bringing forth the fruits thereof.' This new 'nation' is not a political entity, but the international Christian church, comprised of Jews and Gentiles who accept the Son.",
-            "Importance_of_Wording": "The term 'kingdom of God' refers to the sphere of God's rule and the special covenant privilege. 'Taken from you' is a direct judgment on the unfaithful husbandmen (the religious leaders). 'Given to a nation' is the transfer of this privilege. The key qualifier is 'bringing forth the fruits thereof.' The privilege is conditional on faithfulness, not on ethnicity.",
-            "Factual_Explanation": "Jesus told this parable in the temple during the last week of His life, directing it at the chief priests and Pharisees. The vineyard is Israel, the owner is God, the husbandmen are the religious leaders, the servants are the prophets, and the son is Christ Himself. The parable prophesied their plot to kill Him and the resulting forfeiture of their national stewardship.",
-            "Theological_Meaning": "This does not mean God is 'finished with the Jewish people.' It means the special status of national Israel as the sole trustee of God's truth was transferred to the Christian church, a spiritual nation (1 Peter 2:9). Individual Jews, like all people, can be saved by accepting the Son who was rejected by the husbandmen. The church is now the 'vineyard,' and it is also held accountable for 'bringing forth the fruits thereof.'",
-            "Christ_Centered_Meaning": "The entire parable hinges on the rejection of the Son. The husbandmen's desire to kill the heir to seize the inheritance is a picture of humanity's desire to run the world without God. Jesus then applies another prophecy to Himself: 'The stone which the builders rejected, the same is become the head of the corner' (v. 42). He is the cornerstone of the new 'nation,' the church, which is built upon Him."
-          }
-        },
-        {
-          "id": "PR034",
-          "question": "At the Last Supper, what prophetic statement did Jesus make that both established the new covenant in His blood and promised a future reunion banquet in heaven?",
-          "options": [
-            "Matthew 26:28-29 - For this is my body of the new testament, which is broken for many for the remission of sins. But I say unto you, I will not eat henceforth of this bread, until that day when I eat it new with you in my Father's kingdom.",
-            "Matthew 26:28-29 - For this is my blood of the new testament, which is shed for many for the remission of sins. But I say unto you, I will not drink henceforth of this fruit of the vine, until that day when I drink it new with you in my Father's kingdom.",
-            "Matthew 26:28-29 - For this is my blood of the old testament, which is shed for many for the remission of sins. But I say unto you, I will not drink henceforth of this fruit of the vine, until that day when I drink it new with you in my Father's kingdom.",
-            "Matthew 26:28-29 - For this is my blood of the new testament, which is shed for many for the remission of sins. But I say unto you, I will drink henceforth of this fruit of the vine, every year until that day when I drink it new with you in my Father's kingdom."
-          ],
-          "answer": "Matthew 26:28-29 - For this is my blood of the new testament, which is shed for many for the remission of sins. But I say unto you, I will not drink henceforth of this fruit of the vine, until that day when I drink it new with you in my Father's kingdom.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This two-verse statement perfectly captures the dual prophetic nature of communion. In verse 28, Jesus fulfills prophecy by establishing the 'new testament' (or covenant), sealed by His blood, as foretold by Jeremiah (Jeremiah 31:31-34). In verse 29, He makes a new prophecy, looking forward to a future reality: a great reunion banquet where He will once again share the 'fruit of the vine' with His redeemed people in the fully realized kingdom. This links the past, present, and future in the communion service.",
-            "Importance_of_Wording": "The phrase 'blood of the new testament' is monumental. It signifies the ratification of a new covenant, superior to the old one sealed with animal blood. The prophetic promise in verse 29 is personal ('I drink it new *with you*') and specific ('in my Father's kingdom'). This transforms communion from a somber memorial into a joyful anticipation of the 'marriage supper of the Lamb' (Revelation 19:9).",
-            "Factual_Explanation": "During the final Passover meal with His disciples, Jesus instituted the communion service as a replacement for the Passover. He infused the symbols of bread and wine with new, profound meaning, pointing to His sacrificial death and His future return.",
-            "Theological_Meaning": "Communion is an ordinance rich with prophetic significance. It looks back in gratitude to the cross, where our salvation was purchased. It is a present proclamation of our faith ('ye do shew the Lord's death till he come,' 1 Corinthians 11:26). And it looks forward in hope to the Second Coming and the great celebration in the kingdom of God. It connects the 'already' of the cross with the 'not yet' of the kingdom.",
-            "Christ_Centered_Meaning": "The entire service is centered on Christ. The bread is His body, broken for us. The wine is His blood, shed for us. The promise of the future banquet is the promise of being with Him forever. He is the host, the sacrifice, and the object of our hope. Every time we partake in communion, we are prophetically proclaiming our faith in what Christ has done and what He has promised to do."
-          }
-        },
-        {
-          "id": "PR035",
-          "question": "What startling prophecy did Jesus make to explain that His message of truth would not bring immediate worldly peace, but would cause division even within families?",
-          "options": [
-            "Matthew 10:34-36 - Think not that I am come to send peace on earth: I came not to send peace, but a sword. For I am come to set a man at variance against his father, and the daughter against her mother, and the daughter in law against her mother in law. And a man's foes shall be they of his own household.",
-            "Matthew 10:34-36 - Think that I am come to send peace on earth: I came to send peace, not a sword. For I am come to set a man at peace with his father, and the daughter with her mother, and the daughter in law with her mother in law. And a man's friends shall be they of his own household.",
-            "Matthew 10:34-36 - Think not that I am come to send war on earth: I came not to send war, but peace. For I am come to set a man at variance against his enemy, and the daughter against her adversary, and the daughter in law against her mother in law. And a man's foes shall be they of his enemy's household.",
-            "Matthew 10:34-36 - Think not that I am come to send peace on earth: I came not to send peace, but love. For I am come to set a man in love with his father, and the daughter with her mother, and the daughter in law with her mother in law. And a man's friends shall be they of his own household."
-          ],
-          "answer": "Matthew 10:34-36 - Think not that I am come to send peace on earth: I came not to send peace, but a sword. For I am come to set a man at variance against his father, and the daughter against her mother, and the daughter in law against her mother in law. And a man's foes shall be they of his own household.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This passage is Jesus's direct and shocking prophecy about the societal effect of His message. Jesus corrects the assumption that His first coming would bring immediate, universal peace. Instead, He prophesies that the proclamation of truth would act as a 'sword,' a tool of division that separates those who accept it from those who reject it, even within the closest family relationships. This explains why the gospel, though a message of peace with God, can lead to conflict in a sinful world.",
-            "Importance_of_Wording": "The metaphor of the 'sword' is intentionally jarring. It signifies separation and conflict. The specific examples of division—father vs. son, mother vs. daughter—show that the gospel demands an ultimate allegiance that supersedes even the most sacred human bonds. The statement 'a man's foes shall be they of his own household' (a quote from Micah 7:6) is a prophetic summary of this painful reality.",
-            "Factual_Explanation": "As Jesus sent out His twelve disciples on their first missionary journey, He gave them this realistic warning. He was preparing them for the persecution and social division that would inevitably result from preaching a message that confronts sin and calls for undivided loyalty to Him.",
-            "Theological_Meaning": "This is a prophecy of the nature of the Great Controversy as it plays out in human relationships. Truth always separates itself from error. When one person in a family or community accepts the truth, their changed life and values can become a silent rebuke to those who remain in darkness, often leading to misunderstanding and opposition. This will be especially true in the final crisis, when the choice to obey God's commandments will place believers at odds with the rest of the world.",
-            "Christ_Centered_Meaning": "While Jesus is the 'Prince of Peace,' true peace can only be established on the foundation of truth. He did not come to make peace with sin, but to destroy it. The 'sword' is the Word of God (Ephesians 6:17), which is 'sharper than any twoedged sword' and divides between soul and spirit (Hebrews 4:12). Allegiance to Christ and His truth must be our highest priority, and He promises to give us a new, spiritual family that is even more real than our earthly one (Mark 10:29-30)."
-          }
-        },
-        {
-          "id": "PR036",
-          "question": "What prophetic statement did Jesus make, using an agricultural metaphor, to encourage his disciples with the certainty of a great future harvest, even if the present laborers are few?",
-          "options": [
-            "Matthew 9:37-38 - Then saith he unto his disciples, The harvest truly is small, but the labourers are many; Pray ye therefore the Lord of the harvest, that he will send forth fewer labourers into his harvest.",
-            "Matthew 9:37-38 - Then saith he unto his disciples, The harvest truly is plenteous, but the labourers are plenteous; Thank ye therefore the Lord of the harvest, that he hath sent forth labourers into his harvest.",
-            "Matthew 9:37-38 - Then saith he unto his disciples, The harvest truly is plenteous, but the labourers are few; Complain ye therefore to the Lord of the harvest, that he will send forth labourers into his harvest.",
-            "Matthew 9:37-38 - Then saith he unto his disciples, The harvest truly is plenteous, but the labourers are few; Pray ye therefore the Lord of the harvest, that he will send forth labourers into his harvest."
-          ],
-          "answer": "Matthew 9:37-38 - Then saith he unto his disciples, The harvest truly is plenteous, but the labourers are few; Pray ye therefore the Lord of the harvest, that he will send forth labourers into his harvest.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Jesus makes a prophetic declaration about the spiritual state of the world: 'The harvest truly is plenteous.' Despite appearances of apathy or opposition, Jesus sees a world full of people ready to be gathered into His kingdom. This prophetic insight reframes the problem not as a lack of response, but a lack of 'labourers.' The command to 'pray' for more workers is an act of faith based on this prophetic promise of a great harvest.",
-            "Importance_of_Wording": "The word 'plenteous' (or abundant) is a statement of immense potential. The contrast 'but the labourers are few' highlights the urgency of the situation. The title 'the Lord of the harvest' identifies God as the one in charge of the entire operation. The command is not to harvest by themselves, but to 'pray' that the Lord will 'send forth' (ekballō, a strong word meaning 'to thrust out') more workers. It places the ultimate responsibility and power in God's hands.",
-            "Factual_Explanation": "After seeing the spiritual needs of the crowds and being filled with compassion, Jesus gives His disciples this assessment of the missionary task ahead. This statement immediately precedes His commissioning of the twelve apostles, showing that prayer for workers is the prelude to mission.",
-            "Theological_Meaning": "This is a timeless prophecy of the potential for revival and mission. It teaches that the church should never be discouraged by the apparent hardness of the field. From God's perspective, the harvest is always ready. The limiting factor is the availability of consecrated, Spirit-filled workers. The solution to a lack of church growth is not new marketing programs, but earnest prayer to the Lord of the harvest.",
-            "Christ_Centered_Meaning": "Christ is the Lord of the harvest. He is the one who has compassion on the multitudes. He is the one who empowers and sends forth laborers. Our prayer is directed to Him. The 'harvest' consists of souls for whom He died. The entire missionary enterprise is His, and our role is to be co-laborers with Him, trusting His prophetic assessment of the field and praying for the resources to accomplish His work."
-          }
-        },
-        {
-          "id": "PR037",
-          "question": "What prophetic promise did Jesus give that guarantees heavenly rewards and a new spiritual family for those who sacrifice earthly relationships for His sake?",
-          "options": [
-            "Mark 10:29-30 - And Jesus answered and said, Verily I say unto you, There is no man that hath left house, or brethren, or sisters, or father, or mother, or wife, or children, or lands, for my sake, and the gospel's, But he shall receive an hundredfold now in this time, houses, and brethren, and sisters, and mothers, and children, and lands, with persecutions; and in the world to come eternal life.",
-            "Mark 10:29-30 - And Jesus answered and said, Verily I say unto you, There is no man that hath kept house, and brethren, and sisters, and father, and mother, and wife, and children, and lands, for my sake, and the gospel's, But he shall receive a tenfold now in this time... and in the world to come a long life.",
-            "Mark 10:29-30 - And Jesus answered and said, Verily I say unto you, There is no man that hath left house, or brethren, or sisters, or father, or mother, or wife, or children, or lands, for his own sake, and his reputation's, But he shall receive a hundredfold... and in the world to come eternal life.",
-            "Mark 10:29-30 - And Jesus answered and said, Verily I say unto you, There is no man that hath left house, or brethren, or sisters, or father, or mother, or wife, or children, or lands, for my sake, and the gospel's, But he shall receive a hundredfold in the world to come, with persecutions; and in this time, eternal life."
-          ],
-          "answer": "Mark 10:29-30 - And Jesus answered and said, Verily I say unto you, There is no man that hath left house, or brethren, or sisters, or father, or mother, or wife, or children, or lands, for my sake, and the gospel's, But he shall receive an hundredfold now in this time, houses, and brethren, and sisters, and mothers, and children, and lands, with persecutions; and in the world to come eternal life.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This is a direct and powerful prophetic promise that addresses the fear of loss for the sake of the gospel. Jesus acknowledges the reality of having to leave family and possessions. He then makes a stunning prophecy of restoration and reward. The promise is two-fold: a 'hundredfold' return 'now in this time' (in the form of a new, larger spiritual family—the church) and 'eternal life' in the world to come.",
-            "Importance_of_Wording": "The list of potential sacrifices is comprehensive, covering family and property. The reason for the sacrifice is specific: 'for my sake, and the gospel's.' The promised reward is astonishingly generous: 'an hundredfold.' The realistic addition, 'with persecutions,' is a crucial part of the prophecy, warning that this new life will not be free from trouble. The final promise of 'eternal life' is the ultimate hope.",
-            "Factual_Explanation": "This promise was given in response to Peter's question about what the disciples would receive, having left everything to follow Jesus. Jesus expands the principle to apply to all of His followers throughout time.",
-            "Theological_Meaning": "This prophecy reveals God's principle of sacrifice and reward. No sacrifice made for the kingdom of God goes unnoticed or unrewarded. It teaches that the church is intended by God to be a new family for those who may have been cast out by their earthly families. It provides a community of 'brethren, and sisters, and mothers, and children' that offers support and love. It is a powerful motivation for costly discipleship.",
-            "Christ_Centered_Meaning": "Christ is the one who left everything—the glory of heaven, the adoration of angels—for our sake. He is the ultimate example of sacrifice. He builds the new family, the church, through His own blood. When we join His church, we are adopted into the family of God and become brothers and sisters of Christ Himself. The promise He gives here is the promise of inclusion in His own eternal family."
-          }
-        },
-        {
-          "id": "PR038",
-          "question": "Following Peter's confession that Jesus is the Son of God, what prophetic declaration did Jesus make about the divine and unshakable foundation of His church?",
-          "options": [
-            "Matthew 16:18 - And I say also unto thee, That thou art Peter, and upon this rock I will build my church; and the gates of hell shall not prevail against it.",
-            "Matthew 16:18 - And I say also unto thee, That thou art Peter, and upon this apostle I will build my church; and the gates of Rome shall not prevail against it.",
-            "Matthew 16:18 - And I say also unto thee, That thou art Peter, and upon this mountain I will build my church; and the gates of hell shall not come near it.",
-            "Matthew 16:18 - And I say also unto thee, That thou art Peter, and upon this teaching I will build my church; and the gates of hell shall sometimes prevail against it."
-          ],
-          "answer": "Matthew 16:18 - And I say also unto thee, That thou art Peter, and upon this rock I will build my church; and the gates of hell shall not prevail against it.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Following Peter's confession of Jesus's divinity, Jesus makes a prophecy about the future of His movement. He declares He will build His 'church,' and makes the powerful prophetic promise that the 'gates of hell' (the powers of death and Satan) will not overcome it. The foundation of this unshakable church is the 'rock' of the truth Peter had just confessed: that Jesus is the Christ, the divine Son of God.",
-            "Importance_of_Wording": "There is a play on words: 'thou art Peter (Petros, a small stone), and upon this rock (petra, a massive rock foundation) I will build my church.' The 'rock' is not Peter himself, but the great truth of Christ's divinity that Peter confessed. The prophecy that the 'gates of hell shall not prevail' is an absolute guarantee of the church's ultimate victory through all ages of persecution and apostasy.",
-            "Factual_Explanation": "At Caesarea Philippi, Jesus elicited Peter's great confession of faith. In response, Jesus gives this foundational promise, prophesying the establishment and endurance of the Christian church, which did not yet exist in its New Testament form.",
-            "Theological_Meaning": "This is a prophecy of the perpetuity and ultimate triumph of God's church. Despite internal apostasy and external persecution throughout history, a faithful remnant holding to the foundational truth of Christ's divinity has always existed. Many historicist interpreters see themselves as part of this historical line of faithful believers, and this promise guarantees that God's truth and His people will endure until the end.",
-            "Christ_Centered_Meaning": "Christ is the builder of the church. He is also the rock, the foundation upon which it is built (1 Corinthians 3:11). The entire strength and endurance of the church comes from its connection to Him. The 'gates of hell' could not prevail against Him in His resurrection, and therefore they cannot prevail against His body, the church, which is united to Him."
-          }
-        },
-        {
-          "id": "PR039",
-          "question": "What prophetic metaphor, quoted by Matthew from Isaiah, did Jesus fulfill, promising that He would not discard or destroy those with weak and failing faith?",
-          "options": [
-            "Matthew 12:20 - A strong oak shall he not fell, and a burning fire shall he not quench, till he send forth judgment unto victory.",
-            "Matthew 12:20 - A bruised reed shall he not break, and smoking flax shall he not quench, till he send forth judgment unto victory.",
-            "Matthew 12:20 - A withered branch shall he not burn, and a dim lamp shall he not extinguish, till he send forth judgment unto victory.",
-            "Matthew 12:20 - A bent tree shall he not straighten, and a flickering candle shall he not relight, till he send forth judgment unto victory."
-          ],
-          "answer": "Matthew 12:20 - A bruised reed shall he not break, and smoking flax shall he not quench, till he send forth judgment unto victory.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse, quoted from Isaiah, is a beautiful and direct encouragement. It is a prophecy about the gentle, restorative character of the Messiah's ministry. A 'bruised reed' (a person who is damaged, weak, and bent) and 'smoking flax' (a flickering faith, about to go out) are metaphors for people with weak faith. The prophecy promises that Jesus's response to such weakness is not to 'break' or 'quench' it, but to gently nurture it until it leads to 'victory.'",
-            "Importance_of_Wording": "A 'bruised reed' is fragile and easily broken. 'Smoking flax' refers to a wick that has almost no flame left, only a wisp of smoke. These are images of extreme weakness and near-failure. The promise that Christ will 'not break' and 'not quench' such individuals reveals His profound tenderness and patience. The prophecy continues 'till he send forth judgment unto victory,' showing that His goal is to bring even the weakest person to a place of final triumph.",
-            "Factual_Explanation": "Matthew quotes this passage from Isaiah 42:1-4 to explain why Jesus withdrew from the Pharisees' plotting and continued His healing ministry quietly. It was a fulfillment of the prophecy about the Messiah's gentle and non-confrontational character.",
-            "Theological_Meaning": "This prophecy reveals the character of God, which is in stark contrast to the harsh, judgmental character often attributed to Him. He is a God who restores, not one who discards the weak and failing. This is a promise for all who feel they are on the verge of giving up. God's grace is sufficient to fan the faintest spark of faith into a flame.",
-            "Christ_Centered_Meaning": "Jesus is the perfect fulfillment of this prophecy. He dealt tenderly with the doubting Thomas, the fallen Peter, and the sinful woman at the well. He is the divine Physician who came not for the healthy, but for the sick. His entire ministry is one of mending bruised reeds and fanning smoking flax. This prophecy assures us that no matter how weak or bruised we feel, if we turn to Christ, He will not cast us out but will gently lead us to victory."
-          }
-        },
-        {
-          "id": "PR040",
-          "question": "What prophetic woe did Jesus pronounce against the Galilean cities that had witnessed His mighty works, judging them more severely than the pagan cities of old?",
-          "options": [
-            "Matthew 11:21, 23 - Blessed art thou, Chorazin! blessed art thou, Bethsaida! for if the mighty works, which were done in you, had been done in Jerusalem, they would have repented long ago in sackcloth and ashes... And thou, Capernaum, which art exalted unto heaven, shalt be brought down to hell.",
-            "Matthew 11:21, 23 - Woe unto thee, Chorazin! woe unto thee, Bethsaida! for if the mighty works, which were done in you, had been done in Tyre and Sidon, they would have repented long ago in sackcloth and ashes... And thou, Capernaum, which art exalted unto heaven, shalt be brought down to hell.",
-            "Matthew 11:21, 23 - Woe unto thee, Tyre! woe unto thee, Sidon! for if the mighty works, which were done in Chorazin, had been done in you, they would have repented long ago in sackcloth and ashes... And thou, Capernaum, which art exalted unto heaven, shalt be brought down to hell.",
-            "Matthew 11:21, 23 - Woe unto thee, Chorazin! woe unto thee, Bethsaida! for if the mighty works, which were done in you, had been done in Tyre and Sidon, they would have rejoiced long ago in sackcloth and ashes... And thou, Capernaum, which art brought down to hell, shalt be exalted unto heaven."
-          ],
-          "answer": "Matthew 11:21, 23 - Woe unto thee, Chorazin! woe unto thee, Bethsaida! for if the mighty works, which were done in you, had been done in Tyre and Sidon, they would have repented long ago in sackcloth and ashes... And thou, Capernaum, which art exalted unto heaven, shalt be brought down to hell.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This combination of verses contains the direct prophetic woes Jesus pronounced. He singles out the very cities where He had performed most of His miracles—Chorazin, Bethsaida, and His own adopted hometown of Capernaum. His prophecy is that their judgment will be more severe than that of ancient pagan cities because they rejected greater light. The specific prophecy against Capernaum—from being 'exalted unto heaven' (by His presence) to being 'brought down to hell' (to ruin and desolation)—is a stark warning.",
-            "Importance_of_Wording": "The word 'Woe' is a cry of prophetic grief and judgment. The comparison to 'Tyre and Sidon' highlights the principle that accountability is proportional to the light received. Capernaum's prophecy is particularly powerful: the contrast between being 'exalted unto heaven' and 'brought down to hell' (Hades, the place of the dead/ruin) emphasizes the magnitude of their fall.",
-            "Factual_Explanation": "After the rejection of His message by that generation, Jesus pronounced these prophetic judgments on the cities that had been the primary focus of His Galilean ministry. Today, the precise locations of Chorazin and Bethsaida are debated ruins, and Capernaum, once a bustling town, is an archaeological site, its synagogue and houses desolate. The prophecy was fulfilled literally.",
-            "Theological_Meaning": "This is a timeless prophetic principle: greater privilege brings greater responsibility. Those who have been given the most light (like the church today) will be held to the highest account in the judgment. The sin of rejecting revealed truth is more serious than the sin of ignorance. This warns against taking the blessings of the gospel for granted.",
-            "Christ_Centered_Meaning": "These woes come from the lips of the compassionate Savior and reveal His sorrow over the cities' rejection. It was not His desire to condemn them, but their stubborn unbelief in the face of His 'mighty works' sealed their fate. It shows that Christ, who is our Savior, is also our Judge. The same mighty works that were intended to bring salvation become the basis for condemnation when they are rejected."
-          }
-        },
-        {
-          "id": "PR041",
-          "question": "When Jesus prophesied about the 'abomination of desolation,' what specific instruction did the gospel writer Mark include to command the reader's careful attention and study?",
-          "options": [
-            "Mark 13:14 - (...let him that preacheth understand,)",
-            "Mark 13:14 - (...let him that heareth forget not,)",
-            "Mark 13:14 - (...let him that readeth understand,)",
-            "Mark 13:14 - (...let him that doubteth believe,)"
-          ],
-          "answer": "Mark 13:14 - (...let him that readeth understand,)",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This specific parenthetical comment is a direct instruction to the reader from the Gospel writer (or from Jesus Himself, transcribed by Mark). It's like a divinely-inspired highlighter, telling the student of prophecy, 'Pay very close attention to this! This is crucial!' It serves as a powerful endorsement of Daniel's prophecy and a command to study it for understanding.",
-            "Importance_of_Wording": "The phrase 'let him that readeth understand' is a call to careful study and spiritual discernment. It implies that the meaning is not superficial and requires prayerful thought. It elevates this particular prophecy as a key to understanding the events of the end, both for the fall of Jerusalem and for the final crisis.",
-            "Factual_Explanation": "In the middle of quoting Jesus's warning about the 'abomination of desolation,' Mark inserts this unique exhortation. It's a note from the author to his audience, urging them to grasp the significance of what Jesus is saying by referencing the prophet Daniel.",
-            "Theological_Meaning": "This statement validates the historicist method of prophetic interpretation, where later bible writers build upon and refer to earlier ones. Jesus and the Gospel writers saw the book of Daniel as authoritative and essential for understanding end-time events. For historicist interpreters, the prophecies of Daniel and Revelation are inextricably linked, and this verse is a divine command to study them together to understand the final crisis.",
-            "Christ_Centered_Meaning": "Christ, the ultimate interpreter of prophecy, points His followers back to the writings of Daniel. He wants His people to be informed and prepared. The 'understanding' that is called for is not merely intellectual, but a spiritual discernment that comes from the Holy Spirit, which allows the reader to see Christ and His saving work as the central theme of all prophecy."
-          }
-        },
-        {
-          "id": "PR042",
-          "question": "What was the very first prophetic warning Jesus gave in the Olivet Discourse, cautioning that many would come in His name and successfully deceive people?",
-          "options": [
-            "Mark 13:6 - For one shall come in my name, saying, I am Christ; and shall deceive one.",
-            "Mark 13:6 - For many shall come in my name, saying, I am Christ; and shall deceive many.",
-            "Mark 13:6 - For few shall come in my name, saying, I am Christ; and shall deceive few.",
-            "Mark 13:6 - For many shall come in my name, saying, He is Christ; and shall deceive many."
-          ],
-          "answer": "Mark 13:6 - For many shall come in my name, saying, I am Christ; and shall deceive many.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is the first warning Jesus gives in the Olivet Discourse and a direct refutation of the idea of multiple 'Christs.' He prophesies that 'many' will come claiming His title and His authority, and that this deception will be successful ('shall deceive many'). This is a specific prediction against any philosophy promoting multiple messiahs.",
-            "Importance_of_Wording": "The phrase 'in my name' means they will claim to have His authority or be His representative. The statement 'I am Christ' is the ultimate blasphemous claim. The prophecy that they will 'deceive many' is a solemn warning that these deceptions will be popular and widespread. Jesus later escalates this warning in verse 22, adding that they will use 'signs and wonders' to make their claims convincing.",
-            "Factual_Explanation": "When the disciples asked Jesus for the sign of His coming, His very first response was a warning against deception. His first prophecy was that the period leading up to the end would be characterized by widespread religious confusion and false messianic claims.",
-            "Theological_Meaning": "This prophecy has had fulfillment throughout history, with many individuals claiming to be Christ. However, historicist interpreters see its ultimate fulfillment in the rise of a counterfeit religious system that puts a human leader or a tradition in the place of Christ. The final deception will not just be from individuals, but from a global system that claims the prerogatives of Christ while leading people to disobey God. This also includes the New Age idea of the 'Christ-consciousness' within everyone, which denies the unique, literal, and divine person of Jesus Christ.",
-            "Christ_Centered_Meaning": "The only safeguard against false Christs is to know the true Christ intimately. If we have a deep, personal relationship with the Jesus of the Bible, we will not be deceived by counterfeits. The prophecy is a call to ground our faith firmly in the scriptural testimony about the person and work of the one and only Son of God, and to beware of any teaching that detracts from His unique role as Savior and Lord."
-          }
-        },
-        {
-          "id": "PR043",
-          "question": "When refuting the Pharisees on divorce, what prophetic principle from the creation account did Jesus quote to establish the permanence and unity of marriage?",
-          "options": [
-            "Mark 10:6-9 - But from the middle of the creation God made them male and female. For this cause shall a man leave his father and mother, and cleave to his wife; And they twain shall be one flesh... What therefore God hath joined together, let not man put asunder.",
-            "Mark 10:6-9 - But from the beginning of the creation God made them male and female. For this cause shall a man leave his father and mother, and cleave to his wife; And they twain shall be one flesh: so then they are no more twain, but one flesh. What therefore God hath joined together, let not man put asunder.",
-            "Mark 10:6-9 - But from the beginning of the creation God made them Adam and Eve. For this cause shall a man leave his father and mother, and cleave to his wife; And they twain shall be one flesh... What therefore God hath joined together, let not man put asunder.",
-            "Mark 10:6-9 - But from the beginning of the creation God made them male and female. For this cause shall a man leave his father and mother, and cleave to his wife; And they twain shall be one spirit... What therefore God hath joined together, let not man put asunder."
-          ],
-          "answer": "Mark 10:6-9 - But from the beginning of the creation God made them male and female. For this cause shall a man leave his father and mother, and cleave to his wife; And they twain shall be one flesh: so then they are no more twain, but one flesh. What therefore God hath joined together, let not man put asunder.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Jesus bypasses the Mosaic law on divorce and goes back to God's original, prophetic design 'from the beginning of the creation.' He quotes the foundational statements from Genesis 1:27 and 2:24, treating them not just as history, but as the enduring, prophetic blueprint for all human marriage. His powerful concluding command, 'What therefore God hath joined together, let not man put asunder,' is a direct application of this prophetic principle.",
-            "Importance_of_Wording": "Jesus's appeal to 'the beginning' establishes creation, not culture, as the standard. Quoting 'male and female' establishes the complementary nature of the union. Quoting 'they twain shall be one flesh' establishes its unity and exclusivity. His final command, 'let not man put asunder,' elevates the marriage bond from a human contract to a divine joining that humans have no right to break.",
-            "Factual_Explanation": "When the Pharisees tested Jesus on the question of divorce, He refuted their legalistic arguments by appealing to God's original purpose as stated in Genesis 1:27 and 2:24. He treated the creation account as having binding authority over all subsequent human laws and customs.",
-            "Theological_Meaning": "This teaching shows that God's original commands and designs are eternal principles. They are not erased by human sin or cultural change. The creation ordinance of marriage, like the creation ordinance of the Sabbath, is a foundational pillar for humanity. An attack on the sanctity of marriage is an attack on the authority of the Creator Himself.",
-            "Christ_Centered_Meaning": "Jesus, as the Creator Himself, is here interpreting His own law. His teaching restores marriage to its original, sacred place. The union of husband and wife is a symbol of the mystical union between Christ and His church (Ephesians 5:32). Just as Christ is permanently and faithfully joined to His church, so the marriage bond is intended to be a reflection of that permanent, faithful love."
-          }
-        },
-        {
-          "id": "PR044",
-          "question": "What prophetic principle did Jesus teach about the paradoxical nature of discipleship, where saving one's life leads to losing it, and losing it for the gospel leads to saving it?",
-          "options": [
-            "Mark 8:35 - For whosoever will save his life shall save it; but whosoever shall lose his life for my sake and the gospel's, the same shall lose it.",
-            "Mark 8:35 - For whosoever will save his possessions shall lose them; but whosoever shall lose his possessions for my sake and the gospel's, the same shall save them.",
-            "Mark 8:35 - For whosoever will save his life shall lose it; but whosoever shall lose his life for my sake and the gospel's, the same shall save it.",
-            "Mark 8:35 - For whosoever will save his life shall lose it; but whosoever shall save his life for my sake and the gospel's, the same shall save it."
-          ],
-          "answer": "Mark 8:35 - For whosoever will save his life shall lose it; but whosoever shall lose his life for my sake and the gospel's, the same shall save it.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This is a prophetic statement of an eternal principle. Jesus presents a paradox: the effort to save one's physical life at all costs (by avoiding sacrifice and danger) will result in losing one's eternal life ('shall lose it'). Conversely, the willingness to 'lose' one's earthly life for the cause of Christ and the gospel will result in truly saving it for eternity. This is the core logic of Christian martyrdom and missionary sacrifice.",
-            "Importance_of_Wording": "The word 'life' (psuché) can mean both physical life and the soul or self. The paradox works on both levels. The contrast is stark and absolute: 'save' leads to 'lose,' and 'lose' leads to 'save.' The reason for the loss is critical: 'for my sake and the gospel's.' It is not about throwing one's life away for any cause, but about surrendering it for the highest cause.",
-            "Factual_Explanation": "Immediately after Peter's confession and Jesus's first prediction of His own suffering and death, Jesus lays out the cost of discipleship. He makes it clear that following Him involves the same path of self-denial and sacrifice.",
-            "Theological_Meaning": "This is a foundational principle of the Great Controversy. Satan's original temptation was 'Ye shall not surely die.' He offers self-preservation and self-interest as the highest good. God's kingdom operates on the opposite principle of self-sacrifice. This will be the ultimate test for the final generation, who will be called to risk everything, even their lives, rather than receive the mark of the beast.",
-            "Christ_Centered_Meaning": "Christ is the ultimate embodiment of this principle. He did not save His own life, but freely lost it on the cross 'for the gospel's sake.' And by losing it, He saved it, being resurrected to eternal glory, and in doing so, He saved all of us. Our willingness to lose our lives is simply our participation in the pattern He has already established. We are called to have the same mind that was in Christ Jesus, who 'made himself of no reputation, and took upon him the form of a servant... and became obedient unto death' (Philippians 2:5-8)."
-          }
-        },
-        {
-          "id": "PR045",
-          "question": "What prophetic parable of Jesus describes a pre-advent judgment scene where guests are inspected, and one is cast out for not wearing the wedding garment provided by the king?",
-          "options": [
-            "Matthew 22:11-13 - And when the king came in to see the guests, he saw there a man which had on a soiled garment: And he saith unto him, Friend, how camest thou in hither having a soiled garment? And he was speechless. Then said the king to the servants, Bind him hand and foot... and cast him into outer darkness...",
-            "Matthew 22:11-13 - And when the king came in to see the guests, he saw there a man which had not on a wedding garment: And he saith unto him, Friend, how camest thou in hither not having a wedding garment? And he was speechless. Then said the king to the servants, Bind him hand and foot, and take him away, and cast him into outer darkness; there shall be weeping and gnashing of teeth.",
-            "Matthew 22:11-13 - And when the king came in to see the guests, he saw there a man which had not on a wedding garment: And he saith unto him, Friend, why hast thou brought thine own garment? And he made excuses. Then said the king to the servants, Forgive him, and let him stay in the outer court...",
-            "Matthew 22:11-13 - And when the servants came in to see the guests, they saw there a man which had not on a wedding garment: And they saith unto him, Friend, how camest thou in hither not having a wedding garment? And he was speechless. Then said the servants to the king, Cast him out into outer darkness..."
-          ],
-          "answer": "Matthew 22:11-13 - And when the king came in to see the guests, he saw there a man which had not on a wedding garment: And he saith unto him, Friend, how camest thou in hither not having a wedding garment? And he was speechless. Then said the king to the servants, Bind him hand and foot, and take him away, and cast him into outer darkness; there shall be weeping and gnashing of teeth.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "The parable prophesies a situation where the invitation (the call of grace) is free and open. However, before the wedding feast (a symbol of salvation) begins, the king conducts an inspection. This inspection phase, where the guests are examined to see if they are wearing the required wedding garment, is a powerful prophetic picture of the pre-advent or investigative judgment. It shows that while the call is free, there is a standard of preparation that must be met.",
-            "Importance_of_Wording": "The key action is 'the king came in to see the guests.' This is a work of investigation that happens *after* the guests have assembled but *before* the feast begins. The issue is singular: the lack of a 'wedding garment,' which was traditionally provided by the host. The man's rejection of the garment was an act of rebellion and disrespect. His being 'speechless' shows he has no excuse. This illustrates that the judgment is not about our original character ('bad or good') but about whether we have accepted the provision of the king.",
-            "Factual_Explanation": "In the Parable of the Wedding Feast, Jesus describes God's invitation, first to Israel (who rejected it) and then to the Gentiles (who accepted it). This section of the parable adds a solemn warning that just being in the church ('at the wedding') is not enough.",
-            "Theological_Meaning": "From an Adventist perspective, this is one of the clearest parables of the investigative judgment, which began in 1844 (the antitypical Day of Atonement). The 'guests' are all who have ever professed the name of God. The 'King' is God the Father, and His inspection is the work of judgment where the books of record are examined. The 'wedding garment' is the imputed and imparted righteousness of Christ. The judgment reveals who has truly accepted this gift and is living in harmony with it, and who has been content with a mere profession. This investigation determines who is 'chosen' for salvation before Christ returns.",
-            "Christ_Centered_Meaning": "The wedding garment is the pure, spotless character of Jesus Christ, offered freely to all who will accept it. To refuse the garment is to insist on standing before God in our own filthy rags of self-righteousness. The judgment, therefore, is not about whether we have been good enough, but about whether we have been wise enough to accept the all-sufficient righteousness of Christ as our only hope. The man without the garment is speechless because he has rejected the only thing that could have saved him."
-          }
-        },
-        {
-          "id": "PR046",
-          "question": "What recurring prophetic formula does the Gospel of Matthew use to demonstrate that the events of Jesus's life were a direct fulfillment of Old Testament scripture?",
-          "options": [
-            "As it was in the days of the prophet, saying...",
-            "That it might be fulfilled which was spoken by the prophet, saying...",
-            "Behold the word of the prophet came to pass, saying...",
-            "And so the scripture was confirmed by the prophet, saying..."
-          ],
-          "answer": "That it might be fulfilled which was spoken by the prophet, saying...",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This is the most common and distinctive 'fulfillment formula' that Matthew uses repeatedly throughout his gospel. He will describe an event in Jesus's life and then immediately follow it with this phrase to connect it to a specific Old Testament text. This shows that Matthew's primary goal was to prove to his Jewish audience that Jesus was the long-awaited Messiah by demonstrating how His life was a precise fulfillment of their own sacred Scriptures.",
-            "Importance_of_Wording": "The phrase 'That it might be fulfilled' presents the event not as a coincidence, but as a divinely-ordained action with a specific prophetic purpose. It shows God's sovereignty over history and the reliability of His prophetic word. Matthew uses this formula to link Jesus's birth, flight to Egypt, ministry in Galilee, and many other events directly to the writings of prophets like Isaiah and Jeremiah.",
-            "Factual_Explanation": "Matthew's Gospel is famous for its use of this fulfillment formula. It appears over a dozen times (e.g., Matthew 1:22, 2:15, 2:17, 2:23, 4:14, 8:17, 12:17, 13:35, 21:4, 27:9). This literary technique is central to Matthew's theological purpose of presenting Jesus as the promised Messiah-King who fulfills the hopes of Israel.",
-            "Theological_Meaning": "This demonstrates the unity and consistency of the Bible. The New Testament does not abolish the Old; it fulfills it. The events of Jesus's life were not random, but were the culmination of centuries of prophetic promises. This gives believers immense confidence in the trustworthiness of the entire Bible. If the prophecies about Christ's first coming were fulfilled so precisely, we can have equal confidence that the prophecies about His second coming will also be fulfilled.",
-            "Christ_Centered_Meaning": "The constant fulfillment of prophecy in Jesus's life proves that He is the central theme of all Scripture. As Jesus Himself said, the Old Testament scriptures 'are they which testify of me' (John 5:39). This formula shows that Christ did not come to start a new religion, but to be the climax and fulfillment of the one true religion that God had been revealing through the prophets for centuries. He is the 'Yes' and 'Amen' to all of God's promises."
-          }
-        },
-        {
-          "id": "PR047",
-          "question": "When confronted by the Sadducees who denied the resurrection, what prophetic argument did Jesus use from the book of Moses to prove that the patriarchs would live again?",
-          "options": [
-            "Mark 12:26-27 - And as touching the dead, that they rise: have ye not read in the book of Moses, how in the bush God spake unto him, saying, I will be the God of Abraham, and the God of Isaac, and the God of Jacob? He is not the God of the dead, but the God of the living: ye therefore do greatly err.",
-            "Mark 12:26-27 - And as touching the dead, that they rise: have ye not read in the book of Moses, how in the bush God spake unto him, saying, I was the God of Abraham, and the God of Isaac, and the God of Jacob? He is not the God of the dead, but the God of the living: ye therefore do greatly err.",
-            "Mark 12:26-27 - And as touching the dead, that they rise: have ye not read in the book of Moses, how in the bush God spake unto him, saying, I am the God of Abraham, and the God of Isaac, and the God of Jacob? He is not the God of the dead, but the God of the living: ye therefore do greatly err.",
-            "Mark 12:26-27 - And as touching the dead, that they rise: have ye not read in the book of Moses, how in the bush God spake unto him, saying, I am the God of Abraham, and the God of Isaac, and the God of Jacob? He is the God of the dead, and the God of the living: ye therefore do not err."
-          ],
-          "answer": "Mark 12:26-27 - And as touching the dead, that they rise: have ye not read in the book of Moses, how in the bush God spake unto him, saying, I am the God of Abraham, and the God of Isaac, and the God of Jacob? He is not the God of the dead, but the God of the living: ye therefore do greatly err.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Jesus directly confronts the Sadducees' denial of the resurrection. He doesn't just state it as a fact; He proves it by quoting from 'the book of Moses' (the Torah), the only part of the Old Testament they fully accepted. His argument is a profound interpretation of scripture, showing that the promise of the resurrection was embedded in the very nature of God's covenant with the patriarchs.",
-            "Importance_of_Wording": "Jesus's argument is subtle but powerful. He points out that when God spoke to Moses at the burning bush, centuries after the patriarchs had died, God said 'I *am*' (present tense), not 'I *was*' the God of Abraham, Isaac, and Jacob. The ongoing relationship implies a future for the patriarchs. His conclusion, 'He is not the God of the dead, but the God of the living,' turns this grammatical point into a prophetic promise of resurrection life.",
-            "Factual_Explanation": "The Sadducees, a powerful Jewish sect, denied the resurrection, angels, and spirits. They tried to trap Jesus with a convoluted question about a woman with seven husbands. Jesus first diagnosed their error ('ye know not the scriptures, neither the power of God') and then provided this stunning proof of the resurrection from the book of Exodus (Exodus 3:6).",
-            "Theological_Meaning": "This teaching shows that the hope of the resurrection is not a late invention, but is woven into the fabric of God's covenant relationship with His people from the beginning. It also teaches that a correct understanding of prophecy and doctrine comes from knowing both the 'scriptures' (the written word) and the 'power of God' (the ability of God to do what He has promised).",
-            "Christ_Centered_Meaning": "Christ Himself is the 'resurrection, and the life' (John 11:25). His own resurrection is the ultimate proof of the 'power of God' and the guarantee of our own. Because He lives, the patriarchs, and all who have died in faith, will live also. The present-tense statement 'I am' that God used for the patriarchs finds its ultimate expression in Jesus, the great 'I AM,' who has conquered death and holds the keys of the grave."
-          }
-        },
-        {
-          "id": "PR048",
-          "question": "What prophecy from Isaiah did Jesus use to condemn the religious leaders for elevating their traditions above God's law, resulting in hypocritical and worthless worship?",
-          "options": [
-            "Mark 7:6-7 - He answered and said unto them, Well hath Esaias prophesied of you hypocrites, as it is written, This people honoureth me with their lips, but their heart is far from me. Howbeit in vain do they worship me, teaching for doctrines the commandments of men.",
-            "Mark 7:6-7 - He answered and said unto them, Well hath Esaias prophesied of you hypocrites, as it is written, This people ignoreth me with their lips, but their heart is near to me. Therefore in truth do they worship me, teaching for doctrines the commandments of God.",
-            "Mark 7:6-7 - He answered and said unto them, Well hath Esaias prophesied of you righteous, as it is written, This people honoureth me with their heart, but their lips are far from me. Howbeit in truth do they worship me, teaching for doctrines the commandments of God.",
-            "Mark 7:6-7 - He answered and said unto them, Well hath Esaias prophesied of you hypocrites, as it is written, This people honoureth me with their lips, but their heart is far from me. Howbeit in truth do they worship me, teaching for doctrines the commandments of men."
-          ],
-          "answer": "Mark 7:6-7 - He answered and said unto them, Well hath Esaias prophesied of you hypocrites, as it is written, This people honoureth me with their lips, but their heart is far from me. Howbeit in vain do they worship me, teaching for doctrines the commandments of men.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Jesus directly quotes Isaiah 29:13 and applies it as a prophecy about the Pharisees and scribes of His own day. He diagnoses their spiritual disease: their worship is external ('with their lips'), their hearts are distant, and their worship is 'in vain' because they have replaced God's commandments with human traditions. This provides a powerful, prophetic critique of religious externalism.",
-            "Importance_of_Wording": "The prophecy identifies three key problems. 'Honoureth me with their lips, but their heart is far from me' describes hypocrisy. 'In vain do they worship me' declares their religious activities to be worthless. The reason is 'teaching for doctrines the commandments of men,' which is the root of the problem—the elevation of human authority above divine authority.",
-            "Factual_Explanation": "When the Pharisees criticized Jesus's disciples for not following the 'tradition of the elders' regarding ceremonial hand-washing, Jesus turned the tables on them. He accused them of hypocrisy and used this prophecy from Isaiah to show that their obsession with man-made rules caused them to transgress the actual commandments of God.",
-            "Theological_Meaning": "This is a timeless warning for the church. The Great Controversy has always involved a conflict between the Word of God and the traditions of men. Many historicist interpreters see this prophecy as having a major fulfillment in the history of the Christian church, where many human traditions (like Sunday observance, the immortality of the soul, and eternal torment) were elevated above the plain teachings of Scripture. The final conflict will be a choice between the 'commandments of God' and the 'commandments of men' (Revelation 14:12).",
-            "Christ_Centered_Meaning": "Christ came to sweep away the rubbish of human tradition that had obscured the truth about His Father. He calls for a worship that is 'in spirit and in truth' (John 4:24), not one based on external rituals. True worship is a matter of the heart, a loving response to God's character and His commandments, which are all centered in love for God and man. Any tradition that hinders this heart-connection to Christ is a dangerous idol."
-          }
-        },
-        {
-          "id": "PR049",
-          "question": "What specific, malicious accusation did the Pharisees make against Jesus that prompted His prophetic warning about the unpardonable sin of blasphemy against the Holy Ghost?",
-          "options": [
-            "Matthew 12:24 - But when the Pharisees heard it, they said, This fellow doth not cast out devils, but by his own great power and might.",
-            "Matthew 12:24 - But when the Pharisees heard it, they said, This fellow doth not cast out devils, but by Beelzebub the prince of the devils.",
-            "Matthew 12:24 - But when the Pharisees heard it, they said, This fellow doth not cast out devils, but by the power of the angels of God.",
-            "Matthew 12:24 - But when the Pharisees heard it, they said, This fellow doth cast out devils, but only the small and insignificant ones."
-          ],
-          "answer": "Matthew 12:24 - But when the Pharisees heard it, they said, This fellow doth not cast out devils, but by Beelzebub the prince of the devils.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "The warning about the unpardonable sin was not given in a vacuum. It was a direct response to a specific, malicious accusation from the Pharisees. After witnessing an undeniable miracle of healing, they willfully chose to attribute the power of the Holy Spirit, which was working through Christ, to 'Beelzebub the prince of the devils.' This context shows that the unpardonable sin is not an accidental slip of the tongue, but a deliberate, persistent rejection and mislabeling of the Holy Spirit's clear work.",
-            "Importance_of_Wording": "The name 'Beelzebub' was a derogatory term for Satan. The accusation was not one of simple unbelief; it was a conscious decision to call light darkness and good evil. They were so set in their opposition to Jesus that they preferred to align themselves with the devil rather than admit the evidence of God's power. Jesus's prophetic warning that follows is a declaration of the spiritual state of those who so harden their hearts.",
-            "Factual_Explanation": "After Jesus healed a man who was both blind and mute, the crowds were amazed and wondered if He was the Messiah. The Pharisees, seeing their influence threatened, made this blasphemous accusation. Jesus then gave His solemn teaching on the blasphemy against the Holy Spirit, explaining that it is unpardonable because it cuts off the only avenue through which God can reach the human heart.",
-            "Theological_Meaning": "The unpardonable sin is not a single act, but a state of being. It is reaching a point of such stubborn resistance to the convictions of the Holy Spirit that one is no longer capable of repentance. The person who fears they have committed this sin has, by the very nature of their fear and conviction, not committed it. The Holy Spirit is still working with them. The warning is for those who continually and knowingly reject the Spirit's pleadings until His voice is no longer heard in their conscience.",
-            "Christ_Centered_Meaning": "The Holy Spirit's primary work is to testify of Christ (John 15:26). To blaspheme the Spirit is to reject His testimony about Jesus. It is to look at the clear evidence of God's love and power manifested in Christ and to consciously call it evil. It is the ultimate and final rejection of the salvation offered through Jesus Christ. Jesus's prophetic warning is a merciful plea for people to not harden their hearts to the point where they can no longer be reached by His grace."
-          }
-        },
-        {
-          "id": "PR050",
-          "question": "What prophetic maxim did Jesus use to summarize the Parable of the Laborers, teaching that God's kingdom reverses human standards of merit and seniority?",
-          "options": [
-            "Matthew 20:16 - So the last shall be first, and the first last: for many be called, but few chosen.",
-            "Matthew 20:16 - So the first shall be first, and the last last: for all be called, and all chosen.",
-            "Matthew 20:16 - So the weak shall be strong, and the strong weak: for many be called, but few chosen.",
-            "Matthew 20:16 - So the last shall be last, and the first first: for few be called, and many chosen."
-          ],
-          "answer": "Matthew 20:16 - So the last shall be first, and the first last: for many be called, but few chosen.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is the prophetic summary of the Parable of the Laborers in the Vineyard. It prophesies a divine reversal of human expectations. It teaches that God's kingdom does not operate on the principles of human economics or merit. Those who have served longest (the 'first') may have a wrong spirit, while those who come at the last minute receive the same reward of grace, showing God's sovereignty and goodness.",
-            "Importance_of_Wording": "The phrase 'the last shall be first, and the first last' is a chiasm, a literary device that reverses concepts to make a powerful point. It is a prophetic maxim for the kingdom of God. The final clause, 'for many be called, but few chosen,' links this principle to the broader theme of salvation, suggesting that the 'chosen' are those who gratefully accept the master's grace, not those who jealously guard their own perceived status.",
-            "Factual_Explanation": "In this parable, laborers who worked all day were upset that those who worked only one hour received the same pay. The owner's response rebukes their sense of entitlement and reveals that the wage is a matter of his grace, not their merit. Jesus concludes with this prophetic principle.",
-            "Theological_Meaning": "This is a prophecy about the nature of God's grace. It is a rebuke to any system of legalism that attempts to earn salvation through works. It prophesied that the Gentiles ('the last'), who would be called late into the vineyard, would be received on an equal footing of grace with the Jews ('the first'), who had 'borne the burden and heat of the day.' It is a warning to any believer, no matter how long they have been in the church, against developing a spirit of pride and entitlement.",
-            "Christ_Centered_Meaning": "Christ is the 'Lord of the vineyard' who generously gives the 'penny' of eternal life to all who accept His call, regardless of when they come. The wage is not earned; it is the gift of salvation purchased by His blood. The parable teaches us to rejoice in the grace that saves others, rather than comparing our service to theirs. The 'evil eye' of the first laborers is the opposite of the gracious eye of Christ, who looks on all with compassion."
-          }
-        },
-        {
-          "id": "PR051",
-          "question": "What prophetic judgment did Jesus pronounce upon the barren fig tree, as a living parable against having a profession of faith without spiritual fruit?",
-          "options": [
-            "Mark 11:14, 20 - And Jesus answered and said unto it, No man eat fruit of thee hereafter for ever. And his disciples heard it... And in the morning, as they passed by, they saw the fig tree dried up from the roots.",
-            "Mark 11:14, 20 - And Jesus answered and said unto it, I shall eat fruit of thee hereafter for ever. And his disciples heard it... And in the morning, as they passed by, they saw the fig tree full of fruit.",
-            "Mark 11:14, 20 - And Jesus answered and said unto it, No man eat fruit of thee hereafter for a year. And his disciples heard it... And in the morning, as they passed by, they saw the fig tree had lost its leaves.",
-            "Mark 11:14, 20 - And Jesus answered and said unto it, No man eat fruit of thee hereafter for ever. And his disciples heard it... And in the evening, as they passed by, they saw the fig tree dried up from the leaves."
-          ],
-          "answer": "Mark 11:14, 20 - And Jesus answered and said unto it, No man eat fruit of thee hereafter for ever. And his disciples heard it... And in the morning, as they passed by, they saw the fig tree dried up from the roots.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Jesus's curse on the barren fig tree was an acted-out prophecy. The tree had 'leaves,' representing the impressive outward religious profession of the nation of Israel, but 'nothing but leaves'—no spiritual fruit. His prophetic curse, 'No man eat fruit of thee hereafter for ever,' and its swift fulfillment ('dried up from the roots') was a judgment against a fruitless profession. It warns that any church with only an outward show is in danger of the same judgment.",
-            "Importance_of_Wording": "The tree had leaves, which gave the promise of fruit. This is a picture of profession without practice. The curse is absolute and permanent: 'hereafter for ever.' The result is not just withering branches, but being 'dried up from the roots,' signifying a total and irreversible judgment. It was a visible sermon on the consequences of spiritual barrenness.",
-            "Factual_Explanation": "On the Monday of Passion Week, Jesus enacted this prophecy. It was not an act of petulance, but a symbolic judgment against the Jewish nation, which had all the outward forms of religion (the temple, the priesthood, the scriptures) but had failed to produce the fruits of righteousness and had rejected the Messiah.",
-            "Theological_Meaning": "This serves as a prophecy and a solemn warning to the church in all ages. God expects fruit from His people. A profession of faith, doctrinal correctness, and busy activity are worthless if they do not produce the fruit of the Spirit, which is love, joy, peace, and a Christlike character. The church that ceases to bear fruit for the salvation of others is in danger of being cursed and withering away.",
-            "Christ_Centered_Meaning": "Christ is the one who comes seeking fruit. He is the one who inspects the church. He came to His own nation seeking fruit and found none. It is a demonstration of His role as Judge. However, He is also the one who, through His grace, enables us to bear fruit. By abiding in Him, the true Vine, we can avoid the fate of the barren fig tree and produce fruit that will last for eternity (John 15:5)."
-          }
-        },
-        {
-          "id": "PR052",
-          "question": "When the rich young ruler asked about eternal life, what prophetic command did Jesus give that revealed the one idol barring the man from the kingdom?",
-          "options": [
-            "Mark 10:21 - Then Jesus beholding him loved him, and said unto him, One thing thou lackest: go thy way, keep the commandments, and give to the poor, and thou shalt have treasure in heaven: and come, take up the cross, and follow me.",
-            "Mark 10:21 - Then Jesus beholding him loved him, and said unto him, One thing thou lackest: go thy way, sell whatsoever thou hast, and give to the poor, and thou shalt have treasure in heaven: and come, take up the cross, and follow me.",
-            "Mark 10:21 - Then Jesus beholding him rebuked him, and said unto him, One thing thou lackest: go thy way, sell whatsoever thou hast, and give to the poor, and thou shalt have treasure in heaven: and come, take up the cross, and follow me.",
-            "Mark 10:21 - Then Jesus beholding him loved him, and said unto him, Many things thou lackest: go thy way, sell whatsoever thou hast, and give to the poor, and thou shalt have treasure in heaven: and come, take up the cross, and follow me."
-          ],
-          "answer": "Mark 10:21 - Then Jesus beholding him loved him, and said unto him, One thing thou lackest: go thy way, sell whatsoever thou hast, and give to the poor, and thou shalt have treasure in heaven: and come, take up the cross, and follow me.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is a prophetic diagnosis of the young man's spiritual condition. Jesus identifies the 'one thing' that stands between this morally upright man and the kingdom: his love of possessions. The command to 'sell... give... and follow' was a test to reveal the idol in his heart. The man's subsequent grief and departure prophesy the fate of all who love the world more than God, choosing temporary earthly treasure over eternal heavenly treasure.",
-            "Importance_of_Wording": "The text prefaces Jesus's command with 'beholding him loved him,' showing this was not a harsh rebuke but a loving invitation. The phrase 'One thing thou lackest' reveals that even great morality is not enough. The command involves a complete surrender ('sell whatsoever thou hast') and a new allegiance ('come, take up the cross, and follow me'). This is a call to a total transfer of trust from self and wealth to Christ.",
-            "Factual_Explanation": "A rich young ruler came to Jesus, asking how to obtain eternal life. He had kept all the commandments from his youth. Jesus, loving him, gave him this one final test to reveal his heart's true master. The man's failure to meet the test led to Jesus's prophetic teaching on the danger of riches.",
-            "Theological_Meaning": "This is a prophecy of the great test that comes to all people in one form or another. The 'one thing' may be different for each person—it could be riches, reputation, relationships, or pride—but all will be tested on whether they are willing to surrender their ultimate idol to follow Christ completely. The love of money is identified as a 'root of all evil' (1 Timothy 6:10), and this story is a prophetic warning against its power to bar one from heaven.",
-            "Christ_Centered_Meaning": "The young ruler was called to do exactly what Christ Himself had done. Christ, who was rich, for our sakes became poor, selling all He had—the glory of heaven—that we through His poverty might be rich (2 Corinthians 8:9). The command to 'take up the cross, and follow me' is a call to walk the same path of self-sacrificing love that Christ walked. The treasure in heaven He offers is fellowship with Himself, which is infinitely more valuable than any earthly possession."
-          }
-        },
-        {
-          "id": "PR053",
-          "question": "When a skeptical generation demanded a sign, what was the one great prophetic sign Jesus promised would be given, pointing to His death, burial, and resurrection?",
-          "options": [
-            "Matthew 12:40 - For as Jonas was three days and three nights in the whale's belly; so shall the Son of man be three days and three nights in the heart of the earth.",
-            "Matthew 12:40 - For as Moses was forty days and forty nights on the mountain; so shall the Son of man be forty days and forty nights in the heart of the earth.",
-            "Matthew 12:40 - For as Elias was three days and three nights by the brook Cherith; so shall the Son of man be three days and three nights in the heart of the earth.",
-            "Matthew 12:40 - For as Jonas was three days and three nights in Nineveh; so shall the Son of man be three days and three nights in the city of Jerusalem."
-          ],
-          "answer": "Matthew 12:40 - For as Jonas was three days and three nights in the whale's belly; so shall the Son of man be three days and three nights in the heart of the earth.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is Jesus's direct explanation of the one great sign he would give. He takes an Old Testament story—Jonah in the belly of the great fish—and turns it into a direct, explicit prophecy of His own death, burial, and resurrection. This 'sign' is the ultimate historical fact upon which the Christian faith rests. It is the definitive proof of His divinity and authority.",
-            "Importance_of_Wording": "The parallel is specific: 'as Jonas was... so shall the Son of man be.' The timeframe, 'three days and three nights,' prophesies the duration of His stay in the tomb. The location, 'in the heart of the earth,' is a clear reference to His burial. Jonah emerged from the great fish to preach repentance to Nineveh; Christ would emerge from the tomb to offer salvation to the world.",
-            "Factual_Explanation": "When the Pharisees demanded a miraculous sign to prove His authority, Jesus rebuked their sign-seeking attitude and gave them this one, future-oriented prophecy. He was staking His entire claim to be the Messiah on the historical reality of His forthcoming resurrection from the dead.",
-            "Theological_Meaning": "The resurrection is the cornerstone of Christian doctrine. As Paul says, 'If Christ be not risen, then is our preaching vain, and your faith is also vain' (1 Corinthians 15:14). It is the ultimate sign that validates all of Jesus's other claims. It is the proof that His sacrifice for sin was accepted by the Father and that death has been defeated. All other miracles point to this greatest miracle.",
-            "Christ_Centered_Meaning": "Christ Himself is the sign. The prophecy is entirely about His own redemptive act. Just as Jonah's emergence from the fish was a sign to the Ninevites, Christ's emergence from the tomb is God's sign to the world. It is the ultimate confirmation that He is 'a greater than Jonas,' the very Son of God with power over life and death."
-          }
-        },
-        {
-          "id": "PR054",
-          "question": "What prophetic conclusion did Jesus give to the Parable of the Unforgiving Servant, warning that our heavenly Father will revoke His forgiveness if we do not forgive others?",
-          "options": [
-            "Matthew 18:34-35 - And his lord was pleased, and forgave him all that was due unto him. So likewise shall my heavenly Father do also unto you, if ye from your hearts forgive not every one his brother their trespasses.",
-            "Matthew 18:34-35 - And his lord was wroth, and delivered him to the tormentors, till he should pay all that was due unto him. But my heavenly Father shall not do so also unto you, if ye from your hearts forgive not every one his brother their trespasses.",
-            "Matthew 18:34-35 - And his lord was wroth, and delivered him to the tormentors, till he should pay all that was due unto him. So likewise shall my heavenly Father do also unto you, if ye from your hearts forgive not every one his brother their trespasses.",
-            "Matthew 18:34-35 - And his lord was wroth, and delivered him to the tormentors, till he should pay half that was due unto him. So likewise shall my heavenly Father do also unto you, if ye from your hearts forgive not every one his brother their trespasses."
-          ],
-          "answer": "Matthew 18:34-35 - And his lord was wroth, and delivered him to the tormentors, till he should pay all that was due unto him. So likewise shall my heavenly Father do also unto you, if ye from your hearts forgive not every one his brother their trespasses.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This passage is the direct and alarming prophetic conclusion to the Parable of the Unforgiving Servant. It shows that the initial forgiveness of the king was revoked because of the servant's unforgiving spirit. Jesus then turns this story into a direct prophecy of how the final judgment will work: 'So likewise shall my heavenly Father do also unto you...' This shows that an unforgiving heart is evidence that one has never truly accepted God's grace, and it will lead to eternal loss.",
-            "Importance_of_Wording": "The lord was 'wroth' (filled with anger). He 'delivered him to the tormentors'—a complete reversal of his earlier compassion. The key is Jesus's direct application: 'So likewise...' This makes the parable a prophetic statement of a kingdom principle. The forgiveness required is not superficial, but 'from your hearts.' The judgment is based on the evidence of a transformed heart.",
-            "Factual_Explanation": "Peter asked Jesus how often he should forgive his brother. Jesus answered 'seventy times seven' and then told this parable to illustrate the infinite nature of God's forgiveness toward us and the required nature of our forgiveness toward others.",
-            "Theological_Meaning": "This parable does not teach that we earn forgiveness by forgiving. It teaches that a willingness to forgive others is the *evidence* that we have truly understood and received God's forgiveness. An unforgiving spirit is a sign that the heart has not been softened by divine grace. In the investigative judgment, our treatment of others will be brought forth as evidence of our true character and our relationship to God.",
-            "Christ_Centered_Meaning": "The ten thousand talents represent the infinite debt of sin we owe to God, which is impossible for us to repay. Christ, through His sacrifice, paid that infinite debt for us. The hundred pence represents the comparatively tiny offenses others commit against us. When we refuse to forgive a small debt after having been forgiven an infinite one, we show contempt for the grace of Christ. A true appreciation of the cross will always produce a forgiving spirit."
-          }
-        },
-        {
-          "id": "PR055",
-          "question": "What unique, prophetic miracle did Jesus perform to pay the temple tax, demonstrating His lordship over creation and His ability to provide for His followers?",
-          "options": [
-            "Matthew 17:27 - Notwithstanding, lest we should offend them, go thou to the sea, and cast an hook, and take up the fish that first cometh up; and when thou hast opened his mouth, thou shalt find a piece of money: that take, and give unto them for me and thee.",
-            "Matthew 17:27 - Notwithstanding, lest we should offend them, go thou to the marketplace, and cast a net, and take up the money that first cometh to thee; and when thou hast opened thy hand, thou shalt find a piece of money: that take, and give unto them for me and thee.",
-            "Matthew 17:27 - Notwithstanding, lest we should offend them, go thou to the temple, and cast down thy robe, and take up the gift that first cometh to thee; and when thou hast opened it, thou shalt find a piece of money: that take, and give unto them for me and thee.",
-            "Matthew 17:27 - Notwithstanding, lest we should offend them, go thou to the sea, and cast an hook, and take up the fish that first cometh up; and when thou hast opened his mouth, thou shalt find a pearl: that sell, and give unto them for me and thee."
-          ],
-          "answer": "Matthew 17:27 - Notwithstanding, lest we should offend them, go thou to the sea, and cast an hook, and take up the fish that first cometh up; and when thou hast opened his mouth, thou shalt find a piece of money: that take, and give unto them for me and thee.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Jesus, who had just established that as the Son of God He was exempt from the temple tax, chose to pay it anyway 'lest we should offend them.' He then performs a miracle that shows His lordship over nature and His ability to provide for financial needs in the most unexpected way. It is a prophecy in action, assuring believers that when they put God's kingdom first, even their financial obligations can be met through His power.",
-            "Importance_of_Wording": "The instruction is precise: 'go thou to the sea... cast an hook... take up the fish that first cometh up... open his mouth.' This wasn't a random catch; it was a pre-ordained miracle. The coin would be a 'piece of money' (a stater or shekel), the exact amount needed to pay the tax for two people. The final phrase, 'give unto them for me and thee,' shows Jesus identifying with Peter and providing for his need as well as His own.",
-            "Factual_Explanation": "When the collectors of the half-shekel temple tax asked if Jesus paid, Peter rashly said yes. Jesus used the occasion to teach Peter about His true identity and then performed this unique miracle to meet the obligation without causing unnecessary offense.",
-            "Theological_Meaning": "This story teaches several principles. It shows respect for civil and religious order, even when one might be technically exempt. It teaches that our freedom in Christ should not be used as an excuse to be a stumbling block to others. Most importantly, it is a prophetic demonstration of God's ability to provide. It shows that God can provide for those who are faithful to Him in their finances.",
-            "Christ_Centered_Meaning": "Jesus, the Lord of the temple, pays the temple tax. This is an act of incredible humility. He who owns all things provides the money from His own creation to satisfy a human requirement. It is a prophetic picture of His entire mission: He provides out of His own infinite resources the payment that is required of us, whether it is a tax or the infinite debt of sin."
-          }
-        },
-        {
-          "id": "PR056",
-          "question": "What prophetic judgment did Jesus pronounce when cleansing the temple, quoting Isaiah and Jeremiah to condemn its commercialism and declare its true purpose?",
-          "options": [
-            "Mark 11:17 - And he taught, saying unto them, Is it not written, My house shall be called of all nations the house of prayer? but ye have made it a den of thieves.",
-            "Mark 11:17 - And he taught, saying unto them, Is it not written, My house shall be called of all nations the house of sacrifice? but ye have made it a den of iniquity.",
-            "Mark 11:17 - And he taught, saying unto them, Is it not written, My house shall be called of all nations the house of learning? but ye have made it a den of fools.",
-            "Mark 11:17 - And he taught, saying unto them, Is it not written, My house shall be called of all nations the house of praise? but ye have made it a den of silence."
-          ],
-          "answer": "Mark 11:17 - And he taught, saying unto them, Is it not written, My house shall be called of all nations the house of prayer? but ye have made it a den of thieves.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "He quotes two Old Testament prophets to justify his actions. First, from Isaiah 56:7, He states the temple's true purpose: a 'house of prayer for all nations.' Second, from Jeremiah 7:11, He makes his prophetic accusation: 'but ye have made it a den of thieves.' This was a declaration that the worship system had become corrupt and was ripe for judgment.",
-            "Importance_of_Wording": "The contrast is powerful. 'House of prayer' defines its sacred purpose. 'Den of thieves' describes its profane reality, a place where extortion and greed had taken refuge under the cloak of religion. By quoting these prophecies, Jesus was not just offering an opinion; He was acting as the Lord of the temple, reclaiming it and pronouncing judgment on its corruption.",
-            "Factual_Explanation": "This is the second cleansing of the temple, occurring during the final week of Christ's life. His righteous indignation was directed at the system of extortion that had been set up in the Court of the Gentiles, where the poor and the non-Jews were being exploited in the very act of trying to worship God.",
-            "Theological_Meaning": "This is a prophetic act of judgment against apostate worship. Many historicist interpreters see this as a type for God's final judgment on 'Babylon,' the corrupt, end-time religious system described in Revelation. Babylon is a system where commerce and religion are mingled ('merchants of the earth,' Rev. 18) and which has become a 'cage of every unclean and hateful bird.' Christ's cleansing of the temple is a prophecy of His final cleansing of the universe from all such corrupt worship.",
-            "Christ_Centered_Meaning": "Christ's zeal for His Father's house demonstrates His holiness and His passion for pure worship. He is the one who came to cleanse us, His people, who are the true temple of God. His actions show that He cannot tolerate the mixture of the sacred and the profane in our hearts or in His church. He is calling for a reformation, a return to worship that is pure, sincere, and free from the love of money and worldly corruption."
-          }
-        },
-        {
-          "id": "PR057",
-          "question": "What prophetic parable of Jesus describes the kingdom's massive outward growth, while also subtly warning that this visible success can harbor corrupting influences?",
-          "options": [
-            "Matthew 13:31-32 - The kingdom of heaven is like to leaven, which a woman took, and hid in three measures of meal, till the whole was leavened.",
-            "Matthew 13:31-32 - The kingdom of heaven is like unto a merchant man, seeking goodly pearls: Who, when he had found one pearl of great price, went and sold all that he had, and bought it.",
-            "Matthew 13:31-32 - The kingdom of heaven is like to a grain of mustard seed, which a man took, and sowed in his field: Which indeed is the least of all seeds: but when it is grown, it is the greatest among herbs, and becometh a tree, so that the birds of the air come and lodge in the branches thereof.",
-            "Matthew 13:31-32 - The kingdom of heaven is like unto treasure hid in a field; the which when a man hath found, he hideth, and for joy thereof goeth and selleth all that he hath, and buyeth that field."
-          ],
-          "answer": "Matthew 13:31-32 - The kingdom of heaven is like to a grain of mustard seed, which a man took, and sowed in his field: Which indeed is the least of all seeds: but when it is grown, it is the greatest among herbs, and becometh a tree, so that the birds of theair come and lodge in the branches thereof.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This parable prophesies that the church will grow from a tiny beginning to a massive, tree-like structure. However, the detail about the 'birds of the air' lodging in its branches is a subtle prophetic warning. In other parables (like the Sower), birds represent the evil one or demonic influences. This suggests that the visible, organized church, in its quest for size and power, can become a place that harbors corruption and unsanctified elements.",
-            "Importance_of_Wording": "The contrast between the 'least of all seeds' and the 'greatest among herbs' that 'becometh a tree' is a prophecy of the church's spectacular outward growth. The word 'lodge' or 'perch' for the birds implies they are taking shelter and making a home there. The presence of these 'birds' (often a negative symbol in scripture) in the branches of the great 'tree' (the visible church) is a prophetic warning against glorying in mere size and influence.",
-            "Factual_Explanation": "This is one of the seven parables of the kingdom in Matthew 13. It is often paired with the Parable of the Leaven, with both describing the growth of the kingdom, but in different ways.",
-            "Theological_Meaning": "This is a prophecy of the history of the visible Christian church. It grew from a tiny band of disciples into a massive global institution. However, as it grew and gained worldly power and influence (especially after the time of Constantine), it also attracted corruption, political intrigue, and false doctrines ('birds'). It warns against the 'megachurch' mentality that equates size with spiritual success. God is more concerned with the faithfulness of the fruit than the size of the branches.",
-            "Christ_Centered_Meaning": "Christ planted the 'mustard seed' of the gospel. He is the one who gives it life and causes it to grow. However, He is not impressed by outward size or splendor. He is looking for the genuine fruit of the Spirit in the hearts of individuals. The parable is a call for discernment, to distinguish between the legitimate growth of the church and the parasitic, worldly elements that may attach themselves to it. Our safety is not in the size of the 'tree,' but in our personal connection to Christ, the root."
-          }
-        },
-        {
-          "id": "PR058",
-          "question": "What solemn, prophetic warning did Jesus give about the severe judgment reserved for anyone who causes a child-like believer to lose their faith?",
-          "options": [
-            "Mark 9:42 - And whosoever shall reward one of these little ones that believe in me, it is better for him that a crown were hanged about his neck, and he were lifted up to heaven.",
-            "Mark 9:42 - And whosoever shall offend one of these little ones that believe in me, it is better for him that a millstone were hanged about his neck, and he were cast into the sea.",
-            "Mark 9:42 - And whosoever shall offend one of these little ones that believe in me, it is better for him that he be forgiven, and he were brought into the church.",
-            "Mark 9:42 - And whosoever shall teach one of these little ones that believe in me, it is better for him that a book were hanged about his neck, and he were sent to the scribes."
-          ],
-          "answer": "Mark 9:42 - And whosoever shall offend one of these little ones that believe in me, it is better for him that a millstone were hanged about his neck, and he were cast into the sea.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Jesus uses hyperbolic language to express the extreme seriousness of causing a 'little one' (which includes both literal children and new, child-like believers) to 'offend' (stumble or lose their faith). He prophesies that a swift, violent death would be a better fate than the eternal judgment reserved for such a person. It is one of His most severe warnings.",
-            "Importance_of_Wording": "To 'offend' here means to cause to stumble into sin. The 'little ones that believe in me' are especially vulnerable. A 'millstone' was a massive stone, turned by a donkey, used for grinding grain. Tying it around someone's neck and throwing them into the sea was a Roman method of execution for the worst criminals. Jesus is prophesying that the divine punishment for this sin is more horrific than even that terrible earthly fate.",
-            "Factual_Explanation": "In the context of teaching about true greatness in the kingdom (which is child-like humility), Jesus gives this prophetic warning about the sin of being a stumbling block. It underscores the immense value God places on each individual believer, no matter how small or insignificant they may seem.",
-            "Theological_Meaning": "This is a prophecy of the seriousness of spiritual influence. Our actions and words have eternal consequences, not just for ourselves but for others. It is a powerful warning against church leaders, parents, or any influential Christian whose actions (like abuse, hypocrisy, or teaching false doctrine) might cause a trusting soul to turn away from God. The judgment for such sins will be especially severe.",
-            "Christ_Centered_Meaning": "Christ is the great protector of the 'little ones.' His anger against the disciples for hindering the children shows His fierce, loving care for the most vulnerable. He who said 'suffer the little children to come unto me' is the same one who pronounces this woe on those who would drive them away. To cause a child to stumble is to do violence to one for whom Christ died, and He takes that offense personally."
-          }
-        },
-        {
-          "id": "PR059",
-          "question": "What prophecy did Jesus give to a sign-seeking generation, declaring that the repentance of ancient pagans would condemn them in the final judgment?",
-          "options": [
-            "Matthew 12:41-42 - The men of Nineveh shall rise in judgment with this generation, and shall forgive it... The queen of the south shall rise up in the judgment with this generation, and shall praise it...",
-            "Matthew 12:41-42 - The men of Jerusalem shall rise in judgment with this generation, and shall condemn it... The king of Israel shall rise up in the judgment with this generation, and shall condemn it...",
-            "Matthew 12:41-42 - The men of Nineveh shall rise in judgment with this generation, and shall condemn it: because they repented at the preaching of Jonas; and, behold, a greater than Jonas is here. The queen of the south shall rise up in the judgment with this generation, and shall condemn it: for she came from the uttermost parts of the earth to hear the wisdom of Solomon; and, behold, a greater than Solomon is here.",
-            "Matthew 12:41-42 - The men of Nineveh shall not rise in judgment with this generation... because they repented at the preaching of Jonas... The queen of the south shall not rise up in the judgment with this generation... for she came from the uttermost parts of the earth to hear the wisdom of Solomon..."
-          ],
-          "answer": "Matthew 12:41-42 - The men of Nineveh shall rise in judgment with this generation, and shall condemn it: because they repented at the preaching of Jonas; and, behold, a greater than Jonas is here. The queen of the south shall rise up in the judgment with this generation, and shall condemn it: for she came from the uttermost parts of the earth to hear the wisdom of Solomon; and, behold, a greater than Solomon is here.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This two-part prophecy is a powerful statement about future judgment. Jesus prophesies a scene from the final judgment where two groups of Gentiles—the Ninevites and the Queen of Sheba—will act as prosecuting witnesses against the very people who had the Son of God in their midst. This is because they responded positively to a far lesser light (Jonah and Solomon) than the generation that rejected Jesus. It prophesies that accountability in the judgment is based on the light one has received.",
-            "Importance_of_Wording": "In both cases, the pagans 'shall rise up in the judgment... and shall condemn' the privileged generation. The reason for the Ninevites' standing is that they 'repented.' The reason for the queen's standing is that she 'came from the uttermost parts of the earth to hear.' Both showed great effort and humility in response to limited light. Jesus's climactic statements, 'behold, a greater than Jonas is here' and 'a greater than Solomon is here,' underscore the immense privilege His hearers were rejecting.",
-            "Factual_Explanation": "In the context of the Pharisees demanding a sign after rejecting all the signs Jesus had already given, He makes this prophetic statement about the future judgment. He uses these two Old Testament stories to highlight their spiritual blindness and guilt.",
-            "Theological_Meaning": "This is a core principle of divine judgment: to whom much is given, much will be required (Luke 12:48). Those in the modern world who have access to the Bible and the full revelation of the gospel have been given a 'greater' light than any previous generation. To reject this light is a far more serious matter than the sins of those who lived in relative darkness. This prophecy is a solemn warning to all who have the privilege of hearing the full gospel message.",
-            "Christ_Centered_Meaning": "Christ is the one 'greater than Jonas' and 'greater than Solomon.' He is greater than Jonah in His message of repentance and His resurrection (the sign of Jonah). He is greater than Solomon in His wisdom, wealth, and the glory of His kingdom. To reject Him is to reject the ultimate revelation of God. Any missionary can have confidence that the message they preach, which is centered in Christ, is the greatest and most powerful wisdom in the universe."
-          }
-        },
-        {
-          "id": "PR060",
-          "question": "When Jesus commissioned His disciples, what prophetic warning did He give them about the world's reaction to their ministry, followed by a promise for those who persevere?",
-          "options": [
-            "Matthew 10:22 - And ye shall be welcomed of many for my name's sake: but he that starteth the race shall be saved.",
-            "Matthew 10:22 - And ye shall be questioned by all men for my name's sake: but he that answereth to the end shall be saved.",
-            "Matthew 10:22 - And ye shall be hated of all men for my name's sake: but he that endureth to the end shall be saved.",
-            "Matthew 10:22 - And ye shall be known of all men for my name's sake: but he that is first to the end shall be saved."
-          ],
-          "answer": "Matthew 10:22 - And ye shall be hated of all men for my name's sake: but he that endureth to the end shall be saved.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This verse is a direct prophecy that prepares believers for the reality of persecution. Jesus states plainly that His followers 'shall be hated of all men.' Crucially, He gives the reason: 'for my name's sake.' This reframes the hostility not as a personal failure, but as a shared experience with Christ. He then concludes with a prophetic promise: 'he that endureth to the end shall be saved,' linking perseverance through this hatred directly to final salvation.",
-            "Importance_of_Wording": "The phrase 'hated of all men' is a hyperbole signifying widespread, general opposition from the world system. 'For my name's sake' is the key; it means the hatred is because of their identification with Jesus and His character. 'He that endureth to the end' is a call to steadfastness, and 'shall be saved' is the ultimate prophetic hope.",
-            "Factual_Explanation": "While commissioning the twelve disciples for their first mission, Jesus gives them a prophetic preview of the reception the church will receive throughout history. He is managing their expectations, preparing them for opposition and persecution.",
-            "Theological_Meaning": "This is a prophecy of the ongoing Great Controversy. There is an inherent enmity between the spirit of the world and the Spirit of Christ. The world, which loves sin, will naturally hate those whose lives convict it of sin. This hatred will intensify in the last days as the lines between Christ and Satan are drawn more clearly, culminating in a worldwide decree against those who are faithful 'for His name's sake.'",
-            "Christ_Centered_Meaning": "The prophecy is rooted in Christ's own experience. He was hated without a cause. He tells His disciples, 'If the world hate you, ye know that it hated me before it hated you' (John 15:18). To be hated for His name's sake is to be identified with Him, which is the highest honor for a disciple. Our ability to 'endure to the end' comes not from our own strength, but from His power to keep us."
-          }
-        },
-        {
-          "id": "PR061",
-          "question": "To illustrate the kingdom's quiet, internal, yet all-pervading growth, what prophetic parable did Jesus tell His disciples?",
-          "options": [
-            "Matthew 13:33 - The kingdom of heaven is like unto water, which a woman took, and poured on three measures of dust, till the whole was moistened.",
-            "Matthew 13:33 - The kingdom of heaven is like unto leaven, which a woman took, and hid in three measures of meal, till the whole was leavened.",
-            "Matthew 13:33 - The kingdom of heaven is like unto salt, which a woman took, and mixed in three measures of meat, till the whole was seasoned.",
-            "Matthew 13:33 - The kingdom of heaven is like unto a seed, which a woman took, and planted in three measures of soil, till a great plant had grown."
-          ],
-          "answer": "Matthew 13:33 - The kingdom of heaven is like unto leaven, which a woman took, and hid in three measures of meal, till the whole was leavened.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This parable stands in contrast to the Parable of the Mustard Seed (which describes external growth). The Parable of the Leaven prophesies the kingdom's internal, transformative power. The 'leaven' (yeast) is hidden within the meal, working silently and invisibly until it has pervaded and transformed the entire lump. This is a prophetic picture of how the gospel is meant to work in an individual heart and, by extension, within society.",
-            "Importance_of_Wording": "The leaven is 'hid' in the meal, signifying the quiet, often unseen, work of the Holy Spirit in the heart. The 'three measures of meal' was a very large quantity, signifying the totality of the transformation. The process continues 'till the whole was leavened,' prophesying a complete and pervasive change. The agent is a 'woman,' often a symbol of the church, which is the instrument for bringing the gospel to the world.",
-            "Factual_Explanation": "This is one of the seven parables of the kingdom in Matthew 13. It is told immediately after the Parable of the Mustard Seed to provide a complementary perspective on the kingdom's growth.",
-            "Theological_Meaning": "While leaven is often a symbol for sin in the Bible, in this context it represents the powerful, penetrating influence of the kingdom of heaven. This prophecy teaches that the work of the gospel is not always loud and spectacular. Much of its most important work is the quiet transformation of character, which then has a leavening effect on the family, the church, and the community. It is a prophecy of the sanctifying power of the truth.",
-            "Christ_Centered_Meaning": "Christ is the source of the transformative 'leaven' of the kingdom. The truth of His gospel, when received into the heart, cannot remain inert. It works to change our thoughts, our motives, and our actions, until our entire character is brought into harmony with His. The promise that 'the whole was leavened' is a prophecy of the final victory of grace in the life of the fully surrendered believer."
-          }
-        },
-        {
-          "id": "PR062",
-          "question": "In Mark's Olivet Discourse, what prophetic task did Jesus say 'must first' be accomplished, indicating it is the necessary precursor to the final events?",
-          "options": [
-            "Mark 13:10 - And the law must first be established among all nations.",
-            "Mark 13:10 - And the temple must first be rebuilt among all nations.",
-            "Mark 13:10 - And the gospel must first be published among all nations.",
-            "Mark 13:10 - And the prophets must first be heard among all nations."
-          ],
-          "answer": "Mark 13:10 - And the gospel must first be published among all nations.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Mark uniquely places this prophetic imperative—'the gospel must first be published among all nations'—right in the middle of Jesus's warnings about persecution. This prophetic sequencing suggests that the very act of publishing the gospel is what *triggers* the opposition. It is not an unrelated event, but the cause. This encourages the missionary that even if he faces arrest, it is a sign that the prophesied mission is being fulfilled.",
-            "Importance_of_Wording": "The word 'must' denotes a divine necessity; this is a non-negotiable part of God's plan. 'First' gives it chronological priority. 'Published' (kērychthēnai) means to be proclaimed like a herald. 'Among all nations' shows its universal scope. The placement of this verse implies that the 'testimony against them' (v. 9) is given through the act of gospel proclamation.",
-            "Factual_Explanation": "In Mark's account of the Olivet Discourse, this verse serves as a crucial link. The disciples are told they will be brought before councils and kings, and the reason is because the gospel 'must first be published.' The trials themselves become a forum for publishing the gospel to the highest authorities.",
-            "Theological_Meaning": "This prophecy shows that mission is the engine of prophetic history. The final events of the Great Controversy do not unfold in a vacuum; they are precipitated by the church's faithfulness to its mission. When the final warning message of the Three Angels is proclaimed with power, it will polarize the world and lead to the final crisis. Opposition is a sign that the mission is hitting its mark.",
-            "Christ_Centered_Meaning": "Christ Himself is the gospel. To 'publish the gospel' is to lift up Christ before all nations. He prophesied that 'if I be lifted up from the earth, will draw all men unto me' (John 12:32). This drawing of people to Him and away from the kingdom of darkness is what provokes the persecution. The missionary can be confident that even in a closed country, as he lifts up Christ, he is fulfilling this divine, prophetic necessity."
-          }
-        },
-        {
-          "id": "PR063",
-          "question": "What two brief parables did Jesus use to prophesy about the supreme value of the kingdom, which would cause a person to joyfully give up all they have to obtain it?",
-          "options": [
-            "Matthew 13:44, 45-46 - The kingdom of heaven is like unto a lost sheep... Again, the kingdom of heaven is like unto a lost coin...",
-            "Matthew 13:44, 45-46 - The kingdom of heaven is like unto treasure hid in a field... Again, the kingdom of heaven is like unto a sower who went forth to sow...",
-            "Matthew 13:44, 45-46 - The kingdom of heaven is like unto treasure hid in a field; the which when a man hath found, he hideth, and for joy thereof goeth and selleth all that he hath, and buyeth that field. Again, the kingdom of heaven is like unto a merchant man, seeking goodly pearls: Who, when he had found one pearl of great price, went and sold all that he had, and bought it.",
-            "Matthew 13:44, 45-46 - The kingdom of heaven is like unto a great inheritance... Again, the kingdom of heaven is like unto a faithful servant..."
-          ],
-          "answer": "Matthew 13:44, 45-46 - The kingdom of heaven is like unto treasure hid in a field; the which when a man hath found, he hideth, and for joy thereof goeth and selleth all that he hath, and buyeth that field. Again, the kingdom of heaven is like unto a merchant man, seeking goodly pearls: Who, when he had found one pearl of great price, went and sold all that he had, and bought it.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This pair of parables prophesy the response of a person who discovers something of supreme value. The man who finds the hidden treasure and the merchant who finds the one great pearl both have the same reaction: they joyfully sell 'all that they have' to acquire it. These parables prophesy that when a person truly understands the value of the gospel, the sacrifice of everything else is not a painful loss, but a joyful exchange.",
-            "Importance_of_Wording": "In the first parable, the man finds the treasure by chance. In the second, the merchant is actively seeking. This shows the kingdom comes to people in different ways. But the response is identical: they 'sell all.' The key emotion in the first parable is 'for joy thereof,' showing that the sacrifice is not made grudgingly. The 'one pearl of great price' shows the singular, incomparable value of Christ and His salvation.",
-            "Factual_Explanation": "These are two of the seven parables of the kingdom in Matthew 13. They are told as a pair to illustrate the supreme worth of the kingdom and the joyful surrender it inspires.",
-            "Theological_Meaning": "These parables prophesy the experience of true conversion. When a person discovers the truth of the gospel and the beauty of Christ, all other worldly ambitions—wealth, fame, power—become insignificant by comparison. The cost of discipleship, which seems so high from the outside, is seen as a bargain by the one who has found the treasure. It is a prophetic call to value the kingdom above all else.",
-            "Christ_Centered_Meaning": "Christ Himself is the 'treasure' and the 'pearl of great price.' To find Him is to find everything. There is another beautiful interpretation: Christ is the merchant who saw the 'pearl of great price'—lost humanity. He 'sold all that he had,' leaving the riches of heaven and giving His own life, to 'buy' us back from sin and make us His own treasured possession. Our joyful surrender of all for Him is but a faint reflection of His joyful surrender of all for us."
-          }
-        },
-        {
-          "id": "PR064",
-          "question": "When the Sadducees, who denied the resurrection, tried to trap Jesus, what was His prophetic diagnosis of the twofold root of their error?",
-          "options": [
-            "Matthew 22:29 - Jesus answered and said unto them, Ye do err, not keeping the traditions, nor the law of God.",
-            "Matthew 22:29 - Jesus answered and said unto them, Ye do err, not loving the scriptures, nor the wisdom of God.",
-            "Matthew 22:29 - Jesus answered and said unto them, Ye do err, not reading the prophets, nor the signs of God.",
-            "Matthew 22:29 - Jesus answered and said unto them, Ye do err, not knowing the scriptures, nor the power of God."
-          ],
-          "answer": "Matthew 22:29 - Jesus answered and said unto them, Ye do err, not knowing the scriptures, nor the power of God.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This is Jesus's prophetic diagnosis of the root cause of theological error. He states that all error stems from two foundational failures: ignorance of 'the scriptures' (which reveal God's will and promises) and ignorance of 'the power of God' (which can accomplish what the scriptures promise). This is a timeless prophecy about the twin pillars of true faith: God's Word and God's power.",
-            "Importance_of_Wording": "The diagnosis is a couplet: 'not knowing the scriptures' (a lack of information) and 'nor the power of God' (a lack of faith in His ability). One can have one without the other. The Pharisees knew the scriptures but denied God's power to work outside their traditions. The Sadducees (and modern skeptics) deny both. Jesus says this dual ignorance is the cause of their 'error.'",
-            "Factual_Explanation": "When the Sadducees, who denied the resurrection, tried to trap Jesus with a logical puzzle, Jesus began His rebuttal with this profound diagnosis. He showed that their 'rational' objection was rooted in a failure to believe both what God has said and what God can do.",
-            "Theological_Meaning": "This is a prophetic statement about the nature of all apostasy and false doctrine. Any deviation from the truth can ultimately be traced back to one of these two failures. Either people do not know what the Bible plainly says, or they do not believe God has the power to do it. The remedy for error is a return to a simple faith in the Word of God and the omnipotence of God.",
-            "Christ_Centered_Meaning": "Christ is the living 'Word of God' (the embodiment of the scriptures) and He is the 'power of God' (1 Corinthians 1:24). To know Him is to know both the scriptures and the power of God. The Sadducees' error was a rejection of Him. The resurrection they denied is the very event that demonstrated He is both the fulfillment of Scripture and the ultimate manifestation of God's power. The answer to all skepticism is found in knowing Jesus Christ."
-          }
-        },
-        {
-          "id": "PR065",
-          "question": "After Mary of Bethany anointed Jesus with precious ointment, what prophetic promise did He make regarding her act of devotion?",
-          "options": [
-            "Mark 14:9 - Verily I say unto you, Wheresoever this gospel shall be preached throughout the whole world, this also that she hath done shall be spoken of for a memorial of her.",
-            "Mark 14:9 - Verily I say unto you, Wheresoever this woman shall go throughout the whole world, this also that she hath done shall be spoken of for a memorial of her.",
-            "Mark 14:9 - Verily I say unto you, Wheresoever this gospel shall be preached throughout the whole world, her name also shall be spoken of for a memorial of her.",
-            "Mark 14:9 - Verily I say unto you, Wheresoever this gospel shall be preached throughout the whole world, a great reward shall be given to her for a memorial of her."
-          ],
-          "answer": "Mark 14:9 - Verily I say unto you, Wheresoever this gospel shall be preached throughout the whole world, this also that she hath done shall be spoken of for a memorial of her.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Jesus takes a single, spontaneous act of devotion by a woman (Mary of Bethany) and elevates it with a stunning prophecy. He declares that her story will become a permanent part of the gospel message itself, told 'throughout the whole world' as a 'memorial of her.' This is a prophecy that has been, and continues to be, fulfilled every time the gospel story is told.",
-            "Importance_of_Wording": "'Verily I say unto you' is Jesus's stamp of absolute authority and certainty. 'Wheresoever this gospel shall be preached' links her act inextricably to the mission of the church. 'This also that she hath done shall be spoken of' is the specific prediction. 'For a memorial of her' is the purpose, ensuring her act of love would never be forgotten.",
-            "Factual_Explanation": "In response to the disciples' indignation at the 'waste' of the precious ointment, Jesus rebuked them and gave this prophecy. He first gave a prophetic interpretation of her act ('she is come aforehand to anoint my body to the burying'), and then gave a prophetic promise about the remembrance of her act.",
-            "Theological_Meaning": "This prophecy teaches that God sees and values acts of sincere, sacrificial love far more than humans do. The disciples saw a financial loss; Jesus saw a beautiful act of worship and preparation for His death. It shows that true devotion, even if misunderstood by others, is recorded in heaven and has eternal significance. It is a powerful encouragement to all who serve God in quiet, unseen ways.",
-            "Christ_Centered_Meaning": "Mary's anointing of Jesus was an act of profound love and faith. While the disciples were still arguing about the kingdom, she seemed to uniquely grasp the reality of His impending death and ministered to Him for His burial. Her act stands in stark contrast to Judas's betrayal, which was being plotted at the same time. The fragrance of her perfume filled the house, a symbol of the sweet savor of Christ's sacrifice which fills the whole world. The prophecy is a testimony to the power of a heart completely devoted to Christ."
-          }
-        },
-        {
-          "id": "PR066",
-          "question": "As Jesus departed the temple for the last time, what shocking prophecy did He give His disciples about the fate of its magnificent buildings?",
-          "options": [
-            "Mark 13:2 - And Jesus answering said unto him, Seest thou these great buildings? there shall be a great earthquake, and some stones shall be thrown down.",
-            "Mark 13:2 - And Jesus answering said unto him, Seest thou these great buildings? there shall not be left one stone upon another, that shall not be rebuilt in the last days.",
-            "Mark 13:2 - And Jesus answering said unto him, Seest thou these great buildings? there shall not be left one stone upon another, that shall not be thrown down.",
-            "Mark 13:2 - And Jesus answering said unto him, Seest thou these great buildings? there shall be a fire from heaven, and the gold thereof shall be melted down."
-          ],
-          "answer": "Mark 13:2 - And Jesus answering said unto him, Seest thou these great buildings? there shall not be left one stone upon another, that shall not be thrown down.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "In response to the disciples' admiration of the temple's massive stones, Jesus makes a stark and absolute prophecy of its total destruction. This was not a vague warning of damage, but a prediction of complete obliteration, which was fulfilled with shocking precision by the Roman armies.",
-            "Importance_of_Wording": "The prophecy is absolute. 'Not one stone upon another' allows for no exceptions. The phrase 'that shall not be thrown down' emphasizes the violence and completeness of the demolition. Given that some of the temple stones were massive (weighing many tons), this prophecy would have seemed unbelievable to the disciples, yet it came true exactly as stated.",
-            "Factual_Explanation": "As Jesus left the temple for the last time, His disciples commented on its magnificence. He responded with this shocking prophecy. This statement is what prompted them to come to Him privately on the Mount of Olives and ask the questions that led to the Olivet Discourse (Mark 13, Matthew 24).",
-            "Theological_Meaning": "The literal fulfillment of this short-term prophecy is the guarantee of the literal fulfillment of all the long-term prophecies that follow in the same discourse. If Jesus was exactly right about the temple, we can trust that He is exactly right about the signs of His coming and the end of the world. The destruction of the temple also symbolized the end of the sacrificial system, which had been made obsolete by Christ's impending sacrifice.",
-            "Christ_Centered_Meaning": "The temple was the dwelling place of God's presence in the Old Testament. Jesus, in prophesying its destruction, was signaling that the dwelling place of God was no longer to be a building made with hands, but was now centered in Himself. He is the true temple. The destruction of the physical temple was a judgment on a nation that had rejected the one to whom the temple had always pointed."
-          }
-        },
-        {
-          "id": "PR067",
-          "question": "At the Transfiguration, after Moses and Elijah appeared, what prophetic command did the voice of God the Father give from the cloud, establishing Jesus's supreme authority?",
-          "options": [
-            "Matthew 17:5 - ...This is my beloved Son, in whom I am well pleased; build ye him a tabernacle.",
-            "Matthew 17:5 - ...This is my beloved Son, in whom I am well pleased; hear ye him.",
-            "Matthew 17:5 - ...This is my beloved Son, in whom I am well pleased; write ye this vision.",
-            "Matthew 17:5 - ...This is my beloved Son, in whom I am well pleased; follow ye them also."
-          ],
-          "answer": "Matthew 17:5 - While he yet spake, behold, a bright cloud overshadowed them: and behold a voice out of the cloud, which said, This is my beloved Son, in whom I am well pleased; hear ye him.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Just as Peter was putting Jesus on the same level as Moses (representing the Law) and Elijah (representing the Prophets), the voice of God the Father intervenes. He first affirms Jesus's unique identity ('This is my beloved Son') and then gives the supreme prophetic command for the entire Christian era: 'hear ye him.' This establishes Jesus's authority as being superior to and the fulfillment of all that came before.",
-            "Importance_of_Wording": "The Father's declaration is twofold. 'This is my beloved Son, in whom I am well pleased' is a statement of identity and relationship. 'Hear ye him' is the resulting command. It is universal and absolute. From this point forward, the Law and the Prophets must be understood through the lens of Jesus's teachings. When the vision ends, the disciples see 'Jesus only' (v. 8), reinforcing the message that He is now the supreme focus.",
-            "Factual_Explanation": "At the height of the Transfiguration, as Peter was making his ill-advised suggestion, the Shekinah glory cloud of God's presence enveloped them, and the Father's voice spoke these words. This is one of the few times in the Gospels that the Father's audible voice is heard.",
-            "Theological_Meaning": "This is a prophetic declaration that a new age of revelation has dawned. While the Law and the Prophets are still holy, just, and good, their ultimate meaning and authority are now found in the Son. It is a command to the church for all time to test every teaching and every tradition against the words and character of Jesus. He is the ultimate authority.",
-            "Christ_Centered_Meaning": "The command 'hear ye him' is the essence of discipleship. It points to Christ as the ultimate prophet, priest, and king. He is the Word made flesh. Moses spoke about Him, and Elijah prophesied His coming, but He is the reality to which they pointed. All scripture finds its true meaning and purpose in Him."
-          }
-        },
-        {
-          "id": "PR068",
-          "question": "In His prophecy of the final judgment, how did Jesus describe the separation of the righteous from the wicked, using the analogy of a shepherd?",
-          "options": [
-            "Matthew 25:32-33 - And before him shall be gathered all nations: and he shall separate them one from another, as a farmer divideth his wheat from the tares: And he shall set the wheat on his right hand, but the tares on the left.",
-            "Matthew 25:32-33 - And before him shall be gathered all nations: and he shall separate them one from another, as a fisherman divideth his good fish from the bad: And he shall set the good on his right hand, but the bad on the left.",
-            "Matthew 25:32-33 - And before him shall be gathered all nations: and he shall join them one to another, as a shepherd gathereth his sheep and his goats: And he shall set the sheep and the goats on his right hand.",
-            "Matthew 25:32-33 - And before him shall be gathered all nations: and he shall separate them one from another, as a shepherd divideth his sheep from the goats: And he shall set the sheep on his right hand, but the goats on the left."
-          ],
-          "answer": "Matthew 25:32-33 - And before him shall be gathered all nations: and he shall separate them one from another, as a shepherd divideth his sheep from the goats: And he shall set the sheep on his right hand, but the goats on the left.",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "This passage describes the prophetic scene of the final judgment. The judgment is portrayed not as a complex trial, but as a simple, decisive 'separation.' The analogy of a shepherd separating his own sheep from the goats is key. It implies that the two groups are already distinct in their nature and character; the judgment merely makes this existing reality public and final. This reframes the judgment from a terrifying trial to a logical conclusion of the lives people have chosen to live.",
-            "Importance_of_Wording": "The King is also the 'shepherd.' The separation is as natural as a shepherd's daily task. The criteria for separation are not arbitrary but are based on the inherent nature of the animals—sheep follow the shepherd, goats are stubborn and independent. This illustrates that the final judgment is based on character, which has been formed over a lifetime of choices. The 'right hand' is the place of honor and blessing, while the 'left hand' is the place of disfavor.",
-            "Factual_Explanation": "This is Jesus's final parable in the Olivet Discourse, describing the scene of the judgment of the nations that will take place at His second coming. It follows the parables of readiness (Ten Virgins) and faithfulness (Talents) and reveals the ultimate criterion for entering the kingdom.",
-            "Theological_Meaning": "This prophetic parable reveals that the final judgment is not an arbitrary decision God makes at the end, but a ratification of the choices we have made throughout our lives. Our characters are being formed daily. By choosing to follow the Shepherd and live lives of love and service, we are developing the character of the 'sheep.' By choosing to live for self, we develop the character of the 'goats.' The judgment reveals what we have chosen to become.",
-            "Christ_Centered_Meaning": "Christ is the Shepherd-King who presides over the judgment. The 'sheep' are those who have heard His voice and followed Him (John 10:27). Their acts of kindness to the 'least of these' are not the means of their salvation, but the evidence of it. They are the natural outflow of a heart that has been transformed by the love of the Good Shepherd. The judgment is ultimately a separation between those who have a saving relationship with Christ and those who do not."
-          }
-        },
-        {
-          "id": "PR069",
-          "question": "What prophetic 'woe' did Jesus pronounce, acknowledging that offenses are inevitable in a fallen world, but promising specific judgment on the person responsible for causing them?",
-          "options": [
-            "Matthew 18:7 - Blessed is the world because of offences! for it must needs be that offences come; but blessed is that man by whom the offence cometh!",
-            "Matthew 18:7 - Woe unto the world because of offences! for it must needs be that offences come; but blessed is that man by whom forgiveness cometh!",
-            "Matthew 18:7 - Woe unto the world because of offences! for it must needs be that offences come; but woe to that man by whom the offence cometh!",
-            "Matthew 18:7 - Woe unto the world because of offences! for it need not be that offences come; but woe to that man by whom the offence cometh!"
-          ],
-          "answer": "Matthew 18:7 - Woe unto the world because of offences! for it must needs be that offences come; but woe to that man by whom the offence cometh!",
-          "category": "Prophecy",
-          "explanation": {
-            "Relevance_and_Correctness": "Jesus acknowledges that in a sinful world, offenses (stumbling blocks, causes of sin) are inevitable. But He immediately follows this with a prophetic 'woe'—a declaration of judgment—on the specific person who causes others to stumble. This provides assurance that God sees and will hold accountable those who oppress the vulnerable and lead them into sin or despair.",
-            "Importance_of_Wording": "The first 'Woe unto the world' is a statement of grief over the fallen state of humanity. The second, 'but woe to that man by whom the offence cometh!', is a sharp, personal prophecy of judgment. It pinpoints accountability. While the world is full of sin, the person who actively causes another to sin or lose faith bears a terrible responsibility and will face a specific, dreadful judgment.",
-            "Factual_Explanation": "In His discourse on humility and the value of 'little ones,' Jesus gives this solemn prophetic warning. It follows His statement about the millstone, emphasizing God's perspective on the sin of causing others to stumble.",
-            "Theological_Meaning": "This is a prophecy of divine justice. It teaches that God is not a passive observer of oppression and abuse. While sin is a general problem, God holds individuals accountable for their influence on others. This is particularly true for those in positions of power or trust who abuse it. The final judgment will be a time of perfect and just reckoning for all such offenses.",
-            "Christ_Centered_Meaning": "Christ is the great defender of the 'little ones.' The 'woe' He pronounces comes from a heart of love that is fiercely protective of the vulnerable. He is the righteous Judge who will one day call every oppressor to account. This prophecy provides the assurance that suffering is not the final word. Justice will be done by the one who gave His life to save the very people being oppressed."
-          }
-        }
+    "id": "BP001",
+    "question": "The Psalmist David, surrounded by nations worshipping gods of wood and stone, looks to the heavens and the earth. He seeks the ultimate truth about origins, a foundation for true worship that counters the chaotic myths of his neighbors. What foundational declaration in the Law of Moses establishes the singular, purposeful origin of the universe?",
+    "options": [
+        "Genesis 1:1 - In the beginning the Lord formed the heaven and the earth.",
+        "Genesis 1:1 - In the beginning God created the heaven and the earth.",
+        "Genesis 1:1 - At the first God made the heavens and the world.",
+        "Genesis 1:1 - In the beginning God brought forth the firmament and the land."
+    ],
+    "answer": "Genesis 1:1 - In the beginning God created the heaven and the earth.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse is the bedrock of all biblical truth, directly answering the search for ultimate origins. It demolishes polytheistic and pantheistic worldviews by establishing a single, all-powerful 'God' who existed before all things and initiated the universe with purpose and order, providing the only logical foundation for worship.",
+        "Importance_of_Wording": "The specific words are divinely chosen. 'Created' is from the Hebrew *bara'*, a verb exclusively used for God's unique power to bring something into existence from nothing. It is distinct from 'formed' (*yatsar*) or 'made' (*asah*), which imply shaping pre-existing material. 'God' (*Elohim*) is the title used, emphasizing His majestic power and role as the universal Creator, whereas 'the Lord' (*Yahweh*) is the covenant name of God, revealed later in His personal relationship with humanity.",
+        "Factual_Explanation": "Genesis 1:1 is a summary statement for the entire creation account. It declares that time, space, and matter are not eternal but had a definitive starting point, brought into being by the transcendent will of God. This majestic opening sets the stage for the detailed account of the six days of creation that follows.",
+        "Theological_Meaning": "This verse is the ultimate antidote to atheism, materialism, and paganism. It establishes God's sovereignty and ownership over all things. This truth is the foundation for the fourth commandment, as the Sabbath is a weekly memorial of this creative act (Exodus 20:11). The final gospel message to a world steeped in evolutionary theory and false worship is a call back to this very truth: to 'worship him that made heaven, and earth, and the sea, and the fountains of waters' (Revelation 14:7).",
+        "Christ_Centered_Meaning": "The New Testament illuminates that the 'God' of Genesis 1 was a divine plurality, with Christ as the active agent. John 1:3 states, 'All things were made by him; and without him was not any thing made that was made.' (See also Colossians 1:16). The same Word who spoke worlds into existence is the One who offers to recreate a sinner's heart (2 Corinthians 5:17) and will ultimately make 'all things new' in the final restoration (Revelation 21:5)."
+    }
+},
+{
+    "id": "BP002",
+    "question": "At the pinnacle of Creation week, God performs His most intimate creative act, forming a being designed to reflect His own character and rule as a steward over the earth. What precise language does the Bible use to describe this unique creation, establishing the inherent dignity and shared nature of humanity?",
+    "options": [
+        "Genesis 1:27 - So God formed man in his image, after his likeness created he him; man and woman created he them.",
+        "Genesis 1:27 - Thus God created man in his own likeness, in the likeness of God created he him; male and female he made them.",
+        "Genesis 1:27 - So God created man in his own image, in the image of God created he him; male and female created he them.",
+        "Genesis 1:27 - And God made man in his own image, in the very image of God he made him; as male and as female he made them."
+    ],
+    "answer": "Genesis 1:27 - So God created man in his own image, in the image of God created he him; male and female created he them.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse defines the essence of humanity. It reveals we are not an accident of evolution but the deliberate masterpiece of God, bearing His 'image.' This truth establishes the basis for human value, purpose, and the sacredness of the marriage institution, founded on the original 'male and female' design.",
+        "Importance_of_Wording": "'Created' (*bara'*) is used three times, emphasizing the divine and miraculous origin of humanity. 'Image' (*tselem*) refers to the very essence and character—the moral, intellectual, and spiritual faculties—that reflect God. While verse 26 mentions 'likeness,' verse 27 crystallizes the act using the definitive term 'image.' The phrase 'male and female' underscores that this complete image is reflected in humanity's complementary duality.",
+        "Factual_Explanation": "This verse is a poetic and powerful declaration of humanity's origin. Unlike animals, man was made in God's image. This act is repeated for emphasis, underscoring its significance. It establishes that from the beginning, God's plan included two distinct but equal sexes, created to form a complete whole.",
+        "Theological_Meaning": "The 'image of God' is the foundation for all human rights and the reason murder is condemned so severely (Genesis 9:6). The Fall marred this image, but it did not erase it. The plan of salvation is the process of restoring this image in believers. This original, binary design of 'male and female' stands as God's unchanging standard for human sexuality and family, a truth of increasing importance in a morally confused world.",
+        "Christ_Centered_Meaning": "Christ is the perfect and express 'image of the invisible God' (Colossians 1:15). It is only through a connection with Him that the marred image of God in fallen humanity can be restored. As believers behold Him, they are 'changed into the same image from glory to glory' (2 Corinthians 3:18). At His second coming, the redeemed will fully reflect that glorious image, for 'we shall be like him; for we shall see him as he is' (1 John 3:2)."
+    }
+},
+{
+    "id": "BP003",
+    "question": "After six days of forming and filling the earth, God did not simply cease His work; He instituted a memorial of His creative power by consecrating a specific portion of time itself. What is the exact biblical declaration of how God established this sacred institution at the close of creation week?",
+    "options": [
+        "Genesis 2:3 - And God blessed the sabbath day, and hallowed it: because that in it he had rested from all his work which God had made.",
+        "Genesis 2:3 - And God blessed the seventh day, and sanctified it: because that in it he had rested from all his work which God created and made.",
+        "Genesis 2:3 - And the Lord blessed the seventh day, and made it holy: for in it he rested from his work which the Lord created and made.",
+        "Genesis 2:3 - And God blessed the seventh day, and sanctified it: because in it he had ceased from all his labor which God created to make."
+    ],
+    "answer": "Genesis 2:3 - And God blessed the seventh day, and sanctified it: because that in it he had rested from all his work which God created and made.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse documents the origin of the seventh-day Sabbath, not as a Jewish institution, but as a universal memorial for all humanity, established at the foundation of the world. It reveals that the sacredness of the day is rooted in God's own actions at creation.",
+        "Importance_of_Wording": "The specific actions are key: God 'blessed' it (infused it with divine favor and made it a channel of blessing), and 'sanctified' it (set it apart from all other days for a holy purpose). The reason given is that He 'rested'—not from exhaustion, but in satisfaction. The phrase 'which God created and made' is comprehensive, covering both the initial acts of *bara'* (creating from nothing) and the subsequent acts of *asah* (making/forming).",
+        "Factual_Explanation": "On the seventh day, God established a cycle of work and rest for humanity to follow. He set a divine precedent. The holiness of the day is not based on human decree but on God's own choice and actions. This act consecrated a segment of time, making it a perpetual, holy appointment with the Creator.",
+        "Theological_Meaning": "The Sabbath is a timeless sign of God's authority as Creator, a weekly reminder that He is the source of all life and that we are His creatures. It is a guard against human pride and self-sufficiency. In the final conflict over worship, the Sabbath will be a central issue, a seal of loyalty to the Creator God in contrast to allegiance to a human-derived power (Revelation 13-14). Observing it is an act of faith, acknowledging God's complete work in both creation and redemption.",
+        "Christ_Centered_Meaning": "Jesus declared Himself 'Lord even of the sabbath day' (Matthew 12:8), reclaiming it from legalistic traditions and restoring its original purpose as a day of healing, liberation, and blessing. The Sabbath is a symbol of the 'rest' we find from our own works of salvation when we trust in the finished work of Christ on the cross (Hebrews 4:9-10). It points to the past (creation), the present (rest in Christ), and the future (the eternal rest in the new earth)."
+    }
+},
+{
+    "id": "BP004",
+    "question": "Ancient philosophies often depict humanity possessing an immortal spark or soul trapped within a mortal body. The biblical account, however, presents a holistic and integrated view of human existence. What verse describes the precise formula by which God animated the first man, defining what a 'soul' truly is?",
+    "options": [
+        "Genesis 2:7 - And the LORD God formed man of the clay of the earth, and breathed into his nostrils the breath of life; and man received a living soul.",
+        "Genesis 2:7 - And the LORD God made man of the dust of the ground, and put into him the spirit of life; and man became a living being.",
+        "Genesis 2:7 - And the LORD God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.",
+        "Genesis 2:7 - And God formed man of the dust of the ground, and breathed into his mouth the breath of life; and the man was made a living soul."
+    ],
+    "answer": "Genesis 2:7 - And the LORD God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse is the cornerstone of biblical anthropology. It answers the fundamental question, 'What is a human being?' by defining a 'living soul' not as a separate entity that inhabits a body, but as the result of a divine combination.",
+        "Importance_of_Wording": "The phrase 'became a living soul' is critical. Man did not *receive* a soul; the combination of the 'dust of the ground' (the physical body) and the 'breath of life' (the life-force from God) *resulted* in a living, breathing, conscious being, a *nephesh chayyah* (living soul). The distinction refutes the unbibical idea of an inherently immortal soul that can exist apart from the body.",
+        "Factual_Explanation": "The verse outlines a two-step process: God first 'formed' man, like a potter with clay, from the elements of the earth. The body was lifeless until the second step, when God imparted the 'breath of life,' an act that energized the body and brought consciousness. The result of this union is a 'living soul'—a complete person.",
+        "Theological_Meaning": "This understanding is vital to comprehending the state of the dead. If a 'living soul' is the union of body and breath, then at death, when the body returns to dust and the breath returns to God who gave it (Ecclesiastes 12:7), the 'living soul' ceases to exist as a conscious entity. Consciousness is restored only at the resurrection, when God reunites body and breath. This truth protects believers from spiritualistic deceptions that rely on the premise of communication with conscious spirits of the dead.",
+        "Christ_Centered_Meaning": "1 Corinthians 15:45 contrasts the two heads of humanity: 'The first man Adam was made a living soul; the last Adam was made a quickening spirit.' While Adam received life, Christ *gives* life—eternal life. The same divine breath that gave life to Adam at creation is a picture of the Holy Spirit, who breathes spiritual life into the believer, making them a new creation in Christ (John 20:22)."
+    }
+},
+{
+    "id": "BP005",
+    "question": "After the tragic fall of humanity, where Adam and Eve disobeyed a direct command, God pronounces judgments upon the serpent, the woman, and the man. Yet, embedded within the curse on the serpent is the very first glimmer of hope, a prophecy of a future conflict and ultimate victory. What is this foundational gospel promise?",
+    "options": [
+        "Genesis 3:15 - And I will put hatred between thee and the woman, and between thy seed and her offspring; he shall crush thy head, and thou shalt strike his heel.",
+        "Genesis 3:15 - And I will put enmity between thee and the woman, and between thy seed and her seed; it shall bruise thy head, and thou shalt bruise his heel.",
+        "Genesis 3:15 - And I will put enmity between thee and the woman, and between thy serpent and her child; he will crush thy head, and you will bruise his foot.",
+        "Genesis 3:15 - And there shall be enmity between thee and the woman, and between thy offspring and her offspring; it will bruise thy head, and thou wilt bruise its heel."
+    ],
+    "answer": "Genesis 3:15 - And I will put enmity between thee and the woman, and between thy seed and her seed; it shall bruise thy head, and thou shalt bruise his heel.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "Known as the *Protoevangelium* (first gospel), this verse is the seed from which the entire plan of redemption unfolds. Spoken in the context of humanity's deepest despair, it is God's unilateral declaration of war against evil and His promise of a victorious Savior.",
+        "Importance_of_Wording": "The word 'enmity' (a deep-seated hostility) is God-given; humanity cannot generate this spiritual opposition on its own. The 'seed of the woman' is a remarkable phrase, as lineage was biblically traced through the man; this points prophetically to a miraculous, virgin birth. The actions are specific: the serpent's seed would 'bruise his heel'—a painful but non-fatal wound (representing Christ's suffering and death). In contrast, the woman's Seed would 'bruise thy head'—a mortal, crushing blow (representing Christ's ultimate victory over Satan at the cross and his final destruction).",
+        "Factual_Explanation": "God is addressing the serpent (Satan) directly. He foretells a perpetual conflict between two lineages: the spiritual descendants of Satan ('thy seed') and the spiritual and literal descendants of the woman ('her seed'), culminating in a specific male descendant. This individual ('it' or 'he') would suffer but would ultimately destroy the deceiver.",
+        "Theological_Meaning": "This verse establishes that the war between Christ and Satan is the central theme of Scripture—the Great Controversy. It teaches that there is no natural harmony between the church ('the woman') and the world ('the serpent'). God Himself places the 'enmity' in the hearts of those who choose Him, leading them to resist sin. This promise sustained the faith of believers for millennia, from Abel to the prophets, who looked forward to the coming of the promised Seed.",
+        "Christ_Centered_Meaning": "This is the first prophecy of Jesus Christ. He is the 'seed of the woman' (Galatians 4:4). His life, suffering, and death were the 'bruising of the heel.' His resurrection and victory over sin and death was the 'bruising of the head' of the serpent (Hebrews 2:14). This one verse contains the entire gospel in miniature, assuring believers that while the battle against evil is real and painful, the outcome has already been secured by their Champion."
+    }
+},
+{
+    "id": "BP006",
+    "question": "The first act of worship after the Fall reveals a stark contrast between two approaches to God. One son brought an offering that was accepted, while the other brought one that was rejected, leading to the first murder. What does the scripture say God instructed Cain, revealing the nature of sin and the path to acceptance?",
+    "options": [
+        "Genesis 4:7 - If thou doest well, shalt thou not be accepted? and if thou doest not well, sin is at the door. And unto thee shall be his desire, and thou shalt rule over him.",
+        "Genesis 4:7 - If you do right, will you not be received? But if you do wrong, sin is crouching at your door; it desires you, but you must overcome it.",
+        "Genesis 4:7 - If thou doest well, shalt thou not be accepted? and if thou doest not well, sin lieth at the door. And unto thee shall be his desire, and thou shalt rule over him.",
+        "Genesis 4:7 - If thou doest well, will I not accept thee? but if not, sin waits at the door. And its desire is for thee, and thou shouldest have dominion over it."
+    ],
+    "answer": "Genesis 4:7 - If thou doest well, shalt thou not be accepted? and if thou doest not well, sin lieth at the door. And unto thee shall be his desire, and thou shalt rule over him.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse is God's direct counsel to a person on the brink of catastrophic failure. It outlines the universal spiritual struggle: the choice between obedience and disobedience, and the predatory nature of sin when one rejects God's prescribed way.",
+        "Importance_of_Wording": "The phrase 'sin lieth at the door' personifies sin as a beast of prey (*rabats* in Hebrew, meaning to crouch or lie in wait), ready to pounce. 'Doing well' was not about good intentions, but about bringing the required sacrifice—a lamb, which pointed to the promised Seed of Genesis 3:15. Cain's offering of fruit, the work of his own hands, was a rejection of the system of substitutionary atonement. The final clause, 'thou shalt rule over him,' was God's empowering promise: Cain did not have to succumb; by accepting God's way, he could have mastery over the temptation.",
+        "Factual_Explanation": "After rejecting Cain's offering, God graciously reasoned with him. He presented Cain with a clear choice and its consequences. Acceptance ('doest well') was still possible if he followed God's command. Refusal ('doest not well') would leave him vulnerable to the sin that was waiting to consume him. The responsibility for the outcome lay squarely with Cain.",
+        "Theological_Meaning": "This story illustrates the two systems of worship that have existed throughout history: salvation by works (Cain) versus salvation by faith in a substitutionary sacrifice (Abel). Cain's religion was man-made, based on his own efforts, and it produced anger, jealousy, and murder. Abel's faith, evidenced by his obedient offering of a lamb, acknowledged his sinfulness and his need for a Savior (Hebrews 11:4). This is the essence of the controversy between true and false worship.",
+        "Christ_Centered_Meaning": "Abel's lamb was a type of Christ, 'the Lamb of God, which taketh away the sin of the world' (John 1:29). Cain's rejection of the blood sacrifice was a rejection of the prefigured Christ. God's plea to Cain, 'sin lieth at the door,' is a universal warning. The only way to 'rule over' sin is to accept the provision God has made through the blood of Jesus. Any attempt to approach God through our own merits, like Cain, will ultimately be rejected."
+    }
+},
+{
+    "id": "BP007",
+    "question": "As humanity spiraled into universal corruption, God determined to cleanse the earth with a flood. He found one man who walked faithfully with Him and gave him a specific command that would preserve life. How does the Bible describe God's formal establishment of His covenant with this patriarch before the deluge?",
+    "options": [
+        "Genesis 6:18 - But with thee I will make my covenant; and thou shalt come into the ark, thou, and thy sons, and thy wife, and thy sons' wives with thee.",
+        "Genesis 6:18 - But with thee will I establish my covenant; and thou shalt come into the ark, thou, and thy sons, and thy wife, and thy sons' wives with thee.",
+        "Genesis 6:18 - And with you I will confirm my covenant; and you shall enter the ark, you, and your sons, and your wife, and your sons' wives with you.",
+        "Genesis 6:18 - But as for thee, I will create a covenant; and thou must come into the ark, thou, and thy sons, and thy wife, and thy sons' wives with thee."
+    ],
+    "answer": "Genesis 6:18 - But with thee will I establish my covenant; and thou shalt come into the ark, thou, and thy sons, and thy wife, and thy sons' wives with thee.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse marks a pivotal moment in salvation history. Amid a declaration of global judgment, God singles out one family and promises preservation based on a covenant relationship. The ark becomes the divinely appointed means of salvation, a refuge provided by God's grace.",
+        "Importance_of_Wording": "The verb 'establish' (*heqim*) is significant. It implies not creating something new, but confirming or upholding a pre-existing promise. The covenant of grace, first promised in Eden (Genesis 3:15), is here being 'established' or given concrete form with Noah. God initiates ('I will establish'), and Noah responds with obedience ('thou shalt come into the ark'). The invitation is comprehensive, including his entire immediate family.",
+        "Factual_Explanation": "In the context of giving detailed instructions for building the ark, God inserts this solemn promise. It is the assurance that Noah's incredible labor of faith would not be in vain. The covenant was God's guarantee of salvation through the coming flood for Noah and his family, contingent on their entering the ark.",
+        "Theological_Meaning": "The ark is a powerful symbol of salvation. There was only one ark, one door, and one way to be saved from the judgment of the flood. All who were outside the ark, regardless of their own perceived goodness, perished. This illustrates the principle that salvation is found only within God's appointed refuge. Prophetically, the end of the world is compared to the days of Noah (Matthew 24:37-39), where a global crisis will distinguish between those who have entered God's refuge of truth and those who have not.",
+        "Christ_Centered_Meaning": "The ark is a clear type of Christ. 'Neither is there salvation in any other: for there is none other name under heaven given among men, whereby we must be saved' (Acts 4:12). Just as Noah and his family had to enter the ark by faith to be saved from the waters of judgment, so believers must enter into Christ by faith to be saved from the condemnation of sin. The covenant God 'established' with Noah was a continuation of the promise that would find its ultimate fulfillment in the 'new covenant' in Christ's blood."
+    }
+},
+{
+    "id": "BP008",
+    "question": "After the flood, God re-establishes order and law for the new world. He sets a foundational principle for justice and the sanctity of human life, directly linking it to the high value He placed upon humanity at creation. What is this divine decree?",
+    "options": [
+        "Genesis 9:6 - Whoso sheddeth man's blood, by man shall his blood be shed: for in the likeness of God made he man.",
+        "Genesis 9:6 - Whoso sheddeth man's blood, by man shall his blood be shed: for in the image of God made he man.",
+        "Genesis 9:6 - He that takes a man's life, by man shall his life be taken: for in the image of God was man created.",
+        "Genesis 9:6 - Whoever sheds the blood of man, by man his own blood shall be shed: because in the image of God he made mankind."
+    ],
+    "answer": "Genesis 9:6 - Whoso sheddeth man's blood, by man shall his blood be shed: for in the image of God made he man.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse establishes the basis for human government and capital justice. It addresses the 'violence' that filled the earth before the flood (Genesis 6:11) by instituting a severe deterrent to murder, grounding it not in social contract but in the theological truth of man's creation.",
+        "Importance_of_Wording": "The phrasing is a solemn, poetic chiasm: 'sheddeth man's blood... by man shall his blood be shed.' This structure gives it the weight of an unalterable law. The reason given is paramount: 'for in the image of God made he man.' The crime of murder is not merely against a fellow human, but is an assault on the God in whose image that person was made. Using 'image' connects this law directly back to the original dignity conferred at creation (Genesis 1:27).",
+        "Factual_Explanation": "This is God's mandate to post-flood humanity, giving human society the authority and responsibility to administer capital punishment for the crime of murder. It is designed to protect the sanctity of life by demonstrating its supreme value. This principle precedes the Mosaic law and applies to all humanity.",
+        "Theological_Meaning": "This verse reveals that respect for human life is a non-negotiable principle in God's kingdom. An attack on a human being is an attack on the Creator's handiwork and honor. This law stands in stark contrast to pagan cultures where human life was often cheap. It underscores that while the image of God in man was marred by the Fall, it was not erased, and it still commands respect and protection.",
+        "Christ_Centered_Meaning": "While this law establishes civil justice, it also highlights the gravity of the spiritual murder caused by sin. Christ's death was the ultimate shedding of innocent blood. Yet, through His sacrifice, He provides a way for murderers—and all sinners—to find pardon and have the defaced image of God restored within them. He took the penalty prescribed by the law upon Himself so that those guilty of shedding His blood could be forgiven. This divine law magnifies the grace of the gospel."
+    }
+},
+{
+    "id": "BP009",
+    "question": "In an act of rebellious unity, post-flood humanity gathered to build a tower, not for worship, but to make a name for themselves and defy God's command to fill the earth. How does the Scripture capture the Lord's observation and decisive action against this centralized apostasy?",
+    "options": [
+        "Genesis 11:6-7 - And the LORD said, Behold, the people is one... now nothing will be restrained from them... Go to, let us go down, and there confound their language, that they may not understand one another's speech.",
+        "Genesis 11:6-7 - And God said, Behold, the people are united... and now nothing they imagine will be impossible... Come, let us go down, and confuse their language, so they cannot understand what they say.",
+        "Genesis 11:6-7 - And the LORD said, Behold, the people is one... and this they begin to do: and now they will not be stopped from all they have imagined to do... Let us go down, and there confuse their speech.",
+        "Genesis 11:6-7 - And the LORD saw the people were one... and this is their beginning: and now nothing will be withheld from them which they have imagined to do... Let us descend, and confound their language."
+    ],
+    "answer": "Genesis 11:6-7 - And the LORD said, Behold, the people is one... and this they begin to do: and now nothing will be restrained from them, which they have imagined to do. Go to, let us go down, and there confound their language, that they may not understand one another's speech.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This passage explains the origin of the world's languages and nations from a biblical perspective. It reveals God's response to humanity's organized rebellion and pride, demonstrating His power to thwart human schemes that run contrary to His divine will.",
+        "Importance_of_Wording": "The phrase 'the people is one' highlights their unified purpose in rebellion. 'Nothing will be restrained from them, which they have imagined to do' is a stunning statement on the potential of unified human effort when misdirected. The divine response, 'let us go down,' uses a plural pronoun, hinting at the plurality of the Godhead, consistent with Genesis 1:26. 'Confound their language' was a merciful judgment; it scattered humanity as God originally intended (Genesis 9:1), thus limiting their capacity for coordinated evil.",
+        "Factual_Explanation": "God observed the unified project at Babel (Babylon), which was rooted in pride and a desire for self-preservation apart from God. Recognizing that this concentration of power would lead to ever-greater apostasy, God intervened directly by miraculously creating different languages. The resulting confusion forced the people to separate and disperse across the globe.",
+        "Theological_Meaning": "Babel, or Babylon, becomes a symbol throughout Scripture for organized rebellion against God, human pride, and religious confusion. It represents a system based on human works and self-glorification. This event stands in direct prophetic contrast to the miracle of Pentecost in Acts 2, where the Holy Spirit overcame language barriers to unite people from many nations in the worship of the one true God. The confusion of Babel will be prophetically reversed when God gathers His people from every nation, kindred, tongue, and people (Revelation 14:6).",
+        "Christ_Centered_Meaning": "The tower of Babel was humanity's attempt to reach heaven by their own effort. It is a perfect illustration of salvation by works. Christ is the true 'ladder' to heaven, the only way to the Father (John 14:6). While Babel scattered, the cross of Christ gathers. At Pentecost, the curse of Babel was temporarily reversed as a sign that in Christ, God is creating a new, unified humanity from all the scattered nations of the earth, united not by a common building project, but by a common Spirit."
+    }
+},
+{
+    "id": "BP010",
+    "question": "Out of a world sinking back into idolatry after the dispersion at Babel, God calls one man, Abram, to be the father of a new nation. He gives him a command to leave everything familiar behind, attached to a seven-fold promise. What is the pivotal command and the climactic promise that extends beyond Abram to all humanity?",
+    "options": [
+        "Genesis 12:1, 3 - Now the LORD had said unto Abram, Get thee out... And I will bless them that bless thee, and curse him that curseth thee: and in thee shall all families of the earth be blessed.",
+        "Genesis 12:1, 3 - And the LORD said to Abram, Leave your country... And I will bless those who bless you, and curse those who curse you: and through you all the nations of the earth will find blessing.",
+        "Genesis 12:1, 3 - So the LORD said to Abram, Depart from thy kindred... And I will bless them that bless thee, and curse him that curseth thee: and by thee shall all the people of the earth be blessed.",
+        "Genesis 12:1, 3 - Now the LORD said unto Abram, Go from thy land... And I will bless them that bless thee, and him that dishonors thee I will curse: and in thy seed all the families of the earth shall be blessed."
+    ],
+    "answer": "Genesis 12:1, 3 - Now the LORD had said unto Abram, Get thee out of thy country, and from thy kindred, and from thy father's house, unto a land that I will shew thee... And I will bless them that bless thee, and curse him that curseth thee: and in thee shall all families of the earth be blessed.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This is the foundational call of the Hebrew people and the starting point of God's new initiative to bring salvation to the world through a specific lineage. It establishes the principle of salvation by faith, as Abram's obedience was based purely on God's word, not on sight.",
+        "Importance_of_Wording": "The command 'Get thee out' is emphatic, requiring a complete break from country, kindred, and father's house—the three pillars of ancient identity. The climax of the promises, 'in thee shall all families of the earth be blessed,' is the gospel in advance. It reveals that God's choice of Abram was not for his exclusive benefit, but to make him a channel of blessing for the entire world.",
+        "Factual_Explanation": "God called Abram (later Abraham) out of Ur of the Chaldees, a center of pagan moon-worship. The call demanded absolute faith, as he was to leave his home without knowing his final destination (Hebrews 11:8). In return, God promised to make him a great nation, bless him, make his name great, make him a blessing, bless those who blessed him, curse those who cursed him, and through him, bless the world.",
+        "Theological_Meaning": "This call demonstrates that God's people are a called-out people, separated from the world to be a light to the world. The promise of blessing and cursing based on one's treatment of Abraham and his descendants has echoed through history. The ultimate fulfillment of this promise is not national or ethnic, but spiritual. It laid the groundwork for a global mission.",
+        "Christ_Centered_Meaning": "The Apostle Paul explicitly identifies this promise as the preaching of the gospel to Abraham beforehand (Galatians 3:8). The blessing to 'all families of the earth' is fulfilled in Jesus Christ, the 'seed' of Abraham (Galatians 3:16). Through faith in Christ, people from every nation become spiritual children of Abraham and heirs of this promise (Galatians 3:29). The call to 'get thee out' is a type of the call to every believer to leave the kingdom of darkness and journey by faith toward the heavenly country."
+    }
+},
+{
+    "id": "BP011",
+    "question": "In a moment of profound faith and doubt, Abram questions how he can be sure of God's promise to give him the land of Canaan. God responds not with a verbal argument, but by commanding a mysterious and solemn ceremony to ratify His covenant. What instruction did God give Abram to prepare for this divine oath?",
+    "options": [
+        "Genesis 15:9 - And he said unto him, Take me an heifer of three years old, and a she goat of three years old, and a ram of three years old, and a turtledove, and a young pigeon.",
+        "Genesis 15:9 - And he said to him, Bring to me a heifer of three years, a female goat of three years, a ram of three years, and a turtledove, and a young pigeon.",
+        "Genesis 15:9 - And he said unto him, Take for me a three year old heifer, and a three year old she goat, and a three year old ram, with a turtledove and a young pigeon.",
+        "Genesis 15:9 - And God said unto him, Take me a heifer of three years, and a she goat of three years old, and a ram of three years, and a turtledove, and also a young pigeon."
+    ],
+    "answer": "Genesis 15:9 - And he said unto him, Take me an heifer of three years old, and a she goat of three years old, and a ram of three years old, and a turtledove, and a young pigeon.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse details the specific elements for one of the most significant covenant ceremonies in the Old Testament. The animals listed are the very same ones later designated for sacrifice in the Levitical system, showing the deep-rooted connection between covenant and substitutionary atonement.",
+        "Importance_of_Wording": "The list is precise. Each animal—heifer, she-goat, ram, turtledove, pigeon—would later have a role in the sanctuary services. The age 'three years old' signifies maturity and value. Abram was not asked to bring a worthless offering, but the best. The command 'Take me' shows that this is an offering to God, a preparation for a divine encounter.",
+        "Factual_Explanation": "In response to Abram's plea for assurance ('Whereby shall I know?'), God instructs him to prepare for a 'covenant cutting' ceremony, a known ancient Near Eastern practice. In this ritual, parties would pass between the pieces of slain animals, signifying that the same fate should befall them if they broke the oath. The animals were prepared, but as we see later in the chapter, the outworking of the ceremony is uniquely divine.",
+        "Theological_Meaning": "This ceremony visually demonstrates the immense cost of God's promise. A covenant with God is sealed in blood. The death of the animals foreshadowed that the penalty for sin—and for breaking the covenant—is death. This event provided Abram with an unforgettable, tangible assurance of God's faithfulness, rooted in sacrifice. This deep sleep and horror of great darkness that fell on Abram (v. 12) represented humanity's helpless state, unable to secure its own salvation.",
+        "Christ_Centered_Meaning": "This is a profound prophecy of the cross. In a stunning reversal of the ancient ritual, only God (represented by the 'smoking furnace, and a burning lamp') passed between the pieces (Genesis 15:17). Abram, the human party, was asleep. This signifies that the covenant of salvation is unilateral; God takes the full responsibility and the full curse for its fulfillment upon Himself. The slain animals are a type of Christ, who was 'cut off' for us. God's promise is sure, not because of our faithfulness, but because He Himself, in the person of Christ, paid the penalty."
+    }
+},
+{
+    "id": "BP012",
+    "question": "The birth of Ishmael through Hagar, born of human effort to fulfill a divine promise, brings strife into Abraham's camp. Years later, God appears again to reaffirm His covenant, giving Abraham a physical sign to distinguish his descendants as a people set apart. What is this sign and its stated spiritual significance?",
+    "options": [
+        "Genesis 17:11 - And ye shall circumcise the flesh of your foreskin; and it shall be a sign of the covenant betwixt me and you.",
+        "Genesis 17:11 - And you will circumcise the flesh of your foreskins; and it will be for a token of the covenant between myself and you.",
+        "Genesis 17:11 - And ye shall be circumcised in the flesh of your foreskin; and it shall be for a sign of the covenant between me and your family.",
+        "Genesis 17:11 - And ye shall circumcise the flesh of your foreskin; and it shall be a token of the covenant betwixt me and you."
+    ],
+    "answer": "Genesis 17:11 - And ye shall circumcise the flesh of your foreskin; and it shall be a token of the covenant betwixt me and you.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse institutes the sign of the Abrahamic covenant: circumcision. It was a physical mark to constantly remind Israel of their unique relationship with God and the promises He had made to them.",
+        "Importance_of_Wording": "The word 'token' (*oth*) means a sign, a symbol, or a remembrance. Circumcision itself did not save; it was an outward 'token' of an inward reality—a covenant relationship with God. It was a cutting away of the flesh, to be performed on the organ of procreation, signifying that even the continuation of the covenant line was dependent on God, not human strength, and that a cleansing from fleshly desires was needed.",
+        "Factual_Explanation": "At age 99, Abraham is commanded by God (now identifying Himself as *El Shaddai*, God Almighty) to institute circumcision for himself, his son Ishmael, and every male in his household, and for all future generations on the eighth day after birth. It was to be the perpetual, physical sign that they belonged to God's covenant people.",
+        "Theological_Meaning": "From the beginning, God intended this physical sign to represent a spiritual reality. Moses later speaks of the need to 'circumcise the foreskin of your heart' (Deuteronomy 10:16), and Jeremiah condemns those who are 'circumcised yet uncircumcised' (Jeremiah 9:25-26). The sign was worthless without the inward reality of a heart consecrated to God. It was a symbol of cutting away sin and reliance on the flesh.",
+        "Christ_Centered_Meaning": "The New Testament makes clear that physical circumcision is no longer the sign of God's covenant. The true circumcision is 'of the heart, in the spirit, and not in the letter' (Romans 2:29). Colossians 2:11-12 explains that believers experience this spiritual circumcision by being 'buried with him in baptism,' which symbolizes the cutting off of the 'body of the sins of the flesh' through faith in Christ. The outward sign has been replaced by baptism, which signifies death to the old life and resurrection to a new life in Jesus."
+    }
+},
+{
+    "id": "BP013",
+    "question": "Abraham is faced with the ultimate test of faith, a command that seems to contradict the very promise of God upon which his entire life is built. He is told to offer his long-awaited, miracle son, Isaac, as a burnt offering. How does the Bible record God's terrifying and specific instruction to Abraham?",
+    "options": [
+        "Genesis 22:2 - And he said, Take now thy son, thine only son Isaac, whom thou lovest, and get thee into the land of Moriah; and offer him there for a burnt offering upon one of the mountains which I will tell thee of.",
+        "Genesis 22:2 - And he said, Take thy son, your only son, whom thou lovest, even Isaac, and go to the region of Moriah; and sacrifice him there as a burnt offering on a mountain I will show you.",
+        "Genesis 22:2 - And God said, Take now thy son, thine only son whom thou lovest, and go unto the land of Moriah; and offer him for a burnt offering upon the mountain that I will tell thee of.",
+        "Genesis 22:2 - And he said, Take thy son, thine only son Isaac, whom thou hast loved, and get thee into the land of Moriah; and offer him there for a sacrifice upon one of the mountains which I shall show thee."
+    ],
+    "answer": "Genesis 22:2 - And he said, Take now thy son, thine only son Isaac, whom thou lovest, and get thee into the land of Moriah; and offer him there for a burnt offering upon one of the mountains which I will tell thee of.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This is arguably the most dramatic and theologically profound test of faith in the Old Testament. The command is deeply personal and seemingly contradictory to God's character and promises, forcing Abraham to trust God beyond his own understanding.",
+        "Importance_of_Wording": "The language is constructed to maximize the emotional and theological weight. Each phrase builds the cost: 'thy son,' then more specifically, 'thine only son' (from Sarah, the son of the promise), then 'Isaac,' and finally, the heart-wrenching 'whom thou lovest.' This repetition emphasizes the magnitude of the required sacrifice. The command to 'offer him... for a burnt offering' was unambiguous, involving death and complete surrender.",
+        "Factual_Explanation": "God commanded Abraham to travel to the mountainous region of Moriah and sacrifice Isaac. This was a direct test of Abraham's faith and obedience, to see if he feared God above all else, even above the promised son. Abraham obeyed without question, demonstrating a faith so profound that he reasoned God could raise Isaac from the dead (Hebrews 11:17-19).",
+        "Theological_Meaning": "This event, the *Akedah* (the binding), is a cornerstone of faith. It teaches that true faith obeys even when it cannot comprehend God's ways. It also served to deepen Abraham's own understanding of the cost of sin and the nature of substitutionary atonement. He was asked to feel, in a small way, what it would cost God the Father to give His own Son. The location, 'Moriah,' is traditionally held to be the same mountain range where the Temple of Jerusalem, and later, Calvary, would be located.",
+        "Christ_Centered_Meaning": "This entire chapter is the clearest Old Testament type of the sacrifice of Christ. The parallels are stunning: a father offers his only, beloved son (John 3:16); the son carries the wood for his own sacrifice (John 19:17); the sacrifice occurs on Mount Moriah (the future site of Jerusalem); there is a substitutionary sacrifice provided by God (the ram caught in the thicket). Abraham's prophetic declaration, 'God will provide himself a lamb' (Genesis 22:8), was literally fulfilled two millennia later when John the Baptist declared of Jesus, 'Behold the Lamb of God' (John 1:29)."
+    }
+},
+{
+    "id": "BP014",
+    "question": "Fleeing from his brother's wrath, Jacob lies down to sleep in a desolate place, using a stone for a pillow. In a dream that will define his life and the destiny of his descendants, he receives a vision of a connection between heaven and earth, and God reaffirms the covenant. What did Jacob see and what was God's core promise to him?",
+    "options": [
+        "Genesis 28:12-13 - And he dreamed, and behold a ladder set up on the earth, and the top of it reached to heaven... And, behold, the LORD stood above it, and said, I am the LORD God of Abraham thy father, and the God of Isaac.",
+        "Genesis 28:12-13 - And he dreamed, and saw a stairway resting on the earth, with its top reaching to heaven... And the LORD stood beside him and said, I am the LORD, the God of your father Abraham, and the God of Isaac.",
+        "Genesis 28:12-13 - And he dreamed, and behold a stairway set on the earth, and the top of it reached to the heavens... And, behold, the LORD stood upon it, and said, I am the LORD God of Abraham thy father, and the God of Isaac.",
+        "Genesis 28:12-13 - And he dreamed, and behold a ladder was set on the earth, and its top reached to heaven... And, behold, the LORD was above it, and spoke, saying, I am the God of Abraham thy father, and the God of Isaac."
+    ],
+    "answer": "Genesis 28:12-13 - And he dreamed, and behold a ladder set up on the earth, and the top of it reached to heaven: and behold the angels of God ascending and descending on it. And, behold, the LORD stood above it, and said, I am the LORD God of Abraham thy father, and the God of Isaac...",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This passage describes Jacob's life-altering encounter at Bethel ('house of God'). The vision of the ladder provided a fugitive, who felt cut off from God and family, with the profound assurance that communication and connection between heaven and a sinful earth were still possible.",
+        "Importance_of_Wording": "The vision is of a 'ladder' (*sullam*), representing a bridge or link. The 'angels of God ascending and descending on it' depicted constant, active communication and ministration between God and humanity. Crucially, 'the LORD stood above it,' signifying that God Himself is the source of this connection and is in ultimate control. His self-introduction as the God of Abraham and Isaac confirmed to Jacob that the covenant promise was now being passed directly to him.",
+        "Factual_Explanation": "As a lonely exile, Jacob received a divine dream. He saw a structure connecting earth and heaven, with angels using it as a conduit. God Himself stood at the top and personally renewed the Abrahamic covenant with Jacob, promising him land, countless descendants, and a blessing that would extend to all peoples. He also gave a personal promise of protection: 'I am with thee, and will keep thee in all places whither thou goest' (v. 15).",
+        "Theological_Meaning": "The ladder symbolizes the ministry of reconciliation. It illustrates that despite humanity's sin, which creates a gulf between us and God, Heaven has not abandoned the world. The angels are 'ministering spirits, sent forth to minister for them who shall be heirs of salvation' (Hebrews 1:14). This vision taught Jacob that God's presence is not confined to sacred tents or temples, but can be found anywhere by a soul in need.",
+        "Christ_Centered_Meaning": "Jesus Himself explicitly identified who the ladder represented. He said to Nathanael, 'Verily, verily, I say unto you, Hereafter ye shall see heaven open, and the angels of God ascending and descending upon the Son of man' (John 1:51). Christ is the ladder. He is the one and only connection, the sole mediator between God and man (1 Timothy 2:5). Through His incarnation, life, death, and resurrection, He has bridged the gap caused by sin, and it is only through Him that we can access the Father."
+    }
+},
+{
+    "id": "BP015",
+    "question": "After twenty years in exile, Jacob prepares to meet his estranged brother, Esau. The night before, he wrestles with a mysterious man until daybreak. In this struggle, his name is changed, signifying a profound transformation of character. What is the divine declaration that renames and redefines Jacob?",
+    "options": [
+        "Genesis 32:28 - And he said, Thy name shall be called no more Jacob, but Israel: for as a prince hast thou power with God and with men, and hast prevailed.",
+        "Genesis 32:28 - And he said, Your name will no longer be Jacob, but Israel; because you have struggled with God and with humans and have overcome.",
+        "Genesis 32:28 - And he said, Thy name shall be called Jacob no more, but Israel: for thou hast striven with God and with men, and hast overcome.",
+        "Genesis 32:28 - And he said, Thy name is no more Jacob, but Israel: for as a prince thou hast power with God and with men, and didst prevail."
+    ],
+    "answer": "Genesis 32:28 - And he said, Thy name shall be called no more Jacob, but Israel: for as a prince hast thou power with God and with men, and hast prevailed.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This is the climax of Jacob's spiritual journey. His new name, Israel, becomes the name of God's covenant people. The verse explains the meaning of this name, rooting it in a desperate, faith-filled struggle with God Himself.",
+        "Importance_of_Wording": "'Jacob' meant 'supplanter' or 'deceiver,' a name that reflected his flawed character. 'Israel' is often translated as 'he strives with God' or 'God strives.' The explanation given is key: 'as a prince hast thou power with God and with men, and hast prevailed.' He 'prevailed' not by physical strength (his hip was out of joint), but by clinging in desperate faith. This 'power with God' was the source of his new 'power with men,' giving him courage to face Esau.",
+        "Factual_Explanation": "Alone and terrified, Jacob was met by a divine being (identified as God in v. 30 and as an angel in Hosea 12:4, understood as a pre-incarnate appearance of Christ). They wrestled all night. Jacob, recognizing the divine nature of his opponent, refused to let go until he received a blessing. The struggle left him physically broken but spiritually victorious, and his name was changed to reflect this transformation from a deceiver to one who has persevered in faith with God.",
+        "Theological_Meaning": "This experience is a powerful illustration of sanctification and prevailing prayer. Jacob finally ceased from his own striving and clung to God in complete dependence. His victory came at the point of his greatest weakness. This is the experience of every true believer who, in their 'time of trouble,' must wrestle with God's promises, confess their sins, and refuse to let go until they have the assurance of pardon and deliverance. This is the faith that overcomes the world.",
+        "Christ_Centered_Meaning": "The man Jacob wrestled with was the Angel of the Covenant, the Lord Jesus Christ. Jacob was wrestling for his life against the one who holds all life in His hands. In the same way, the sinner, convicted of their sin, must come to grips with Jesus. The struggle is one of surrender. We must let go of our self-reliance and cling to Christ as our only hope. The blessing He gives is a new character, a new name, and the assurance that because we have 'prevailed' with Him in prayer, we need not fear any human foe."
+    }
+},
+{
+    "id": "BP016",
+    "question": "Sold into slavery by his own brothers, Joseph rises to power in Egypt. When a famine forces his brothers to seek grain, they come and bow before him, unknowingly fulfilling his youthful dreams. After testing them, Joseph finally reveals his identity in a moment of stunning grace and theological insight. How does he reframe their evil deed from a divine perspective?",
+    "options": [
+        "Genesis 45:5 - Now therefore be not grieved, nor angry with yourselves, that ye sold me hither: for God did send me before you to preserve life.",
+        "Genesis 45:5 - Therefore do not be grieved, or angry at yourselves, that you sold me here: for God sent me ahead of you to save lives.",
+        "Genesis 45:5 - So now, be not grieved, and be not angry with yourselves, because ye sold me here: for God sent me before you to preserve your lives.",
+        "Genesis 45:5 - And now, do not be sad, nor upset with yourselves, for selling me here: because God has sent me before you to preserve life."
+    ],
+    "answer": "Genesis 45:5 - Now therefore be not grieved, nor angry with yourselves, that ye sold me hither: for God did send me before you to preserve life.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse is a masterclass in forgiveness and divine providence. Joseph, the wronged party, looks past his brothers' malicious intent and sees God's sovereign hand at work, turning a sinful act into a means of salvation for his family and for many nations.",
+        "Importance_of_Wording": "Joseph's immediate concern is to alleviate their guilt: 'be not grieved, nor angry with yourselves.' He then presents the divine viewpoint that supersedes their own: 'for God did send me before you.' He doesn't say God *approved* of their sin, but that God *used* their sin within His larger, redemptive plan. The purpose was 'to preserve life,' highlighting the gracious and life-giving nature of God's ultimate design.",
+        "Factual_Explanation": "After a series of tests that revealed his brothers' repentance and changed hearts, Joseph could no longer contain himself. He revealed his identity, and seeing their terror and shame, he immediately offered them comfort and a theological explanation for the past two decades of suffering. He explained that his presence in Egypt was not an accident but a divine appointment.",
+        "Theological_Meaning": "This is a supreme example of God's providence, the doctrine that God is continually directing all things toward His ultimate purpose. It echoes the later truth expressed in Romans 8:28, 'And we know that all things work together for good to them that love God.' It teaches that God is able to overrule the evil intentions of men to accomplish His good and gracious will. This perspective allows believers to face injustice and suffering with hope, trusting that a larger, redemptive story is being written.",
+        "Christ_Centered_Meaning": "Joseph's life is one of the most complete types of Christ in the Old Testament. He was beloved by his father, rejected and sold by his brethren for pieces of silver, considered dead, yet rose from humiliation (the pit, prison) to a position of supreme power at the right hand of the king. From this exalted position, he forgave his repentant brothers and became the savior and bread-giver for the world. His statement, 'God did send me before you to preserve life,' is a perfect echo of Christ's mission, who was sent by the Father and delivered up by men's evil hands to be the ultimate preserver of eternal life for all who come to Him."
+    }
+},
+{
+    "id": "BP017",
+    "question": "On his deathbed, the patriarch Jacob (Israel) gathers his twelve sons to prophesy their future destinies. When he comes to his son Judah, he utters a remarkable prophecy that looks far beyond the tribe's future, pointing to a kingly line and a mysterious, ultimate ruler. What is this Messianic prophecy?",
+    "options": [
+        "Genesis 49:10 - The sceptre shall not depart from Judah, nor a lawgiver from between his feet, until Shiloh come; and unto him shall the gathering of the people be.",
+        "Genesis 49:10 - The ruler's staff will not depart from Judah, nor the commander's staff from his descendants, until he to whom it belongs shall come; and the obedience of the nations shall be his.",
+        "Genesis 49:10 - The sceptre will not depart from Judah, or a lawgiver from his feet, until Shiloh comes; and to him will be the gathering of the peoples.",
+        "Genesis 49:10 - The sceptre shall not pass from Judah, nor a ruler from between his feet, until he comes to whom it belongs; and unto him shall the nations be gathered."
+    ],
+    "answer": "Genesis 49:10 - The sceptre shall not depart from Judah, nor a lawgiver from between his feet, until Shiloh come; and unto him shall the gathering of the people be.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This is one of the earliest and most significant Messianic prophecies in the Bible. It specifically identifies the tribe of Judah as the royal line from which the ultimate King would emerge.",
+        "Importance_of_Wording": "The 'sceptre' is the symbol of kingship, and the 'lawgiver' (or ruler's staff) reinforces this idea of governmental authority. The prophecy states this authority would remain with Judah 'until Shiloh come.' 'Shiloh' is a mysterious name, interpreted as 'He to whom it belongs,' 'The Tranquil One,' or 'The Peacemaker.' It clearly points to a specific individual. The final clause, 'unto him shall the gathering of the people be,' indicates that His reign would be universal, drawing all nations to Himself.",
+        "Factual_Explanation": "Jacob, under divine inspiration, prophesied that the tribe of Judah would have preeminence and produce Israel's royal dynasty. This was fulfilled in King David and his descendants. The prophecy looked beyond this earthly kingdom to a future ruler, Shiloh, who would hold the ultimate right to rule and would command the allegiance of all peoples.",
+        "Theological_Meaning": "This prophecy provided a clear marker for Israel to identify the coming Messiah. He had to be of the tribe of Judah. It anchored the hope of a coming King in a specific lineage, protecting the people from false messiahs. The concept of 'Shiloh' as a peacemaker who brings rest is a central theme of the Messiah's work. The 'gathering of the people' to Him has end-time significance, pointing to the final harvest when believers from every nation are united under their true King.",
+        "Christ_Centered_Meaning": "Jesus Christ is the fulfillment of this prophecy. Hebrews 7:14 states, 'For it is evident that our Lord sprang out of Juda.' He is the 'Lion of the tribe of Juda' (Revelation 5:5). He came when the 'sceptre' had effectively departed, as Judea was under Roman rule. Jesus is the true 'Shiloh,' the Prince of Peace, to whom the right to rule belongs. The 'gathering of the people' began with His earthly ministry and continues as the gospel is preached to all nations. It will culminate at His second coming, when He gathers His elect from the four corners of the earth to be with Him forever."
+    }
+},
+{
+    "id": "BP018",
+    "question": "Centuries after Joseph, a new Pharaoh enslaves the Israelites, subjecting them to bitter bondage. In their affliction, the people cry out to God. How does the Bible describe God's response to their suffering, revealing His memory of the ancient covenant He made with their forefathers?",
+    "options": [
+        "Exodus 2:24-25 - And God heard their groaning, and God remembered his covenant with Abraham, with Isaac, and with Jacob. And God looked upon the children of Israel, and God had respect unto them.",
+        "Exodus 2:24-25 - And God heard their cries, and he remembered his covenant with Abraham, Isaac, and Jacob. And God saw the children of Israel, and God was concerned for them.",
+        "Exodus 2:24-25 - And God heard their groaning, and God remembered his covenant with Abraham, and Isaac, and with Jacob. And God looked upon the children of Israel, and God acknowledged them.",
+        "Exodus 2:24-25 - So God heard their groaning, and God remembered his covenant with Abraham, with Isaac, and with Jacob. And God saw the children of Israel, and knew their condition."
+    ],
+    "answer": "Exodus 2:24-25 - And God heard their groaning, and God remembered his covenant with Abraham, with Isaac, and with Jacob. And God looked upon the children of Israel, and God had respect unto them.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "These verses mark the turning point for Israel in Egypt. After a long period of apparent divine silence, God's attention is explicitly focused on His people's suffering, and His subsequent actions are grounded in His covenant faithfulness.",
+        "Importance_of_Wording": "The passage contains a powerful four-fold description of God's response: He 'heard,' 'remembered,' 'looked upon,' and 'had respect unto' them. 'Remembered' does not mean God had forgotten; in Hebrew, to remember is to act on what is known. He was now acting on His covenant promises. 'Had respect unto' (*yada*, to know) implies a deep, experiential, and compassionate knowledge of their plight. He didn't just see them; He knew them and was moved to act.",
+        "Factual_Explanation": "The suffering of the Israelites in Egypt had reached a critical point. Their prayers and groans ascended to God, who then began to set in motion the events of the Exodus. This passage serves as the preface to the call of Moses, explaining the divine motivation behind the great deliverance that was about to unfold.",
+        "Theological_Meaning": "This shows that God is not a distant, passive observer of human suffering. He is intimately aware of the pain of His people. His actions are not arbitrary but are based on His unchanging covenant promises. This provides immense comfort to believers in any age who are undergoing trial; their cries are heard, and God's eventual intervention is as certain as His own faithfulness to His word.",
+        "Christ_Centered_Meaning": "The groaning of Israel in bondage is a picture of all humanity groaning under the bondage of sin. Just as God heard their cry and came down to deliver, so He saw humanity's desperate state and sent His Son, Jesus, to be our Deliverer. Jesus is the embodiment of God 'remembering' His covenant. Through Christ, God 'looked upon' us and 'had respect unto' our fallen state, not to condemn, but to save. The Exodus, which begins here, is the great Old Testament type of the redemption Christ accomplishes for all who cry out to Him."
+    }
+},
+{
+    "id": "BP019",
+    "question": "While tending sheep in the desert, Moses encounters a stunning miracle: a bush that burns but is not consumed. From this fire, God calls out to him, commissioning him to be Israel's deliverer. When Moses asks for God's name to validate his mission, what is the profound and mysterious name God reveals about His own eternal nature?",
+    "options": [
+        "Exodus 3:14 - And God said unto Moses, I AM THAT WHICH I AM: and he said, Thus shalt thou say unto the children of Israel, I AM has sent me to you.",
+        "Exodus 3:14 - And God said unto Moses, I AM THAT I AM: and he said, Thus shalt thou say unto the children of Israel, I AM hath sent me unto you.",
+        "Exodus 3:14 - And God said to Moses, I WILL BE WHAT I WILL BE: and he said, Thus you shall say to the children of Israel, I WILL BE has sent me to you.",
+        "Exodus 3:14 - And God said unto Moses, I AM WHO I AM: and he said, Thus must thou say unto the children of Israel, The I AM hath sent me unto you."
+    ],
+    "answer": "Exodus 3:14 - And God said unto Moses, I AM THAT I AM: and he said, Thus shalt thou say unto the children of Israel, I AM hath sent me unto you.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This is one of the most significant moments of divine self-revelation in the Bible. The name God gives is not merely a title but a declaration of His essential being: self-existent, eternal, and unchanging.",
+        "Importance_of_Wording": "The Hebrew phrase is *Ehyeh Asher Ehyeh*, which translates to 'I AM THAT I AM' or 'I WILL BE WHAT I WILL BE.' It speaks of absolute being. He is the one who has life in Himself, un-derived from any other source. He then shortens it to the covenant name 'I AM' (*Ehyeh*). This name is directly related to the more common form 'YHWH' (or Yahweh, often rendered LORD), which means 'He Is' or 'He Causes to Be.' It was an assurance to Moses and Israel that the God who 'IS' would be with them.",
+        "Factual_Explanation": "Moses, feeling inadequate for the task of confronting Pharaoh, asked for God's name as a credential. He needed to know who was sending him. God's response was not a simple label but an explanation of His nature. This name would serve as a powerful assurance to the enslaved Israelites that the God of their fathers was the ever-living, ever-present, all-sufficient God who was now acting on their behalf.",
+        "Theological_Meaning": "The name 'I AM' declares God's aseity (self-existence) and immutability (He is unchanging in His character and promises). He is the one constant in a world of change and decay. For a people in bondage, this name was a promise of faithfulness and power. The God who *is* can overcome the Pharaoh who *is*. This name stands as the ultimate foundation of a believer's security.",
+        "Christ_Centered_Meaning": "Jesus Christ explicitly and controversially claimed this divine name for Himself. When in debate with the Jews, He declared, 'Verily, verily, I say unto you, Before Abraham was, I am' (John 8:58). The Jews understood this as a claim to deity and took up stones to kill Him. Jesus used the 'I AM' formula repeatedly in the Gospel of John ('I am the bread of life,' 'I am the light of the world,' 'I am the resurrection, and the life'), revealing that He is the full manifestation of the eternal, self-existent God who spoke to Moses from the burning bush."
+    }
+},
+{
+    "id": "BP020",
+    "question": "Moses and Aaron stand before the mighty Pharaoh, delivering God's command to release Israel. Pharaoh arrogantly defies the message, leading God to unleash a series of ten plagues to demonstrate His power. What was God's stated purpose for these judgments, aimed not only at Egypt but also for the benefit of future generations?",
+    "options": [
+        "Exodus 10:2 - And that thou mayest tell in the ears of thy son, and of thy son's son, what things I have wrought in Egypt, and my signs which I have done among them; that ye may know how that I am the LORD.",
+        "Exodus 10:2 - And that you may recount to your son, and your son's son, the things I have done in Egypt, and the signs which I performed among them; that you may know that I am the LORD.",
+        "Exodus 10:2 - And that thou mayest tell thy son, and thy son's son, what I have done in Egypt, and my miracles which I have performed among them; so that ye will know that I am the LORD.",
+        "Exodus 10:2 - And so thou canst tell in the hearing of thy son, and of thy son's son, what I have wrought upon Egypt, and the signs which I did among them; that ye may know that I am Yahweh."
+    ],
+    "answer": "Exodus 10:2 - And that thou mayest tell in the ears of thy son, and of thy son's son, what things I have wrought in Egypt, and my signs which I have done among them; that ye may know how that I am the LORD.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse, given just before the plague of locusts, reveals the pedagogical and memorial purpose of the plagues. They were not merely punitive but were intended to be a lasting testimony to God's supreme power, for the instruction of both Israel and the nations.",
+        "Importance_of_Wording": "The instruction is deeply personal and multi-generational: 'tell in the ears of thy son, and of thy son's son.' This was to be a core part of Israel's identity, passed down through oral tradition. The phrase 'what things I have wrought' (*'alal*) implies a powerful, almost playful, demonstration of superiority. The ultimate goal is declarative: 'that ye may know how that I am the LORD (YHWH).' The plagues were a lesson in theology, designed to reveal the identity and character of Israel's God.",
+        "Factual_Explanation": "God explains to Moses that He has hardened Pharaoh's heart (i.e., allowed his own stubbornness to strengthen) precisely so that these signs could be shown. The purpose was twofold: to demonstrate His power over the gods of Egypt, and to create an unforgettable historical record that would form the basis of Israel's faith for all time. The stories of the Exodus were meant to be told and retold.",
+        "Theological_Meaning": "This reveals that God is a God who acts in history and wants His acts to be remembered. The plagues were a systematic dismantling of the Egyptian pantheon; the god of the Nile (Hapi) was defeated by the plague of blood, the sun god (Ra) was defeated by the plague of darkness, etc. This was a cosmic battle, proving that the God of a slave-nation was the King of the universe. For believers, this is a reminder that our faith is not based on abstract philosophy but on the mighty acts of God in history.",
+        "Christ_Centered_Meaning": "The plagues are a type of the judgments that will fall upon the world, symbolically called 'Egypt' and 'Babylon,' before the second coming of Christ (Revelation 16). Just as God made a distinction between the Egyptians and His people in Goshen, so He will protect His faithful people during the final time of trouble. The ultimate purpose of God's final judgments is the same as it was in Egypt: that the whole universe may 'know that I am the LORD' and give glory to Him. The deliverance from Egypt prefigures the greater deliverance from the bondage of sin and the tyranny of Satan, accomplished by Christ."
+    }
+},
+{
+    "id": "BP021",
+    "question": "On the night of the final, devastating plague, God institutes a special observance for Israel, a perpetual ordinance to commemorate their deliverance. It involves a lamb, unleavened bread, and bitter herbs, eaten in haste. What instruction did God give concerning the blood of the slain lamb?",
+    "options": [
+        "Exodus 12:7 - And they shall take of the blood, and strike it on the two side posts and on the upper door post of the houses, wherein they shall eat it.",
+        "Exodus 12:7 - And they will take some of the blood, and put it on the two doorposts and on the lintel of the houses, where they will eat it.",
+        "Exodus 12:7 - And they shall take the blood, and place it on the two side posts and on the top of the door of the houses, wherein they eat it.",
+        "Exodus 12:7 - And they are to take of the blood, and strike it upon the two side posts and on the upper door frame of the houses, in which they will eat it."
+    ],
+    "answer": "Exodus 12:7 - And they shall take of the blood, and strike it on the two side posts and on the upper door post of the houses, wherein they shall eat it.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse is the central command of the Passover institution. The application of the blood was the specific act of faith that distinguished between life and death on that fateful night. It is the heart of the Passover typology.",
+        "Importance_of_Wording": "The action is specific and deliberate: 'take of the blood, and strike it.' It wasn't enough for the lamb to be slain; its blood had to be personally applied by the inhabitants of the house. The location was also precise: the 'two side posts and on the upper door post,' forming a frame of blood that the destroying angel would see. The blood was to be applied to the outside of the house, a public declaration of faith in God's provision.",
+        "Factual_Explanation": "God commanded each Israelite household to select a perfect, year-old male lamb, kill it at twilight, and apply its blood to the doorframes of their homes. They were then to roast and eat the lamb with unleavened bread and bitter herbs. That night, the Lord would pass through Egypt, and the destroying angel would 'pass over' any house marked with the blood, while the firstborn in every unprotected Egyptian home would die.",
+        "Theological_Meaning": "The Passover is the quintessential Old Testament picture of redemption. It teaches profound truths: salvation comes through the death of an innocent substitute; the blood of the substitute must be personally applied by faith; God provides a way to be safe from His own righteous judgment. The unleavened bread symbolized putting away sin (leaven), and the bitter herbs were a reminder of the bitterness of their bondage.",
+        "Christ_Centered_Meaning": "The New Testament explicitly identifies Christ as the fulfillment of this type. 'For even Christ our passover is sacrificed for us' (1 Corinthians 5:7). Jesus is the perfect 'Lamb of God, which taketh away the sin of the world' (John 1:29). It is not enough to know that He died; His blood, representing His atoning sacrifice, must be personally applied by faith to the 'doorposts' of our hearts. When the final judgment comes upon the world, the only safety is found under the protection of the blood of the Lamb. It is His righteousness, not our own, that saves us from the destroyer."
+    }
+},
+{
+    "id": "BP022",
+    "question": "As the Israelites eat the first Passover meal, poised for immediate departure from Egypt, God gives them the reason for the protective power of the lamb's blood. What is the divine promise that explains how the blood would save them from the impending judgment?",
+    "options": [
+        "Exodus 12:13 - And the blood shall be to you for a sign upon the houses where ye are: and when I see the blood, I will pass over you, and the plague shall not be upon you to destroy you.",
+        "Exodus 12:13 - And the blood will be a token for you upon the houses where you are: and when I see the blood, I will pass over you, and no plague shall be on you to destroy you.",
+        "Exodus 12:13 - And the blood shall be to you for a token upon the houses where ye are: and when I see the blood, I will pass over you, and the plague shall not be upon you to destroy you, when I smite the land of Egypt.",
+        "Exodus 12:13 - And the blood shall be a sign for you on the houses where you are: and when I see the blood, I will protect you, and the plague will not touch you to destroy you, when I strike the land of Egypt."
+    ],
+    "answer": "Exodus 12:13 - And the blood shall be to you for a token upon the houses where ye are: and when I see the blood, I will pass over you, and the plague shall not be upon you to destroy you, when I smite the land of Egypt.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse is the theological core of the Passover event. It explains the mechanism of salvation on that night: the blood served as a sign that triggered God's protective action. It was not the inherent goodness of the people inside, but the presence of the blood outside, that made the difference.",
+        "Importance_of_Wording": "The blood was a 'token' (*oth*), a visible sign of their faith and obedience. The promise is direct and unconditional: 'when I see the blood, I will pass over you.' God's gaze was fixed on the blood, not on the worthiness of the household. The result was complete protection: 'the plague shall not be upon you to destroy you.' This wording emphasizes the substitutionary nature of the lamb's death.",
+        "Factual_Explanation": "God explicitly tells the Israelites the function of the blood they were commanded to apply. It would be a visual sign for Him. When His judgment, executed by the 'destroyer,' passed through the land of Egypt, the sight of the blood on the doorposts would cause Him to 'pass over' that house, sparing the firstborn within.",
+        "Theological_Meaning": "This verse powerfully illustrates the principle of justification by faith alone. The Israelites' safety did not depend on their feelings, their understanding, or their future performance. It depended entirely on their simple, obedient trust in God's provision—the blood of the lamb. The blood was the evidence of their faith. This is a foundational truth for any believer: our salvation rests not on what is within us, but on the finished work of a substitute applied on our behalf.",
+        "Christ_Centered_Meaning": "This is a direct prophecy of the saving power of Christ's blood. The 'token' on the house is a type of the seal of the Holy Spirit, which marks those who have applied the blood of Christ to their lives by faith. God's promise, 'when I see the blood, I will pass over you,' finds its ultimate fulfillment in the final judgment. God's justice 'passes over' the repentant sinner, not because they are sinless, but because He sees the blood of His Son, which has already met the full demands of the law. 'Much more then, being now justified by his blood, we shall be saved from wrath through him' (Romans 5:9)."
+    }
+},
+{
+    "id": "BP023",
+    "question": "After their miraculous escape from Egypt, God consecrates the firstborn of Israel to Himself as a memorial of the Passover night. He then institutes a seven-day festival to be observed annually, ensuring the lessons of the Exodus are never forgotten. What is the name of this festival and its core requirement?",
+    "options": [
+        "Exodus 13:6 - Seven days thou shalt eat unleavened bread, and in the seventh day shall be a feast to the LORD.",
+        "Exodus 13:6 - For seven days you must eat bread made without yeast, and on the seventh day there is to be a festival to the LORD.",
+        "Exodus 13:6 - Seven days you shall eat unleavened loaves, and on the seventh day will be a feast for the LORD.",
+        "Exodus 13:6 - For seven days thou shalt eat unleavened bread, and on the seventh day a feast shall be held for the LORD."
+    ],
+    "answer": "Exodus 13:6 - Seven days thou shalt eat unleavened bread, and in the seventh day shall be a feast to the LORD.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse establishes the Feast of Unleavened Bread, which immediately followed the Passover. It transformed the hasty meal of the Exodus night into a week-long object lesson about purity and separation from the corruption of their former life in Egypt.",
+        "Importance_of_Wording": "The command is simple and absolute: 'Seven days thou shalt eat unleavened bread.' The number seven in Scripture often signifies completeness or divine perfection. This complete week of avoiding leaven symbolized a total break with their past life. The festival culminated in a 'feast to the LORD,' a day of joyful celebration and worship for their redemption.",
+        "Factual_Explanation": "Immediately following the Passover, the Israelites were commanded to observe a seven-day festival during which they were to remove all leaven (yeast) from their homes and eat only unleavened bread (*matzah*). This commemorated the haste with which they left Egypt, as their dough had no time to rise. It became a perpetual statute for Israel.",
+        "Theological_Meaning": "In Scripture, leaven is almost always a symbol of sin, corruption, and false doctrine (1 Corinthians 5:6-8; Matthew 16:6). The Feast of Unleavened Bread, therefore, symbolized the life of sanctification that should follow justification (represented by Passover). Having been redeemed by the blood of the lamb, the believer is called to 'purge out the old leaven' and live a new life of sincerity and truth, separated from the sinful influences of the world (symbolized by Egypt).",
+        "Christ_Centered_Meaning": "The Apostle Paul provides the definitive Christ-centered interpretation of this feast. 'Purge out therefore the old leaven, that ye may be a new lump, as ye are unleavened. For even Christ our passover is sacrificed for us: Therefore let us keep the feast, not with old leaven, neither with the leaven of malice and wickedness; but with the unleavened bread of sincerity and truth' (1 Corinthians 5:7-8). For the Christian, this feast typifies the ongoing experience of living a holy life, empowered by Christ's sacrifice. It represents the daily choice to put away sin and walk in newness of life."
+    }
+},
+{
+    "id": "BP024",
+    "question": "Trapped between the pursuing Egyptian army and the impassable Red Sea, the Israelites are terrified and cry out to Moses. In this moment of extreme crisis, Moses delivers a message of profound faith, commanding the people to be still and witness God's power. What is this classic declaration of faith and deliverance?",
+    "options": [
+        "Exodus 14:13 - And Moses said unto the people, Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day: for the Egyptians whom ye have seen to day, ye shall see them again no more for ever.",
+        "Exodus 14:13 - And Moses said to the people, Do not be afraid, stand firm, and you will see the deliverance the LORD will bring you today: for the Egyptians you see today, you will never see them again.",
+        "Exodus 14:13 - And Moses said unto the people, Do not fear, stand fast, and behold the salvation of God, which he will perform for you today: for the Egyptians whom ye see today, ye shall see them no more forever.",
+        "Exodus 14:13 - And Moses said to the people, Fear not, stand your ground, and see the salvation of the LORD, which he will work for you today: for the Egyptians you have seen today, you shall see them again no more."
+    ],
+    "answer": "Exodus 14:13 - And Moses said unto the people, Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day: for the Egyptians whom ye have seen to day, ye shall see them again no more for ever.",
+      "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This is one of the most powerful exhortations to faith in the face of impossible circumstances in all of Scripture. It encapsulates the core principle of divine deliverance: human desperation is the stage for God's greatest works.",
+        "Importance_of_Wording": "The commands are a sequence of faith: 'Fear ye not' (addressing their emotion), 'stand still' (cease your panicked, human efforts), and 'see the salvation of the LORD' (actively watch for God's intervention). The promise is absolute and final: 'ye shall see them again no more for ever.' This was not a temporary reprieve but a complete and final victory over their oppressors.",
+        "Factual_Explanation": "With Pharaoh's army closing in, the Israelites felt utterly trapped. Their response was fear and complaint. Moses, acting as God's spokesman, countered their panic with a command to trust. He instructed them to stop fleeing and complaining, and instead to wait expectantly for God to act. This set the stage for the miraculous parting of the Red Sea.",
+        "Theological_Meaning": "This verse teaches a crucial lesson for every believer facing an overwhelming crisis. There are moments when human striving is futile and the only proper response is to 'be still, and know that I am God' (Psalm 46:10). It is often when we cease our own frantic efforts that we create the space to witness God's power. Salvation belongs to the Lord, and our role is often to trust and obey, even when the command is simply to wait.",
+        "Christ_Centered_Meaning": "The deliverance at the Red Sea is a powerful type of baptism and redemption through Christ. The Israelites passed through the water from bondage to freedom, while their enemies were destroyed in those same waters (1 Corinthians 10:1-2). Moses' command to 'stand still, and see the salvation of the LORD' is the essence of the gospel. We cannot save ourselves from the 'Egypt' of sin and the enemy who pursues us. We must cease from our own works, 'stand still' in faith, and look to the cross to 'see the salvation of the LORD' which He has accomplished for us. In Christ, the power of our old master, sin, is broken 'no more for ever.'"
+    }
+},
+{
+    "id": "BP025",
+    "question": "After the people stand still in faith, God gives Moses the marching order to proceed, even though the sea is still before them. Then, God Himself takes on the role of a warrior, positioning His presence to protect Israel and confound their enemies. How is this divine intervention described?",
+    "options": [
+        "Exodus 14:19-20 - And the angel of God... removed from before their face, and stood behind them: And it came between the camp of the Egyptians and the camp of Israel; and it was a cloud and darkness to them, but it gave light by night to these.",
+        "Exodus 14:19-20 - And the angel of God, which went before the camp of Israel, removed and went behind them... And it came between the camp of the Egyptians and the camp of Israel; and it was a cloud and darkness to them, but it gave light by night to these.",
+        "Exodus 14:19-20 - And the angel of God, who went before the host of Israel, moved and went behind them... And it came between the army of Egypt and the army of Israel; and there was a cloud and darkness to them, but it brought light by night to these.",
+        "Exodus 14:19-20 - Then the angel of God... withdrew and went behind them... And it came between the camp of the Egyptians and the camp of Israel; so that it was a cloud and darkness to the one, but it gave light by night to the other."
+    ],
+    "answer": "Exodus 14:19-20 - And the angel of God, which went before the camp of Israel, removed and went behind them; and the pillar of the cloud went from before their face, and stood behind them: And it came between the camp of the Egyptians and the camp of Israel; and it was a cloud and darkness to them, but it gave light by night to these: so that the one came not near the other all the night.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This passage details the strategic and supernatural protection God afforded Israel in their moment of greatest vulnerability. The same pillar that guided them now became their rear guard, a barrier of separation between them and their enemies.",
+        "Importance_of_Wording": "The text identifies the protector as both the 'angel of God' and the 'pillar of the cloud,' showing them to be one and the same—a manifestation of the divine presence. The dual nature of this manifestation is profound: to the Egyptians, it was 'a cloud and darkness,' causing confusion and fear. To Israel ('these'), 'it gave light by night,' providing comfort and reassurance. This demonstrates that God's presence is perceived differently by the righteous and the wicked.",
+        "Factual_Explanation": "As the Israelites prepared to move forward into the sea, the divine presence, which had been leading them as a pillar of cloud by day and fire by night, repositioned itself. It moved from the front of the Israelite camp to the rear, physically inserting itself as a barrier between the fleeing slaves and the pursuing Egyptian army. This divine shield kept the two camps separated throughout the entire night.",
+        "Theological_Meaning": "This is a powerful illustration of God's role as a protector of His people. He literally stands between them and the dangers that pursue them. The same truth that is a source of light and comfort to the believer can be a source of confusion and darkness to the unbeliever. God's word and His providences have a dual effect, depending on the heart of the person encountering them. For those in covenant with Him, He is a refuge; for those opposed to Him, He is a consuming fire.",
+        "Christ_Centered_Meaning": "The 'angel of God' who led and protected Israel is identified as Christ, the pre-incarnate Son of God. He is the one who stands as the great protector of His church. He is the 'light of the world,' but to those who reject Him, His message brings condemnation and darkness (John 3:19-20). In the final conflict, Christ's truth will be a saving light to His faithful remnant, while it will be incomprehensible darkness to those who follow the deceptions of 'Babylon.' He stands as the great divider between the saved and the lost."
+    }
+},
+{
+    "id": "BP026",
+    "question": "After the triumphant crossing of the Red Sea and the destruction of the Egyptian army, Moses and the children of Israel sing a song of praise to the Lord. Within this song is a declaration of God's unique character among all celestial powers and a description of His holiness. What is this rhetorical question and statement of praise?",
+    "options": [
+        "Exodus 15:11 - Who is like unto thee, O LORD, among the gods? who is like thee, glorious in holiness, fearful in praises, doing wonders?",
+        "Exodus 15:11 - Who is like you, O LORD, among the mighty ones? who is like you, glorious in holiness, awesome in praises, working wonders?",
+        "Exodus 15:11 - Who is like thee, O LORD, among the mighty? who is like thee, majestic in holiness, terrible in praises, doing miracles?",
+        "Exodus 15:11 - Who can be compared to thee, O LORD, among the gods? who is like thee, glorious in holiness, worthy of praises, doing great wonders?"
+    ],
+    "answer": "Exodus 15:11 - Who is like unto thee, O LORD, among the gods? who is like thee, glorious in holiness, fearful in praises, doing wonders?",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse is the theological climax of the Song of the Sea. It moves from recounting God's acts to praising His essential nature. It directly contrasts the living God with the dead idols of Egypt and other nations, establishing His absolute uniqueness and moral perfection.",
+        "Importance_of_Wording": "The question 'Who is like unto thee, O LORD, among the gods?' is a direct challenge to all other forms of worship. 'Glorious in holiness' identifies God's primary attribute—His moral purity and separateness from all evil—as the source of His glory. 'Fearful in praises' means He is so awesome that He inspires reverence and awe in those who praise Him. 'Doing wonders' points to His acts in creation and redemption as evidence of His unparalleled power.",
+        "Factual_Explanation": "In this first great hymn recorded in the Bible, the Israelites celebrate their deliverance. This specific verse forms the centerpiece of their worship, articulating the profound lesson they had just learned. By systematically dismantling the power of Egypt and its deities through the plagues and the Red Sea event, God had proven His complete and utter supremacy.",
+        "Theological_Meaning": "This question becomes a refrain throughout Scripture, a cornerstone of monotheistic faith (Psalm 86:8; Isaiah 40:25). It affirms that God is not merely the greatest in a pantheon but is in a category all by Himself. His 'holiness' is what makes Him truly God. This truth is the foundation of all true worship. We worship Him not just for what He does, but for who He is. The song itself has prophetic significance, as it is echoed by the redeemed in the end times.",
+        "Christ_Centered_Meaning": "The song of Moses is sung again, prophetically, by those who gain victory over the beast in the last days. They stand on a 'sea of glass' and sing 'the song of Moses the servant of God, and the song of the Lamb' (Revelation 15:2-3). This shows that the deliverance from Egypt is a type of the final deliverance of God's people from the tyranny of end-time Babylon. The praise of God as 'glorious in holiness' finds its ultimate expression in Christ, who is the perfect embodiment of God's holy character, the one who does 'wonders' of re-creation in the human heart."
+    }
+},
+{
+    "id": "BP027",
+    "question": "Three days into the wilderness, the Israelites run out of water and find only a bitter spring at a place named Marah. The people murmur against Moses, and in response to Moses' cry, God shows him a way to heal the waters. What promise and statute did God make with Israel at this place, linking obedience to physical well-being?",
+    "options": [
+        "Exodus 15:26 - And said, If thou wilt diligently hearken to the voice of the LORD thy God... and wilt give ear to his commandments... I will put none of these diseases upon thee, which I have brought upon the Egyptians: for I am the LORD that healeth thee.",
+        "Exodus 15:26 - And said, If you will listen carefully to the voice of the LORD your God... and will listen to his commands... I will bring none of the sicknesses upon you, which I have brought on the Egyptians: for I am the LORD, your healer.",
+        "Exodus 15:26 - And he said, If thou wilt diligently obey the voice of the LORD thy God... and give ear to his statutes... I will place none of these afflictions upon thee, which I have brought upon Egypt: for I am the LORD who healeth thee.",
+        "Exodus 15:26 - And said, If thou dost hearken to the voice of the LORD thy God... and give ear to his commandments... I will put none of the plagues upon thee, which I put upon the Egyptians: for I am the LORD that maketh thee well."
+    ],
+    "answer": "Exodus 15:26 - And said, If thou wilt diligently hearken to the voice of the LORD thy God, and wilt do that which is right in his sight, and wilt give ear to his commandments, and keep all his statutes, I will put none of these diseases upon thee, which I have brought upon the Egyptians: for I am the LORD that healeth thee.",
+      "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This is the first great health law given to Israel. It establishes a direct link between covenant faithfulness—obedience to God's principles—and the physical health and well-being of the nation. It reveals a God who is concerned not only with spiritual matters but also with the physical vitality of His people.",
+        "Importance_of_Wording": "The conditions are comprehensive and repetitive for emphasis: 'diligently hearken,' 'do that which is right,' 'give ear to his commandments,' and 'keep all his statutes.' This covers both hearing and doing. The promise is a conditional exemption from the 'diseases... brought upon the Egyptians.' The final declaration, 'for I am the LORD that healeth thee' (Yahweh-Rapha), reveals a fundamental aspect of God's character: He is the ultimate source of all healing.",
+        "Factual_Explanation": "After sweetening the bitter waters of Marah by having Moses cast a specific tree into them, God made a statute and an ordinance with Israel. He promised that if they would be obedient to His commands, they would be spared the diseases that afflicted the Egyptians, a people who lived in defiance of God and His natural laws. This promise was a foundational principle for the covenant nation.",
+        "Theological_Meaning": "This passage is a cornerstone of the biblical health message. It teaches that God's laws—moral, civil, and physical—are designed for our good. Obedience to God's principles of living (which would later include laws of diet, hygiene, and quarantine) brings physical blessings. While not every sickness is a direct result of personal sin, this verse establishes a general principle that a lifestyle in harmony with the Creator's design promotes health, while a lifestyle at odds with it invites disease. Healing, ultimately, is a divine gift.",
+        "Christ_Centered_Meaning": "Jesus' earthly ministry was a perfect fulfillment of the title 'Yahweh-Rapha.' He went about 'healing all manner of sickness and all manner of disease among the people' (Matthew 4:23). His miracles of physical healing were signs of His greater power to heal the soul from the disease of sin. The 'tree' cast into the bitter waters is a beautiful type of the cross of Christ. The cross, a symbol of a curse, when applied by faith to the bitter experiences of our lives, brings sweetness, healing, and salvation. The ultimate healing He provides is the resurrection to eternal life, where there will be no more sickness or pain."
+    }
+},
+{
+    "id": "BP028",
+    "question": "In the Wilderness of Sin, the Israelites again murmur, this time for lack of food, romanticizing their slavery in Egypt. God promises to provide for them in a miraculous way, testing their obedience daily. What is the precise description of the mysterious food that appeared on the ground each morning?",
+    "options": [
+        "Exodus 16:14-15 - And when the dew that lay was gone up, behold... a small round thing, as small as the hoar frost on the ground. And when the children of Israel saw it, they said one to another, It is manna: for they wist not what it was.",
+        "Exodus 16:14-15 - And when the layer of dew was gone, behold... a small round substance, as small as the frost on the ground. And when the children of Israel saw it, they said to one another, What is it? for they knew not what it was.",
+        "Exodus 16:14-15 - And when the dew was gone up, behold... a small, flaky thing, as fine as frost on the ground. And when the children of Israel saw it, they said to each other, What is this? for they did not know what it was.",
+        "Exodus 16:14-15 - And when the dew that lay was gone up, behold, upon the face of the wilderness there lay a small round thing, as small as the hoar frost on the ground. And when the children of Israel saw it, they said one to another, It is manna: for they wist not what it was."
+    ],
+    "answer": "Exodus 16:15 - And when the children of Israel saw it, they said one to another, It is manna: for they wist not what it was. And Moses said unto them, This is the bread which the LORD hath given you to eat.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This passage describes the first appearance of manna, the supernatural food that would sustain Israel for forty years. The name 'manna' itself, derived from their question, captures the miraculous and mysterious nature of God's provision.",
+        "Importance_of_Wording": "The description is of something humble and mysterious: 'a small round thing, as small as the hoar frost.' It was not ostentatious. The key part is their reaction: 'they said one to another, It is manna: for they wist not what it was.' The name 'manna' literally comes from the question 'What is it?' (*man hu*). It forever enshrined their initial wonder and their complete dependence on this unknown, divinely provided substance.",
+        "Factual_Explanation": "As promised, after a layer of dew evaporated each morning, the ground was covered with a fine, flake-like substance. The Israelites had never seen anything like it. Moses identified it for them as the 'bread which the LORD hath given you.' They were instructed to gather one omer (about two quarts) per person each day. On the sixth day, they were to gather a double portion, as none would appear on the Sabbath, a weekly test of their faith and obedience.",
+        "Theological_Meaning": "The manna was a daily lesson in faith and dependence. They could not hoard it (it would breed worms), and they had to trust God to provide it fresh each day. This taught them the principle of 'give us this day our daily bread.' The cessation of manna on the seventh day was a powerful weekly reminder of the sanctity of the Sabbath, which God had instituted at creation. It taught them to trust God's provision for the Sabbath and to honor His command to rest.",
+        "Christ_Centered_Meaning": "Jesus Christ is the ultimate fulfillment of the manna. In John chapter 6, after feeding the five thousand, Jesus declared, 'I am that bread of life. Your fathers did eat manna in the wilderness, and are dead. This is the bread which cometh down from heaven, that a man may eat thereof, and not die. I am the living bread which came down from heaven' (John 6:48-51). Just as the manna was a mysterious, humble, daily provision from heaven, so Christ is the divine gift who came down to give His life for the world. We must feed on Him daily through His Word and communion with Him to have spiritual life."
+    }
+},
+{
+    "id": "BP029",
+    "question": "At Rephidim, the Israelites again face a water crisis and quarrel with Moses. God instructs Moses to take the same rod used in Egypt and strike a rock at Horeb. What is the explicit instruction God gives Moses, promising to be present at the very place of the miracle?",
+    "options": [
+        "Exodus 17:6 - Behold, I will stand before thee there upon the rock in Horeb; and thou shalt smite the rock, and there shall come water out of it, that the people may drink.",
+        "Exodus 17:6 - See, I will stand before thee there on the rock in Horeb; and thou shalt strike the rock, and water will come out of it, that the people may drink.",
+        "Exodus 17:6 - Behold, I am standing before thee there on the rock at Horeb; and thou shalt smite the rock, and there will come water from it, so the people can drink.",
+        "Exodus 17:6 - Lo, I will stand before thee there upon the stone in Horeb; and thou shalt smite the stone, and there shall come water out of it, that the people may drink."
+    ],
+    "answer": "Exodus 17:6 - Behold, I will stand before thee there upon the rock in Horeb; and thou shalt smite the rock, and there shall come water out of it, that the people may drink.",
+      "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse details the divine command for one of the most significant miracles in the wilderness journey. It demonstrates God's grace in providing for a rebellious people and contains profound Christological typology.",
+        "Importance_of_Wording": "The most stunning phrase is God's promise: 'Behold, I will stand before thee there upon the rock.' God Himself would be present, identifying Himself with the very rock that was to be struck. The command is direct: 'thou shalt smite the rock.' The result would be an abundance of water from this most unlikely of sources, satisfying the people's thirst.",
+        "Factual_Explanation": "Facing a rebellion born of thirst, Moses was commanded by God to take some elders as witnesses and his miraculous rod and go to a specific rock at Horeb (another name for the Sinai region). God promised to be present there. Moses was to strike the rock, and from it, water would flow for the entire nation.",
+        "Theological_Meaning": "This event teaches that God can bring life from the most barren and lifeless of sources. The rock, a symbol of hardness and death, became a fountain of life. It was a powerful demonstration of God's power and a rebuke to the people's unbelief. This event was so significant that it was memorialized in the name of the place, Massah (testing) and Meribah (quarreling).",
+        "Christ_Centered_Meaning": "The Apostle Paul gives the inspired interpretation of this event in 1 Corinthians 10:4, stating that the Israelites 'did all drink the same spiritual drink: for they drank of that spiritual Rock that followed them: and that Rock was Christ.' Christ is the Rock of our salvation. The divine presence 'upon the rock' that was 'smitten' is a vivid prophecy of Christ, our Rock, who was 'smitten of God, and afflicted' (Isaiah 53:4) on the cross. From His wounded side flowed the water of life (John 19:34), the gift of the Holy Spirit, which gives eternal life to all who are thirsting. This historical event is one of the clearest Old Testament pictures of the cross."
+    }
+},
+{
+    "id": "BP030",
+    "question": "After defeating the Amalekites, Moses' father-in-law, Jethro, visits the camp and observes how Moses single-handedly judges the people from morning until evening. Jethro offers sage advice on delegation. What is the core of Jethro's counsel for establishing an organized and efficient system of governance?",
+    "options": [
+        "Exodus 18:21 - Moreover thou shalt provide out of all the people able men, such as fear God, men of truth, hating covetousness; and place such over them, to be rulers of thousands, and rulers of hundreds, rulers of fifties, and rulers of tens.",
+        "Exodus 18:21 - Furthermore you shall select from all the people capable men, those who fear God, men of truth, who hate dishonest gain; and place these over them, to be rulers of thousands, rulers of hundreds, rulers of fifties, and rulers of tens.",
+        "Exodus 18:21 - Moreover thou shalt choose from among the people able men, such as fear God, men of truth, hating avarice; and set them over the people, as rulers of thousands, hundreds, fifties, and tens.",
+        "Exodus 18:21 - And you will provide from among all the people able men, such as fear God, men of integrity, hating covetousness; and you shall place them over them as rulers of thousands, and rulers of hundreds, rulers of fifties, and rulers of tens."
+    ],
+    "answer": "Exodus 18:21 - Moreover thou shalt provide out of all the people able men, such as fear God, men of truth, hating covetousness; and place such over them, to be rulers of thousands, and rulers of hundreds, rulers of fifties, and rulers of tens.",
+    "category": "Bible People",
+    "explanation": {
+        "Relevance_and_Correctness": "This verse outlines the first organized system of civil government and judicial administration for the nation of Israel. Jethro's advice provides a timeless model for leadership, organization, and delegation within any large community, including the church.",
+        "Importance_of_Wording": "The qualifications for leaders are paramount and multi-faceted. They must be 'able men' (competent and capable). But ability is not enough; their character is crucial. They must 'fear God' (have a reverent, obedient relationship with Him), be 'men of truth' (honest and reliable), and be 'hating covetousness' (free from the love of money and immune to bribery). The structure is a clear, hierarchical system of delegation, from tens up to thousands.",
+        "Factual_Explanation": "Jethro, a priest of Midian, observed that Moses' method of judging every single dispute himself was unsustainable and would wear out both Moses and the people. He advised him to establish a tiered judicial system. Moses would teach the people God's laws, but a body of qualified men would be appointed to handle smaller matters, bringing only the most difficult cases to Moses. Moses wisely heeded this counsel.",
+        "Theological_Meaning": "This passage highlights the importance of order and organization in God's work. God is not the author of confusion (1 Corinthians 14:33). While He calls and equips primary leaders like Moses, He also intends for the work to be shared among many qualified individuals. This model became foundational for the later organization of Israel and provides guiding principles for church organization today. The emphasis on moral character over mere talent is a vital lesson for selecting leaders in God's cause.",
+        "Christ_Centered_Meaning": "While Moses was a type of Christ as the great lawgiver and mediator, this passage shows that even he could not bear the burden alone. It points forward to the New Testament model of the church, where Christ is the Head, but He works through a body with many members (1 Corinthians 12). The apostles later followed Jethro's principle when they appointed deacons to handle practical matters so they could devote themselves to prayer and the ministry of the word (Acts 6:1-4). The qualifications for elders and deacons in the New Testament (1 Timothy 3; Titus 1) echo the high moral standard first established here by Jethro."
+    }
+},
+{
+  "id": "BP031",
+  "question": "As Israel camps before Mount Sinai, God calls Moses up the mountain to propose a covenant with the entire nation. If they obey, God promises to elevate them to a unique and privileged position among all the nations of the earth. What is this three-fold promise of Israel's divine calling?",
+  "options": [
+      "Exodus 19:5-6 - Now therefore, if ye will obey my voice indeed, and keep my covenant, then ye shall be a peculiar treasure unto me above all people... And ye shall be unto me a kingdom of priests, and an holy nation.",
+      "Exodus 19:5-6 - So now, if you will truly obey my voice, and keep my covenant, then you shall be a special treasure to me above all people... And you shall be for me a kingdom of priests, and a holy nation.",
+      "Exodus 19:5-6 - Now then, if you will obey my voice, and keep my covenant, you shall be my treasured possession above all peoples... And you will be to me a kingdom of priests, and a dedicated nation.",
+      "Exodus 19:5-6 - Therefore, if you will indeed obey my voice, and keep my covenant, then you shall be my own treasure from all the peoples... And you shall be to me a kingdom of priests, and a holy people."
+  ],
+  "answer": "Exodus 19:5-6 - Now therefore, if ye will obey my voice indeed, and keep my covenant, then ye shall be a peculiar treasure unto me above all people: for all the earth is mine: And ye shall be unto me a kingdom of priests, and an holy nation.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is God's formal mission statement for the nation of Israel. It defines their purpose and identity not just for their own benefit, but as God's representatives to the entire world. This calling is conditional upon their faithfulness to the covenant.",
+      "Importance_of_Wording": "The promises are rich with meaning. 'A peculiar treasure' (*segullah*) means a special, cherished possession, something a king would keep in his personal treasury. 'A kingdom of priests' signifies that the entire nation was called to be mediators, representing God to the world and bringing the world to God. 'An holy nation' means they were to be set apart, morally and spiritually distinct from all other nations, reflecting God's own character.",
+      "Factual_Explanation": "Before giving the Ten Commandments, God offered Israel a covenant. He reminded them of His deliverance from Egypt ('on eagles' wings') and then laid out the terms. If they would obey His voice and keep the covenant He was about to reveal, they would receive this unique status. The reason God could make this offer is because 'all the earth is mine,' asserting His universal sovereignty.",
+      "Theological_Meaning": "This calling was missionary in its intent. Israel was not chosen for exclusive salvation but to be a light to the Gentiles, demonstrating the blessings of living under God's rule. Their failure to live up to this high calling is a central tragedy of the Old Testament story. However, the calling itself was never revoked; it was transferred to spiritual Israel.",
+      "Christ_Centered_Meaning": "The Apostle Peter directly applies this calling to the Christian church: 'But ye are a chosen generation, a royal priesthood, an holy nation, a peculiar people; that ye should shew forth the praises of him who hath called you out of darkness into his marvellous light' (1 Peter 2:9). Through faith in Christ, believers from all nations become God's 'peculiar treasure' and are called to the same missionary purpose: to be priests who minister God's grace to a lost world and to live as a holy people who reflect His character."
+  }
+},
+{
+  "id": "BP032",
+  "question": "Atop a smoke-filled, quaking Mount Sinai, God speaks the Ten Commandments directly to the people of Israel. Before listing the specific prohibitions, He prefaces the law with a powerful statement of His identity and His redemptive relationship with them. What is this foundational preamble to the Decalogue?",
+  "options": [
+      "Exodus 20:2 - I am the LORD thy God, which have brought thee out of the land of Egypt, out of the house of bondage.",
+      "Exodus 20:2 - I am the LORD your God, who led thee out of the land of Egypt, from the house of slavery.",
+      "Exodus 20:2 - I am Jehovah thy God, which brought thee forth from the land of Egypt, from the house of bondage.",
+      "Exodus 20:2 - I am the LORD thy God, who has brought thee out of Egypt, out of the land of slavery."
+  ],
+  "answer": "Exodus 20:2 - I am the LORD thy God, which have brought thee out of the land of Egypt, out of the house of bondage.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse is the preamble to the Ten Commandments, establishing the basis upon which God has the right to command. It grounds the law not in abstract power, but in a relationship of redemption. Obedience is the response to grace, not a means of earning it.",
+      "Importance_of_Wording": "'I am the LORD (YHWH) thy God' identifies Him by His personal, covenant name. The phrase 'which have brought thee out of the land of Egypt' frames the entire law as a response to a historical act of salvation. 'The house of bondage' vividly recalls their former state of slavery, contrasting it with the freedom offered in the covenant.",
+      "Factual_Explanation": "Before God spoke the first commandment, He introduced Himself. This introduction served as His credentials. He wasn't an unknown deity imposing arbitrary rules; He was their proven Deliverer. This statement reminded Israel that the law was a gift from the one who had already saved them, designed to preserve their freedom.",
+      "Theological_Meaning": "This verse establishes that grace precedes law. The Decalogue is not a ladder to climb to get to God, but a framework for living for those who have already been saved by God. This principle refutes legalism. The law is not given to make us slaves, but to protect us from returning to the 'house of bondage'—be it literal slavery in Egypt or the spiritual slavery of sin.",
+      "Christ_Centered_Meaning": "This preamble finds its ultimate meaning in Christ. For the believer, it reads: 'I am the Lord your God, who has brought you out of the 'Egypt' of sin and death, out of the house of bondage to Satan.' The Christian keeps the commandments not to be saved, but because they *have been* saved by the mighty act of redemption at the cross. Obedience flows from a heart liberated by grace, eager to live in a way that honors the Redeemer."
+  }
+},
+{
+  "id": "BP033",
+  "question": "The second commandment strikes at the heart of all idolatry by forbidding not only the worship of other gods but also the creation of any physical representation of the true God for worship. What specific warning does God attach to this command, revealing His jealous nature and the generational consequences of idolatry?",
+  "options": [
+      "Exodus 20:5 - Thou shalt not bow down thyself to them, nor serve them: for I the LORD thy God am a jealous God, visiting the iniquity of the fathers upon the children unto the third and fourth generation of them that hate me.",
+      "Exodus 20:5 - Thou shalt not bow to them, or worship them: for I the LORD thy God am a jealous God, punishing the sin of the fathers upon the children to the third and fourth generation of those that despise me.",
+      "Exodus 20:5 - Thou must not bow down thyself to them, nor serve them: for I the LORD thy God am a zealous God, visiting the sins of the fathers on the children unto the third and fourth generation of them that hate me.",
+      "Exodus 20:5 - Thou shalt not bow down to them, nor serve them: for I the LORD thy God am a jealous God, visiting the wickedness of the fathers upon the children unto the third and fourth generation of those who hate me."
+  ],
+  "answer": "Exodus 20:5 - Thou shalt not bow down thyself to them, nor serve them: for I the LORD thy God am a jealous God, visiting the iniquity of the fathers upon the children unto the third and fourth generation of them that hate me.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse provides the divine rationale behind the prohibition of idolatry. It reveals God's character as 'jealous'—not in a petty, human sense, but in His passionate desire for exclusive devotion—and outlines the far-reaching impact of this foundational sin.",
+      "Importance_of_Wording": "'Jealous' (*qanna*) means zealous for and protective of a relationship. God's jealousy is for our good, as He knows that dividing our worship leads to our ruin. 'Visiting the iniquity' does not mean God arbitrarily punishes children for their parents' sins. Rather, it describes the natural consequence of sin—that the influence, example, and societal decay of one generation's idolatry are passed down, affecting future generations 'of them that hate me,' i.e., those who continue in the same path of rebellion.",
+      "Factual_Explanation": "Attached to the command against making graven images, God explains His nature. He demands exclusive loyalty because He alone is God. He warns that the sin of idolatry has a corrupting influence that ripples through families and societies for generations, perpetuating a cycle of rebellion and its consequences.",
+      "Theological_Meaning": "This commandment guards the purity of worship. Any attempt to represent the infinite God with a finite object diminishes Him and corrupts the worshiper. The principle of generational influence is a sober reality; choices have consequences that extend beyond ourselves. Conversely, the next verse (v. 6) shows that the influence of godliness extends even further, 'unto thousands of them that love me, and keep my commandments.' God's mercy far outweighs His judgment.",
+      "Christ_Centered_Meaning": "Christ is the only true 'image of the invisible God' (Colossians 1:15). To worship any other image or representation is to reject the perfect revelation of God in His Son. Idolatry, at its heart, is putting anything—wealth, power, self, relationships—in the place that Christ alone deserves. The Christian's call is to flee idolatry (1 Corinthians 10:14) and give Christ the exclusive worship and allegiance He is due as our jealous (protective) Savior."
+  }
+},
+{
+  "id": "BP034",
+  "question": "The third commandment safeguards the reverence due to God Himself, prohibiting the misuse of His name. This goes far beyond simple profanity. What is the solemn warning attached to this commandment?",
+  "options": [
+      "Exodus 20:7 - Thou shalt not take the name of the LORD thy God in vain; for the LORD will not hold him guiltless that taketh his name in vain.",
+      "Exodus 20:7 - You shall not misuse the name of the LORD your God; for the LORD will not consider him innocent who misuses his name.",
+      "Exodus 20:7 - Thou shalt not speak the name of the LORD thy God for nought; for the LORD will not hold him guiltless that speaks his name for nought.",
+      "Exodus 20:7 - Thou shalt not take the name of the LORD thy God for vanity; for the LORD will not acquit him that taketh his name in vain."
+  ],
+  "answer": "Exodus 20:7 - Thou shalt not take the name of the LORD thy God in vain; for the LORD will not hold him guiltless that taketh his name in vain.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This commandment protects the honor of God's character. His 'name' represents His authority, His power, and His entire being. To take it 'in vain' is to treat Him and all He represents with contempt.",
+      "Importance_of_Wording": "To take a name 'in vain' (*lashav*) means to use it for an empty, false, or worthless purpose. This includes perjury (swearing a false oath), flippant or irreverent use of His name in common speech, and—most significantly—professing to be a follower of God while living in a way that dishonors Him. The warning is stark: 'the LORD will not hold him guiltless.' This is not a minor infraction; it is a sin that God Himself will certainly judge.",
+      "Factual_Explanation": "The third commandment forbids any use of God's name that would empty it of its significance. In a world where oaths by deities were common, this law demanded that any appeal to God's name be done with utmost seriousness and truthfulness. It also applied to those who claimed to represent God; their actions could either honor or profane His name.",
+      "Theological_Meaning": "This law teaches that our words and our lives are inextricably linked to God's reputation in the world. As His representatives, our conduct can either sanctify or profane His name before others. To claim the name 'Christian' and live a life of sin is a profound violation of this command. It makes God's name seem worthless or 'vain' to a watching world.",
+      "Christ_Centered_Meaning": "Believers are baptized 'in the name of the Father, and of the Son, and of the Holy Ghost' (Matthew 28:19). We take upon ourselves the name of Christ. The most profound way to break this commandment is to be a false representative of Christ, misrepresenting His character of love, mercy, and holiness. As Paul says in Romans 2:24, 'For the name of God is blasphemed among the Gentiles through you.' Conversely, our great purpose is to 'hallow' or sanctify God's name through lives of faithful obedience."
+  }
+},
+{
+  "id": "BP035",
+  "question": "At the very heart of the Ten Commandments, positioned as the bridge between duties to God and duties to humanity, lies the command to observe the seventh-day Sabbath. How does God ground this command in the history of creation itself, defining it as a holy memorial?",
+  "options": [
+      "Exodus 20:11 - For in six days the LORD made heaven and earth, the sea, and all that in them is, and rested the seventh day: wherefore the LORD blessed the sabbath day, and hallowed it.",
+      "Exodus 20:11 - Because in six days the LORD made the heavens and the earth, the sea, and all that is in them, and rested on the seventh day: therefore the LORD blessed the sabbath day, and made it holy.",
+      "Exodus 20:11 - For in six days the LORD created heaven and earth, the sea, and everything in them, and he rested the seventh day: for this reason the LORD blessed the sabbath day, and hallowed it.",
+      "Exodus 20:11 - For in six days the LORD made heaven and earth, and the sea, and everything in them, and rested on the seventh day: so the LORD blessed the sabbath day, and sanctified it."
+  ],
+  "answer": "Exodus 20:11 - For in six days the LORD made heaven and earth, the sea, and all that in them is, and rested the seventh day: wherefore the LORD blessed the sabbath day, and hallowed it.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse provides the official reason for the Sabbath commandment within the Decalogue. It links the weekly observance directly back to God's own actions at the close of creation week, establishing it not as a mere Jewish ordinance, but as a universal memorial of God's creative power.",
+      "Importance_of_Wording": "The language deliberately echoes Genesis 2. 'The LORD made' (*asah*) encompasses the entire creative work. He 'rested' not from exhaustion but in celebration of a finished work. Based on this precedent, He 'blessed' the Sabbath day (infused it with special favor) and 'hallowed it' (set it apart from all other days for a holy purpose). This makes the Sabbath's holiness an act of God, not of human choice.",
+      "Factual_Explanation": "The command to 'Remember the sabbath day' (v. 8) implies it was already known. Verse 11 provides the definitive rationale. The seven-day cycle of work and rest is to be a mirror of the original creation week. By resting on the seventh day, humanity acknowledges God as the Creator and owner of all time and existence.",
+      "Theological_Meaning": "The Sabbath is the great sign of God's authority as Creator. In a world that increasingly embraces godless evolution, the Sabbath stands as a weekly testimony to a divine origin. Prophetically, the final conflict described in Revelation revolves around worship. The first angel's message calls the world to 'worship him that made heaven, and earth, and the sea, and the fountains of waters' (Revelation 14:7), a direct quote from the Sabbath commandment. This makes the Sabbath a crucial seal of loyalty to the Creator God in the last days, in contrast to the 'mark' of a rival power that seeks to change God's law.",
+      "Christ_Centered_Meaning": "Jesus declared, 'The sabbath was made for man, and not man for the sabbath: Therefore the Son of man is Lord also of the sabbath' (Mark 2:27-28). He is the Creator who instituted the day and the Redeemer who gives true 'rest.' The Sabbath is a symbol not only of creation rest but also of redemption rest—the rest from our own works of salvation that we find by trusting in the finished work of Christ on the cross (Hebrews 4). It is a weekly invitation to enter into a relationship of trust and communion with our Creator and Redeemer."
+  }
+},
+{
+  "id": "BP036",
+  "question": "The fifth commandment serves as a transition from honoring God to honoring fellow humans, starting with the most foundational human relationship. What is the specific command regarding parents, and what unique promise is attached to it?",
+  "options": [
+      "Exodus 20:12 - Honour thy father and thy mother: that thy days may be long upon the land which the LORD thy God giveth thee.",
+      "Exodus 20:12 - Respect thy father and thy mother: that thou mayest live long in the land which the LORD thy God is giving thee.",
+      "Exodus 20:12 - Honour thy father and thy mother: that thy days may be extended in the land which the LORD thy God giveth thee.",
+      "Exodus 20:12 - Revere thy father and thy mother: that thy days may be many upon the land which the LORD thy God giveth thee."
+  ],
+  "answer": "Exodus 20:12 - Honour thy father and thy mother: that thy days may be long upon the land which the LORD thy God giveth thee.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the first commandment with a specific promise attached. It establishes the family unit as the bedrock of a stable society and links respect for parental authority directly to national prosperity and longevity.",
+      "Importance_of_Wording": "'Honour' (*kabad*) is a strong word, meaning to treat with weight, respect, and reverence. It goes beyond mere obedience to an attitude of the heart. The promise 'that thy days may be long upon the land' has both a personal and a corporate application. Individuals who honor their parents tend to live more stable lives, and a nation where family structures are respected will endure.",
+      "Factual_Explanation": "Positioned as the first of the 'second table' of the law (duties to others), this commandment underscores the importance of the family. Parents are God's first representatives to a child. Learning to honor them is the training ground for learning to honor God and all other rightful authority.",
+      "Theological_Meaning": "The health of a society can be measured by the strength of its families. This commandment provides the divine blueprint for social stability. When respect for parental authority breaks down, it is a precursor to the breakdown of all civil and divine authority. The Apostle Paul identified disobedience to parents as a sign of the moral decay of the last days (2 Timothy 3:2).",
+      "Christ_Centered_Meaning": "Jesus perfectly modeled this commandment, submitting to His earthly parents (Luke 2:51) and, even from the cross, ensuring His mother was cared for (John 19:26-27). He also taught that love for God our Father must ultimately take precedence over all earthly family ties (Matthew 10:37). For the believer, honoring our parents is one of the primary ways we demonstrate our love and honor for our Heavenly Father."
+  }
+},
+{
+  "id": "BP037",
+  "question": "The sixth commandment is a short, powerful prohibition that protects the sanctity of human life. What is the precise, stark wording of this universal moral law?",
+  "options": [
+      "Exodus 20:13 - Thou shalt not murder.",
+      "Exodus 20:13 - Thou shalt not kill.",
+      "Exodus 20:13 - Thou shalt do no murder.",
+      "Exodus 20:13 - Thou shalt not commit murder."
+  ],
+  "answer": "Exodus 20:13 - Thou shalt not kill.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This command is a foundational pillar of civilized society, safeguarding the most basic human right—the right to life, which is a gift from God.",
+      "Importance_of_Wording": "The KJV translation 'Thou shalt not kill' uses the Hebrew verb *ratsach*. This verb specifically refers to the unlawful, malicious, or premeditated taking of a human life—what modern language calls murder. It does not prohibit capital punishment (which God instituted in Genesis 9:6), killing in a just war, or accidental manslaughter, which are governed by other laws. The command is absolute in its prohibition of personal, unauthorized killing.",
+      "Factual_Explanation": "This brief, unconditional command establishes the supreme value of human life. It directly follows the command to honor parents, who are the givers of life on a human level, and is grounded in the fact that humanity is made in the image of God (Genesis 9:6).",
+      "Theological_Meaning": "This law protects the divine prerogative over life and death. Since God is the author of life, only He has the right to take it or to delegate the authority to take it under specific, controlled circumstances (i.e., civil government). This stands in stark contrast to the pagan world where human life was often cheap and human sacrifice was practiced.",
+      "Christ_Centered_Meaning": "In the Sermon on the Mount, Jesus expanded the spiritual meaning of this commandment far beyond the physical act. He taught that anger, contempt, and hateful words against a brother are violations of the spirit of this law: 'Whosoever is angry with his brother without a cause shall be in danger of the judgment' (Matthew 5:21-22). John the Apostle states it even more directly: 'Whosoever hateth his brother is a murderer' (1 John 3:15). Christ calls His followers not just to refrain from killing, but to have a heart of love that actively seeks the well-being of others, thereby fulfilling the true intent of the law."
+  }
+},
+{
+  "id": "BP038",
+  "question": "The seventh commandment protects the sacredness of the marriage covenant, which is the foundation of the family and society. What is the clear and concise prohibition against violating this covenant?",
+  "options": [
+      "Exodus 20:14 - Thou shalt not commit adultery.",
+      "Exodus 20:14 - Thou shalt not be an adulterer.",
+      "Exodus 20:14 - Thou shalt not practice adultery.",
+      "Exodus 20:14 - Thou must not commit adultery."
+  ],
+  "answer": "Exodus 20:14 - Thou shalt not commit adultery.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This command safeguards the purity and exclusivity of the marriage relationship, which was instituted by God at creation (Genesis 2:24). It protects the family from the devastating consequences of infidelity.",
+      "Importance_of_Wording": "The command is unequivocal. The Hebrew verb *na'aph* specifically refers to sexual unfaithfulness by a married person. Like the command against murder, its stark simplicity leaves no room for ambiguity. It sets a clear boundary that is essential for social order and personal well-being.",
+      "Factual_Explanation": "This law establishes marital fidelity as a divine mandate. It protects the honor of individuals, the stability of families, the integrity of lineage, and the very fabric of the covenant community. Violating this command was considered a grievous sin with severe consequences in Israelite society.",
+      "Theological_Meaning": "The marriage covenant is used throughout Scripture as the primary metaphor for the relationship between God and His people. Idolatry and spiritual unfaithfulness are repeatedly condemned as 'spiritual adultery' (Jeremiah 3:8; Ezekiel 23). Therefore, this commandment not only governs human relationships but also teaches a profound lesson about the exclusive loyalty and faithfulness that God desires from His followers.",
+      "Christ_Centered_Meaning": "Jesus, in the Sermon on the Mount, elevated this commandment to the level of thought and intention. He stated, 'But I say unto you, That whosoever looketh on a woman to lust after her hath committed adultery with her already in his heart' (Matthew 5:28). He taught that true purity is a matter of the heart, not just the outward act. The New Testament presents the church as the 'bride of Christ' (Ephesians 5:25-32; Revelation 19:7). Our relationship with Him demands absolute faithfulness and purity of heart, guarding our minds and affections from anything that would divide our loyalty."
+  }
+},
+{
+  "id": "BP039",
+  "question": "The eighth commandment protects the right to private property and the fruit of one's labor. What is the direct and simple command against unlawful acquisition?",
+  "options": [
+      "Exodus 20:15 - Thou shalt not steal.",
+      "Exodus 20:15 - Thou must not steal.",
+      "Exodus 20:15 - Thou shalt not take what is not thine.",
+      "Exodus 20:15 - Thou shalt not be a thief."
+  ],
+  "answer": "Exodus 20:15 - Thou shalt not steal.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This command is essential for economic stability and social trust. It forbids taking by force, stealth, or deception that which rightfully belongs to another.",
+      "Importance_of_Wording": "The Hebrew verb *ganab* covers a wide range of theft, from shoplifting and burglary to kidnapping (man-stealing, considered a capital offense in Exodus 21:16), fraud, and withholding just wages. The command is broad and absolute, establishing the principle of respecting the property and rights of others.",
+      "Factual_Explanation": "This law undergirds all commerce and community life. It guarantees that individuals can enjoy the security of their possessions, earned through honest labor. Without this principle, society descends into chaos and injustice, where the strong prey upon the weak.",
+      "Theological_Meaning": "This commandment is rooted in the character of God, who is a giver, not a taker. It also implicitly affirms the legitimacy of private ownership. Furthermore, it has a spiritual dimension. To withhold from God what is rightfully His—such as tithes and offerings—is described in Scripture as 'robbing God' (Malachi 3:8). True honesty begins with our relationship with God.",
+      "Christ_Centered_Meaning": "The New Testament expands the concept of stealing. Paul instructs, 'Let him that stole steal no more: but rather let him labour, working with his hands the thing which is good, that he may have to give to him that needeth' (Ephesians 4:28). The Christian ethic goes beyond not stealing; it involves becoming a productive and generous person. The ultimate theft is to rob God of the glory, honor, and service due to Him. Surrendering our lives to Christ is the ultimate act of restoring to God what is His, acknowledging that 'ye are not your own... ye are bought with a price' (1 Corinthians 6:19-20)."
+  }
+},
+{
+  "id": "BP040",
+  "question": "The ninth commandment guards the importance of truth and protects a person's reputation, which is often their most valuable asset. What is the specific prohibition against false testimony?",
+  "options": [
+      "Exodus 20:16 - Thou shalt not give false witness against thy neighbour.",
+      "Exodus 20:16 - Thou shalt not bear false witness against thy neighbour.",
+      "Exodus 20:16 - Thou shalt not testify falsely against thy neighbour.",
+      "Exodus 20:16 - Thou must not bear false testimony against thy neighbour."
+  ],
+  "answer": "Exodus 20:16 - Thou shalt not bear false witness against thy neighbour.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This command is the foundation of a just legal system and trustworthy social interactions. It specifically prohibits perjury in a legal setting but extends to all forms of falsehood that harm another person.",
+      "Importance_of_Wording": "To 'bear false witness' primarily refers to lying in a judicial context, where a person's property, freedom, or life could be at stake. The word 'neighbour' extends the obligation beyond the courtroom to all members of the community. The command forbids slander, gossip, misrepresentation, and any use of words intended to deceive and harm.",
+      "Factual_Explanation": "In ancient Israel, legal cases were often decided by the testimony of two or three witnesses. A false witness could therefore cause immense injustice. This law established truthfulness as a sacred duty, protecting the innocent from malicious accusations.",
+      "Theological_Meaning": "This commandment reflects the nature of God, who is a 'God of truth' (Isaiah 65:16) and for whom it is impossible to lie (Hebrews 6:18). Satan, in contrast, is called 'a liar, and the father of it' (John 8:44). Therefore, truth-telling is an act of alignment with God, while falsehood is an act of alignment with His adversary. Truth is the currency of God's kingdom.",
+      "Christ_Centered_Meaning": "Jesus was the ultimate victim of false witnesses, who were brought in to secure His condemnation (Matthew 26:59-60). He, on the other hand, is 'the way, the truth, and the life' (John 14:6). Followers of Christ are called to be people of the truth. This means not only refraining from lies but actively speaking the truth in love (Ephesians 4:15). In the final conflict, the world will be saturated with deception, and God's faithful people will be distinguished by their commitment to the 'Spirit of truth' (John 16:13) and the truth of His word."
+  }
+},
+{
+  "id": "BP041",
+  "question": "The final commandment of the Decalogue is unique because it legislates not an action, but a desire. It addresses the root cause of many other sins. What does this tenth commandment forbid?",
+  "options": [
+      "Exodus 20:17 - Thou shalt not desire thy neighbour's house, thou shalt not desire thy neighbour's wife, nor his manservant, nor his maidservant, nor his ox, nor his ass, nor any thing that is thy neighbour's.",
+      "Exodus 20:17 - Thou shalt not covet thy neighbour's house, thou shalt not covet thy neighbour's wife, nor his manservant, nor his maidservant, nor his ox, nor his ass, nor any thing that is thy neighbour's.",
+      "Exodus 20:17 - Thou shalt not covet thy neighbour's house, or thy neighbour's wife, nor his manservant, nor his maidservant, nor his ox, nor his ass, nor any thing belonging to thy neighbour.",
+      "Exodus 20:17 - Thou shalt not covet thy neighbour's house, and thou shalt not covet thy neighbour's wife, nor his male servant, nor his female servant, nor his ox, nor his ass, nor any thing that is thy neighbour's."
+  ],
+  "answer": "Exodus 20:17 - Thou shalt not covet thy neighbour's house, thou shalt not covet thy neighbour's wife, nor his manservant, nor his maidservant, nor his ox, nor his ass, nor any thing that is thy neighbour's.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This commandment goes to the heart, forbidding the sinful desire for something that belongs to another. It demonstrates the spiritual nature of God's law, proving that it is concerned with our inner motives, not just our outward actions.",
+      "Importance_of_Wording": "The Hebrew word for 'covet' (*chamad*) means to desire intensely, to long for, or to lust after. The command is comprehensive, listing specific examples—house, wife, servants, animals—and then concluding with the all-encompassing phrase 'nor any thing that is thy neighbour's.' This repetition emphasizes the seriousness and scope of the prohibition.",
+      "Factual_Explanation": "This law served as a spiritual capstone to the Decalogue. It showed the Israelites that God's standard of righteousness included the inner life of thought and desire. Coveting is the seed from which theft, adultery, and even murder can grow. By forbidding the desire, God's law seeks to prevent the sin before it is even conceived.",
+      "Theological_Meaning": "The tenth commandment reveals the impossibility of being justified by the law through human effort. No one can perfectly control their desires. It was this commandment that convicted the Apostle Paul of his sinfulness: 'I had not known sin, but by the law: for I had not known lust [coveting], except the law had said, Thou shalt not covet' (Romans 7:7). This law drives us to recognize our need for a Savior who can not only forgive our actions but also change our hearts.",
+      "Christ_Centered_Meaning": "The antidote to covetousness is contentment in Christ. The writer to the Hebrews connects the two: 'Let your conversation be without covetousness; and be content with such things as ye have: for he hath said, I will never leave thee, nor forsake thee' (Hebrews 13:5). When we find our ultimate treasure and satisfaction in Jesus, the desire for what others have loses its power. He is the only one who can fill the longing of the human heart and grant true contentment, which is 'great gain' (1 Timothy 6:6)."
+  }
+},
+{
+  "id": "BP042",
+  "question": "After witnessing the terrifying display of God's power at Sinai and hearing His voice speak the Ten Commandments, the people of Israel are overcome with fear. They retreat and plead with Moses to act as their intermediary. What is their specific request to Moses?",
+  "options": [
+      "Exodus 20:19 - And they said unto Moses, Speak thou with us, and we will hear: but let not God speak with us, lest we die.",
+      "Exodus 20:19 - And they said to Moses, You speak with us, and we will listen: but do not let God speak with us, or we will die.",
+      "Exodus 20:19 - And they said unto Moses, Speak thou to us, and we will obey: but let not God speak with us, lest we die.",
+      "Exodus 20:19 - And they said unto Moses, Speak thou with us, and we will hearken: but let not the Lord speak with us, lest we die."
+  ],
+  "answer": "Exodus 20:19 - And they said unto Moses, Speak thou with us, and we will hear: but let not God speak with us, lest we die.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This moment is a crucial turning point. The people's fear reveals their consciousness of their own sinfulness in the presence of a holy God. Their request for a mediator establishes the role that Moses, and the future priesthood, would fill in the Old Covenant.",
+      "Importance_of_Wording": "Their plea is stark: 'Speak thou with us... but let not God speak with us.' They recognized the unbridgeable gap between their impurity and God's holiness. The reason given, 'lest we die,' was not an exaggeration but a correct assessment of their state. They understood that sinful man cannot stand in the presence of a holy God without a mediator.",
+      "Factual_Explanation": "The sights and sounds at Sinai—thunder, lightning, the trumpet blast, the smoking mountain—were overwhelming. The direct voice of God was more than they could bear. In terror, they stood far off and begged Moses to be their go-between. They promised to listen to whatever God said through him.",
+      "Theological_Meaning": "This event powerfully demonstrates the purpose of the law: to reveal sin and our desperate need for a mediator. The law, in its perfect holiness, exposes our unholiness and makes us cry out for someone to stand in the gap for us. This popular request for a mediator became a foundational principle of the Sinaitic covenant, with its system of priests and sacrifices designed to bridge the gap between God and man.",
+      "Christ_Centered_Meaning": "The people's cry for a mediator finds its ultimate answer in Jesus Christ. The New Testament declares, 'For there is one God, and one mediator between God and men, the man Christ Jesus' (1 Timothy 2:5). Moses was a type of Christ, the great Prophet and Mediator. But while Moses could only speak God's words, Christ *is* God's Word. While the people rightly feared death, Jesus entered death for us, so that we can now 'come boldly unto the throne of grace, that we may obtain mercy, and find grace to help in time of need' (Hebrews 4:16)."
+  }
+},
+{
+  "id": "BP043",
+  "question": "Immediately after the Ten Commandments, God gives Moses instructions for proper worship, specifically concerning the construction of altars. To guard against the pagan influences of their neighbors, what specific instruction does God give about the materials and construction of an altar dedicated to Him?",
+  "options": [
+      "Exodus 20:25 - And if thou wilt make me an altar of stone, thou shalt not build it of hewn stone: for if thou lift up thy tool upon it, thou hast polluted it.",
+      "Exodus 20:25 - And if you make me an altar of stone, you shall not build it of cut stone: for if you use your tool on it, you have defiled it.",
+      "Exodus 20:25 - And if thou make me an altar of stone, thou shalt not build it of carved stone: for if thou lift up thy chisel upon it, thou hast polluted it.",
+      "Exodus 20:25 - And if you will make me an altar of stone, you shall not build it with hewn stone: for if you lift up your tool upon it, you have made it unclean."
+  ],
+  "answer": "Exodus 20:25 - And if thou wilt make me an altar of stone, thou shalt not build it of hewn stone: for if thou lift up thy tool upon it, thou hast polluted it.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This law establishes a principle of simplicity and humility in worship, directly contrasting with the elaborate, man-made altars of paganism. It teaches that salvation is God's work, not to be embellished or 'improved' by human effort.",
+      "Importance_of_Wording": "The prohibition is absolute: 'thou shalt not build it of hewn stone.' Hewn stone is stone that has been shaped and smoothed by human tools. The reason is profound: 'if thou lift up thy tool upon it, thou hast polluted it.' Human effort, human pride, and human artistry, when applied to the means of atonement, do not enhance it; they defile it.",
+      "Factual_Explanation": "God instructed that any altar to Him should be made of simple earth or of unworked, natural stones. This stood in stark opposition to the Canaanite practice of building ornate, carved altars, often on 'high places,' which were centers of idolatrous and immoral rites. God's altar was to be simple, accessible, and free of human pride.",
+      "Theological_Meaning": "This command illustrates the principle of salvation by grace through faith. The altar, the place of sacrifice and atonement, was to be a picture of divine provision, not human achievement. Any attempt to add our own 'workmanship' to the cross pollutes the simple truth of the gospel. Salvation is a rugged, unadorned gift, not a polished work of human art.",
+      "Christ_Centered_Meaning": "The unhewn altar is a beautiful type of Christ and His sacrifice. Christ's work on the cross was complete and perfect. It needs no addition or refinement from us. To try and add our works, our rituals, or our merits to His finished sacrifice is to 'pollute' the gospel. The cross stands as a 'rock of offence' to human pride (1 Peter 2:8), just as a simple pile of uncut stones would have been an offense to a pagan artisan. We must come to the cross as it is, without trying to shape it to our own liking."
+  }
+},
+{
+  "id": "BP044",
+  "question": "Following the Decalogue, God provides a series of civil laws known as the 'Book of the Covenant.' The first of these laws deals with the treatment of Hebrew servants, establishing their rights and a definite limit to their servitude. What is the ordinance for a Hebrew who has been sold into service?",
+  "options": [
+      "Exodus 21:2 - If thou buy an Hebrew servant, six years he shall serve: and in the seventh he shall go out free for nothing.",
+      "Exodus 21:2 - If you buy a Hebrew servant, six years he must serve: and in the seventh he shall be released free without payment.",
+      "Exodus 21:2 - If one buys a Hebrew servant, six years he shall serve: and in the seventh he will go out free for nothing.",
+      "Exodus 21:2 - If thou acquire a Hebrew servant, six years he shall serve: and in the seventh he may go out free for nothing."
+  ],
+  "answer": "Exodus 21:2 - If thou buy an Hebrew servant, six years he shall serve: and in the seventh he shall go out free for nothing.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This law distinguishes Israelite servitude from the chattel slavery of surrounding nations. It was primarily a system for working off debt, with built-in protections and a guaranteed end point, reflecting God's concern for justice and human dignity.",
+      "Importance_of_Wording": "The term 'servant' (*ebed*) is more accurately translated 'bond-servant' than 'slave' in this context. The time limit is firm: 'six years he shall serve.' The release in the seventh year is absolute and unconditional: 'he shall go out free for nothing.' No further payment could be exacted from him. The seventh year of release echoes the Sabbath principle of rest and restoration.",
+      "Factual_Explanation": "This law governed Israelites who, due to poverty, sold themselves or were sold to repay a debt. It was not permanent slavery. After six years of service, they were to be set free in the Sabbatical year. This provided a humane solution to insolvency while preventing the establishment of a permanent Israelite slave class.",
+      "Theological_Meaning": "This ordinance is a practical application of Israel's own experience. God constantly reminded them, 'Remember that you were a slave in Egypt.' Having been freed by grace, they were to show grace and mercy to their own countrymen in debt. This law institutionalized compassion and provided a regular cycle of release and economic reset within the nation, preventing perpetual poverty.",
+      "Christ_Centered_Meaning": "The six years of service followed by freedom in the seventh year is a picture of our redemption. We were all sold under sin, servants in the house of bondage. But Christ, our Redeemer, has purchased our freedom. We are set 'free for nothing'—without any cost to ourselves, because He paid the debt in full. The law further describes a servant who loves his master and chooses to stay with him forever (Exodus 21:5-6). This is a beautiful type of the believer who, having been set free by Christ, joyfully chooses to become His bond-servant for life out of love and gratitude."
+  }
+},
+{
+  "id": "BP045",
+  "question": "Within the civil laws given to Moses, God establishes a principle of retributive justice designed to limit vengeance and ensure that punishments are proportional to the crime. What is the famous legal formula that encapsulates this principle of 'an eye for an eye'?",
+  "options": [
+      "Exodus 21:23-25 - And if any mischief follow, then thou shalt give life for life, Eye for eye, tooth for tooth, hand for hand, foot for foot, Burning for burning, wound for wound, stripe for stripe.",
+      "Exodus 21:23-25 - But if there is harm, then you shall give life for life, Eye for eye, tooth for tooth, hand for hand, foot for foot, Burn for burn, wound for wound, stripe for stripe.",
+      "Exodus 21:23-25 - And if injury follows, then thou must give life for life, Eye for an eye, tooth for a tooth, hand for a hand, foot for a foot, A burn for a burn, a wound for a wound, a stripe for a stripe.",
+      "Exodus 21:23-25 - But if any injury follow, then thou shalt give life for life, Eye for eye, tooth for tooth, hand for hand, foot for foot, Burning for burning, wound for wound, and stripe for stripe."
+  ],
+  "answer": "Exodus 21:23-25 - And if any mischief follow, then thou shalt give life for life, Eye for eye, tooth for tooth, hand for hand, foot for foot, Burning for burning, wound for wound, stripe for stripe.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This principle, known as the *lex talionis* (law of retaliation), was a cornerstone of ancient Near Eastern law. In the Bible, its purpose was not to encourage personal revenge, but to guide judges in administering public justice, ensuring punishments were fair and not excessive.",
+      "Importance_of_Wording": "The formula 'Eye for eye, tooth for tooth' is a legal maxim, not a command for personal vengeance. The comprehensive list—life, eye, tooth, hand, foot, burn, wound, stripe—demonstrates that the principle of proportional justice applied to a wide range of injuries. The punishment must fit the crime, no more and no less.",
+      "Factual_Explanation": "This law was given to civil magistrates to prevent blood feuds and escalating cycles of violence. Instead of a family taking matters into their own hands and perhaps killing an offender for putting out an eye, the court would impose a just and equivalent penalty (which was often a monetary fine equivalent to the value of the loss). It was a principle of limitation and equity.",
+      "Theological_Meaning": "This law reflects God's perfect justice. The penalty for sin is death because sin is an offense against an infinite God. The demand for 'life for life' shows that a life is the only just payment for a life. This highlights the severity of sin and the righteousness of God's judgment against it. It underscores why a substitutionary sacrifice was necessary to satisfy the demands of divine justice.",
+      "Christ_Centered_Meaning": "In the Sermon on the Mount, Jesus addressed the misuse of this principle for personal revenge. He said, 'Ye have heard that it hath been said, An eye for an eye, and a tooth for a tooth: But I say unto you, That ye resist not evil' (Matthew 5:38-39). He was not abolishing the civil law for magistrates but teaching His followers to operate by a higher law of grace and forgiveness in their personal relationships. Ultimately, Jesus fulfilled the *lex talionis* on our behalf. He gave His 'life for life,' His 'wounds' for our healing, and His 'stripes' for our peace. Divine justice was fully satisfied at the cross, allowing God to extend mercy to us without compromising His righteousness."
+  }
+},
+{
+  "id": "BP046",
+  "question": "As God concludes the Book of the Covenant, He makes a profound promise to guide and protect Israel on their journey to the Promised Land. He promises to send a divine being before them, to whom they must give absolute obedience. What is this promise and the solemn warning attached to it?",
+  "options": [
+      "Exodus 23:20-21 - Behold, I send an Angel before thee, to keep thee in the way, and to bring thee into the place which I have prepared. Beware of him, and obey his voice, provoke him not; for he will not pardon your transgressions: for my name is in him.",
+      "Exodus 23:20-21 - See, I am sending an Angel ahead of you, to guard you along the way, and to bring you to the place I have prepared. Pay attention to him, and listen to his voice, do not rebel against him; for he will not forgive your sins: because my name is in him.",
+      "Exodus 23:20-21 - Behold, I am sending an Angel before thee, to protect thee on the way, and to bring thee to the place which I have made ready. Be careful of him, and obey his voice, do not provoke him; for he will not forgive your rebellion: for my name is in him.",
+      "Exodus 23:20-21 - Lo, I send an Angel before thee, to keep thee in the path, and to bring thee into the place which I have prepared. Watch him, and obey his voice, provoke him not; for he will not pardon your sins: for my own name is in him."
+  ],
+  "answer": "Exodus 23:20-21 - Behold, I send an Angel before thee, to keep thee in the way, and to bring thee into the place which I have prepared. Beware of him, and obey his voice, provoke him not; for he will not pardon your transgressions: for my name is in him.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage reveals the identity of Israel's divine guide. This is no ordinary angel, but a unique being who possesses divine authority and bears God's own 'name,' indicating He shares the divine nature.",
+      "Importance_of_Wording": "The command to 'Beware of him, and obey his voice' demands the kind of reverence due to God alone. The warning 'he will not pardon your transgressions' signifies that He has the divine prerogative to forgive or not to forgive, a right belonging only to God. The reason given is ultimate: 'for my name is in him.' The 'name' represents the character, authority, and very essence of God.",
+      "Factual_Explanation": "God promised Israel a supernatural guide and protector, the Angel of the LORD. This Angel was not just a messenger but the very presence of God leading them. Their success and safety in conquering Canaan was contingent upon their obedience to this divine leader.",
+      "Theological_Meaning": "This 'Angel of the LORD' is a recurring figure in the Old Testament who speaks and acts as God (e.g., Genesis 16:13, Genesis 22:11-12, Judges 6:11-14). He is a manifestation of God Himself, a pre-incarnate appearance of the Second Person of the Godhead. This passage demonstrates that from the beginning, God led His people through His Son.",
+      "Christ_Centered_Meaning": "This Angel is unequivocally identified in Christian theology as the pre-incarnate Christ. He is the one who 'keeps us in the way' and brings us to the heavenly 'place which I have prepared' (John 14:2-3). Paul identifies Him as 'that spiritual Rock that followed them: and that Rock was Christ' (1 Corinthians 10:4). The warning 'provoke him not' finds its sad fulfillment in the wilderness, where the people repeatedly tested Christ and perished. Today, He is still our guide, and we are called to 'obey his voice' as spoken in His Word, for He is the one in whom the fullness of God's name and character dwells."
+  }
+},
+{
+  "id": "BP047",
+  "question": "In His closing promises to Israel, God links their faithful service and rejection of idolatry to specific physical blessings, including health and longevity. What is this comprehensive promise of divine care for an obedient nation?",
+  "options": [
+      "Exodus 23:25-26 - And ye shall serve the LORD your God, and he shall bless thy bread, and thy water; and I will take sickness away from the midst of thee. ...the number of thy days I will fulfil.",
+      "Exodus 23:25-26 - And you shall worship the LORD your God, and he will bless your bread, and your water; and I will remove illness from among you. ...the number of your days I will complete.",
+      "Exodus 23:25-26 - And ye must serve the LORD your God, and he will bless thy bread, and thy water; and I will take all disease from the midst of thee. ...the number of thy days I will make full.",
+      "Exodus 23:25-26 - And ye shall serve the LORD your God, and he shall bless thy food, and thy drink; and I will take away sickness from among you. ...the full number of thy days I will give thee."
+  ],
+  "answer": "Exodus 23:25-26 - And ye shall serve the LORD your God, and he shall bless thy bread, and thy water; and I will take sickness away from the midst of thee. There shall nothing cast their young, nor be barren, in thy land: the number of thy days I will fulfil.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage explicitly connects covenant faithfulness with national health and prosperity. It reveals God's holistic concern for His people, desiring their well-being in every area of life—sustenance, health, fertility, and longevity.",
+      "Importance_of_Wording": "The condition is simple: 'ye shall serve the LORD your God.' The blessings are comprehensive. 'Bless thy bread, and thy water' covers basic sustenance. 'I will take sickness away' is a powerful promise of public health. The promise against barrenness ensures the nation's continuity. Finally, 'the number of thy days I will fulfil' promises a full, natural lifespan, free from premature death.",
+      "Factual_Explanation": "God presented a clear choice to Israel: if they would exclusively serve Him and put away the idols of Canaan, He would grant them a level of health and prosperity unknown to other nations. This was intended to be a powerful witness to the world of the benefits of living under God's rule.",
+      "Theological_Meaning": "This reinforces the biblical health message first introduced at Marah (Exodus 15:26). God's laws are not arbitrary restrictions but are life-giving principles. A nation following God's statutes for diet, hygiene, and morality would naturally be healthier. This promise shows that God is the source of all life and health. While individual exceptions occur, the general principle holds true: a lifestyle in harmony with the Creator leads to life, while rebellion leads to disease and death.",
+      "Christ_Centered_Meaning": "Jesus is the 'bread of life' and the source of 'living water.' True service to God begins by receiving Him. He is the Great Physician who came to 'take sickness away,' healing both physical and spiritual diseases. The promise of a 'fulfilled' life finds its ultimate meaning not in mere length of days on this earth, but in the abundant and eternal life that He offers to all who believe (John 10:10). The ultimate fulfillment of this promise awaits the new earth, where 'God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain' (Revelation 21:4)."
+  }
+},
+{
+  "id": "BP048",
+  "question": "After Moses relays all of God's laws and judgments to the people, they respond with a unified voice, formally agreeing to enter into the covenant. What is the people's unanimous declaration of acceptance?",
+  "options": [
+      "Exodus 24:3 - And Moses came and told the people all the words of the LORD, and all the judgments: and all the people answered with one voice, and said, All the words which the LORD hath said will we do.",
+      "Exodus 24:3 - And Moses came and told the people all the words of the LORD, and all the ordinances: and all the people replied with one voice, saying, All the words which the LORD has spoken we will perform.",
+      "Exodus 24:3 - And Moses came and told the people all the sayings of the LORD, and all the judgments: and all the people answered with a single voice, and said, All the words which the LORD hath said we will obey.",
+      "Exodus 24:3 - And Moses came and spoke to the people all the words of the LORD, and all the rules: and all the people answered with one voice, and said, All the words that the LORD hath spoken we will do."
+  ],
+  "answer": "Exodus 24:3 - And Moses came and told the people all the words of the LORD, and all the judgments: and all the people answered with one voice, and said, All the words which the LORD hath said will we do.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse records Israel's formal, verbal acceptance of the Sinaitic Covenant. It is their collective 'I do' in the covenant ceremony, making the agreement binding upon them as a nation.",
+      "Importance_of_Wording": "Moses presented 'all the words' (the Ten Commandments) and 'all the judgments' (the civil laws from the Book of the Covenant). The people's response was unified: 'with one voice.' Their promise was absolute and unconditional: 'All the words which the LORD hath said will we do.' This was a solemn, national vow.",
+      "Factual_Explanation": "This was the first step in the covenant ratification ceremony. Moses acted as the mediator, communicating God's terms. The people then had to give their consent. After hearing the conditions, they unanimously agreed to obey, setting the stage for the sealing of the covenant with blood.",
+      "Theological_Meaning": "This moment highlights both the nobility and the tragedy of Israel's story. Their intention was good, but they were tragically unaware of their own weakness and inability to keep this promise in their own strength. Their subsequent failure, especially with the golden calf, demonstrated the folly of relying on human resolve. This shows that the Old Covenant, based on the people's promise to obey, was destined to be broken, highlighting the need for a New Covenant, where God's law is written on the heart (Jeremiah 31:33).",
+      "Christ_Centered_Meaning": "The people's confident promise, 'we will do,' stands in stark contrast to the reality of the human heart. It illustrates the futility of trying to achieve righteousness through works of the law. We are saved not by our promise to God, but by God's promise to us, fulfilled in Christ. Our salvation rests on Christ's perfect declaration, 'It is finished,' not on our flawed promise, 'we will do.' The Christian life is not lived by our power, but by His power working in us 'to will and to do of his good pleasure' (Philippians 2:13)."
+  }
+},
+{
+  "id": "BP049",
+  "question": "To formally seal the covenant between God and Israel, Moses builds an altar and offers sacrifices. He then takes the blood of the offerings and performs a solemn ritual, applying it to the people themselves. What does Moses declare as he sprinkles the blood on the assembly?",
+  "options": [
+      "Exodus 24:8 - And Moses took the blood, and sprinkled it on the people, and said, Behold the blood of the covenant, which the LORD hath made with you concerning all these words.",
+      "Exodus 24:8 - And Moses took the blood, and threw it upon the people, and said, Behold the blood of the covenant, which the LORD hath made with you in accordance with all these words.",
+      "Exodus 24:8 - And Moses took the blood, and sprinkled it on the people, and said, See the blood of the agreement, which the LORD hath made with you concerning all these words.",
+      "Exodus 24:8 - And Moses took the blood, and sprinkled it over the people, and said, Look, the blood of the covenant, which the LORD hath made with you based on all these words."
+  ],
+  "answer": "Exodus 24:8 - And Moses took the blood, and sprinkled it on the people, and said, Behold the blood of the covenant, which the LORD hath made with you concerning all these words.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the climactic moment of the covenant ratification. The sprinkling of blood signifies that the covenant is a life-and-death agreement, sealed by the life of a substitute. It visually and powerfully binds both parties to the terms.",
+      "Importance_of_Wording": "Moses' declaration, 'Behold the blood of the covenant,' is a solemn formula that gives meaning to the ritual. The blood is the visible sign ('Behold') of the covenant agreement. The covenant is initiated by 'the LORD' but is made 'with you concerning all these words,' linking the blood directly to the laws the people had just agreed to obey.",
+      "Factual_Explanation": "After the people agreed to the covenant's terms, Moses offered burnt offerings and peace offerings. He put half of the blood in basins and threw the other half against the altar (representing God's side of the covenant). After reading the law again and receiving a second confirmation from the people (v. 7), he took the blood from the basins and sprinkled it on them, sealing their participation in the covenant.",
+      "Theological_Meaning": "This act demonstrates the biblical principle that 'without shedding of blood is no remission' (Hebrews 9:22). A covenant with a holy God requires atonement for the sinfulness of the human party. The blood represented the penalty for breaking the covenant (death) being paid by a substitute. The people were, in effect, consecrated and cleansed by this blood, enabling them to enter into this special relationship with God.",
+      "Christ_Centered_Meaning": "This verse is quoted directly by Jesus at the Last Supper, giving it its ultimate meaning. As He instituted the new covenant, He took the cup and said, 'For this is my blood of the new testament [covenant], which is shed for many for the remission of sins' (Matthew 26:28). The blood of bulls and goats could never truly take away sin; it only pointed forward to the reality. The blood of Christ is the true 'blood of the covenant,' the only blood that can cleanse us from all sin and ratify the New Covenant, through which we receive forgiveness and eternal life."
+  }
+},
+{
+  "id": "BP051",
+  "question": "After calling Moses up into the mountain for forty days, God gives him the blueprint for a sacred dwelling place, a sanctuary where He could manifest His presence among His people. What was the declared purpose for this tabernacle, revealing God's deep desire for intimacy with humanity?",
+  "options": [
+      "Exodus 25:8 - And let them make me a sanctuary; that I may dwell among them.",
+      "Exodus 25:8 - And they shall make me a holy place; that I may dwell in their midst.",
+      "Exodus 25:8 - And let them build me a sanctuary; that I may have my dwelling with them.",
+      "Exodus 25:8 - And let them prepare me a sanctuary; that I may live among them."
+  ],
+  "answer": "Exodus 25:8 - And let them make me a sanctuary; that I may dwell among them.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse is the foundational command for the entire sanctuary system. It reveals the primary motivation behind the intricate structure: not to confine God, but to provide a designated point of contact where the holy God could safely 'dwell among' His sinful people.",
+      "Importance_of_Wording": "The word 'sanctuary' (*miqdash*) means a holy place or a consecrated place. The purpose is 'that I may dwell' (*shakan*), from which the word 'Shekinah' (the glorious presence) is derived. The phrase 'among them' is crucial; God did not ask for a palace to dwell *above* them, but a tent to dwell *in the midst of* their camp, sharing their journey.",
+      "Factual_Explanation": "God instructed Moses to receive a freewill offering from the people to gather materials for a portable sanctuary, the Tabernacle. This structure would be the center of Israel's worship and national life throughout their wilderness wanderings. Its design was not of human origin; Moses was commanded to make it exactly according to the 'pattern' shown to him on the mount (Exodus 25:9).",
+      "Theological_Meaning": "The earthly sanctuary was a copy, a shadow, or a model of the true, heavenly sanctuary where Christ ministers as our High Priest (Hebrews 8:1-5). It was a visual gospel, an object lesson of the plan of salvation. Every article of furniture and every service pointed forward to the work of the Messiah. God's desire to 'dwell among them' reveals His relational character, a truth that counters deistic ideas of a distant, uninvolved creator.",
+      "Christ_Centered_Meaning": "The ultimate fulfillment of God's desire to 'dwell among us' was the incarnation of Jesus Christ. The apostle John uses the same imagery: 'And the Word was made flesh, and dwelt [literally, 'tabernacled' or *skenoo*] among us, (and we beheld his glory...)' (John 1:14). Christ was God's presence in human form. The sanctuary's purpose is now fulfilled in Him. Furthermore, the believer's body is called 'the temple of the Holy Ghost' (1 Corinthians 6:19), and the collective church is 'an holy temple in the Lord' (Ephesians 2:21). The final fulfillment will be in the New Earth, when 'the tabernacle of God is with men, and he will dwell with them' forever (Revelation 21:3)."
+  }
+},
+{
+  "id": "BP052",
+  "question": "At the very heart of the Sanctuary, within its most sacred compartment, the Most Holy Place, God commanded the construction of a chest to contain His law. This object would be the focal point of God's presence on earth. What was this sacred ark to contain, and what was to be placed on top of it?",
+  "options": [
+      "Exodus 25:16, 21 - And thou shalt put into the ark the testimony which I shall give thee. And thou shalt put the mercy seat above upon the ark...",
+      "Exodus 25:16, 21 - And thou shalt place in the ark the testimony which I will give thee. And thou shalt place the mercy seat on top of the ark...",
+      "Exodus 25:16, 21 - And thou shalt put into the ark the law which I shall give thee. And thou shalt put the mercy seat above the ark...",
+      "Exodus 25:16, 21 - And thou shalt put into the ark the covenant which I shall give thee. And thou shalt put the covering upon the ark..."
+  ],
+  "answer": "Exodus 25:16, 21 - And thou shalt put into the ark the testimony which I shall give thee. And thou shalt put the mercy seat above upon the ark; and in the ark thou shalt put the testimony that I shall give thee.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage describes the essential components of the Ark of the Covenant, the most sacred object in the Tabernacle. It establishes the relationship between God's law ('the testimony') and His grace ('the mercy seat'), which is the central theme of salvation.",
+      "Importance_of_Wording": "'The testimony' is the name given to the Ten Commandments, as they are God's testimony about His will and character. 'The mercy seat' (*kapporet*) is the solid gold lid of the Ark, from a root word meaning 'to cover' or 'to atone.' The command to place the mercy seat 'above upon the ark' is theologically profound. Mercy is positioned directly above the law.",
+      "Factual_Explanation": "The Ark was an acacia wood chest overlaid with gold. It was to contain the two stone tablets of the Ten Commandments. The lid, or Mercy Seat, was made of pure gold and featured two cherubim facing each other with their wings overshadowing the seat. This object would reside in the Most Holy Place, and God promised to commune with Moses from above the Mercy Seat (v. 22).",
+      "Theological_Meaning": "The Ark of the Covenant represents the foundation of God's throne and government: His holy law. The law ('the testimony') within the Ark condemns the sinner. However, the Mercy Seat was placed over the law. On the Day of Atonement, the blood of the sacrifice was sprinkled on the Mercy Seat, symbolically covering the people's sins and satisfying the demands of the law. This beautifully illustrates that God's government is founded on a perfect balance of justice (the law) and mercy (the atoning blood). Mercy does not abolish the law but meets its claims.",
+      "Christ_Centered_Meaning": "Christ is the fulfillment of both the law and the mercy seat. He perfectly kept the law, honoring the 'testimony' within the ark. He is also our 'mercy seat' or 'propitiation' (Romans 3:25, where the Greek word *hilasterion* is the same word used for the Mercy Seat in the Septuagint). Through His sacrificial blood, He covers our transgressions of the law and enables God to be both 'just, and the justifier of him which believeth in Jesus' (Romans 3:26). It is at the throne of grace, our Mercy Seat, that we find forgiveness."
+  }
+},
+{
+  "id": "BP053",
+  "question": "As part of the priestly vestments for the high priest, God commanded the creation of a special breastplate. It was to be set with twelve precious stones, each engraved with the name of one of the tribes of Israel. What was the stated purpose of this breastplate, revealing the High Priest's function as an intercessor?",
+  "options": [
+      "Exodus 28:29 - And Aaron shall carry the names of the children of Israel in the breastplate of judgment upon his heart, when he goeth in unto the holy place, for a remembrance before the LORD continually.",
+      "Exodus 28:29 - And Aaron shall bear the names of the children of Israel in the breastplate of judgment upon his heart, when he goeth in unto the holy place, for a memorial before the LORD continually.",
+      "Exodus 28:29 - And Aaron will carry the names of the children of Israel in the breastplate of judgment over his heart, when he goes into the holy place, as a memorial before the LORD always.",
+      "Exodus 28:29 - And Aaron shall bear the names of the sons of Israel in the breastplate of justice upon his heart, when he goeth in unto the holy place, for a remembrance before the LORD always."
+  ],
+  "answer": "Exodus 28:29 - And Aaron shall bear the names of the children of Israel in the breastplate of judgment upon his heart, when he goeth in unto the holy place, for a memorial before the LORD continually.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse describes the function of the breastplate, which was far more than a decorative item. It was a central part of the high priest's intercessory ministry, symbolizing that he carried the people he represented on his heart before God.",
+      "Importance_of_Wording": "The act of 'bear[ing] the names... upon his heart' signifies deep, personal, and affectionate representation. It was called the 'breastplate of judgment' because it contained the Urim and Thummim, through which God's judgment or will was revealed. Its purpose was to be a 'memorial before the LORD continually,' meaning Israel was constantly remembered and represented in the presence of God.",
+      "Factual_Explanation": "The breastplate was an intricately woven pouch, set with twelve different precious stones in four rows. Each stone was engraved with the name of one of the twelve tribes. It was attached to the ephod and worn over the high priest's heart whenever he ministered in the Holy Place. He also carried the names on two onyx stones on his shoulders, symbolizing that he bore both their burden (on his shoulders) and their identity (on his heart).",
+      "Theological_Meaning": "This illustrates the nature of true intercession. The priest represented the people, not as a nameless crowd, but as distinct individuals (the unique stones and names). He carried them with affection ('upon his heart') into God's presence. This visual representation assured the Israelites that they were never forgotten by God, as their mediator bore them continually before Him.",
+      "Christ_Centered_Meaning": "This is a beautiful type of the high priestly ministry of Jesus. He is our great High Priest who has passed into the heavens (Hebrews 4:14). He bears the names of all His people—each one a unique and precious jewel—upon His heart continually before the Father. We are 'graven upon the palms of his hands' (Isaiah 49:16). He knows us by name and represents us perfectly in the heavenly sanctuary. His intercession is not cold and formal, but filled with the love of a Savior who carries His people on His heart."
+  }
+},
+{
+  "id": "BP054",
+  "question": "In the detailed instructions for the priestly garments, a special piece was to be made for the high priest's forehead, engraved with a specific inscription. What was this inscription, and what did it signify about the purpose of the high priest's ministry?",
+  "options": [
+      "Exodus 28:36-38 - And thou shalt make a plate of pure gold, and grave upon it... HOLINESS TO THE LORD. And it shall be upon Aaron's forehead, that Aaron may bear the iniquity of the holy things... that they may be accepted before the LORD.",
+      "Exodus 28:36-38 - And thou shalt make a plate of pure gold, and engrave upon it... HOLY TO THE LORD. And it shall be on Aaron's forehead, so that Aaron may take away the sin of the holy things... that they may be received by the LORD.",
+      "Exodus 28:36-38 - And thou shalt make a plate of pure gold, and grave upon it... DEDICATED TO THE LORD. And it shall be upon Aaron's forehead, that Aaron may bear the guilt of the holy things... that they may be accepted by the LORD.",
+      "Exodus 28:36-38 - And thou shalt make a plate of gold, and engrave upon it... HOLINESS UNTO THE LORD. And it shall be upon Aaron's forehead, that Aaron can bear the sin of the holy things... so they may be accepted before the LORD."
+  ],
+  "answer": "Exodus 28:36-38 - And thou shalt make a plate of pure gold, and grave upon it, like the engravings of a signet, HOLINESS TO THE LORD. And it shall be upon Aaron's forehead, that Aaron may bear the iniquity of the holy things, which the children of Israel shall hallow in all their holy gifts; and it shall be always upon his forehead, that they may be accepted before the LORD.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage describes the golden plate on the high priest's turban and explains its profound theological function. It reveals how the imperfections in Israel's worship were atoned for through the mediation of their consecrated high priest.",
+      "Importance_of_Wording": "The inscription 'HOLINESS TO THE LORD' publicly declared the sacred purpose of the priest's office. The function was 'that Aaron may bear the iniquity of the holy things.' This is a stunning concept: even Israel's 'holy gifts'—their sacrifices and offerings—were tainted with sin and imperfection. The high priest, through his consecrated office, symbolically took this imperfection upon himself so that the offering 'may be accepted before the LORD.'",
+      "Factual_Explanation": "A plate of pure gold was engraved with this sacred motto and fastened by a blue lace to the front of the high priest's mitre (turban). It was to be worn 'always' when he was ministering. This inscription on his forehead represented the consecration of his mind and thoughts to God.",
+      "Theological_Meaning": "This teaches the pervasive nature of sin. Even our best efforts, our worship, and our 'holy gifts' are flawed and fall short of God's perfect standard. We cannot approach God even with our acts of worship without a mediator to bear our 'iniquity.' Acceptance before God is never based on the perfection of the worshiper or the worship, but on the perfection of the mediating priest.",
+      "Christ_Centered_Meaning": "Jesus is our great High Priest, the perfect embodiment of 'HOLINESS TO THE LORD.' He is the only one who can 'bear the iniquity of our holy things.' When we offer our prayers, our praise, our service—all of which are imperfect—they are made acceptable to God the Father only because they are presented through Christ. His perfect righteousness covers the defects of our worship. It is because He is 'always' before the Father interceding for us that we 'may be accepted before the LORD.'"
+  }
+},
+{
+  "id": "BP055",
+  "question": "Central to the daily worship in the sanctuary's Holy Place was the altar of incense. The burning of this specific, sacred incense was a perpetual act before the Lord. To what did this fragrant smoke, ascending before the veil, correspond?",
+  "options": [
+      "Psalm 141:2 - Let my prayer be set forth before thee as incense; and the lifting up of my hands as the evening sacrifice.",
+      "Psalm 141:2 - May my prayer be presented before you like incense; and the lifting up of my hands like the evening offering.",
+      "Psalm 141:2 - Let my prayer come before thee as incense; and the lifting of my hands as the evening gift.",
+      "Psalm 141:2 - Let my prayer be set before thee as incense; and the raising of my hands as the evening sacrifice."
+  ],
+  "answer": "Psalm 141:2 - Let my prayer be set forth before thee as incense; and the lifting up of my hands as the evening sacrifice.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "While the instructions for the altar are in Exodus 30, this verse from the Psalms provides the inspired spiritual meaning of the incense. It explicitly connects the ascending smoke of the fragrant incense with the prayers of God's people ascending to His throne.",
+      "Importance_of_Wording": "The Psalmist's plea is that his 'prayer be set forth... as incense.' This imagery captures the idea that prayer, like the specially compounded incense, is to be pure, precious, and continually offered. The 'lifting up of my hands' was a common posture of prayer, here linked to the daily 'evening sacrifice,' showing the regularity and devotion intended in prayer.",
+      "Factual_Explanation": "The altar of incense stood directly before the veil that separated the Holy from the Most Holy Place. Every morning and evening, when tending the lamps, the priest would burn the sacred incense on this altar. The fragrant cloud would fill the Holy Place and drift over the veil towards the Mercy Seat, symbolizing prayers constantly rising before God's throne.",
+      "Theological_Meaning": "The incense was composed of four specific sweet spices, divinely prescribed and forbidden for common use. This signifies that our prayers are made acceptable not on their own merit, but because they are mingled with something precious and divine. The altar itself was overlaid with gold (divinity) and had horns (power), showing the power of prayer offered through a divine mediator.",
+      "Christ_Centered_Meaning": "Revelation 8:3-4 provides the ultimate interpretation. An angel (representing Christ in His priestly role) stands at the heavenly altar with a golden censer. He is given 'much incense, that he should offer it with the prayers of all saints upon the golden altar which was before the throne.' Our faulty, faltering prayers ascend to God only because they are mingled with the 'much incense' of Christ's perfect righteousness and intercession. His merits make our prayers a sweet-smelling savor to the Father."
+  }
+},
+{
+  "id": "BP056",
+  "question": "God establishes the Sabbath not only as a memorial of creation but also as a special sign between Him and Israel throughout their history. What is the explicit declaration in Exodus that defines the Sabbath as a perpetual sign of the covenant relationship?",
+  "options": [
+      "Exodus 31:13 - Speak thou also unto the children of Israel, saying, Verily my sabbaths ye shall keep: for it is a sign between me and you throughout your generations; that ye may know that I am the LORD that doth sanctify you.",
+      "Exodus 31:13 - Say also to the children of Israel, Surely my sabbaths you shall keep: for it is a sign between me and you in your generations; that you may know that I am the LORD that sanctifies you.",
+      "Exodus 31:13 - Speak thou unto the children of Israel, and say, My sabbaths ye shall keep: for it is a sign between me and you throughout your generations; so that ye may know that I am the LORD who makes you holy.",
+      "Exodus 31:13 - Speak also to the children of Israel, saying, Truly my sabbaths you must keep: for it is a token between me and you through your generations; that you may know that I am the LORD that doth make you holy."
+  ],
+  "answer": "Exodus 31:13 - Speak thou also unto the children of Israel, saying, Verily my sabbaths ye shall keep: for it is a sign between me and you throughout your generations; that ye may know that I am the LORD that doth sanctify you.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse, given right after the detailed sanctuary instructions, adds a profound new layer to the meaning of the Sabbath. It is not only a memorial of Creation, but also the specific 'sign' of a relationship with the God who sanctifies.",
+      "Importance_of_Wording": "'It is a sign' (*oth*) means it is a distinguishing mark or token of identity. This sign functions 'throughout your generations.' The purpose of the sign is so 'that ye may know that I am the LORD that doth sanctify you.' The Sabbath is therefore a sign of both God's creative power (Exodus 20:11) and His sanctifying (making holy) power.",
+      "Factual_Explanation": "God places this reminder and amplification of the Sabbath law at the conclusion of the sanctuary instructions to emphasize its supreme importance. Even the sacred work of building the sanctuary was to cease on the Sabbath. This established the Sabbath's holiness above even the most holy work.",
+      "Theological_Meaning": "The Sabbath is a sign that distinguishes God's people. By resting on the day God blessed and set apart, they identify themselves with the Creator God. This verse adds the dimension of sanctification. Just as God made the day holy, He makes His people holy. Resting on the Sabbath is an act of faith, acknowledging that our sanctification is not our own work, but His. It is a sign that we have ceased from our own works to let God work in us.",
+      "Christ_Centered_Meaning": "Christ is our sanctification (1 Corinthians 1:30). The Sabbath is a weekly invitation to enter into the rest of His finished work, both in creation and redemption. By ceasing our labors, we acknowledge that He is the one who created us and the only one who can re-create us in His image. The Sabbath rest is a symbol of the spiritual rest and holiness we find in Christ. It is the 'sign' that we belong to Him, the Lord who sanctifies us."
+  }
+},
+{
+  "id": "BP057",
+  "question": "While Moses is on the mountain receiving the law, the people below grow impatient and commit a catastrophic act of apostasy. They compel Aaron to create an idol for them. After Aaron builds the golden calf, what declaration does he make, attempting to blend this idolatry with the worship of the true God?",
+  "options": [
+      "Exodus 32:5 - And when Aaron saw it, he built an altar before it; and Aaron made proclamation, and said, To morrow is a feast to the LORD.",
+      "Exodus 32:5 - And when Aaron saw this, he built an altar before it; and Aaron made a proclamation, saying, Tomorrow will be a festival to the LORD.",
+      "Exodus 32:5 - And when Aaron saw it, he built an altar in front of it; and Aaron proclaimed, and said, To morrow shall be a feast for the LORD.",
+      "Exodus 32:5 - And when Aaron saw it, he built an altar before it; and Aaron made a public announcement, and said, To morrow is a holy day to the LORD."
+  ],
+  "answer": "Exodus 32:5 - And when Aaron saw it, he built an altar before it; and Aaron made proclamation, and said, To morrow is a feast to the LORD.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse is the tragic heart of the golden calf apostasy. It reveals that the people's sin was not an outright rejection of God, but a corrupt, syncretistic attempt to worship Him through a visible image, a direct violation of the second commandment.",
+      "Importance_of_Wording": "Aaron's proclamation of a 'feast to the LORD (YHWH)' is shocking. He uses the personal, covenant name of God for this idolatrous festival. This was not a feast to a pagan god like Apis, the Egyptian bull god, but a misguided and forbidden attempt to represent the invisible YHWH with a golden calf, likely symbolizing His strength and power.",
+      "Factual_Explanation": "Seeing that Moses was delayed, the people demanded a visible god to lead them. Aaron succumbed to the pressure, collected their gold earrings, and fashioned a molten calf. He then built an altar and declared a feast to YHWH for the following day, which devolved into pagan-style revelry.",
+      "Theological_Meaning": "This story is a powerful warning against corrupting true worship with human inventions and pagan forms. It demonstrates how quickly people can turn from spiritual truth to tangible falsehood, especially when leadership is weak. The desire for a visible, tangible God that can be controlled is a constant temptation. This syncretism—blending truth with error—is often more dangerous than outright paganism because it is more deceptive.",
+      "Christ_Centered_Meaning": "The golden calf incident is a stark illustration of humanity's inability to keep the law in their own strength, just days after promising 'All that the LORD hath said will we do.' It proves the necessity of a better covenant and a perfect Mediator. Moses' powerful intercession for the people (Exodus 32:31-32), where he offered to have his own name blotted out of God's book to save them, is a profound type of Christ, who truly was 'made a curse for us' and took our condemnation upon Himself to save us from our sin."
+  }
+},
+{
+  "id": "BP058",
+  "question": "In the aftermath of the golden calf apostasy, Moses pleads with God to forgive the people and to continue His presence with them. In a moment of intense intimacy, Moses makes a bold request to see God's glory. How does God respond, defining His glory in terms of His character?",
+  "options": [
+      "Exodus 33:18-19 - And he said, I beseech thee, shew me thy glory. And he said, I will make all my goodness pass before thee, and I will proclaim the name of the LORD before thee...",
+      "Exodus 33:18-19 - And he said, I pray thee, show me thy glory. And he said, I will make all my goodness pass in front of thee, and I will pronounce the name of the LORD before thee...",
+      "Exodus 33:18-19 - And he said, Please, show me thy glory. And he said, I will cause all my good to pass before thee, and I will proclaim the name of the LORD in thy presence...",
+      "Exodus 33:18-19 - And he said, I beseech thee, let me see thy glory. And he said, I will make all my goodness pass before thee, and I will declare the name of the LORD before thee..."
+  ],
+  "answer": "Exodus 33:18-19 - And he said, I beseech thee, shew me thy glory. And he said, I will make all my goodness pass before thee, and I will proclaim the name of the LORD before thee; and will be gracious to whom I will be gracious, and will shew mercy on whom I will shew mercy.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage is a pivotal moment of divine revelation. It answers the question, 'What is the glory of God?' God defines His glory not in terms of overwhelming power or blinding light, but as the sum of His character: His goodness, grace, and mercy, exercised according to His sovereign will.",
+      "Importance_of_Wording": "Moses asks to see 'glory' (*kavod*). God responds by promising to make His 'goodness' (*tuv*) pass before him and to 'proclaim the name of the LORD.' This equates His glory with His goodness and His name (His character). The declaration of His sovereign right to show grace and mercy is a direct answer to the crisis of the golden calf; Israel's only hope was to appeal to this sovereign mercy.",
+      "Factual_Explanation": "After securing God's promise to remain with Israel, Moses, seeking ultimate assurance, asks for a direct vision of God's glory. God agrees, but explains that Moses cannot see His face and live. He arranges to place Moses in a cleft of a rock, cover him with His hand as He passes by, and allow Moses to see His 'back parts' while He proclaims His character.",
+      "Theological_Meaning": "This is one of the most profound definitions of 'glory' in the Bible. God's ultimate glory is His moral character, His blend of mercy, grace, longsuffering, goodness, truth, justice, and righteousness. This revelation, given right after Israel's greatest sin, shows that God's glory is most brightly displayed in His gracious dealings with sinners.",
+      "Christ_Centered_Meaning": "Moses was hidden in the 'cleft of the rock' to be protected from the full force of God's glory. That Rock was Christ (1 Corinthians 10:4). It is only when we are hidden in Christ that we can behold the glory of God and live. The proclamation of God's name is a proclamation of the character of Jesus, who is the 'brightness of his glory, and the express image of his person' (Hebrews 1:3). In the face of Jesus Christ, we see the full glory of God's goodness, grace, and truth (2 Corinthians 4:6)."
+  }
+},
+{
+  "id": "BP059",
+  "question": "After God agrees to show Moses His glory, He calls him back up the mountain with two new stone tablets. There, God passes by and proclaims His name, revealing the core attributes of His character. What is this foundational declaration of God's nature, which balances His mercy and His justice?",
+  "options": [
+      "Exodus 34:6-7 - The LORD, The LORD God, merciful and gracious, longsuffering, and abundant in goodness and truth, Keeping mercy for thousands, forgiving iniquity and transgression and sin, and that will by no means clear the guilty...",
+      "Exodus 34:6-7 - The LORD, The LORD God, compassionate and gracious, slow to anger, and abounding in love and faithfulness, Maintaining mercy for thousands, forgiving wickedness and rebellion and sin, yet he will not leave the guilty unpunished...",
+      "Exodus 34:6-7 - The LORD, The LORD God, merciful and kind, longsuffering, and great in goodness and truth, Showing mercy to thousands, forgiving iniquity and transgression and sin, and that will by no means acquit the guilty...",
+      "Exodus 34:6-7 - The LORD, The LORD God, merciful and gracious, patient, and abundant in goodness and truth, Keeping love for thousands, forgiving iniquity and rebellion and sin, and that will by no means pardon the guilty..."
+  ],
+  "answer": "Exodus 34:6-7 - And the LORD passed by before him, and proclaimed, The LORD, The LORD God, merciful and gracious, longsuffering, and abundant in goodness and truth, Keeping mercy for thousands, forgiving iniquity and transgression and sin, and that will by no means clear the guilty; visiting the iniquity of the fathers upon the children, and upon the children's children, unto the third and to the fourth generation.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the fulfillment of God's promise to Moses and is arguably the most comprehensive self-revelation of God's character in the Old Testament. It became a creed for Israel, quoted and referenced throughout the rest of Scripture.",
+      "Importance_of_Wording": "The proclamation begins by emphasizing mercy: 'merciful and gracious, longsuffering, and abundant in goodness and truth.' It details His forgiveness for all types of sin: 'iniquity and transgression and sin.' However, this grace is not cheap. The statement is perfectly balanced with His justice: 'and that will by no means clear the guilty.' He is a God of love, but He does not ignore sin; unrepentant sin will be judged.",
+      "Factual_Explanation": "As Moses stood on the mountain with the new tablets, God descended in the cloud and proclaimed His own name and character as He passed by. This revelation formed the basis for the renewal of the covenant with Israel after the golden calf disaster.",
+      "Theological_Meaning": "This passage is the bedrock of biblical theology regarding God's character. It refutes any one-sided view of God as either a sentimental grandfather who overlooks sin or a harsh judge without compassion. He is both perfectly merciful and perfectly just. This dual nature is the great theme of the plan of salvation: how can God forgive sinners without compromising His justice? The rest of the Bible is the answer to that question.",
+      "Christ_Centered_Meaning": "The cross of Christ is the ultimate demonstration of this declaration. At the cross, God's mercy and justice met. He demonstrated His boundless love and grace by 'forgiving iniquity and transgression and sin.' At the same time, He showed that He would 'by no means clear the guilty' by pouring out the full penalty for sin upon His own Son. In Christ, God can be both merciful to the sinner and just in His dealings with sin. Jesus is the living embodiment of this glorious name."
+  }
+},
+{
+  "id": "BP060",
+  "question": "When Moses descends from Mount Sinai after his forty-day encounter with God and the renewal of the covenant, his physical appearance is dramatically altered, though he is unaware of it himself. What was this change, and how did the people, including Aaron, react to it?",
+  "options": [
+      "Exodus 34:29-30 - ...Moses wist not that the skin of his face shone while he talked with him. And when Aaron and all the children of Israel saw Moses, behold, the skin of his face shone; and they were afraid to come nigh him.",
+      "Exodus 34:29-30 - ...Moses knew not that the skin of his face was radiant because he had talked with him. And when Aaron and all the sons of Israel saw Moses, behold, the skin of his face was radiant; and they were fearful of coming near him.",
+      "Exodus 34:29-30 - ...Moses did not know that the skin of his face glowed as he talked with him. And when Aaron and all the children of Israel saw Moses, behold, the skin of his face glowed; and they were afraid to approach him.",
+      "Exodus 34:29-30 - ...Moses was unaware that the skin of his face shone because he had spoken with him. And when Aaron and all the children of Israel saw Moses, look, the skin of his face shone; and they were afraid to come close to him."
+  ],
+  "answer": "Exodus 34:29-30 - And it came to pass, when Moses came down from mount Sinai with the two tables of testimony in Moses' hand, when he came down from the mount, that Moses wist not that the skin of his face shone while he talked with him. And when Aaron and all the children of Israel saw Moses, behold, the skin of his face shone; and they were afraid to come nigh him.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This event vividly illustrates the transformative effect of being in God's presence. The glory that Moses beheld was reflected in his own face, becoming a visible sign of his unique role as mediator.",
+      "Importance_of_Wording": "The Hebrew word for 'shone' (*qaran*) is related to the word for 'horn' and suggests that rays of light emanated from his face. The fact that 'Moses wist not' (did not know) shows that this was not his own glory; it was a reflection of God's, and true holiness is unconscious of itself. The people's reaction of fear demonstrates the same principle seen at Sinai: sinful humanity shrinks from the manifestation of divine glory.",
+      "Factual_Explanation": "After spending forty days in direct communion with God, Moses' face absorbed and reflected a measure of the divine glory. This radiance was so intense that the people were afraid to approach him. As a result, Moses began to wear a veil over his face when speaking to the people, removing it only when he went in to speak with the Lord.",
+      "Theological_Meaning": "The veil had a dual purpose: it shielded the people from a glory they could not bear, and it also hid the fading of that glory, symbolizing the temporary nature of the Old Covenant's glory. The incident shows that communion with God changes a person, making them a reflection of His character to the world.",
+      "Christ_Centered_Meaning": "The Apostle Paul gives the definitive interpretation of this event in 2 Corinthians 3. He contrasts the 'fading' glory on Moses' face with the abiding glory of the New Covenant. He explains that the veil on Moses' face is like a veil over the hearts of those who read the Old Testament without seeing its fulfillment in Christ. But for believers in Jesus, that veil is taken away. 'But we all, with open face beholding as in a glass the glory of the Lord, are changed into the same image from glory to glory, even as by the Spirit of the Lord' (2 Corinthians 3:18). By beholding Christ, we are progressively transformed to reflect His character."
+  }
+},
+{
+  "id": "BP061",
+  "question": "At the conclusion of the forty years of wandering, Moses recounts God's law to the new generation poised to enter Canaan. In the book of Deuteronomy, he repeats the Ten Commandments, but with a significant addition to the fourth commandment. What reason, based on their redemptive history, does he give for keeping the Sabbath?",
+  "options": [
+      "Deuteronomy 5:15 - And remember that thou wast a servant in the land of Egypt, and that the LORD thy God brought thee out thence through a mighty hand and by a stretched out arm: therefore the LORD thy God commanded thee to keep the sabbath day.",
+      "Deuteronomy 5:15 - And recall that you were a slave in the land of Egypt, and that the LORD your God brought you out from there with a mighty hand and an outstretched arm: for this reason the LORD your God commanded you to keep the sabbath day.",
+      "Deuteronomy 5:15 - And remember that thou wast a bondman in the land of Egypt, and that the LORD thy God brought thee out from there with a mighty hand and by a stretched out arm: therefore the LORD thy God commanded thee to observe the sabbath day.",
+      "Deuteronomy 5:15 - And be mindful that thou wast a servant in the land of Egypt, and that the LORD thy God brought thee out thence by a mighty hand and by a stretched out arm: so the LORD thy God commanded thee to keep the sabbath day."
+  ],
+  "answer": "Deuteronomy 5:15 - And remember that thou wast a servant in the land of Egypt, and that the LORD thy God brought thee out thence through a mighty hand and by a stretched out arm: therefore the LORD thy God commanded thee to keep the sabbath day.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse provides a second, complementary reason for Sabbath observance. While Exodus 20 grounds it in creation, Deuteronomy 5 grounds it in redemption. For Israel, the Sabbath was to be a celebration of both freedom from chaos (creation) and freedom from slavery (redemption).",
+      "Importance_of_Wording": "The command to 'remember' here points back to their slavery in Egypt. Their deliverance was accomplished 'through a mighty hand and by a stretched out arm'—phrases emphasizing God's miraculous power. The word 'therefore' explicitly links their experience of redemption to the command to keep the Sabbath. They were to give their servants rest on the Sabbath because God had given them rest from their bondage.",
+      "Factual_Explanation": "In his final sermon, Moses tailored his retelling of the law to the specific experience of the generation that had been redeemed from Egypt and sustained in the wilderness. The Sabbath was now not only a memorial of a universal creation but also a memorial of their specific national salvation.",
+      "Theological_Meaning": "This dual meaning of the Sabbath is profoundly important. It is a sign of God as both Creator and Redeemer. By keeping it, we acknowledge Him as the source of our physical life (creation) and our spiritual life (redemption). It is a weekly celebration of the freedom He gives—freedom from the meaningless toil of a godless world and freedom from the bondage of sin.",
+      "Christ_Centered_Meaning": "Christ is our Creator and our Redeemer. The Sabbath is a perfect symbol of the complete rest we find in Him. The Exodus from Egypt is the Old Testament's great model of salvation. Jesus accomplished a greater Exodus for us at the cross, delivering us from the bondage of sin and death. Observing the Sabbath is an act of faith, a weekly declaration that we are resting in the finished work of Christ, our Creator and our Redeemer, who by His 'mighty hand and stretched out arm' has set us free."
+  }
+},
+{
+  "id": "BP062",
+  "question": "In Leviticus, God outlines the different types of offerings, each illustrating a different facet of Christ's work. The very first offering described is the burnt offering, which was to be wholly consumed on the altar. What was required of the offerer who brought a bullock for a burnt offering to ensure its acceptance?",
+  "options": [
+      "Leviticus 1:3-4 - If his offering be a burnt sacrifice of the herd, let him offer a male without blemish: he shall offer it of his own voluntary will at the door of the tabernacle... And he shall put his hand upon the head of the burnt offering; and it shall be accepted for him to make atonement for him.",
+      "Leviticus 1:3-4 - If his gift be a burnt offering of the herd, let him offer a male without defect: he shall offer it of his own free will at the entrance of the tabernacle... And he shall lay his hand on the head of the burnt offering; and it will be accepted for him to make atonement for him.",
+      "Leviticus 1:3-4 - If his offering is a burnt sacrifice of the herd, let him present a male without blemish: he must offer it of his own voluntary will at the door of the tent... And he shall place his hand upon the head of the burnt offering; and it shall be accepted for him to make him clean.",
+      "Leviticus 1:3-4 - If his offering be a burnt sacrifice of the herd, let him offer a male without spot: he shall offer it of his own will at the door of the tabernacle... And he shall put his hand on the head of the burnt offering; and it will be accepted to make reconciliation for him."
+  ],
+  "answer": "Leviticus 1:3-4 - If his offering be a burnt sacrifice of the herd, let him offer a male without blemish: he shall offer it of his own voluntary will at the door of the tabernacle of the congregation before the LORD. And he shall put his hand upon the head of the burnt offering; and it shall be accepted for him to make atonement for him.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage details the foundational requirements for the burnt offering, the most complete of the sacrifices. It establishes the principles of perfection in the substitute and the identification of the sinner with the substitute.",
+      "Importance_of_Wording": "The animal had to be a 'male without blemish,' signifying perfection. The offerer was to bring it 'of his own voluntary will,' indicating a willing heart. The crucial act was to 'put his hand upon the head of the burnt offering.' This was the act of identification, symbolically transferring the sinner's identity and sin to the innocent victim. The result was that 'it shall be accepted for him to make atonement for him.'",
+      "Factual_Explanation": "The burnt offering (*olah*, meaning 'that which ascends') was a voluntary act of worship symbolizing total consecration and devotion to God. The entire animal (except the skin) was consumed on the altar, its smoke ascending as a 'sweet savour' to the Lord. The offerer laid his hand on the animal, then killed it, and the priests would handle the blood and the burning.",
+      "Theological_Meaning": "The burnt offering represented complete surrender and dedication to God. The act of laying on of hands is the heart of the concept of substitution. The sinner acknowledges that the victim is taking their place. The death of the perfect substitute satisfies God's justice ('atonement') and makes the worshiper acceptable.",
+      "Christ_Centered_Meaning": "Jesus is the perfect fulfillment of the burnt offering. He was the 'male without blemish,' the sinless Son of God (Hebrews 9:14; 1 Peter 1:19). He offered Himself 'of his own voluntary will' ('I lay down my life... No man taketh it from me,' John 10:17-18). By faith, the sinner 'lays his hand' upon Christ, identifying with Him and accepting Him as their substitute. Christ's total self-sacrifice on the cross ascended to God as a 'sweet smelling savour' (Ephesians 5:2), and through His sacrifice, we are 'accepted in the beloved' (Ephesians 1:6)."
+  }
+},
+{
+  "id": "BP063",
+  "question": "The sin offering was a mandatory sacrifice required when an individual sinned unintentionally. It powerfully illustrates the principle of substitutionary atonement. After the sinner laid his hands on the animal, what did the priest do with the blood to make atonement?",
+  "options": [
+      "Leviticus 4:6 - And the priest shall dip his finger in the blood, and sprinkle of the blood seven times before the LORD, before the vail of the sanctuary.",
+      "Leviticus 4:6 - And the priest will dip his finger in the blood, and sprinkle some of the blood seven times before the LORD, in front of the veil of the sanctuary.",
+      "Leviticus 4:6 - And the priest shall dip his finger in the blood, and sprinkle the blood seven times before the LORD, in front of the curtain of the sanctuary.",
+      "Leviticus 4:6 - And the priest should dip his finger in the blood, and sprinkle of the blood seven times before God, before the vail of the holy place."
+  ],
+  "answer": "Leviticus 4:6 - And the priest shall dip his finger in the blood, and sprinkle of the blood seven times before the LORD, before the vail of the sanctuary.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse describes the critical part of the sin offering ritual for a priest or the whole congregation. The application of the blood before the veil brought the record of the confessed sin into the sanctuary, awaiting final disposition on the Day of Atonement.",
+      "Importance_of_Wording": "The act of sprinkling 'seven times' signifies a perfect and complete presentation of the atoning blood. It was done 'before the LORD,' in the Holy Place, 'before the vail.' The veil separated the Holy Place from the Most Holy Place where God's presence dwelt above the Mercy Seat. The blood was brought as close as possible to the presence of God.",
+      "Factual_Explanation": "When a person sinned, they brought an animal for a sin offering. They confessed their sin over the animal (by laying on of hands) and then slew it. The priest would take the blood—which represented the life of the sinner forfeited and paid by the substitute—and minister it in the sanctuary. This act transferred the confessed sin, now covered by the blood, into the sanctuary itself.",
+      "Theological_Meaning": "This ritual is a cornerstone of the sanctuary message. It shows that confessed sin is not immediately obliterated but is transferred to the sanctuary through the blood of the substitute. This record of sin accumulated throughout the year until the sanctuary was 'cleansed' on the Day of Atonement. This demonstrates that forgiveness is a legal process that must be ministered through the High Priest in the sanctuary.",
+      "Christ_Centered_Meaning": "This is a type of Christ's ministry in the heavenly sanctuary. When we confess our sins, the merit of Christ's shed blood is applied to our case. He, our High Priest, presents His blood before the Father in the heavenly sanctuary, securing our forgiveness (Hebrews 9:12, 24). Our confessed sins are transferred to the records of heaven, to be finally blotted out during the great antitypical Day of Atonement, or the pre-advent investigative judgment, where the cases of all the professed people of God are reviewed."
+  }
+},
+{
+  "id": "BP064",
+  "question": "In a terrifying demonstration of the need for absolute reverence in worship, two of Aaron's sons offered a profane fire before the Lord, resulting in their immediate deaths. What was God's subsequent command to Aaron and his remaining sons, linking priestly service to abstinence and clear judgment?",
+  "options": [
+      "Leviticus 10:9 - Do not drink wine nor strong drink, thou, nor thy sons with thee, when ye go into the tabernacle of the congregation, lest ye die: it shall be a statute for ever throughout your generations.",
+      "Leviticus 10:9 - Do not drink wine or strong drink, thou, or thy sons with thee, when you enter the tabernacle of the congregation, lest you die: it shall be a law forever throughout your generations.",
+      "Leviticus 10:9 - Drink no wine nor strong drink, thou, nor thy sons with thee, when ye go into the tabernacle, lest ye die: it will be a statute for ever throughout your generations.",
+      "Leviticus 10:9 - Neither wine nor strong drink shall ye drink, thou, nor thy sons with thee, when ye go into the tent of meeting, lest ye die: it shall be a perpetual statute for your generations."
+  ],
+  "answer": "Leviticus 10:9 - Do not drink wine nor strong drink, thou, nor thy sons with thee, when ye go into the tabernacle of the congregation, lest ye die: it shall be a statute for ever throughout your generations.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This command, given immediately after the death of Nadab and Abihu for offering 'strange fire,' provides the context for their sin. It strongly implies that their judgment was clouded by alcohol, leading them to disregard God's specific instructions for worship.",
+      "Importance_of_Wording": "The prohibition is absolute for priests on duty: 'Do not drink wine nor strong drink.' 'Wine' refers to fermented grape juice, and 'strong drink' to any other intoxicating beverage. The consequence is severe: 'lest ye die.' This was established as a 'statute for ever,' underlining its permanent importance. The reason given in the next verse is to be able to 'put difference between holy and unholy, and between unclean and clean.'",
+      "Factual_Explanation": "Nadab and Abihu, Aaron's oldest sons, took their own censers and lit them with 'strange fire'—fire not taken from the sacred altar of burnt offering as God commanded. Fireflashed out from the Lord and consumed them. In the immediate aftermath, God gave this command, connecting the use of intoxicants with the inability to discern between the sacred and the common, which led to their fatal irreverence.",
+      "Theological_Meaning": "This is a foundational passage for the biblical principle of health and temperance, especially for those in positions of spiritual leadership. It teaches that anything that clouds the mind and impairs judgment is unfit for the service of God. Clear thinking and sanctified discernment are essential for true worship and for teaching others God's ways. The principle extends beyond alcohol to any practice that diminishes our physical, mental, or spiritual capacity.",
+      "Christ_Centered_Meaning": "As our High Priest, Christ ministered with a perfectly clear mind, wholly consecrated to His Father's will. Followers of Christ are called a 'royal priesthood' (1 Peter 2:9). This command applies in principle to all believers who are to 'present your bodies a living sacrifice, holy, acceptable unto God' (Romans 12:1). We are to be sober and vigilant, keeping our minds clear from worldly intoxication so that we can properly discern and reflect God's holy character."
+  }
+},
+{
+  "id": "BP065",
+  "question": "The laws of clean and unclean animals in Leviticus 11 form a key part of Israel's health and holiness code. What is the fundamental principle God gives for identifying clean land animals that were permissible to eat?",
+  "options": [
+      "Leviticus 11:3 - Whatsoever parteth the hoof, and is clovenfooted, and cheweth the cud, among the beasts, that shall ye eat.",
+      "Leviticus 11:3 - Whatever divides the hoof, and is cloven-footed, and chews the cud, among the animals, that you may eat.",
+      "Leviticus 11:3 - Whatsoever has a parted hoof, and is clovenfooted, and cheweth the cud, among the beasts, that ye may eat.",
+      "Leviticus 11:3 - Anything that parteth the hoof, and is clovenfooted, and cheweth the cud, among the beasts, that you can eat."
+  ],
+  "answer": "Leviticus 11:3 - Whatsoever parteth the hoof, and is clovenfooted, and cheweth the cud, among the beasts, that shall ye eat.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse establishes the simple, two-part test for determining which land animals were considered 'clean' and suitable for food. This distinction was a core component of Israel's identity and their call to be a 'holy' people.",
+      "Importance_of_Wording": "The rule is precise and requires two characteristics to be present simultaneously. The animal must 'parteth the hoof, and is clovenfooted' (i.e., has a completely split hoof) AND 'cheweth the cud' (is a ruminant). The chapter goes on to give examples of animals like the camel or the pig that meet one criterion but not the other, and are therefore unclean.",
+      "Factual_Explanation": "God gave Israel a set of dietary laws that distinguished them from all other nations. These laws covered land animals, sea creatures, birds, and insects. The criteria for land animals were the most straightforward. This list identified herbivorous animals, generally recognized as healthier sources of food than carnivorous or scavenging animals.",
+      "Theological_Meaning": "The stated reason for these laws was holiness: 'For I am the LORD your God: ye shall therefore sanctify yourselves, and ye shall be holy; for I am holy' (Leviticus 11:44). The distinction between clean and unclean taught Israel to make careful choices and to recognize that God is concerned with the practical, physical aspects of life. This is a foundational principle of the Christian health message: our bodies are the temple of the Holy Spirit, and we should glorify God in what we eat and drink (1 Corinthians 10:31). These laws were given for their well-being, protecting them from diseases common in scavenger animals.",
+      "Christ_Centered_Meaning": "While the ceremonial aspects of the law were fulfilled in Christ, the underlying principles of health and holiness remain. The original diet given to humanity in Eden was plant-based (Genesis 1:29). These dietary laws were a remedial system for a post-flood, post-exodus world. They point to the deeper truth that God cares about our physical health as it impacts our spiritual clarity. For the Christian, the goal is not merely to follow a list, but to apply the principle of choosing the 'cleanest' and most healthful options available, that we might better serve God with clear minds and healthy bodies."
+  }
+},
+{
+  "id": "BP066",
+  "question": "The Day of Atonement was the most solemn day of the Israelite year, a day of national judgment and cleansing. The central ritual involved two goats. After one goat was sacrificed as a sin offering, what was to be done with the second goat, the 'scapegoat'?",
+  "options": [
+      "Leviticus 16:21-22 - And Aaron shall lay both his hands upon the head of the live goat, and confess over him all the iniquities of the children of Israel... and shall send him away by the hand of a fit man into the wilderness: And the goat shall bear upon him all their iniquities unto a land not inhabited.",
+      "Leviticus 16:21-22 - And Aaron shall place both his hands on the head of the live goat, and confess over it all the sins of the children of Israel... and shall send it away by the hand of a chosen man into the wilderness: And the goat will bear upon it all their sins into a desolate land.",
+      "Leviticus 16:21-22 - And Aaron shall lay his hands upon the head of the live goat, and confess over him all the rebellions of the children of Israel... and shall send him away by the hand of a fit man into the desert: And the goat shall carry upon him all their iniquities into a land of separation.",
+      "Leviticus 16:21-22 - And Aaron shall lay both his hands upon the head of the living goat, and confess over him all the transgressions of the children of Israel... and shall send him away by the hand of an appointed man into the wilderness: And the goat shall bear on him all their iniquities unto a remote land."
+  ],
+  "answer": "Leviticus 16:21-22 - And Aaron shall lay both his hands upon the head of the live goat, and confess over him all the iniquities of the children of Israel, and all their transgressions in all their sins, putting them upon the head of the goat, and shall send him away by the hand of a fit man into the wilderness: And the goat shall bear upon him all their iniquities unto a land not inhabited: and he shall let go the goat in the wilderness.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage describes the unique ritual of the scapegoat (*Azazel*), which symbolized the final removal and disposition of the confessed sins of God's people after the sanctuary had been cleansed.",
+      "Importance_of_Wording": "The high priest confesses 'all the iniquities... transgressions... and sins,' a comprehensive list covering every type of sin. This confession transfers the accumulated, confessed sins of the past year from the sanctuary onto the head of the live goat. This goat then 'shall bear upon him all their iniquities' and carry them away to a 'land not inhabited,' symbolizing their final and complete removal from the presence of God's people.",
+      "Factual_Explanation": "On the Day of Atonement, two goats were chosen. Lots were cast. One was the 'LORD's goat,' which was slain as a sin offering to cleanse the sanctuary. The second was the 'scapegoat' or 'goat for Azazel.' After cleansing the sanctuary with the blood of the first goat, the high priest would perform this ritual with the live goat, which was then led away to perish in the wilderness.",
+      "Theological_Meaning": "This two-part ceremony powerfully illustrates the final phases of God's plan to eradicate sin. The first goat (for the LORD) represents Christ's atoning sacrifice, which makes cleansing possible. The second goat (for Azazel/the scapegoat) represents Satan, the originator and instigator of sin. It is crucial to note the scapegoat is not a savior figure; it is not slain as a sacrifice and its blood is not shed for atonement. It is a vehicle for punishment and final removal. After the work of judgment and atonement is complete, the responsibility for all the confessed and forgiven sin of the righteous is rolled back upon Satan, who will bear the final punishment for it.",
+      "Christ_Centered_Meaning": "Christ is represented by the Lord's goat, whose blood cleanses the sanctuary and atones for sin. The Day of Atonement ceremony is a type of the pre-advent investigative judgment, in which the records of all professed believers are examined in the heavenly sanctuary. At the close of this judgment, Christ comes again. The scapegoat ritual will find its fulfillment after the millennium, when the confessed sins of the righteous are placed upon Satan's head, and he and all sin are banished from the universe forever, sent into the 'lake of fire'—a land not inhabited by the redeemed (Revelation 20)."
+  }
+},
+{
+  "id": "BP067",
+  "question": "Leviticus makes a profound statement about the significance of blood in the sacrificial system, explaining why it was forbidden for consumption and why it was the exclusive element for making atonement. What is this foundational declaration about the life and purpose of blood?",
+  "options": [
+      "Leviticus 17:11 - For the life of the flesh is in the blood: and I have given it to you upon the altar to make an atonement for your souls: for it is the blood that maketh an atonement for the soul.",
+      "Leviticus 17:11 - Because the life of the flesh is in the blood: and I have given it to you on the altar to make atonement for your souls: for it is the blood that makes atonement by reason of the life.",
+      "Leviticus 17:11 - For the soul of the flesh is in the blood: and I have given it to you upon the altar to make a covering for your souls: for it is the blood that maketh a covering for the soul.",
+      "Leviticus 17:11 - For the life of the body is in the blood: and I have given it to you on the altar to make atonement for your lives: because it is the blood that maketh an atonement for the life."
+  ],
+  "answer": "Leviticus 17:11 - For the life of the flesh is in the blood: and I have given it to you upon the altar to make an atonement for your souls: for it is the blood that maketh an atonement for the soul.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the theological centerpiece of the entire sacrificial system. It explains *why* blood was the required agent of atonement. It is not a magical substance, but it represents the life that was forfeit due to sin.",
+      "Importance_of_Wording": "The statement is threefold. First, a scientific and spiritual principle: 'the life of the flesh is in the blood.' Second, a divine provision: 'I have given it to you upon the altar to make an atonement.' Atonement is God's gift, not man's invention. Third, the summary statement: 'it is the blood that maketh an atonement for the soul.' The value is not in the fluid itself, but in the life it represents.",
+      "Factual_Explanation": "God commanded that all slaughtered animals intended for food must have their blood drained, and this blood was never to be eaten. The reason given is that God had reserved blood for one sacred purpose only: to be placed upon the altar as the means of atonement for sin.",
+      "Theological_Meaning": "This verse is the key that unlocks the meaning of Old Testament sacrifices. The penalty for sin is death (Romans 6:23). Since 'the life... is in the blood,' the shedding of blood represents the paying of that death penalty. When the blood of an innocent substitute was offered on the altar, it represented one life being given for another. This is the heart of substitutionary atonement.",
+      "Christ_Centered_Meaning": "This verse points directly to the necessity of Christ's death. The writer to the Hebrews builds upon this, stating, 'without shedding of blood is no remission' (Hebrews 9:22). The blood of animals could never truly take away sin but only serve as a type. It was the precious blood of Christ, representing His perfect, divine-human life, that was given upon the 'altar' of the cross to make a true and final atonement for our souls. We are redeemed, 'not with corruptible things... But with the precious blood of Christ, as of a lamb without blemish and without spot' (1 Peter 1:18-19)."
+  }
+},
+{
+  "id": "BP068",
+  "question": "Amidst the many civil and ceremonial laws in Leviticus is a command that Jesus Himself would later identify as the second greatest of all commandments, summarizing all of our duties to our fellow human beings. What is this pinnacle of ethical instruction?",
+  "options": [
+      "Leviticus 19:18 - Thou shalt not avenge, nor bear any grudge against the children of thy people, but thou shalt love thy neighbour as thyself: I am the LORD.",
+      "Leviticus 19:18 - Thou shall not take vengeance, nor hold a grudge against the sons of thy people, but thou shalt love thy neighbour as thyself: I am the LORD.",
+      "Leviticus 19:18 - Thou shalt not avenge thyself, nor bear any grudge against the children of thy people, but thou shalt love thy friend as thyself: I am the LORD.",
+      "Leviticus 19:18 - Thou shalt not seek revenge, nor bear a grudge against anyone among your people, but love your neighbour as you love yourself: I am the LORD."
+  ],
+  "answer": "Leviticus 19:18 - Thou shalt not avenge, nor bear any grudge against the children of thy people, but thou shalt love thy neighbour as thyself: I am the LORD.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse is the ethical heart of the Torah. It elevates morality beyond mere prohibitions to a positive, active principle of love, which serves as the foundation for a just and compassionate society.",
+      "Importance_of_Wording": "The command begins with negative prohibitions against vengeance and grudges, common human reactions to being wronged. It then pivots to the all-encompassing positive command: 'thou shalt love thy neighbour as thyself.' This is the standard. The final statement, 'I am the LORD,' grounds this high ethical demand in the very character of God Himself. We are to love this way because this is how God is.",
+      "Factual_Explanation": "In a chapter often called the 'Holiness Code,' God gives Israel instructions on how their holiness should manifest in practical, everyday relationships. This command is the climax of that instruction, providing the guiding principle for all social interactions.",
+      "Theological_Meaning": "This verse demonstrates that the Old Testament law was not a cold, sterile legal code. At its heart was the principle of love. It shows that true religion is not just about vertical duties to God but is equally concerned with horizontal duties to others. Love is the motivation that fulfills the intent of all the other commandments regarding our neighbors.",
+      "Christ_Centered_Meaning": "When asked what the greatest commandment was, Jesus answered by quoting Deuteronomy 6:5 ('Thou shalt love the Lord thy God...') and then immediately quoted this verse from Leviticus, saying, 'And the second is like unto it, Thou shalt love thy neighbour as thyself. On these two commandments hang all the law and the prophets' (Matthew 22:37-40). Jesus not only taught this principle but perfectly embodied it, even loving His enemies and praying for His executioners. The New Covenant does not abolish this law but empowers the believer through the Holy Spirit to actually live it out."
+  }
+},
+{
+  "id": "BP069",
+  "question": "God established a cycle of seven annual feasts for Israel, each one a holy convocation and a prophetic type. The last of these feasts was a week-long celebration of joy and remembrance for God's provision in the wilderness. What was this feast called, and what were the people commanded to do during it?",
+  "options": [
+      "Leviticus 23:42-43 - Ye shall dwell in booths seven days... That your generations may know that I made the children of Israel to dwell in booths, when I brought them out of the land of Egypt: I am the LORD your God.",
+      "Leviticus 23:42-43 - Ye shall live in tents seven days... So that your generations may know that I made the children of Israel to live in tents, when I brought them out of the land of Egypt: I am the LORD your God.",
+      "Leviticus 23:42-43 - Ye shall dwell in shelters seven days... That your generations may know that I made the children of Israel to dwell in shelters, when I brought them out of the land of Egypt: I am the LORD your God.",
+      "Leviticus 23:42-43 - Ye shall inhabit booths seven days... That your generations may know that I made the children of Israel to live in booths, when I brought them forth from the land of Egypt: I am the LORD your God."
+  ],
+  "answer": "Leviticus 23:42-43 - Ye shall dwell in booths seven days; all that are Israelites born shall dwell in booths: That your generations may know that I made the children of Israel to dwell in booths, when I brought them out of the land of Egypt: I am the LORD your God.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage describes the central practice of the Feast of Tabernacles (or 'Booths,' *Sukkot*). It was a joyful harvest festival that also served as a physical reminder of their humble origins and God's faithful protection during their 40-year journey.",
+      "Importance_of_Wording": "The command to 'dwell in booths' was a literal one. They were to construct temporary shelters out of branches and live in them for the week. The reason was pedagogical: 'That your generations may know' about their history. It was a hands-on history lesson to prevent future generations from forgetting their dependence on God.",
+      "Factual_Explanation": "The Feast of Tabernacles was the final feast of the religious year, occurring in the autumn after all the harvests were gathered. It was a time of immense joy and thanksgiving. For seven days, the Israelites would live in these temporary huts, reminding them that they were once sojourners who depended on God for everything.",
+      "Theological_Meaning": "This feast celebrated God's faithfulness as a provider and protector. By leaving their permanent homes for temporary shelters, they acknowledged that God is our true dwelling place and security. Prophetically, the feast pointed forward to the great final ingathering of God's people from all nations to celebrate His eternal reign.",
+      "Christ_Centered_Meaning": "It was during the Feast of Tabernacles that Jesus stood and cried, 'If any man thirst, let him come unto me, and drink' (John 7:37), connecting Himself with the water-drawing ceremony of the feast. The feast's ultimate fulfillment will be at the end of time, after the great harvest of souls is complete. It points to the 'marriage supper of the Lamb' (Revelation 19:9) and the final state when 'the tabernacle of God is with men, and he will dwell with them' in the New Earth (Revelation 21:3). Our life on this earth is a temporary 'booth,' as we look forward to our permanent home with God."
+  }
+},
+{
+  "id": "BP070",
+  "question": "As part of the Holiness Code, God establishes a radical economic and social principle of restoration and liberty, designed to prevent perpetual poverty and the permanent alienation of families from their ancestral land. What is the name of this 50th year celebration, and what was its primary decree?",
+  "options": [
+      "Leviticus 25:10 - And ye shall hallow the fiftieth year, and proclaim liberty throughout all the land unto all the inhabitants thereof: it shall be a jubile unto you; and ye shall return every man unto his possession, and ye shall return every man unto his family.",
+      "Leviticus 25:10 - And ye shall consecrate the fiftieth year, and announce liberty throughout the land to all the inhabitants thereof: it shall be a jubilee for you; and ye shall return each man unto his property, and ye shall return each man unto his family.",
+      "Leviticus 25:10 - And ye shall make holy the fiftieth year, and proclaim freedom throughout the land unto all its inhabitants: it shall be a jubilee unto you; and ye shall return every man to his own land, and ye shall return every man unto his own family.",
+      "Leviticus 25:10 - And ye shall hallow the fiftieth year, and declare liberty in all the land unto all the inhabitants of it: it shall be a jubilee unto you; and ye shall return all men unto their possession, and ye shall return all men unto their families."
+  ],
+  "answer": "Leviticus 25:10 - And ye shall hallow the fiftieth year, and proclaim liberty throughout all the land unto all the inhabitants thereof: it shall be a jubile unto you; and ye shall return every man unto his possession, and ye shall return every man unto his family.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse institutes the Year of Jubilee, a unique feature of Israel's economy and a profound symbol of divine grace and restoration. It provided a regular 'reset' for the entire society.",
+      "Importance_of_Wording": "The year was to be 'hallowed' or set apart. The central action was to 'proclaim liberty throughout all the land' (the phrase inscribed on the American Liberty Bell). This liberty had two specific components: 'ye shall return every man unto his possession' (land sold due to poverty was returned to the original family), and 'ye shall return every man unto his family' (Israelites who had sold themselves into servitude were set free).",
+      "Factual_Explanation": "The Year of Jubilee occurred after a cycle of seven Sabbatical years (7 x 7 = 49 years). On the Day of Atonement of the 49th year, a trumpet (*shofar*) would sound to announce the beginning of the 50th year, the Jubilee. All debts were cancelled, slaves were freed, and ancestral land was returned.",
+      "Theological_Meaning": "The Jubilee was a powerful reminder that the land ultimately belonged to God, and the Israelites were merely stewards ('The land shall not be sold for ever: for the land is mine; for ye are strangers and sojourners with me,' Leviticus 25:23). It prevented a permanent landed aristocracy and a permanent underclass. It was a beautiful picture of God's grace, wiping the slate clean and giving everyone a fresh start.",
+      "Christ_Centered_Meaning": "The Year of Jubilee is a magnificent type of the gospel. Jesus began His public ministry by reading from Isaiah 61, a Jubilee text: 'The Spirit of the Lord is upon me... to preach deliverance to the captives... to set at liberty them that are bruised, To preach the acceptable year of the Lord' (Luke 4:18-19). Christ proclaims the ultimate Jubilee. Through Him, our debt of sin is cancelled, we are set free from our bondage to Satan, and our lost inheritance—eternal life and a home in the New Earth—is restored to us."
+  }
+},
+{
+  "id": "BP071",
+  "question": "In the book of Numbers, God gives Moses a special benediction that the priests are to use to bless the people of Israel. What is this beautiful three-part priestly blessing?",
+  "options": [
+      "Numbers 6:24-26 - The LORD bless thee, and keep thee: The LORD make his face shine upon thee, and be gracious unto thee: The LORD lift up his countenance upon thee, and give thee peace.",
+      "Numbers 6:24-26 - The LORD bless you, and guard you: The LORD make his face to shine upon you, and be gracious to you: The LORD lift up his face toward you, and give you peace.",
+      "Numbers 6:24-26 - The LORD bless thee, and protect thee: The LORD make his face shine on thee, and be good to thee: The LORD lift up his countenance to thee, and give thee peace.",
+      "Numbers 6:24-26 - The LORD bless thee, and keep thee: The LORD make his face bright upon thee, and be gracious unto thee: The LORD show his countenance to thee, and give thee peace."
+  ],
+  "answer": "Numbers 6:24-26 - The LORD bless thee, and keep thee: The LORD make his face shine upon thee, and be gracious unto thee: The LORD lift up his countenance upon thee, and give thee peace.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "Known as the Aaronic Blessing, this is the divinely prescribed formula for priestly blessing in the Old Testament. It beautifully encapsulates God's desire for the complete well-being of His people.",
+      "Importance_of_Wording": "The blessing is structured in three ascending lines, each containing the covenant name 'LORD' (YHWH). It moves from general provision ('bless thee, and keep thee') to intimate favor ('make his face shine upon thee, and be gracious') to ultimate reconciliation and well-being ('lift up his countenance upon thee, and give thee peace'). 'Shining face' and 'lifted countenance' are Hebrew idioms for divine favor and acceptance.",
+      "Factual_Explanation": "God commanded Moses to give these specific words to Aaron and his sons to use when they blessed the Israelites. The act of blessing was a key part of the priestly ministry. God promises in the next verse, 'And they shall put my name upon the children of Israel; and I will bless them,' indicating that the priests were the channel, but God Himself was the source of the blessing.",
+      "Theological_Meaning": "This prayer reveals the heart of God towards His children. He desires to bless, protect, show favor, extend grace, grant acceptance, and give peace (*shalom*—a word that means much more than absence of conflict, but wholeness, health, and complete well-being). It is a comprehensive prayer for divine care in every aspect of life.",
+      "Christ_Centered_Meaning": "Jesus is the ultimate fulfillment of this blessing. Through Him, God has blessed us with all spiritual blessings (Ephesians 1:3). He is the one through whom the 'light of the knowledge of the glory of God' shines 'in the face of Jesus Christ' (2 Corinthians 4:6). He is our peace (Ephesians 2:14). As our great High Priest, Christ continually pronounces this blessing over His people, interceding for them that they might experience the fullness of the Father's favor and peace."
+  }
+},
+{
+  "id": "BP072",
+  "question": "When the twelve spies returned from scouting the land of Canaan, ten of them brought a report that filled the people with fear and unbelief, causing them to rebel against God's command to enter the land. What was the core of this 'evil report'?",
+  "options": [
+      "Numbers 13:32-33 - The land... is a land that eateth up the inhabitants thereof; and all the people that we saw in it are men of a great stature... and we were in our own sight as grasshoppers, and so we were in their sight.",
+      "Numbers 13:32-33 - The land... is a land that devours the inhabitants thereof; and all the people that we saw in it are men of a great size... and we were in our own eyes as grasshoppers, and so we were in their eyes.",
+      "Numbers 13:32-33 - The land... is a land that consumeth the inhabitants thereof; and all the people that we saw in it are men of great stature... and we were in our own sight as insects, and so we were in their sight.",
+      "Numbers 13:32-33 - The land... is a land that eats up the inhabitants thereof; and all the people that we saw in it are men of a great height... and we seemed in our own sight as grasshoppers, and so we seemed in their sight."
+  ],
+  "answer": "Numbers 13:32-33 - And they brought up an evil report of the land which they had searched unto the children of Israel, saying, The land, through which we have gone to search it, is a land that eateth up the inhabitants thereof; and all the people that we saw in it are men of a great stature. And there we saw the giants, the sons of Anak, which come of the giants: and we were in our own sight as grasshoppers, and so we were in their sight.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage captures the faithless perspective that led to Israel's 40 years of wandering. The spies did not lie about the facts (the land was good, the people were strong), but their interpretation was colored by fear, not faith. They saw giants in the land but failed to see the God of heaven.",
+      "Importance_of_Wording": "The phrase 'a land that eateth up the inhabitants' was a slanderous exaggeration. The key to their unbelief is the comparison: 'we were in our own sight as grasshoppers, and so we were in their sight.' They measured themselves against the giants, not the giants against God. Their small view of themselves led to a small view of God's power.",
+      "Factual_Explanation": "After 40 days of exploring Canaan, the twelve spies returned. All agreed the land was fruitful ('flows with milk and honey'). However, ten of them focused on the fortified cities and the powerful inhabitants, especially the 'giants, the sons of Anak.' Their fearful report spread panic through the camp, while only Joshua and Caleb urged the people to trust God and go forward.",
+      "Theological_Meaning": "This is a classic illustration of the conflict between faith and sight. The ten spies walked by sight, focusing on the obstacles. Joshua and Caleb walked by faith, focusing on God's promises ('If the LORD delight in us, then he will bring us into this land,' Numbers 14:8). The entire congregation sided with the ten, revealing a deep-seated unbelief. This failure at Kadesh Barnea was the pivotal sin of the wilderness generation.",
+      "Christ_Centered_Meaning": "The Christian life is a walk of faith, not of sight. We are constantly faced with 'giants'—impossible circumstances, overwhelming temptations, and daunting tasks. Like the ten spies, we can look at our own weakness and feel like 'grasshoppers,' leading to paralysis and defeat. Or, like Joshua and Caleb, we can look to the power of God in Christ, who has already overcome the world. The promised rest in Canaan is a type of the spiritual rest we enter by faith in Christ (Hebrews 4), and the eternal rest of the heavenly Canaan."
+  }
+},
+{
+  "id": "BP073",
+  "question": "In response to the people's rebellion at Kadesh Barnea, God pronounces a sentence upon the entire generation that came out of Egypt. What is the specific judgment God declares, directly linking the punishment to the duration of the spies' journey?",
+  "options": [
+      "Numbers 14:34 - After the number of the days in which ye searched the land, even forty days, each day for a year, shall ye bear your iniquities, even forty years, and ye shall know my breach of promise.",
+      "Numbers 14:34 - According to the number of the days in which you searched the land, even forty days, each day for a year, shall you bear your sins, even forty years, and you shall know my displeasure.",
+      "Numbers 14:34 - After the number of the days in which ye scouted the land, even forty days, each day for a year, shall ye suffer for your iniquities, even forty years, and ye shall know my judgment.",
+      "Numbers 14:34 - By the number of the days in which ye searched the land, even forty days, each day for a year, must ye bear your iniquities, even forty years, and ye shall know my turning away."
+  ],
+  "answer": "Numbers 14:34 - After the number of the days in which ye searched the land, even forty days, each day for a year, shall ye bear your iniquities, even forty years, and ye shall know my breach of promise.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse details the divine sentence for Israel's unbelief. It establishes the 40-year duration of their wilderness wandering and provides the symbolic reason for it, instituting the prophetic 'day-for-a-year' principle.",
+      "Importance_of_Wording": "The formula is explicit: 'forty days, each day for a year... even forty years.' The punishment was meted out with poetic justice. They would wander for 40 years to 'bear your iniquities.' The phrase 'ye shall know my breach of promise' (or 'my turning away') is stark; God would withdraw His promise to bring *that specific generation* into the land. The covenant with the nation would stand, but the faithless generation forfeited their part in it.",
+      "Factual_Explanation": "After the people wept and chose a new captain to lead them back to Egypt, God's patience came to an end. He declared that every person twenty years old and upward who had murmured against Him, except for Caleb and Joshua, would die in the wilderness. Their children, whom they feared would be victims, would instead be the ones to inherit the land after 40 years.",
+      "Theological_Meaning": "This judgment demonstrates the serious consequences of unbelief. Unbelief is not a minor weakness; it is a sin that dishonors God and rejects His promises. This event serves as a solemn warning throughout the rest of Scripture (1 Corinthians 10:5-11; Hebrews 3:16-19). The 'day-for-a-year' principle established here becomes a key for interpreting major time prophecies later in the Bible, such as in Daniel and Revelation.",
+      "Christ_Centered_Meaning": "The book of Hebrews uses this very event as its central warning against rejecting Christ. 'Take heed, brethren, lest there be in any of you an evil heart of unbelief, in departing from the living God' (Hebrews 3:12). Just as that generation failed to enter God's rest (Canaan) because of unbelief, we can fail to enter God's spiritual rest in Christ and the eternal rest of heaven if we persist in unbelief. The good news is that 'there remaineth therefore a rest to the people of God,' and we are urged to 'labour therefore to enter into that rest, lest any man fall after the same example of unbelief' (Hebrews 4:9, 11)."
+  }
+},
+{
+  "id": "BP074",
+  "question": "During the wilderness wanderings, a Levite named Korah led a major rebellion against the authority of Moses and Aaron, claiming that all Israelites were holy and had equal right to leadership. How did Moses propose to let God publicly settle this challenge to the priesthood?",
+  "options": [
+      "Numbers 16:16-17 - And Moses said unto Korah, Be thou and all thy company before the LORD, thou, and they, and Aaron, to morrow: And take every man his censer, and put incense in them... even two hundred and fifty censers; thou also, and Aaron, each of you his censer.",
+      "Numbers 16:16-17 - And Moses said to Korah, You and all your company be before the LORD, you, and they, and Aaron, tomorrow: And each man take his censer, and put incense in it... even two hundred and fifty censers; you also, and Aaron, each his own censer.",
+      "Numbers 16:16-17 - And Moses said unto Korah, Be thou and all thy group before the LORD, thou, and they, and Aaron, on the morrow: And take every man his censer, and put incense upon them... even two hundred and fifty censers; thou also, and Aaron, each of you his censer.",
+      "Numbers 16:16-17 - And Moses said to Korah, Be thou and all thy company before God, thou, and they, and Aaron, to morrow: And take every man his censer, and put incense in them... even two hundred and fifty censers; thou also, and Aaron, each man with his censer."
+  ],
+  "answer": "Numbers 16:16-17 - And Moses said unto Korah, Be thou and all thy company before the LORD, thou, and they, and Aaron, to morrow: And take every man his censer, and put incense in them, and bring ye before the LORD every man his censer, two hundred and fifty censers; thou also, and Aaron, each of you his censer.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage describes the setup for the divine test that would resolve Korah's rebellion. The test centered on the offering of incense, the highest priestly function, to see whom God would choose.",
+      "Importance_of_Wording": "Moses' instruction was a direct challenge. He tells Korah and his 250 followers to perform the role they were usurping. They were to 'take every man his censer, and put incense in them.' By including 'thou also, and Aaron,' Moses placed the divinely appointed high priest on the same level as the rebels for the purpose of the test, showing complete confidence that God would vindicate His own choice.",
+      "Factual_Explanation": "Korah, a Levite, along with Dathan and Abiram and 250 'princes of the assembly,' challenged the exclusive priesthood of Aaron. Moses proposed a trial by fire: all 250 rebels, plus Korah and Aaron, would come to the tabernacle door with censers of incense. The one whom the LORD chose would be demonstrated by His acceptance.",
+      "Theological_Meaning": "This story is a powerful warning against spiritual pride and rebellion against God's appointed order. Korah's argument ('all the congregation are holy') sounded pious, but it was a cloak for ambition and a rejection of God's specific appointments. It illustrates the danger of self-appointed ministry and the fact that God is the one who establishes authority in His church, not popular opinion or personal ambition. The result was a terrifying judgment where the earth swallowed Korah's faction and fire from the Lord consumed the 250 men with censers.",
+      "Christ_Centered_Meaning": "Aaron's priesthood was a type of Christ's perfect priesthood. The rebellion of Korah was a rejection of God's chosen mediator. All who attempt to approach God through their own means or their own self-appointed systems of worship are, in principle, following Korah. There is only one true High Priest and Mediator, Jesus Christ (1 Timothy 2:5). After the judgment, Aaron ran with his censer between the living and the dead to stop a plague (Numbers 16:46-48), a beautiful picture of Christ's intercession, which stands between us and the deadly plague of sin."
+  }
+},
+{
+  "id": "BP075",
+  "question": "Near the end of the forty years, at a place also called Meribah, the Israelites again quarreled with Moses over a lack of water. God told Moses to speak to a rock to bring forth water. Instead, in a moment of anger, Moses acted contrary to God's command. What did Moses say and do, and what was the tragic consequence?",
+  "options": [
+      "Numbers 20:10-12 - And Moses... said unto them, Hear now, ye rebels; must we fetch you water out of this rock? And Moses lifted up his hand, and with his rod he smote the rock twice... And the LORD spake unto Moses and Aaron, Because ye believed me not... therefore ye shall not bring this congregation into the land...",
+      "Numbers 20:10-12 - And Moses... said to them, Listen now, ye rebels; must we bring you water out of this rock? And Moses lifted up his hand, and with his staff he struck the rock twice... And the LORD said to Moses and Aaron, Because you did not believe me... therefore you shall not bring this assembly into the land...",
+      "Numbers 20:10-12 - And Moses... said unto them, Hear, ye rebels; must we bring you water from this rock? And Moses lifted up his hand, and with his rod he hit the rock twice... And the LORD spoke unto Moses and Aaron, Because ye trusted me not... therefore ye shall not lead this congregation into the land...",
+      "Numbers 20:10-12 - And Moses... said unto them, Hear now, ye rebels; must we get you water out of this rock? And Moses raised his hand, and with his rod he smote the rock two times... And the LORD spake unto Moses and Aaron, Because ye did not sanctify me... therefore ye shall not bring this congregation into the land..."
+  ],
+  "answer": "Numbers 20:10-12 - And Moses and Aaron gathered the congregation together before the rock, and he said unto them, Hear now, ye rebels; must we fetch you water out of this rock? And Moses lifted up his hand, and with his rod he smote the rock twice... And the LORD spake unto Moses and Aaron, Because ye believed me not, to sanctify me in the eyes of the children of Israel, therefore ye shall not bring this congregation into the land which I have given them.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage recounts the personal tragedy of Moses and Aaron. A single act of disobedience, born of frustration, cost them their life's goal of entering the Promised Land. It's a sobering lesson on the high standard God requires of His leaders.",
+      "Importance_of_Wording": "Moses' sin was multifaceted. He spoke rashly ('Hear now, ye rebels'). He took credit ('must we fetch you water'), obscuring God's power. Most importantly, he disobeyed the specific command. God said 'Speak ye unto the rock' (v. 8), but Moses 'smote the rock twice.' God's reason for the punishment was 'Because ye believed me not, to sanctify me in the eyes of the children of Israel.' Moses' action misrepresented God's character.",
+      "Factual_Explanation": "For the second time, Israel was without water at a place called Meribah ('quarreling'). God instructed Moses to take the rod and simply speak to the rock. Angered by the people's constant rebellion, Moses struck the rock instead. Water came forth, but the act of disobedience had severe consequences for both Moses and Aaron.",
+      "Theological_Meaning": "This story reveals that leadership carries immense responsibility. A leader's actions are a reflection of God's character to the people. By striking the rock in anger, Moses misrepresented God as being harsh and impatient, rather than gracious. The punishment seems severe, but it underscores the holiness of God and the importance of exact obedience, especially for those who stand as His representatives.",
+      "Christ_Centered_Meaning": "This event has profound typological meaning. The Rock was a symbol of Christ (1 Corinthians 10:4). The first time, at the beginning of the journey, the Rock was to be smitten (Exodus 17:6), typifying Christ's crucifixion. After being smitten once, Christ does not need to be crucified again. Now, we are to simply 'speak' to the Rock—to come to Him in prayer with our needs. By striking the Rock a second time, Moses marred this beautiful type and misrepresented the plan of salvation. He spoiled the picture of a once-for-all sacrifice."
+  }
+},
+{
+  "id": "BP076",
+  "question": "After another rebellion where the people spoke against God and Moses, God sent fiery serpents among them, and many died. When the people repented, God provided a peculiar remedy. What did God instruct Moses to make, and what was the promise for those who looked upon it?",
+  "options": [
+      "Numbers 21:8-9 - And the LORD said unto Moses, Make thee a fiery serpent, and set it upon a pole: and it shall come to pass, that every one that is bitten, when he looketh upon it, shall live. And Moses made a serpent of brass...",
+      "Numbers 21:8-9 - And the LORD said to Moses, Make thee a venomous serpent, and set it on a pole: and it will come to pass, that every one that is bitten, when he sees it, shall live. And Moses made a serpent of bronze...",
+      "Numbers 21:8-9 - And the LORD said unto Moses, Make thee a fiery serpent, and put it upon a pole: and it shall be, that every one that is bitten, when he looketh at it, shall live. And Moses made a snake of brass...",
+      "Numbers 21:8-9 - And God said unto Moses, Make a fiery serpent, and set it upon a pole: and it will be, that any one that is bitten, when he gazes upon it, shall live. And Moses made a serpent of brass..."
+  ],
+  "answer": "Numbers 21:8-9 - And the LORD said unto Moses, Make thee a fiery serpent, and set it upon a pole: and it shall come to pass, that every one that is bitten, when he looketh upon it, shall live. And Moses made a serpent of brass, and put it upon a pole, and it came to pass, that if a serpent had bitten any man, when he beheld the serpent of brass, he lived.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This story provides one of the most direct and powerful Old Testament types of Christ's crucifixion and the principle of salvation by faith alone. The remedy seemed strange, but it required the afflicted to look away from themselves and their wounds to God's provision.",
+      "Importance_of_Wording": "God commanded Moses to make a 'fiery serpent'—an image of the very thing that was causing their death. It was to be 'set it upon a pole,' lifting it up for all to see. The condition for healing was simple and required an act of faith: 'when he looketh upon it, shall live.' There was no other cure; their healing depended entirely on looking in faith to the object God provided.",
+      "Factual_Explanation": "The Israelites, weary and impatient, complained about the lack of food and water. As a judgment, venomous snakes infested the camp. After the people confessed their sin, Moses prayed for them. God then instructed him to create this bronze serpent. Those who were bitten and looked at the bronze serpent were miraculously healed.",
+      "Theological_Meaning": "This event teaches that salvation comes only through God's appointed means, no matter how illogical it may seem to human reason. The cure was not in the bronze object itself, but in the faith that obeyed God's command to look. It required sinners to look at an image of the sin that was killing them, lifted up as God's remedy.",
+      "Christ_Centered_Meaning": "Jesus Himself gave the inspired interpretation of this event. He told Nicodemus, 'And as Moses lifted up the serpent in the wilderness, even so must the Son of man be lifted up: That whosoever believeth in him should not perish, but have eternal life' (John 3:14-15). Jesus, who knew no sin, was 'made... to be sin for us' (2 Corinthians 5:21) on the cross. He was lifted up in the likeness of the sin that brings death. Just as the Israelites had to look in faith to the bronze serpent to be healed, we must look in faith to the crucified Christ to be saved from the deadly venom of sin."
+  }
+},
+{
+  "id": "BP077",
+  "question": "The king of Moab, Balak, hired a prophet named Balaam to curse Israel. Though Balaam was determined to earn the reward, God controlled his tongue, forcing him to bless Israel instead. In his third oracle, what prophetic blessing did Balaam pronounce, describing the beauty and prosperity of Israel's encampment?",
+  "options": [
+      "Numbers 24:5 - How goodly are thy tents, O Jacob, and thy tabernacles, O Israel!",
+      "Numbers 24:5 - How beautiful are thy tents, O Jacob, and thy dwellings, O Israel!",
+      "Numbers 24:5 - How fair are thy tents, O Jacob, and thy tabernacles, O Israel!",
+      "Numbers 24:5 - How pleasant are thy tents, O Jacob, and thy dwelling places, O Israel!"
+  ],
+  "answer": "Numbers 24:5 - How goodly are thy tents, O Jacob, and thy tabernacles, O Israel!",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is one of the beautiful, involuntary blessings that Balaam was forced to speak over Israel. Looking down from the mountain, he saw not a chaotic horde, but an orderly, blessed community under God's protection, and he was compelled to praise it.",
+      "Importance_of_Wording": "'How goodly' speaks of beauty, pleasantness, and excellence. The use of both 'tents, O Jacob' and 'tabernacles, O Israel' is poetic parallelism, using both the personal and national names of the patriarch to encompass the entire people. It was a declaration of divine favor upon their dwellings.",
+      "Factual_Explanation": "Balak brought Balaam to a series of high places overlooking the Israelite camp, hoping for a curse. Each time, Balaam opened his mouth and a blessing came out. In this third oracle, inspired by the Spirit of God, he uttered a series of praises, comparing Israel's prosperity to fertile valleys, lush gardens, and strong trees.",
+      "Theological_Meaning": "This story demonstrates God's sovereign protection over His people. No curse can stand against those whom God has blessed (Numbers 23:8, 20). It shows that God's purpose will prevail, even when using a compromised and greedy prophet like Balaam. God can turn the intended curses of our enemies into blessings.",
+      "Christ_Centered_Meaning": "The 'goodly tents' of Israel find their spiritual fulfillment in the church, the dwelling place of God by His Spirit (Ephesians 2:22). While the church on earth may seem imperfect and flawed to human eyes, from God's perspective, it is a 'goodly' and beautiful assembly, clothed in the righteousness of Christ. The true beauty of the church is not in its outward appearance but in the presence of God dwelling in the midst of His people."
+  }
+},
+{
+  "id": "BP078",
+  "question": "In his fourth and final oracle, the prophet Balaam looks far into the future and utters a remarkable prophecy about a future ruler who will arise from Israel and vanquish His enemies. What is this famous Messianic prophecy?",
+  "options": [
+      "Numbers 24:17 - I shall see him, but not now: I shall behold him, but not nigh: there shall come a Star out of Jacob, and a Sceptre shall rise out of Israel, and shall smite the corners of Moab...",
+      "Numbers 24:17 - I see him, but not at present: I behold him, but not near: a Star will come forth from Jacob, and a Sceptre will rise from Israel, and shall crush the borders of Moab...",
+      "Numbers 24:17 - I shall see him, but not yet: I shall gaze upon him, but not nigh: there shall arise a Star out of Jacob, and a Sceptre shall come out of Israel, and shall strike the corners of Moab...",
+      "Numbers 24:17 - I see him, but not now: I behold him, but not close: there shall come a Star from Jacob, and a Sceptre shall rise from Israel, and shall smite the rulers of Moab..."
+  ],
+  "answer": "Numbers 24:17 - I shall see him, but not now: I shall behold him, but not nigh: there shall come a Star out of Jacob, and a Sceptre shall rise out of Israel, and shall smite the corners of Moab, and destroy all the children of Sheth.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is one of the most explicit and earliest Messianic prophecies in the Pentateuch. Though spoken by a pagan prophet, it accurately foretells the coming of a victorious King from Israel.",
+      "Importance_of_Wording": "Balaam's words 'I shall see him, but not now... not nigh' indicate the distant, future nature of the prophecy. The two titles are highly symbolic: a 'Star' represents a glorious, heavenly being, a source of light and guidance. A 'Sceptre' is the unambiguous symbol of kingship and royal authority. This king would be a conqueror who would 'smite the corners of Moab' and other enemies of God's people.",
+      "Factual_Explanation": "In his final prophecy, Balaam's vision extended far beyond the immediate future. He foresaw the rise of a great Ruler from the lineage of Jacob (Israel). This prophecy sustained the messianic hope in Israel for centuries.",
+      "Theological_Meaning": "This prophecy affirms God's ultimate plan to establish His kingdom through a chosen King. While it had a partial, near-term fulfillment in King David who did conquer Moab, its language and scope point to a far greater, ultimate Ruler. It shows that God's redemptive plan was in motion long before it was fully revealed.",
+      "Christ_Centered_Meaning": "Jesus Christ is the ultimate fulfillment of this prophecy. The Magi from the east, who were likely heirs of Balaam's prophetic tradition, came seeking the King of the Jews because they had seen 'his star in the east' (Matthew 2:2). Jesus Himself is called the 'bright and morning star' (Revelation 22:16). He holds the 'sceptre of righteousness' (Hebrews 1:8). At His first coming, He came as a suffering servant, but at His second coming, He will return as the conquering King to 'smite' all His enemies and establish His everlasting kingdom."
+  }
+},
+{
+  "id": "BP079",
+  "question": "Just before his death, Moses blesses the twelve tribes. When he comes to the tribe of Levi, he praises their faithfulness during the golden calf incident and defines their unique, dual role within the nation of Israel. What is this special commission?",
+  "options": [
+      "Deuteronomy 33:10 - They shall teach Jacob thy judgments, and Israel thy law: they shall put incense before thee, and whole burnt sacrifice upon thine altar.",
+      "Deuteronomy 33:10 - They will teach Jacob your ordinances, and Israel your law: they will put incense before you, and whole burnt offering on your altar.",
+      "Deuteronomy 33:10 - They shall teach Jacob thy statutes, and Israel thy law: they shall put incense before thy face, and whole burnt sacrifice upon thine altar.",
+      "Deuteronomy 33:10 - They are to teach Jacob thy judgments, and Israel thy law: they shall place incense before thee, and whole burnt sacrifice upon thy altar."
+  ],
+  "answer": "Deuteronomy 33:10 - They shall teach Jacob thy judgments, and Israel thy law: they shall put incense before thee, and whole burnt sacrifice upon thine altar.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse perfectly summarizes the two primary functions of the tribe of Levi: they were to be the teachers of God's law to the nation and the ministers of the sanctuary sacrificial system.",
+      "Importance_of_Wording": "The first role was pedagogical: 'They shall teach Jacob thy judgments, and Israel thy law.' They were the custodians and instructors of the Torah. The second role was priestly: 'they shall put incense before thee' (representing intercessory prayer) 'and whole burnt sacrifice upon thine altar' (representing atonement). This dual role made them the spiritual heart of the nation.",
+      "Factual_Explanation": "Because the Levites rallied to Moses' side and executed judgment after the golden calf apostasy (Exodus 32:26-29), they were set apart for God's service instead of the firstborn of all the tribes. Moses' final blessing confirms and celebrates this special calling.",
+      "Theological_Meaning": "This reveals God's ideal for His people: to have a group wholly dedicated to spiritual instruction and mediation. A nation that knows the law and has access to atonement is a nation that can be holy. The failure of the Levites at various times in Israel's history to fulfill this mandate was a direct cause of national apostasy.",
+      "Christ_Centered_Meaning": "Jesus Christ perfectly fulfills both of these Levitical roles. He is the ultimate Teacher, the one who speaks the words of God and reveals the true meaning of the law (Matthew 5-7). He is also the ultimate Priest, who not only offers the sacrifice but IS the sacrifice. He is both the offerer of incense (our intercessor) and the whole burnt sacrifice itself. As a 'royal priesthood' (1 Peter 2:9), believers are now called to this dual ministry: to teach the truth of the gospel to the world and to offer 'spiritual sacrifices, acceptable to God by Jesus Christ' (1 Peter 2:5)."
+  }
+},
+{
+  "id": "BP080",
+  "question": "In his final song, Moses describes God's tender care for Israel during the wilderness journey, using the imagery of a great bird teaching its young to fly. How is this loving, protective guidance of God described?",
+  "options": [
+      "Deuteronomy 32:11-12 - As an eagle stirreth up her nest, fluttereth over her young, spreadeth abroad her wings, taketh them, beareth them on her wings: So the LORD alone did lead him...",
+      "Deuteronomy 32:11-12 - Like an eagle that stirs up its nest, flutters over its young, spreads out its wings, taketh them, carries them on its pinions: So the LORD alone did guide him...",
+      "Deuteronomy 32:11-12 - As an eagle awakens her nest, hovers over her young, spreadeth abroad her wings, taketh them, beareth them on her feathers: So the LORD alone did lead him...",
+      "Deuteronomy 32:11-12 - As an eagle stirreth up her home, fluttereth over her young, spreadeth her wings, taketh them, beareth them upon her wings: So the LORD by himself did lead him..."
+  ],
+  "answer": "Deuteronomy 32:11-12 - As an eagle stirreth up her nest, fluttereth over her young, spreadeth abroad her wings, taketh them, beareth them on her wings: So the LORD alone did lead him, and there was no strange god with him.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This beautiful and detailed simile captures the multifaceted nature of God's relationship with His people. He is not only a king and lawgiver but also a tender, nurturing parent who guides, protects, and sometimes 'stirs the nest' to encourage growth.",
+      "Importance_of_Wording": "The imagery unfolds in a sequence. The eagle 'stirreth up her nest' to push the young out of their comfort zone. It 'fluttereth over her young' to demonstrate how to fly. It 'spreadeth abroad her wings, taketh them, beareth them' to catch them when they falter. This perfectly describes God's methods: He leads us, teaches us, allows us to be tested, but is always there to catch and support us. The conclusion 'So the LORD alone did lead him' emphasizes His exclusive care.",
+      "Factual_Explanation": "In the Song of Moses, a poetic summary of Israel's history and God's faithfulness, Moses uses this powerful metaphor to remind the people of God's constant, personal involvement during their forty years of wandering. This was a contrast to the distant and impersonal gods of the pagans.",
+      "Theological_Meaning": "This metaphor reveals that God's guidance sometimes involves disrupting our comfort ('stirreth up her nest') for the purpose of spiritual growth. He allows trials and challenges to teach us to depend on Him ('to fly'). Yet, His protective care is always present. We are safe, not because the nest is safe, but because the Parent is strong and watchful.",
+      "Christ_Centered_Meaning": "Jesus expressed a similar maternal love for Israel when He lamented, 'O Jerusalem, Jerusalem... how often would I have gathered thy children together, even as a hen gathereth her chickens under her wings, and ye would not!' (Matthew 23:37). The image of being borne on eagle's wings points to the divine power that lifts us up from our sin and weakness and carries us through life's trials. It is by His strength alone that we are brought safely to our eternal home."
+  }
+},
+{
+  "id": "BP081",
+  "question": "In the last chapter of Deuteronomy, Moses ascends Mount Nebo to view the Promised Land, which he is forbidden to enter. God shows him the full expanse of the land that was promised to the patriarchs. What does God say to Moses in this final, poignant moment?",
+  "options": [
+      "Deuteronomy 34:4 - And the LORD said unto him, This is the land which I sware unto Abraham, unto Isaac, and unto Jacob, saying, I will give it unto thy seed: I have caused thee to see it with thine eyes, but thou shalt not go over thither.",
+      "Deuteronomy 34:4 - And the LORD said to him, This is the land which I promised unto Abraham, unto Isaac, and unto Jacob, saying, I will give it to thy descendants: I have let thee see it with thine eyes, but thou shalt not cross over there.",
+      "Deuteronomy 34:4 - And God said unto him, This is the land which I sware unto Abraham, unto Isaac, and unto Jacob, saying, I will give it unto thy seed: I have caused thee to behold it with thine eyes, but thou shalt not go over there.",
+      "Deuteronomy 34:4 - And the LORD said unto him, This is the land which I did sware unto Abraham, unto Isaac, and unto Jacob, saying, I will give it unto thy seed: I have made thee see it with thine eyes, but thou shalt not pass over thither."
+  ],
+  "answer": "Deuteronomy 34:4 - And the LORD said unto him, This is the land which I sware unto Abraham, unto Isaac, and unto Jacob, saying, I will give it unto thy seed: I have caused thee to see it with thine eyes, but thou shalt not go over thither.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse records the final conversation between God and Moses, a bittersweet moment that confirms God's faithfulness to His covenant promise while also reaffirming the consequence of Moses' sin at Meribah.",
+      "Importance_of_Wording": "God reaffirms the promise by name-checking the patriarchs: 'Abraham, Isaac, and Jacob.' The phrase 'I have caused thee to see it' implies a supernatural vision, allowing Moses to see the full extent of the land. The final clause, 'but thou shalt not go over thither,' is a tender but firm reiteration of the judgment, showing that God's decisions are unchangeable, even for His most favored servants.",
+      "Factual_Explanation": "At 120 years old, with his physical and mental faculties undiminished, Moses climbed Mount Nebo. From there, God gave him a panoramic view of the entire land of Canaan. After this vision and conversation, Moses died there in the land of Moab, and God Himself buried him in a secret location.",
+      "Theological_Meaning": "This moment highlights the faithfulness of God to His promises, even when His people (including their leaders) falter. The promise to the patriarchs would be fulfilled for their descendants. It also shows the seriousness of sin and the reality of divine judgment. Yet, the story doesn't end here. The mystery of his burial and the later biblical record hint at a greater destiny for Moses.",
+      "Christ_Centered_Meaning": "Though Moses died without entering the earthly Canaan, he did enter the heavenly Canaan. This is proven by his appearance, alongside Elijah, with Jesus on the Mount of Transfiguration (Matthew 17:3). There, Moses stood in the Promised Land, talking with the Savior about the greater redemption to be accomplished at Jerusalem. This reveals the truth about the state of the dead and the resurrection: death is a sleep from which God's power can awaken His servants. Moses' story demonstrates that for the faithful, the consequence of sin on this earth does not negate the ultimate promise of eternal life through the resurrection."
+  }
+},
+{
+  "id": "BP082",
+  "question": "In the book of Joshua, the new leader of Israel is faced with the daunting task of conquering the fortified city of Jericho. An angelic being appears to him with a drawn sword. When Joshua challenges him, what is the being's profound and authoritative self-identification?",
+  "options": [
+      "Joshua 5:14 - And he said, Nay; but as captain of the host of the LORD am I now come.",
+      "Joshua 5:14 - And he said, No; but as commander of the army of the LORD have I now come.",
+      "Joshua 5:14 - And he said, Nay; but as chief of the host of the LORD am I now come.",
+      "Joshua 5:14 - And he said, Nay; but as the captain of the army of the LORD I have now come."
+  ],
+  "answer": "Joshua 5:14 - And he said, Nay; but as captain of the host of the LORD am I now come.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the moment of divine commissioning for the conquest of Canaan. Joshua, the human captain, comes face to face with the true, divine Captain who will lead the armies of Israel.",
+      "Importance_of_Wording": "When Joshua asks, 'Art thou for us, or for our adversaries?', the answer 'Nay' is stunning. The divine Captain refuses to be put on Israel's side as a mere ally. Instead, He declares His own supreme authority: 'as captain of the host of the LORD am I now come.' The question is not whether He is on Joshua's side, but whether Joshua is on His side. This encounter re-frames the entire conquest: it is not Israel's war, but the LORD's.",
+      "Factual_Explanation": "As Joshua was near Jericho, planning his attack, he was confronted by a 'man' with a drawn sword. Joshua, as a good soldier, challenged him. The being's reply caused Joshua to fall on his face in worship, and the being then commanded him to remove his sandals because the ground was holy—the same command given to Moses at the burning bush.",
+      "Theological_Meaning": "This event teaches that God is not a tribal deity or a mascot for our causes. He is the sovereign Commander. Success in any spiritual warfare depends on recognizing His leadership and submitting completely to His strategy. The victory at Jericho was achieved not by conventional military tactics, but by bizarre, absolute obedience to the Captain's commands.",
+      "Christ_Centered_Meaning": "This 'captain of the host of the LORD' is another theophany, a pre-incarnate appearance of Jesus Christ. He is the true leader of the church in its warfare against sin and evil. This encounter is a powerful reminder to every Christian leader and believer that we are not in charge. We are soldiers under command. Our role is to ask, 'What saith my lord unto his servant?' (Joshua 5:14) and then to obey. Victory is assured when we follow the Captain of our salvation (Hebrews 2:10)."
+  }
+},
+{
+  "id": "BP083",
+  "question": "The prostitute Rahab saved the Israelite spies because she had heard of the mighty acts of their God. When she pleads for her own life and the lives of her family, she makes a profound confession of faith about the God of Israel. What is her declaration?",
+  "options": [
+      "Joshua 2:11 - ...for the LORD your God, he is God in heaven above, and in earth beneath.",
+      "Joshua 2:11 - ...for the LORD your God, he is God in the heavens above, and on the earth below.",
+      "Joshua 2:11 - ...because the LORD your God, he is God in heaven above, and upon the earth beneath.",
+      "Joshua 2:11 - ...for Jehovah your God, he is God in heaven above, and in the earth beneath."
+  ],
+  "answer": "Joshua 2:11 - And as soon as we had heard these things, our hearts did melt, neither did there remain any more courage in any man, because of you: for the LORD your God, he is God in heaven above, and in earth beneath.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a remarkable confession of faith from a pagan woman living in a doomed city. It shows that faith is based on hearing God's works and responding to that evidence, and it demonstrates that God's grace extends to anyone, regardless of their background, who turns to Him.",
+      "Importance_of_Wording": "Rahab's confession is a statement of monotheistic faith, learned by hearing reports of the Exodus and the victories over Sihon and Og. Her declaration that the LORD (YHWH) is 'God in heaven above, and in earth beneath' acknowledges His universal sovereignty. She recognized that the God of Israel was not just another tribal deity, but the supreme ruler of all creation.",
+      "Factual_Explanation": "When the two spies entered her house in Jericho, Rahab hid them. She explained that the entire city was terrified because they had heard how the LORD had dried up the Red Sea and had given Israel victory over the Amorite kings. Based on this, she made her confession and negotiated for the safety of her family.",
+      "Theological_Meaning": "Rahab's story illustrates the principle of 'faith cometh by hearing, and hearing by the word of God' (Romans 10:17). Even a report of God's power was enough to produce saving faith in her heart, while the Israelites who saw the miracles firsthand often responded with unbelief. It is a powerful example of salvation by grace through faith.",
+      "Christ_Centered_Meaning": "Rahab is one of only four women mentioned in the genealogy of Jesus Christ in Matthew 1. This Gentile prostitute, saved by her faith, became an ancestress of the Messiah. This is a stunning demonstration of God's grace, showing that Christ's lineage and His salvation are for all people, not just the physically descended of Israel. In the 'hall of faith' in Hebrews 11, she is commended: 'By faith the harlot Rahab perished not with them that believed not, when she had received the spies with peace' (Hebrews 11:31)."
+  }
+},
+{
+  "id": "BP084",
+  "question": "After the miraculous conquest of Jericho, an Israelite named Achan violated God's command by taking the accursed thing from the city's spoils. This sin brought defeat upon the entire nation at Ai. When confronted by Joshua, what did Achan confess to taking?",
+  "options": [
+      "Joshua 7:21 - When I saw among the spoils a goodly Babylonish garment, and two hundred shekels of silver, and a wedge of gold of fifty shekels weight, then I coveted them, and took them...",
+      "Joshua 7:21 - When I saw among the plunder a beautiful robe from Babylon, and two hundred shekels of silver, and a bar of gold of fifty shekels weight, then I desired them, and took them...",
+      "Joshua 7:21 - When I saw among the spoils a beautiful Babylonian garment, and two hundred shekels of silver, and a wedge of gold of fifty shekels weight, then I wanted them, and took them...",
+      "Joshua 7:21 - When I saw in the spoils a goodly Shinar garment, and two hundred shekels of silver, and a tongue of gold of fifty shekels weight, then I coveted them, and took them..."
+  ],
+  "answer": "Joshua 7:21 - When I saw among the spoils a goodly Babylonish garment, and two hundred shekels of silver, and a wedge of gold of fifty shekels weight, then I coveted them, and took them; and, behold, they are hid in the earth in the midst of my tent, and the silver under it.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "Achan's confession details the specific items he stole, but more importantly, it reveals the process of sin, which perfectly follows the pattern of the tenth commandment and the fall of Eve: 'I saw... then I coveted... and took them.'",
+      "Importance_of_Wording": "The items are significant. A 'goodly Babylonish garment' (a robe from Shinar/Babylon) represents worldly pride and luxury. The 'silver' and 'gold' represent greed and materialism. These are the classic temptations that draw the heart away from God. His confession traces the downward spiral from the eye to the heart to the hand.",
+      "Factual_Explanation": "God had commanded that all the spoils of Jericho were 'accursed' (*herem*), meaning they were wholly devoted to the LORD, either for destruction or for His treasury. Achan's theft violated this direct command. As a result, Israel was defeated in their next battle at Ai. God revealed to Joshua that there was sin in the camp. Through a process of elimination by casting lots, Achan was identified.",
+      "Theological_Meaning": "This story teaches the principle of corporate responsibility. The sin of one individual affected the entire community and broke their fellowship with God. It is a powerful warning against the secret, cherished sin that can defile the church and hinder its progress. It also shows that sin cannot remain hidden from God and will eventually be exposed.",
+      "Christ_Centered_Meaning": "Achan's sin is a type of the hypocrisy and materialism that can infect the church. The story of Ananias and Sapphira in Acts 5 is the New Testament parallel, where a secret sin of greed brought swift judgment upon the early church. The 'goodly Babylonish garment' is a symbol of the allure of spiritual Babylon—the worldly system of pride and false worship. The believer is called to 'come out of her, my people, that ye be not partakers of her sins, and that ye receive not of her plagues' (Revelation 18:4)."
+  }
+},
+{
+  "id": "BP085",
+  "question": "At the end of his life, Joshua gathers all the tribes of Israel at Shechem and delivers a final, impassioned speech, challenging them to renew their covenant with God. What is his famous and ultimate challenge to the people regarding their allegiance?",
+  "options": [
+      "Joshua 24:15 - And if it seem evil unto you to serve the LORD, choose you this day whom ye will serve... but as for me and my house, we will serve the LORD.",
+      "Joshua 24:15 - And if it seems wrong to you to serve the LORD, choose for yourselves this day whom ye will serve... but as for me and my household, we will serve the LORD.",
+      "Joshua 24:15 - And if it seem undesirable to you to serve the LORD, choose you this day whom ye will serve... but as for me and my family, we will serve the LORD.",
+      "Joshua 24:15 - And if it seem evil unto you to worship the LORD, choose you this day whom ye will serve... but as for me and my house, we will worship the LORD."
+  ],
+  "answer": "Joshua 24:15 - And if it seem evil unto you to serve the LORD, choose you this day whom ye will serve; whether the gods which your fathers served that were on the other side of the flood, or the gods of the Amorites, in whose land ye dwell: but as for me and my house, we will serve the LORD.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is one of the most powerful calls to commitment in all of Scripture. Joshua, at the end of a long life of faithfulness, lays out the choice of allegiance in the starkest possible terms and then makes his own personal, unwavering stand.",
+      "Importance_of_Wording": "The command 'choose you this day' emphasizes the urgency and personal responsibility of the decision. Neutrality is not an option. He presents the other choices clearly: the ancestral gods from Mesopotamia or the local gods of Canaan. His final declaration, 'but as for me and my house, we will serve the LORD,' is a model of spiritual leadership, where the leader makes a personal commitment and leads his family by example.",
+      "Factual_Explanation": "Joshua recounted Israel's history, from Abraham to the conquest of Canaan, emphasizing God's faithfulness at every step. Based on this evidence, he called the people to put away all foreign gods and make a conscious, deliberate choice to serve the LORD alone. The people responded positively, vowing to serve the LORD.",
+      "Theological_Meaning": "This passage establishes the principle that faith must be a personal choice for each generation. It cannot be inherited. Every individual and every family must decide whom they will serve. Joshua's challenge has echoed down through the ages as the ultimate call to discipleship. It demands a decision that has eternal consequences.",
+      "Christ_Centered_Meaning": "Joshua, whose name is the Hebrew form of 'Jesus' (*Yehoshua*), means 'YHWH is Salvation.' As a type of Christ, he led his people into their promised rest. His final challenge is echoed by Jesus, the true Joshua: 'He that is not with me is against me' (Matthew 12:30). The choice is always before us: will we serve the gods of this world—materialism, pride, self—or will we, like Joshua, declare our undivided allegiance to the Lord Jesus Christ, leading our households in the same path? The Great Controversy is a battle for allegiance, and every person must 'choose... this day.'"
+  }
+},
+{
+  "id": "BP086",
+  "question": "The book of Judges chronicles a dark period of apostasy and moral decline in Israel, following a repeating cycle of sin, servitude, supplication, and salvation. What is the recurring phrase that summarizes the root cause of this national failure?",
+  "options": [
+      "Judges 21:25 - In those days there was no king in Israel: every man did that which was right in his own eyes.",
+      "Judges 21:25 - In those days there was no king in Israel: each man did that which was right in his own sight.",
+      "Judges 21:25 - In those days Israel had no king: every man did that which seemed right to him.",
+      "Judges 21:25 - In those days there was not a king in Israel: every man did that which was good in his own eyes."
+  ],
+  "answer": "Judges 21:25 - In those days there was no king in Israel: every man did that which was right in his own eyes.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse serves as the thematic summary and final epitaph for the entire period of the Judges. It diagnosis the spiritual and moral anarchy of the time, identifying the core problem as a rejection of divine authority.",
+      "Importance_of_Wording": "The phrase 'there was no king in Israel' has a dual meaning. On a literal level, it refers to the lack of a centralized human monarchy. On a deeper, theological level, it means they were not acknowledging the LORD as their King. The direct result was moral relativism: 'every man did that which was right in his own eyes.' When God's absolute standard is rejected, subjective human opinion becomes the only guide, leading to chaos.",
+      "Factual_Explanation": "The book of Judges describes a repeating cycle: the people would forget the LORD and worship Canaanite idols; God would allow them to be oppressed by their enemies; the people would cry out to God for help; God would raise up a 'judge' (a military and civic leader) to deliver them. After the judge died, the cycle would begin again. The book ends with this verse, explaining the underlying cause of the chaos.",
+      "Theological_Meaning": "This verse is a timeless warning about the dangers of moral relativism and the rejection of absolute truth. When society abandons the transcendent law of God as its standard, the inevitable result is anarchy and depravity. It affirms that true freedom is not doing whatever one wants, but living in joyful submission to the will of a righteous and loving King.",
+      "Christ_Centered_Meaning": "The ultimate problem in the time of the Judges was that Israel had rejected God as their true King. The people's later demand for a human king was a formal rejection of God's rule (1 Samuel 8:7). Jesus Christ came to be our King, but the world largely rejected Him, crying 'We have no king but Caesar' (John 19:15). The human heart, left to itself, will always do 'that which is right in his own eyes.' The gospel is the good news that we can enthrone Christ as the rightful King of our hearts, and by His Spirit, begin to live according to what is right in His eyes."
+  }
+},
+{
+  "id": "BP087",
+  "question": "In the time of the judges, a woman named Hannah, barren and provoked by her rival, pours out her soul in silent prayer before the Lord at the tabernacle in Shiloh. The high priest, Eli, misjudges her, but she explains her distress. What is her poignant description of her prayer?",
+  "options": [
+      "1 Samuel 1:15 - And Hannah answered and said, No, my lord, I am a woman of a sorrowful spirit: I have drunk neither wine nor strong drink, but have poured out my soul before the LORD.",
+      "1 Samuel 1:15 - And Hannah replied and said, No, my lord, I am a woman with a troubled spirit: I have drunk no wine nor strong drink, but have poured out my heart before the LORD.",
+      "1 Samuel 1:15 - And Hannah answered and said, Not so, my lord, I am a woman of a heavy spirit: I have drunk neither wine nor strong drink, but have poured out my soul unto the LORD.",
+      "1 Samuel 1:15 - And Hannah answered and said, No, my lord, I am a woman of a sad spirit: I have not drunk wine nor strong drink, but have poured out my soul before God."
+  ],
+  "answer": "1 Samuel 1:15 - And Hannah answered and said, No, my lord, I am a woman of a sorrowful spirit: I have drunk neither wine nor strong drink, but have poured out my soul before the LORD.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a classic description of deep, heartfelt, and desperate prayer. Hannah's response to Eli's false accusation models both respect for authority and profound spiritual earnestness.",
+      "Importance_of_Wording": "She describes herself as a 'woman of a sorrowful spirit,' capturing her deep anguish. Her defense, 'I have drunk neither wine nor strong drink,' corrects Eli's assumption that she was drunk. The beautiful phrase 'but have poured out my soul before the LORD' is a perfect metaphor for prayer that holds nothing back, emptying the heart of all its burdens, fears, and desires before God.",
+      "Factual_Explanation": "Hannah, one of the two wives of Elkanah, was barren and was cruelly taunted by her rival, Peninnah. During an annual pilgrimage to Shiloh, Hannah went to the tabernacle and prayed silently, her lips moving but no sound coming out. The high priest Eli saw her and accused her of being drunk. After her respectful explanation, Eli blessed her, and God answered her prayer, giving her a son, Samuel.",
+      "Theological_Meaning": "Hannah's prayer is a model for believers in distress. It was specific (she asked for a son), persistent (she prayed year after year), and sacrificial (she vowed to give the son back to the Lord). It teaches that God is attentive to the silent, desperate cries of the heart, even when human spiritual leaders may misjudge us. It shows that God honors earnest, soul-baring prayer.",
+      "Christ_Centered_Meaning": "Hannah's experience of suffering and vindication is a picture of the 'barren' soul who finds life and fruitfulness only in God. Her prayer is a type of the soul-anguish that drives us to Christ. Jesus, in the garden of Gethsemane, also 'poured out his soul unto death' (Isaiah 53:12), offering prayers 'with strong crying and tears' (Hebrews 5:7). Hannah's vow to give her long-awaited son back to God is a picture of the Father's love in giving His only begotten Son for us. Her subsequent song of praise (1 Samuel 2) is a magnificent prophecy of the gospel, celebrating God who raises the poor and humbles the proud."
+  }
+},
+{
+  "id": "BP088",
+  "question": "The boy Samuel was given to the Lord's service under the high priest Eli. In a time when divine revelation was rare, the Lord called to Samuel in the night. Unfamiliar with God's voice, Samuel ran to Eli three times. What instruction did Eli finally give Samuel on how to respond to God's call?",
+  "options": [
+      "1 Samuel 3:9 - Therefore Eli said unto Samuel, Go, lie down: and it shall be, if he call thee, that thou shalt say, Speak, LORD; for thy servant heareth.",
+      "1 Samuel 3:9 - So Eli said to Samuel, Go, lie down: and it will be, if he calls thee, that thou shalt say, Speak, LORD; for thy servant is listening.",
+      "1 Samuel 3:9 - Therefore Eli said unto Samuel, Go, lie down: and it shall be, if he call thee, that thou shalt say, Speak, LORD; for thy servant doth hear.",
+      "1 Samuel 3:9 - Therefore Eli said to Samuel, Go and lie down: and it shall be, if he calls thee, that thou must say, Speak, LORD; for thy servant heareth."
+  ],
+  "answer": "1 Samuel 3:9 - Therefore Eli said unto Samuel, Go, lie down: and it shall be, if he call thee, that thou shalt say, Speak, LORD; for thy servant heareth.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse marks the turning point in Samuel's life and the beginning of a new era of prophecy in Israel. Eli's instruction provides the model response for anyone who desires to hear from God: an attitude of reverence, submission, and readiness to listen.",
+      "Importance_of_Wording": "The prescribed response is perfect in its humility. 'Speak, LORD' is an invitation, acknowledging God's initiative. 'for thy servant heareth' expresses a submissive posture ('servant') and an attentive ear ('heareth'). It is not 'Speak, Lord, and I will give you my opinion,' but simply, 'I am listening.'",
+      "Factual_Explanation": "The word of the Lord was 'precious' (rare) in those days. God called Samuel by name in the night. Thinking it was Eli, Samuel ran to him. This happened three times before the aging priest realized it was the LORD calling the boy. He then gave Samuel these instructions for how to answer.",
+      "Theological_Meaning": "This story teaches the conditions for receiving divine revelation. Samuel was serving faithfully in the temple ('ministered before the LORD'), and he had a humble, teachable spirit. It also shows that even a flawed leader like Eli could still point someone else to God. The call of God requires a response of quiet attentiveness and a will prepared to obey.",
+      "Christ_Centered_Meaning": "Samuel's response, 'Speak, LORD; for thy servant heareth,' is the prayer of every true disciple of Christ. Jesus said, 'My sheep hear my voice, and I know them, and they follow me' (John 10:27). We hear His voice today primarily through the Scriptures, the written Word. Like Samuel, we must approach the Bible with a humble, servant's heart, ready to listen and obey. Samuel grew up to be a prophet who faithfully spoke God's word; he was a type of Christ, the ultimate Prophet, who only spoke what He heard from the Father (John 8:28)."
+  }
+},
+{
+  "id": "BP089",
+  "question": "After the Philistines captured the Ark of the Covenant, they placed it in the temple of their god, Dagon, as a trophy of war. What happened to the idol of Dagon during the night, demonstrating the absolute supremacy of the God of Israel?",
+  "options": [
+      "1 Samuel 5:4 - And when they arose early on the morrow morning, behold, Dagon was fallen upon his face to the ground before the ark of the LORD; and the head of Dagon and both the palms of his hands were cut off upon the threshold.",
+      "1 Samuel 5:4 - And when they arose early on the next morning, behold, Dagon had fallen on his face to the ground before the ark of the LORD; and the head of Dagon and both the palms of his hands were cut off on the threshold.",
+      "1 Samuel 5:4 - And when they got up early on the morrow, behold, Dagon was fallen on his face to the earth before the ark of the LORD; and the head of Dagon and both the palms of his hands were severed upon the threshold.",
+      "1 Samuel 5:4 - And when they arose early on the morrow, behold, Dagon was fallen with his face to the ground before the ark of the LORD; and the head of Dagon and both his hands were cut off upon the threshold."
+  ],
+  "answer": "1 Samuel 5:4 - And when they arose early on the morrow morning, behold, Dagon was fallen upon his face to the ground before the ark of the LORD; and the head of Dagon and both the palms of his hands were cut off upon the threshold; only the stump of Dagon was left to him.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This event is a dramatic and even humorous depiction of the powerlessness of idols before the living God. The Ark, representing God's presence, requires no army to defend its honor; it wages its own war in the heart of the enemy's temple.",
+      "Importance_of_Wording": "On the first night, Dagon simply fell on his face in a posture of worship. On the second night, the judgment was more severe: he was not only prostrate, but mutilated. The 'head' (representing intelligence) and the 'palms of his hands' (representing power) were 'cut off upon the threshold.' All that remained was the 'stump' or fishy part of the idol, utterly defeated and powerless.",
+      "Factual_Explanation": "The Philistines, after defeating Israel, brought the Ark to their capital city, Ashdod, and set it beside their chief deity, Dagon (a half-man, half-fish god). The next morning they found the idol prostrate. They set it back up. The following morning, they found it prostrate again, but this time broken and mutilated, with the significant parts lying on the threshold of the temple.",
+      "Theological_Meaning": "This is a powerful object lesson on the first and second commandments. The God of Israel will tolerate no rivals. He is not one god among many; He is the only God. The story demonstrates that idols are lifeless, foolish, and powerless things that cannot even keep themselves upright, let alone save their worshippers. The presence of God's truth, represented by the Ark containing His law, inevitably exposes and demolishes falsehood.",
+      "Christ_Centered_Meaning": "The Ark in Dagon's temple is a picture of Christ, the true presence of God, entering the domain of Satan. 'For this purpose the Son of God was manifested, that he might destroy the works of the devil' (1 John 3:8). No idol of pride, greed, or self can remain standing in the heart where Christ is enthroned. He comes to break the power and intelligence of our false gods, leaving them as useless stumps on the threshold of our lives, as He cleanses the temple of our hearts."
+  }
+},
+{
+  "id": "BP090",
+  "question": "The people of Israel, desiring to be like other nations, rejected God's direct rule and demanded a human king. Samuel the prophet was grieved, but the Lord told him to grant their request. What did God say to Samuel that revealed the true nature of the people's rejection?",
+  "options": [
+      "1 Samuel 8:7 - And the LORD said unto Samuel, Hearken unto the voice of the people in all that they say unto thee: for they have not rejected thee, but they have rejected me, that I should not reign over them.",
+      "1 Samuel 8:7 - And the LORD said to Samuel, Listen to the voice of the people in all that they say to thee: for they have not rejected thee, but they have rejected me, that I should not be king over them.",
+      "1 Samuel 8:7 - And the LORD said unto Samuel, Obey the voice of the people in all that they say to thee: for they have not rejected thee, but they have rejected me, from being king over them.",
+      "1 Samuel 8:7 - And the LORD said unto Samuel, Hearken unto the voice of the people in all that they say to thee: because they have not rejected thee, but they have rejected me, so that I should not reign over them."
+  ],
+  "answer": "1 Samuel 8:7 - And the LORD said unto Samuel, Hearken unto the voice of the people in all that they say unto thee: for they have not rejected thee, but they have rejected me, that I should not reign over them.",
+  "category": "Bible People",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a pivotal and tragic moment in Israel's history. God Himself interprets the people's political demand for a king as a personal and spiritual rejection of His own sovereignty.",
+      "Importance_of_Wording": "God comforts Samuel by clarifying that the rejection was not personal ('they have not rejected thee'). The core issue was theological: 'but they have rejected me, that I should not reign over them.' They were trading the perfect, invisible King for a flawed, visible one. They wanted a king to fight their battles and give them national prestige, failing to see that God had always been that for them.",
+      "Factual_Explanation": "When Samuel grew old, his sons, who were appointed as judges, proved to be corrupt. Using this as an excuse, the elders of Israel came to Samuel and demanded he appoint a king to rule over them 'like all the nations.' Samuel was displeased and prayed to the Lord, who then gave him this response.",
+      "Theological_Meaning": "This event demonstrates the persistent human tendency to prefer the visible over the invisible, the human over the divine. It is a desire for a form of security that can be seen and controlled, rather than trusting in God's unseen providence. God grants their request, but as Samuel warns them, it will come at a great cost: conscription, taxation, and loss of freedom. This shows that God sometimes allows us to have what we want to teach us the bitter lesson that what we want is not what is best for us.",
+      "Christ_Centered_Meaning": "The rejection of God's kingship is the central sin of humanity. This event in Israel's history was a national manifestation of this universal rebellion. It reached its climax when the people stood before the Son of God, their true King, and shouted, 'We have no king but Caesar' (John 19:15). The gospel is the good news that through the cross, Jesus has established His spiritual kingdom. He invites us to reverse Israel's ancient choice by willingly submitting to His reign in our hearts. The great controversy is ultimately a war between two kingdoms and a struggle over whom we will accept as our rightful king."
+  }
+},
+{
+  "id": "PR001",
+  "question": "In Matthew's account, what prophetic reason did the angel give to Joseph for naming the child JESUS, identifying the mission He was born to fulfill?",
+  "options": [
+      "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall govern his people in their land.",
+      "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall guide his people in all their ways.",
+      "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall save his people from their sins.",
+      "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall redeem his people from their foes."
+  ],
+  "answer": "Matthew 1:21 - And she shall bring forth a son, and thou shalt call his name JESUS: for he shall save his people from their sins.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse is the most direct answer to the contemplation. While other verses confirm His divine nature (like 'Emmanuel'), this verse explicitly states the prophetic mission embedded in His name. It defines His purpose not as political liberation or mere comfort, but as salvation from the root cause of all human misery: sin.",
+      "Importance_of_Wording": "The name 'JESUS' (Greek: Iēsous) is the Greek form of the Hebrew name 'Joshua' (Yehoshua), which means 'Yahweh is salvation.' The name itself is a prophetic declaration. The verse explains why he is to have this name: 'for he shall save his people from their sins.' The word 'from' is critical; it implies deliverance from the power and presence of sin itself, not just from the punishment for sin.",
+      "Factual_Explanation": "An angel delivered this prophetic command to Joseph in a dream, explaining the identity and mission of the child Mary was carrying. The name Jesus (Ἰησοῦς - Iesous - Strong's G2424) means 'Yahweh saves.' His mission was to 'save' (σώζω - sōzō - Strong's G4982) His people from their 'sins' (ἁμαρτία - hamartia - Strong's G266).",
+      "Theological_Meaning": "This verse establishes the central theme of the Great Controversy: God's plan to solve the sin problem. It refutes the popular but incorrect idea of a purely political messiah and defines salvation in spiritual terms. This is the foundation of the gospel that will be proclaimed to the world, a message of freedom from the guilt and dominion of sin.",
+      "Christ_Centered_Meaning": "Christ's entire life was the unfolding of this prophetic name. His teachings addressed the root of sin in the heart. His death provided the atonement for sin. His resurrection broke the power of sin. His ministry in the heavenly sanctuary now applies the benefits of His sacrifice to save us from sin. His Second Coming will be the final act of saving His people from the very presence of sin."
+  }
+},
+{
+  "id": "PR002",
+  "question": "When the Magi from the east arrived in Jerusalem, the troubled King Herod consulted the religious experts about the Messiah's origin. What specific prophecy did the chief priests and scribes cite to pinpoint the birthplace of the long-awaited ruler?",
+  "options": [
+      "Matthew 2:6 - And thou Bethlehem, in the land of Juda, art not the smallest among the leaders of Juda: for out of thee shall come a Governor, that shall save my people Israel.",
+      "Matthew 2:6 - And thou Bethlehem Ephratah, though thou be little among the thousands of Juda, yet out of thee shall he come forth unto me that is to be ruler in Israel.",
+      "Matthew 2:6 - And thou Bethlehem, in the land of Juda, art not the least among the princes of Juda: for out of thee shall come a Governor, that shall rule my people Israel.",
+      "Matthew 2:6 - And thou Bethlehem, in the land of Juda, art not the least among the princes of Juda: for out of thee shall come a King, that shall shepherd my people Israel."
+  ],
+  "answer": "Matthew 2:6 - And thou Bethlehem, in the land of Juda, art not the least among the princes of Juda: for out of thee shall come a Governor, that shall rule my people Israel.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse contains Matthew's quotation of Micah 5:2, which the religious leaders correctly identified as the prophecy foretelling the Messiah's birthplace. It demonstrates the precision of biblical prophecy and the tragic irony that those who knew the prophecies best failed to recognize their fulfillment.",
+      "Importance_of_Wording": "Matthew's wording, 'art not the least,' emphasizes the honor bestowed upon the small town. The title 'Governor' who will 'rule' (or 'shepherd') His people highlights Christ's role as the rightful King and caretaker of Israel, fulfilling the Davidic covenant. While the original prophecy in Micah uses slightly different wording, Matthew's inspired quotation captures the essence of the prophecy for his audience.",
+      "Factual_Explanation": "The chief priests and scribes, experts in the Law and the Prophets, immediately knew the answer to Herod's query. They quoted the prophet Micah, who had foretold nearly 700 years earlier that the Messiah would be born in the seemingly insignificant town of Bethlehem.",
+      "Theological_Meaning": "This event underscores the reliability of God's prophetic word. The exact location of the Messiah's birth was known centuries in advance. It also serves as a solemn warning that mere intellectual knowledge of prophecy is not enough. The scribes knew where to find the king, but it was the Gentile Magi who sought Him to worship Him. One can be an expert in prophetic truth and still be lost.",
+      "Christ_Centered_Meaning": "The humility of Christ's kingdom is foreshadowed here. The great Governor and Ruler comes not from the capital city of Jerusalem, but from the humble village of Bethlehem, the 'house of bread.' This prophecy of His first advent gives believers confidence in the prophecies of His second advent. Just as surely as He came from Bethlehem to save, He will return from heaven to rule."
+  }
+},
+{
+  "id": "PR003",
+  "question": "John the Baptist began his ministry as a powerful voice of repentance, preparing the nation for the Messiah's arrival. Matthew's gospel identifies him as the direct fulfillment of a specific prophecy from Isaiah. What was this prophecy that described John's mission?",
+  "options": [
+      "Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The sound of one crying in the wilderness, Prepare ye the way of the Lord, make his paths plain.",
+      "Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one calling in the wilderness, Prepare the way of the Lord, make the highways straight for him.",
+      "Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight.",
+      "Matthew 3:3 - For this is he that was spoken of by the prophet Isaiah, saying, The voice of one that crieth in the desert, Make ready the way of the Lord, make his paths level."
+  ],
+  "answer": "Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse explicitly connects the historical figure of John the Baptist with the prophetic forerunner described in Isaiah 40:3. It defines his ministry not as an end in itself, but as a preparatory work for a greater One to follow.",
+      "Importance_of_Wording": "'The voice of one crying' emphasizes the message, not the man. The location, 'in the wilderness,' signifies a call away from the corrupt religious centers to a place of spiritual reality. The command 'Prepare ye the way of the Lord, make his paths straight' is a metaphor for spiritual renewal. It means to remove the obstacles of sin, pride, and hypocrisy from the heart so that the Messiah can enter.",
+      "Factual_Explanation": "Matthew identifies John the Baptist as the fulfillment of Isaiah's prophecy. John's ascetic lifestyle, his location in the Judean wilderness, and his powerful call to repentance were all in perfect accord with the prophetic description of the Messiah's forerunner.",
+      "Theological_Meaning": "This fulfills the prophecy in Malachi 3:1 and 4:5 of an 'Elijah' figure who would come to prepare the way. John's work was a call to reformation, a message of true heart-work over mere outward ceremony. This same preparatory work is needed in the hearts of believers before Christ's Second Coming. There must be a 'straightening' of character and a putting away of sin in preparation to meet the Lord.",
+      "Christ_Centered_Meaning": "John the Baptist is the greatest of the Old Covenant prophets because he was the first to point directly to the Lamb of God who was present. His entire mission was to decrease so that Christ could increase (John 3:30). In a similar way, the final gospel message to the world, the Three Angels' Messages of Revelation 14, is a global 'voice crying' to prepare the way for the second coming of the Lord. It is a call to 'Fear God, and give glory to him' and to worship the Creator, making the world's 'paths straight' for the return of the King."
+  }
+},
+{
+  "id": "PR004",
+  "question": "In the Sermon on the Mount, Jesus makes a profound statement about His relationship to the Old Testament Scriptures, specifically the Law and the Prophets. What did He declare was His ultimate purpose concerning them, refuting any idea that He came to abolish them?",
+  "options": [
+      "Matthew 5:17 - Do not think that I have come to destroy the law, or the prophets: I am not come to destroy, but to make perfect.",
+      "Matthew 5:17 - Think not that I am come to annul the law, or the prophets: I am not come to annul, but to establish.",
+      "Matthew 5:17 - Think not that I am come to destroy the law, or the prophets: I am not come to destroy, but to fulfil.",
+      "Matthew 5:17 - Suppose not that I am come to abolish the law, or the prophets: I am not come to abolish, but to complete."
+  ],
+  "answer": "Matthew 5:17 - Think not that I am come to destroy the law, or the prophets: I am not come to destroy, but to fulfil.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a foundational declaration for understanding the relationship between the Old and New Covenants. Jesus states unequivocally that His mission is one of fulfillment, not abrogation. This has massive prophetic implications for the eternal nature of God's moral law.",
+      "Importance_of_Wording": "To 'destroy' (*kataluō*) means to tear down or dissolve. To 'fulfil' (*plēroō*) means to fill up, to complete, or to bring to its full intended meaning. Jesus came to fill the law with meaning by His perfect life, to fulfill its prophetic types by His sacrificial death, and to empower His followers to obey its principles through His Spirit.",
+      "Factual_Explanation": "In the introduction to the main body of the Sermon on the Mount, Jesus addressed a likely misunderstanding. As He was about to give a deeper, spiritual interpretation of the commandments, some might have thought He was setting aside the written law. He preemptively corrected this, stating His purpose was to uphold and perfectly embody it.",
+      "Theological_Meaning": "This verse is a powerful affirmation of the perpetuity of God's moral law, the Ten Commandments. Since Christ did not come to destroy it, it remains the eternal standard of righteousness for all people. This includes the fourth commandment regarding the seventh-day Sabbath, which, as part of the law, was also fulfilled—filled with meaning—by Christ, the Lord of the Sabbath, not destroyed. The idea that the law was abolished at the cross is a direct contradiction of Christ's own words here.",
+      "Christ_Centered_Meaning": "Christ fulfilled the law in multiple ways. He fulfilled its moral demands with His sinless life. He fulfilled its ceremonial types (sacrifices, priesthood) in His role as the Lamb of God and our great High Priest. He fulfilled its prophecies concerning the Messiah. The law points to our need for a Savior, and Christ is the one who meets that need. He enables believers to fulfill the 'righteousness of the law' as they walk according to the Spirit (Romans 8:4)."
+  }
+},
+{
+  "id": "PR005",
+  "question": "Continuing his Sermon on the Mount, Jesus makes a prophetic declaration about the enduring nature of God's law, linking its permanence to the very existence of the created universe. What is this powerful statement of the law's immutability?",
+  "options": [
+      "Matthew 5:18 - For verily I say unto you, Till heaven and earth pass, one iota or one dot shall in no wise pass from the law, till all be accomplished.",
+      "Matthew 5:18 - For verily I say unto you, Until heaven and earth disappear, not the smallest letter or the least stroke of a pen shall by any means pass from the law, until everything be fulfilled.",
+      "Matthew 5:18 - For truly I say to you, Until heaven and earth pass away, not one jot or one tittle shall by any means pass from the law, until all is accomplished.",
+      "Matthew 5:18 - For verily I say unto you, Till heaven and earth pass, one jot or one tittle shall in no wise pass from the law, till all be fulfilled."
+  ],
+  "answer": "Matthew 5:18 - For verily I say unto you, Till heaven and earth pass, one jot or one tittle shall in no wise pass from the law, till all be fulfilled.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "Following His statement about not destroying the law, Jesus gives this prophetic guarantee of its permanence. It is one of the strongest statements in all of Scripture about the eternal nature of God's revealed will.",
+      "Importance_of_Wording": "A 'jot' (*iota*) was the smallest letter of the Hebrew alphabet. A 'tittle' was a tiny stroke or decorative mark on a letter. Jesus used this hyperbole to express that not even the smallest, most insignificant part of the law would be abolished. The law is as permanent as 'heaven and earth.' The final clause, 'till all be fulfilled,' refers not just to prophetic fulfillment, but to the full accomplishment of God's entire plan of salvation, which culminates in the new heaven and new earth.",
+      "Factual_Explanation": "Jesus uses the strongest possible language to affirm the law's authority and permanence. His statement would have been shocking to those who treated the law casually or thought the Messiah would set it aside. He declares that His Father's law is as unchanging as His own character.",
+      "Theological_Meaning": "This verse is a cornerstone for the doctrine of the law's perpetuity. It refutes any theology that claims the Ten Commandments, including the Sabbath commandment, were abolished at the cross. Since heaven and earth have not yet passed away, the law remains the universal standard of righteousness. In the end-time conflict depicted in Revelation, God's faithful people are identified by their loyalty to this unchanging law: they 'keep the commandments of God, and have the testimony of Jesus Christ' (Revelation 12:17).",
+      "Christ_Centered_Meaning": "The law is a reflection of the character of God. Since God's character is eternal, His law must also be eternal. Christ's life and death did not abolish the law; they magnified it and made its honor plain (Isaiah 42:21). The cross demonstrates how seriously God takes the breaking of His law—the penalty had to be paid. The plan of salvation does not do away with the law; it provides a way for sinners to be forgiven for breaking it and empowered to keep it through the grace of Christ."
+  }
+},
+{
+  "id": "PR006",
+  "question": "In one of His most famous parables, Jesus tells of a sower who casts seed on different types of soil, predicting the various responses the gospel message would receive. What did He say the 'seed' represents in this prophetic parable?",
+  "options": [
+      "Matthew 13:19 - When a person heareth the word of the kingdom, and perceives it not, then cometh the wicked one, and taketh away that which was sown in his heart.",
+      "Matthew 13:19 - When any one heareth the message of the kingdom, and understandeth it not, then cometh the devil, and catcheth away that which was sown in his soul.",
+      "Matthew 13:19 - When any one heareth the word of the kingdom, and understandeth it not, then cometh the wicked one, and catcheth away that which was sown in his heart.",
+      "Matthew 13:19 - When any one listens to the message of the kingdom, and comprehends it not, then comes the evil one, and snatches away that which was planted in his heart."
+  ],
+  "answer": "Matthew 13:19 - When any one heareth the word of the kingdom, and understandeth it not, then cometh the wicked one, and catcheth away that which was sown in his heart.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "In explaining the parable, Jesus explicitly identifies the seed. This verse explains the first type of soil—the wayside—and defines the 'seed' as the foundational element of His kingdom: the Word.",
+      "Importance_of_Wording": "The 'seed' is identified as 'the word of the kingdom.' This is the gospel message, the good news about God's reign. The key problem for the wayside hearer is that they 'understandeth it not.' This lack of spiritual perception or reception leaves the Word vulnerable. The action of the 'wicked one' is to 'catcheth away' or snatch it, preventing it from taking root. This highlights the reality of a spiritual enemy actively working to thwart the gospel.",
+      "Factual_Explanation": "Jesus told the parable of the sower to a large crowd. Later, in private, His disciples asked for an explanation. He then interpreted the elements of the parable for them. The sower is Christ and His messengers, the seed is the Word, and the different soils represent the different conditions of the human heart.",
+      "Theological_Meaning": "This parable is a prophecy of how the gospel will be received throughout the Christian era. It foretells that not everyone who hears the message will be saved. The outcome depends on the condition of the heart and the response of the hearer. It is a vital diagnostic tool for self-examination and a realistic guide for those who share the gospel. It also reveals the existence of the Great Controversy—a battle for the heart between Christ (the Sower) and Satan (the wicked one).",
+      "Christ_Centered_Meaning": "Christ Himself is the living Word (John 1:1). The 'word of the kingdom' is the message about Him and His saving work. The success of His kingdom depends on His Word being received and nurtured in the human heart. This parable prophesies the challenges His church will face in proclaiming the final gospel message—the 'everlasting gospel' of Revelation 14—to a world with hardened, stony, and thorny hearts. Yet, it also promises that there will be 'good ground' that produces an abundant harvest."
+  }
+},
+{
+  "id": "PR007",
+  "question": "Jesus told a prophetic parable about a man who sowed good seed in his field, but an enemy came and sowed tares among the wheat. The servants asked if they should root out the tares. What was the master's reply, foretelling the mixed state of the church until the final judgment?",
+  "options": [
+      "Matthew 13:29-30 - But he said, No; lest while ye gather up the tares, ye should root up the wheat with them. Let them both grow together until the harvest.",
+      "Matthew 13:29-30 - But he said, Nay; lest when ye gather up the tares, ye uproot also the wheat with them. Let both grow together until the time of harvest.",
+      "Matthew 13:29-30 - But he said, No; lest while ye pull up the tares, ye root up also the wheat with them. Permit both to grow together until the harvest.",
+      "Matthew 13:29-30 - But he said, Nay; lest while ye gather up the tares, ye root up also the wheat with them. Let both grow together until the harvest: and in the time of harvest I will say to the reapers, Gather ye together first the tares, and bind them in bundles to be burned: but gather the wheat into my barn."
+  ],
+  "answer": "Matthew 13:29-30 - But he said, Nay; lest while ye gather up the tares, ye root up also the wheat with them. Let both grow together until the harvest: and in the time of harvest I will say to the reapers, Gather ye together first the tares, and bind them in bundles to be burned: but gather the wheat into my barn.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This parable directly addresses the problem of evil and hypocrisy within the visible church. The master's command is a prophecy that the church on earth will be a mixed company of true and false believers until the end of the age.",
+      "Importance_of_Wording": "The master's 'Nay' is a firm prohibition against premature, humanly-administered judgment. The reason is practical and merciful: 'lest... ye root up also the wheat.' Humans cannot perfectly read the heart and are liable to make mistakes. The timing is explicit: 'Let both grow together until the harvest.' The 'harvest' is the designated time for separation, and it will be conducted by the 'reapers' (angels), not the servants (church members).",
+      "Factual_Explanation": "Jesus explained this parable, stating that the sower is the Son of Man, the field is the world, the good seed are the children of the kingdom, and the tares are the children of the wicked one. The enemy who sows them is the devil, the harvest is the end of the world, and the reapers are the angels (Matthew 13:37-39).",
+      "Theological_Meaning": "This parable is a prophecy that forbids persecuting or excommunicating those suspected of being false believers, except in cases of open sin. It teaches patience and trust in God's ultimate judgment. It explains why evil is permitted to exist alongside good within the church. The final separation is a divine, not human, prerogative. This has profound implications for understanding the antitypical Day of Atonement, or investigative judgment, which is a work of heavenly, not earthly, tribunals.",
+      "Christ_Centered_Meaning": "Christ is the Lord of the harvest. He knows who are His ('the Lord knoweth them that are his,' 2 Timothy 2:19). This parable prophesies the final judgment at the end of the age, which culminates at the Second Coming. At that time, Christ will send His angels to make the final, perfect separation. The tares will be gathered for destruction, and the wheat—the righteous—will be gathered into the 'barn,' which represents the kingdom of heaven. It is a promise of ultimate justice and vindication for the true children of God."
+  }
+},
+{
+  "id": "PR008",
+  "question": "After the feeding of the five thousand, Jesus delivered a profound discourse, prophesying of a true, life-giving bread from heaven. What did He declare Himself to be, fulfilling the type of the manna in the wilderness?",
+  "options": [
+      "John 6:35 - And Jesus said unto them, I am the bread of life: whoever cometh to me shall not hunger; and whoever believeth on me shall not thirst.",
+      "John 6:35 - And Jesus said unto them, I am the living bread: he that cometh to me shall never hunger; and he that believeth on me shall never thirst.",
+      "John 6:35 - And Jesus said unto them, I am the bread of life: he that cometh to me shall never hunger; and he that believeth on me shall never thirst.",
+      "John 6:35 - And Jesus said to them, I am the bread of life: he who comes to me shall not hunger; and he who believes in me shall not thirst."
+  ],
+  "answer": "John 6:35 - And Jesus said unto them, I am the bread of life: he that cometh to me shall never hunger; and he that believeth on me shall never thirst.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is one of the great 'I AM' statements in John's Gospel. Jesus takes the historical type of manna, which the Jews revered, and declares Himself to be its prophetic fulfillment. He is the true, spiritual sustenance from heaven.",
+      "Importance_of_Wording": "'I am' is the divine name, a claim to deity. 'The bread of life' identifies Him as the essential nourishment for the soul. The promise is absolute: 'shall never hunger' and 'shall never thirst.' This speaks of a complete and permanent satisfaction of spiritual longing that can only be found in a relationship with Him.",
+      "Factual_Explanation": "The crowd, having been miraculously fed, followed Jesus, seeking more physical bread. Jesus redirected their focus from the physical to the spiritual, explaining that the manna their ancestors ate in the wilderness was only a temporary provision. He then made this profound declaration, identifying Himself as the true bread that gives eternal life.",
+      "Theological_Meaning": "This teaching is central to the doctrine of salvation. It shows that eternal life is not a reward to be earned, but a gift to be received by partaking of Christ through faith. Just as physical bread must be eaten to sustain physical life, Christ must be 'eaten'—His teachings assimilated, His sacrifice accepted, His life received into ours—to have spiritual life. This points to the need for a daily, personal connection with Christ through prayer and the study of His Word, our spiritual food.",
+      "Christ_Centered_Meaning": "The manna in the wilderness was a prophetic type. It came from heaven, it was a mystery ('What is it?'), it was given freely, and it had to be gathered daily. Jesus fulfills all these types. He came from heaven, His divine-human nature is a mystery, His salvation is a free gift, and we must come to Him for spiritual nourishment daily. This is the essence of the new covenant life."
+  }
+},
+{
+  "id": "PR009",
+  "question": "When some of the religious leaders challenged Jesus' authority, He made a stunning prophetic claim about His own eternal pre-existence, using the divine name revealed to Moses. What was this declaration that caused the Jews to take up stones against Him?",
+  "options": [
+      "John 8:58 - Jesus said unto them, Verily, verily, I declare unto you, Before Abraham was, I exist.",
+      "John 8:58 - Jesus said unto them, Verily, verily, I say unto you, Before Abraham existed, I am.",
+      "John 8:58 - Jesus said unto them, Verily, verily, I say unto you, Before Abraham was, I am.",
+      "John 8:58 - Jesus said to them, Truly, truly, I say to you, Before Abraham was born, I am."
+  ],
+  "answer": "John 8:58 - Jesus said unto them, Verily, verily, I say unto you, Before Abraham was, I am.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is one of the clearest claims to full deity made by Jesus in the Gospels. He doesn't just claim to have existed before Abraham; He claims the timeless, eternal existence of God Himself, fulfilling the prophecies of a divine Messiah.",
+      "Importance_of_Wording": "The contrast in verbs is crucial. He says 'Before Abraham *was*' (Greek: *genesthai*, meaning 'came to be' or 'was born'), referring to Abraham's historical origin. But He says of Himself, 'I *am*' (Greek: *egō eimi*). He did not say 'I was.' He used the timeless present tense, the very name of God revealed at the burning bush ('I AM THAT I AM,' Exodus 3:14), claiming eternal self-existence.",
+      "Factual_Explanation": "During a heated debate, the Jewish leaders mocked Jesus' claim to have seen Abraham. Jesus responded with this unequivocal statement of His eternal pre-existence and deity. The leaders understood His claim perfectly, which is why their immediate reaction was to pick up stones to execute Him for blasphemy.",
+      "Theological_Meaning": "This verse is a cornerstone of the doctrine of Christ's divinity. It affirms that Jesus is not a created being, not even the highest angel, but is the eternal God, co-equal with the Father. The identity of the Savior as the eternal 'I AM' is essential to His power to save. Only the eternal Lawgiver could die to satisfy the claims of His own law. Only the self-existent one could lay down His life and take it up again.",
+      "Christ_Centered_Meaning": "Jesus is the fulfillment of all the 'I AM' declarations of the Old Testament God. He is the I AM who met Moses, the I AM who guided Israel, and the I AM who promised salvation. His claim here undergirds all His other 'I AM' statements in John (the bread of life, the light of the world, the resurrection, etc.). He is the eternal God who entered human history to become our Savior."
+  }
+},
+{
+  "id": "PR010",
+  "question": "In His great discourse on the good shepherd, Jesus makes a prophetic promise concerning other sheep not of the Israelite fold, foretelling the future inclusion of the Gentiles into His one universal church. What is this prophecy of the unified flock?",
+  "options": [
+      "John 10:16 - And other sheep I have, which are not of this fold: them also I must lead, and they shall hear my voice; and there shall be one church, and one shepherd.",
+      "John 10:16 - And other sheep I have, which are not of this flock: them also I must gather, and they shall listen to my voice; and there shall be one flock, and one shepherd.",
+      "John 10:16 - And other sheep I have, which are not of this fold: them also I must bring, and they shall hear my voice; and there shall be one fold, and one shepherd.",
+      "John 10:16 - And different sheep I have, which are not of this pen: them also I must bring, and they will hear my voice; and there shall be one flock, and one shepherd."
+  ],
+  "answer": "John 10:16 - And other sheep I have, which are not of this fold: them also I must bring, and they shall hear my voice; and there shall be one fold, and one shepherd.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a key missionary prophecy from Jesus Himself. He looks beyond His immediate Jewish audience and foretells the creation of a new, unified body of believers drawn from all nations of the world.",
+      "Importance_of_Wording": "'This fold' refers to the nation of Israel. The 'other sheep' are the Gentiles. The verb 'I must bring' expresses a divine necessity; it is a core part of His mission. The result is prophetic: 'they shall hear my voice,' and the creation of 'one fold, and one shepherd.' The KJV's 'one fold' is better translated as 'one flock,' emphasizing a unified group of followers, not necessarily one single organizational structure.",
+      "Factual_Explanation": "Jesus was teaching the religious leaders using the metaphor of a shepherd and his sheep. He contrasted Himself, the true shepherd who enters by the door, with the false shepherds (thieves and robbers). He then expanded His vision beyond Israel to include a global flock.",
+      "Theological_Meaning": "This prophecy demolishes ethnic and national barriers to salvation. It foretells the breaking down of the 'middle wall of partition' between Jew and Gentile (Ephesians 2:14). The church of Jesus Christ is to be a universal body, united not by bloodline or geography, but by hearing and responding to the voice of the one true Shepherd. This is a prophecy of the great gospel commission to 'all nations.'",
+      "Christ_Centered_Meaning": "Christ is the one Shepherd who lays down His life for all the sheep, both Jew and Gentile. The fulfillment of this prophecy began after Pentecost, with the ministry of Peter to Cornelius and the missionary journeys of Paul. It continues today as the 'everlasting gospel' is proclaimed to 'every nation, and kindred, and tongue, and people' (Revelation 14:6), gathering the final flock before the Shepherd's return. All who hear His voice and follow Him belong to this one, unified body, regardless of their background."
+  }
+},
+{
+  "id": "PR011",
+  "question": "Just before raising Lazarus from the dead, Jesus made one of His most profound prophetic declarations to Martha, defining His own identity as the ultimate conqueror of death. What is this climactic 'I AM' statement?",
+  "options": [
+      "John 11:25 - Jesus said unto her, I am the resurrection, and the source of life: he that believeth in me, though he were dead, yet shall he live again.",
+      "John 11:25 - Jesus said unto her, I am the one who resurrects, and the life: he that believeth in me, though he were dead, yet shall he be alive.",
+      "John 11:25 - Jesus said unto her, I am the resurrection, and the life: he that believeth in me, though he were dead, yet shall he live.",
+      "John 11:25 - Jesus said to her, I am the resurrection, and the life: he who believes in me, though he die, yet shall he live."
+  ],
+  "answer": "John 11:25 - Jesus said unto her, I am the resurrection, and the life: he that believeth in me, though he were dead, yet shall he live:",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is Jesus' ultimate prophecy against the power of the grave. He doesn't just say He *can* resurrect people; He declares that He *IS* the resurrection. He embodies the very power that defeats death.",
+      "Importance_of_Wording": "The claim 'I am the resurrection, and the life' is comprehensive. 'Resurrection' is the promise for the believer who has died. 'Life' is the promise for the believer who is still living. The promise 'though he were dead, yet shall he live' is a direct prophecy of the future bodily resurrection of the saints. The subsequent verse 'And whosoever liveth and believeth in me shall never die' prophesies that the final generation of believers will be translated without seeing death.",
+      "Factual_Explanation": "Martha expressed her faith that her brother Lazarus would rise again 'in the resurrection at the last day.' Jesus corrected her by bringing that future hope into the present reality of His own person. He is not just the agent of a future event; He is the source and embodiment of that power right now. He then proceeded to demonstrate this by calling Lazarus from the tomb.",
+      "Theological_Meaning": "This verse is the Christian's ultimate hope and the definitive answer to the state of the dead. It refutes the idea of an immortal soul that goes to heaven immediately at death. Instead, it places the hope for life after death squarely on the event of the resurrection, which is caused by Christ Himself. Death is a sleep from which the Life-giver will awaken His people.",
+      "Christ_Centered_Meaning": "Christ is the conqueror of death. The raising of Lazarus was a prophetic preview of His own resurrection, which is the 'firstfruits' of all who have fallen asleep in Him (1 Corinthians 15:20). Because He is the Resurrection and the Life, His Second Coming will be the moment of the great resurrection, when 'the dead in Christ shall rise first' (1 Thessalonians 4:16). This statement is the foundation of our hope for reunion with loved ones and for eternal life."
+  }
+},
+{
+  "id": "PR012",
+  "question": "On the night of His betrayal, Jesus prepared His disciples for His departure by prophesying His return to take them to a place He would prepare. What is this cherished promise of the Second Coming?",
+  "options": [
+      "John 14:2-3 - In my Father's house are many abodes... I go to prepare a place for you. And if I go and prepare a place for you, I will return again, and receive you to myself; that where I am, there ye may be also.",
+      "John 14:2-3 - In my Father's dwelling are many mansions... I go to prepare a place for you. And when I go and prepare a place for you, I will come again, and gather you unto myself; that where I am, there ye may be also.",
+      "John 14:2-3 - In my Father's house are many mansions... I go to prepare a place for you. And if I go and prepare a place for you, I will come again, and receive you unto myself; that where I am, there ye may be also.",
+      "John 14:2-3 - In my Father's house are many rooms... I go to make ready a place for you. And if I go and make ready a place for you, I will return, and take you to myself; that where I am, there ye may be also."
+  ],
+  "answer": "John 14:2-3 - In my Father's house are many mansions: if it were not so, I would have told you. I go to prepare a place for you. And if I go and prepare a place for you, I will come again, and receive you unto myself; that where I am, there ye may be also.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "Known as the 'blessed hope,' this is one of the most direct and personal prophecies from Jesus about His second advent. It outlines the sequence of events: His departure, His preparatory work, and His personal return.",
+      "Importance_of_Wording": "The phrase 'I will come again' is a definitive promise of a literal, personal return. The purpose is 'to receive you unto myself,' highlighting the personal reunion between Christ and His people. The ultimate goal is co-location and fellowship: 'that where I am, there ye may be also.' The preparation of a 'place' refers not only to the heavenly city but also to His work as High Priest in the heavenly sanctuary, preparing a people to inhabit it.",
+      "Factual_Explanation": "In the upper room, Jesus' disciples were filled with sorrow and confusion about His impending death and departure. Jesus comforted them with this prophetic promise, shifting their focus from the pain of His departure to the joy of His return.",
+      "Theological_Meaning": "This is the foundational prophecy for the doctrine of the Second Coming. It promises a literal, visible return of Christ to gather His church. This event is the great climax of the plan of salvation, the moment when the saints are delivered from a world of sin and taken to their eternal home. It is the hope that has sustained believers through centuries of trial and persecution.",
+      "Christ_Centered_Meaning": "Christ's promise is twofold. First, 'I go to prepare a place for you.' This points to His ascension and His ongoing intercessory ministry as our High Priest in the heavenly sanctuary, making atonement and preparing our individual cases for the kingdom. Second, 'I will come again.' This is the consummation of His saving work. His first coming was to purchase our salvation; His second coming is to bring us into the full possession of it. This promise is the believer's ultimate hope and motivation for holy living."
+  }
+},
+{
+  "id": "PR013",
+  "question": "Jesus continued His final discourse by prophesying the coming of another Comforter who would abide with the disciples forever, guiding them into all truth. What did Jesus identify this Comforter to be?",
+  "options": [
+      "John 14:16-17 - And I will entreat the Father, and he shall give you another Comforter, that he may remain with you for ever; Even the Spirit of truth...",
+      "John 14:16-17 - And I will pray the Father, and he shall give you a different Comforter, that he may abide with you always; Even the Holy Spirit of truth...",
+      "John 14:16-17 - And I will pray the Father, and he shall give you another Comforter, that he may abide with you for ever; Even the Spirit of truth...",
+      "John 14:16-17 - And I will ask the Father, and he will give you another Helper, that he may be with you for ever; Even the Spirit of truth..."
+  ],
+  "answer": "John 14:16-17 - And I will pray the Father, and he shall give you another Comforter, that he may abide with you for ever; Even the Spirit of truth; whom the world cannot receive, because it seeth him not, neither knoweth him: but ye know him; for he dwelleth with you, and shall be in you.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a pivotal prophecy foretelling the dispensation of the Holy Spirit, which would begin at Pentecost. Jesus promised that His followers would not be left as orphans but would receive the abiding presence of God through the Spirit.",
+      "Importance_of_Wording": "'Another Comforter' (Greek: *allos parakletos*) means another of the same kind, not a different kind. The Holy Spirit would continue the same work as Jesus. A *parakletos* is one called alongside to help—a comforter, advocate, and counselor. He is identified as 'the Spirit of truth,' highlighting His work of guiding the church into a correct understanding of God's Word. The prophecy that He 'dwelleth with you, and shall be in you' foretold a new, more intimate indwelling of the divine presence.",
+      "Factual_Explanation": "To comfort His disciples about His departure, Jesus prophesied the coming of His successor and representative on earth, the Holy Spirit. This was a promise that His presence would be with them in a new and more powerful way after His ascension.",
+      "Theological_Meaning": "This prophecy is the foundation for the New Testament understanding of the Holy Spirit's work. The Spirit is not an impersonal force but a divine Person, a Comforter 'like Jesus.' His work is to convict of sin, guide into truth, and empower believers for witness. The coming of the Spirit at Pentecost was the inauguration of the final phase of God's work on earth before the return of Christ.",
+      "Christ_Centered_Meaning": "The Holy Spirit's primary mission is to glorify Christ (John 16:14). He does not speak of Himself but takes the things of Christ and reveals them to us. He is the one who makes Christ's presence real in the believer's life. He is the agent of the new birth and the one who writes God's law upon the heart in the new covenant. The 'Spirit of truth' is especially vital in the last days, to protect God's people from the powerful delusions and false spirits that will permeate the world."
+  }
+},
+{
+  "id": "PR014",
+  "question": "Jesus prophesied to His disciples that in the future, a time of intense persecution would come when those who harmed them would believe they were actually serving God. What is this chilling prophecy of religiously motivated persecution?",
+  "options": [
+      "John 16:2 - They shall expel you from the synagogues: yea, the time is coming, that whosoever puts you to death will think that he doeth God service.",
+      "John 16:2 - They shall cast you out of the synagogues: yea, the time cometh, that whosoever killeth you will think that he doeth God a favour.",
+      "John 16:2 - They shall put you out of the synagogues: yea, the time cometh, that whosoever killeth you will think that he doeth God service.",
+      "John 16:2 - They will put you out of the synagogues: yea, the hour is coming, that whosoever murders you will think that he offers God service."
+  ],
+  "answer": "John 16:2 - They shall put you out of the synagogues: yea, the time cometh, that whosoever killeth you will think that he doeth God service.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a sobering prophecy that foretells the nature of persecution against Christ's true followers throughout history. It reveals that the most dangerous persecution often comes not from atheists, but from a misguided and zealous false religion.",
+      "Importance_of_Wording": "'They shall put you out of the synagogues' refers to excommunication, being cut off from one's religious community. The prophecy intensifies: 'whosoever killeth you will think that he doeth God service.' This is the ultimate deception, where murdering a true child of God is seen as a righteous act of worship. The reason given in the next verse is 'they have not known the Father, nor me.'",
+      "Factual_Explanation": "Jesus was preparing His disciples for the intense opposition they would face after His departure. He prophesied that their loyalty to Him would lead to rejection by the established religious systems and even to martyrdom at the hands of those who sincerely, but wrongly, believed they were defending God.",
+      "Theological_Meaning": "This prophecy was fulfilled in the life of the Apostle Paul before his conversion, who 'verily thought with myself, that I ought to do many things contrary to the name of Jesus of Nazareth' (Acts 26:9). It was fulfilled during the Dark Ages, when millions were persecuted and martyred by a religio-political power that claimed to be acting for God. It has profound end-time relevance, as Revelation 13 describes a global, religious power that will enforce false worship and cause those who refuse to be killed.",
+      "Christ_Centered_Meaning": "This prophecy reveals the terrible consequences of rejecting Christ as the sole revealer of the Father. Any religious system that does not have a true knowledge of the character of Christ is capable of becoming a persecuting power. The final test for God's people will be one of worship—loyalty to the commandments of God and the faith of Jesus, versus loyalty to the commandments of men enforced by a deceptive religious authority. This prophecy is a call to ensure our faith is founded on a true knowledge of God, not on human tradition."
+  }
+},
+{
+  "id": "PR015",
+  "question": "In his Gospel, Mark begins by identifying Jesus not just as the Messiah, but by a title that prophesies His divine nature from the very first verse. What is the opening declaration of Mark's Gospel?",
+  "options": [
+      "Mark 1:1 - The commencement of the gospel of Jesus Christ, the Only Begotten Son of God.",
+      "Mark 1:1 - The beginning of the good news of Jesus Christ, the Son of the Highest.",
+      "Mark 1:1 - The beginning of the gospel of Jesus Christ, the Son of God.",
+      "Mark 1:1 - The start of the gospel of Jesus Christ, the Son of God."
+  ],
+  "answer": "Mark 1:1 - The beginning of the gospel of Jesus Christ, the Son of God.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This opening sentence is a thesis statement for the entire book. It's a prophetic declaration that the story to follow is not just about a great teacher or prophet, but about the divine Son of God, fulfilling the prophecies of a divine Messiah.",
+      "Importance_of_Wording": "'The beginning' suggests that the Gospel story doesn't end with the book, but continues in the lives of believers. 'Gospel' means 'good news.' The titles are crucial: 'Jesus' is His human name, 'Christ' (the Anointed One/Messiah) is His official title, and 'the Son of God' is the declaration of His divine nature and relationship to the Father.",
+      "Factual_Explanation": "Unlike Matthew who begins with a genealogy or Luke who begins with historical context, Mark's Gospel starts with this abrupt, powerful, and direct theological and prophetic claim. The entire book is then presented as evidence to support this opening statement.",
+      "Theological_Meaning": "This verse fulfills prophecies like Psalm 2:7, 'Thou art my Son; this day have I begotten thee.' It sets the stage for the central conflict of the gospel: the clash between the claims of the Son of God and the unbelief of the world. It frames the entire narrative as a revelation of God in human flesh.",
+      "Christ_Centered_Meaning": "The title 'Son of God' is the foundation of our salvation. Because He is divine, His life has infinite value, and His death can atone for the sins of the whole world. Because He is the Son, He can perfectly reveal the character of the Father. Mark's Gospel, with its emphasis on Christ's power and action, is a continuous demonstration of what it means for the 'Son of God' to be at work in the world."
+  }
+},
+{
+  "id": "PR016",
+  "question": "At Jesus' baptism by John, a voice from heaven made a prophetic declaration, confirming Jesus' identity and formally anointing Him for His messianic mission. What did the voice from heaven say?",
+  "options": [
+      "Mark 1:11 - And there came a voice from heaven, saying, This is my beloved Son, in whom I am well pleased.",
+      "Mark 1:11 - And a voice came from heaven, which said, Thou art my precious Son, in whom I am well pleased.",
+      "Mark 1:11 - And there came a voice from heaven, saying, Thou art my beloved Son, in whom I am well pleased.",
+      "Mark 1:11 - And there came a voice out of heaven, saying, Thou art my beloved Son, in thee I am well pleased."
+  ],
+  "answer": "Mark 1:11 - And there came a voice from heaven, saying, Thou art my beloved Son, in whom I am well pleased.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the divine inauguration of Christ's public ministry. The Father's audible voice from heaven is a direct prophetic testimony, fulfilling Old Testament prophecies and confirming Jesus' unique status as the Messiah.",
+      "Importance_of_Wording": "The declaration is personal and direct: 'Thou art...' not 'This is...' (as in Matthew's account, which is directed to the crowd). This is the Father speaking to the Son. 'My beloved Son' echoes the royal language of Psalm 2:7. 'in whom I am well pleased' echoes the prophecy of the suffering servant in Isaiah 42:1, 'mine elect, in whom my soul delighteth.' It prophetically links His identity as Son with His mission as the Servant.",
+      "Factual_Explanation": "Immediately after Jesus was baptized by John in the Jordan River, the heavens opened, the Holy Spirit descended on Him in the form of a dove, and this voice was heard from heaven. This event marked the anointing of Jesus with the Holy Spirit for His work.",
+      "Theological_Meaning": "This event is a clear manifestation of the Trinity: the Son is being baptized, the Spirit is descending, and the Father is speaking from heaven. The Father's declaration of pleasure signifies His acceptance of Christ as humanity's representative and substitute. Christ's willingness to be baptized—identifying with sinners—was pleasing to the Father and was the first step in His public ministry of fulfilling all righteousness.",
+      "Christ_Centered_Meaning": "This moment is Christ's coronation as the Messiah. All the requirements of the sanctuary service for the anointing of a priest and king were met. He was washed (baptism), anointed (by the Spirit), and proclaimed (by the Father). This prophetic anointing empowers Him for His work of teaching, healing, and ultimately, His atoning sacrifice. It is the Father's official seal of approval upon the Savior of the world."
+  }
+},
+{
+  "id": "PR017",
+  "question": "After calling His first disciples, Jesus began to preach in the synagogues of Galilee. What was the central, prophetic theme of His earliest proclamation, announcing that a new era in God's plan had arrived?",
+  "options": [
+      "Mark 1:15 - And saying, The time is fulfilled, and the reign of God is at hand: turn ye, and believe the gospel.",
+      "Mark 1:15 - And saying, The time is come, and the kingdom of God is at hand: repent ye, and believe the gospel.",
+      "Mark 1:15 - And saying, The time is fulfilled, and the kingdom of God is at hand: repent ye, and believe the gospel.",
+      "Mark 1:15 - And saying, The age is fulfilled, and the kingdom of God is near: repent ye, and believe the good news."
+  ],
+  "answer": "Mark 1:15 - And saying, The time is fulfilled, and the kingdom of God is at hand: repent ye, and believe the gospel.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the summary of Jesus' inaugural message. It is a profoundly prophetic statement, declaring the fulfillment of a specific prophetic timeline and the arrival of the long-awaited Messianic kingdom.",
+      "Importance_of_Wording": "'The time is fulfilled' is a direct reference to the prophetic timeline of Daniel 9:24-27, specifically the 69 weeks (483 years) that were to extend from the decree to rebuild Jerusalem to the appearance of 'Messiah the Prince.' Christ's appearance on the public stage in A.D. 27 precisely fulfilled this prophecy. 'The kingdom of God is at hand' announces that the reign of God has drawn near in the person of the King Himself. The required response is twofold: 'repent' (change your mind and life) and 'believe the gospel' (trust in this good news).",
+      "Factual_Explanation": "Mark summarizes the essence of Jesus' early Galilean ministry with this powerful, four-part message. It was a declaration that God's prophetic clock had struck the hour, and the central event of all history was now unfolding.",
+      "Theological_Meaning": "This message establishes that God operates according to a divine timetable. Christ's first coming was not a random event but a precisely timed fulfillment of prophecy. This gives believers confidence that His Second Coming will also occur exactly according to God's prophetic schedule. The call to repentance and faith is the timeless response required for entry into God's kingdom.",
+      "Christ_Centered_Meaning": "Christ Himself is the fulfillment of the time and the embodiment of the kingdom. To believe the gospel is to believe in Him. Just as He announced that 'the time is fulfilled' for His first coming, the book of Revelation announces that 'the hour of his judgment is come' (Revelation 14:7), signaling the final phase of His work before His second coming. The message remains the same: recognize the prophetic times, repent, and believe the everlasting gospel."
+  }
+},
+{
+  "id": "PR018",
+  "question": "When Jesus healed a leper, He instructed the man to show himself to the priest and offer the prescribed sacrifice. What did Jesus say was the prophetic purpose of this act?",
+  "options": [
+      "Mark 1:44 - And saith unto him, See thou say nothing to any man: but go on thy way, shew thyself to the priest, and offer for thy cleansing those things which Moses commanded, for a sign unto them.",
+      "Mark 1:44 - And saith unto him, See thou tell nothing to any man: but go thy way, shew thyself to the priest, and offer for thy cleansing those things which Moses commanded, for an example unto them.",
+      "Mark 1:44 - And saith unto him, See thou say nothing to any man: but go thy way, shew thyself to the priest, and offer for thy cleansing those things which Moses commanded, for a testimony unto them.",
+      "Mark 1:44 - And said unto him, See that thou say nothing to any man: but go thy way, shew thyself to the priest, and offer for thy cleansing those things which Moses commanded, for a witness to them."
+  ],
+  "answer": "Mark 1:44 - And saith unto him, See thou say nothing to any man: but go thy way, shew thyself to the priest, and offer for thy cleansing those things which Moses commanded, for a testimony unto them.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "Jesus' instruction here has deep prophetic significance. He upholds the ceremonial law while simultaneously providing irrefutable proof of His messianic power to the very people who would ultimately reject Him.",
+      "Importance_of_Wording": "The command 'shew thyself to the priest' was a requirement of the law in Leviticus 14. Only the priest could officially declare a leper clean. The purpose was 'for a testimony unto them.' 'Them' refers to the priests and the religious system. The healed leper would be a living 'testimony' or 'witness' that the Messiah, who had the power to cleanse from leprosy (a type of sin), was in their midst.",
+      "Factual_Explanation": "After cleansing a man with leprosy, a disease considered incurable by human means, Jesus commanded him to complete the legal requirements of the Mosaic law. This involved a priestly inspection and specific sacrifices.",
+      "Theological_Meaning": "This act shows that Jesus did not come to abolish the law, but to fulfill it. He respected the God-ordained authority of the priesthood, even though it was corrupt. The cleansing of a leper was one of the recognized signs of the Messiah. By sending the man to the priests, Jesus was providing them with official, undeniable evidence of His identity. Their subsequent rejection of Him was therefore without excuse.",
+      "Christ_Centered_Meaning": "Leprosy in the Bible is a powerful symbol of sin—it is deep, pervasive, and leads to isolation and death. Only Christ can cleanse us from the 'leprosy' of sin. When He cleanses us, our changed lives become a 'testimony' to the world and even to skeptical religious systems of His saving power. The offering commanded by Moses was a type that pointed to Christ; Christ, the reality, now sent the man to perform the type, creating a powerful prophetic witness."
+  }
+},
+{
+  "id": "PR019",
+  "question": "The scribes and Pharisees, seeing Jesus eat with publicans and sinners, questioned His disciples. Jesus overheard them and gave a prophetic statement of His mission, defining the very people He came to save. What was His declaration?",
+  "options": [
+      "Mark 2:17 - When Jesus heard it, he saith unto them, They that are whole have no need of a physician, but they that are sick: I came not to call the upright, but sinners to repentance.",
+      "Mark 2:17 - When Jesus heard it, he saith unto them, They that are healthy have no need of the physician, but they that are ill: I came not to call the righteous, but sinners to repentance.",
+      "Mark 2:17 - When Jesus heard it, he saith unto them, They that are whole have no need of the physician, but they that are sick: I came not to call the righteous, but sinners to repentance.",
+      "Mark 2:17 - When Jesus heard it, he said to them, They that are well have no need of a doctor, but they that are sick: I came not to call the righteous, but sinners."
+  ],
+  "answer": "Mark 2:17 - When Jesus heard it, he saith unto them, They that are whole have no need of the physician, but they that are sick: I came not to call the righteous, but sinners to repentance.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a concise, prophetic mission statement. It defines the nature of the gospel and identifies its intended recipients. It prophesies that His message will be rejected by the self-righteous and accepted by those who recognize their spiritual need.",
+      "Importance_of_Wording": "The analogy of the 'physician' is powerful. Jesus identifies Himself as the Great Physician for the soul-sick. 'They that are whole' refers to the self-righteous Pharisees who saw no need for spiritual healing. His mission is explicit: 'I came not to call the righteous, but sinners to repentance.' This doesn't mean some people are truly righteous without Him, but that He came for those who *admit* they are sinners.",
+      "Factual_Explanation": "Jesus had called Levi (Matthew), a tax collector, to be one of His disciples. He then attended a feast at Levi's house, filled with other tax collectors and 'sinners'—people despised by the religious elite. The Pharisees were scandalized by this association, and Jesus responded with this statement.",
+      "Theological_Meaning": "This verse is the heart of the doctrine of grace. The gospel is not for those who think they can save themselves, but for those who know they are lost. It prophesies a perpetual division between two types of religion: a religion of self-righteousness based on works, and a religion of grace based on repentance and faith in the Physician. The health message of the bible is implicitly tied here: just as there are principles for physical health, Christ the physician has the only remedy for spiritual sickness.",
+      "Christ_Centered_Meaning": "Christ is the Great Physician. He came into the 'sick ward' of planet earth to bring healing and life. His diagnosis is that 'all have sinned, and come short of the glory of God' (Romans 3:23). The only ones who can benefit from His cure are those who accept the diagnosis. This statement is a prophecy that His church will always be a hospital for sinners, not a museum for saints. It is a place where the sick are welcomed and find healing in the grace of Christ."
+  }
+},
+{
+  "id": "PR020",
+  "question": "After performing many miracles, Jesus faced growing opposition from the religious leaders who conspired against Him. Mark's gospel states that this opposition was a direct fulfillment of a prophecy from Isaiah concerning the quiet, gentle, and victorious nature of the Messiah's ministry. What is the substance of this prophecy?",
+  "options": [
+      "Matthew 12:19-21 - He shall not fight, nor cry; neither shall any person hear his voice in the streets. A broken reed shall he not crush, and smoking flax shall he not quench, until he sends forth judgment unto victory. And in his name shall the Gentiles trust.",
+      "Matthew 12:19-21 - He shall not argue, nor cry; neither shall any man hear his voice in the public squares. A bruised reed shall he not shatter, and smoking flax shall he not extinguish, till he send forth judgment unto victory. And in his name shall the nations trust.",
+      "Matthew 12:19-21 - He shall not strive, nor cry; neither shall any man hear his voice in the streets. A bruised reed shall he not break, and smoking flax shall he not quench, till he send forth judgment unto victory. And in his name shall the Gentiles trust.",
+      "Matthew 12:19-21 - He will not quarrel, nor cry out; neither shall anyone hear his voice in the streets. A bruised reed he will not break, and a smoldering wick he will not snuff out, until he brings forth justice unto victory. And in his name will the Gentiles hope."
+  ],
+  "answer": "Matthew 12:19-21 - He shall not strive, nor cry; neither shall any man hear his voice in the streets. A bruised reed shall he not break, and smoking flax shall he not quench, till he send forth judgment unto victory. And in his name shall the Gentiles trust.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This quotation from Isaiah 42 prophesies the gentle and unassuming character of the Messiah, which stood in stark contrast to the confrontational and power-hungry expectations of the time. Mark (and Matthew, from which this fuller quote is taken) shows Jesus' withdrawal from conflict as a direct fulfillment of this prophecy.",
+      "Importance_of_Wording": "'He shall not strive, nor cry' prophesies a ministry free from noisy self-promotion and political agitation. 'A bruised reed shall he not break' describes His tenderness toward the weak and broken. 'Smoking flax shall he not quench' speaks of His patience with those whose faith is weak and faltering. Yet, this gentleness is not weakness; it will persist 'till he send forth judgment unto victory.' The final line, 'in his name shall the Gentiles trust,' prophesies the worldwide scope of His kingdom.",
+      "Factual_Explanation": "After healing a man with a withered hand on the Sabbath, the Pharisees were filled with rage and began to plot Jesus' death. In response, Jesus withdrew with His disciples to the sea, avoiding a direct confrontation. The gospel writer sees this quiet, non-confrontational method as the fulfillment of Isaiah's prophecy.",
+      "Theological_Meaning": "This prophecy reveals the character of God's kingdom. It does not advance through force and political power, but through quiet influence, gentleness, and love. It is a kingdom that nurtures the weakest and most fragile of people. This gentle method, however, is invincible and will ultimately result in victory when Christ's judgment is established over all the earth.",
+      "Christ_Centered_Meaning": "Christ is the gentle Savior who invites the 'weary and heavy laden' to find rest in Him. He has compassion for the 'bruised reeds' and 'smoking flax'—the spiritually, emotionally, and physically broken. This prophecy is a promise that His church is to be a place of healing, not a place where the wounded are crushed. It also gives hope that His quiet work will ultimately triumph over all the noisy opposition of the world."
+  }
+},
+{
+  "id": "PR021",
+  "question": "In Mark's account of the Parable of the Sower, what does Jesus prophesy will happen to the seed that falls on stony ground—representing those who receive the Word with initial joy but have no spiritual depth?",
+  "options": [
+      "Mark 4:16-17 - And these are they which are sown on stony ground; who, when they have heard the word, immediately receive it with happiness; And have no root in their hearts, and so endure for a while: afterward, when suffering or persecution ariseth for the word's sake, immediately they fall away.",
+      "Mark 4:16-17 - And these are they likewise which are sown on stony ground; who, when they have heard the word, quickly receive it with gladness; And have no foundation in themselves, and so last but for a time: afterward, when affliction or persecution cometh for the word's sake, immediately they are scandalized.",
+      "Mark 4:16-17 - And these are they likewise which are sown on stony ground; who, when they have heard the word, immediately receive it with gladness; And have no root in themselves, and so endure but for a time: afterward, when affliction or persecution ariseth for the word's sake, immediately they are offended.",
+      "Mark 4:16-17 - And these are they also which are sown on rocky ground; who, when they have heard the word, at once receive it with joy; And have no root in themselves, and so endure for a short time: later, when trouble or persecution comes for the word's sake, at once they stumble."
+  ],
+  "answer": "Mark 4:16-17 - And these are they likewise which are sown on stony ground; who, when they have heard the word, immediately receive it with gladness; And have no root in themselves, and so endure but for a time: afterward, when affliction or persecution ariseth for the word's sake, immediately they are offended.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is Jesus' prophetic diagnosis of a superficial faith. He foretells that a certain type of hearer will show great initial enthusiasm for the gospel but will fall away as soon as their faith is tested.",
+      "Importance_of_Wording": "The key characteristics are 'immediately receive it with gladness' and 'have no root in themselves.' The joy is emotional, not based on deep conviction. Because there is no 'root,' they 'endure but for a time.' The specific test is 'affliction or persecution ariseth for the word's sake.' The result is that 'immediately they are offended' (or 'stumble'). Their faith cannot withstand pressure.",
+      "Factual_Explanation": "Jesus explains the second type of soil in His parable. The stony ground represents a heart that is shallow. The Word cannot penetrate deeply because of a hard, rocky sub-layer of self or un-surrendered sin. The initial growth is quick and promising, but it withers under the 'heat' of trial.",
+      "Theological_Meaning": "This is a prophecy about the nature of true and false conversion. True conversion involves a deep, radical work of the Spirit, breaking up the 'stony ground' of the heart. A faith based only on emotion, excitement, or the promise of blessings without a true counting of the cost will not last. It prophesies that trials are a necessary part of the Christian life, designed by God to reveal the quality of our faith.",
+      "Christ_Centered_Meaning": "Christ calls for a faith that is deeply rooted in Him, the 'Rock of our salvation.' This parable is a prophecy of the challenges His followers will face. Many will profess allegiance in times of peace and prosperity, but in the final crisis, when persecution arises over loyalty to God's commandments, only those with deep roots of conviction and a daily connection to Christ will endure. This is a call to cultivate a deep, personal relationship with Christ that can withstand the coming storm."
+  }
+},
+{
+  "id": "PR022",
+  "question": "In the same explanation of the Parable of the Sower, Jesus gives a prophecy about the seed sown among thorns. What three things does He identify as the 'thorns' that will choke the Word and make it unfruitful?",
+  "options": [
+      "Mark 4:19 - And the cares of this age, and the deceitfulness of money, and the lusts of other things coming in, choke the word, and it becomes without fruit.",
+      "Mark 4:19 - And the anxieties of this world, and the deceitfulness of riches, and the passions for other things entering in, choke the word, and it becometh barren.",
+      "Mark 4:19 - And the cares of this world, and the deceitfulness of riches, and the lusts of other things entering in, choke the word, and it becometh unfruitful.",
+      "Mark 4:19 - And the worries of this life, and the delusion of wealth, and the desires for other things coming in, choke the word, and it becomes unfruitful."
+  ],
+  "answer": "Mark 4:19 - And the cares of this world, and the deceitfulness of riches, and the lusts of other things entering in, choke the word, and it becometh unfruitful.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is Jesus' prophetic warning about the dangers of materialism and worldliness to the spiritual life. He foretells that a person can have a genuine start in the faith, but allow it to be suffocated by competing affections.",
+      "Importance_of_Wording": "The three 'thorns' are precisely identified. 1) 'The cares of this world': anxieties and worries about daily life that distract from eternal realities. 2) 'The deceitfulness of riches': the false promise that wealth brings security and happiness, which leads to materialism. 3) 'The lusts of other things': the desire for anything and everything that competes with God for the heart's affection. These things 'choke the word,' meaning they absorb all the nutrients and energy of the soul, so the spiritual life 'becometh unfruitful.'",
+      "Factual_Explanation": "This is Jesus' explanation of the third type of soil. The thorny ground represents a heart that is divided. The person has heard and received the Word, but they have not cleared out the 'weeds' of worldly desires. The spiritual life and the worldly life compete until the worldly suffocates the spiritual.",
+      "Theological_Meaning": "This is a prophecy about the primary battleground for many believers, especially in prosperous societies. The danger is not necessarily open persecution, but a slow, subtle choking of spiritual life by worldly attachments. It fulfills the principle that 'ye cannot serve God and mammon' (Matthew 6:24). This is a solemn prophecy that a divided heart will ultimately be an unfruitful heart.",
+      "Christ_Centered_Meaning": "Christ calls His followers to seek first the kingdom of God and His righteousness (Matthew 6:33). This parable is a prophetic warning against the love of the world, which is enmity with God. It has powerful end-time relevance, as the final deceptions of Babylon are built upon materialism and the allure of worldly security. The call to come out of Babylon is a call to disentangle oneself from the 'thorns' of this world, so that the Word can bear fruit in our lives to God's glory."
+  }
+},
+{
+  "id": "PR023",
+  "question": "In the region of Caesarea Philippi, after Peter's great confession, Jesus began to prophesy openly about His own fate. What were the three specific events He foretold concerning the Son of man?",
+  "options": [
+      "Mark 8:31 - And he began to teach them, that the Son of man must suffer many things, and be rejected of the elders, and the chief priests, and the scribes, and be put to death, and after three days rise again.",
+      "Mark 8:31 - And he began to teach them, that the Son of man must suffer many things, and be spurned by the elders, and of the chief priests, and scribes, and be slain, and after three days rise again.",
+      "Mark 8:31 - And he began to teach them, that the Son of man must suffer many things, and be rejected of the elders, and of the chief priests, and scribes, and be killed, and after three days rise again.",
+      "Mark 8:31 - And he began to teach them, that the Son of man must endure many things, and be rejected by the elders, and the chief priests, and scribes, and be killed, and after three days be resurrected."
+  ],
+  "answer": "Mark 8:31 - And he began to teach them, that the Son of man must suffer many things, and be rejected of the elders, and of the chief priests, and scribes, and be killed, and after three days rise again.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the first of three major passion predictions in Mark. It is a pivotal moment where Jesus shifts from teaching about His identity to teaching about His mission of suffering, death, and resurrection, directly countering the disciples' expectations of a political messiah.",
+      "Importance_of_Wording": "The word 'must' signifies divine necessity; this was the fulfillment of God's predetermined plan, not an accident of history. The prophecy is specific: 1) He will 'suffer many things' and 'be rejected' by the specific religious authorities ('elders, chief priests, and scribes'). 2) He will 'be killed.' 3) He will 'after three days rise again.' This three-part prophecy became the core of the apostolic gospel.",
+      "Factual_Explanation": "Immediately after Peter correctly identified Him as the Christ, Jesus began to teach this new, difficult truth. Peter, still thinking in worldly terms, rebuked Jesus for teaching about suffering and death, which earned him a sharp rebuke from Jesus in return.",
+      "Theological_Meaning": "This prophecy redefines the meaning of 'Messiah.' It is not about earthly power and glory, but about sacrificial suffering and vicarious death. It fulfills the prophecies of the suffering servant in Isaiah 53. The resurrection is presented as an integral part of the plan, the divine vindication of His sacrifice. This shows that the cross was not a tragedy that befell Jesus, but a victory He predicted and willingly embraced.",
+      "Christ_Centered_Meaning": "This is the gospel in its prophetic essence. The entire plan of salvation hinged on these three prophesied events. His suffering and rejection by the leaders of the church demonstrate the blindness that comes from rejecting God's word. His death was the fulfillment of the entire sacrificial system. His resurrection is the guarantee of our own resurrection and the ultimate proof of His divinity. He is the Lamb who was 'slain from the foundation of the world' (Revelation 13:8), and His death was prophesied in heaven before it was predicted on earth."
+  }
+},
+{
+  "id": "PR024",
+  "question": "After the transfiguration, as they were coming down the mountain, the disciples asked Jesus about the prophecy of Elijah's return. Jesus confirmed the prophecy but revealed its surprising fulfillment. What did He explain about the prophesied Elijah?",
+  "options": [
+      "Mark 9:12-13 - And he answered and told them, Elijah verily cometh first, and shall restore all things... But I say unto you, That Elijah is now come, and they have done unto him whatsoever they listed, as it is written of him.",
+      "Mark 9:12-13 - And he answered and said to them, Elias verily cometh first, and restores all things... But I say unto you, That Elias is indeed come, and they did unto him whatsoever they wanted, as it is written concerning him.",
+      "Mark 9:12-13 - And he answered and told them, Elias verily cometh first, and restoreth all things... But I say unto you, That Elias is indeed come, and they have done unto him whatsoever they listed, as it is written of him.",
+      "Mark 9:12-13 - And he answered and told them, Elijah truly cometh first, and will restore all things... But I say unto you, That Elijah is already come, and they have done to him whatever they wished, as it is written of him."
+  ],
+  "answer": "Mark 9:12-13 - And he answered and told them, Elias verily cometh first, and restoreth all things; and how it is written of the Son of man, that he must suffer many things, and be set at nought. But I say unto you, That Elias is indeed come, and they have done unto him whatsoever they listed, as it is written of him.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "Jesus here interprets the prophecy of Malachi 4:5-6. He confirms its validity ('Elias verily cometh first') but then reveals its fulfillment was not what the people expected. He identifies a past fulfillment while leaving the door open for a future one.",
+      "Importance_of_Wording": "Jesus affirms the prophecy but then declares 'Elias is indeed come,' speaking in the past tense. The key is that 'they have done unto him whatsoever they listed' (whatever they wished), a clear reference to the imprisonment and beheading of John the Baptist by Herod. Jesus links the rejection and suffering of the prophetic forerunner ('as it is written of him') to His own prophesied suffering and rejection as the Son of man.",
+      "Factual_Explanation": "The disciples, having just seen the glorified Elijah on the mountain, were confused about the prophecy that Elijah must come before the Messiah. Jesus explains that John the Baptist came 'in the spirit and power of Elias' (Luke 1:17) and fulfilled that role for His first advent, but was rejected and killed, foreshadowing Christ's own fate.",
+      "Theological_Meaning": "This passage teaches a crucial principle of prophetic interpretation: prophecy can have dual or multiple applications. John the Baptist fulfilled the 'Elijah' prophecy for the first coming. This implies that there will be a final 'Elijah message'—a worldwide call to repentance and reformation to prepare the world for the second coming. This message is identified with the three angels' messages of Revelation 14, which 'restore all things,' including the truth about God's law, the Sabbath, and true worship.",
+      "Christ_Centered_Meaning": "The link Jesus makes between the suffering of the forerunner and His own suffering is profound. It shows a pattern: God's messengers who call for reformation are often rejected and persecuted. John prepared the way for Christ's first coming and was killed. The final 'Elijah' movement that prepares the way for the second coming will also face intense opposition. This prophecy is both a warning and a comfort, showing that the path of faithful witness often involves sharing in the sufferings of Christ."
+  }
+},
+{
+  "id": "PR025",
+  "question": "In a dispute with the Pharisees over divorce, Jesus appealed beyond the law of Moses to God's original, prophetic design for marriage. What did He say was God's intention from the beginning of creation?",
+  "options": [
+      "Mark 10:6-9 - But from the beginning of the creation God made them a male and a female. For this cause shall a man leave his father and mother, and cleave to his wife; And the two shall become one flesh... What therefore God hath joined together, let no man put asunder.",
+      "Mark 10:6-9 - But from the beginning of creation God created them male and female. For this cause a man shall leave his father and mother, and cleave to his wife; And they shall be one flesh... What therefore God hath joined together, let not man divide.",
+      "Mark 10:6-9 - But from the start of the creation God made them male and female. For this reason shall a man leave his father and mother, and be joined to his wife; And the two shall be one flesh... What therefore God hath united, let not man separate.",
+      "Mark 10:6-9 - But from the beginning of the creation God made them male and female. For this cause shall a man leave his father and mother, and cleave to his wife; And they twain shall be one flesh... What therefore God hath joined together, let not man put asunder."
+  ],
+  "answer": "Mark 10:6-9 - But from the beginning of the creation God made them male and female. For this cause shall a man leave his father and mother, and cleave to his wife; And they twain shall be one flesh: so then they are no more twain, but one flesh. What therefore God hath joined together, let not man put asunder.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a prophetic declaration that appeals to the created order as God's unchanging will. Jesus sets aside the temporary, Mosaic concession for divorce and re-establishes the creation ordinance as the divine ideal for all time.",
+      "Importance_of_Wording": "Jesus grounds His teaching 'from the beginning of the creation,' giving it foundational and permanent authority. He quotes Genesis, stating God 'made them male and female.' This binary design is the basis for the 'one flesh' union of marriage. The concluding command, 'What therefore God hath joined together, let not man put asunder,' is a divine prohibition against breaking the sacred, God-ordained bond.",
+      "Factual_Explanation": "The Pharisees tested Jesus with a question about the legality of divorce. Jesus explained that the Mosaic permission for divorce was a concession to the 'hardness of your heart,' but it was not God's original plan. He then authoritatively set forth the creation model as the true, prophetic standard.",
+      "Theological_Meaning": "This teaching has immense prophetic importance for the last days. Jesus establishes God's original design for marriage—a lifelong, monogamous union between one man and one woman—as a creation ordinance, as foundational as the Sabbath. In a world of increasing confusion about marriage and sexuality, this verse stands as God's unchanging prophetic ideal. Loyalty to this creational truth will be a mark of God's faithful people in the end times.",
+      "Christ_Centered_Meaning": "The 'one flesh' union of marriage is used by the Apostle Paul as the great symbol, or 'mystery,' of the relationship between Christ and the church (Ephesians 5:31-32). Christ, the bridegroom, has joined Himself to His church, the bride, in an unbreakable covenant. His love is faithful and sacrificial. Jesus' teaching on the permanence of marriage is a reflection of the permanence of His covenant love for His people."
+  }
+},
+{
+  "id": "PR026",
+  "question": "When Jesus entered Jerusalem for the final time, the crowds greeted Him with a specific, prophetic chant, quoting from the Psalms. What was this cry that acknowledged Him as the promised Son of David?",
+  "options": [
+      "Mark 11:9-10 - And those that went before, and those that followed, cried, saying, Hosanna; Blessed is he that cometh in the name of the Lord: Blessed be the kingdom of our ancestor David, that cometh in the name of the Lord: Hosanna in the highest.",
+      "Mark 11:9-10 - And they that went before, and they that followed, cried, saying, Hosanna; Blessed is he that cometh in the name of the Lord: Blessed be the kingdom of our father David, that cometh in the name of the Lord: Hosanna in the highest.",
+      "Mark 11:9-10 - And they that went before, and they that followed, shouted, saying, Hosanna; Blessed is he that cometh in the name of the Lord: Blessed be the kingdom of our father David, that comes in the name of the Lord: Hosanna in the highest.",
+      "Mark 11:9-10 - And they that went before, and they that followed, cried, saying, Hosanna; Blessed is the one who cometh in the name of the Lord: Blessed be the reign of our father David, that cometh in the name of the Lord: Hosanna in the highest."
+  ],
+  "answer": "Mark 11:9-10 - And they that went before, and they that followed, cried, saying, Hosanna; Blessed is he that cometh in the name of the Lord: Blessed be the kingdom of our father David, that cometh in the name of the Lord: Hosanna in the highest.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This event, known as the Triumphal Entry, was the one time Jesus allowed the people to hail Him as a king. Their shouts were a direct, though perhaps not fully understood, fulfillment of prophecy concerning the Messiah's arrival in Jerusalem.",
+      "Importance_of_Wording": "'Hosanna' is a Hebrew plea meaning 'Save now!' It comes from Psalm 118:25-26, a royal, messianic psalm. By shouting 'Blessed is he that cometh in the name of the Lord,' they were applying this messianic psalm directly to Jesus. The specific addition in Mark's gospel, 'Blessed be the kingdom of our father David,' shows they clearly understood Him as the heir to David's throne.",
+      "Factual_Explanation": "As Jesus rode into Jerusalem on a donkey colt, fulfilling the prophecy of Zechariah 9:9, the crowds spread their cloaks and palm branches on the road. They began to shout this combination of phrases from Psalm 118, acclaiming Him as the long-awaited Messianic King.",
+      "Theological_Meaning": "This was the official, public presentation of the Messiah to the nation of Israel. It occurred at the precise time prophesied in Daniel 9—at the end of the 69 weeks. The leaders of the nation, however, rejected this presentation, and just a few days later, the same city that shouted 'Hosanna' would shout 'Crucify him.' This event marks the tragic, final rejection of the Messiah by the nation's leadership.",
+      "Christ_Centered_Meaning": "The Triumphal Entry is a prophetic preview of Christ's second coming. At His first coming, He rode on a humble donkey. At His second coming, He will return on a white horse as King of kings and Lord of lords (Revelation 19:11-16). The shouts of 'Hosanna' will be replaced by the anthems of the redeemed from all ages, welcoming their victorious King. While the first Triumphal Entry led to a cross, the second will lead to a crown and an eternal kingdom."
+  }
+},
+{
+  "id": "PR027",
+  "question": "In the Parable of the Wicked Husbandmen, Jesus told of a vineyard owner who sent servants and finally his own son to collect the fruit, all of whom were rejected and killed. What did Jesus prophesy the owner of the vineyard would do in response?",
+  "options": [
+      "Mark 12:9 - What shall therefore the lord of the vineyard do? he will come and destroy the farmers, and will give the vineyard to different ones.",
+      "Mark 12:9 - What shall therefore the master of the vineyard do? he will come and destroy the tenants, and will give the vineyard to others.",
+      "Mark 12:9 - What shall therefore the lord of the vineyard do? he will come and destroy the husbandmen, and will give the vineyard unto others.",
+      "Mark 12:9 - What will therefore the owner of the vineyard do? he will come and kill the husbandmen, and will give the vineyard unto others."
+  ],
+  "answer": "Mark 12:9 - What shall therefore the lord of the vineyard do? he will come and destroy the husbandmen, and will give the vineyard unto others.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This parable is a direct prophecy against the religious leaders of Israel. Jesus uses this story to foretell their own destruction and the transfer of spiritual privilege from the nation of Israel to a new body of believers.",
+      "Importance_of_Wording": "The question 'What shall therefore the lord of the vineyard do?' forces the listeners to pronounce judgment on themselves. The prophecy is twofold and devastating: 1) 'he will come and destroy the husbandmen' (foretelling the destruction of the unfaithful leadership and Jerusalem in A.D. 70). 2) 'and will give the vineyard unto others' (foretelling that the commission to be God's light to the world would be taken from national Israel and given to the newly formed Christian church, composed of both Jews and Gentiles).",
+      "Factual_Explanation": "Jesus told this parable to the chief priests, scribes, and elders in the temple during His final week. The vineyard represents Israel, the owner is God the Father, the husbandmen (tenants) are the religious leaders, the servants are the prophets, and the beloved son is Christ Himself. The leaders understood He was speaking about them (v. 12).",
+      "Theological_Meaning": "This is a prophecy of the end of Israel's probation as God's chosen covenant nation. Because of their persistent rejection of the prophets and their ultimate rejection and murder of the Son, their stewardship would be terminated. This doesn't mean God rejected individual Jews, but that the national entity would no longer be the primary vehicle of His salvation plan.",
+      "Christ_Centered_Meaning": "Christ is the 'beloved son' who was cast out of the vineyard and killed. But in the verse immediately following, Jesus quotes Psalm 118: 'The stone which the builders rejected is become the head of the corner.' He prophesies that despite their rejection of Him, He would become the foundation of God's new spiritual temple, the church. The stewardship of the gospel vineyard is now given to those who will bear fruit for Him, a 'royal priesthood' and 'peculiar people' drawn from every nation (1 Peter 2:9)."
+  }
+},
+{
+  "id": "PR028",
+  "question": "As Jesus left the temple for the last time, His disciples marveled at its magnificent buildings. In response, Jesus gave a startling prophecy about the temple's complete and utter ruin. What was His specific prediction?",
+  "options": [
+      "Mark 13:2 - And Jesus said unto him, Seest thou these impressive buildings? there shall not be left one stone upon another, that shall not be dismantled.",
+      "Mark 13:2 - And Jesus answering said unto him, Seest thou these great buildings? there shall not be left one stone upon another, that shall not be thrown down.",
+      "Mark 13:2 - And Jesus answering said unto him, Seest thou these great buildings? there shall not remain one stone upon another, that shall not be thrown down.",
+      "Mark 13:2 - And Jesus answering said to him, Do you see these great buildings? there shall not be left one stone upon another, that will not be cast down."
+  ],
+  "answer": "Mark 13:2 - And Jesus answering said unto him, Seest thou these great buildings? there shall not be left one stone upon another, that shall not be thrown down.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a direct and shocking prophecy of the complete destruction of the Jerusalem temple, which was the heart of Jewish national and religious life. It was unthinkable to the disciples.",
+      "Importance_of_Wording": "The language is absolute and emphatic: 'there shall not be left one stone upon another.' This prophesies not just damage, but total demolition. The phrase 'that shall not be thrown down' reinforces the totality of the destruction. It would be a complete leveling of the entire temple complex.",
+      "Factual_Explanation": "The temple, extensively rebuilt and beautified by Herod the Great, was one of the wonders of the ancient world. As they departed from it, a disciple commented on its impressive stones and buildings. Jesus used this moment to deliver this stunning prophecy of its impending doom.",
+      "Theological_Meaning": "The destruction of the temple was a divine judgment on the nation for rejecting the Messiah. It symbolized the end of the earthly, typical sanctuary system. The system of animal sacrifices and earthly priesthood, which had pointed forward to Christ, became obsolete and meaningless after He, the great antitype, had come and offered Himself as the one true sacrifice.",
+      "Christ_Centered_Meaning": "This prophecy had a literal and precise fulfillment in A.D. 70 when the Roman armies under Titus destroyed Jerusalem and the temple. Historical accounts tell how the fires melted the gold, which ran between the stones, and the soldiers pried apart every stone to get the gold, literally leaving not one stone upon another. This prophecy has a dual application, also pointing to the end of the world. The destruction of Jerusalem is a type, or small-scale model, of the final destruction that will come upon the wicked at the end of time. The warning signs Jesus gave to His disciples to flee Jerusalem are a pattern of the signs He gives His people to be ready for His second coming."
+  }
+},
+{
+  "id": "PR029",
+  "question": "In the Olivet Discourse, Jesus' disciples asked Him for the sign of His coming and of the end of the age. Jesus began His answer with a prophetic warning that would be the primary characteristic of the last days. What was this paramount warning?",
+  "options": [
+      "Mark 13:5-6 - And Jesus answering them began to say, Take heed that no one deceive you: For many shall come in my name, saying, I am he; and shall deceive many.",
+      "Mark 13:5-6 - And Jesus answering them began to say, Watch out lest any man fool you: For many shall come in my name, saying, I am Christ; and shall deceive many.",
+      "Mark 13:5-6 - And Jesus answering them began to say, Take heed lest any man deceive you: For many shall come in my name, saying, I am Christ; and shall deceive many.",
+      "Mark 13:5-6 - And Jesus answering them began to say, Be careful that no man deceive you: For many will come in my name, saying, I am the Christ; and will lead many astray."
+  ],
+  "answer": "Mark 13:5-6 - And Jesus answering them began to say, Take heed lest any man deceive you: For many shall come in my name, saying, I am Christ; and shall deceive many.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is Jesus' first and most emphasized answer to the disciples' question about end-time signs. Before He talks about wars, earthquakes, or famines, He prophesies that the greatest danger in the last days will be spiritual deception.",
+      "Importance_of_Wording": "The command 'Take heed' (or 'Watch out') is repeated throughout the discourse. The specific deception is that 'many shall come in my name,' meaning they will claim to represent Christ or even be Christ Himself. The result is dire: they 'shall deceive many.' This prophesies widespread religious deception, not just from outside the church, but from within.",
+      "Factual_Explanation": "Sitting on the Mount of Olives, Peter, James, John, and Andrew privately asked Jesus for the signs of His return. His very first words were a warning against being led astray by false messiahs and false teachers.",
+      "Theological_Meaning": "This prophecy reveals that the central battle of the end times is a battle over truth. Satan's primary strategy will not be overt persecution (though that will come), but subtle, religious deception. He will work through false prophets and false movements that use the name of Christ to lead people away from the truths of God's Word. This underscores the critical importance of being grounded in Scripture to be able to discern truth from error.",
+      "Christ_Centered_Meaning": "The ultimate deception is a false christ, or a false gospel that presents a distorted picture of Christ and His requirements. Revelation 13 describes a worldwide power that performs 'great wonders' and 'deceiveth them that dwell on the earth.' The only safety against this prophesied mass deception is a personal, living connection with the true Christ, and a firm reliance on 'the testimony of Jesus,' which is the 'spirit of prophecy' (Revelation 19:10). We must test every spirit and every teaching against the unchanging Word of God."
+  }
+},
+{
+  "id": "PR030",
+  "question": "In the Olivet Discourse, Jesus prophesied that before the end could come, His gospel must first be preached to all the world. What is this prophecy of the global proclamation of the gospel?",
+  "options": [
+      "Mark 13:10 - And the gospel must first be announced to all the nations.",
+      "Mark 13:10 - And the gospel must first be published among all nations.",
+      "Mark 13:10 - And the good news must first be preached to all nations.",
+      "Mark 13:10 - And the gospel must first be proclaimed among all the nations."
+  ],
+  "answer": "Mark 13:10 - And the gospel must first be published among all nations.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a key prophecy that sets a precondition for the end of the age. It foretells a worldwide missionary movement and defines the church's primary task in the last days.",
+      "Importance_of_Wording": "The word 'must' signifies a divine necessity; it is a non-negotiable part of God's end-time plan. 'Published' (or 'preached') means to be publicly proclaimed or heralded. The scope is universal: 'among all nations.' This prophesies that the good news will transcend every cultural and geographical barrier before Christ returns.",
+      "Factual_Explanation": "In the midst of describing the signs of the end—wars, earthquakes, and persecution—Jesus inserts this positive prophecy. It assures His followers that despite the chaos and opposition, His mission will succeed. The work of evangelism is the great sign that precedes the end.",
+      "Theological_Meaning": "This verse is the Great Commission set in a prophetic, end-time context. It gives the church its marching orders for the final age. It implies that God will not allow the end to come until every person has had an opportunity to hear and respond to the message of salvation.",
+      "Christ_Centered_Meaning": "The 'gospel' is the good news about Jesus Christ. This prophecy finds its ultimate expression in the Three Angels' Messages of Revelation 14. There, an angel is seen flying in the midst of heaven 'having the everlasting gospel to preach unto them that dwell on the earth, and to every nation, and kindred, and tongue, and people.' This is the final, global proclamation of the gospel, a last call to worship the Creator and prepare for the return of Christ, which immediately follows in the prophetic sequence (Revelation 14:14)."
+  }
+},
+{
+  "id": "PR031",
+  "question": "Speaking of the end times, Jesus gave His followers a prophetic warning about a specific sign that would signal the immediate need to flee from Judea, referencing a prophecy from the book of Daniel. What was this specific sign?",
+  "options": [
+      "Mark 13:14 - But when ye shall see the abomination which maketh desolate, spoken of by Daniel the prophet, standing where it ought not, (let him that readeth understand,) then let them that be in Judaea flee to the mountains.",
+      "Mark 13:14 - But when ye shall see the abomination of ruin, spoken of by Daniel the prophet, standing where it ought not, (let him that readeth understand,) then let them that be in Judaea escape to the mountains.",
+      "Mark 13:14 - But when ye shall see the abomination of desolation, spoken of by Daniel the prophet, standing where it ought not, (let him that readeth understand,) then let them that be in Judaea flee to the mountains.",
+      "Mark 13:14 - But when you shall see the abomination of desolation, mentioned by Daniel the prophet, standing where it should not, (let the reader understand,) then let those that are in Judaea flee to the mountains."
+  ],
+  "answer": "Mark 13:14 - But when ye shall see the abomination of desolation, spoken of by Daniel the prophet, standing where it ought not, (let him that readeth understand,) then let them that be in Judaea flee to the mountains:",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a crucial and specific prophecy that served as a direct, life-saving sign for the early Christians. It has a dual application, pointing both to the destruction of Jerusalem and to a future, end-time event.",
+      "Importance_of_Wording": "'The abomination of desolation' is a term from Daniel referring to a sacrilegious power that defiles God's sanctuary and causes ruin. 'Standing where it ought not' points to this power occupying a holy place. The parenthetical instruction, '(let him that readeth understand,)' is a command from Jesus to study and correctly interpret Daniel's prophecy. The command to 'flee to the mountains' is an urgent call for physical escape, not spiritual resistance, once this sign appears.",
+      "Factual_Explanation": "Luke's parallel account clarifies the immediate fulfillment: 'when ye shall see Jerusalem compassed with armies, then know that the desolation thereof is nigh' (Luke 21:20). The 'abomination of desolation' for the early church was the pagan Roman armies surrounding the holy city. When the Roman siege under Cestus Gallus was mysteriously lifted in A.D. 66, the Christians, remembering this prophecy, fled the city and were saved from the horrific destruction that followed in A.D. 70.",
+      "Theological_Meaning": "This prophecy has a second, end-time application. The 'abomination of desolation' also refers to a final, apostate religious power that will set itself up in the place of God (2 Thessalonians 2:4) and seek to enforce its will upon the world. This power will unite with civil authorities to persecute God's people. Just as the early Christians were to flee Jerusalem, God's people in the last days are called to separate themselves from spiritual 'Babylon' when this power consolidates its control.",
+      "Christ_Centered_Meaning": "Christ, the ultimate prophet, gave His people a clear sign to ensure their safety. This demonstrates His loving care and foreknowledge. It also validates the importance of understanding Old Testament prophecy, specifically the book of Daniel. For the end-time believer, 'understanding' the prophecies about the 'abomination of desolation' is not an academic exercise, but a matter of spiritual survival, enabling us to recognize the final deceptions and remain loyal to Christ."
+  }
+},
+{
+  "id": "PR032",
+  "question": "Jesus prophesied that immediately following a long period of tribulation, there would be dramatic signs in the heavens, signaling that His return is near. What are these specific cosmic signs?",
+  "options": [
+      "Mark 13:24-25 - But in those days, after that tribulation, the sun will be darkened, and the moon will not give its light, And the stars shall fall from heaven, and the powers in heaven shall be shaken.",
+      "Mark 13:24-25 - But in those days, following that tribulation, the sun shall be darkened, and the moon shall not give her light, And the stars of heaven shall be falling, and the powers that are in heaven shall be shaken.",
+      "Mark 13:24-25 - But in those days, after that tribulation, the sun shall be darkened, and the moon shall not give her light, And the stars of heaven shall fall, and the powers that are in heaven shall be shaken.",
+      "Mark 13:24-25 - But in those days, after that affliction, the sun shall be darkened, and the moon shall not give her brightness, And the stars of heaven shall fall, and the powers that are in heaven shall be moved."
+  ],
+  "answer": "Mark 13:24-25 - But in those days, after that tribulation, the sun shall be darkened, and the moon shall not give her light, And the stars of heaven shall fall, and the powers that are in heaven shall be shaken.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a direct prophecy of a sequence of astronomical events that would herald the end of a specific prophetic period and serve as signs of the approaching Second Coming.",
+      "Importance_of_Wording": "The timing is crucial: 'after that tribulation.' This refers to the 1260-year period of papal persecution prophesied in Daniel and Revelation, which extended from A.D. 538 to 1798. The signs are specific and sequential: 1) the 'sun shall be darkened,' 2) the 'moon shall not give her light,' 3) the 'stars of heaven shall fall.' The final sign, the 'powers that are in heaven shall be shaken,' points to the ultimate cosmic disturbance at the very moment of Christ's return.",
+      "Factual_Explanation": "Jesus is quoting from Old Testament prophets like Isaiah (13:10) and Joel (2:31), applying their language to the time just before His return. Historically, believers have identified these signs with specific events: the great 'Dark Day' in New England on May 19, 1780 (when the sun was mysteriously darkened and the moon appeared as blood); and the spectacular Leonid meteor shower of November 13, 1833 (when the stars appeared to be falling from heaven).",
+      "Theological_Meaning": "These signs were given to awaken the world and God's people to the nearness of the end. They mark the transition from the long 'tribulation' to the final 'generation' that would see the return of Christ. The fulfillment of these signs in history gives believers confidence that we are living in the very last days of earth's history, just before the coming of the Son of man.",
+      "Christ_Centered_Meaning": "The created heavens declare the glory of God, but here they are used to declare the coming of the God of glory. These signs are God's alarm clock, designed to rouse a sleeping world and a sleeping church. They are a call to look up, for our redemption draws near. They confirm that Christ's prophecies are sure, and just as the signs of His coming have been fulfilled, His actual coming will also be fulfilled."
+  }
+},
+{
+  "id": "PR033",
+  "question": "Following the signs in the sun, moon, and stars, Jesus gives the ultimate prophecy of His Second Coming. How does He describe His own glorious, visible return to the earth?",
+  "options": [
+      "Mark 13:26 - And then shall they behold the Son of man coming in clouds with great power and glory.",
+      "Mark 13:26 - And then shall they see the Son of man appearing in the clouds with great might and glory.",
+      "Mark 13:26 - And then shall they see the Son of man coming in the clouds with great power and glory.",
+      "Mark 13:26 - And then they will see the Son of man arriving in the clouds with great power and glory."
+  ],
+  "answer": "Mark 13:26 - And then shall they see the Son of man coming in the clouds with great power and glory.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the climax of the Olivet Discourse and the ultimate hope of the Christian faith. It is Jesus' own prophecy of the manner of His return, directly fulfilling the vision given to the prophet Daniel.",
+      "Importance_of_Wording": "The event is visible: 'then shall they see.' The person is specific: 'the Son of man,' Jesus' favorite title for Himself. The mode of travel is 'coming in the clouds,' just as the angels promised at His ascension (Acts 1:11). The nature of His arrival is 'with great power and glory,' in stark contrast to His humble first advent.",
+      "Factual_Explanation": "After describing the preliminary signs, Jesus describes the main event itself. This is the great and final sign. His return will not be a secret, spiritual, or localized event, but a literal, global, and gloriously visible phenomenon that every eye will see (Revelation 1:7).",
+      "Theological_Meaning": "This prophecy refutes all theories of a 'secret rapture' or a spiritual second coming. The return of Christ is prophesied to be the most spectacular, audible, and visible event in human history. It is the moment of deliverance for the righteous and the day of judgment for the wicked. The 'great power' will be demonstrated in the resurrection of the dead and the translation of the living saints, and the 'glory' will be the unveiled majesty of God.",
+      "Christ_Centered_Meaning": "This is the fulfillment of Daniel's prophecy: 'I saw in the night visions, and, behold, one like the Son of man came with the clouds of heaven' (Daniel 7:13). At His trial, Jesus prophesied to the high priest, 'Hereafter shall ye see the Son of man sitting on the right hand of power, and coming in the clouds of heaven' (Matthew 26:64). His return in power and glory is the ultimate vindication of His person and His work. It is the moment the suffering Savior becomes the reigning King, and His people are finally brought home."
+  }
+},
+{
+  "id": "PR034",
+  "question": "To illustrate the certainty and timing of His return, Jesus gave a prophetic parable from nature. What did He say the disciples should learn from the fig tree?",
+  "options": [
+      "Mark 13:28-29 - Now learn a parable from the fig tree; When its branch is yet tender, and bringeth forth leaves, ye know that summer is close: So ye in like manner, when ye shall see these things come to pass, know that it is nigh, even at the gates.",
+      "Mark 13:28-29 - Now learn a parable of the fig tree; When her branch is yet tender, and putteth forth leaves, ye know that summer is near: So ye in like manner, when ye shall see these things come to pass, know that it is nigh, even at the doors.",
+      "Mark 13:28-29 - Now learn a parable from the fig tree; When her branch is now tender, and produces leaves, ye know that summer is near: So ye in like manner, when ye shall see these things begin to pass, know that it is near, even at the doors.",
+      "Mark 13:28-29 - Now learn a lesson from the fig tree; When its branch is yet tender, and puts forth leaves, you know that summer is near: So you in like manner, when you shall see these things coming to pass, know that he is nigh, even at the doors."
+  ],
+  "answer": "Mark 13:28-29 - Now learn a parable of the fig tree; When her branch is yet tender, and putteth forth leaves, ye know that summer is near: So ye in like manner, when ye shall see these things come to pass, know that it is nigh, even at the doors.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This parable provides the key to interpreting the signs Jesus had just given. It prophesies that the signs are not the end itself, but are reliable indicators that the end is extremely close.",
+      "Importance_of_Wording": "The lesson is from nature's certainty. Just as budding leaves reliably signal summer, the prophesied signs reliably signal the nearness of the Second Coming. 'These things' refers to the signs He had just listed (deception, wars, earthquakes, celestial signs). The conclusion is one of imminent expectation: 'know that it is nigh, even at the doors.' This language implies an event that is about to happen.",
+      "Factual_Explanation": "After describing the signs that would precede His return, Jesus gave this simple agricultural parable to teach His disciples how to interpret them. They were not to be discouraged or confused by the signs, but to see them as hopeful indicators of impending deliverance.",
+      "Theological_Meaning": "This parable is a command to be observant students of prophetic signs. God gives signs so His people will not be in darkness about the timing of His return. While we do not know the 'day or the hour,' we can and must know when it is 'near, even at the doors.' This encourages a state of constant readiness and hopeful watching.",
+      "Christ_Centered_Meaning": "The fig tree is often a symbol of the nation of Israel. While some see a connection there, the primary meaning is the simple lesson from nature. Christ, the Lord of nature, is also the Lord of history. He has set a prophetic timetable in motion. When we see the 'leaves' of prophecy unfolding—the fulfillment of the signs He foretold—we can have absolute confidence that the 'summer' of eternal life, brought by His return, is about to begin."
+  }
+},
+{
+  "id": "PR035",
+  "question": "While Jesus taught that we can know when His coming is near, He made a definitive prophetic statement about the human (and even angelic) inability to know the exact time of His return. What did He declare?",
+  "options": [
+      "Mark 13:32 - But of that day and the hour no man knoweth, no, not the angels of heaven, not even the Son, but the Father alone.",
+      "Mark 13:32 - But of that day and that hour knoweth no one, not the angels which are in heaven, neither the Son, but the Father.",
+      "Mark 13:32 - But of that day and that hour knoweth no man, no, not the angels which are in heaven, neither the Son, but the Father.",
+      "Mark 13:32 - But of that day and that hour no one knows, no, not the angels who are in heaven, neither the Son, but only the Father."
+  ],
+  "answer": "Mark 13:32 - But of that day and that hour knoweth no man, no, not the angels which are in heaven, neither the Son, but the Father.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a crucial prophetic boundary. It stands as a perpetual warning against date-setting and speculation, while simultaneously encouraging a state of constant readiness.",
+      "Importance_of_Wording": "The statement is comprehensive in its exclusion: 'no man... not the angels... neither the Son.' This emphasizes the absolute secrecy of the final moment, which is known 'but [by] the Father' alone. Jesus, speaking in His incarnate, human state, voluntarily submitted Himself to this limitation. This humility makes His command to 'watch' all the more powerful.",
+      "Factual_Explanation": "After giving the signs that allow us to know the nearness of His coming, Jesus clearly states that the precise moment is a divine secret. This balances the knowledge of the 'season' with ignorance of the exact 'day and hour.'",
+      "Theological_Meaning": "This prophecy has served to rebuke fanaticism and false predictions throughout Christian history. Anyone who claims to know the day or the hour is directly contradicting the words of Christ. The purpose of prophecy is not to satisfy our curiosity, but to prepare our character. Since we do not know the hour, we must be ready at every hour. Our focus should be on readiness, not on complex calculations to discover what God has concealed.",
+      "Christ_Centered_Meaning": "The Son's willing submission to not knowing the hour in His incarnate state is a profound example of His humility and trust in the Father. His message to us is therefore not 'calculate,' but 'watch' and 'be ye also ready' (Matthew 24:42, 44). Our assurance is not in knowing the date, but in knowing the Person who is coming. Our readiness comes from a daily, living relationship with Christ, so that whether He comes in the morning, noon, or night, we will greet Him with joy."
+  }
+},
+{
+  "id": "PR036",
+  "question": "During the Last Supper, Jesus took a cup of wine and made a prophetic declaration, establishing it as a symbol of the New Covenant and foretelling His future reunion with the disciples. What did He say about the cup and His future drinking of it?",
+  "options": [
+      "Mark 14:24-25 - And he said unto them, This is my blood of the new testament, which is shed for all. Verily I say unto you, I will not drink again of the fruit of the vine, until that day that I drink it new in the kingdom of God.",
+      "Mark 14:24-25 - And he said unto them, This is my blood of the new testament, which is shed for many. Verily I say unto you, I will not drink henceforth of the fruit of the vine, until that day when I drink it new in the kingdom of God.",
+      "Mark 14:24-25 - And he said unto them, This is my blood of the new testament, which is shed for many. Verily I say unto you, I will drink no more of the fruit of the vine, until that day that I drink it new in the kingdom of God.",
+      "Mark 14:24-25 - And he said to them, This is my blood of the new covenant, which is poured out for many. Truly I say to you, I will drink no more of the fruit of the vine, until that day that I drink it anew in the kingdom of God."
+  ],
+  "answer": "Mark 14:24-25 - And he said unto them, This is my blood of the new testament, which is shed for many. Verily I say unto you, I will drink no more of the fruit of the vine, until that day that I drink it new in the kingdom of God.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This passage contains a dual prophecy. First, Jesus prophetically re-interprets the Passover cup as a symbol of His own atoning blood, which will inaugurate the New Covenant. Second, He prophesies a future celebration in the consummated kingdom of God.",
+      "Importance_of_Wording": "'This is my blood of the new testament [covenant]' is the language of covenant ratification. His blood, 'shed for many,' is the sacrifice that seals the new agreement between God and humanity. His vow, 'I will drink no more... until that day,' transforms the Lord's Supper from a mere memorial of a past event into a prophetic anticipation of a future one. 'Drink it new in the kingdom of God' points to the great celebration feast, the Marriage Supper of the Lamb.",
+      "Factual_Explanation": "As Jesus and His disciples were celebrating the Passover, He took the third cup of the meal (the 'cup of redemption') and gave it this new, profound meaning. He commanded them to continue this observance in memory of Him, but also as a pledge of His return.",
+      "Theological_Meaning": "The Lord's Supper is thus both a memorial and a prophecy. We look back with gratitude to the cross where His blood was shed for our forgiveness. We also look forward with hope to the day when we will sit down with Him at the banquet table in His kingdom. It connects the 'already' of our salvation with the 'not yet' of its final consummation.",
+      "Christ_Centered_Meaning": "This prophecy fills the Communion service with eschatological hope. Every time believers partake of the unfermented 'fruit of the vine' (a principle of health and holiness), we are not only remembering Christ's death but are also proclaiming His return ('For as often as ye eat this bread, and drink this cup, ye do shew the Lord's death till he come,' 1 Corinthians 11:26). It is a pledge of our future, face-to-face fellowship with our Savior in a world made new."
+  }
+},
+{
+  "id": "PR037",
+  "question": "On the way to the Garden of Gethsemane, Jesus made a sorrowful prophecy that all of His disciples would desert Him that very night, quoting a specific prophecy from Zechariah. What was this prophecy?",
+  "options": [
+      "Mark 14:27 - And Jesus saith unto them, All ye shall be offended because of me tonight: for it is written, I will smite the pastor, and the sheep shall be scattered.",
+      "Mark 14:27 - And Jesus saith unto them, All ye shall stumble because of me this night: for it is written, I will smite the shepherd, and the flock shall be scattered.",
+      "Mark 14:27 - And Jesus saith unto them, All ye shall be offended because of me this night: for it is written, I will smite the shepherd, and the sheep shall be scattered.",
+      "Mark 14:27 - And Jesus saith unto them, All of you will be offended because of me this night: for it is written, I will strike the shepherd, and the sheep will be scattered."
+  ],
+  "answer": "Mark 14:27 - And Jesus saith unto them, All ye shall be offended because of me this night: for it is written, I will smite the shepherd, and the sheep shall be scattered.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a direct prophecy by Jesus of the disciples' imminent failure, which He grounds in an Old Testament prophecy. It demonstrates His foreknowledge of their weakness and the divine plan that was unfolding.",
+      "Importance_of_Wording": "'All ye shall be offended' means they would all stumble and fall away from Him in this moment of crisis. He then quotes Zechariah 13:7, 'I will smite the shepherd.' The 'I' in the original prophecy is God the Father, indicating that the death of the Shepherd (Christ) was part of the divine plan. The result would be that 'the sheep shall be scattered.'",
+      "Factual_Explanation": "As they walked to the Mount of Olives after the Last Supper, Jesus soberly prepared His disciples for their own impending failure. Peter, in his typical fashion, vehemently denied that he would ever be offended, boasting that he would die with Jesus. Jesus then proceeded to prophesy Peter's specific denial.",
+      "Theological_Meaning": "This prophecy shows the fragility of human faithfulness when faced with severe trial. It underscores our absolute dependence on God's grace. It also reveals the profound loneliness of Christ in His passion; the Shepherd was smitten, and the sheep, for a time, were scattered in fear and confusion, just as prophesied.",
+      "Christ_Centered_Meaning": "Christ is the good Shepherd who was 'smitten' for the sheep. His arrest and crucifixion was the fulfillment of this prophecy. The scattering of the disciples was temporary. After His resurrection, the Shepherd sought out His scattered sheep (like Peter on the shores of Galilee) and gathered them once more, commissioning them to be shepherds of His flock. This prophecy, while painful, ultimately points to the resilience of God's plan and His power to restore His fallen followers."
+  }
+},
+{
+  "id": "PR038",
+  "question": "During His trial before the Sanhedrin, the high priest put Jesus under oath to declare if He was the Christ, the Son of God. What was Jesus' powerful, two-part prophetic answer?",
+  "options": [
+      "Mark 14:62 - And Jesus said, I am he: and ye shall see the Son of man seated on the right hand of power, and coming in the clouds of heaven.",
+      "Mark 14:62 - And Jesus said, I am: and ye shall see the Son of man sitting on the right hand of power, and coming in the clouds of heaven.",
+      "Mark 14:62 - And Jesus said, I am: and you will see the Son of man sitting at the right hand of might, and coming with the clouds of heaven.",
+      "Mark 14:62 - And Jesus said, I am: and ye shall behold the Son of man sitting on the right hand of power, and arriving in the clouds of heaven."
+  ],
+  "answer": "Mark 14:62 - And Jesus said, I am: and ye shall see the Son of man sitting on the right hand of power, and coming in the clouds of heaven.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is Jesus' great 'Yes' under oath. He not only confirms His messianic identity but also delivers a stunning prophecy of His future exaltation and glorious return, turning the tables on His judges.",
+      "Importance_of_Wording": "His answer 'I am' is a direct affirmation of His divinity. He then combines two powerful Old Testament prophecies. 'Sitting on the right hand of power' is from Psalm 110:1 ('The LORD said unto my Lord, Sit thou at my right hand'), a prophecy of His exaltation and priestly intercession. 'Coming in the clouds of heaven' is from Daniel 7:13, a prophecy of His second coming in glory. He prophesied to His judges that their roles would be reversed: the prisoner they were condemning would one day be their glorious Judge.",
+      "Factual_Explanation": "After a series of false witnesses failed to produce a consistent charge, the high priest Caiaphas put Jesus under a solemn oath. Jesus, who had been silent, now gave a direct and earth-shattering answer that sealed His own death sentence, as the high priest immediately accused Him of blasphemy.",
+      "Theological_Meaning": "At His moment of deepest humiliation, Jesus prophesied His ultimate glorification. This shows that His trial and death were not a defeat, but a necessary step on His path to glory. He looked beyond the cross to His ascension, His high-priestly ministry ('sitting on the right hand of power'), and His final return ('coming in the clouds').",
+      "Christ_Centered_Meaning": "This is the ultimate prophetic statement of Christ's two-phase ministry after His resurrection. First, His heavenly sanctuary ministry as our High Priest, where He sits at the 'right hand of power,' applying the benefits of His atonement. Second, His second coming, where He will return in glory to gather His people and execute judgment. He declared His ultimate victory at the very moment of His apparent defeat."
+  }
+},
+{
+  "id": "PR039",
+  "question": "In the book of Matthew, what specific Old Testament prophecy is cited as being fulfilled when the soldiers parted Jesus' garments and cast lots for his vesture at the foot of the cross?",
+  "options": [
+      "Matthew 27:35 - And they crucified him, and parted his garments, throwing lots: that it might be fulfilled which was spoken by the prophet, They parted my garments among them, and for my clothing did they cast lots.",
+      "Matthew 27:35 - And they crucified him, and parted his garments, casting lots: that it might be fulfilled which was spoken by the prophet, They parted my garments among them, and upon my vesture did they cast lots.",
+      "Matthew 27:35 - And they crucified him, and parted his clothing, casting lots: that it might be fulfilled which was said by the prophet, They parted my raiment among them, and upon my vesture did they cast lots.",
+      "Matthew 27:35 - And they crucified him, and divided his garments, casting lots: that it might be fulfilled which was spoken by the prophet, They divided my garments among them, and for my vesture they did cast lots."
+  ],
+  "answer": "Matthew 27:35 - And they crucified him, and parted his garments, casting lots: that it might be fulfilled which was spoken by the prophet, They parted my garments among them, and upon my vesture did they cast lots.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse shows how even the seemingly incidental actions of the Roman soldiers at the crucifixion were a precise fulfillment of a specific, detailed prophecy, demonstrating God's sovereign control over the events of the cross.",
+      "Importance_of_Wording": "Matthew quotes directly from Psalm 22:18. The prophecy has two parts: they 'parted his garments,' referring to His outer clothes which they divided among themselves. Then, for His 'vesture' (His seamless inner tunic), 'did they cast lots,' because it would have been ruined by tearing it. The soldiers, ignorant of the prophecy, fulfilled it to the letter.",
+      "Factual_Explanation": "As was the custom, the Roman execution squad claimed the minor possessions of the condemned. They divided Jesus' clothes, but when they came to the seamless tunic, they decided to gamble for it rather than divide it, thus perfectly fulfilling the ancient prophecy.",
+      "Theological_Meaning": "Psalm 22 is a profound Messianic psalm that describes the suffering of the crucified one in startling detail a thousand years before the event. The fulfillment of such a specific detail gives powerful evidence for the divine inspiration of Scripture and God's absolute foreknowledge. It shows that the events of the cross were not random but were part of a divinely foreordained plan.",
+      "Christ_Centered_Meaning": "The suffering Savior on the cross was the one spoken of by the prophets. This fulfillment of prophecy served to strengthen the faith of the disciples after the resurrection and became a powerful tool in apostolic preaching. If God foretold and controlled even the small details of the crucifixion, believers can have absolute confidence that He will also fulfill every detail of the prophecies concerning Christ's second coming and the establishment of His kingdom."
+  }
+},
+{
+  "id": "PR040",
+  "question": "When Jesus cried out from the cross, 'My God, my God, why hast thou forsaken me?', He was quoting the opening line of a Psalm that prophesies in detail the experience of the crucified Messiah. Which Psalm did He quote?",
+  "options": [
+      "Psalm 77:7 - Will the Lord cast off for ever? and will he be favourable no more?",
+      "Psalm 88:14 - LORD, why castest thou off my soul? why hidest thou thy face from me?",
+      "Psalm 22:1 - My God, my God, why hast thou forsaken me? why art thou so far from helping me, and from the words of my roaring?",
+      "Psalm 42:9 - I will say unto God my rock, Why hast thou forgotten me? why go I mourning because of the oppression of the enemy?"
+  ],
+  "answer": "Psalm 22:1 - My God, my God, why hast thou forsaken me? why art thou so far from helping me, and from the words of my roaring?",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the correct opening verse of the most detailed prophetic description of the crucifixion in the Old Testament. By quoting this first line, Jesus was pointing all who had ears to hear to the entire prophetic psalm.",
+      "Importance_of_Wording": "The cry 'My God, my God, why hast thou forsaken me?' expresses the central horror of the cross: the separation from the Father that Christ experienced as He bore the full weight of the world's sin. He who knew no sin was made sin for us, and in that moment, He felt the divine wrath against sin that we deserved.",
+      "Factual_Explanation": "As Jesus hung on the cross, He uttered this agonizing cry in Aramaic ('Eloi, Eloi, lama sabachthani?'), which is recorded in both Matthew and Mark. It is the opening line of Psalm 22.",
+      "Theological_Meaning": "Psalm 22 goes on to prophesy the mocking of the onlookers ('He trusted on the LORD... let him deliver him'), the physical agony of crucifixion ('all my bones are out of joint... they pierced my hands and my feet'), the parting of the garments, and culminates in a shout of victory ('he hath done this'). By quoting the first verse, Jesus was claiming the entire psalm as a prophecy of His experience, inviting the onlookers to see the fulfillment before their eyes.",
+      "Christ_Centered_Meaning": "This cry is the fulfillment of the prophecy that the Shepherd would be smitten. It is the cost of our atonement. The Father did not forsake the Son because He ceased to love Him, but because the Son was standing in the place of the sinner, bearing the full, undiluted consequence of sin, which is separation from God. This cry reveals the depth of Christ's suffering for us. But the psalm does not end in despair. It ends in triumph, prophesying that 'all the ends of the world shall remember and turn unto the LORD,' pointing to the glorious results of His sacrifice."
+  }
+},
+{
+  "id": "PR041",
+  "question": "After His resurrection, Jesus appeared to two disciples on the road to Emmaus who were confused and despondent about the crucifixion. Beginning with the writings of Moses, what did Jesus do to restore their faith?",
+  "options": [
+      "Luke 24:27 - And starting at Moses and all the prophets, he expounded unto them in all the holy writings the things concerning himself.",
+      "Luke 24:27 - And beginning with Moses and all the prophets, he interpreted to them in all the scriptures the things concerning himself.",
+      "Luke 24:27 - And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning himself.",
+      "Luke 24:27 - And commencing at Moses and all the prophets, he explained to them in all the scriptures the things about himself."
+  ],
+  "answer": "Luke 24:27 - And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning himself.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This verse describes the first Bible study given by the resurrected Christ. It reveals His own method for understanding Scripture: all of it, from Moses to the last prophet, points to Him. This is the key to all sound prophetic and biblical interpretation.",
+      "Importance_of_Wording": "The scope is comprehensive: 'beginning at Moses and all the prophets' and 'in all the scriptures.' The action is interpretive: 'he expounded unto them,' meaning He explained and opened up the meaning. The subject matter is singular: 'the things concerning himself.' Jesus taught them that His suffering, death, and resurrection were not a tragic accident, but the precise fulfillment of Old Testament prophecy.",
+      "Factual_Explanation": "Cleopas and another disciple were walking to Emmaus, discussing the sad events of the crucifixion. Jesus joined them, but they were kept from recognizing Him. He asked what they were talking about, and after they recounted the events, He rebuked them as 'slow of heart to believe all that the prophets have spoken' and then gave them this masterful Bible study.",
+      "Theological_Meaning": "This is a foundational principle of hermeneutics (the science of interpretation). Christ is the central theme of all Scripture. The Old Testament is not merely a history of Israel but a prophetic book that unveils the person and work of the Messiah. To read the scriptures without seeing Christ is to miss their primary purpose. Their hearts burned within them (v. 32) because a Christ-centered, prophetic understanding of Scripture brings light and fire to the soul.",
+      "Christ_Centered_Meaning": "The entire sanctuary service, with its priests and sacrifices, prophesied of Him. The historical deliverers like Joseph, Moses, and David were types of Him. The explicit prophecies of Isaiah, Daniel, and the Psalms pointed to Him. Jesus Himself is the master key that unlocks the meaning of the entire Old Testament. This principle is vital for understanding prophecy today; all prophecy, including the difficult symbols of Daniel and Revelation, must be interpreted through the lens of Jesus Christ and the Great Controversy between Him and Satan."
+  }
+},
+{
+  "id": "PR042",
+  "question": "Later on the day of His resurrection, Jesus appeared to the eleven disciples. To prove He was not a spirit and to open their minds to the prophecies, what did He declare must be fulfilled?",
+  "options": [
+      "Luke 24:44 - And he said unto them, These are the sayings which I spoke unto you, while I was yet with you, that all things must be fulfilled, which were written in the law of Moses, and in the prophets, and in the psalms, regarding me.",
+      "Luke 24:44 - And he said unto them, These are the words which I spake unto you, while I was yet with you, that all things must be fulfilled, which were written in the law of Moses, and in the prophets, and in the psalms, concerning me.",
+      "Luke 24:44 - And he said to them, These are the words which I spoke to you, while I was still with you, that everything must be fulfilled, which was written in the law of Moses, and in the prophets, and in the psalms, about me.",
+      "Luke 24:44 - And he said unto them, These are the words which I spake unto you, while I was yet with you, that all things must be accomplished, which were written in the law of Moses, and in the prophets, and in the psalms, concerning me."
+  ],
+  "answer": "Luke 24:44 - And he said unto them, These are the words which I spake unto you, while I was yet with you, that all things must be fulfilled, which were written in the law of Moses, and in the prophets, and in the psalms, concerning me.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is Jesus' authoritative statement on the threefold division of the Hebrew Scriptures and their unified prophetic witness to Him. He affirms that His entire life, death, and resurrection were the fulfillment of a detailed, divinely-inspired script.",
+      "Importance_of_Wording": "Jesus refers to the three sections of the Tanakh (the Hebrew Bible): 'the law of Moses' (Torah), 'the prophets' (Nevi'im), and 'the psalms' (representing the Writings, or Ketuvim). He states that 'all things must be fulfilled' written in these sections 'concerning me.' This is a comprehensive claim that He is the central subject of the entire Old Testament.",
+      "Factual_Explanation": "Appearing to the disciples in the upper room, Jesus calmed their fears and then gave them their second great lesson on prophetic interpretation. He reminded them of what He had taught them before His death and then 'opened he their understanding, that they might understand the scriptures' (v. 45).",
+      "Theological_Meaning": "This verse establishes the divine authority and Christ-centered unity of the Old Testament. It teaches that the plan of salvation, culminating in the Messiah, was not an afterthought but was woven into the fabric of Scripture from the very beginning. This provides an unshakable, prophetic foundation for the Christian faith.",
+      "Christ_Centered_Meaning": "Christ's statement is the mandate for a Christological reading of all Scripture. Every story, every law, every sanctuary service, and every prophecy finds its true meaning in relation to Him. The law of Moses showed *why* we need a Savior. The prophets predicted the *coming* of the Savior. The psalms expressed the *heart* of the Savior. Jesus is the fulfillment of them all. This is the truth that turns the disciples from a fearful huddle into bold witnesses."
+  }
+},
+{
+  "id": "PR043",
+  "question": "After opening the disciples' minds to the Old Testament, Jesus summarized the core prophetic message concerning Himself that was now to become their proclamation to the world. What did He identify as the two main points of this prophetic message?",
+  "options": [
+      "Luke 24:46-47 - And said unto them, Thus it is written, and thus it was required for Christ to suffer, and to rise from the dead the third day: And that turning and remission of sins should be preached in his name among all nations.",
+      "Luke 24:46-47 - And said unto them, Thus it is written, and thus it was fitting for Christ to suffer, and to rise from the dead the third day: And that repentance and pardon of sins should be preached in his name to all nations.",
+      "Luke 24:46-47 - And said unto them, Thus it is written, and thus it behoved Christ to suffer, and to rise from the dead the third day: And that repentance and remission of sins should be preached in his name among all nations.",
+      "Luke 24:46-47 - And said to them, Thus it is written, and thus it was necessary for Christ to suffer, and to rise from the dead on the third day: And that repentance and forgiveness of sins should be proclaimed in his name among all nations."
+  ],
+  "answer": "Luke 24:46-47 - And said unto them, Thus it is written, and thus it behoved Christ to suffer, and to rise from the dead the third day: And that repentance and remission of sins should be preached in his name among all nations, beginning at Jerusalem.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is Jesus' own summary of the gospel, the core message that was prophesied and now must be proclaimed. It contains the central facts of His work and the required human response.",
+      "Importance_of_Wording": "The message is rooted in prophecy: 'Thus it is written.' It 'behoved' Christ (it was divinely necessary) 'to suffer, and to rise from the dead the third day.' This is the historical core of the gospel. The second part is the mission: 'repentance and remission of sins should be preached in his name.' Repentance is the human response; remission (forgiveness) is the divine gift. This message is for 'all nations,' showing the universal scope of the gospel.",
+      "Factual_Explanation": "Having explained how the Old Testament points to Him, Jesus now commissions His disciples. He boils down all the prophecies into this concise summary and tells them they are to be 'witnesses of these things' (v. 48) to the entire world.",
+      "Theological_Meaning": "This is the essence of the apostolic kerygma (proclamation). The gospel is not a set of moral teachings, but the proclamation of a historical event—the prophesied death and resurrection of Jesus Christ—and its saving benefits. The message is not just forgiveness, but a call to 'repentance,' a turning away from sin, which is empowered by the grace that offers remission.",
+      "Christ_Centered_Meaning": "The entire Christian mission is encapsulated here. It is to preach 'in his name,' meaning on His authority and centered on His person. The message of repentance and remission of sins is the core of the Three Angels' Messages, the final call to a world steeped in sin. It is a call to turn from the false worship of Babylon ('repentance') and receive forgiveness and cleansing through faith in the Lamb ('remission of sins'), in preparation for the judgment hour and the return of the King."
+  }
+},
+{
+  "id": "PR044",
+  "question": "In the prologue to his Gospel, John the Apostle gives a prophetic testimony to the divine, pre-existent nature of 'the Word'. Before the incarnation, what is the eternal status of this Word?",
+  "options": [
+      "John 1:1-2 - At the first was the Word, and the Word was with God, and the Word was God. The same was at the first with God.",
+      "John 1:1-2 - In the beginning was the Word, and the Word was beside God, and the Word was God. This one was in the beginning with God.",
+      "John 1:1-2 - In the beginning was the Word, and the Word was with God, and the Word was God. The same was in the beginning with God.",
+      "John 1:1-2 - In the beginning existed the Word, and the Word was with God, and the Word was God. The same was in the beginning with God."
+  ],
+  "answer": "John 1:1-2 - In the beginning was the Word, and the Word was with God, and the Word was God. The same was in the beginning with God.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is John's opening, profound theological statement, a prophecy of the eternal nature of the one who would become Jesus Christ. It sets the stage for the entire Gospel by identifying Jesus as the eternal, divine God.",
+      "Importance_of_Wording": "The phrasing is precise and powerful. 'In the beginning *was* the Word' (not 'was created'). The Word already existed at the point of creation. 'The Word was *with* God' establishes a distinction of Persons within the Godhead. 'And the Word *was* God' declares the full deity of the Word, refuting any idea that He is a lesser being. John repeats 'The same was in the beginning with God' to leave no room for misunderstanding.",
+      "Factual_Explanation": "John begins his Gospel not with a historical narrative, but with a theological prologue that echoes Genesis 1:1. He introduces Jesus as 'the Word' (Greek: *Logos*), a term that would resonate with both Jewish (the creative Word of God) and Greek (the rational principle of the universe) audiences.",
+      "Theological_Meaning": "This is a foundational text for the doctrine of the Trinity and the deity of Christ. It prophesies that the man Jesus, whose story John is about to tell, is none other than the eternal God who existed in a distinct, personal relationship with God the Father from all eternity. This truth is non-negotiable for salvation; only a divine Savior could pay the infinite penalty for sin.",
+      "Christ_Centered_Meaning": "The 'Word' is Christ. This passage is the New Testament's great commentary on Genesis 1:1. The God who created all things was a plurality, with Christ as the active agent. As John continues, 'All things were made by him; and without him was not any thing made that was made' (John 1:3). The same divine Word that spoke the universe into existence is the only power that can recreate a sinner's heart (2 Corinthians 5:17) and will ultimately make 'all things new' in the restored earth (Revelation 21:5)."
+  }
+},
+{
+  "id": "PR045",
+  "question": "John the Baptist gave a prophetic testimony identifying Jesus as the fulfillment of the entire sacrificial system. What was his proclamation when he saw Jesus coming toward him?",
+  "options": [
+      "John 1:29 - The following day John seeth Jesus coming unto him, and saith, Behold the Lamb of God, which beareth away the sin of the world.",
+      "John 1:29 - The next day John seeth Jesus coming unto him, and saith, Behold the Sacrifice of God, which taketh away the sin of the world.",
+      "John 1:29 - The next day John seeth Jesus coming unto him, and saith, Behold the Lamb of God, which taketh away the sin of the world.",
+      "John 1:29 - The next day John saw Jesus coming toward him, and said, Look, the Lamb of God, who takes away the sin of the world."
+  ],
+  "answer": "John 1:29 - The next day John seeth Jesus coming unto him, and saith, Behold the Lamb of God, which taketh away the sin of the world.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is the pinnacle of John the Baptist's prophetic ministry. With this one statement, he identified Jesus as the antitype to which all the Passover lambs and sanctuary sacrifices had pointed for centuries.",
+      "Importance_of_Wording": "The title 'Lamb of God' is profoundly significant. It points to the Passover lamb whose blood saved from death, the lamb of the daily sacrifice, and the suffering servant of Isaiah 53, who was 'brought as a lamb to the slaughter.' The verb 'taketh away' (Greek: *airōn*) means to bear, lift up, and carry away. The scope is universal: 'the sin of the world,' not just the sins of Israel.",
+      "Factual_Explanation": "After Jesus' baptism and temptation, John the Baptist was continuing his ministry. When he saw Jesus approaching, he made this public, prophetic declaration to his own disciples, identifying Jesus as the ultimate sacrifice for sin.",
+      "Theological_Meaning": "This statement is the gospel in a nutshell. It prophesies the means of salvation: a substitutionary sacrifice provided by God Himself. It reveals the purpose of Christ's coming: to deal with the sin problem. The entire Old Testament sacrificial system, with its thousands of slain lambs, was a prophetic object lesson that found its complete fulfillment in this one Lamb.",
+      "Christ_Centered_Meaning": "Jesus is the Lamb 'slain from the foundation of the world' (Revelation 13:8). His sacrifice was the one, true, and final atonement for sin. This is the central truth of the heavenly sanctuary ministry, where He, the Lamb that was slain, now stands before the throne as our High Priest, pleading the merits of His blood. In the final victory celebration, the redeemed will sing, 'Worthy is the Lamb that was slain to receive power, and riches, and wisdom, and strength, and honour, and glory, and blessing' (Revelation 5:12)."
+  }
+},
+{
+  "id": "PR046",
+  "question": "Jesus had a conversation with Nicodemus, a ruler of the Jews, who came to him by night. Jesus explained that to see the kingdom of God, a person must undergo a radical transformation, which He described with a prophetic metaphor. What did Jesus say one must experience?",
+  "options": [
+      "John 3:3 - Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be made new, he cannot see the kingdom of God.",
+      "John 3:3 - Jesus replied and said to him, Truly, truly, I say to thee, Unless a man be born again, he cannot perceive the kingdom of God.",
+      "John 3:3 - Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God.",
+      "John 3:3 - Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born from above, he cannot see the kingdom of God."
+  ],
+  "answer": "John 3:3 - Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is Jesus' foundational prophecy about the nature of personal salvation. He declares that entry into God's kingdom is not based on heritage, knowledge, or works, but on a supernatural event: the new birth.",
+      "Importance_of_Wording": "The phrase 'born again' (Greek: *gennēthē anōthen*) has a dual meaning. It can mean 'born again' or 'born from above.' Both are true. It is a new birth, a second beginning, and its source is 'from above,' from God. Jesus' statement is absolute: 'Except a man be born again, he cannot see...' This is not an optional extra for the dedicated; it is the essential, non-negotiable requirement for salvation.",
+      "Factual_Explanation": "Nicodemus, a respected Pharisee and member of the Sanhedrin, came to Jesus acknowledging Him as a teacher from God. Jesus cut straight to the heart of the matter, bypassing pleasantries to address Nicodemus's fundamental spiritual need for a radical, personal transformation.",
+      "Theological_Meaning": "This verse prophesies the necessity of regeneration by the Holy Spirit. It refutes any system of salvation based on human effort. We cannot reform our old nature; we must receive a new nature from God. This is the essence of the new covenant, which promises 'a new heart also will I give you, and a new spirit will I put within you' (Ezekiel 36:26). The new birth is the fulfillment of this prophecy in the life of the believer.",
+      "Christ_Centered_Meaning": "The new birth is made possible only through the death and resurrection of Jesus Christ. As Paul writes, we are 'buried with him by baptism into death: that like as Christ was raised up from the dead... even so we also should walk in newness of life' (Romans 6:4). Christ, the life-giver, is the source of this new life. It is the creative power of the Word who spoke worlds into existence (John 1:3) that now speaks a new spiritual creation into existence within the believer's heart (2 Corinthians 5:17)."
+  }
+},
+{
+  "id": "PR047",
+  "question": "Jesus spoke to the Samaritan woman at the well, prophesying a time when the physical location of worship would become irrelevant, being replaced by a new, spiritual form of worship. What did He declare the Father is seeking?",
+  "options": [
+      "John 4:23-24 - But the hour is coming, and now is, when the true worshippers will worship the Father in spirit and in truth: because the Father seeketh such to worship him. God is a Spirit: and they that worship him must worship him in spirit and in truth.",
+      "John 4:23-24 - But the hour cometh, and now is, when the true worshippers shall worship the Father in spirit and in reality: for the Father seeketh such to worship him. God is Spirit: and they that worship him must worship him in spirit and in reality.",
+      "John 4:23-24 - But the hour cometh, and now is, when the true worshippers shall worship the Father in spirit and in truth: for the Father seeketh such to worship him. God is a Spirit: and they that worship him must worship him in spirit and in truth.",
+      "John 4:23-24 - But the time cometh, and now is, when the real worshippers shall worship the Father in spirit and in truth: for the Father desireth such to worship him. God is a Spirit: and they that worship him must worship him in spirit and in truth."
+  ],
+  "answer": "John 4:23-24 - But the hour cometh, and now is, when the true worshippers shall worship the Father in spirit and in truth: for the Father seeketh such to worship him. God is a Spirit: and they that worship him must worship him in spirit and in truth.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a major prophecy announcing the transition from the geographically-centered worship of the Old Covenant (Jerusalem, Gerizim) to the universal, spiritual worship of the New Covenant. It defines the nature of true worship for all time.",
+      "Importance_of_Wording": "'The hour cometh, and now is' signifies that this new era was being inaugurated in Jesus' own person and ministry. True worship must be 'in spirit' (with the heart, sincere and genuine, prompted by the Holy Spirit) 'and in truth' (in accordance with God's revealed Word, not human tradition or error). The motivation is profound: 'for the Father seeketh such to worship him.' God is actively searching for worshippers of this kind.",
+      "Factual_Explanation": "The Samaritan woman raised the centuries-old debate about the proper place of worship: Mount Gerizim for the Samaritans or Jerusalem for the Jews. Jesus declared this entire debate obsolete. He prophesied a new kind of worship not tied to a physical location.",
+      "Theological_Meaning": "This prophecy signaled the end of the earthly sanctuary system as the focal point of worship. With Christ's death and His ascension to the heavenly sanctuary, our worship is now directed toward Him where He is, at the right hand of the Father. This has immense significance for understanding the end-time conflict over worship. The final battle will not be over a physical location, but over the *manner* and *object* of worship: 'in spirit and in truth' according to God's commandments, versus the traditions and commandments of men.",
+      "Christ_Centered_Meaning": "Jesus is the 'truth' (John 14:6) and the one who gives the Holy 'Spirit.' Therefore, to worship 'in spirit and in truth' is to worship through Christ and by His Spirit. He is the new and living temple, the true meeting place between God and humanity. The final call of the gospel is a call to this kind of worship: 'worship him that made heaven, and earth, and the sea, and the fountains of waters' (Revelation 14:7)—worship the Creator in the way He has commanded, in spirit and in truth."
+  }
+},
+{
+  "id": "PR048",
+  "question": "Jesus healed a man who had been an invalid for thirty-eight years, and did so on the Sabbath. When the Jews persecuted Him for it, He made a prophetic claim about His relationship with the Father and His own authority to work. What was His defense?",
+  "options": [
+      "John 5:17 - But Jesus answered them, My Father works always, and I work.",
+      "John 5:17 - But Jesus replied to them, My Father is working until now, and I am working.",
+      "John 5:17 - But Jesus answered them, My Father worketh hitherto, and I work.",
+      "John 5:17 - But Jesus answered them, My Father has been working until now, and I work also."
+  ],
+  "answer": "John 5:17 - But Jesus answered them, My Father worketh hitherto, and I work.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a profound prophetic claim to equality with God, using the Sabbath as the context. Jesus claims the same divine prerogative to do good and give life on the Sabbath as His Father.",
+      "Importance_of_Wording": "'My Father worketh hitherto' (or 'is working until now') refers to God's continuous work of sustaining the universe and showing mercy, which does not cease on the Sabbath. Jesus' statement, 'and I work,' places His own work on the same level as the Father's. He is claiming that His works of healing and life-giving are the very works of God, and are therefore perfectly appropriate for the Sabbath day.",
+      "Factual_Explanation": "At the pool of Bethesda, Jesus healed a man who had been lame for 38 years. Because this occurred on the Sabbath, the Jewish leaders began to persecute Jesus. This verse is His direct response to their accusations.",
+      "Theological_Meaning": "The Jews understood this perfectly as a claim to deity, for the next verse says they sought to kill Him 'because he not only had broken the sabbath, but said also that God was his Father, making himself equal with God' (John 5:18). This prophecy reclaims the Sabbath from a day of restrictive, man-made rules to its original purpose: a day for celebrating God's works of creation and redemption, a day for healing and doing good. It prophesies that the Lord of the Sabbath would restore its true meaning.",
+      "Christ_Centered_Meaning": "Jesus, as the Creator, is the one who instituted the Sabbath. Here He prophesies and demonstrates its true purpose. The Sabbath is a celebration of the 'works' of God. At creation, God rested from His work of forming the world. In redemption, Christ offers us rest from our own sinful works. On the Sabbath, He did His Father's work of healing and restoration, a prophetic preview of the final restoration He will bring in the new earth, the ultimate Sabbath rest."
+  }
+},
+{
+  "id": "PR049",
+  "question": "Continuing His defense for healing on the Sabbath, Jesus makes a startling prophecy about a future hour when the dead will hear His voice and be resurrected. He describes two distinct resurrections with two different outcomes. What is this prophecy?",
+  "options": [
+      "John 5:28-29 - Be not amazed at this: for the hour is coming, in the which all who are in the graves shall hear his voice, And shall come forth; they that have done good, unto the resurrection of life; and they that have done evil, unto the resurrection of condemnation.",
+      "John 5:28-29 - Marvel not at this: for the hour is coming, in the which all that are in the graves shall hear his voice, And shall come forth; they that have done good, unto the resurrection of life; and they that have done evil, unto the resurrection of damnation.",
+      "John 5:28-29 - Marvel not at this: for the hour is coming, in the which all that are in the graves shall hear his voice, And shall come forth; they that have done good, unto the resurrection of life; and they that have done wickedness, unto the resurrection of damnation.",
+      "John 5:28-29 - Do not marvel at this: for the time is coming, in which all that are in the tombs shall hear his voice, And shall come out; they that have done good, unto the resurrection of life; and they that have done evil, unto the resurrection of judgment."
+  ],
+  "answer": "John 5:28-29 - Marvel not at this: for the hour is coming, in the which all that are in the graves shall hear his voice, And shall come forth; they that have done good, unto the resurrection of life; and they that have done evil, unto the resurrection of damnation.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is one of the clearest prophecies in the Bible of a general resurrection, and it explicitly describes two different destinies. It forms the basis for the New Testament doctrine of the two resurrections.",
+      "Importance_of_Wording": "'The hour is coming' points to a future, specific time. 'All that are in the graves shall hear his voice' prophesies a universal call to the dead, underscoring Christ's authority over death itself. The prophecy then describes a division based on character: 'they that have done good' (the righteous) experience a 'resurrection of life,' while 'they that have done evil' (the wicked) experience a 'resurrection of damnation' (or 'judgment').",
+      "Factual_Explanation": "Jesus grounds His authority to heal in His authority as the Son of God, to whom the Father has given all judgment and the power to give life. He then projects this authority into the future, prophesying this great resurrection event.",
+      "Theological_Meaning": "This prophecy is a cornerstone for understanding the state of the dead and the end times. It teaches that the dead are in their 'graves' (in a state of unconscious sleep), not alive in heaven or hell. They await the voice of Christ to be called forth. It also clearly teaches two distinct resurrections, separated by their nature and outcome. Revelation 20 clarifies the timing: the 'resurrection of life' (the first resurrection) occurs at the Second Coming for the righteous, and the 'resurrection of damnation' (the second resurrection) occurs a thousand years later for the wicked.",
+      "Christ_Centered_Meaning": "Christ's own resurrection is the guarantee and 'firstfruits' of the resurrection of life. Because He rose, those who are in Him will also rise. His voice, which called Lazarus from the tomb, is the same voice that will one day empty all the graves of the righteous. This prophecy is the ultimate hope for the believer, promising victory over death and a restored, eternal life in the presence of the Life-giver."
+  }
+},
+{
+  "id": "PR050",
+  "question": "At the Feast of Tabernacles, Jesus stood up on the last and greatest day of the feast and made a prophetic invitation, promising a supernatural outflow from those who believe in Him. What was this promise?",
+  "options": [
+      "John 7:37-38 - In the last day, that great day of the feast, Jesus stood and cried, saying, If any man thirst, let him come unto me, and drink. He that trusts in me, as the scripture hath said, out of his belly shall flow rivers of living water.",
+      "John 7:37-38 - In the last day, that great day of the feast, Jesus stood and shouted, saying, If any man thirst, let him come unto me, and drink. He that believeth in me, as the scripture hath said, from his belly shall flow streams of living water.",
+      "John 7:37-38 - In the last day, that great day of the feast, Jesus stood and cried, saying, If any man thirst, let him come unto me, and drink. He that believeth on me, as the scripture hath said, out of his belly shall flow rivers of living water.",
+      "John 7:37-38 - On the last day, that great day of the feast, Jesus stood and cried, saying, If any man is thirsty, let him come to me, and drink. He that believeth on me, as the scripture hath said, out of his heart shall flow rivers of living water."
+  ],
+  "answer": "John 7:37-38 - In the last day, that great day of the feast, Jesus stood and cried, saying, If any man thirst, let him come unto me, and drink. He that believeth on me, as the scripture hath said, out of his belly shall flow rivers of living water.",
+  "category": "Prophecy",
+  "explanation": {
+      "Relevance_and_Correctness": "This is a dramatic, public prophecy given in the context of a key messianic ceremony. Jesus identifies Himself as the true source of spiritual life and prophesies the coming and work of the Holy Spirit in the life of the believer.",
+      "Importance_of_Wording": "The invitation 'If any man thirst, let him come unto me, and drink' is a universal call to find satisfaction in Christ. The prophecy 'out of his belly shall flow rivers of living water' promises that the believer will not only be satisfied, but will become a source of life and blessing to others. This outflow is conditioned on belief ('He that believeth on me') and is rooted in Scripture ('as the scripture hath said').",
+      "Factual_Explanation": "The Feast of Tabernacles included a daily water-pouring ceremony, where a priest would draw water from the Pool of Siloam and pour it out at the altar, commemorating the water from the rock in the wilderness and praying for rain. On the last day, Jesus stood and made this loud proclamation, identifying Himself as the true spiritual water to which the ceremony pointed.",
+      "Theological_Meaning": "John immediately interprets this prophecy for us in the next verse: '(But this spake he of the Spirit, which they that believe on him should receive: for the Holy Ghost was not yet given; because that Jesus was not yet glorified.)' (John 7:39). This is a prophecy of Pentecost and the subsequent outpouring of the Holy Spirit upon the church. The Spirit would be the source of this divine, overflowing life.",
+      "Christ_Centered_Meaning": "Christ is the smitten Rock from which the living water flows. By coming to Him, we drink of His life-giving Spirit. This prophecy foretells that the work of Christ through His followers would be like 'rivers,' a powerful, life-giving, and ever-flowing influence in a dry and thirsty world. It is the mission of every believer, filled with the Spirit, to be a channel of these 'rivers of living water' to others."
+  }
+}
   ]

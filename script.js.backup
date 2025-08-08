@@ -139,9 +139,7 @@ muteToggle.addEventListener('click', () => {
     // Create an array of all audio elements
     const allAudioElements = [
         audioCorrect1, audioCorrect2, audioWrong, audioTimeup,
-        audioRiser, audioBg, audioTimerTick, audioTickingTime,
-        audioStreakWowza, audioStreakZing, audioStreakKawabanga,
-        audioStreakLetsGo, audioStreakNice
+        audioRiser, audioBg, audioTimerTick, audioTickingTime
     ];
     
     // Set muted state for all audio elements
@@ -168,9 +166,7 @@ function ensureUserInteraction() {
         // Pre-load audio files after user interaction
         const allAudioElements = [
             audioCorrect1, audioCorrect2, audioWrong, audioTimeup,
-            audioRiser, audioBg, audioTimerTick, audioTickingTime,
-            audioStreakWowza, audioStreakZing, audioStreakKawabanga,
-            audioStreakLetsGo, audioStreakNice
+            audioRiser, audioBg, audioTimerTick, audioTickingTime
         ];
         
         // Touch all audio elements to prepare them
@@ -275,11 +271,8 @@ function resetState() {
 
 // --- Animation Functions ---
 const RIGHT_OVERLAYS = [
-    { text: 'POW!', color: '#ffd700', fontSize: '3.5rem', rotate: -8 },
-    { text: 'ZING!', color: '#4caf50', fontSize: '3.2rem', rotate: 6 },
     { text: 'BAM!', color: '#ff4b5c', fontSize: '3.7rem', rotate: 12 },
     { text: 'YES!', color: '#2196f3', fontSize: '3.3rem', rotate: -14 },
-    { text: 'NICE!', color: '#ff9800', fontSize: '3.4rem', rotate: 8 }
 ];
 const WRONG_OVERLAYS = [
     { text: 'ZAP!', color: '#ff4b5c', fontSize: '3.5rem', rotate: 10 },
@@ -583,29 +576,13 @@ function fadeOut(el, cb) {
     }, 500);
 }
 
-// --- Audio Streak Sounds ---
-const audioStreakWowza = document.getElementById('audio-streak-wowza');
-const audioStreakZing = document.getElementById('audio-streak-zing');
-const audioStreakKawabanga = document.getElementById('audio-streak-kawabanga');
-const audioStreakLetsGo = document.getElementById('audio-streak-letsgo');
-const audioStreakNice = document.getElementById('audio-streak-nice');
+// --- Streak sounds removed ---
 
 /**
  * Plays a special sound effect based on the player's streak level
  * @param {number} streak - The current streak count
  */
-function playStreakSound(streak) {
-    let audio = null;
-    if (streak === 3) audio = audioStreakWowza;
-    else if (streak === 5) audio = audioStreakZing;
-    else if (streak === 7) audio = audioStreakKawabanga;
-    else if (streak === 10) audio = audioStreakLetsGo;
-    else if (streak >= 15) audio = audioStreakNice;
-    
-    if (audio) {
-        playSound(audio);
-    }
-}
+function playStreakSound(streak) { return; }
 
 // --- Category to icon mapping
 const CATEGORY_ICONS = {
@@ -769,8 +746,7 @@ function setLoadingProgress(percent) {
 
 // --- Asset Preload Logic ---
 const audioElements = [
-    'audio-correct-1','audio-correct-2','audio-wrong','audio-timeup','audio-riser','audio-bg','audio-timer-tick','audio-ticking-time',
-    'audio-streak-wowza','audio-streak-zing','audio-streak-kawabanga','audio-streak-letsgo','audio-streak-nice'
+    'audio-correct-1','audio-correct-2','audio-wrong','audio-timeup','audio-riser','audio-bg','audio-timer-tick','audio-ticking-time'
 ].map(id => document.getElementById(id)).filter(Boolean);
 
 function preloadAudioAssets(onProgress, onComplete) {
@@ -1147,7 +1123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // Trigger streak confetti/fireworks
         if (correct && currentStreak > 0 && (currentStreak === 3 || currentStreak === 5 || currentStreak === 7 || currentStreak === 10 || currentStreak === 15)) {
-            playStreakSound(currentStreak);
+            // streak sounds disabled
         }
         // If perfect score
         if (gameMode === 'solo' && correctAnswers === questions.length) {
@@ -1263,12 +1239,12 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'perfect':
                 triggerConfetti('perfect');
                 triggerComicFireworks(true);
-                playStreakSound(10); // Epic sound
+                // streak sounds disabled
                 break;
             case 'excellent':
                 triggerConfetti('streak');
                 triggerComicFireworks(false);
-                playStreakSound(5);
+                // streak sounds disabled
                 break;
             case 'good':
                 triggerConfetti('default');

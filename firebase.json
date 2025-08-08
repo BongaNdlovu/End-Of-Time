@@ -12,11 +12,5 @@
         "destination": "/index.html"
       }
     ]
-  },
-  "firestore": {
-    "rules": "firestore-rules.txt"
-  },
-  "functions": {
-    "source": "functions"
   }
 }

@@ -3231,8 +3231,6 @@ if (window.location.protocol !== 'file:') {
     firebase.initializeApp(firebaseConfig);
     auth = firebase.auth();
     db = firebase.firestore();
-    // Initialize Cloud Functions (region can be adjusted if needed)
-    functions = firebase.functions();
     console.log('✅ Firebase initialized successfully');
 } else {
     console.log('⚠️ Running locally - Firebase features disabled');
@@ -3457,33 +3455,41 @@ function formatLeaderboardTime(seconds) {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
-// Submit score to leaderboard via Cloud Function (server-side validation)
-async function submitToLeaderboard(score, time) {
+// Submit score to leaderboard
+function submitToLeaderboard(score, time) {
   if (!currentUser || optoutCheckbox.checked) return;
-
-  const finalScore = Math.max(0, parseInt(score, 10) || 0);
+  
+  // Ensure score and time are valid numbers
+  const finalScore = parseInt(score, 10) || 0;
   const finalTime = parseInt(time, 10) || 0;
-
-  console.log('Submitting score via Cloud Function:', { finalScore, finalTime });
-
-  try {
-    const submitFn = functions.httpsCallable('submitLeaderboardEntry');
-    const payload = {
-      score: finalScore,
-      time: finalTime,
-      questionCount: Array.isArray(questions) ? questions.length : null,
-      powerUpsUsed,
-      longestStreak,
-      correctAnswers,
-      gameMode,
-      startedAtMs: typeof gameStartTime === 'number' ? gameStartTime : null,
-      endedAtMs: Date.now(),
-    };
-    const res = await submitFn(payload);
-    console.log('✅ Server accepted leaderboard entry:', res && res.data);
-  } catch (error) {
-    console.error('❌ Server rejected leaderboard submission:', error);
-  }
+  
+  console.log('Submitting score to leaderboard:', { 
+    originalScore: score, 
+    originalTime: time,
+    finalScore: finalScore, 
+    finalTime: finalTime, 
+    user: currentUser.displayName,
+    currentPlayerScore: playerScore,
+    timeAttackBlueTeamFinalScore: timeAttackBlueTeamFinalScore
+  });
+  
+  const entry = {
+    uid: currentUser.uid,
+    displayName: currentUser.displayName,
+    photoURL: currentUser.photoURL,
+    score: finalScore,
+    time: finalTime,
+    date: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  
+  // Always submit the current score - let the leaderboard ranking handle the display
+  db.collection('leaderboard').doc(currentUser.uid).set(entry)
+    .then(() => {
+      console.log('✅ Score submitted successfully:', finalScore);
+    })
+    .catch(error => {
+      console.error('Error submitting score:', error);
+    });
 }
 
 // Fetch and display Top 100 leaderboard

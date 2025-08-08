@@ -3247,6 +3247,15 @@ if (window.location.protocol !== 'file:') {
     firebase.initializeApp(firebaseConfig);
     auth = firebase.auth();
     db = firebase.firestore();
+    // Initialize Analytics if available and measurementId exists
+    try {
+        if (firebase.analytics && firebaseConfig.measurementId) {
+            firebase.analytics();
+            console.log('✅ Firebase Analytics initialized');
+        }
+    } catch (e) {
+        console.warn('⚠️ Firebase Analytics init failed:', e);
+    }
     console.log('✅ Firebase initialized successfully');
 } else {
     console.log('⚠️ Running locally - Firebase features disabled');

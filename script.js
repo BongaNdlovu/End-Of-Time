@@ -590,15 +590,20 @@ function triggerComicAlarm() {
 let categoryDropdown;
 
 // --- Faith Tokens and Power-Ups ---
+let doublePointsActive = false;
 let freezeTimeActive = false;
-// Removed revive-related variables and double points feature
+// Removed revive-related variables
 const faithTokensDiv = document.getElementById('faith-tokens');
+const doublePointsBtn = document.getElementById('double-points-btn');
 const freezeTimeBtn = document.getElementById('freeze-time-btn');
-// Removed revive button reference and double points button reference
+// Removed revive button reference
 
 function updateFaithTokens(animate = false) {
     faithTokensDiv.innerText = `Faith Tokens: ${faithTokens}`;
+    doublePointsBtn.disabled = faithTokens < 1 || doublePointsActive;
     freezeTimeBtn.disabled = faithTokens < 1 || freezeTimeActive;
+    // Removed revive button disabled state
+    
     // Animate faith tokens change if requested
     if (animate) {
         faithTokensDiv.classList.remove('token-change');
@@ -608,7 +613,15 @@ function updateFaithTokens(animate = false) {
     }
 }
 
-// Removed double points onclick (feature removed)
+doublePointsBtn.onclick = function() {
+    if (faithTokens < 1 || doublePointsActive) return;
+    faithTokens--;
+    doublePointsActive = true;
+    updateFaithTokens(true);
+    doublePointsBtn.classList.add('hint-highlight');
+    setTimeout(() => doublePointsBtn.classList.remove('hint-highlight'), 1200);
+    powerUpsUsed++;
+};
 
 freezeTimeBtn.onclick = function() {
     if (faithTokens < 1 || freezeTimeActive) return;
@@ -940,15 +953,6 @@ const ACHIEVEMENTS = [
     color: '#673AB7',
     rarity: 'epic',
     check: (stats) => stats.prophecyStreak >= 5,
-  },
-  {
-    id: 'health_guru',
-    name: 'Health Guru',
-    description: 'Answer 5 health questions correctly in a row.',
-    icon: '🥗',
-    color: '#4CAF50',
-    rarity: 'rare',
-    check: (stats) => stats.healthStreak >= 5,
   },
   {
     id: 'bible_scholar',
@@ -1747,6 +1751,7 @@ document.addEventListener('DOMContentLoaded', () => {
         teamBlackScore = 0;
         currentQuestionIndex = 0;
         faithTokens = 0;
+        doublePointsActive = false;
         freezeTimeActive = false;
         timeRanOut = false; // Reset time out flag
         // --- NEW FOR SEQUENTIAL TEAM TIME ATTACK ---
@@ -1834,6 +1839,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         hintBtn.disabled = false;
         takeawayBtn.disabled = false;
+        doublePointsActive = false;
         freezeTimeActive = false;
         updateFaithTokens();
         
@@ -1952,12 +1958,9 @@ document.addEventListener('DOMContentLoaded', () => {
         wagerInput.disabled = false;
         wagerInput.style.background = isLightningRound ? '#ffd700' : '';
         
-        // Only freeze time is available (double points removed)
-        if (gameMode === 'solo') {
-            freezeTimeBtn.style.display = 'none';
-        } else {
-            freezeTimeBtn.style.display = '';
-        }
+        // Ensure power-up buttons are visible in both modes (spend allowed in solo and team)
+        doublePointsBtn.style.display = '';
+        freezeTimeBtn.style.display = '';
         
         // Clear encouragement message
         let encouragementDiv = document.getElementById('encouragement-message');
@@ -2002,12 +2005,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const correct = selectedBtn.innerText === questions[currentQuestionIndex].answer;
         showFeedback(correct);
         
-        // Determine wager and clamp to valid bounds
         let wager = parseInt(wagerInput.value, 10) || 1;
-        if (wager < 1) wager = 1;
-        if (wager > maxWagerValue) wager = maxWagerValue;
-        // Compute points strictly from wager (double points feature removed)
-        const points = wager;
+        const isFriday = (new Date().getDay() === 5);
+        if (isFriday) wager *= 2;
         
         // Track achievement stats
         const currentQuestion = questions[currentQuestionIndex];
@@ -2025,7 +2025,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedBtn.classList.add('correct', 'highlight-correct');
             console.log('🎯 Debug: Added highlight to correct answer:', selectedBtn.innerText);
             
-            // Use computed points to ensure the awarded score matches the wager
+            let points = wager * (doublePointsActive ? 2 : 1);
             if (gameMode === 'solo') {
                 const oldScore = playerScore;
                 playerScore += points;
@@ -2040,19 +2040,18 @@ document.addEventListener('DOMContentLoaded', () => {
             } else { // Teams
                 if (currentTeam === 'blue') teamBlueScore += points;
                 else teamBlackScore += points;
+                // Enable token earning in team mode via global streak
+                currentStreak++;
+                if (currentStreak > 0 && currentStreak % 3 === 0) {
+                    faithTokens++;
+                    updateFaithTokens(true);
+                }
             }
             selectedBtn.classList.add('correct');
             selectedBtn.style.transform = 'scale(1.05)';
             setTimeout(() => {
                 selectedBtn.style.transform = '';
             }, 300);
-            // Visual feedback for wager result
-            wagerInput.classList.remove('wager-success', 'wager-failure');
-            wagerInput.classList.add('wager-success');
-            if (typeof wagerFeedback !== 'undefined' && wagerFeedback) {
-                wagerFeedback.textContent = `Great bet! +${points} points`;
-                wagerFeedback.style.color = '#4caf50';
-            }
         } else {
             playSound(audioWrong);
             shakeElement(selectedBtn);
@@ -2061,19 +2060,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 playerScore = Math.max(0, playerScore - wager);
                 currentStreak = 0;
                 console.log(`Score updated: ${oldScore} - ${wager} = ${playerScore}`);
-            } else { // Teams
-                if (currentTeam === 'blue') teamBlueScore = Math.max(0, teamBlueScore - wager);
-                else teamBlackScore = Math.max(0, teamBlackScore - wager);
-                currentStreak = 0;
+        } else { // Teams
+            if (currentTeam === 'blue') teamBlueScore = Math.max(0, teamBlueScore - wager);
+            else teamBlackScore = Math.max(0, teamBlackScore - wager);
+            currentStreak = 0;
             }
             selectedBtn.classList.add('incorrect');
-            // Visual feedback for wager result
-            wagerInput.classList.remove('wager-success', 'wager-failure');
-            wagerInput.classList.add('wager-failure');
-            if (typeof wagerFeedback !== 'undefined' && wagerFeedback) {
-                wagerFeedback.textContent = `Risky bet! -${wager} points`;
-                wagerFeedback.style.color = '#f44336';
-            }
             // Show correct answer with highlight
         const correctAnswer = questions[currentQuestionIndex].answer;
         console.log('🎯 Debug: Correct answer should be:', correctAnswer);
@@ -2089,6 +2081,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (gameMode === 'solo') updateSoloStats();
         else updateScoreDisplay();
+
+        doublePointsActive = false;
 
         // Disable all buttons (highlighting already done above)
         Array.from(optionsDiv.children).forEach(btn => {
@@ -2724,7 +2718,15 @@ document.addEventListener('DOMContentLoaded', () => {
         takeawayBtn.disabled = true;
     };
 
-    // Double points feature removed
+    doublePointsBtn.onclick = function() {
+        if (faithTokens < 1 || doublePointsActive) return;
+        faithTokens--;
+        doublePointsActive = true;
+        updateFaithTokens(true);
+        doublePointsBtn.classList.add('hint-highlight');
+        setTimeout(() => doublePointsBtn.classList.remove('hint-highlight'), 1200);
+        powerUpsUsed++;
+    };
 
     freezeTimeBtn.onclick = function() {
         if (faithTokens < 1 || freezeTimeActive) return;
@@ -2826,6 +2828,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameStartTime = null;
         gameElapsedTime = 0;
         gameQuestionCount = 0;
+        doublePointsActive = false;
         freezeTimeActive = false;
         timeRanOut = false;
         timeAttackTeamTurn = 'blue';
@@ -2948,7 +2951,7 @@ if (contrastToggle) {
 }
 
 // --- Accessibility: Keyboard navigation for main controls ---
-[soloBtn, teamsBtn, hintBtn, takeawayBtn, freezeTimeBtn, nextBtn, exitBtn, muteToggle, contrastToggle].forEach(btn => {
+[soloBtn, teamsBtn, hintBtn, takeawayBtn, doublePointsBtn, freezeTimeBtn, nextBtn, exitBtn, muteToggle, contrastToggle].forEach(btn => {
     if (btn) btn.tabIndex = 0;
 });
 
@@ -3209,44 +3212,27 @@ if (deepInsightNextBtn) {
 }
 
 // --- Firebase Config & Auth ---
-// Firebase project: "End of Time" (end-of-time-94cd3)
-// Project number: 628602476853
+// Firebase project: "End of Time" (end-of-time)
+// Project number: 361998196975
 // TODO: You need to create a Web App in your Firebase project to get the API key and other credentials
 // Go to https://console.firebase.google.com/ → Your Project → Project Settings → General → Your Apps → Add Web App
 const firebaseConfig = {
-  apiKey: "AIzaSyA78bvzjP-b7K9TPCbIL3ttzPJr07VR8kY",
-  authDomain: "end-of-time-94cd3.firebaseapp.com",
-  projectId: "end-of-time-94cd3",
-  storageBucket: "end-of-time-94cd3.firebasestorage.app",
-  messagingSenderId: "628602476853",
-  appId: "1:628602476853:web:181df03c3374465811147c",
-  measurementId: "G-E5R3NG1533"
+  apiKey: "AIzaSyAKExnN5p_QiS7iX-2x4S8Ttf7cPQ_U72E",
+  authDomain: "end-of-time.firebaseapp.com",
+  projectId: "end-of-time",
+  storageBucket: "end-of-time.appspot.com",
+  messagingSenderId: "361998196975",
+  appId: "1:361998196975:web:a2c3dabc5c8a760868bb1a",
+  measurementId: "G-53MF5JWV2V"
 };
-
 // Only initialize Firebase if not running locally
 let auth, db, currentUser = null;
-
-// Page visibility handling to prevent async errors
-let isPageActive = true;
-document.addEventListener('visibilitychange', () => {
-  isPageActive = !document.hidden;
-  if (!isPageActive) {
-    console.log('⚠️ Page became hidden - pausing async operations');
-  } else {
-    console.log('✅ Page became visible - resuming operations');
-  }
-});
-
-// Handle page unload to clean up async operations
-window.addEventListener('beforeunload', () => {
-  isPageActive = false;
-  console.log('🔄 Page unloading - cleaning up async operations');
-});
-
 if (window.location.protocol !== 'file:') {
     firebase.initializeApp(firebaseConfig);
     auth = firebase.auth();
     db = firebase.firestore();
+    // Initialize Cloud Functions (region can be adjusted if needed)
+    functions = firebase.functions();
     console.log('✅ Firebase initialized successfully');
 } else {
     console.log('⚠️ Running locally - Firebase features disabled');
@@ -3343,64 +3329,38 @@ function updateUserInfoUI() {
     if (mainSignoutBtn) mainSignoutBtn.style.display = 'none';
   }
 }
-
-// Enhanced Google sign-in with proper error handling
 googleSigninBtn.onclick = function() {
   console.log('Attempting Google sign-in...');
-  
-  // Check if page is still active
-  if (document.hidden) {
-    console.log('⚠️ Page is hidden, skipping sign-in');
-    return;
-  }
-  
   const provider = new firebase.auth.GoogleAuthProvider();
-  
-  // Add timeout to prevent hanging
-  const signInPromise = auth.signInWithPopup(provider);
-  const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => reject(new Error('Sign-in timeout')), 30000); // 30 second timeout
+  auth.signInWithPopup(provider).then(result => {
+    console.log('✅ Google sign-in successful:', result.user.displayName);
+    currentUser = result.user;
+    updateUserInfoUI();
+  }).catch(error => {
+    console.error('❌ Google sign-in failed:', error);
+    console.error('Error code:', error.code);
+    console.error('Error message:', error.message);
+    
+    // More specific error messages
+    let errorMessage = 'Failed to sign in with Google. ';
+    switch(error.code) {
+      case 'auth/popup-closed-by-user':
+        errorMessage += 'Sign-in was cancelled.';
+        break;
+      case 'auth/popup-blocked':
+        errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
+        break;
+      case 'auth/unauthorized-domain':
+        errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
+        break;
+      case 'auth/operation-not-allowed':
+        errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
+        break;
+      default:
+        errorMessage += 'Please try again.';
+    }
+    alert(errorMessage);
   });
-  
-  Promise.race([signInPromise, timeoutPromise])
-    .then(result => {
-      // Check if page is still active before updating UI
-      if (!document.hidden) {
-        console.log('✅ Google sign-in successful:', result.user.displayName);
-        currentUser = result.user;
-        updateUserInfoUI();
-      } else {
-        console.log('⚠️ Page became hidden during sign-in, skipping UI update');
-      }
-    })
-    .catch(error => {
-      // Only log errors if page is still active
-      if (!document.hidden) {
-        console.error('❌ Google sign-in failed:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
-        
-        // More specific error messages
-        let errorMessage = 'Failed to sign in with Google. ';
-        switch(error.code) {
-          case 'auth/popup-closed-by-user':
-            errorMessage += 'Sign-in was cancelled.';
-            break;
-          case 'auth/popup-blocked':
-            errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
-            break;
-          case 'auth/unauthorized-domain':
-            errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
-            break;
-          case 'auth/operation-not-allowed':
-            errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
-            break;
-          default:
-            errorMessage += 'Please try again.';
-        }
-        alert(errorMessage);
-      }
-    });
 };
 googleSignoutBtn.onclick = function() {
   auth.signOut().then(() => {
@@ -3497,135 +3457,33 @@ function formatLeaderboardTime(seconds) {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
-// Helper function to format Firebase timestamps
-function formatFirebaseDate(timestamp) {
-  if (!timestamp) return 'Recent';
-  
-  try {
-    let jsDate;
-    
-    if (timestamp.toDate && typeof timestamp.toDate === 'function') {
-      // Firebase Timestamp object (v8)
-      jsDate = timestamp.toDate();
-    } else if (timestamp.seconds !== undefined) {
-      // Firebase Timestamp object (v9) - convert seconds to milliseconds
-      jsDate = new Date(timestamp.seconds * 1000);
-    } else if (timestamp instanceof Date) {
-      // Regular Date object
-      jsDate = timestamp;
-    } else if (typeof timestamp === 'string') {
-      // String date
-      jsDate = new Date(timestamp);
-      if (isNaN(jsDate.getTime())) return 'Recent';
-    } else if (typeof timestamp === 'number') {
-      // Timestamp number (milliseconds)
-      jsDate = new Date(timestamp);
-    } else {
-      return 'Recent';
-    }
-    
-    // Check if date is valid
-    if (isNaN(jsDate.getTime())) return 'Recent';
-    
-    // Format the date
-    const now = new Date();
-    const diffInHours = (now - jsDate) / (1000 * 60 * 60);
-    
-    if (diffInHours < 1) {
-      return 'Just now';
-    } else if (diffInHours < 24) {
-      const hours = Math.floor(diffInHours);
-      return `${hours}h ago`;
-    } else if (diffInHours < 168) { // 7 days
-      const days = Math.floor(diffInHours / 24);
-      return `${days}d ago`;
-    } else {
-      return jsDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      });
-    }
-  } catch (error) {
-    console.error('Error formatting date:', error);
-    return 'Recent';
-  }
-}
+// Submit score to leaderboard via Cloud Function (server-side validation)
+async function submitToLeaderboard(score, time) {
+  if (!currentUser || optoutCheckbox.checked) return;
 
-// Submit score to leaderboard
-function submitToLeaderboard(score, time) {
-  // Check if user is authenticated
-  if (!currentUser) {
-    console.log('⚠️ No user signed in - skipping leaderboard submission');
-    return;
-  }
-  
-  if (optoutCheckbox && optoutCheckbox.checked) {
-    console.log('⚠️ User opted out of leaderboard - skipping submission');
-    return;
-  }
-  
-  // Ensure score and time are valid numbers
-  const finalScore = parseInt(score, 10) || 0;
+  const finalScore = Math.max(0, parseInt(score, 10) || 0);
   const finalTime = parseInt(time, 10) || 0;
-  
-  console.log('Submitting score to leaderboard:', { 
-    originalScore: score, 
-    originalTime: time,
-    finalScore: finalScore, 
-    finalTime: finalTime, 
-    user: currentUser.displayName,
-    uid: currentUser.uid,
-    currentPlayerScore: playerScore,
-    timeAttackBlueTeamFinalScore: timeAttackBlueTeamFinalScore
-  });
-  
-  // Validate user data
-  if (!currentUser.uid) {
-    console.error('❌ User UID is missing');
-    return;
+
+  console.log('Submitting score via Cloud Function:', { finalScore, finalTime });
+
+  try {
+    const submitFn = functions.httpsCallable('submitLeaderboardEntry');
+    const payload = {
+      score: finalScore,
+      time: finalTime,
+      questionCount: Array.isArray(questions) ? questions.length : null,
+      powerUpsUsed,
+      longestStreak,
+      correctAnswers,
+      gameMode,
+      startedAtMs: typeof gameStartTime === 'number' ? gameStartTime : null,
+      endedAtMs: Date.now(),
+    };
+    const res = await submitFn(payload);
+    console.log('✅ Server accepted leaderboard entry:', res && res.data);
+  } catch (error) {
+    console.error('❌ Server rejected leaderboard submission:', error);
   }
-  
-  const entry = {
-    uid: currentUser.uid,
-    displayName: currentUser.displayName || 'Anonymous',
-    photoURL: currentUser.photoURL || 'https://via.placeholder.com/24x24',
-    score: finalScore,
-    time: finalTime,
-    date: firebase.firestore.FieldValue.serverTimestamp()
-  };
-  
-  // Validate entry data
-  if (!entry.uid || typeof entry.score !== 'number' || typeof entry.time !== 'number') {
-    console.error('❌ Invalid entry data:', entry);
-    return;
-  }
-  
-  console.log('📝 Submitting entry to Firestore:', entry);
-  
-  // Submit to leaderboard with enhanced error handling
-  db.collection('leaderboard').doc(currentUser.uid).set(entry)
-    .then(() => {
-      console.log('✅ Score submitted successfully:', finalScore);
-    })
-    .catch(error => {
-      console.error('❌ Error submitting score:', error);
-      
-      // Handle specific error cases
-      if (error.code === 'permission-denied') {
-        console.error('🔒 Permission denied - check Firestore security rules');
-        showFirebaseErrorMessage('Permission denied. Please check if you are signed in correctly.', false);
-      } else if (error.code === 'unauthenticated') {
-        console.error('🔐 User not authenticated');
-        showFirebaseErrorMessage('Please sign in to save your score.', false);
-      } else if (error.code === 'invalid-argument') {
-        console.error('📝 Invalid data format');
-        showFirebaseErrorMessage('Invalid score data. Please try again.', true);
-      } else {
-        console.error('🌐 Network or server error:', error.message);
-        showFirebaseErrorMessage('Failed to save score. Please check your connection and try again.', true);
-      }
-    });
 }
 
 // Fetch and display Top 100 leaderboard
@@ -3683,9 +3541,47 @@ function fetchAndDisplayLeaderboard() {
         const photoURL = d.photoURL || 'https://via.placeholder.com/24x24';
         const score = parseInt(d.score, 10) || 0;
         const time = parseInt(d.time, 10) || 0;
-        // Handle Firebase timestamp properly using the helper function
-        const date = formatFirebaseDate(d.date);
-        console.log('🗓️ Debug: Formatted date:', date, 'from:', d.date);
+        // Handle Firebase timestamp properly
+        let date = 'Unknown';
+        console.log('🗓️ Debug: Raw date field:', { 
+            date: d.date, 
+            type: typeof d.date, 
+            hasToDate: d.date && typeof d.date.toDate === 'function',
+            isDate: d.date instanceof Date 
+        });
+        
+        if (d.date) {
+            if (d.date.toDate && typeof d.date.toDate === 'function') {
+                // Firebase Timestamp object
+                try {
+                    date = d.date.toDate().toLocaleDateString();
+                    console.log('🗓️ Debug: Firebase timestamp converted to:', date);
+                } catch (error) {
+                    console.error('🗓️ Error converting Firebase timestamp:', error);
+                    date = 'Recent';
+                }
+            } else if (d.date instanceof Date) {
+                // Regular Date object
+                date = d.date.toLocaleDateString();
+                console.log('🗓️ Debug: Date object converted to:', date);
+            } else if (typeof d.date === 'string') {
+                // String date
+                const parsedDate = new Date(d.date);
+                if (!isNaN(parsedDate.getTime())) {
+                    date = parsedDate.toLocaleDateString();
+                    console.log('🗓️ Debug: String date converted to:', date);
+                }
+            } else if (typeof d.date === 'number') {
+                // Timestamp number
+                date = new Date(d.date).toLocaleDateString();
+                console.log('🗓️ Debug: Number timestamp converted to:', date);
+            } else {
+                console.log('🗓️ Debug: Unhandled date type, using fallback');
+                date = 'Recent';
+            }
+        } else {
+            console.log('🗓️ Debug: No date field found');
+        }
         
         console.log('Displaying leaderboard entry:', { rank, displayName, score, time, date, isCurrent });
         

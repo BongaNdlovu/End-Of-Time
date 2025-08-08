@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Leaderboard collection rules
+    match /leaderboard/{userId} {
+      // Anyone can read leaderboard entries
+      allow read: if true;
+      
+      // Block direct client writes; only allow via Cloud Functions using App Check or service account
+      allow write: if false;
+    }
+  }
+} 

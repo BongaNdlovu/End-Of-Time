@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!--
+/**
+ * SDA Trivia Challenge - Main HTML
+ * ================================
+ *
+ * This file contains the HTML structure for the SDA Trivia Challenge game.
+ * It defines the user interface components, game screens, and includes
+ * necessary scripts and stylesheets.
+ *
+ * STRUCTURE:
+ * ---------
+ * - Header with meta tags, title, and external resources
+ * - Main container with game title and mode selection
+ * - Game screen with question display, options, and game tools
+ * - Game over screen with results and play again options
+ * - Audio elements for sound effects and background music
+ *
+ * FEATURES:
+ * --------
+ * - Responsive design for various screen sizes
+ * - Multiple game modes (Solo Player and Two Teams)
+ * - Power-ups and game tools (Hint, Take Away Two, Double Points, etc.)
+ * - Score tracking and achievement system
+ * - Audio feedback for game events
+ * - Confetti animation for celebrations
+ *
+ * DEPENDENCIES:
+ * -----------
+ * - questions.js: Contains the trivia question database
+ * - script.js: Main game logic and functionality
+ * - styles.css: Styling for the game interface
+ * - confetti-js: External library for confetti animations
+ * - Google Fonts: Bangers and Inter fonts
+ *
+ * FUTURE IMPROVEMENTS:
+ * ------------------
+ * 1. Add proper semantic HTML5 elements (header, main, footer, etc.)
+ * 2. Improve accessibility with ARIA attributes and keyboard navigation
+ * 3. Implement proper form validation for inputs
+ * 4. Add loading indicators for assets and game initialization
+ * 5. Implement local storage for saving game progress and settings
+ * 6. Add more interactive elements like tooltips for game features
+ * 7. Optimize audio loading with async loading patterns
+ * 8. Add support for internationalization (i18n)
+ * 9. Implement PWA features for offline play
+ * 10. Add more detailed documentation for custom data attributes
+ */
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>End of Time</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Remove Google Fonts, we will use local Montserrat fonts -->
+    <script src="questions.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js/dist/index.min.js"></script>
+    <!-- Manifest only loaded when not running locally -->
+    <script>
+        if (window.location.protocol !== 'file:') {
+            const link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = 'manifest.json';
+            document.head.appendChild(link);
+        }
+    </script>
+</head>
+<body>
+<video id="background-video" src="background.mp4" autoplay loop muted playsinline style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen;"></video>
+    <div id="loading-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(30,32,40,0.95);display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.4s;">
+                    <div style="color:#ffffff;font-family:'Montserrat-Regular', Arial, sans-serif;font-size:2.2rem;text-shadow:0 0 12px #111;">Loading End of Time...</div>
+        <div id="loading-progress" style="margin-top:1.2rem;width:60vw;max-width:320px;height:12px;background:#333;border-radius:8px;overflow:hidden;">
+            <div id="loading-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#8B0000,#ffffff);transition:width 0.3s;"></div>
+        </div>
+    </div>
+    <div id="logo-container" style="display: flex; align-items: center; justify-content: center; margin-top: 2rem; margin-bottom: 1.5rem; gap: 0.7rem;">
+        <span style="font-family: 'Inter', Arial, sans-serif; font-size: 1.2rem; color: #fff; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">Powered By</span>
+        <img src="Fear God.png" alt="Fear God Imprints Logo" style="height: 80px; width: auto; vertical-align: middle; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));" class="logo-pulse" />
+    </div>
+    <div class="feedback-overlay"></div>
+    <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100;"></canvas>
+    <div class="container" style="min-width:320px;max-width:700px;width:95vw;margin:auto;">
+        <h1 class="glitch-effect">End of Time</h1>
+        <div id="category-select" class="category-select" style="margin-bottom: 1.2rem;">
+            <label for="category-dropdown">Choose Category:</label>
+            <select id="category-dropdown" aria-label="Select question category"></select>
+        </div>
+        <p class="intro-text">Behold, the days come, saith the Lord God, that I will send a famine in the land, not a famine of bread, nor a thirst for water, but of hearing the words of the Lord:</p>
+        <p style="text-align: center; font-family: 'Montserrat-Light', Arial, sans-serif; font-size: 0.9rem; color: #cccccc; margin: 0.5rem 0 1rem 0; font-style: italic; text-shadow: 0 0 5px rgba(255,255,255,0.3);">Based on the KJV Bible</p>
+        <div id="fun-fact-box"></div>
+        <div id="game-length-container" style="margin-bottom: 1.2rem; text-align: center;">
+            <label for="game-length-select" style="font-family: 'Montserrat-Regular', Arial, sans-serif; font-size: 1.1rem; color: #ffffff; margin-right: 0.5em;">Number of Questions:</label>
+            <select id="game-length-select" aria-label="Select number of questions" style="font-size: 1.1rem; border-radius: 8px; padding: 0.3em 1em; border: 2px solid #8B0000;">
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+        <div id="time-attack-container" style="margin-bottom: 1.2rem; text-align: center; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+            <label for="time-attack-checkbox" style="font-family: 'Montserrat-Regular', Arial, sans-serif; font-size: 1.1rem; color: #8B0000; opacity: 0.5; pointer-events: none; user-select: none;">Time Attack Mode (disabled)</label>
+            <input type="checkbox" id="time-attack-checkbox" style="width: 20px; height: 20px; cursor: not-allowed; opacity: 0.5;" disabled>
+        </div>
+
+        <!-- Sign-in status section -->
+        <div id="signin-status-container" style="margin-bottom: 1.2rem; text-align: center; padding: 1rem; background: rgba(139,0,0,0.1); border-radius: 12px; border: 2px solid rgba(139,0,0,0.3);">
+            <div id="signin-status-display" style="margin-bottom: 0.8rem;">
+                <p id="signin-status-text" style="font-family: 'Montserrat-Regular', Arial, sans-serif; font-size: 1rem; color: #ffffff; margin: 0;">Not signed in - Your scores won't be saved</p>
+            </div>
+            <div id="signin-buttons" style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+                <button id="main-signin-btn" class="comic-button" style="background: #4285f4; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 1rem; cursor: pointer;">
+                    <img src="https://developers.google.com/identity/images/g-logo.png" style="width:16px;height:16px;vertical-align:middle;margin-right:0.4rem;">Sign In
+                </button>
+                <button id="main-signout-btn" class="comic-button" style="background: #666; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 1rem; cursor: pointer; display: none;">Sign Out</button>
+                <button id="view-leaderboard-btn" class="comic-button" style="background: #388e3c; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 1rem; cursor: pointer;">View Leaderboard</button>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button id="solo" class="comic-button" aria-label="Start solo player mode">Solo Player</button>
+            <button id="teams" class="comic-button" aria-label="Start two teams mode">Two Teams</button>
+        </div>
+    </div>
+    <div class="game" id="game" style="display:none;">
+        <!-- Game Header: Logo, Tokens, Timer -->
+        <div class="game-header">
+            <div class="game-logo-container">
+                <img src="Fear God.png" alt="Fear God Imprints Logo" class="game-logo logo-pulse" />
+            </div>
+            <div id="faith-tokens">Faith Tokens: 0</div>
+            <div class="timer">
+                <div class="digital-timer">
+                    <div class="timer-display">
+                        <span class="timer-label">TIME</span>
+                        <span class="timer-value">08</span>
+                    </div>
+                    <div class="timer-segments">
+                        <div class="segment segment-top"></div>
+                        <div class="segment segment-top-right"></div>
+                        <div class="segment segment-bottom-right"></div>
+                        <div class="segment segment-bottom"></div>
+                        <div class="segment segment-bottom-left"></div>
+                        <div class="segment segment-top-left"></div>
+                        <div class="segment segment-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Middle: Tools, Progress, Wager -->
+        <div class="game-middle">
+            <div class="game-tools">
+                <button id="hint-btn" class="comic-button" aria-label="Use hint tool">Hint (-3)</button>
+                <button id="takeaway-btn" class="comic-button" aria-label="Use take away two tool">Take Away Two (-2)</button>
+                <button id="double-points-btn" class="comic-button" aria-label="Use double points tool">Double Points (1 Token)</button>
+                <button id="freeze-time-btn" class="comic-button" aria-label="Use freeze time tool">Freeze Time (1 Token)</button>
+            </div>
+
+            <div id="wager-container">
+                <label for="wager-input">Wager:</label>
+                <input type="number" id="wager-input" min="1" max="20" value="5">
+            </div>
+        </div>
+        
+        <!-- Game Main: Score, Question, Options -->
+        <div class="game-main">
+            <div class="score-solo" id="score-solo">
+                <p>Score: 0</p>
+                <p>Streak: 0</p>
+                <p>1 / 100</p>
+            </div>
+            <div class="question-options-container">
+                <div class="question">
+                    <p>Question text goes here...</p>
+                </div>
+                <div class="options"></div>
+            </div>
+        </div>
+        
+        <!-- Team elements -->
+        <h3 id="team-turn-indicator" style="text-align:center; font-family:'Bangers', cursive; color:#ffffff; display:none;"></h3>
+        <div class="score-teams" id="score-teams" style="display:none;">
+            <div>
+                <p>Blue: 0</p>
+                <p>1 / 100</p>
+                <p>Black: 0</p>
+            </div>
+        </div>
+        
+        <!-- Deep insight and next button -->
+        <div id="deep-insight-div" style="display:none; margin: 1rem 0 0 0; width: 100%; background: #ffffff; border: 2px solid #8B0000; border-radius: 12px; font-family: 'Montserrat-Regular', Arial, sans-serif; font-size: 1.1rem; color: #333333; text-align: left; padding: 1.2rem 1.5rem; box-shadow: 0 2px 8px rgba(139,0,0,0.2); grid-column: 1 / -1;">
+            <div id="deep-insight-content"></div>
+            <button id="deep-insight-next-btn" class="comic-button" style="margin-top: 1rem;">Next Question</button>
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+            <button id="show-options" class="comic-button" style="display: none;">Show Options</button>
+            <button id="next" class="comic-button">Next Question</button>
+        </div>
+    </div>
+    <div class="game-over" id="game-over" style="display:none;">
+        <!-- Add logo to game-over screen -->
+        <div class="game-logo-container">
+            <img src="Fear God.png" alt="Fear God Imprints Logo" class="game-logo logo-pulse" />
+        </div>
+        <h2>Game Over!</h2>
+        <div id="fun-fact-box-end"></div>
+        <div class="results-solo" id="results-solo">
+            <p>Your Score: 0</p>
+            <p>Correct Answers: 0/100</p>
+            <p>Longest Streak: 0</p>
+            <p id="results-solo-time" style="display: none;"></p>
+            <div class="stars">★ ★ ★ ★ ★</div>
+            <p id="achievement-title">Achievement Unlocked: Novice Guardian!</p>
+        </div>
+        <div class="results-teams" id="results-teams" style="display:none;">
+            <p>Blue: 0</p>
+            <p>Black: 0</p>
+            <p id="team-winner">Blue Team Wins!</p>
+            <p id="results-teams-time" style="display: none;"></p>
+        </div>
+        <!-- Leaderboard section -->
+        <div id="leaderboard-filter" style="text-align:center; margin-bottom:0.5em; display:none;">
+            <label for="leaderboard-question-count" style="font-family:'Montserrat-Regular', Arial, sans-serif; font-size:1.1em; color:#388e3c;">Leaderboard for: </label>
+            <select id="leaderboard-question-count" style="font-size:1.1em; border-radius:8px; padding:0.2em 1em; border:2px solid #388e3c;">
+                <option value="10">10 Questions</option>
+                <option value="20">20 Questions</option>
+                <option value="50">50 Questions</option>
+                <option value="100">100 Questions</option>
+            </select>
+        </div>
+        <div id="leaderboard" class="leaderboard-section" style="margin: 1.5em 0; display: none;">
+            <h3>Leaderboard</h3>
+            <ul class="leaderboard-list"></ul>
+        </div>
+        <div class="buttons">
+            <button id="play-again" class="comic-button">Play Again</button>
+            <button id="download" class="comic-button">Download Answers</button>
+        </div>
+    </div>
+    <!-- Team Intermission Screen -->
+    <div id="intermission-screen" style="display: none;">
+      <h2>Team Turn Over!</h2>
+      <p>Blue Team's Final Score: <span id="intermission-score">0</span></p>
+      <h3>Get Ready, Black Team!</h3>
+      <button id="start-next-turn-btn" class="comic-button">Start Your Turn</button>
+    </div>
+
+    <div id="top-right-controls">
+        <button id="exit" class="comic-button" style="display:none;">Exit Game</button>
+        <button id="mute-toggle" class="comic-button" aria-label="Mute or unmute sound" style="display: none;">🔊</button>
+        <button id="contrast-toggle" class="comic-button" aria-label="Toggle high contrast mode" style="display: block;">🌓</button>
+    </div>
+    <!-- Audio elements (hidden) -->
+    <audio id="audio-correct-1" src="correct_answer_1.wav" preload="auto"></audio>
+    <audio id="audio-correct-2" src="correct_answer_2.wav" preload="auto"></audio>
+    <audio id="audio-wrong" src="WRONG BUZZER 7.wav" preload="auto"></audio>
+    <audio id="audio-timeup" src="Motionarray_Floraphonic_Gameshow_Buzzer_1.wav" preload="auto"></audio>
+    <audio id="audio-riser" src="Semi Impact Risers-001.wav" preload="auto"></audio>
+    <!-- Remove old background music -->
+    <!-- <audio id="audio-bg" src="2024-12-08_-_Detective_Revelation_-_www.FesliyanStudios.com.mp3" preload="auto" loop></audio> -->
+    <!-- Background music tracks - 5 soundtracks for variety -->
+    <audio id="audio-bg-1" src="soundtrack 1.mp3" preload="auto"></audio>
+    <audio id="audio-bg-2" src="soundtrack 2.mp3" preload="auto"></audio>
+    <audio id="audio-bg-3" src="soundtrack 3.mp3" preload="auto"></audio>
+    <audio id="audio-bg-4" src="soundtrack 4.mp3" preload="auto"></audio>
+    <audio id="audio-bg-5" src="soundtrack 5.mp3" preload="auto"></audio>
+    <audio id="audio-timer-tick" src="Motionarray_Floraphonic_Gameshow_Buzzer_1.wav" preload="auto"></audio>
+    <audio id="audio-ticking-time" src="ticking_time.wav" preload="auto"></audio>
+    <audio id="audio-streak-wowza" src="wowza.mp3" preload="auto"></audio>
+    <audio id="audio-streak-zing" src="zing.mp3" preload="auto"></audio>
+    <audio id="audio-streak-kawabanga" src="kawabanga.mp3" preload="auto"></audio>
+    <audio id="audio-streak-letsgo" src="lets_go.mp3" preload="auto"></audio>
+    <audio id="audio-streak-nice" src="nice.mp3" preload="auto"></audio>
+    <audio id="audio-transition" src="Transition.wav" preload="auto"></audio>
+    <audio id="audio-transition2" src="Transition 2.wav" preload="auto"></audio>
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <!-- Firebase Auth -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <!-- Firebase Functions (for secure server-side leaderboard submission) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-functions-compat.js"></script>
+    <!-- Leaderboard Modal -->
+    <div id="leaderboard-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;background:linear-gradient(135deg,rgba(40,44,52,0.95),rgba(30,34,42,0.97));align-items:center;justify-content:center;flex-direction:column;backdrop-filter:blur(10px);">
+      <div style="background:linear-gradient(145deg,#1a1a1a,#2a2a2a);border-radius:24px;box-shadow:0 8px 32px rgba(139,0,0,0.4),0 0 0 1px rgba(139,0,0,0.2);padding:2.5rem 3rem;max-width:95vw;width:900px;max-height:90vh;text-align:center;position:relative;display:flex;flex-direction:column;border:2px solid rgba(139,0,0,0.3);">
+        <div style="position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:60%;height:4px;background:linear-gradient(90deg,transparent,#ffffff,transparent);border-radius:2px;"></div>
+        <h2 style="color:#ffffff;font-family:'Montserrat-Bold',Arial,sans-serif;margin-bottom:1.5rem;font-size:2.2rem;text-shadow:0 0 20px rgba(255,255,255,0.6);letter-spacing:1px;">🏆 Global Leaderboard</h2>
+        <p style="color:#d1d8e0;font-size:1rem;margin-bottom:2rem;font-family:'Montserrat-Regular',Arial,sans-serif;">Top 100 Champions of Faith</p>
+        
+        <div id="auth-section" style="margin-bottom:1.5rem;padding:1rem;background:rgba(139,0,0,0.1);border-radius:12px;border:1px solid rgba(139,0,0,0.3);">
+          <button id="google-signin-btn" style="margin-bottom:1rem;background:linear-gradient(45deg,#4285f4,#34a853);color:#fff;border:none;padding:0.8rem 1.5rem;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 15px rgba(66,133,244,0.4);transition:all 0.3s ease;">Sign in with Google</button>
+          <button id="google-signout-btn" style="margin-bottom:1rem;display:none;background:linear-gradient(45deg,#666,#888);color:#fff;border:none;padding:0.8rem 1.5rem;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 15px rgba(102,102,102,0.4);transition:all 0.3s ease;">Sign out</button>
+          <div id="user-info" style="margin-bottom:1rem;color:#d1d8e0;font-family:'Montserrat-Regular',Arial,sans-serif;"></div>
+        </div>
+        
+        <label style="display:flex;align-items:center;justify-content:center;gap:0.5em;margin-bottom:1.5rem;color:#ffffff;font-family:'Montserrat-Regular',Arial,sans-serif;font-size:0.9rem;">
+          <input type="checkbox" id="optout-leaderboard" style="width:18px;height:18px;accent-color:#8B0000;"> Opt out of leaderboard
+        </label>
+        
+        <div id="leaderboard-table-container" style="flex:1;overflow-y:auto;max-height:55vh;border:2px solid rgba(139,0,0,0.4);border-radius:16px;background:rgba(30,30,30,0.08);backdrop-filter:blur(10px);box-shadow:inset 0 2px 10px rgba(0,0,0,0.2);">
+          <table id="leaderboard-table" style="width:100%;border-collapse:collapse;">
+            <thead style="position:sticky;top:0;background:linear-gradient(135deg,#2a2a2a,#3a3a3a);z-index:1;border-bottom:2px solid rgba(139,0,0,0.4);">
+              <tr>
+                <th style="padding:1rem 0.8rem;text-align:center;font-weight:bold;color:#ffffff;font-family:'Montserrat-Bold',Arial,sans-serif;font-size:1.1rem;text-shadow:0 0 10px rgba(255,255,255,0.4);">Rank</th>
+                <th style="padding:1rem 0.8rem;text-align:left;font-weight:bold;color:#ffffff;font-family:'Montserrat-Bold',Arial,sans-serif;font-size:1.1rem;text-shadow:0 0 10px rgba(255,255,255,0.4);">Player</th>
+                <th style="padding:1rem 0.8rem;text-align:center;font-weight:bold;color:#ffffff;font-family:'Montserrat-Bold',Arial,sans-serif;font-size:1.1rem;text-shadow:0 0 10px rgba(255,255,255,0.4);">Score</th>
+                <th style="padding:1rem 0.8rem;text-align:center;font-weight:bold;color:#ffffff;font-family:'Montserrat-Bold',Arial,sans-serif;font-size:1.1rem;text-shadow:0 0 10px rgba(255,255,255,0.4);">Time</th>
+                <th style="padding:1rem 0.8rem;text-align:center;font-weight:bold;color:#ffffff;font-family:'Montserrat-Bold',Arial,sans-serif;font-size:1.1rem;text-shadow:0 0 10px rgba(255,255,255,0.4);">Date</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        
+        <button id="close-leaderboard-btn" style="margin-top:1.5rem;background:linear-gradient(45deg,#e74c3c,#c0392b);color:#fff;border:none;padding:0.8rem 2rem;border-radius:10px;font-size:1.1rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 15px rgba(231,76,60,0.4);transition:all 0.3s ease;font-family:'Montserrat-Bold',Arial,sans-serif;">Close</button>
+      </div>
+    </div>
+</body>
+</html>

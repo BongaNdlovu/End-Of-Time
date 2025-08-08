@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Configuration Validator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-section {
+            background: #2a2a2a;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #8B0000;
+        }
+        .success { border-left-color: #4CAF50; }
+        .error { border-left-color: #f44336; }
+        .warning { border-left-color: #ff9800; }
+        .info { border-left-color: #2196F3; }
+        pre {
+            background: #333;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        button {
+            background: #8B0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #a00000;
+        }
+        .config-display {
+            background: #333;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <h1>🔥 Firebase Configuration Validator</h1>
+    <p>This page will test your Firebase configuration to ensure everything is working correctly.</p>
+    
+    <div id="results"></div>
+    
+    <button onclick="runAllTests()">Run All Tests</button>
+    <button onclick="clearResults()">Clear Results</button>
+    
+    <script>
+        // Your Firebase configuration from script.js
+        const firebaseConfig = {
+            apiKey: "AIzaSyAKExnN5p_QiS7iX-2x4S8Ttf7cPQ_U72E",
+            authDomain: "end-of-time.firebaseapp.com",
+            projectId: "end-of-time",
+            storageBucket: "end-of-time.appspot.com",
+            messagingSenderId: "361998196975",
+            appId: "1:361998196975:web:a2c3dabc5c8a760868bb1a",
+            measurementId: "G-53MF5JWV2V"
+        };
+        
+        let auth, db;
+        
+        function addResult(title, content, type = 'info') {
+            const resultsDiv = document.getElementById('results');
+            const section = document.createElement('div');
+            section.className = `test-section ${type}`;
+            section.innerHTML = `
+                <h3>${title}</h3>
+                <div>${content}</div>
+            `;
+            resultsDiv.appendChild(section);
+        }
+        
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+        
+        function runAllTests() {
+            clearResults();
+            
+            // Test 1: Firebase SDK Loading
+            testFirebaseSDK();
+            
+            // Test 2: Configuration Validation
+            testConfiguration();
+            
+            // Test 3: Firebase App Initialization
+            testFirebaseInitialization();
+            
+            // Test 4: Authentication Service
+            testAuthentication();
+            
+            // Test 5: Firestore Database
+            testFirestore();
+            
+            // Test 6: Security Rules
+            testSecurityRules();
+            
+            // Test 7: Google Sign-In
+            testGoogleSignIn();
+        }
+        
+        function testFirebaseSDK() {
+            addResult('📦 Firebase SDK Loading', 'Checking if Firebase SDKs are properly loaded...', 'info');
+            
+            if (typeof firebase === 'undefined') {
+                addResult('❌ Firebase SDK Error', 'Firebase SDK is not loaded. Check your internet connection and script tags.', 'error');
+                return false;
+            }
+            
+            const requiredServices = ['app', 'auth', 'firestore'];
+            const missingServices = [];
+            
+            requiredServices.forEach(service => {
+                if (!firebase[service]) {
+                    missingServices.push(service);
+                }
+            });
+            
+            if (missingServices.length > 0) {
+                addResult('❌ Missing Firebase Services', `Missing services: ${missingServices.join(', ')}`, 'error');
+                return false;
+            }
+            
+            addResult('✅ Firebase SDK Loading', 'All Firebase SDKs loaded successfully!', 'success');
+            return true;
+        }
+        
+        function testConfiguration() {
+            addResult('⚙️ Configuration Validation', 'Validating Firebase configuration...', 'info');
+            
+            const requiredFields = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
+            const missingFields = [];
+            const invalidFields = [];
+            
+            requiredFields.forEach(field => {
+                if (!firebaseConfig[field]) {
+                    missingFields.push(field);
+                } else if (firebaseConfig[field] === 'YOUR_ACTUAL_' + field.toUpperCase()) {
+                    invalidFields.push(field);
+                }
+            });
+            
+            if (missingFields.length > 0) {
+                addResult('❌ Missing Configuration Fields', `Missing: ${missingFields.join(', ')}`, 'error');
+                return false;
+            }
+            
+            if (invalidFields.length > 0) {
+                addResult('❌ Invalid Configuration Fields', `Invalid placeholder values: ${invalidFields.join(', ')}`, 'error');
+                return false;
+            }
+            
+            const configDisplay = `
+                <div class="config-display">
+                    <strong>Project ID:</strong> ${firebaseConfig.projectId}<br>
+                    <strong>Auth Domain:</strong> ${firebaseConfig.authDomain}<br>
+                    <strong>API Key:</strong> ***${firebaseConfig.apiKey.slice(-4)}<br>
+                    <strong>Storage Bucket:</strong> ${firebaseConfig.storageBucket}<br>
+                    <strong>Messaging Sender ID:</strong> ${firebaseConfig.messagingSenderId}<br>
+                    <strong>App ID:</strong> ${firebaseConfig.appId}
+                </div>
+            `;
+            
+            addResult('✅ Configuration Validation', `All configuration fields are present and valid.${configDisplay}`, 'success');
+            return true;
+        }
+        
+        function testFirebaseInitialization() {
+            addResult('🚀 Firebase App Initialization', 'Testing Firebase app initialization...', 'info');
+            
+            try {
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+                
+                // Check if app is initialized
+                if (firebase.apps.length > 0) {
+                    const app = firebase.apps[0];
+                    addResult('✅ Firebase App Initialization', `Firebase app initialized successfully!<br>App name: ${app.name}<br>Project ID: ${app.options.projectId}`, 'success');
+                    return true;
+                } else {
+                    addResult('❌ Firebase App Initialization', 'Firebase app not initialized properly.', 'error');
+                    return false;
+                }
+            } catch (error) {
+                addResult('❌ Firebase App Initialization Error', `Error: ${error.message}`, 'error');
+                return false;
+            }
+        }
+        
+        function testAuthentication() {
+            addResult('🔐 Authentication Service', 'Testing Firebase Authentication...', 'info');
+            
+            try {
+                auth = firebase.auth();
+                
+                if (!auth) {
+                    addResult('❌ Authentication Service', 'Firebase Auth service not available.', 'error');
+                    return false;
+                }
+                
+                // Test auth state listener
+                auth.onAuthStateChanged(user => {
+                    if (user) {
+                        addResult('✅ Authentication Service', `Auth service working! User signed in: ${user.displayName || user.email}`, 'success');
+                    } else {
+                        addResult('✅ Authentication Service', 'Auth service working! No user currently signed in.', 'success');
+                    }
+                }, error => {
+                    addResult('❌ Authentication Service Error', `Auth state change error: ${error.message}`, 'error');
+                });
+                
+                return true;
+            } catch (error) {
+                addResult('❌ Authentication Service Error', `Error: ${error.message}`, 'error');
+                return false;
+            }
+        }
+        
+        function testFirestore() {
+            addResult('💾 Firestore Database', 'Testing Firestore database connection...', 'info');
+            
+            try {
+                db = firebase.firestore();
+                
+                if (!db) {
+                    addResult('❌ Firestore Database', 'Firestore database service not available.', 'error');
+                    return false;
+                }
+                
+                // Test a simple read operation
+                db.collection('leaderboard').limit(1).get()
+                    .then(snapshot => {
+                        addResult('✅ Firestore Database', 'Firestore connection successful! Database is accessible.', 'success');
+                    })
+                    .catch(error => {
+                        if (error.code === 'permission-denied') {
+                            addResult('⚠️ Firestore Database', 'Firestore accessible but permission denied. This might be due to security rules.', 'warning');
+                        } else {
+                            addResult('❌ Firestore Database Error', `Error: ${error.message}`, 'error');
+                        }
+                    });
+                
+                return true;
+            } catch (error) {
+                addResult('❌ Firestore Database Error', `Error: ${error.message}`, 'error');
+                return false;
+            }
+        }
+        
+        function testSecurityRules() {
+            addResult('🔒 Security Rules', 'Testing Firestore security rules...', 'info');
+            
+            if (!db) {
+                addResult('❌ Security Rules Test', 'Firestore not available for testing security rules.', 'error');
+                return;
+            }
+            
+            // Test write operation to check security rules
+            const testDoc = db.collection('test').doc('validator-test');
+            testDoc.set({
+                timestamp: new Date(),
+                test: true
+            })
+            .then(() => {
+                addResult('✅ Security Rules', 'Write operation successful! Security rules allow writes.', 'success');
+                // Clean up test document
+                return testDoc.delete();
+            })
+            .catch(error => {
+                if (error.code === 'permission-denied') {
+                    addResult('⚠️ Security Rules', 'Write operation denied by security rules. This is expected if rules are properly configured.', 'warning');
+                } else {
+                    addResult('❌ Security Rules Error', `Error: ${error.message}`, 'error');
+                }
+            });
+        }
+        
+        function testGoogleSignIn() {
+            addResult('🔑 Google Sign-In', 'Testing Google Sign-In provider...', 'info');
+            
+            if (!auth) {
+                addResult('❌ Google Sign-In Test', 'Authentication service not available.', 'error');
+                return;
+            }
+            
+            const provider = new firebase.auth.GoogleAuthProvider();
+            
+            if (!provider) {
+                addResult('❌ Google Sign-In Provider', 'Google Auth Provider not available.', 'error');
+                return;
+            }
+            
+            addResult('✅ Google Sign-In Provider', 'Google Auth Provider is available and ready to use.', 'success');
+            
+            // Note: We won't actually trigger sign-in here as it requires user interaction
+            addResult('ℹ️ Google Sign-In Test', 'To test actual sign-in, use the sign-in button in your game.', 'info');
+        }
+        
+        // Auto-run tests when page loads
+        window.addEventListener('load', () => {
+            setTimeout(runAllTests, 1000);
+        });
+    </script>
+</body>
+</html> 

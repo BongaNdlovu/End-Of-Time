@@ -590,20 +590,15 @@ function triggerComicAlarm() {
 let categoryDropdown;
 
 // --- Faith Tokens and Power-Ups ---
-let doublePointsActive = false;
 let freezeTimeActive = false;
-// Removed revive-related variables
+// Removed revive-related variables and double points feature
 const faithTokensDiv = document.getElementById('faith-tokens');
-const doublePointsBtn = document.getElementById('double-points-btn');
 const freezeTimeBtn = document.getElementById('freeze-time-btn');
-// Removed revive button reference
+// Removed revive button reference and double points button reference
 
 function updateFaithTokens(animate = false) {
     faithTokensDiv.innerText = `Faith Tokens: ${faithTokens}`;
-    doublePointsBtn.disabled = faithTokens < 1 || doublePointsActive;
     freezeTimeBtn.disabled = faithTokens < 1 || freezeTimeActive;
-    // Removed revive button disabled state
-    
     // Animate faith tokens change if requested
     if (animate) {
         faithTokensDiv.classList.remove('token-change');
@@ -613,14 +608,7 @@ function updateFaithTokens(animate = false) {
     }
 }
 
-doublePointsBtn.onclick = function() {
-    if (faithTokens < 1 || doublePointsActive) return;
-    faithTokens--;
-    doublePointsActive = true;
-    updateFaithTokens(true);
-    doublePointsBtn.classList.add('hint-highlight');
-    setTimeout(() => doublePointsBtn.classList.remove('hint-highlight'), 1200);
-};
+// Removed double points onclick (feature removed)
 
 freezeTimeBtn.onclick = function() {
     if (faithTokens < 1 || freezeTimeActive) return;
@@ -1759,7 +1747,6 @@ document.addEventListener('DOMContentLoaded', () => {
         teamBlackScore = 0;
         currentQuestionIndex = 0;
         faithTokens = 0;
-        doublePointsActive = false;
         freezeTimeActive = false;
         timeRanOut = false; // Reset time out flag
         // --- NEW FOR SEQUENTIAL TEAM TIME ATTACK ---
@@ -1847,7 +1834,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         hintBtn.disabled = false;
         takeawayBtn.disabled = false;
-        doublePointsActive = false;
         freezeTimeActive = false;
         updateFaithTokens();
         
@@ -1966,12 +1952,10 @@ document.addEventListener('DOMContentLoaded', () => {
         wagerInput.disabled = false;
         wagerInput.style.background = isLightningRound ? '#ffd700' : '';
         
-        // Ensure double points and freeze time are only visible in team mode
+        // Only freeze time is available (double points removed)
         if (gameMode === 'solo') {
-            doublePointsBtn.style.display = 'none';
             freezeTimeBtn.style.display = 'none';
         } else {
-            doublePointsBtn.style.display = '';
             freezeTimeBtn.style.display = '';
         }
         
@@ -2022,8 +2006,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let wager = parseInt(wagerInput.value, 10) || 1;
         if (wager < 1) wager = 1;
         if (wager > maxWagerValue) wager = maxWagerValue;
-        // Compute points to award on correct answers (double points tool applies here only)
-        const points = doublePointsActive ? wager * 2 : wager;
+        // Compute points strictly from wager (double points feature removed)
+        const points = wager;
         
         // Track achievement stats
         const currentQuestion = questions[currentQuestionIndex];
@@ -2041,7 +2025,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedBtn.classList.add('correct', 'highlight-correct');
             console.log('🎯 Debug: Added highlight to correct answer:', selectedBtn.innerText);
             
-            // Use computed points to ensure the awarded score matches the wager (with double points tool if active)
+            // Use computed points to ensure the awarded score matches the wager
             if (gameMode === 'solo') {
                 const oldScore = playerScore;
                 playerScore += points;
@@ -2105,8 +2089,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (gameMode === 'solo') updateSoloStats();
         else updateScoreDisplay();
-
-        doublePointsActive = false;
 
         // Disable all buttons (highlighting already done above)
         Array.from(optionsDiv.children).forEach(btn => {
@@ -2742,15 +2724,7 @@ document.addEventListener('DOMContentLoaded', () => {
         takeawayBtn.disabled = true;
     };
 
-    doublePointsBtn.onclick = function() {
-        if (faithTokens < 1 || doublePointsActive) return;
-        faithTokens--;
-        doublePointsActive = true;
-        updateFaithTokens(true);
-        doublePointsBtn.classList.add('hint-highlight');
-        setTimeout(() => doublePointsBtn.classList.remove('hint-highlight'), 1200);
-        powerUpsUsed++;
-    };
+    // Double points feature removed
 
     freezeTimeBtn.onclick = function() {
         if (faithTokens < 1 || freezeTimeActive) return;
@@ -2852,7 +2826,6 @@ document.addEventListener('DOMContentLoaded', () => {
         gameStartTime = null;
         gameElapsedTime = 0;
         gameQuestionCount = 0;
-        doublePointsActive = false;
         freezeTimeActive = false;
         timeRanOut = false;
         timeAttackTeamTurn = 'blue';
@@ -2975,7 +2948,7 @@ if (contrastToggle) {
 }
 
 // --- Accessibility: Keyboard navigation for main controls ---
-[soloBtn, teamsBtn, hintBtn, takeawayBtn, doublePointsBtn, freezeTimeBtn, nextBtn, exitBtn, muteToggle, contrastToggle].forEach(btn => {
+[soloBtn, teamsBtn, hintBtn, takeawayBtn, freezeTimeBtn, nextBtn, exitBtn, muteToggle, contrastToggle].forEach(btn => {
     if (btn) btn.tabIndex = 0;
 });
 

@@ -1,6 +1,6 @@
 {
-  "name": "End of Time",
-  "short_name": "End of Time",
+  "name": "SDA Trivia Challenge",
+  "short_name": "Trivia",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#232526",

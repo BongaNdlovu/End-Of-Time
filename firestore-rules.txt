@@ -3,11 +3,16 @@ service cloud.firestore {
   match /databases/{database}/documents {
     // Leaderboard collection rules
     match /leaderboard/{userId} {
-      // Anyone can read leaderboard entries
+      // Anyone can read leaderboard entries (for displaying the leaderboard)
       allow read: if true;
       
-      // Block direct client writes; only allow via Cloud Functions using App Check or service account
-      allow write: if false;
+      // Users can only write to their own document (for submitting their own scores)
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Test collection for validation (optional)
+    match /test/{document} {
+      allow read, write: if request.auth != null;
     }
   }
 } 

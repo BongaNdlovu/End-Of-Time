@@ -1,0 +1,124 @@
+[debug] [2025-08-07T12:31:16.850Z] ----------------------------------------------------------------------
+[debug] [2025-08-07T12:31:16.852Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\fanel\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-08-07T12:31:16.852Z] CLI Version:   14.12.0
+[debug] [2025-08-07T12:31:16.852Z] Platform:      win32
+[debug] [2025-08-07T12:31:16.852Z] Node Version:  v24.4.1
+[debug] [2025-08-07T12:31:16.852Z] Time:          Thu Aug 07 2025 14:31:16 GMT+0200 (South Africa Standard Time)
+[debug] [2025-08-07T12:31:16.852Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-07T12:31:16.998Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-07T12:31:16.998Z] > authorizing via signed-in user (fanelesibonge50@gmail.com)
+[debug] [2025-08-07T12:31:16.998Z] [iam] checking project end-of-time-94cd3 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-08-07T12:31:16.999Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:16.999Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:17.000Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions [none]
+[debug] [2025-08-07T12:31:17.000Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions x-goog-quota-user=projects/end-of-time-94cd3
+[debug] [2025-08-07T12:31:17.000Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-07T12:31:18.650Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions 200
+[debug] [2025-08-07T12:31:18.650Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-07T12:31:18.651Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:18.651Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:18.651Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/end-of-time-94cd3 [none]
+[debug] [2025-08-07T12:31:19.273Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/end-of-time-94cd3 200
+[debug] [2025-08-07T12:31:19.273Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/end-of-time-94cd3 {"projectId":"end-of-time-94cd3","projectNumber":"628602476853","displayName":"End of Time","name":"projects/end-of-time-94cd3","resources":{"hostingSite":"end-of-time-94cd3"},"state":"ACTIVE","etag":"1_79d31268-16a2-40e7-90e1-b90a29e7024b"}
+[info] 
+[info] === Deploying to 'end-of-time-94cd3'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-08-07T12:31:19.277Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:19.277Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:19.278Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions [none]
+[debug] [2025-08-07T12:31:19.278Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-08-07T12:31:31.411Z] ----------------------------------------------------------------------
+[debug] [2025-08-07T12:31:31.413Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\fanel\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --debug
+[debug] [2025-08-07T12:31:31.413Z] CLI Version:   14.12.0
+[debug] [2025-08-07T12:31:31.413Z] Platform:      win32
+[debug] [2025-08-07T12:31:31.413Z] Node Version:  v24.4.1
+[debug] [2025-08-07T12:31:31.413Z] Time:          Thu Aug 07 2025 14:31:31 GMT+0200 (South Africa Standard Time)
+[debug] [2025-08-07T12:31:31.414Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-07T12:31:31.558Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-07T12:31:31.559Z] > authorizing via signed-in user (fanelesibonge50@gmail.com)
+[debug] [2025-08-07T12:31:31.559Z] [iam] checking project end-of-time-94cd3 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-08-07T12:31:31.560Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:31.560Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:31.561Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions [none]
+[debug] [2025-08-07T12:31:31.562Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions x-goog-quota-user=projects/end-of-time-94cd3
+[debug] [2025-08-07T12:31:31.562Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-07T12:31:33.225Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions 200
+[debug] [2025-08-07T12:31:33.226Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/end-of-time-94cd3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-07T12:31:33.226Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:33.226Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:33.227Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/end-of-time-94cd3 [none]
+[debug] [2025-08-07T12:31:33.843Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/end-of-time-94cd3 200
+[debug] [2025-08-07T12:31:33.844Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/end-of-time-94cd3 {"projectId":"end-of-time-94cd3","projectNumber":"628602476853","displayName":"End of Time","name":"projects/end-of-time-94cd3","resources":{"hostingSite":"end-of-time-94cd3"},"state":"ACTIVE","etag":"1_79d31268-16a2-40e7-90e1-b90a29e7024b"}
+[info] 
+[info] === Deploying to 'end-of-time-94cd3'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-08-07T12:31:33.848Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:33.848Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:33.849Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions [none]
+[debug] [2025-08-07T12:31:33.849Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-08-07T12:31:35.787Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions 200
+[debug] [2025-08-07T12:31:35.787Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions {"name":"projects/628602476853/sites/end-of-time-94cd3/versions/6258a87f0d885395","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[end-of-time-94cd3]: beginning deploy... 
+[info] i  hosting[end-of-time-94cd3]: found 1 files in public 
+[debug] [2025-08-07T12:31:35.797Z] [hosting] uploading with 200 concurrency
+[debug] [2025-08-07T12:31:35.798Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:35.799Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:35.799Z] [hosting] hash cache [cHVibGlj] stored for 1 files
+[debug] [2025-08-07T12:31:35.800Z] [hosting][hash queue][FINAL] {"max":0,"min":0,"avg":0,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":2}
+[debug] [2025-08-07T12:31:35.800Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/628602476853/sites/end-of-time-94cd3/versions/6258a87f0d885395:populateFiles [none]
+[debug] [2025-08-07T12:31:35.800Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/628602476853/sites/end-of-time-94cd3/versions/6258a87f0d885395:populateFiles {"files":{"/index.html":"ad79476ba6e4a2cb4a8f99e19bd004f6dfbe4d695209f30e80bf2818535b8a79"}}
+[debug] [2025-08-07T12:31:36.139Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/628602476853/sites/end-of-time-94cd3/versions/6258a87f0d885395:populateFiles 200
+[debug] [2025-08-07T12:31:36.139Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/628602476853/sites/end-of-time-94cd3/versions/6258a87f0d885395:populateFiles {"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/end-of-time-94cd3/versions/6258a87f0d885395/files"}
+[debug] [2025-08-07T12:31:36.140Z] [hosting][populate queue][FINAL] {"max":342,"min":342,"avg":342,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":342}
+[debug] [2025-08-07T12:31:36.140Z] [hosting] uploads queued: 0
+[debug] [2025-08-07T12:31:36.140Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":0,"complete":0,"success":0,"errored":0,"retried":0,"total":0,"elapsed":1754569896140}
+[info] i  hosting: upload complete 
+[info] +  hosting[end-of-time-94cd3]: file upload complete 
+[debug] [2025-08-07T12:31:36.141Z] [hosting] deploy completed after 351ms
+[debug] [2025-08-07T12:31:36.141Z] [
+  {
+    "config": {
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "end-of-time-94cd3"
+    },
+    "version": "projects/628602476853/sites/end-of-time-94cd3/versions/6258a87f0d885395"
+  }
+]
+[info] i  hosting[end-of-time-94cd3]: finalizing version... 
+[debug] [2025-08-07T12:31:36.142Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:36.142Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:36.143Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions/6258a87f0d885395 updateMask=status%2Cconfig
+[debug] [2025-08-07T12:31:36.143Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions/6258a87f0d885395 {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2025-08-07T12:31:36.520Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions/6258a87f0d885395 200
+[debug] [2025-08-07T12:31:36.521Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/versions/6258a87f0d885395 {"name":"projects/628602476853/sites/end-of-time-94cd3/versions/6258a87f0d885395","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2025-08-07T12:31:34.231013Z","createUser":{"email":"fanelesibonge50@gmail.com"},"finalizeTime":"2025-08-07T12:31:35.155820Z","finalizeUser":{"email":"fanelesibonge50@gmail.com"}}
+[debug] [2025-08-07T12:31:36.521Z] [hosting] finalized version for end-of-time-94cd3:[object Object]
+[info] +  hosting[end-of-time-94cd3]: version finalized 
+[info] i  hosting[end-of-time-94cd3]: releasing new version... 
+[debug] [2025-08-07T12:31:36.521Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:36.521Z] Checked if tokens are valid: true, expires at: 1754572988370
+[debug] [2025-08-07T12:31:36.522Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/channels/live/releases versionName=projects%2F628602476853%2Fsites%2Fend-of-time-94cd3%2Fversions%2F6258a87f0d885395
+[debug] [2025-08-07T12:31:36.522Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/channels/live/releases {}
+[debug] [2025-08-07T12:31:36.904Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/channels/live/releases 200
+[debug] [2025-08-07T12:31:36.904Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/end-of-time-94cd3/channels/live/releases {"name":"projects/628602476853/sites/end-of-time-94cd3/channels/live/releases/1754569894991000","version":{"name":"projects/628602476853/sites/end-of-time-94cd3/versions/6258a87f0d885395","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2025-08-07T12:31:34.231013Z","createUser":{"email":"fanelesibonge50@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJW-mK0VOwsXUK4algPgmQsNIbBvPkc0DVjlz7FcEHPCn_XboI=mo"},"finalizeTime":"2025-08-07T12:31:35.155820Z","finalizeUser":{"email":"fanelesibonge50@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJW-mK0VOwsXUK4algPgmQsNIbBvPkc0DVjlz7FcEHPCn_XboI=mo"}},"type":"DEPLOY","releaseTime":"2025-08-07T12:31:34.991Z","releaseUser":{"email":"fanelesibonge50@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJW-mK0VOwsXUK4algPgmQsNIbBvPkc0DVjlz7FcEHPCn_XboI=mo"}}
+[debug] [2025-08-07T12:31:36.905Z] [hosting] release: {"name":"projects/628602476853/sites/end-of-time-94cd3/channels/live/releases/1754569894991000","version":{"name":"projects/628602476853/sites/end-of-time-94cd3/versions/6258a87f0d885395","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2025-08-07T12:31:34.231013Z","createUser":{"email":"fanelesibonge50@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJW-mK0VOwsXUK4algPgmQsNIbBvPkc0DVjlz7FcEHPCn_XboI=mo"},"finalizeTime":"2025-08-07T12:31:35.155820Z","finalizeUser":{"email":"fanelesibonge50@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJW-mK0VOwsXUK4algPgmQsNIbBvPkc0DVjlz7FcEHPCn_XboI=mo"}},"type":"DEPLOY","releaseTime":"2025-08-07T12:31:34.991Z","releaseUser":{"email":"fanelesibonge50@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJW-mK0VOwsXUK4algPgmQsNIbBvPkc0DVjlz7FcEHPCn_XboI=mo"}}
+[info] +  hosting[end-of-time-94cd3]: release complete 
+[info] 
+[info] +  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/end-of-time-94cd3/overview
+[info] Hosting URL: https://end-of-time-94cd3.web.app

@@ -11,7 +11,12 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ],
-    "site": "end-of-time-94cd3"
+    ]
+  },
+  "firestore": {
+    "rules": "firestore-rules.txt"
+  },
+  "functions": {
+    "source": "functions"
   }
 }

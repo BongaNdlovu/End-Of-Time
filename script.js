@@ -32,6 +32,8 @@ const resultsTeams = document.getElementById('results-teams');
 const playAgainBtn = document.getElementById('play-again');
 const downloadBtn = document.getElementById('download');
 const exitBtn = document.getElementById('exit');
+const mainMenuBtn = document.getElementById('main-menu');
+const backToGameMenuBtn = document.getElementById('back-to-game-menu');
 const feedbackOverlay = document.querySelector('.feedback-overlay');
 const achievementTitle = document.getElementById('achievement-title');
 const teamWinner = document.getElementById('team-winner');
@@ -3041,7 +3043,54 @@ document.addEventListener('DOMContentLoaded', () => {
         if (funFactBox) {
             funFactBox.innerText = getRandomFunFact();
         }
+        // Navigate back to main menu page (designate current page as the game menu)
+        try {
+            window.location.href = 'index.html';
+        } catch (e) {
+            console.warn('Menu navigation failed, staying on page:', e);
+        }
     };
+
+    // Main Menu button: reuse exit cleanup then navigate to menu
+    if (mainMenuBtn) {
+        mainMenuBtn.onclick = () => {
+            // If in-game and progress exists, confirm
+            if (gameDiv.style.display !== 'none' && currentQuestionIndex > 0 && !confirm('Return to Main Menu? Current progress will be lost.')) {
+                return;
+            }
+            // Trigger the same cleanup as exit, then go menu
+            try { exitBtn.click(); } catch (_) {}
+            // Ensure navigation to hub menu in case exit cleanup keeps us on page
+            window.location.href = 'menu.html';
+        };
+    }
+
+    // Back to in-page game selection screen (visible during gameplay except on launcher & game-over)
+    if (backToGameMenuBtn) {
+        backToGameMenuBtn.onclick = () => {
+            // Confirm if there is progress
+            if (gameDiv.style.display !== 'none' && currentQuestionIndex > 0 && !confirm('Go back to the game menu? Progress for this run will be lost.')) {
+                return;
+            }
+            // Cleanup basic timers/audio but stay on the same page
+            clearInterval(timer);
+            stopTicking();
+            if (isTimeAttackMode) { stopGlobalTimer(); }
+
+            // Reset state and UI to launcher
+            resetState();
+            pauseBgMusic();
+            slideOut(gameDiv, () => slideIn(container));
+            gameDiv.style.display = 'none';
+            gameOverDiv.style.display = 'none';
+            gameDiv.classList.remove('active');
+            gameOverDiv.classList.remove('active');
+
+            // Hide top-right controls relevant to gameplay
+            exitBtn.style.display = 'none';
+            backToGameMenuBtn.style.display = 'none';
+        };
+    }
     nextBtn.onclick = () => {
         // Hide explanation first if it's visible
         if (explanationDiv.style.display === 'block') {
@@ -3147,8 +3196,8 @@ if (contrastToggle) {
     }
 }
 
-// --- Accessibility: Keyboard navigation for main controls ---
-[soloBtn, teamsBtn, hintBtn, takeawayBtn, freezeTimeBtn, nextBtn, exitBtn, muteToggle, contrastToggle].forEach(btn => {
+    // --- Accessibility: Keyboard navigation for main controls ---
+    [soloBtn, teamsBtn, hintBtn, takeawayBtn, freezeTimeBtn, nextBtn, exitBtn, mainMenuBtn, backToGameMenuBtn, muteToggle, contrastToggle].forEach(btn => {
     if (btn) btn.tabIndex = 0;
 });
 

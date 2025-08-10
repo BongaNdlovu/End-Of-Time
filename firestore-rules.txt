@@ -14,5 +14,36 @@ service cloud.firestore {
     match /test/{document} {
       allow read, write: if request.auth != null;
     }
+
+    // Prayers collection rules
+    match /prayers/{prayerId} {
+      // Publicly readable feed (client filters anonymity/ownership)
+      allow read: if true;
+      // Only authenticated users can create prayer requests
+      allow create: if request.auth != null;
+      // Only the owner can update/delete their own prayer
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // Interactions on a prayer (e.g., "I prayed", comments)
+    match /prayers/{prayerId}/interactions/{interactionId} {
+      allow read: if true;
+      // Allow anyone to record an interaction (supports guests for "I prayed")
+      allow create: if true;
+      // Only the author of an interaction can modify/delete it
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // Notifications for users
+    match /notifications/{notificationId} {
+      allow read, update: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if true; // created by client logic for now; can be moved to Cloud Functions
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // User profiles (store FCM tokens and preferences)
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
   }
 } 

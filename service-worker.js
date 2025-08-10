@@ -1,22 +1,27 @@
-const CACHE_NAME = 'sda-trivia-v3';
+const CACHE_NAME = 'sda-trivia-v4';
 const ASSETS = [
   '/',
+  '/menu.html',
   '/index.html',
+  '/menu-styles.css',
   '/styles.css',
   '/script.js',
   '/questions.js',
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
-  // Add all audio/image assets here
   '/Fear God.png',
+  '/background.mp4',
+  '/Transition.wav',
+  '/Transition 2.wav',
+  '/soundtrack 1.mp3',
   '/correct_answer_1.wav',
   '/correct_answer_2.wav',
   '/WRONG BUZZER 7.wav',
   '/Motionarray_Floraphonic_Gameshow_Buzzer_1.wav',
   '/Semi Impact Risers-001.wav',
   '/ticking_time.wav',
-  // '/offline.html', // Uncomment if you add an offline fallback page
+  // '/offline.html', // Optional offline fallback
 ];
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -24,11 +29,14 @@ self.addEventListener('install', event => {
   );
 });
 self.addEventListener('fetch', event => {
-  // SPA navigation fallback
+  // Navigation fallback: prefer menu, then game
   if (event.request.mode === 'navigate') {
-    event.respondWith(
-      caches.match('/index.html').then(response => response || fetch(event.request))
-    );
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const menu = await cache.match('/menu.html');
+      const game = await cache.match('/index.html');
+      return menu || game || fetch(event.request);
+    })());
     return;
   }
   // Stale-while-revalidate (optional, for assets like questions.js)
@@ -45,9 +53,7 @@ self.addEventListener('fetch', event => {
   // }
   // Error handling/offline fallback
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request).catch(() => caches.match('/offline.html'));
-    })
+    caches.match(event.request).then(response => response || fetch(event.request))
   );
 });
 self.addEventListener('activate', event => {

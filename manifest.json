@@ -1,7 +1,7 @@
 {
   "name": "End of Time",
   "short_name": "End of Time",
-  "start_url": ".",
+  "start_url": "menu.html",
   "display": "standalone",
   "background_color": "#232526",
   "theme_color": "#ffd700",

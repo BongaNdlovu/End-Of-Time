@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End of Time - Hub Menu</title>
+    <link rel="stylesheet" href="menu-styles.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script>
+        // Attach PWA manifest when hosted
+        if (window.location.protocol !== 'file:') {
+            const link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = 'manifest.json';
+            document.head.appendChild(link);
+        }
+    </script>
+</head>
+<body>
+    <!-- Background video with same styling as the game -->
+    <video id="background-video" src="background.mp4" autoplay loop muted playsinline 
+           style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen;"></video>
+    
+    <div class="menu-container">
+        <!-- Header with logo -->
+        <header class="menu-header">
+            <div class="logo-container">
+                <img src="Fear God.png" alt="Fear God Imprints Logo" class="logo logo-pulse" />
+            </div>
+            <h1 class="game-title glitch-effect">END OF TIME</h1>
+            <p class="subtitle">Choose Your Path</p>
+        </header>
+        
+        <!-- Authentication Section -->
+        <div class="auth-section" id="auth-section">
+            <div class="auth-status" id="auth-status">
+                <p id="auth-message">Sign in to save your progress and compete on leaderboards</p>
+            </div>
+            <div class="auth-buttons" id="auth-buttons">
+                <button id="google-signin-btn" class="auth-btn signin-btn">
+                    <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-icon">
+                    Sign In with Google
+                </button>
+                <button id="google-signout-btn" class="auth-btn signout-btn" style="display: none;">
+                    Sign Out
+                </button>
+            </div>
+            <div class="user-info" id="user-info" style="display: none;">
+                <img id="user-photo" src="" alt="User" class="user-photo">
+                <span id="user-name"></span>
+            </div>
+        </div>
+
+        <!-- Main menu options -->
+        <main class="main-menu">
+            <div class="menu-options">
+                <div class="menu-item" onclick="enterGame()" tabindex="0">
+                    <div class="menu-icon">⚔️</div>
+                    <h2>Enter the Game</h2>
+                    <p>Test your biblical knowledge and faith</p>
+                    <div class="menu-glow"></div>
+                </div>
+                
+                <div class="menu-item" onclick="openAcademy()" tabindex="0">
+                    <div class="menu-icon">📚</div>
+                    <h2>End of Time Academy</h2>
+                    <p>Study mode - Learn and practice your faith</p>
+                    <div class="menu-glow"></div>
+                </div>
+                
+                <div class="menu-item" onclick="openPrayerNetwork()" tabindex="0">
+                    <div class="menu-icon">✞</div>
+                    <h2>End of Time Prayer Network</h2>
+                    <p>Connect through prayer and community</p>
+                    <div class="menu-glow"></div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="menu-footer">
+            <p>&copy; 2024 End of Time. All rights reserved.</p>
+            <p class="powered-by">Powered by <img src="Fear God.png" alt="Fear God Imprints" class="footer-logo" /></p>
+        </footer>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="audio-hover" src="Transition.wav" preload="auto"></audio>
+    <audio id="audio-select" src="Transition 2.wav" preload="auto"></audio>
+    <audio id="audio-bg" src="soundtrack 1.mp3" preload="auto" loop></audio>
+
+    <script>
+        // Play background music on first interaction
+        let audioStarted = false;
+        function startAudio() {
+            if (!audioStarted) {
+                const bgAudio = document.getElementById('audio-bg');
+                bgAudio.volume = 0.3;
+                bgAudio.play().catch(e => console.log('Audio play failed:', e));
+                audioStarted = true;
+            }
+        }
+
+        function playHoverSound() {
+            startAudio();
+            const hoverAudio = document.getElementById('audio-hover');
+            hoverAudio.volume = 0.5;
+            hoverAudio.currentTime = 0;
+            hoverAudio.play().catch(e => console.log('Hover sound failed:', e));
+        }
+
+        function playSelectSound() {
+            const selectAudio = document.getElementById('audio-select');
+            selectAudio.volume = 0.7;
+            selectAudio.currentTime = 0;
+            selectAudio.play().catch(e => console.log('Select sound failed:', e));
+        }
+
+        function enterGame() {
+            playSelectSound();
+            // Store auth state in localStorage for the game to use
+            if (currentUser) {
+                localStorage.setItem('endOfTime_user', JSON.stringify({
+                    uid: currentUser.uid,
+                    displayName: currentUser.displayName,
+                    email: currentUser.email,
+                    photoURL: currentUser.photoURL
+                }));
+            } else {
+                localStorage.removeItem('endOfTime_user');
+            }
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 500);
+        }
+        
+        function openAcademy() {
+            playSelectSound();
+            setTimeout(() => {
+                // Replace with your academy URL when ready
+                alert('End of Time Academy coming soon!');
+            }, 500);
+        }
+        
+        function openPrayerNetwork() {
+            playSelectSound();
+            setTimeout(() => {
+                // Open the Prayer Network page
+                window.location.href = 'Qwen_html_20250810_ttxf0530d.html';
+            }, 500);
+        }
+        
+        // Add hover effects and sounds
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                playHoverSound();
+                item.classList.add('hovered');
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.classList.remove('hovered');
+            });
+            
+            // Keyboard support
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                }
+            });
+        });
+
+        // Keyboard navigation
+        let selectedIndex = -1;
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (selectedIndex >= 0) {
+                    menuItems[selectedIndex].classList.remove('keyboard-selected');
+                }
+                selectedIndex = (selectedIndex + 1) % menuItems.length;
+                menuItems[selectedIndex].classList.add('keyboard-selected');
+                menuItems[selectedIndex].focus();
+                playHoverSound();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (selectedIndex >= 0) {
+                    menuItems[selectedIndex].classList.remove('keyboard-selected');
+                }
+                selectedIndex = selectedIndex <= 0 ? menuItems.length - 1 : selectedIndex - 1;
+                menuItems[selectedIndex].classList.add('keyboard-selected');
+                menuItems[selectedIndex].focus();
+                playHoverSound();
+            }
+        });
+
+        // Firebase Configuration and Authentication
+        const firebaseConfig = {
+            apiKey: "AIzaSyA78bvzjP-b7K9TPCbIL3ttzPJr07VR8kY",
+            authDomain: "end-of-time-94cd3.firebaseapp.com",
+            projectId: "end-of-time-94cd3",
+            storageBucket: "end-of-time-94cd3.firebasestorage.app",
+            messagingSenderId: "628602476853",
+            appId: "1:628602476853:web:181df03c3374465811147c",
+            measurementId: "G-E5R3NG1533"
+        };
+
+        let auth, currentUser = null;
+
+        // Initialize Firebase
+        if (window.location.protocol !== 'file:') {
+            firebase.initializeApp(firebaseConfig);
+            auth = firebase.auth();
+            console.log('✅ Firebase initialized for menu page');
+        } else {
+            console.log('⚠️ Running locally - Firebase features disabled');
+            auth = {
+                onAuthStateChanged: (callback) => callback(null),
+                signInWithPopup: () => Promise.reject(new Error('Firebase disabled locally')),
+                signOut: () => Promise.resolve()
+            };
+        }
+
+        // Authentication Functions
+        function updateAuthUI() {
+            const authMessage = document.getElementById('auth-message');
+            const signinBtn = document.getElementById('google-signin-btn');
+            const signoutBtn = document.getElementById('google-signout-btn');
+            const userInfo = document.getElementById('user-info');
+            const userPhoto = document.getElementById('user-photo');
+            const userName = document.getElementById('user-name');
+
+            if (currentUser) {
+                authMessage.textContent = `Welcome back, ${currentUser.displayName || 'User'}!`;
+                signinBtn.style.display = 'none';
+                signoutBtn.style.display = 'block';
+                userInfo.style.display = 'flex';
+                
+                if (userPhoto && currentUser.photoURL) {
+                    userPhoto.src = currentUser.photoURL;
+                    userPhoto.style.display = 'block';
+                } else {
+                    userPhoto.style.display = 'none';
+                }
+                
+                if (userName) {
+                    userName.textContent = currentUser.displayName || currentUser.email || 'User';
+                }
+            } else {
+                authMessage.textContent = 'Sign in to save your progress and compete on leaderboards';
+                signinBtn.style.display = 'block';
+                signoutBtn.style.display = 'none';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        function signInWithGoogle() {
+            if (window.location.protocol === 'file:') {
+                alert('Firebase authentication is not available when running locally. Please host the files on a web server.');
+                return;
+            }
+
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    console.log('✅ Google sign-in successful:', result.user.displayName);
+                    currentUser = result.user;
+                    updateAuthUI();
+                    playSelectSound();
+                })
+                .catch(error => {
+                    console.error('❌ Sign-in error:', error);
+                    let errorMessage = 'Failed to sign in with Google. ';
+                    switch(error.code) {
+                        case 'auth/popup-closed-by-user':
+                            errorMessage += 'Sign-in was cancelled.';
+                            break;
+                        case 'auth/popup-blocked':
+                            errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
+                            break;
+                        default:
+                            errorMessage += 'Please try again.';
+                    }
+                    alert(errorMessage);
+                });
+        }
+
+        function signOut() {
+            auth.signOut()
+                .then(() => {
+                    console.log('✅ Sign out successful');
+                    currentUser = null;
+                    updateAuthUI();
+                    playSelectSound();
+                })
+                .catch(error => {
+                    console.error('❌ Sign-out error:', error);
+                    alert('Failed to sign out. Please try again.');
+                });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add click listener to start audio on first user interaction
+            document.addEventListener('click', startAudio, { once: true });
+            document.addEventListener('keydown', startAudio, { once: true });
+
+            // Initialize authentication
+            if (auth && auth.onAuthStateChanged) {
+                auth.onAuthStateChanged(user => {
+                    currentUser = user;
+                    updateAuthUI();
+                });
+            }
+
+            // Add event listeners for auth buttons
+            const signinBtn = document.getElementById('google-signin-btn');
+            const signoutBtn = document.getElementById('google-signout-btn');
+            
+            if (signinBtn) {
+                signinBtn.addEventListener('click', signInWithGoogle);
+            }
+            
+            if (signoutBtn) {
+                signoutBtn.addEventListener('click', signOut);
+            }
+
+            // Register service worker for PWA/offline support
+            if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+                navigator.serviceWorker.register('service-worker.js').then(() => {
+                    console.log('✅ Service worker registered from menu');
+                }).catch(err => console.warn('SW registration failed:', err));
+            }
+        });
+    </script>
+</body>
+</html>

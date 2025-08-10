@@ -53,6 +53,10 @@ The following files have been updated with the new Firebase configuration:
 2. **Deploy Your Game**: Your Firebase configuration is ready for deployment
 3. **Verify Firebase Console**: Check that your new project is properly configured
 4. **Test Leaderboard**: Ensure the leaderboard functionality works with the new configuration
+5. **Create Collections**:
+   - `leaderboard`
+   - `prayers` with subcollection `interactions`
+6. **Publish Rules**: Deploy the updated rules in `firestore-rules.txt` (includes `prayers/*`)
 
 ## 🔍 Troubleshooting
 

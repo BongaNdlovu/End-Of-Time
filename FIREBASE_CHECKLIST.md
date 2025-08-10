@@ -38,7 +38,7 @@ Based on your current `script.js` file, here's the status of your Firebase confi
 - [ ] Ensure `leaderboard` collection is accessible
 
 ### 4. Security Rules Verification
-Current rules should be:
+Current rules should include leaderboard and prayer collections:
 ```javascript
 rules_version = '2';
 service cloud.firestore {
@@ -46,6 +46,18 @@ service cloud.firestore {
     match /leaderboard/{userId} {
       allow read: if true;
       allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /prayers/{prayerId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    match /prayers/{prayerId}/interactions/{interactionId} {
+      allow read: if true;
+      allow create: if true; // allow guests to record "I prayed"
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
   }
 }

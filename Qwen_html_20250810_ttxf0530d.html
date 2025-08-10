@@ -31,6 +31,7 @@
                     <button class="notif-btn" id="notif-bell"><i class="fas fa-bell"></i><span class="notif-badge" id="notif-count" style="display:none;">0</span></button>
                     <div class="notif-panel" id="notif-panel"></div>
                 </div>
+                <button class="cta-btn" id="notif-settings-btn" title="Notification Settings"><i class="fas fa-sliders-h"></i></button>
                 <button class="cta-btn" id="nav-submit-btn">Submit Prayer</button>
             </div>
         </nav>
@@ -43,6 +44,31 @@
                 <button class="pill-btn" id="hero-view-wall">View the Prayer Wall</button>
             </div>
         </section>
+
+        <!-- Notification Settings Modal -->
+        <div class="modal-backdrop" id="settings-modal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <div class="modal-title">Notification Settings</div>
+                    <button class="close-x" id="settings-close">Close</button>
+                </div>
+                <div class="form-row">
+                    <label for="settings-email">Email</label>
+                    <input type="email" id="settings-email" placeholder="you@example.com" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;">
+                </div>
+                <div class="form-row">
+                    <label>Enable Email Alerts</label>
+                    <label class="switch"><input type="checkbox" id="settings-notify-email"> <span>Notify by email</span></label>
+                </div>
+                <div class="form-row">
+                    <label>Enable Push Alerts</label>
+                    <label class="switch"><input type="checkbox" id="settings-notify-push"> <span>Notify by push</span></label>
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:12px;">
+                    <button class="save-btn" id="settings-save">Save</button>
+                </div>
+            </div>
+        </div>
         <!-- Header -->
         <div class="app-header">
             <div class="app-title">
@@ -638,6 +664,12 @@
             document.getElementById('nav-wall-link')?.addEventListener('click', (e)=>{e.preventDefault(); toFeed();});
             document.getElementById('nav-home-link')?.addEventListener('click', (e)=>{e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'});});
             document.getElementById('nav-submit-btn')?.addEventListener('click', (e)=>{e.preventDefault(); toSubmit();});
+            // Settings modal wiring
+            const modal = document.getElementById('settings-modal');
+            const openSettings = () => { modal.style.display = 'flex'; };
+            const closeSettings = () => { modal.style.display = 'none'; };
+            document.getElementById('notif-settings-btn')?.addEventListener('click', openSettings);
+            document.getElementById('settings-close')?.addEventListener('click', closeSettings);
         });
 
         // Auth + realtime feed
@@ -656,7 +688,7 @@
                                 await navigator.serviceWorker.register('/firebase-messaging-sw.js');
                             } catch {}
                         }
-                        const token = await messaging.getToken({ vapidKey: 'REPLACE_WITH_YOUR_PUBLIC_VAPID_KEY', serviceWorkerRegistration: await navigator.serviceWorker.getRegistration() });
+                        const token = await messaging.getToken({ vapidKey: 'BAbWcvy8_ZSDsLut27Je8yV7st4v9HSkvEYw8cibQl3UVfcYsm4J20OvZmVY56O2OkBIdmMComzaBON7qn4E7UI', serviceWorkerRegistration: await navigator.serviceWorker.getRegistration() });
                         if (token) {
                             await db.collection('users').doc(uid).set({ fcmTokens: firebase.firestore.FieldValue.arrayUnion(token) }, { merge: true });
                         }
@@ -709,6 +741,24 @@
                     bell.addEventListener('click', ()=>{
                         open = !open; panel.style.display = open ? 'block' : 'none';
                     });
+                    // Load settings defaults
+                    (async () => {
+                        try {
+                            const doc = await db.collection('users').doc(uid).get();
+                            const data = doc.data() || {};
+                            document.getElementById('settings-email').value = data.email || '';
+                            document.getElementById('settings-notify-email').checked = !!data.notifyEmail;
+                            document.getElementById('settings-notify-push').checked = !!data.notifyPush;
+                            document.getElementById('settings-save').addEventListener('click', async () => {
+                                const email = (document.getElementById('settings-email')).value.trim();
+                                const notifyEmail = (document.getElementById('settings-notify-email')).checked;
+                                const notifyPush = (document.getElementById('settings-notify-push')).checked;
+                                await db.collection('users').doc(uid).set({ email, notifyEmail, notifyPush }, { merge: true });
+                                alert('Settings saved');
+                                (document.getElementById('settings-modal')).style.display = 'none';
+                            });
+                        } catch {}
+                    })();
                     db.collection('notifications')
                       .where('userId','==', uid)
                       .orderBy('createdAt','desc')

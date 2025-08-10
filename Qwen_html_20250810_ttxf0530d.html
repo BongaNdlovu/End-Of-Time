@@ -650,7 +650,13 @@
                 (async () => {
                     try {
                         if (!messaging || !uid) return;
-                        const token = await messaging.getToken({ vapidKey: 'REPLACE_WITH_YOUR_PUBLIC_VAPID_KEY' });
+                        // Ensure SW is registered at root
+                        if ('serviceWorker' in navigator) {
+                            try {
+                                await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+                            } catch {}
+                        }
+                        const token = await messaging.getToken({ vapidKey: 'REPLACE_WITH_YOUR_PUBLIC_VAPID_KEY', serviceWorkerRegistration: await navigator.serviceWorker.getRegistration() });
                         if (token) {
                             await db.collection('users').doc(uid).set({ fcmTokens: firebase.firestore.FieldValue.arrayUnion(token) }, { merge: true });
                         }

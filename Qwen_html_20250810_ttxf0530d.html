@@ -510,19 +510,10 @@
                         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                     });
                     input.value = '';
-                    // Notification to owner (in-app)
-                    if (ownerUserId && ownerUserId !== (user && user.uid)) {
-                        await db.collection('notifications').add({
-                            userId: ownerUserId,
-                            type: 'comment',
-                            prayerId,
-                            actorId: user ? user.uid : null,
-                            actorName: user ? (user.displayName || user.email || 'User') : 'Guest',
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                            read: false,
-                        });
-                    }
-                } catch (e) { console.error(e); alert('Failed to post comment'); }
+                } catch (e) { 
+                    console.error(e); 
+                    alert('Failed to post comment. Error: ' + e.message); 
+                }
             });
             return unsub;
         }

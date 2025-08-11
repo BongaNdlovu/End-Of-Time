@@ -104,6 +104,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  min-height: 0;
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.tab-content.active {
+  display: flex !important;
 }
 
 /* Cards */

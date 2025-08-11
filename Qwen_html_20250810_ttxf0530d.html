@@ -484,8 +484,10 @@
             // Clear dynamic items after first card (stats card remains)
             const staticCards = feed.querySelectorAll('.card');
             const firstCard = staticCards[0];
+            const secondCard = staticCards[1];
             feed.innerHTML = '';
             if (firstCard) feed.appendChild(firstCard);
+            if (secondCard) feed.appendChild(secondCard);
 
             snapshotDocs.forEach(doc => {
                 const p = doc.data();
@@ -685,7 +687,7 @@
                         // Ensure SW is registered at root
                         if ('serviceWorker' in navigator) {
                             try {
-                                await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+                                await navigator.serviceWorker.register('./firebase-messaging-sw.js');
                             } catch {}
                         }
                         const token = await messaging.getToken({ vapidKey: 'BAbWcvy8_ZSDsLut27Je8yV7st4v9HSkvEYw8cibQl3UVfcYsm4J20OvZmVY56O2OkBIdmMComzaBON7qn4E7UI', serviceWorkerRegistration: await navigator.serviceWorker.getRegistration() });

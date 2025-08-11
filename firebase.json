@@ -1,17 +1,15 @@
 {
   "hosting": {
-    "public": "public",
+    "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
     "site": "end-of-time-94cd3"
+  },
+  "firestore": {
+    "rules": "firestore-rules.txt",
+    "indexes": "firestore.indexes.json"
   }
 }

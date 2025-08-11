@@ -1,6 +1,13 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // This rule is required for collectionGroup queries on 'interactions'
+    // It allows any client to read interaction documents (e.g., to count prayers).
+    match /{path=**}/interactions/{interactionId} {
+      allow read: if true;
+      // Keep the more specific create/update/delete rules below for security.
+    }
+
     // Leaderboard collection rules
     match /leaderboard/{userId} {
       // Anyone can read leaderboard entries (for displaying the leaderboard)
@@ -37,7 +44,9 @@ service cloud.firestore {
     // Notifications for users
     match /notifications/{notificationId} {
       allow read, update: if request.auth != null && request.auth.uid == resource.data.userId;
-      allow create: if true; // created by client logic for now; can be moved to Cloud Functions
+      // SECURITY FIX: Only allow creating a notification if the target userId in the document
+      // matches the ID of the user making the request.
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
       allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
 

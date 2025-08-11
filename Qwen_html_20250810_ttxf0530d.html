@@ -1076,7 +1076,7 @@
                         // Ensure SW is registered at root
                         if ('serviceWorker' in navigator) {
                             try {
-                                await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+                                await navigator.serviceWorker.register('firebase-messaging-sw.js');
                             } catch {}
                         }
                         const token = await messaging.getToken({ vapidKey: 'BAbWcvy8_ZSDsLut27Je8yV7st4v9HSkvEYw8cibQl3UVfcYsm4J20OvZmVY56O2OkBIdmMComzaBON7qn4E7UI', serviceWorkerRegistration: await navigator.serviceWorker.getRegistration() });
@@ -1118,19 +1118,21 @@
 
                 // default to all
                 subscribeAll();
-                
-                // Update user stats in real-time
-                updateUserStats(uid);
-                updatePrayerStreak(uid);
 
-                // wire navbar links
-                document.getElementById('nav-wall-link')?.addEventListener('click', (e)=>{ e.preventDefault(); subscribeAll(); });
-                document.getElementById('nav-about-link')?.addEventListener('click', (e)=>{ e.preventDefault(); subscribeMine(); });
-                
-                // Load dashboard when dashboard tab is clicked
-                document.querySelector('[data-tab="dashboardTab"]')?.addEventListener('click', () => {
-                    loadUserDashboard(uid);
-                });
+                if (user) {
+                    // Update user stats in real-time
+                    updateUserStats(uid);
+                    updatePrayerStreak(uid);
+
+                    // wire navbar links
+                    document.getElementById('nav-wall-link')?.addEventListener('click', (e)=>{ e.preventDefault(); subscribeAll(); });
+                    document.getElementById('nav-about-link')?.addEventListener('click', (e)=>{ e.preventDefault(); subscribeMine(); });
+
+                    // Load dashboard when dashboard tab is clicked
+                    document.querySelector('[data-tab="dashboardTab"]')?.addEventListener('click', () => {
+                        loadUserDashboard(uid);
+                    });
+                }
 
                 // Notifications: show unread for current user
                 if (uid) {

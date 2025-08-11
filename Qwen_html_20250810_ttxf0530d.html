@@ -376,18 +376,32 @@
             measurementId: "G-E5R3NG1533"
         };
 
+        let auth, db, messaging = null;
+        
         if (window.location.protocol !== 'file:') {
-            if (!firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
+            try {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                auth = firebase.auth();
+                db = firebase.firestore();
+                
+                try { 
+                    messaging = firebase.messaging(); 
+                } catch (e) {
+                    console.warn('Firebase messaging not available:', e.message);
+                }
+                
+                console.log('✅ Firebase initialized for Prayer Network');
+            } catch (e) {
+                console.error('❌ Firebase initialization failed:', e);
+                auth = { onAuthStateChanged: (cb) => cb(null) };
+                db = null;
             }
-            var auth = firebase.auth();
-            var db = firebase.firestore();
-            var messaging = null;
-            try { messaging = firebase.messaging(); } catch (e) {}
         } else {
-            // Fallback mock when running locally from file://
-            var auth = { onAuthStateChanged: (cb) => cb(null) };
-            var db = null;
+            console.log('⚠️ Running locally - Firebase features disabled');
+            auth = { onAuthStateChanged: (cb) => cb(null) };
+            db = null;
         }
 
         // Session bridging from hub menu
@@ -611,8 +625,39 @@
             });
         }
 
-        // Submit form wiring
-        document.addEventListener('DOMContentLoaded', () => {
+        // Tab Navigation System
+        function initTabNavigation() {
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Hide all content areas
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                        content.style.display = 'none';
+                    });
+                    
+                    // Show selected content
+                    const tabId = tab.getAttribute('data-tab');
+                    const targetTab = document.getElementById(tabId);
+                    if (targetTab) {
+                        targetTab.classList.add('active');
+                        targetTab.style.display = 'flex';
+                        targetTab.style.flexDirection = 'column';
+                        targetTab.style.gap = '15px';
+                    }
+                });
+            });
+        }
+
+        // Form submission handling
+        function initFormHandling() {
             const form = document.getElementById('prayerForm');
             if (form && db) {
                 form.addEventListener('submit', async (e) => {
@@ -637,30 +682,22 @@
                         });
                         alert('Prayer request submitted successfully!');
                         form.reset();
-                        // Switch to feed tab
-                        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-                        document.querySelector('[data-tab="feedTab"]').classList.add('active');
-                        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-                        document.getElementById('feedTab').style.display = 'flex';
+                        // Switch to feed tab using our navigation system
+                        const feedTab = document.querySelector('[data-tab="feedTab"]');
+                        if (feedTab) {
+                            feedTab.click();
+                        }
                     } catch (e) { console.error(e); alert('Failed to submit prayer.'); }
                 });
             }
             // Navbar/Hero wiring
             const toFeed = () => {
-                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-                document.querySelector('[data-tab="feedTab"]').classList.add('active');
-                document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-                document.getElementById('feedTab').style.display = 'flex';
-                document.getElementById('feedTab').style.flexDirection = 'column';
-                document.getElementById('feedTab').style.gap = '15px';
+                const feedTab = document.querySelector('[data-tab="feedTab"]');
+                if (feedTab) feedTab.click();
             };
             const toSubmit = () => {
-                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-                document.querySelector('[data-tab="submitTab"]').classList.add('active');
-                document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-                document.getElementById('submitTab').style.display = 'flex';
-                document.getElementById('submitTab').style.flexDirection = 'column';
-                document.getElementById('submitTab').style.gap = '15px';
+                const submitTab = document.querySelector('[data-tab="submitTab"]');
+                if (submitTab) submitTab.click();
             };
             document.getElementById('hero-view-wall')?.addEventListener('click', toFeed);
             document.getElementById('nav-wall-link')?.addEventListener('click', (e)=>{e.preventDefault(); toFeed();});
@@ -674,9 +711,25 @@
             document.getElementById('settings-close')?.addEventListener('click', closeSettings);
         });
 
-        // Auth + realtime feed
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
-            if (!auth || !db) return;
+            // Initialize all components
+            initFormHandling();
+            
+            // Show default tab (Feed)
+            const defaultTab = document.getElementById('feedTab');
+            if (defaultTab) {
+                defaultTab.classList.add('active');
+                defaultTab.style.display = 'flex';
+                defaultTab.style.flexDirection = 'column';
+                defaultTab.style.gap = '15px';
+            }
+            
+            // Firebase initialization
+            if (!auth || !db) {
+                console.warn('Firebase not available - some features will be disabled');
+                return;
+            }
             setLoading(true);
             auth.onAuthStateChanged(user => {
                 const uid = user ? user.uid : null;
@@ -687,7 +740,7 @@
                         // Ensure SW is registered at root
                         if ('serviceWorker' in navigator) {
                             try {
-                                await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+                                await navigator.serviceWorker.register('./firebase-messaging-sw.js');
                             } catch {}
                         }
                         const token = await messaging.getToken({ vapidKey: 'BAbWcvy8_ZSDsLut27Je8yV7st4v9HSkvEYw8cibQl3UVfcYsm4J20OvZmVY56O2OkBIdmMComzaBON7qn4E7UI', serviceWorkerRegistration: await navigator.serviceWorker.getRegistration() });
@@ -790,71 +843,6 @@
                 }
             });
         });
-        // Tab Navigation
-        document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs
-                document.querySelectorAll('.nav-tab').forEach(t => {
-                    t.classList.remove('active');
-                });
-                
-                // Add active class to clicked tab
-                tab.classList.add('active');
-                
-                // Hide all content areas
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.style.display = 'none';
-                });
-                
-                // Show selected content
-                const tabId = tab.getAttribute('data-tab');
-                document.getElementById(tabId).style.display = 'flex';
-                document.getElementById(tabId).style.flexDirection = 'column';
-                document.getElementById(tabId).style.gap = '15px';
-            });
-        });
-        
-        // Prayer Form Submission
-        document.getElementById('prayerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Prayer request submitted successfully!');
-            this.reset();
-            
-            // Switch to feed tab
-            document.querySelectorAll('.nav-tab').forEach(t => {
-                t.classList.remove('active');
-            });
-            document.querySelector('[data-tab="feedTab"]').classList.add('active');
-            
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.style.display = 'none';
-            });
-            document.getElementById('feedTab').style.display = 'flex';
-        });
-        
-        // Prayer Action Buttons
-        document.querySelectorAll('.action-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                if (this.classList.contains('answered')) {
-                    alert('This prayer has already been marked as answered.');
-                } else if (this.querySelector('i').classList.contains('fa-pray')) {
-                    alert('Thank you for praying! Your prayer has been recorded.');
-                    this.innerHTML = '<i class="fas fa-check"></i> Prayed';
-                    this.style.background = 'rgba(40, 167, 69, 0.2)';
-                    this.style.color = 'var(--success)';
-                }
-            });
-        });
-        
-        // Simulate notifications
-        setTimeout(() => {
-            const bellIcon = document.querySelector('.fa-bell');
-            const badge = document.createElement('span');
-            badge.className = 'badge';
-            badge.textContent = '3';
-            bellIcon.parentElement.style.position = 'relative';
-            bellIcon.parentElement.appendChild(badge);
-        }, 2000);
     </script>
 </body>
 </html>

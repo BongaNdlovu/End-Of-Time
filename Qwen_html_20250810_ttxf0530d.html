@@ -832,7 +832,7 @@
             const closeSettings = () => { modal.style.display = 'none'; };
             document.getElementById('notif-settings-btn')?.addEventListener('click', openSettings);
             document.getElementById('settings-close')?.addEventListener('click', closeSettings);
-        });
+        }
 
         // Update user statistics
         function updateUserStats(uid) {
@@ -1076,7 +1076,7 @@
                         // Ensure SW is registered at root
                         if ('serviceWorker' in navigator) {
                             try {
-                                await navigator.serviceWorker.register('./firebase-messaging-sw.js');
+                                await navigator.serviceWorker.register('/firebase-messaging-sw.js');
                             } catch {}
                         }
                         const token = await messaging.getToken({ vapidKey: 'BAbWcvy8_ZSDsLut27Je8yV7st4v9HSkvEYw8cibQl3UVfcYsm4J20OvZmVY56O2OkBIdmMComzaBON7qn4E7UI', serviceWorkerRegistration: await navigator.serviceWorker.getRegistration() });

@@ -417,9 +417,49 @@
             const area = document.getElementById('contentArea');
             if (isLoading) {
                 area.setAttribute('aria-busy', 'true');
+                // Add loading overlay
+                if (!document.getElementById('loading-overlay')) {
+                    const overlay = document.createElement('div');
+                    overlay.id = 'loading-overlay';
+                    overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999; color: white; font-size: 18px;';
+                    overlay.innerHTML = '<div><i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i>Loading prayers...</div>';
+                    document.body.appendChild(overlay);
+                }
             } else {
                 area.removeAttribute('aria-busy');
+                const overlay = document.getElementById('loading-overlay');
+                if (overlay) {
+                    overlay.remove();
+                }
             }
+        }
+        
+        // Show success message
+        function showSuccess(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position: fixed; top: 20px; right: 20px; background: var(--success); color: white; padding: 15px 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);';
+            toast.innerHTML = `<i class="fas fa-check" style="margin-right: 8px;"></i>${message}`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+        
+        // Show error message  
+        function showError(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position: fixed; top: 20px; right: 20px; background: var(--danger); color: white; padding: 15px 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);';
+            toast.innerHTML = `<i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>${message}`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
         }
 
         // Render functions
@@ -546,28 +586,74 @@
 
                 // Wire actions
                 const prayBtn = wrapper.querySelector('.pray-btn');
+                
+                // Check if user already prayed
+                if (currentUid) {
+                    db.collection('prayers').doc(doc.id).collection('interactions')
+                        .where('type', '==', 'prayed')
+                        .where('userId', '==', currentUid)
+                        .get()
+                        .then(snapshot => {
+                            if (!snapshot.empty) {
+                                prayBtn.innerHTML = '<i class="fas fa-check"></i> You Prayed (<span class="pray-count">0</span>)';
+                                prayBtn.classList.add('answered');
+                                prayBtn.disabled = true;
+                            }
+                        });
+                }
+
                 prayBtn.addEventListener('click', async () => {
+                    if (prayBtn.disabled) return;
+                    
+                    // Visual feedback
+                    const originalText = prayBtn.innerHTML;
+                    prayBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Praying...';
+                    prayBtn.disabled = true;
+
                     try {
+                        const user = auth.currentUser;
+                        const userName = user ? (user.displayName || user.email || 'Anonymous') : 'Anonymous';
+                        
                         await db.collection('prayers').doc(doc.id).collection('interactions').add({
                             type: 'prayed',
                             userId: currentUid || null,
+                            userDisplayName: userName,
                             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                         });
-                        alert('Thank you for praying!');
-                        // Notify owner (in-app)
+                        
+                        // Update button state
+                        prayBtn.innerHTML = '<i class="fas fa-check"></i> You Prayed (<span class="pray-count">0</span>)';
+                        prayBtn.classList.add('answered');
+                        
+                        // Update prayer count in database
+                        await db.collection('prayers').doc(doc.id).update({
+                            prayedCount: firebase.firestore.FieldValue.increment(1)
+                        });
+                        
+                        // Show success message
+                        setTimeout(() => {
+                            showSuccess('Thank you for your prayers! Your faith strengthens the community.');
+                        }, 500);
+                        
+                        // Notify owner (in-app notification)
                         if (p.userId && p.userId !== currentUid) {
                             await db.collection('notifications').add({
                                 userId: p.userId,
                                 type: 'prayed',
                                 prayerId: doc.id,
+                                prayerTitle: p.title,
                                 actorId: currentUid || null,
-                                actorName: 'Someone',
+                                actorName: userName,
+                                message: `${userName} prayed for your request: "${p.title}"`,
                                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                                 read: false,
                             });
                         }
                     } catch (e) {
-                        console.error(e); alert('Failed to record prayer.');
+                        console.error('Prayer interaction error:', e);
+                        prayBtn.innerHTML = originalText;
+                        prayBtn.disabled = false;
+                        alert('Unable to record your prayer. Please try again.');
                     }
                 });
 
@@ -668,26 +754,63 @@
                     const urgency = form.querySelectorAll('select')[1]?.value || 'ongoing';
                     const isAnonymous = document.getElementById('anonymous')?.checked || false;
 
-                    if (!title) { alert('Please provide a title.'); return; }
+                    if (!title) { 
+                        alert('Please provide a title for your prayer request.'); 
+                        return; 
+                    }
+
+                    // Show loading state
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+                    submitBtn.disabled = true;
 
                     try {
                         const user = auth.currentUser;
-                        await db.collection('prayers').add({
+                        const prayerData = {
                             userId: user ? user.uid : null,
                             userDisplayName: user ? (user.displayName || user.email || 'User') : 'Guest',
-                            title, description, category, urgency, isAnonymous,
+                            userEmail: user ? user.email : null,
+                            title: title, 
+                            description: description, 
+                            category: category, 
+                            urgency: urgency, 
+                            isAnonymous: isAnonymous,
                             status: 'open',
                             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                            privacy: isAnonymous ? 'anonymous' : 'public'
-                        });
-                        alert('Prayer request submitted successfully!');
-                        form.reset();
-                        // Switch to feed tab using our navigation system
-                        const feedTab = document.querySelector('[data-tab="feedTab"]');
-                        if (feedTab) {
-                            feedTab.click();
-                        }
-                    } catch (e) { console.error(e); alert('Failed to submit prayer.'); }
+                            updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                            privacy: isAnonymous ? 'anonymous' : 'public',
+                            prayedCount: 0,
+                            commentCount: 0
+                        };
+
+                        const docRef = await db.collection('prayers').add(prayerData);
+                        console.log('Prayer submitted with ID:', docRef.id);
+                        
+                        // Success feedback
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Submitted!';
+                        submitBtn.style.background = 'var(--success)';
+                        
+                        setTimeout(() => {
+                            showSuccess('Prayer request submitted successfully! The community will pray for you.');
+                            form.reset();
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.style.background = '';
+                            submitBtn.disabled = false;
+                            
+                            // Switch to feed tab using our navigation system
+                            const feedTab = document.querySelector('[data-tab="feedTab"]');
+                            if (feedTab) {
+                                feedTab.click();
+                            }
+                        }, 1500);
+                        
+                    } catch (e) { 
+                        console.error('Prayer submission error:', e);
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        alert('Failed to submit prayer. Please check your connection and try again.'); 
+                    }
                 });
             }
             // Navbar/Hero wiring
@@ -710,6 +833,219 @@
             document.getElementById('notif-settings-btn')?.addEventListener('click', openSettings);
             document.getElementById('settings-close')?.addEventListener('click', closeSettings);
         });
+
+        // Update user statistics
+        function updateUserStats(uid) {
+            if (!uid || !db) return;
+            
+            // Update prayers shared count
+            db.collection('prayers').where('userId', '==', uid).onSnapshot(snapshot => {
+                document.querySelector('.stat-card:nth-child(1) .stat-value').textContent = snapshot.size;
+            });
+            
+            // Update prayers prayed count (interactions where user prayed for others)
+            db.collectionGroup('interactions')
+                .where('type', '==', 'prayed')
+                .where('userId', '==', uid)
+                .onSnapshot(snapshot => {
+                    document.querySelector('.stat-card:nth-child(2) .stat-value').textContent = snapshot.size;
+                });
+            
+            // Update answered prayers count
+            db.collection('prayers')
+                .where('userId', '==', uid)
+                .where('status', '==', 'answered')
+                .onSnapshot(snapshot => {
+                    document.querySelector('.stat-card:nth-child(3) .stat-value').textContent = snapshot.size;
+                });
+        }
+        
+        // Load user dashboard with real data
+        function loadUserDashboard(uid) {
+            if (!uid || !db) return;
+            
+            const dashboardTab = document.getElementById('dashboardTab');
+            if (!dashboardTab) return;
+            
+            // Clear existing content except headers
+            dashboardTab.innerHTML = `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Your Prayer History</div>
+                    </div>
+                    <div id="user-prayers-container">
+                        <div style="text-align: center; padding: 20px; color: #999;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading your prayers...
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Answered Prayers</div>
+                    </div>
+                    <div id="answered-prayers-container">
+                        <div style="text-align: center; padding: 20px; color: #999;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading answered prayers...
+                        </div>
+                    </div>
+                </div>`;
+            
+            // Load user's prayers
+            db.collection('prayers')
+                .where('userId', '==', uid)
+                .orderBy('createdAt', 'desc')
+                .limit(10)
+                .get()
+                .then(snapshot => {
+                    const container = document.getElementById('user-prayers-container');
+                    if (snapshot.empty) {
+                        container.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">You haven\'t submitted any prayers yet.</div>';
+                        return;
+                    }
+                    
+                    container.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const p = doc.data();
+                        const prayerDiv = document.createElement('div');
+                        prayerDiv.className = 'prayer-request';
+                        prayerDiv.innerHTML = `
+                            <div class="prayer-user">
+                                <div class="avatar">You</div>
+                                <div class="user-info">
+                                    <div class="user-name">You</div>
+                                    <div class="request-time">${p.createdAt ? new Date(p.createdAt.toDate()).toLocaleDateString() : 'Recently'}</div>
+                                </div>
+                                <div class="urgency-tag ${p.urgency ? `urgency-${p.urgency}` : ''}">${p.urgency || 'General'}</div>
+                            </div>
+                            <div class="prayer-content">
+                                <div class="prayer-title">${p.title || 'Prayer Request'}</div>
+                                <div class="prayer-description">${p.description || ''}</div>
+                            </div>
+                            <div class="prayer-meta">
+                                <div class="category-tag">${p.category || 'General'}</div>
+                                <div style="color: #999; font-size: 0.9em;">${p.prayedCount || 0} people prayed</div>
+                            </div>
+                            <div class="prayer-actions">
+                                <button class="action-btn ${p.status === 'answered' ? 'answered' : ''}" onclick="togglePrayerStatus('${doc.id}', '${p.status}')">
+                                    <i class="fas fa-${p.status === 'answered' ? 'undo' : 'check-circle'}"></i> 
+                                    ${p.status === 'answered' ? 'Mark Open' : 'Mark Answered'}
+                                </button>
+                            </div>`;
+                        container.appendChild(prayerDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading prayers:', error);
+                    document.getElementById('user-prayers-container').innerHTML = '<div style="color: red; padding: 20px;">Error loading prayers.</div>';
+                });
+            
+            // Load answered prayers
+            db.collection('prayers')
+                .where('status', '==', 'answered')
+                .orderBy('answeredAt', 'desc')
+                .limit(5)
+                .get()
+                .then(snapshot => {
+                    const container = document.getElementById('answered-prayers-container');
+                    if (snapshot.empty) {
+                        container.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">No answered prayers to show yet.</div>';
+                        return;
+                    }
+                    
+                    container.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const p = doc.data();
+                        const isOwn = p.userId === uid;
+                        const prayerDiv = document.createElement('div');
+                        prayerDiv.className = 'prayer-request';
+                        prayerDiv.innerHTML = `
+                            <div class="prayer-user">
+                                <div class="avatar">${isOwn ? 'You' : (p.userDisplayName || 'User').substring(0,2)}</div>
+                                <div class="user-info">
+                                    <div class="user-name">${isOwn ? 'You' : (p.userDisplayName || 'User')}</div>
+                                    <div class="request-time">Answered ${p.answeredAt ? new Date(p.answeredAt.toDate()).toLocaleDateString() : 'recently'}</div>
+                                </div>
+                            </div>
+                            <div class="prayer-content">
+                                <div class="prayer-title">${p.title || 'Prayer Request'}</div>
+                                <div class="prayer-description">${p.description || ''}</div>
+                            </div>
+                            <div class="prayer-meta">
+                                <div class="category-tag">${p.category || 'General'}</div>
+                                <div style="color: var(--success); font-weight: 600;">✓ Answered</div>
+                            </div>`;
+                        container.appendChild(prayerDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading answered prayers:', error);
+                    document.getElementById('answered-prayers-container').innerHTML = '<div style="color: red; padding: 20px;">Error loading answered prayers.</div>';
+                });
+        }
+        
+        // Toggle prayer status function
+        function togglePrayerStatus(prayerId, currentStatus) {
+            if (!db) return;
+            
+            const newStatus = currentStatus === 'answered' ? 'open' : 'answered';
+            const updateData = {
+                status: newStatus,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            
+            if (newStatus === 'answered') {
+                updateData.answeredAt = firebase.firestore.FieldValue.serverTimestamp();
+            } else {
+                updateData.answeredAt = null;
+            }
+            
+            db.collection('prayers').doc(prayerId).update(updateData)
+                .then(() => {
+                    alert(`Prayer marked as ${newStatus}!`);
+                    // Reload dashboard to reflect changes
+                    const currentUser = auth.currentUser;
+                    if (currentUser) {
+                        loadUserDashboard(currentUser.uid);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating prayer status:', error);
+                    alert('Failed to update prayer status.');
+                });
+        }
+        
+        // Make function global for onclick handlers
+        window.togglePrayerStatus = togglePrayerStatus;
+
+        // Calculate prayer streak
+        function updatePrayerStreak(uid) {
+            if (!uid || !db) return;
+            
+            // Simple streak calculation - days with prayer activity
+            const now = new Date();
+            const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+            
+            db.collectionGroup('interactions')
+                .where('userId', '==', uid)
+                .where('type', 'in', ['prayed', 'comment'])
+                .where('createdAt', '>=', sevenDaysAgo)
+                .get()
+                .then(snapshot => {
+                    const days = new Set();
+                    snapshot.forEach(doc => {
+                        const date = doc.data().createdAt?.toDate();
+                        if (date) {
+                            days.add(date.toDateString());
+                        }
+                    });
+                    
+                    const streakElement = document.querySelector('.streak-count');
+                    if (streakElement) {
+                        streakElement.textContent = `${days.size} Days`;
+                    }
+                });
+        }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
@@ -782,10 +1118,19 @@
 
                 // default to all
                 subscribeAll();
+                
+                // Update user stats in real-time
+                updateUserStats(uid);
+                updatePrayerStreak(uid);
 
                 // wire navbar links
                 document.getElementById('nav-wall-link')?.addEventListener('click', (e)=>{ e.preventDefault(); subscribeAll(); });
                 document.getElementById('nav-about-link')?.addEventListener('click', (e)=>{ e.preventDefault(); subscribeMine(); });
+                
+                // Load dashboard when dashboard tab is clicked
+                document.querySelector('[data-tab="dashboardTab"]')?.addEventListener('click', () => {
+                    loadUserDashboard(uid);
+                });
 
                 // Notifications: show unread for current user
                 if (uid) {
@@ -808,9 +1153,43 @@
                                 const email = (document.getElementById('settings-email')).value.trim();
                                 const notifyEmail = (document.getElementById('settings-notify-email')).checked;
                                 const notifyPush = (document.getElementById('settings-notify-push')).checked;
-                                await db.collection('users').doc(uid).set({ email, notifyEmail, notifyPush }, { merge: true });
-                                alert('Settings saved');
-                                (document.getElementById('settings-modal')).style.display = 'none';
+                                
+                                // Validate email if provided
+                                if (email && !/\S+@\S+\.\S+/.test(email)) {
+                                    alert('Please enter a valid email address.');
+                                    return;
+                                }
+                                
+                                const saveBtn = document.getElementById('settings-save');
+                                const originalText = saveBtn.textContent;
+                                saveBtn.textContent = 'Saving...';
+                                saveBtn.disabled = true;
+                                
+                                try {
+                                    await db.collection('users').doc(uid).set({ 
+                                        email, 
+                                        notifyEmail, 
+                                        notifyPush,
+                                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                                    }, { merge: true });
+                                    
+                                    saveBtn.textContent = 'Saved!';
+                                    saveBtn.style.background = 'var(--success)';
+                                    
+                                    setTimeout(() => {
+                                        alert('Settings saved successfully!');
+                                        saveBtn.textContent = originalText;
+                                        saveBtn.style.background = '';
+                                        saveBtn.disabled = false;
+                                        (document.getElementById('settings-modal')).style.display = 'none';
+                                    }, 1000);
+                                    
+                                } catch (error) {
+                                    console.error('Settings save error:', error);
+                                    saveBtn.textContent = originalText;
+                                    saveBtn.disabled = false;
+                                    alert('Failed to save settings. Please try again.');
+                                }
                             });
                         } catch {}
                     })();
@@ -826,8 +1205,15 @@
                               if (!n.read) unread++;
                               const div = document.createElement('div');
                               div.className = 'notif-item' + (!n.read ? ' unread' : '');
-                              const text = n.type === 'comment' ? `${n.actorName || 'Someone'} commented on your prayer` : `${n.actorName || 'Someone'} prayed for you`;
-                              div.innerHTML = `<div>${text}</div><div class="notif-actions"><button class="link-btn view-prayer">Open</button><button class="link-btn mark-read">Mark read</button></div>`;
+                              const text = n.message || (n.type === 'comment' ? `${n.actorName || 'Someone'} commented on your prayer` : `${n.actorName || 'Someone'} prayed for you`);
+                              const timeAgo = n.createdAt ? new Date(n.createdAt.toDate()).toLocaleString() : 'Just now';
+                              div.innerHTML = `
+                                  <div class="notif-text" style="font-weight: 500; margin-bottom: 4px;">${text}</div>
+                                  <div class="notif-time" style="font-size: 0.8em; color: #999; margin-bottom: 8px;">${timeAgo}</div>
+                                  <div class="notif-actions">
+                                      <button class="link-btn view-prayer">View</button>
+                                      <button class="link-btn mark-read">${n.read ? 'Read' : 'Mark Read'}</button>
+                                  </div>`;
                               div.querySelector('.view-prayer').addEventListener('click', ()=>{
                                   // switch to wall
                                   document.getElementById('nav-wall-link')?.click();

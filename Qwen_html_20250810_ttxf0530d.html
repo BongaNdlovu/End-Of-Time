@@ -10,7 +10,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js"></script>
 </head>
 <body>
     <video id="background-video" src="background.mp4" autoplay loop muted playsinline></video>
@@ -46,7 +45,7 @@
         </section>
 
         <!-- Notification Settings Modal -->
-        <div class="modal-backdrop" id="settings-modal">
+        <div class="modal-backdrop" id="settings-modal" style="display:none;">
             <div class="modal-card">
                 <div class="modal-header">
                     <div class="modal-title">Notification Settings</div>
@@ -69,19 +68,6 @@
                 </div>
             </div>
         </div>
-        <!-- Header -->
-        <div class="app-header">
-            <div class="app-title">
-                <img src="Fear God.png" alt="Fear God Imprints Logo" class="logo logo-pulse">
-                <i class="fas fa-hands-praying"></i>
-                <span class="glitch-effect">End of Time Prayer Network</span>
-            </div>
-            <div class="header-icons">
-                <a href="menu.html" title="Back to Hub"><i class="fas fa-home"></i></a>
-                <i class="fas fa-bell"></i>
-                <i class="fas fa-cog"></i>
-            </div>
-        </div>
         
         <!-- Content Area -->
         <div class="content-area" id="contentArea">
@@ -94,15 +80,15 @@
                     </div>
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="stat-value">24</div>
+                            <div class="stat-value">0</div>
                             <div class="stat-label">Prayers Shared</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value">18</div>
+                            <div class="stat-value">0</div>
                             <div class="stat-label">Prayers Prayed</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value">7</div>
+                            <div class="stat-value">0</div>
                             <div class="stat-label">Answered</div>
                         </div>
                     </div>
@@ -116,99 +102,13 @@
                         </div>
                         <div class="streak-info">
                             <div class="streak-title">Current Prayer Streak</div>
-                            <div class="streak-count">12 Days</div>
+                            <div class="streak-count">0 Days</div>
                             <div class="streak-desc">Keep praying to maintain your streak!</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Prayer Requests -->
-                <div class="prayer-request card">
-                    <div class="prayer-user">
-                        <div class="avatar">MJ</div>
-                        <div class="user-info">
-                            <div class="user-name">Maria Johnson</div>
-                            <div class="request-time">2 hours ago</div>
-                        </div>
-                        <div class="urgency-tag urgency-immediate">Immediate</div>
-                    </div>
-                    <div class="prayer-content">
-                        <div class="prayer-title">Healing for my daughter</div>
-                        <div class="prayer-description">
-                            My daughter has been in the hospital for a week now with a serious infection. 
-                            Please pray for her complete recovery and for strength for our family.
-                        </div>
-                    </div>
-                    <div class="prayer-meta">
-                        <div class="category-tag">Health</div>
-                    </div>
-                    <div class="prayer-actions">
-                        <button class="action-btn">
-                            <i class="fas fa-pray"></i> I Prayed
-                        </button>
-                        <button class="action-btn">
-                            <i class="fas fa-comment"></i> Comment
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="prayer-request card anonymous">
-                    <div class="prayer-user">
-                        <div class="avatar">A</div>
-                        <div class="user-info">
-                            <div class="user-name">Anonymous</div>
-                            <div class="request-time">5 hours ago</div>
-                        </div>
-                        <div class="urgency-tag urgency-week">This Week</div>
-                    </div>
-                    <div class="prayer-content">
-                        <div class="prayer-title">Guidance in career decision</div>
-                        <div class="prayer-description">
-                            I'm at a crossroads in my career and need wisdom to make the right decision. 
-                            Praying for clarity and peace in this process.
-                        </div>
-                    </div>
-                    <div class="prayer-meta">
-                        <div class="category-tag">Career</div>
-                    </div>
-                    <div class="prayer-actions">
-                        <button class="action-btn">
-                            <i class="fas fa-pray"></i> I Prayed
-                        </button>
-                        <button class="action-btn">
-                            <i class="fas fa-comment"></i> Comment
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="prayer-request card">
-                    <div class="prayer-user">
-                        <div class="avatar">TR</div>
-                        <div class="user-info">
-                            <div class="user-name">Thomas Rivera</div>
-                            <div class="request-time">Yesterday</div>
-                        </div>
-                        <div class="urgency-tag urgency-ongoing">Ongoing</div>
-                    </div>
-                    <div class="prayer-content">
-                        <div class="prayer-title">Missionary work support</div>
-                        <div class="prayer-description">
-                            Praying for protection and provision for our missionary team in Southeast Asia. 
-                            Also praying for open doors to share the Gospel.
-                        </div>
-                    </div>
-                    <div class="prayer-meta">
-                        <div class="category-tag">Mission</div>
-                    </div>
-                    <div class="prayer-actions">
-                        <button class="action-btn answered">
-                            <i class="fas fa-check-circle"></i> Answered
-                        </button>
-                        <button class="action-btn">
-                            <i class="fas fa-comment"></i> Comment
-                        </button>
-                    </div>
-                </div>
+                <!-- Prayer requests will be dynamically added here -->
             </div>
             
             <!-- Submit Prayer Tab -->
@@ -269,53 +169,9 @@
                     <div class="card-header">
                         <div class="card-title">Your Prayer History</div>
                     </div>
-                    <div class="prayer-request">
-                        <div class="prayer-user">
-                            <div class="avatar">You</div>
-                            <div class="user-info">
-                                <div class="user-name">You</div>
-                                <div class="request-time">3 days ago</div>
-                            </div>
-                            <div class="urgency-tag urgency-week">This Week</div>
-                        </div>
-                        <div class="prayer-content">
-                            <div class="prayer-title">Wisdom for decision making</div>
-                            <div class="prayer-description">
-                                Seeking God's guidance for an important career decision I need to make this month.
-                            </div>
-                        </div>
-                        <div class="prayer-meta">
-                            <div class="category-tag">Career</div>
-                        </div>
-                        <div class="prayer-actions">
-                            <button class="action-btn answered">
-                                <i class="fas fa-check-circle"></i> Answered
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="prayer-request">
-                        <div class="prayer-user">
-                            <div class="avatar">You</div>
-                            <div class="user-info">
-                                <div class="user-name">You</div>
-                                <div class="request-time">2 weeks ago</div>
-                            </div>
-                            <div class="urgency-tag urgency-ongoing">Ongoing</div>
-                        </div>
-                        <div class="prayer-content">
-                            <div class="prayer-title">Healing for my mother</div>
-                            <div class="prayer-description">
-                                Praying for my mother's recovery from surgery and for comfort for our family.
-                            </div>
-                        </div>
-                        <div class="prayer-meta">
-                            <div class="category-tag">Health</div>
-                        </div>
-                        <div class="prayer-actions">
-                            <button class="action-btn">
-                                <i class="fas fa-check-circle"></i> Mark as Answered
-                            </button>
+                    <div id="user-prayers-container">
+                        <div style="text-align: center; padding: 20px; color: #999;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading your prayers...
                         </div>
                     </div>
                 </div>
@@ -324,23 +180,9 @@
                     <div class="card-header">
                         <div class="card-title">Answered Prayers</div>
                     </div>
-                    <div class="prayer-request">
-                        <div class="prayer-user">
-                            <div class="avatar">TR</div>
-                            <div class="user-info">
-                                <div class="user-name">Thomas Rivera</div>
-                                <div class="request-time">Answered 2 days ago</div>
-                            </div>
-                        </div>
-                        <div class="prayer-content">
-                            <div class="prayer-title">Missionary work support</div>
-                            <div class="prayer-description">
-                                Thank you all for your prayers! Our team had a breakthrough in our outreach efforts. 
-                                Four new believers joined our community this week.
-                            </div>
-                        </div>
-                        <div class="prayer-meta">
-                            <div class="category-tag">Mission</div>
+                    <div id="answered-prayers-container">
+                        <div style="text-align: center; padding: 20px; color: #999;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading answered prayers...
                         </div>
                     </div>
                 </div>
@@ -365,7 +207,7 @@
     </div>
 
     <script>
-        // Firebase config (same project as hub)
+        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyA78bvzjP-b7K9TPCbIL3ttzPJr07VR8kY",
             authDomain: "end-of-time-94cd3.firebaseapp.com",
@@ -376,65 +218,32 @@
             measurementId: "G-E5R3NG1533"
         };
 
-        let auth, db, messaging = null;
+        let auth, db;
+        let currentUser = null;
+        let activeUnsub = null;
         
-        if (window.location.protocol !== 'file:') {
-            try {
-                if (!firebase.apps.length) {
-                    firebase.initializeApp(firebaseConfig);
-                }
-                auth = firebase.auth();
-                db = firebase.firestore();
-                
-                try { 
-                    messaging = firebase.messaging(); 
-                } catch (e) {
-                    console.warn('Firebase messaging not available:', e.message);
-                }
-                
-                console.log('✅ Firebase initialized for Prayer Network');
-            } catch (e) {
-                console.error('❌ Firebase initialization failed:', e);
-                auth = { onAuthStateChanged: (cb) => cb(null) };
-                db = null;
+        // Initialize Firebase
+        try {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
             }
-        } else {
-            console.log('⚠️ Running locally - Firebase features disabled');
-            auth = { onAuthStateChanged: (cb) => cb(null) };
-            db = null;
+            auth = firebase.auth();
+            db = firebase.firestore();
+            console.log('✅ Firebase initialized for Prayer Network');
+        } catch (e) {
+            console.error('❌ Firebase initialization failed:', e);
         }
 
-        // Session bridging from hub menu
-        try {
-            const storedUser = localStorage.getItem('endOfTime_user');
-            if (storedUser && auth && auth.currentUser == null && window.location.protocol !== 'file:') {
-                // We won't silently sign-in; we just use auth state listener below
-            }
-        } catch (e) {}
-
-        // UI helpers
+        // UI Helper Functions
         function setLoading(isLoading) {
             const area = document.getElementById('contentArea');
             if (isLoading) {
                 area.setAttribute('aria-busy', 'true');
-                // Add loading overlay
-                if (!document.getElementById('loading-overlay')) {
-                    const overlay = document.createElement('div');
-                    overlay.id = 'loading-overlay';
-                    overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999; color: white; font-size: 18px;';
-                    overlay.innerHTML = '<div><i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i>Loading prayers...</div>';
-                    document.body.appendChild(overlay);
-                }
             } else {
                 area.removeAttribute('aria-busy');
-                const overlay = document.getElementById('loading-overlay');
-                if (overlay) {
-                    overlay.remove();
-                }
             }
         }
         
-        // Show success message
         function showSuccess(message) {
             const toast = document.createElement('div');
             toast.style.cssText = 'position: fixed; top: 20px; right: 20px; background: var(--success); color: white; padding: 15px 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);';
@@ -448,7 +257,6 @@
             }, 3000);
         }
         
-        // Show error message  
         function showError(message) {
             const toast = document.createElement('div');
             toast.style.cssText = 'position: fixed; top: 20px; right: 20px; background: var(--danger); color: white; padding: 15px 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);';
@@ -462,77 +270,30 @@
             }, 5000);
         }
 
-        // Render functions
-        let activeUnsub = null;
-
-        function attachCommentsListeners(prayerId, commentsContainer, ownerUserId) {
-            const listEl = commentsContainer.querySelector('.comments-list');
-            const formEl = commentsContainer.querySelector('.comment-form');
-            // Live comments
-            const q = db.collection('prayers').doc(prayerId).collection('interactions').where('type','==','comment').orderBy('createdAt','asc');
-            const unsub = q.onSnapshot(s => {
-                listEl.innerHTML = '';
-                s.forEach(d => {
-                    const c = d.data();
-                    const li = document.createElement('div');
-                    li.style.margin = '6px 0';
-                    li.style.opacity = '0.95';
-                    const canEdit = auth.currentUser && c.userId === auth.currentUser.uid;
-                    li.innerHTML = `<strong>${c.userDisplayName || 'User'}:</strong> ${c.text || ''}
-                        ${canEdit ? ` <button class=\"tiny-btn edit-comment\">Edit</button> <button class=\"tiny-btn delete-comment\">Delete</button>` : ''}`;
-                    if (canEdit) {
-                        li.querySelector('.edit-comment').addEventListener('click', async () => {
-                            const newText = prompt('Edit comment:', c.text || '');
-                            if (newText == null) return;
-                            try { await d.ref.update({ text: newText }); } catch (e) { console.error(e); alert('Failed to edit comment'); }
-                        });
-                        li.querySelector('.delete-comment').addEventListener('click', async () => {
-                            if (!confirm('Delete this comment?')) return;
-                            try { await d.ref.delete(); } catch (e) { console.error(e); alert('Failed to delete'); }
-                        });
-                    }
-                    listEl.appendChild(li);
-                });
-            });
-            // Submit comment
-            formEl.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const input = formEl.querySelector('input');
-                const text = input.value.trim();
-                if (!text) return;
-                const user = auth.currentUser;
-                try {
-                    await db.collection('prayers').doc(prayerId).collection('interactions').add({
-                        type: 'comment',
-                        userId: user ? user.uid : null,
-                        userDisplayName: user ? (user.displayName || user.email || 'User') : 'Guest',
-                        text,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    });
-                    input.value = '';
-                } catch (e) { 
-                    console.error(e); 
-                    alert('Failed to post comment. Error: ' + e.message); 
-                }
-            });
-            return unsub;
-        }
-
-        function attachPrayedCount(prayerId, countEl) {
-            return db.collection('prayers').doc(prayerId).collection('interactions').where('type','==','prayed').onSnapshot(s => {
-                countEl.textContent = s.size.toString();
-            });
-        }
-
+        // Render prayers function
         function renderPrayers(snapshotDocs, currentUid) {
             const feed = document.getElementById('feedTab');
-            // Clear dynamic items after first card (stats card remains)
+            
+            // Keep the first two cards (stats and streak)
             const staticCards = feed.querySelectorAll('.card');
-            const firstCard = staticCards[0];
-            const secondCard = staticCards[1];
+            const cardsToKeep = Array.from(staticCards).slice(0, 2);
+            
+            // Clear everything else
             feed.innerHTML = '';
-            if (firstCard) feed.appendChild(firstCard);
-            if (secondCard) feed.appendChild(secondCard);
+            cardsToKeep.forEach(card => feed.appendChild(card));
+
+            if (snapshotDocs.length === 0) {
+                const emptyState = document.createElement('div');
+                emptyState.className = 'card';
+                emptyState.style.textAlign = 'center';
+                emptyState.style.padding = '40px';
+                emptyState.innerHTML = `
+                    <i class="fas fa-praying-hands" style="font-size: 3rem; color: #999; margin-bottom: 1rem;"></i>
+                    <p style="color: #999; font-size: 1.1rem;">No prayers yet. Be the first to share!</p>
+                `;
+                feed.appendChild(emptyState);
+                return;
+            }
 
             snapshotDocs.forEach(doc => {
                 const p = doc.data();
@@ -547,9 +308,9 @@
                         <div class="avatar">${(displayName||'U').substring(0,2)}</div>
                         <div class="user-info">
                             <div class="user-name">${displayName}</div>
-                            <div class="request-time">${new Date(p.createdAt?.toDate ? p.createdAt.toDate() : p.createdAt || Date.now()).toLocaleString()}</div>
+                            <div class="request-time">${p.createdAt ? new Date(p.createdAt.toDate()).toLocaleString() : 'Just now'}</div>
                         </div>
-                        <div class="urgency-tag ${p.urgency ? `urgency-${p.urgency}`: ''}">${p.urgency ? p.urgency : ''}</div>
+                        <div class="urgency-tag ${p.urgency ? `urgency-${p.urgency}`: ''}">${p.urgency || 'General'}</div>
                     </div>
                     <div class="prayer-content">
                         <div class="prayer-title">${p.title || 'Prayer Request'}</div>
@@ -560,11 +321,9 @@
                     </div>
                     <div class="prayer-actions">
                         <button class="action-btn pray-btn"><i class="fas fa-pray"></i> I Prayed (<span class="pray-count">0</span>)</button>
-                        <button class="action-btn toggle-comments"><i class="fas fa-comment"></i> View Comments</button>
+                        <button class="action-btn toggle-comments"><i class="fas fa-comment"></i> Comments</button>
                         ${isOwner 
-                            ? `<button class="action-btn toggle-status">${p.status === 'answered' ? '<i class=\"fas fa-undo\"></i> Mark Open' : '<i class=\"fas fa-check-circle\"></i> Mark Answered'}</button>
-                               <button class="action-btn edit-prayer"><i class=\"fas fa-edit\"></i> Edit</button>
-                               <button class="action-btn delete-prayer"><i class=\"fas fa-trash\"></i> Delete</button>`
+                            ? `<button class="action-btn toggle-status">${p.status === 'answered' ? '<i class="fas fa-undo"></i> Mark Open' : '<i class="fas fa-check-circle"></i> Mark Answered'}</button>`
                             : ''}
                     </div>
                     <div class="comments-container" style="display:none;margin-top:10px;">
@@ -575,35 +334,26 @@
                         </form>
                     </div>`;
 
-                // Wire actions
+                // Wire up the pray button
                 const prayBtn = wrapper.querySelector('.pray-btn');
+                const prayCount = wrapper.querySelector('.pray-count');
                 
-                // Check if user already prayed
-                if (currentUid) {
-                    db.collection('prayers').doc(doc.id).collection('interactions')
-                        .where('type', '==', 'prayed')
-                        .where('userId', '==', currentUid)
-                        .get()
-                        .then(snapshot => {
-                            if (!snapshot.empty) {
-                                prayBtn.innerHTML = '<i class="fas fa-check"></i> You Prayed (<span class="pray-count">0</span>)';
-                                prayBtn.classList.add('answered');
-                                prayBtn.disabled = true;
-                            }
-                        });
-                }
+                // Update pray count
+                db.collection('prayers').doc(doc.id).collection('interactions')
+                    .where('type', '==', 'prayed')
+                    .onSnapshot(snapshot => {
+                        prayCount.textContent = snapshot.size;
+                    });
 
                 prayBtn.addEventListener('click', async () => {
                     if (prayBtn.disabled) return;
                     
-                    // Visual feedback
+                    prayBtn.disabled = true;
                     const originalText = prayBtn.innerHTML;
                     prayBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Praying...';
-                    prayBtn.disabled = true;
 
                     try {
-                        const user = auth.currentUser;
-                        const userName = user ? (user.displayName || user.email || 'Anonymous') : 'Anonymous';
+                        const userName = currentUser ? (currentUser.displayName || currentUser.email || 'Anonymous') : 'Anonymous';
                         
                         await db.collection('prayers').doc(doc.id).collection('interactions').add({
                             type: 'prayed',
@@ -612,115 +362,63 @@
                             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                         });
                         
-                        // Update button state
                         prayBtn.innerHTML = '<i class="fas fa-check"></i> You Prayed (<span class="pray-count">0</span>)';
                         prayBtn.classList.add('answered');
                         
-                        // Update prayer count in database
-                        await db.collection('prayers').doc(doc.id).update({
-                            prayedCount: firebase.firestore.FieldValue.increment(1)
-                        });
-                        
-                        // Show success message
-                        setTimeout(() => {
-                            showSuccess('Thank you for your prayers! Your faith strengthens the community.');
-                        }, 500);
-                        
-                        // Notify owner (in-app notification)
-                        if (p.userId && p.userId !== currentUid) {
-                            await db.collection('notifications').add({
-                                userId: p.userId,
-                                type: 'prayed',
-                                prayerId: doc.id,
-                                prayerTitle: p.title,
-                                actorId: currentUid || null,
-                                actorName: userName,
-                                message: `${userName} prayed for your request: "${p.title}"`,
-                                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                                read: false,
-                            });
-                        }
+                        showSuccess('Thank you for your prayers!');
                     } catch (e) {
                         console.error('Prayer interaction error:', e);
                         prayBtn.innerHTML = originalText;
                         prayBtn.disabled = false;
-                        alert('Unable to record your prayer. Please try again.');
+                        showError('Unable to record your prayer. Please try again.');
                     }
                 });
 
+                // Toggle status button for owners
                 const toggleStatus = wrapper.querySelector('.toggle-status');
                 if (toggleStatus) {
                     toggleStatus.addEventListener('click', async () => {
                         try {
-                            const next = (p.status === 'answered') ? 'open' : 'answered';
-                            await db.collection('prayers').doc(doc.id).update({ status: next, answeredAt: next==='answered'? firebase.firestore.FieldValue.serverTimestamp() : null });
-                            alert(`Status updated to ${next}.`);
-                        } catch (e) { console.error(e); alert('Failed to update status.'); }
+                            const newStatus = p.status === 'answered' ? 'open' : 'answered';
+                            await db.collection('prayers').doc(doc.id).update({ 
+                                status: newStatus, 
+                                answeredAt: newStatus === 'answered' ? firebase.firestore.FieldValue.serverTimestamp() : null 
+                            });
+                            showSuccess(`Prayer marked as ${newStatus}`);
+                        } catch (e) { 
+                            console.error(e); 
+                            showError('Failed to update status'); 
+                        }
                     });
                 }
 
-                // Edit/delete for owner's prayers
-                const editBtn = wrapper.querySelector('.edit-prayer');
-                const delBtn = wrapper.querySelector('.delete-prayer');
-                if (editBtn) {
-                    editBtn.addEventListener('click', async () => {
-                        const newTitle = prompt('Edit title:', p.title || '');
-                        if (newTitle == null) return;
-                        const newDesc = prompt('Edit description:', p.description || '');
-                        if (newDesc == null) return;
-                        try { await db.collection('prayers').doc(doc.id).update({ title: newTitle, description: newDesc }); alert('Updated.'); }
-                        catch(e){ console.error(e); alert('Failed to update'); }
-                    });
-                }
-                if (delBtn) {
-                    delBtn.addEventListener('click', async () => {
-                        if (!confirm('Delete this prayer?')) return;
-                        try { await db.collection('prayers').doc(doc.id).delete(); alert('Deleted.'); }
-                        catch(e){ console.error(e); alert('Failed to delete'); }
-                    });
-                }
-
-                // Comments toggle and live listeners
-                let commentsUnsub = null;
+                // Comments toggle
                 const commentsContainer = wrapper.querySelector('.comments-container');
-                wrapper.querySelector('.toggle-comments').addEventListener('click', () => {
+                const toggleComments = wrapper.querySelector('.toggle-comments');
+                
+                toggleComments.addEventListener('click', () => {
                     const isOpen = commentsContainer.style.display !== 'none';
-                    if (isOpen) {
-                        commentsContainer.style.display = 'none';
-                        if (commentsUnsub) { commentsUnsub(); commentsUnsub = null; }
-                    } else {
-                        commentsContainer.style.display = 'block';
-                        if (!commentsUnsub) commentsUnsub = attachCommentsListeners(doc.id, commentsContainer, p.userId);
-                    }
+                    commentsContainer.style.display = isOpen ? 'none' : 'block';
                 });
-
-                // Prayed count live
-                const countEl = wrapper.querySelector('.pray-count');
-                attachPrayedCount(doc.id, countEl);
 
                 feed.appendChild(wrapper);
             });
         }
 
-        // Tab Navigation System
+        // Tab Navigation
         function initTabNavigation() {
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.addEventListener('click', (e) => {
                     e.preventDefault();
                     
-                    // Remove active class from all tabs
                     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-                    
-                    // Add active class to clicked tab
                     tab.classList.add('active');
                     
-                    // Hide all content areas
                     document.querySelectorAll('.tab-content').forEach(content => {
                         content.classList.remove('active');
                         content.style.display = 'none';
                     });
                     
-                    // Show selected content
                     const tabId = tab.getAttribute('data-tab');
                     const targetTab = document.getElementById(tabId);
                     if (targetTab) {
@@ -728,17 +426,23 @@
                         targetTab.style.display = 'flex';
                         targetTab.style.flexDirection = 'column';
                         targetTab.style.gap = '15px';
+                        
+                        // Load dashboard data when switching to dashboard tab
+                        if (tabId === 'dashboardTab' && currentUser) {
+                            loadUserDashboard(currentUser.uid);
+                        }
                     }
                 });
             });
         }
 
-        // Form submission handling
+        // Form submission
         function initFormHandling() {
             const form = document.getElementById('prayerForm');
-            if (form && db) {
+            if (form) {
                 form.addEventListener('submit', async (e) => {
                     e.preventDefault();
+                    
                     const title = form.querySelector('input[type="text"]').value.trim();
                     const description = form.querySelector('textarea').value.trim();
                     const category = form.querySelector('select').value || 'general';
@@ -746,22 +450,20 @@
                     const isAnonymous = document.getElementById('anonymous')?.checked || false;
 
                     if (!title) { 
-                        alert('Please provide a title for your prayer request.'); 
+                        showError('Please provide a title for your prayer request.'); 
                         return; 
                     }
 
-                    // Show loading state
                     const submitBtn = form.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
                     submitBtn.disabled = true;
 
                     try {
-                        const user = auth.currentUser;
                         const prayerData = {
-                            userId: user ? user.uid : null,
-                            userDisplayName: user ? (user.displayName || user.email || 'User') : 'Guest',
-                            userEmail: user ? user.email : null,
+                            userId: currentUser ? currentUser.uid : null,
+                            userDisplayName: currentUser ? (currentUser.displayName || currentUser.email || 'User') : 'Guest',
+                            userEmail: currentUser ? currentUser.email : null,
                             title: title, 
                             description: description, 
                             category: category, 
@@ -775,74 +477,68 @@
                             commentCount: 0
                         };
 
-                        const docRef = await db.collection('prayers').add(prayerData);
-                        console.log('Prayer submitted with ID:', docRef.id);
+                        await db.collection('prayers').add(prayerData);
                         
-                        // Success feedback
-                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Submitted!';
-                        submitBtn.style.background = 'var(--success)';
+                        showSuccess('Prayer request submitted successfully!');
+                        form.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
                         
-                        setTimeout(() => {
-                            showSuccess('Prayer request submitted successfully! The community will pray for you.');
-                            form.reset();
-                            submitBtn.innerHTML = originalText;
-                            submitBtn.style.background = '';
-                            submitBtn.disabled = false;
-                            
-                            // Switch to feed tab using our navigation system
-                            const feedTab = document.querySelector('[data-tab="feedTab"]');
-                            if (feedTab) {
-                                feedTab.click();
-                            }
-                        }, 1500);
+                        // Switch to feed tab
+                        document.querySelector('[data-tab="feedTab"]').click();
                         
                     } catch (e) { 
                         console.error('Prayer submission error:', e);
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
-                        alert('Failed to submit prayer. Please check your connection and try again.'); 
+                        showError('Failed to submit prayer. Please try again.'); 
                     }
                 });
             }
-            // Navbar/Hero wiring
-            const toFeed = () => {
-                const feedTab = document.querySelector('[data-tab="feedTab"]');
-                if (feedTab) feedTab.click();
-            };
-            const toSubmit = () => {
-                const submitTab = document.querySelector('[data-tab="submitTab"]');
-                if (submitTab) submitTab.click();
-            };
-            document.getElementById('hero-view-wall')?.addEventListener('click', toFeed);
-            document.getElementById('nav-wall-link')?.addEventListener('click', (e)=>{e.preventDefault(); toFeed();});
-            document.getElementById('nav-home-link')?.addEventListener('click', (e)=>{e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'});});
-            document.getElementById('nav-submit-btn')?.addEventListener('click', (e)=>{e.preventDefault(); toSubmit();});
-            // Settings modal wiring
+            
+            // Wire up navbar and hero buttons
+            document.getElementById('hero-view-wall')?.addEventListener('click', () => {
+                document.querySelector('[data-tab="feedTab"]').click();
+            });
+            
+            document.getElementById('nav-wall-link')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector('[data-tab="feedTab"]').click();
+            });
+            
+            document.getElementById('nav-submit-btn')?.addEventListener('click', () => {
+                document.querySelector('[data-tab="submitTab"]').click();
+            });
+            
+            // Settings modal
             const modal = document.getElementById('settings-modal');
-            const openSettings = () => { modal.style.display = 'flex'; };
-            const closeSettings = () => { modal.style.display = 'none'; };
-            document.getElementById('notif-settings-btn')?.addEventListener('click', openSettings);
-            document.getElementById('settings-close')?.addEventListener('click', closeSettings);
+            document.getElementById('notif-settings-btn')?.addEventListener('click', () => {
+                modal.style.display = 'flex';
+            });
+            document.getElementById('settings-close')?.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
         }
 
         // Update user statistics
         function updateUserStats(uid) {
             if (!uid || !db) return;
             
-            // Update prayers shared count
+            // Prayers shared
             db.collection('prayers').where('userId', '==', uid).onSnapshot(snapshot => {
                 document.querySelector('.stat-card:nth-child(1) .stat-value').textContent = snapshot.size;
             });
             
-            // Update prayers prayed count (interactions where user prayed for others)
+            // Prayers prayed (using collectionGroup)
             db.collectionGroup('interactions')
                 .where('type', '==', 'prayed')
                 .where('userId', '==', uid)
-                .onSnapshot(snapshot => {
+                .get()
+                .then(snapshot => {
                     document.querySelector('.stat-card:nth-child(2) .stat-value').textContent = snapshot.size;
                 });
             
-            // Update answered prayers count
+            // Answered prayers
             db.collection('prayers')
                 .where('userId', '==', uid)
                 .where('status', '==', 'answered')
@@ -850,37 +546,13 @@
                     document.querySelector('.stat-card:nth-child(3) .stat-value').textContent = snapshot.size;
                 });
         }
-        
-        // Load user dashboard with real data
+
+        // Load user dashboard
         function loadUserDashboard(uid) {
             if (!uid || !db) return;
             
-            const dashboardTab = document.getElementById('dashboardTab');
-            if (!dashboardTab) return;
-            
-            // Clear existing content except headers
-            dashboardTab.innerHTML = `
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Your Prayer History</div>
-                    </div>
-                    <div id="user-prayers-container">
-                        <div style="text-align: center; padding: 20px; color: #999;">
-                            <i class="fas fa-spinner fa-spin"></i> Loading your prayers...
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Answered Prayers</div>
-                    </div>
-                    <div id="answered-prayers-container">
-                        <div style="text-align: center; padding: 20px; color: #999;">
-                            <i class="fas fa-spinner fa-spin"></i> Loading answered prayers...
-                        </div>
-                    </div>
-                </div>`;
+            const userPrayersContainer = document.getElementById('user-prayers-container');
+            const answeredPrayersContainer = document.getElementById('answered-prayers-container');
             
             // Load user's prayers
             db.collection('prayers')
@@ -889,13 +561,12 @@
                 .limit(10)
                 .get()
                 .then(snapshot => {
-                    const container = document.getElementById('user-prayers-container');
                     if (snapshot.empty) {
-                        container.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">You haven\'t submitted any prayers yet.</div>';
+                        userPrayersContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">You haven\'t submitted any prayers yet.</div>';
                         return;
                     }
                     
-                    container.innerHTML = '';
+                    userPrayersContainer.innerHTML = '';
                     snapshot.forEach(doc => {
                         const p = doc.data();
                         const prayerDiv = document.createElement('div');
@@ -915,20 +586,13 @@
                             </div>
                             <div class="prayer-meta">
                                 <div class="category-tag">${p.category || 'General'}</div>
-                                <div style="color: #999; font-size: 0.9em;">${p.prayedCount || 0} people prayed</div>
-                            </div>
-                            <div class="prayer-actions">
-                                <button class="action-btn ${p.status === 'answered' ? 'answered' : ''}" onclick="togglePrayerStatus('${doc.id}', '${p.status}')">
-                                    <i class="fas fa-${p.status === 'answered' ? 'undo' : 'check-circle'}"></i> 
-                                    ${p.status === 'answered' ? 'Mark Open' : 'Mark Answered'}
-                                </button>
                             </div>`;
-                        container.appendChild(prayerDiv);
+                        userPrayersContainer.appendChild(prayerDiv);
                     });
                 })
                 .catch(error => {
                     console.error('Error loading prayers:', error);
-                    document.getElementById('user-prayers-container').innerHTML = '<div style="color: red; padding: 20px;">Error loading prayers.</div>';
+                    userPrayersContainer.innerHTML = '<div style="color: red; padding: 20px;">Error loading prayers.</div>';
                 });
             
             // Load answered prayers
@@ -938,13 +602,12 @@
                 .limit(5)
                 .get()
                 .then(snapshot => {
-                    const container = document.getElementById('answered-prayers-container');
                     if (snapshot.empty) {
-                        container.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">No answered prayers to show yet.</div>';
+                        answeredPrayersContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">No answered prayers to show yet.</div>';
                         return;
                     }
                     
-                    container.innerHTML = '';
+                    answeredPrayersContainer.innerHTML = '';
                     snapshot.forEach(doc => {
                         const p = doc.data();
                         const isOwn = p.userId === uid;
@@ -966,81 +629,18 @@
                                 <div class="category-tag">${p.category || 'General'}</div>
                                 <div style="color: var(--success); font-weight: 600;">✓ Answered</div>
                             </div>`;
-                        container.appendChild(prayerDiv);
+                        answeredPrayersContainer.appendChild(prayerDiv);
                     });
                 })
                 .catch(error => {
                     console.error('Error loading answered prayers:', error);
-                    document.getElementById('answered-prayers-container').innerHTML = '<div style="color: red; padding: 20px;">Error loading answered prayers.</div>';
-                });
-        }
-        
-        // Toggle prayer status function
-        function togglePrayerStatus(prayerId, currentStatus) {
-            if (!db) return;
-            
-            const newStatus = currentStatus === 'answered' ? 'open' : 'answered';
-            const updateData = {
-                status: newStatus,
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
-            
-            if (newStatus === 'answered') {
-                updateData.answeredAt = firebase.firestore.FieldValue.serverTimestamp();
-            } else {
-                updateData.answeredAt = null;
-            }
-            
-            db.collection('prayers').doc(prayerId).update(updateData)
-                .then(() => {
-                    alert(`Prayer marked as ${newStatus}!`);
-                    // Reload dashboard to reflect changes
-                    const currentUser = auth.currentUser;
-                    if (currentUser) {
-                        loadUserDashboard(currentUser.uid);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error updating prayer status:', error);
-                    alert('Failed to update prayer status.');
-                });
-        }
-        
-        // Make function global for onclick handlers
-        window.togglePrayerStatus = togglePrayerStatus;
-
-        // Calculate prayer streak
-        function updatePrayerStreak(uid) {
-            if (!uid || !db) return;
-            
-            // Simple streak calculation - days with prayer activity
-            const now = new Date();
-            const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-            
-            db.collectionGroup('interactions')
-                .where('userId', '==', uid)
-                .where('type', 'in', ['prayed', 'comment'])
-                .where('createdAt', '>=', sevenDaysAgo)
-                .get()
-                .then(snapshot => {
-                    const days = new Set();
-                    snapshot.forEach(doc => {
-                        const date = doc.data().createdAt?.toDate();
-                        if (date) {
-                            days.add(date.toDateString());
-                        }
-                    });
-                    
-                    const streakElement = document.querySelector('.streak-count');
-                    if (streakElement) {
-                        streakElement.textContent = `${days.size} Days`;
-                    }
+                    answeredPrayersContainer.innerHTML = '<div style="color: red; padding: 20px;">Error loading answered prayers.</div>';
                 });
         }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize all components
+            initTabNavigation();
             initFormHandling();
             
             // Show default tab (Feed)
@@ -1052,176 +652,55 @@
                 defaultTab.style.gap = '15px';
             }
             
-            // Firebase initialization
-            if (!auth || !db) {
-                console.warn('Firebase not available - some features will be disabled');
-                return;
-            }
-            setLoading(true);
-            auth.onAuthStateChanged(user => {
-                const uid = user ? user.uid : null;
-                // Save push token if supported and user opted-in previously
-                (async () => {
-                    try {
-                        if (!messaging || !uid) return;
-                        // Ensure SW is registered at root
-                        if ('serviceWorker' in navigator) {
-                            try {
-                                await navigator.serviceWorker.register('firebase-messaging-sw.js');
-                            } catch {}
-                        }
-                        const token = await messaging.getToken({ vapidKey: 'BAbWcvy8_ZSDsLut27Je8yV7st4v9HSkvEYw8cibQl3UVfcYsm4J20OvZmVY56O2OkBIdmMComzaBON7qn4E7UI', serviceWorkerRegistration: await navigator.serviceWorker.getRegistration() });
-                        if (token) {
-                            await db.collection('users').doc(uid).set({ fcmTokens: firebase.firestore.FieldValue.arrayUnion(token) }, { merge: true });
-                        }
-                    } catch(e) {}
-                })();
-                function subscribeAll() {
-                    if (activeUnsub) { activeUnsub(); activeUnsub = null; }
+            // Firebase authentication listener
+            if (auth && db) {
+                setLoading(true);
+                
+                auth.onAuthStateChanged(user => {
+                    currentUser = user;
+                    const uid = user ? user.uid : null;
+                    
+                    // Update UI based on auth state
+                    if (user) {
+                        console.log('User signed in:', user.email);
+                        updateUserStats(uid);
+                    } else {
+                        console.log('No user signed in');
+                    }
+                    
+                    // Load prayers feed
+                    if (activeUnsub) {
+                        activeUnsub();
+                        activeUnsub = null;
+                    }
+                    
                     activeUnsub = db.collection('prayers')
-                      .orderBy('createdAt', 'desc')
-                      .limit(50)
-                      .onSnapshot(snap => {
-                          setLoading(false);
-                          const docs = snap.docs.filter(d => {
-                              const p = d.data();
-                              if (p.privacy === 'private') {
-                                  return uid && p.userId === uid; // only owner sees private
-                              }
-                              return true; // public or anonymous are visible to all
-                          });
-                          renderPrayers(docs, uid);
-                      }, err => { setLoading(false); console.error(err); });
-                }
-                function subscribeMine() {
-                    if (activeUnsub) { activeUnsub(); activeUnsub = null; }
-                    if (!uid) { renderPrayers([], uid); return; }
-                    activeUnsub = db.collection('prayers')
-                      .where('userId', '==', uid)
-                      .onSnapshot(snap => {
-                          setLoading(false);
-                          const docs = snap.docs.sort((a,b)=>{
-                              const at=a.data().createdAt?.toMillis?.()||0, bt=b.data().createdAt?.toMillis?.()||0; return bt-at;
-                          });
-                          renderPrayers(docs, uid);
-                      }, err => { setLoading(false); console.error(err); });
-                }
-
-                // default to all
-                subscribeAll();
-
-                if (user) {
-                    // Update user stats in real-time
-                    updateUserStats(uid);
-                    updatePrayerStreak(uid);
-
-                    // wire navbar links
-                    document.getElementById('nav-wall-link')?.addEventListener('click', (e)=>{ e.preventDefault(); subscribeAll(); });
-                    document.getElementById('nav-about-link')?.addEventListener('click', (e)=>{ e.preventDefault(); subscribeMine(); });
-
-                    // Load dashboard when dashboard tab is clicked
-                    document.querySelector('[data-tab="dashboardTab"]')?.addEventListener('click', () => {
-                        loadUserDashboard(uid);
-                    });
-                }
-
-                // Notifications: show unread for current user
-                if (uid) {
-                    const panel = document.getElementById('notif-panel');
-                    const badge = document.getElementById('notif-count');
-                    const bell = document.getElementById('notif-bell');
-                    let open = false;
-                    bell.addEventListener('click', ()=>{
-                        open = !open; panel.style.display = open ? 'block' : 'none';
-                    });
-                    // Load settings defaults
-                    (async () => {
-                        try {
-                            const doc = await db.collection('users').doc(uid).get();
-                            const data = doc.data() || {};
-                            document.getElementById('settings-email').value = data.email || '';
-                            document.getElementById('settings-notify-email').checked = !!data.notifyEmail;
-                            document.getElementById('settings-notify-push').checked = !!data.notifyPush;
-                            document.getElementById('settings-save').addEventListener('click', async () => {
-                                const email = (document.getElementById('settings-email')).value.trim();
-                                const notifyEmail = (document.getElementById('settings-notify-email')).checked;
-                                const notifyPush = (document.getElementById('settings-notify-push')).checked;
-                                
-                                // Validate email if provided
-                                if (email && !/\S+@\S+\.\S+/.test(email)) {
-                                    alert('Please enter a valid email address.');
-                                    return;
+                        .orderBy('createdAt', 'desc')
+                        .limit(50)
+                        .onSnapshot(snapshot => {
+                            setLoading(false);
+                            const docs = snapshot.docs.filter(doc => {
+                                const p = doc.data();
+                                // Show public and anonymous prayers to everyone
+                                // Only show private prayers to their owner
+                                if (p.privacy === 'private') {
+                                    return uid && p.userId === uid;
                                 }
-                                
-                                const saveBtn = document.getElementById('settings-save');
-                                const originalText = saveBtn.textContent;
-                                saveBtn.textContent = 'Saving...';
-                                saveBtn.disabled = true;
-                                
-                                try {
-                                    await db.collection('users').doc(uid).set({ 
-                                        email, 
-                                        notifyEmail, 
-                                        notifyPush,
-                                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                                    }, { merge: true });
-                                    
-                                    saveBtn.textContent = 'Saved!';
-                                    saveBtn.style.background = 'var(--success)';
-                                    
-                                    setTimeout(() => {
-                                        alert('Settings saved successfully!');
-                                        saveBtn.textContent = originalText;
-                                        saveBtn.style.background = '';
-                                        saveBtn.disabled = false;
-                                        (document.getElementById('settings-modal')).style.display = 'none';
-                                    }, 1000);
-                                    
-                                } catch (error) {
-                                    console.error('Settings save error:', error);
-                                    saveBtn.textContent = originalText;
-                                    saveBtn.disabled = false;
-                                    alert('Failed to save settings. Please try again.');
-                                }
+                                return true;
                             });
-                        } catch {}
-                    })();
-                    db.collection('notifications')
-                      .where('userId','==', uid)
-                      .orderBy('createdAt','desc')
-                      .limit(50)
-                      .onSnapshot(s => {
-                          let unread = 0;
-                          panel.innerHTML = '';
-                          s.forEach(d => {
-                              const n = d.data();
-                              if (!n.read) unread++;
-                              const div = document.createElement('div');
-                              div.className = 'notif-item' + (!n.read ? ' unread' : '');
-                              const text = n.message || (n.type === 'comment' ? `${n.actorName || 'Someone'} commented on your prayer` : `${n.actorName || 'Someone'} prayed for you`);
-                              const timeAgo = n.createdAt ? new Date(n.createdAt.toDate()).toLocaleString() : 'Just now';
-                              div.innerHTML = `
-                                  <div class="notif-text" style="font-weight: 500; margin-bottom: 4px;">${text}</div>
-                                  <div class="notif-time" style="font-size: 0.8em; color: #999; margin-bottom: 8px;">${timeAgo}</div>
-                                  <div class="notif-actions">
-                                      <button class="link-btn view-prayer">View</button>
-                                      <button class="link-btn mark-read">${n.read ? 'Read' : 'Mark Read'}</button>
-                                  </div>`;
-                              div.querySelector('.view-prayer').addEventListener('click', ()=>{
-                                  // switch to wall
-                                  document.getElementById('nav-wall-link')?.click();
-                                  // Optionally, we could scroll to the item after it's rendered
-                              });
-                              div.querySelector('.mark-read').addEventListener('click', ()=>{
-                                  d.ref.update({ read: true });
-                              });
-                              panel.appendChild(div);
-                          });
-                          if (unread > 0) { badge.style.display = 'inline-block'; badge.textContent = String(unread); } else { badge.style.display = 'none'; }
-                      });
-                }
-            });
+                            renderPrayers(docs, uid);
+                        }, error => {
+                            setLoading(false);
+                            console.error('Error loading prayers:', error);
+                            showError('Failed to load prayers. Please refresh the page.');
+                        });
+                });
+            } else {
+                console.error('Firebase not initialized properly');
+                showError('Unable to connect to prayer network. Please refresh the page.');
+            }
         });
     </script>
 </body>
 </html>
+

@@ -63,3 +63,18 @@ self.addEventListener('activate', event => {
     ))
   );
 }); 
+
+// Generic message responder so pages can confirm SW connectivity
+self.addEventListener('message', (event) => {
+  try {
+    if (event.ports && event.ports[0]) {
+      event.ports[0].postMessage({ status: 'received' });
+    } else if (self.clients && self.clients.matchAll) {
+      event.waitUntil(
+        self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
+          clients.forEach(client => client.postMessage({ status: 'received' }));
+        })
+      );
+    }
+  } catch (e) {}
+});

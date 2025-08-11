@@ -43,11 +43,9 @@ service cloud.firestore {
 
     // Notifications for users
     match /notifications/{notificationId} {
-      allow read, update: if request.auth != null && request.auth.uid == resource.data.userId;
-      // SECURITY FIX: Only allow creating a notification if the target userId in the document
-      // matches the ID of the user making the request.
-      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
-      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if true; // Allow anyone to create notifications
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
 
     // User profiles (store FCM tokens and preferences)

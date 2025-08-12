@@ -26,6 +26,7 @@
                 <a href="#" id="nav-wall-link">Prayer Wall</a>
             </div>
             <div class="nav-cta">
+                <button class="cta-btn" id="hub-menu-btn" title="Back to Hub"><i class="fas fa-home"></i></button>
                 <div style="position:relative;">
                     <button class="notif-btn" id="notif-bell"><i class="fas fa-bell"></i><span class="notif-badge" id="notif-count" style="display:none;">0</span></button>
                     <div class="notif-panel" id="notif-panel"></div>
@@ -766,6 +767,10 @@
             
             document.getElementById('nav-submit-btn')?.addEventListener('click', () => {
                 document.querySelector('[data-tab="submitTab"]').click();
+            });
+            // Hub button -> go back to hub menu
+            document.getElementById('hub-menu-btn')?.addEventListener('click', () => {
+                window.location.href = 'menu.html';
             });
             
             // Settings modal

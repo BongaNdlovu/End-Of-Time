@@ -2,9 +2,9 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     // This rule is required for collectionGroup queries on 'interactions'
-    // It allows any client to read interaction documents (e.g., to count prayers).
+    // Only authenticated users can read interaction documents (e.g., to count prayers).
     match /{path=**}/interactions/{interactionId} {
-      allow read: if true;
+      allow read: if request.auth != null;
       // Keep the more specific create/update/delete rules below for security.
     }
 
@@ -24,8 +24,8 @@ service cloud.firestore {
 
     // Prayers collection rules
     match /prayers/{prayerId} {
-      // Publicly readable feed (client filters anonymity/ownership)
-      allow read: if true;
+      // Only authenticated users can read prayers
+      allow read: if request.auth != null;
       // Only authenticated users can create prayer requests
       allow create: if request.auth != null;
       // Only the owner can update/delete their own prayer
@@ -34,9 +34,10 @@ service cloud.firestore {
 
     // Interactions on a prayer (e.g., "I prayed", comments)
     match /prayers/{prayerId}/interactions/{interactionId} {
-      allow read: if true;
-      // Allow anyone to record an interaction (supports guests for "I prayed")
-      allow create: if true;
+      // Only authenticated users can read interactions
+      allow read: if request.auth != null;
+      // Only authenticated users can create interactions
+      allow create: if request.auth != null;
       // Only the author of an interaction can modify/delete it
       allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }

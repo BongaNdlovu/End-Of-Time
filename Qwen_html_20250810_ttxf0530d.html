@@ -33,6 +33,7 @@
                 </div>
                 <button class="cta-btn" id="notif-settings-btn" title="Notification Settings"><i class="fas fa-sliders-h"></i></button>
                 <button class="cta-btn" id="nav-submit-btn">Submit Prayer</button>
+                <button class="cta-btn" id="signout-btn" title="Sign Out" style="display:none;"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </nav>
 
@@ -70,6 +71,56 @@
                 </div>
                 <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:12px;">
                     <button class="save-btn" id="settings-save">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authentication Modal -->
+        <div class="modal-backdrop" id="auth-modal" style="display:flex;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <div class="modal-title">Sign In to Prayer Network</div>
+                </div>
+                <div id="auth-content">
+                    <!-- Sign In Form -->
+                    <div id="signin-form">
+                        <div class="form-row">
+                            <label for="signin-email">Email</label>
+                            <input type="email" id="signin-email" placeholder="your@email.com" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="signin-password">Password</label>
+                            <input type="password" id="signin-password" placeholder="Your password" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;" required>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; gap:10px; margin-top:12px;">
+                            <button class="save-btn" id="signin-btn">Sign In</button>
+                            <button class="save-btn" id="show-signup" style="background:transparent;border:1px solid var(--border);">Create Account</button>
+                        </div>
+                    </div>
+
+                    <!-- Sign Up Form -->
+                    <div id="signup-form" style="display:none;">
+                        <div class="form-row">
+                            <label for="signup-name">Display Name</label>
+                            <input type="text" id="signup-name" placeholder="Your name" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="signup-email">Email</label>
+                            <input type="email" id="signup-email" placeholder="your@email.com" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="signup-password">Password</label>
+                            <input type="password" id="signup-password" placeholder="Choose a password" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="signup-confirm">Confirm Password</label>
+                            <input type="password" id="signup-confirm" placeholder="Confirm password" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;" required>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; gap:10px; margin-top:12px;">
+                            <button class="save-btn" id="signup-btn">Create Account</button>
+                            <button class="save-btn" id="show-signin" style="background:transparent;border:1px solid var(--border);">Back to Sign In</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -259,6 +310,163 @@
             console.log('✅ Firebase initialized for Prayer Network');
         } catch (e) {
             console.error('❌ Firebase initialization failed:', e);
+        }
+
+        // Authentication Functions
+        function showAuthModal() {
+            document.getElementById('auth-modal').style.display = 'flex';
+        }
+
+        function hideAuthModal() {
+            document.getElementById('auth-modal').style.display = 'none';
+        }
+
+        function initAuth() {
+            const signinForm = document.getElementById('signin-form');
+            const signupForm = document.getElementById('signup-form');
+            const showSignup = document.getElementById('show-signup');
+            const showSignin = document.getElementById('show-signin');
+            const signinBtn = document.getElementById('signin-btn');
+            const signupBtn = document.getElementById('signup-btn');
+            const signoutBtn = document.getElementById('signout-btn');
+
+            // Toggle between signin and signup forms
+            showSignup.addEventListener('click', () => {
+                signinForm.style.display = 'none';
+                signupForm.style.display = 'block';
+            });
+
+            showSignin.addEventListener('click', () => {
+                signupForm.style.display = 'none';
+                signinForm.style.display = 'block';
+            });
+
+            // Sign in functionality
+            signinBtn.addEventListener('click', async () => {
+                const email = document.getElementById('signin-email').value.trim();
+                const password = document.getElementById('signin-password').value;
+
+                if (!email || !password) {
+                    showError('Please enter both email and password');
+                    return;
+                }
+
+                signinBtn.disabled = true;
+                signinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+
+                try {
+                    await auth.signInWithEmailAndPassword(email, password);
+                    showSuccess('Welcome back! You are now signed in.');
+                    hideAuthModal();
+                } catch (error) {
+                    console.error('Sign in error:', error);
+                    showError(getAuthErrorMessage(error.code));
+                } finally {
+                    signinBtn.disabled = false;
+                    signinBtn.innerHTML = 'Sign In';
+                }
+            });
+
+            // Sign up functionality
+            signupBtn.addEventListener('click', async () => {
+                const name = document.getElementById('signup-name').value.trim();
+                const email = document.getElementById('signup-email').value.trim();
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('signup-confirm').value;
+
+                if (!name || !email || !password || !confirmPassword) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    showError('Passwords do not match');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showError('Password must be at least 6 characters long');
+                    return;
+                }
+
+                signupBtn.disabled = true;
+                signupBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+
+                try {
+                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                    await userCredential.user.updateProfile({ displayName: name });
+                    
+                    // Create user document in Firestore
+                    await db.collection('users').doc(userCredential.user.uid).set({
+                        displayName: name,
+                        email: email,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        notifyEmail: true,
+                        weeklySummary: true,
+                        notifyPush: true
+                    });
+
+                    showSuccess('Account created successfully! Welcome to the Prayer Network.');
+                    hideAuthModal();
+                } catch (error) {
+                    console.error('Sign up error:', error);
+                    showError(getAuthErrorMessage(error.code));
+                } finally {
+                    signupBtn.disabled = false;
+                    signupBtn.innerHTML = 'Create Account';
+                }
+            });
+
+            // Sign out functionality
+            signoutBtn.addEventListener('click', async () => {
+                try {
+                    await auth.signOut();
+                    showSuccess('You have been signed out');
+                } catch (error) {
+                    console.error('Sign out error:', error);
+                    showError('Failed to sign out');
+                }
+            });
+        }
+
+        function getAuthErrorMessage(errorCode) {
+            switch (errorCode) {
+                case 'auth/user-not-found':
+                    return 'No account found with this email address';
+                case 'auth/wrong-password':
+                    return 'Incorrect password';
+                case 'auth/email-already-in-use':
+                    return 'An account with this email already exists';
+                case 'auth/weak-password':
+                    return 'Password is too weak';
+                case 'auth/invalid-email':
+                    return 'Invalid email address';
+                case 'auth/too-many-requests':
+                    return 'Too many failed attempts. Please try again later';
+                default:
+                    return 'Authentication failed. Please try again';
+            }
+        }
+
+        function updateUIForAuthState(user) {
+            const authModal = document.getElementById('auth-modal');
+            const signoutBtn = document.getElementById('signout-btn');
+            const navSubmitBtn = document.getElementById('nav-submit-btn');
+            const navSettingsBtn = document.getElementById('notif-settings-btn');
+
+            if (user) {
+                // User is signed in
+                authModal.style.display = 'none';
+                signoutBtn.style.display = 'block';
+                navSubmitBtn.style.display = 'block';
+                navSettingsBtn.style.display = 'block';
+            } else {
+                // User is signed out
+                authModal.style.display = 'flex';
+                signoutBtn.style.display = 'none';
+                navSubmitBtn.style.display = 'none';
+                navSettingsBtn.style.display = 'none';
+            }
         }
 
         // UI Helper Functions
@@ -1018,6 +1226,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             initTabNavigation();
             initFormHandling();
+            initAuth();
             
             // Show default tab (Feed)
             const defaultTab = document.getElementById('feedTab');
@@ -1037,6 +1246,8 @@
                     const uid = user ? user.uid : null;
                     
                     // Update UI based on auth state
+                    updateUIForAuthState(user);
+                    
                     if (user) {
                         console.log('User signed in:', user.email);
                         updateUserStats(uid);

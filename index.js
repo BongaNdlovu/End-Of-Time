@@ -1,0 +1,508 @@
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const nodemailer = require('nodemailer');
+
+// Load existing compiled TypeScript exports (e.g., onInteractionCreate)
+let tsExports = {};
+try {
+  tsExports = require('./lib/index.js');
+} catch (e) {
+  // lib may not exist if not built yet
+}
+
+if (!admin.apps.length) {
+  admin.initializeApp();
+}
+
+const db = admin.firestore();
+
+// Configure your email service (example with Gmail)
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user:
+      process.env.EMAIL_USER ||
+      (functions.config().email && functions.config().email.user) ||
+      'your-email@gmail.com',
+    pass:
+      process.env.EMAIL_PASS ||
+      (functions.config().email && functions.config().email.password) ||
+      'your-app-password', // Use App Password for Gmail
+  },
+});
+
+// Helper subject/body builders
+function getEmailSubject(type) {
+  switch (type) {
+    case 'prayer_received':
+      return '🙏 Someone is praying for you';
+    case 'comment_received':
+      return '💬 New comment on your prayer request';
+    default:
+      return 'End of Time Prayer Network Update';
+  }
+}
+
+function getEmailBody(type, data = {}) {
+  switch (type) {
+    case 'prayer_received':
+      return generatePrayerNotificationEmail(
+        { displayName: 'Friend', email: '' },
+        { title: data.prayerTitle || '' },
+        { userDisplayName: data.userName || 'Someone' }
+      );
+    case 'comment_received':
+      return generateCommentNotificationEmail(
+        { displayName: 'Friend', email: '' },
+        { title: data.prayerTitle || '' },
+        { userDisplayName: data.userName || 'Someone', text: data.comment || '' }
+      );
+    default:
+      return '<p>Update from End of Time Prayer Network</p>';
+  }
+}
+
+// Email HTML templates (immediate notifications)
+function generatePrayerNotificationEmail(userData, prayer, interaction) {
+  const userName = userData.displayName || (userData.email ? userData.email.split('@')[0] : 'Friend');
+  const prayerName = interaction.userDisplayName || 'Someone';
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Someone is Praying for You</title>
+  </head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5;">
+    <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%); color: white; padding: 30px; text-align: center;">
+            <h2 style="margin: 0; font-size: 24px;">🙏 Someone is Praying for You!</h2>
+        </div>
+        <div style="padding: 30px;">
+            <p style="color: #333; font-size: 16px; line-height: 1.6;">Dear ${userName},</p>
+            <p style="color: #555; font-size: 15px; line-height: 1.6;">We wanted to let you know that <strong>${prayerName}</strong> is lifting you up in prayer right now.</p>
+            <div style="background: #f8f9fa; border-left: 4px solid #8B0000; padding: 15px; margin: 20px 0;">
+                <p style="color: #333; font-weight: bold; margin: 0 0 5px 0;">Your Prayer Request:</p>
+                <p style="color: #555; margin: 0; font-style: italic;">"${prayer.title || ''}"</p>
+            </div>
+            <p style="color: #555; font-size: 15px; line-height: 1.6;">You are not alone in this journey. The community stands with you in faith and prayer.</p>
+            <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p style="color: #856404; margin: 0; font-style: italic; text-align: center;">"Therefore I say unto you, What things soever ye desire, when ye pray, believe that ye receive them, and ye shall have them."<br><strong>- Mark 11:24</strong></p>
+            </div>
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="https://end-of-time-94cd3.web.app/prayer-network" style="display: inline-block; background: #8B0000; color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: bold;">View Prayer Wall</a>
+            </div>
+        </div>
+        <div style="background: #f8f9fa; padding: 20px; text-align: center; color: #666; font-size: 12px;">
+            <p style="margin: 0;">End of Time Prayer Network</p>
+            <p style="margin: 5px 0;"><a href="https://end-of-time-94cd3.web.app/settings" style="color: #8B0000; text-decoration: none;">Manage Notifications</a></p>
+        </div>
+    </div>
+  </body>
+</html>`;
+}
+
+function generateCommentNotificationEmail(userData, prayer, interaction) {
+  const userName = userData.displayName || (userData.email ? userData.email.split('@')[0] : 'Friend');
+  const commenterName = interaction.userDisplayName || 'Someone';
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Encouragement Received</title>
+  </head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5;">
+    <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%); color: white; padding: 30px; text-align: center;">
+            <h2 style="margin: 0; font-size: 24px;">💬 New Encouragement Received</h2>
+        </div>
+        <div style="padding: 30px;">
+            <p style="color: #333; font-size: 16px; line-height: 1.6;">Dear ${userName},</p>
+            <p style="color: #555; font-size: 15px; line-height: 1.6;"><strong>${commenterName}</strong> left an encouraging message on your prayer request:</p>
+            <div style="background: #f8f9fa; border-left: 4px solid #8B0000; padding: 15px; margin: 20px 0;">
+                <p style="color: #333; font-weight: bold; margin: 0 0 5px 0;">Your Prayer:</p>
+                <p style="color: #555; margin: 0; font-style: italic;">"${prayer.title || ''}"</p>
+            </div>
+            <div style="background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 3px solid #007bff;">
+                <p style="color: #004085; margin: 0;"><strong>${commenterName} wrote:</strong><br>"${interaction.text || ''}"</p>
+            </div>
+            <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p style="color: #856404; margin: 0; font-style: italic; text-align: center;">"Therefore encourage one another and build each other up, just as in fact you are doing."<br><strong>- 1 Thessalonians 5:11</strong></p>
+            </div>
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="https://end-of-time-94cd3.web.app/prayer-network" style="display: inline-block; background: #8B0000; color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: bold;">Reply to Comment</a>
+            </div>
+        </div>
+        <div style="background: #f8f9fa; padding: 20px; text-align: center; color: #666; font-size: 12px;">
+            <p style="margin: 0;">End of Time Prayer Network</p>
+            <p style="margin: 5px 0;"><a href="https://end-of-time-94cd3.web.app/settings" style="color: #8B0000; text-decoration: none;">Manage Notifications</a></p>
+        </div>
+    </div>
+  </body>
+</html>`;
+}
+
+// Listen for email queue entries
+const sendEmailNotification = functions.firestore
+  .document('emailQueue/{docId}')
+  .onCreate(async (snap) => {
+    const data = snap.data();
+    if (!data || !data.to) {
+      await snap.ref.update({ status: 'failed', error: 'Missing recipient email' });
+      return;
+    }
+
+    const mailOptions = {
+      from: 'End of Time Prayer Network <noreply@endoftime.com>',
+      to: data.to,
+      subject: getEmailSubject(data.type),
+      html: getEmailBody(data.type, data.data),
+    };
+    try {
+      await transporter.sendMail(mailOptions);
+      await snap.ref.update({ status: 'sent' });
+    } catch (error) {
+      console.error('Email send error:', error);
+      await snap.ref.update({ status: 'failed', error: error.message });
+    }
+  });
+
+// ================= Weekly summary helpers =================
+function getWeekNumber(date) {
+  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+  const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+}
+
+function getWeekIdentifier() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const week = getWeekNumber(now);
+  return `${year}-W${week}`;
+}
+
+function getWeeklyVerse() {
+  const verses = [
+    { text: 'The prayer of a righteous person is powerful and effective.', reference: 'James 5:16' },
+    { text: 'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.', reference: 'Philippians 4:6' },
+    { text: 'Therefore I tell you, whatever you ask for in prayer, believe that you have received it, and it will be yours.', reference: 'Mark 11:24' },
+    { text: 'This is the confidence we have in approaching God: that if we ask anything according to his will, he hears us.', reference: '1 John 5:14' },
+    { text: 'Call to me and I will answer you and tell you great and unsearchable things you do not know.', reference: 'Jeremiah 33:3' },
+    { text: 'The Lord is near to all who call on him, to all who call on him in truth.', reference: 'Psalm 145:18' },
+    { text: 'Before they call I will answer; while they are still speaking I will hear.', reference: 'Isaiah 65:24' },
+    { text: 'Ask and it will be given to you; seek and you will find; knock and the door will be opened to you.', reference: 'Matthew 7:7' },
+    { text: 'The eyes of the Lord are on the righteous and his ears are attentive to their prayer.', reference: '1 Peter 3:12' },
+    { text: 'Cast all your anxiety on him because he cares for you.', reference: '1 Peter 5:7' },
+  ];
+  const weekNumber = getWeekNumber(new Date());
+  return verses[weekNumber % verses.length];
+}
+
+async function gatherWeeklySummaryData(userId, since) {
+  const summaryData = {
+    hasActivity: false,
+    userPrayers: [],
+    prayersReceived: 0,
+    commentsReceived: [],
+    answeredPrayers: [],
+    communityHighlights: [],
+    totalCommunityPrayers: 0,
+    encouragementVerse: getWeeklyVerse(),
+  };
+
+  try {
+    const userPrayersSnapshot = await db
+      .collection('prayers')
+      .where('userId', '==', userId)
+      .where('createdAt', '>=', since)
+      .orderBy('createdAt', 'desc')
+      .limit(10)
+      .get();
+
+    for (const doc of userPrayersSnapshot.docs) {
+      const prayer = doc.data();
+      summaryData.userPrayers.push({
+        id: doc.id,
+        title: prayer.title,
+        status: prayer.status,
+        createdAt: prayer.createdAt && prayer.createdAt.toDate ? prayer.createdAt.toDate() : null,
+        prayedCount: 0,
+      });
+      const prayedSnapshot = await db
+        .collection('prayers')
+        .doc(doc.id)
+        .collection('interactions')
+        .where('type', '==', 'prayed')
+        .where('createdAt', '>=', since)
+        .get();
+      summaryData.userPrayers[summaryData.userPrayers.length - 1].prayedCount = prayedSnapshot.size;
+      summaryData.prayersReceived += prayedSnapshot.size;
+    }
+
+    const userPrayerIds = userPrayersSnapshot.docs.map((d) => d.id);
+    for (const prayerId of userPrayerIds) {
+      const commentsSnapshot = await db
+        .collection('prayers')
+        .doc(prayerId)
+        .collection('interactions')
+        .where('type', '==', 'comment')
+        .where('createdAt', '>=', since)
+        .orderBy('createdAt', 'desc')
+        .limit(5)
+        .get();
+      commentsSnapshot.forEach((doc) => {
+        const c = doc.data();
+        summaryData.commentsReceived.push({
+          text: c.text,
+          userName: c.userDisplayName || 'Anonymous',
+          createdAt: c.createdAt && c.createdAt.toDate ? c.createdAt.toDate() : null,
+        });
+      });
+    }
+
+    const answeredSnapshot = await db
+      .collection('prayers')
+      .where('userId', '==', userId)
+      .where('status', '==', 'answered')
+      .where('answeredAt', '>=', since)
+      .orderBy('answeredAt', 'desc')
+      .limit(5)
+      .get();
+    answeredSnapshot.forEach((doc) => {
+      const prayer = doc.data();
+      summaryData.answeredPrayers.push({
+        title: prayer.title,
+        description: prayer.description,
+        answeredAt: prayer.answeredAt && prayer.answeredAt.toDate ? prayer.answeredAt.toDate() : null,
+      });
+    });
+
+    const communitySnapshot = await db
+      .collection('prayers')
+      .where('createdAt', '>=', since)
+      .where('privacy', '!=', 'private')
+      .orderBy('privacy')
+      .orderBy('prayedCount', 'desc')
+      .limit(5)
+      .get();
+    communitySnapshot.forEach((doc) => {
+      const prayer = doc.data();
+      if (!prayer.isAnonymous || prayer.userId === userId) {
+        summaryData.communityHighlights.push({
+          title: prayer.title,
+          userName: prayer.isAnonymous ? 'Anonymous' : prayer.userDisplayName || 'A believer',
+          prayedCount: prayer.prayedCount || 0,
+          category: prayer.category,
+        });
+      }
+    });
+
+    const allPrayersSnapshot = await db.collection('prayers').where('createdAt', '>=', since).get();
+    summaryData.totalCommunityPrayers = allPrayersSnapshot.size;
+
+    summaryData.hasActivity =
+      summaryData.userPrayers.length > 0 ||
+      summaryData.prayersReceived > 0 ||
+      summaryData.commentsReceived.length > 0 ||
+      summaryData.answeredPrayers.length > 0;
+  } catch (error) {
+    console.error('Error gathering summary data for user:', userId, error);
+  }
+
+  return summaryData;
+}
+
+function generateWeeklySummaryEmail(userData, summaryData) {
+  const userName = userData.displayName || (userData.email ? userData.email.split('@')[0] : 'Friend');
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Weekly Prayer Summary</title>
+  </head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5;">
+    <div style="max-width: 600px; margin: 0 auto; background: #ffffff; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+        <div style="background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%); color: white; padding: 40px 30px; text-align: center;">
+            <h1 style="margin: 0; font-size: 28px; font-weight: 300; letter-spacing: 1px;">🙏 Weekly Prayer Summary</h1>
+            <p style="margin: 10px 0 0 0; opacity: 0.9; font-size: 14px;">End of Time Prayer Network</p>
+        </div>
+        <div style="padding: 30px;">
+            <h2 style="color: #333; font-size: 20px; margin-bottom: 10px;">Peace be with you, ${userName}!</h2>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 30px;">Here's your weekly summary of prayers and blessings from our community.</p>
+            <div style="background: #f8f9fa; border-left: 4px solid #8B0000; padding: 15px; margin-bottom: 30px;">
+                <p style="color: #333; font-style: italic; margin: 0;">"${summaryData.encouragementVerse.text}"</p>
+                <p style="color: #8B0000; font-weight: bold; margin: 10px 0 0 0; font-size: 14px;">- ${summaryData.encouragementVerse.reference}</p>
+            </div>
+            ${summaryData.userPrayers.length > 0 || summaryData.prayersReceived > 0 ? `
+            <div style=\"margin-bottom: 30px;\">
+                <h3 style=\"color: #8B0000; font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;\">📊 Your Impact This Week</h3>
+                <div style=\"display: flex; justify-content: space-around; text-align: center; margin: 20px 0;\">
+                    <div><div style=\"font-size: 32px; color: #8B0000; font-weight: bold;\">${summaryData.userPrayers.length}</div><div style=\"color: #666; font-size: 14px;\">Prayers Shared</div></div>
+                    <div><div style=\"font-size: 32px; color: #8B0000; font-weight: bold;\">${summaryData.prayersReceived}</div><div style=\"color: #666; font-size: 14px;\">Prayers Received</div></div>
+                    <div><div style=\"font-size: 32px; color: #8B0000; font-weight: bold;\">${summaryData.answeredPrayers.length}</div><div style=\"color: #666; font-size: 14px;\">Answered</div></div>
+                </div>
+            </div>` : ''}
+            ${summaryData.userPrayers.length > 0 ? `
+            <div style=\"margin-bottom: 30px;\">
+                <h3 style=\"color: #8B0000; font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;\">🙏 Your Prayer Requests</h3>
+                ${summaryData.userPrayers.map(prayer => `
+                  <div style=\\\"background: #f8f9fa; padding: 15px; margin-bottom: 10px; border-radius: 8px;\\\">
+                    <h4 style=\\\"margin: 0 0 5px 0; color: #333; font-size: 16px;\\\">${prayer.title}</h4>
+                    <p style=\\\"margin: 5px 0; color: #666; font-size: 14px;\\\">Status: <span style=\\\"color: ${prayer.status === 'answered' ? '#28a745' : '#8B0000'}; font-weight: bold;\\\">${prayer.status === 'answered' ? '✓ Answered' : 'Ongoing'}</span></p>
+                    ${prayer.prayedCount > 0 ? `<p style=\\\\\\\"margin: 5px 0; color: #666; font-size: 14px;\\\\\\\">🙏 ${prayer.prayedCount} ${prayer.prayedCount === 1 ? 'person' : 'people'} prayed for this</p>` : ''}
+                  </div>
+                `).join('')}
+            </div>` : ''}
+            ${summaryData.commentsReceived.length > 0 ? `
+            <div style=\"margin-bottom: 30px;\">
+                <h3 style=\"color: #8B0000; font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;\">💬 Encouragements Received</h3>
+                ${summaryData.commentsReceived.slice(0,3).map(c => `
+                  <div style=\\\"background: #fff3cd; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 3px solid #ffc107;\\\">\n
+                    <p style=\\\"margin: 0 0 5px 0; color: #333; font-style: italic;\\\">\"${c.text}\"</p>
+                    <p style=\\\"margin: 0; color: #666; font-size: 12px; text-align: right;\\\">- ${c.userName}</p>
+                  </div>
+                `).join('')}
+            </div>` : ''}
+            ${summaryData.answeredPrayers.length > 0 ? `
+            <div style=\"margin-bottom: 30px;\">
+                <h3 style=\"color: #28a745; font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;\">🎉 Answered Prayers - Praise God!</h3>
+                ${summaryData.answeredPrayers.map(p => `
+                  <div style=\\\"background: #d4edda; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 3px solid #28a745;\\\">
+                    <h4 style=\\\"margin: 0 0 5px 0; color: #155724; font-size: 16px;\\\">✓ ${p.title}</h4>
+                    ${p.description ? `<p style=\\\\\\\"margin: 5px 0; color: #155724; font-size: 14px;\\\\\\\">${(p.description || '').substring(0,100)}${(p.description || '').length > 100 ? '...' : ''}</p>` : ''}
+                  </div>
+                `).join('')}
+            </div>` : ''}
+            ${summaryData.communityHighlights.length > 0 ? `
+            <div style=\"margin-bottom: 30px;\">
+                <h3 style=\"color: #8B0000; font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;\">🌍 Community Prayer Focus</h3>
+                <p style=\"color: #666; margin-bottom: 15px; font-size: 14px;\">This week, ${summaryData.totalCommunityPrayers} prayers were shared in our community. Here are the prayers that received the most support:</p>
+                ${summaryData.communityHighlights.slice(0,3).map(p => `
+                  <div style=\\\"background: #f8f9fa; padding: 12px; margin-bottom: 8px; border-radius: 6px;\\\">
+                    <p style=\\\"margin: 0 0 5px 0; color: #333; font-size: 14px;\\\"><strong>${p.title}</strong></p>
+                    <p style=\\\"margin: 0; color: #666; font-size: 12px;\\\">by ${p.userName} • ${p.prayedCount} prayers • ${p.category || 'General'}</p>
+                  </div>
+                `).join('')}
+            </div>` : ''}
+            <div style="background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%); color: white; padding: 25px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
+                <h3 style="margin: 0 0 10px 0; font-size: 20px;">Continue Your Faith Journey</h3>
+                <p style="margin: 0 0 20px 0; opacity: 0.9; font-size: 14px;">Someone needs your prayers today. Visit the prayer wall to lift others up.</p>
+                <a href="https://end-of-time-94cd3.web.app/prayer-network" style="display: inline-block; background: white; color: #8B0000; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 14px;">Visit Prayer Wall</a>
+            </div>
+            <div style="text-align: center; color: #999; font-size: 12px; padding: 20px; border-top: 1px solid #eee;">
+                <p style="margin: 0 0 10px 0;">You received this email because you opted in for weekly summaries.</p>
+                <p style="margin: 0 0 10px 0;"><a href="https://end-of-time-94cd3.web.app/settings" style="color: #8B0000; text-decoration: none;">Update your notification preferences</a></p>
+                <p style="margin: 0;">End of Time Prayer Network © ${new Date().getFullYear()}</p>
+            </div>
+        </div>
+    </div>
+  </body>
+ </html>`;
+}
+
+// Scheduled weekly summaries (Saturday 17:00 Africa/Johannesburg)
+const sendWeeklySummaries = functions.pubsub
+  .schedule('0 17 * * 6')
+  .timeZone('Africa/Johannesburg')
+  .onRun(async () => {
+    console.log('Starting weekly prayer summary task...');
+    try {
+      const usersSnapshot = await db
+        .collection('users')
+        .where('weeklySummary', '==', true)
+        .where('email', '!=', null)
+        .get();
+      if (usersSnapshot.empty) {
+        console.log('No users opted in for weekly summaries');
+        return null;
+      }
+      const oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      const emailPromises = [];
+      for (const userDoc of usersSnapshot.docs) {
+        const userData = userDoc.data();
+        const userId = userDoc.id;
+        if (!userData.email) continue;
+        const summaryData = await gatherWeeklySummaryData(userId, oneWeekAgo);
+        if (summaryData.hasActivity) {
+          const emailHtml = generateWeeklySummaryEmail(userData, summaryData);
+          const mailOptions = {
+            from: 'End of Time Prayer Network <noreply@endoftime.com>',
+            to: userData.email,
+            subject: '🙏 Your Weekly Prayer Summary - End of Time Network',
+            html: emailHtml,
+          };
+          emailPromises.push(
+            transporter
+              .sendMail(mailOptions)
+              .then(async () => {
+                console.log(`Weekly summary sent to ${userData.email}`);
+                await db.collection('summariesSent').add({
+                  userId,
+                  email: userData.email,
+                  sentAt: admin.firestore.FieldValue.serverTimestamp(),
+                  week: getWeekIdentifier(),
+                });
+              })
+              .catch((error) => {
+                console.error(`Failed to send summary to ${userData.email}:`, error);
+              })
+          );
+        }
+      }
+      await Promise.all(emailPromises);
+      console.log(`Weekly summaries completed. Sent ${emailPromises.length} emails.`);
+    } catch (error) {
+      console.error('Error in weekly summary task:', error);
+    }
+    return null;
+  });
+
+// Manual trigger for testing
+const triggerWeeklySummaryManually = functions.https.onRequest(async (req, res) => {
+  if (process.env.NODE_ENV === 'production' && req.headers.authorization !== `Bearer ${functions.config().admin && functions.config().admin.key}`) {
+    return res.status(403).send('Unauthorized');
+  }
+  try {
+    const userId = req.query.userId;
+    if (userId) {
+      const userDoc = await db.collection('users').doc(String(userId)).get();
+      if (!userDoc.exists) return res.status(404).send('User not found');
+      const userData = userDoc.data();
+      if (!userData.email) return res.status(400).send('User has no email');
+      const oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      const summaryData = await gatherWeeklySummaryData(String(userId), oneWeekAgo);
+      const emailHtml = generateWeeklySummaryEmail(userData, summaryData);
+      await transporter.sendMail({
+        from: 'End of Time Prayer Network <noreply@endoftime.com>',
+        to: userData.email,
+        subject: '🙏 Your Weekly Prayer Summary - End of Time Network (Test)',
+        html: emailHtml,
+      });
+      return res.send(`Weekly summary sent to ${userData.email}`);
+    }
+    if (sendWeeklySummaries.run) {
+      await sendWeeklySummaries.run();
+    }
+    return res.send('Weekly summaries triggered for all users');
+  } catch (error) {
+    console.error('Error triggering weekly summary:', error);
+    return res.status(500).send(`Error: ${error.message}`);
+  }
+});
+
+// Export both TS-compiled functions (if any) and the new JS function
+module.exports = {
+  ...tsExports,
+  sendEmailNotification,
+  sendWeeklySummaries,
+  triggerWeeklySummaryManually,
+};
+
+

@@ -1,32 +1,20 @@
 {
-  "name": "end-of-time",
-  "version": "1.0.0",
-  "description": "A trivia game with a global leaderboard, deployed as a static web app.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BongaNdlovu/End-of-Time"
+  "name": "end-of-time-functions",
+  "engines": {
+    "node": "18"
   },
-  "author": "Bonga Ndlovu",
-  "license": "MIT",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "start": "npx serve .",
-    "serve": "npx serve ."
+    "build": "tsc -p .",
+    "deploy": "npm run build && firebase deploy --only functions"
   },
   "dependencies": {
-    "firebase": "^10.7.0"
+    "firebase-admin": "^11.11.0",
+    "firebase-functions": "^4.4.0",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^7.0.5"
   },
   "devDependencies": {
-    "vite": "^5.0.0"
-  },
-  "keywords": [
-    "trivia",
-    "game",
-    "firebase",
-    "leaderboard",
-    "static",
-    "end-of-time"
-  ]
-} 
+    "typescript": "^5.4.0"
+  }
+}

@@ -52,5 +52,18 @@ service cloud.firestore {
     match /users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
+
+    // Email queue (write-only for clients, processed by Cloud Functions)
+    match /emailQueue/{document} {
+      allow read: if false;
+      allow create: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    // Summaries sent log (readable by the owner, write by CF only)
+    match /summariesSent/{document} {
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow write: if false;
+    }
   }
 } 

@@ -124,6 +124,54 @@
                 </div>
             </div>
         </div>
+
+        <!-- Prayer List Management Modal -->
+        <div class="modal-backdrop" id="prayer-list-modal" style="display:none;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <div class="modal-title" id="prayer-list-modal-title">Create New Prayer List</div>
+                    <button class="close-x" id="prayer-list-close">Close</button>
+                </div>
+                <form id="prayer-list-form">
+                    <div class="form-row">
+                        <label for="list-name">List Name</label>
+                        <input type="text" id="list-name" placeholder="e.g., Family Prayers" maxlength="50" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="list-description">Description (Optional)</label>
+                        <textarea id="list-description" placeholder="What kind of prayers will you add to this list?" maxlength="200" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;min-height:80px;"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <label for="list-color">Color Theme</label>
+                        <div class="color-picker" style="display:flex;gap:10px;flex-wrap:wrap;">
+                            <div class="color-option" data-color="#4CAF50" style="width:30px;height:30px;border-radius:50%;background:#4CAF50;cursor:pointer;border:2px solid transparent;"></div>
+                            <div class="color-option" data-color="#2196F3" style="width:30px;height:30px;border-radius:50%;background:#2196F3;cursor:pointer;border:2px solid transparent;"></div>
+                            <div class="color-option" data-color="#FF9800" style="width:30px;height:30px;border-radius:50%;background:#FF9800;cursor:pointer;border:2px solid transparent;"></div>
+                            <div class="color-option" data-color="#9C27B0" style="width:30px;height:30px;border-radius:50%;background:#9C27B0;cursor:pointer;border:2px solid transparent;"></div>
+                            <div class="color-option" data-color="#F44336" style="width:30px;height:30px;border-radius:50%;background:#F44336;cursor:pointer;border:2px solid transparent;"></div>
+                            <div class="color-option" data-color="#607D8B" style="width:30px;height:30px;border-radius:50%;background:#607D8B;cursor:pointer;border:2px solid transparent;"></div>
+                        </div>
+                        <input type="hidden" id="list-color" value="#4CAF50">
+                    </div>
+                    <div class="form-row">
+                        <label for="list-icon">Icon</label>
+                        <div class="icon-picker" style="display:flex;gap:10px;flex-wrap:wrap;">
+                            <div class="icon-option" data-icon="fas fa-heart" style="width:40px;height:40px;border-radius:8px;background:#444;cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;color:#fff;"><i class="fas fa-heart"></i></div>
+                            <div class="icon-option" data-icon="fas fa-family" style="width:40px;height:40px;border-radius:8px;background:#444;cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;color:#fff;"><i class="fas fa-users"></i></div>
+                            <div class="icon-option" data-icon="fas fa-briefcase" style="width:40px;height:40px;border-radius:8px;background:#444;cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;color:#fff;"><i class="fas fa-briefcase"></i></div>
+                            <div class="icon-option" data-icon="fas fa-cross" style="width:40px;height:40px;border-radius:8px;background:#444;cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;color:#fff;"><i class="fas fa-cross"></i></div>
+                            <div class="icon-option" data-icon="fas fa-book" style="width:40px;height:40px;border-radius:8px;background:#444;cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;color:#fff;"><i class="fas fa-book"></i></div>
+                            <div class="icon-option" data-icon="fas fa-globe" style="width:40px;height:40px;border-radius:8px;background:#444;cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;color:#fff;"><i class="fas fa-globe"></i></div>
+                        </div>
+                        <input type="hidden" id="list-icon" value="fas fa-heart">
+                    </div>
+                    <div style="display:flex; justify-content:space-between; gap:10px; margin-top:20px;">
+                        <button type="button" class="save-btn" id="delete-list-btn" style="background:#e74c3c;display:none;">Delete List</button>
+                        <button type="submit" class="save-btn" id="save-list-btn">Create List</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         
         <!-- Content Area -->
         <div class="content-area" id="contentArea">
@@ -206,6 +254,14 @@
                                 <option value="immediate">Immediate</option>
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Add to Prayer List (Optional)</label>
+                            <select class="form-select" id="prayer-list-select">
+                                <option value="">None - Community Prayer Only</option>
+                                <!-- Prayer lists will be loaded here -->
+                            </select>
+                        </div>
                         
                         <div class="checkbox-group">
                             <input type="checkbox" id="anonymous">
@@ -219,6 +275,32 @@
                 </div>
             </div>
             
+            <!-- My Prayer Lists Tab -->
+            <div class="tab-content" id="prayerListsTab" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">My Prayer Lists</div>
+                        <button class="cta-btn" id="add-list-btn"><i class="fas fa-plus"></i> New List</button>
+                    </div>
+                    <div id="prayer-lists-container">
+                        <div style="text-align: center; padding: 20px; color: #999;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading your prayer lists...
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Selected List Prayers -->
+                <div class="card" id="list-prayers-card" style="display: none;">
+                    <div class="card-header">
+                        <div class="card-title" id="list-prayers-title">List Prayers</div>
+                        <button class="cta-btn" id="add-prayer-to-list-btn"><i class="fas fa-plus"></i> Add Prayer</button>
+                    </div>
+                    <div id="list-prayers-container">
+                        <!-- Prayers for selected list will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
             <!-- Dashboard Tab -->
             <div class="tab-content" id="dashboardTab" style="display: none;">
                 <div class="card">
@@ -250,6 +332,10 @@
             <div class="nav-tab active" data-tab="feedTab">
                 <i class="fas fa-home"></i>
                 <div>Feed</div>
+            </div>
+            <div class="nav-tab" data-tab="prayerListsTab">
+                <i class="fas fa-list"></i>
+                <div>My Lists</div>
             </div>
             <div class="nav-tab" data-tab="submitTab">
                 <i class="fas fa-plus-circle"></i>
@@ -883,9 +969,11 @@
                         targetTab.style.flexDirection = 'column';
                         targetTab.style.gap = '15px';
                         
-                        // Load dashboard data when switching to dashboard tab
+                        // Load data when switching tabs
                         if (tabId === 'dashboardTab' && currentUser) {
                             loadUserDashboard(currentUser.uid);
+                        } else if (tabId === 'prayerListsTab' && currentUser) {
+                            loadPrayerLists(currentUser.uid);
                         }
                     }
                 });
@@ -903,6 +991,7 @@
                     const description = form.querySelector('textarea').value.trim();
                     const category = form.querySelector('select').value || 'general';
                     const urgency = form.querySelectorAll('select')[1]?.value || 'ongoing';
+                    const selectedListId = document.getElementById('prayer-list-select')?.value || '';
                     const isAnonymous = document.getElementById('anonymous')?.checked || false;
 
                     if (!title) { 
@@ -933,7 +1022,12 @@
                             commentCount: 0
                         };
 
-                        await db.collection('prayers').add(prayerData);
+                        const prayerDoc = await db.collection('prayers').add(prayerData);
+                        
+                        // Add to selected prayer list if one was chosen
+                        if (selectedListId) {
+                            await addPrayerToList(prayerDoc.id, selectedListId);
+                        }
                         
                         showSuccess('Prayer request submitted successfully! The community will lift you up.');
                         form.reset();
@@ -1224,12 +1318,587 @@
                     answeredPrayersContainer.innerHTML = '<div style="color: red; padding: 20px;">Error loading answered prayers.</div>';
                 });
         }
+
+        // ===== PRAYER LISTS FUNCTIONALITY =====
+        
+        let currentEditingListId = null;
+        let userPrayerLists = [];
+
+        // Initialize default prayer lists for new users
+        async function initializeDefaultPrayerLists(uid) {
+            if (!uid || !db) return;
+            
+            try {
+                // Check if user already has prayer lists
+                const existingLists = await db.collection('prayerLists')
+                    .where('userId', '==', uid)
+                    .get();
+                
+                if (!existingLists.empty) return; // User already has lists
+                
+                const defaultLists = [
+                    { name: 'General', description: 'General prayer requests', color: '#607D8B', icon: 'fas fa-heart', isDefault: true, orderIndex: 0 },
+                    { name: 'Family', description: 'Prayers for family members', color: '#4CAF50', icon: 'fas fa-users', isDefault: false, orderIndex: 1 },
+                    { name: 'Health', description: 'Health and healing prayers', color: '#2196F3', icon: 'fas fa-heartbeat', isDefault: false, orderIndex: 2 },
+                    { name: 'Work & Career', description: 'Professional life prayers', color: '#FF9800', icon: 'fas fa-briefcase', isDefault: false, orderIndex: 3 },
+                    { name: 'Spiritual Growth', description: 'Personal spiritual development', color: '#9C27B0', icon: 'fas fa-cross', isDefault: false, orderIndex: 4 }
+                ];
+                
+                const batch = db.batch();
+                defaultLists.forEach(list => {
+                    const docRef = db.collection('prayerLists').doc();
+                    batch.set(docRef, {
+                        ...list,
+                        userId: uid,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        prayerCount: 0
+                    });
+                });
+                
+                await batch.commit();
+                console.log('✅ Default prayer lists created for user');
+                
+            } catch (error) {
+                console.error('Error creating default prayer lists:', error);
+            }
+        }
+
+        // Load user's prayer lists
+        function loadPrayerLists(uid) {
+            if (!uid || !db) return;
+            
+            db.collection('prayerLists')
+                .where('userId', '==', uid)
+                .orderBy('orderIndex', 'asc')
+                .onSnapshot(snapshot => {
+                    userPrayerLists = [];
+                    const container = document.getElementById('prayer-lists-container');
+                    const prayerListSelect = document.getElementById('prayer-list-select');
+                    
+                    container.innerHTML = '';
+                    prayerListSelect.innerHTML = '<option value="">None - Community Prayer Only</option>';
+                    
+                    if (snapshot.empty) {
+                        container.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">No prayer lists yet. Create your first list!</div>';
+                        return;
+                    }
+                    
+                    snapshot.forEach(doc => {
+                        const list = { id: doc.id, ...doc.data() };
+                        userPrayerLists.push(list);
+                        
+                        // Add to prayer lists container
+                        const listCard = createPrayerListCard(list);
+                        container.appendChild(listCard);
+                        
+                        // Add to prayer submission dropdown
+                        const option = document.createElement('option');
+                        option.value = list.id;
+                        option.textContent = `📋 ${list.name} (${list.prayerCount || 0} prayers)`;
+                        prayerListSelect.appendChild(option);
+                    });
+                }, error => {
+                    console.error('Error loading prayer lists:', error);
+                    showError('Failed to load prayer lists');
+                });
+        }
+
+        // Create prayer list card UI
+        function createPrayerListCard(list) {
+            const card = document.createElement('div');
+            card.className = 'prayer-list-card';
+            card.style.cssText = `
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 16px;
+                margin-bottom: 12px;
+                background: linear-gradient(135deg, ${list.color}15, rgba(255,255,255,0.02));
+                border-left: 4px solid ${list.color};
+                cursor: pointer;
+                transition: all 0.2s ease;
+                position: relative;
+            `;
+            
+            card.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="list-icon" style="
+                            width: 40px; 
+                            height: 40px; 
+                            border-radius: 10px; 
+                            background: ${list.color}; 
+                            display: flex; 
+                            align-items: center; 
+                            justify-content: center; 
+                            color: white;
+                            font-size: 16px;
+                        ">
+                            <i class="${list.icon}"></i>
+                        </div>
+                        <div>
+                            <div class="list-name" style="font-weight: 600; color: #fff; font-size: 16px;">${list.name}</div>
+                            <div class="list-description" style="color: #999; font-size: 14px; margin-top: 2px;">${list.description || ''}</div>
+                            <div class="list-stats" style="color: #ccc; font-size: 12px; margin-top: 4px;">
+                                ${list.prayerCount || 0} prayers
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-actions" style="display: flex; gap: 8px;">
+                        <button class="edit-list-btn" data-list-id="${list.id}" style="
+                            background: rgba(255,255,255,0.1); 
+                            border: none; 
+                            color: #fff; 
+                            padding: 8px; 
+                            border-radius: 6px; 
+                            cursor: pointer;
+                            width: 32px;
+                            height: 32px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        " title="Edit List">
+                            <i class="fas fa-edit" style="font-size: 12px;"></i>
+                        </button>
+                        <button class="view-list-btn" data-list-id="${list.id}" style="
+                            background: ${list.color}; 
+                            border: none; 
+                            color: white; 
+                            padding: 8px 12px; 
+                            border-radius: 6px; 
+                            cursor: pointer;
+                            font-size: 12px;
+                            font-weight: 500;
+                        " title="View Prayers">
+                            View Prayers
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Add hover effect
+            card.addEventListener('mouseenter', () => {
+                card.style.background = `linear-gradient(135deg, ${list.color}25, rgba(255,255,255,0.05))`;
+                card.style.transform = 'translateY(-2px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.background = `linear-gradient(135deg, ${list.color}15, rgba(255,255,255,0.02))`;
+                card.style.transform = 'translateY(0)';
+            });
+            
+            // Wire up buttons
+            card.querySelector('.edit-list-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                editPrayerList(list.id);
+            });
+            
+            card.querySelector('.view-list-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                viewListPrayers(list.id, list.name);
+            });
+            
+            return card;
+        }
+
+        // Show prayer list modal
+        function showPrayerListModal(listId = null) {
+            const modal = document.getElementById('prayer-list-modal');
+            const title = document.getElementById('prayer-list-modal-title');
+            const form = document.getElementById('prayer-list-form');
+            const deleteBtn = document.getElementById('delete-list-btn');
+            const saveBtn = document.getElementById('save-list-btn');
+            
+            currentEditingListId = listId;
+            
+            if (listId) {
+                // Edit mode
+                const list = userPrayerLists.find(l => l.id === listId);
+                if (!list) return;
+                
+                title.textContent = 'Edit Prayer List';
+                document.getElementById('list-name').value = list.name;
+                document.getElementById('list-description').value = list.description || '';
+                document.getElementById('list-color').value = list.color;
+                document.getElementById('list-icon').value = list.icon;
+                
+                // Update UI selections
+                updateColorSelection(list.color);
+                updateIconSelection(list.icon);
+                
+                deleteBtn.style.display = list.isDefault ? 'none' : 'block';
+                saveBtn.textContent = 'Update List';
+            } else {
+                // Create mode
+                title.textContent = 'Create New Prayer List';
+                form.reset();
+                document.getElementById('list-color').value = '#4CAF50';
+                document.getElementById('list-icon').value = 'fas fa-heart';
+                updateColorSelection('#4CAF50');
+                updateIconSelection('fas fa-heart');
+                deleteBtn.style.display = 'none';
+                saveBtn.textContent = 'Create List';
+            }
+            
+            modal.style.display = 'flex';
+        }
+
+        // Update color selection UI
+        function updateColorSelection(selectedColor) {
+            document.querySelectorAll('.color-option').forEach(option => {
+                if (option.dataset.color === selectedColor) {
+                    option.style.borderColor = '#fff';
+                    option.style.boxShadow = '0 0 0 2px rgba(255,255,255,0.3)';
+                } else {
+                    option.style.borderColor = 'transparent';
+                    option.style.boxShadow = 'none';
+                }
+            });
+        }
+
+        // Update icon selection UI
+        function updateIconSelection(selectedIcon) {
+            document.querySelectorAll('.icon-option').forEach(option => {
+                if (option.dataset.icon === selectedIcon) {
+                    option.style.borderColor = '#fff';
+                    option.style.boxShadow = '0 0 0 2px rgba(255,255,255,0.3)';
+                } else {
+                    option.style.borderColor = 'transparent';
+                    option.style.boxShadow = 'none';
+                }
+            });
+        }
+
+        // Save prayer list
+        async function savePrayerList(formData) {
+            if (!currentUser || !db) return;
+            
+            try {
+                const listData = {
+                    userId: currentUser.uid,
+                    name: formData.name.trim(),
+                    description: formData.description.trim(),
+                    color: formData.color,
+                    icon: formData.icon,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+                
+                if (currentEditingListId) {
+                    // Update existing list
+                    await db.collection('prayerLists').doc(currentEditingListId).update(listData);
+                    showSuccess('Prayer list updated successfully!');
+                } else {
+                    // Create new list
+                    listData.orderIndex = userPrayerLists.length;
+                    listData.isDefault = false;
+                    listData.prayerCount = 0;
+                    listData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    
+                    await db.collection('prayerLists').add(listData);
+                    showSuccess('Prayer list created successfully!');
+                }
+                
+                document.getElementById('prayer-list-modal').style.display = 'none';
+            } catch (error) {
+                console.error('Error saving prayer list:', error);
+                showError('Failed to save prayer list. Please try again.');
+            }
+        }
+
+        // Delete prayer list
+        async function deletePrayerList(listId) {
+            if (!listId || !db) return;
+            
+            const list = userPrayerLists.find(l => l.id === listId);
+            if (!list || list.isDefault) {
+                showError('Cannot delete default prayer list');
+                return;
+            }
+            
+            if (!confirm(`Are you sure you want to delete "${list.name}"? This will remove all prayers from this list but won't delete the prayers themselves.`)) {
+                return;
+            }
+            
+            try {
+                // Delete all prayer list items for this list
+                const listItems = await db.collection('prayerListItems')
+                    .where('prayerListId', '==', listId)
+                    .get();
+                
+                const batch = db.batch();
+                listItems.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+                
+                // Delete the list itself
+                batch.delete(db.collection('prayerLists').doc(listId));
+                
+                await batch.commit();
+                showSuccess('Prayer list deleted successfully');
+                document.getElementById('prayer-list-modal').style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error deleting prayer list:', error);
+                showError('Failed to delete prayer list');
+            }
+        }
+
+        // Edit prayer list
+        function editPrayerList(listId) {
+            showPrayerListModal(listId);
+        }
+
+        // View prayers in a specific list
+        function viewListPrayers(listId, listName) {
+            if (!listId || !db) return;
+            
+            const listPrayersCard = document.getElementById('list-prayers-card');
+            const listPrayersTitle = document.getElementById('list-prayers-title');
+            const listPrayersContainer = document.getElementById('list-prayers-container');
+            
+            listPrayersTitle.textContent = `${listName} Prayers`;
+            listPrayersCard.style.display = 'block';
+            listPrayersContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;"><i class="fas fa-spinner fa-spin"></i> Loading prayers...</div>';
+            
+            // Load prayers for this list
+            db.collection('prayerListItems')
+                .where('prayerListId', '==', listId)
+                .orderBy('orderIndex', 'asc')
+                .onSnapshot(async snapshot => {
+                    if (snapshot.empty) {
+                        listPrayersContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">No prayers in this list yet.</div>';
+                        return;
+                    }
+                    
+                    listPrayersContainer.innerHTML = '';
+                    
+                    // Get prayer details for each item
+                    for (const doc of snapshot.docs) {
+                        const item = doc.data();
+                        try {
+                            const prayerDoc = await db.collection('prayers').doc(item.prayerId).get();
+                            if (prayerDoc.exists) {
+                                const prayer = { id: prayerDoc.id, ...prayerDoc.data() };
+                                const prayerCard = createListPrayerCard(prayer, item, listId);
+                                listPrayersContainer.appendChild(prayerCard);
+                            }
+                        } catch (error) {
+                            console.error('Error loading prayer details:', error);
+                        }
+                    }
+                }, error => {
+                    console.error('Error loading list prayers:', error);
+                    listPrayersContainer.innerHTML = '<div style="color: red; padding: 20px;">Error loading prayers.</div>';
+                });
+        }
+
+        // Create prayer card for list view
+        function createListPrayerCard(prayer, listItem, listId) {
+            const card = document.createElement('div');
+            card.className = 'prayer-request card';
+            card.style.marginBottom = '12px';
+            
+            card.innerHTML = `
+                <div class="prayer-user">
+                    <div class="avatar">${(prayer.userDisplayName || 'U').substring(0,2)}</div>
+                    <div class="user-info">
+                        <div class="user-name">${prayer.userDisplayName || 'User'}</div>
+                        <div class="request-time">${prayer.createdAt ? new Date(prayer.createdAt.toDate()).toLocaleDateString() : 'Recently'}</div>
+                    </div>
+                    <div class="urgency-tag ${prayer.urgency ? `urgency-${prayer.urgency}` : ''}">${prayer.urgency || 'General'}</div>
+                </div>
+                <div class="prayer-content">
+                    <div class="prayer-title">${prayer.title || 'Prayer Request'}</div>
+                    <div class="prayer-description">${prayer.description || ''}</div>
+                </div>
+                <div class="prayer-meta">
+                    <div class="category-tag">${prayer.category || 'General'}</div>
+                    ${prayer.status === 'answered' ? '<div style="color: var(--success); font-weight: 600;">✓ Answered</div>' : ''}
+                </div>
+                <div class="prayer-actions">
+                    <button class="action-btn remove-from-list-btn" data-prayer-id="${prayer.id}" data-list-id="${listId}">
+                        <i class="fas fa-times"></i> Remove from List
+                    </button>
+                    ${prayer.userId === currentUser?.uid ? `
+                        <button class="action-btn toggle-status" data-prayer-id="${prayer.id}" data-status="${prayer.status}">
+                            ${prayer.status === 'answered' ? '<i class="fas fa-undo"></i> Mark Ongoing' : '<i class="fas fa-check-circle"></i> Mark Answered'}
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Wire up remove button
+            card.querySelector('.remove-from-list-btn').addEventListener('click', async () => {
+                try {
+                    const itemDoc = await db.collection('prayerListItems')
+                        .where('prayerListId', '==', listId)
+                        .where('prayerId', '==', prayer.id)
+                        .get();
+                    
+                    if (!itemDoc.empty) {
+                        await itemDoc.docs[0].ref.delete();
+                        // Update prayer count
+                        await updatePrayerListCount(listId);
+                        showSuccess('Prayer removed from list');
+                    }
+                } catch (error) {
+                    console.error('Error removing prayer from list:', error);
+                    showError('Failed to remove prayer from list');
+                }
+            });
+            
+            // Wire up status toggle if it's user's prayer
+            const statusBtn = card.querySelector('.toggle-status');
+            if (statusBtn) {
+                statusBtn.addEventListener('click', async () => {
+                    const newStatus = statusBtn.dataset.status === 'answered' ? 'ongoing' : 'answered';
+                    try {
+                        await db.collection('prayers').doc(prayer.id).update({
+                            status: newStatus,
+                            answeredAt: newStatus === 'answered' ? firebase.firestore.FieldValue.serverTimestamp() : null,
+                            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        showSuccess(`Prayer marked as ${newStatus}`);
+                    } catch (error) {
+                        console.error('Error updating prayer status:', error);
+                        showError('Failed to update prayer status');
+                    }
+                });
+            }
+            
+            return card;
+        }
+
+        // Update prayer list count
+        async function updatePrayerListCount(listId) {
+            try {
+                const items = await db.collection('prayerListItems')
+                    .where('prayerListId', '==', listId)
+                    .get();
+                
+                await db.collection('prayerLists').doc(listId).update({
+                    prayerCount: items.size
+                });
+            } catch (error) {
+                console.error('Error updating prayer list count:', error);
+            }
+        }
+
+        // Add prayer to list
+        async function addPrayerToList(prayerId, listId) {
+            if (!prayerId || !listId || !currentUser) return;
+            
+            try {
+                // Check if prayer is already in this list
+                const existing = await db.collection('prayerListItems')
+                    .where('prayerListId', '==', listId)
+                    .where('prayerId', '==', prayerId)
+                    .get();
+                
+                if (!existing.empty) {
+                    showError('Prayer is already in this list');
+                    return;
+                }
+                
+                // Get current max order index for this list
+                const listItems = await db.collection('prayerListItems')
+                    .where('prayerListId', '==', listId)
+                    .orderBy('orderIndex', 'desc')
+                    .limit(1)
+                    .get();
+                
+                const maxOrderIndex = listItems.empty ? 0 : listItems.docs[0].data().orderIndex + 1;
+                
+                // Add prayer to list
+                await db.collection('prayerListItems').add({
+                    prayerListId: listId,
+                    prayerId: prayerId,
+                    orderIndex: maxOrderIndex,
+                    addedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    addedBy: currentUser.uid
+                });
+                
+                // Update prayer list count
+                await updatePrayerListCount(listId);
+                
+                return true;
+            } catch (error) {
+                console.error('Error adding prayer to list:', error);
+                showError('Failed to add prayer to list');
+                return false;
+            }
+        }
+
+        // Initialize prayer list UI handlers
+        function initPrayerListHandlers() {
+            // Add list button
+            document.getElementById('add-list-btn')?.addEventListener('click', () => {
+                showPrayerListModal();
+            });
+            
+            // Close modal
+            document.getElementById('prayer-list-close')?.addEventListener('click', () => {
+                document.getElementById('prayer-list-modal').style.display = 'none';
+            });
+            
+            // Color picker
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const color = option.dataset.color;
+                    document.getElementById('list-color').value = color;
+                    updateColorSelection(color);
+                });
+            });
+            
+            // Icon picker
+            document.querySelectorAll('.icon-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const icon = option.dataset.icon;
+                    document.getElementById('list-icon').value = icon;
+                    updateIconSelection(icon);
+                });
+            });
+            
+            // Form submission
+            document.getElementById('prayer-list-form')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = {
+                    name: document.getElementById('list-name').value,
+                    description: document.getElementById('list-description').value,
+                    color: document.getElementById('list-color').value,
+                    icon: document.getElementById('list-icon').value
+                };
+                
+                if (!formData.name.trim()) {
+                    showError('Please enter a list name');
+                    return;
+                }
+                
+                await savePrayerList(formData);
+            });
+            
+            // Delete button
+            document.getElementById('delete-list-btn')?.addEventListener('click', async () => {
+                if (currentEditingListId) {
+                    await deletePrayerList(currentEditingListId);
+                }
+            });
+            
+            // Close modal when clicking outside
+            document.getElementById('prayer-list-modal')?.addEventListener('click', (e) => {
+                if (e.target.id === 'prayer-list-modal') {
+                    document.getElementById('prayer-list-modal').style.display = 'none';
+                }
+            });
+        }
         
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             initTabNavigation();
             initFormHandling();
             initAuth();
+            initPrayerListHandlers();
             
             // Show default tab (Feed)
             const defaultTab = document.getElementById('feedTab');
@@ -1244,7 +1913,7 @@
             if (auth && db) {
                 setLoading(true);
                 
-                auth.onAuthStateChanged(user => {
+                auth.onAuthStateChanged(async user => {
                     currentUser = user;
                     const uid = user ? user.uid : null;
                     
@@ -1254,6 +1923,10 @@
                     if (user) {
                         console.log('User signed in:', user.email);
                         updateUserStats(uid);
+                        
+                        // Initialize prayer lists for user
+                        await initializeDefaultPrayerLists(uid);
+                        loadPrayerLists(uid);
                         
                         // Load notification settings
                         db.collection('users').doc(uid).get().then(doc => {

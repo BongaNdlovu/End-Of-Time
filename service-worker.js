@@ -29,13 +29,25 @@ self.addEventListener('install', event => {
   );
 });
 self.addEventListener('fetch', event => {
-  // Navigation fallback: prefer menu, then game
+  // Handle navigation requests: prefer network, then exact cache, then fallbacks
   if (event.request.mode === 'navigate') {
     event.respondWith((async () => {
-      const cache = await caches.open(CACHE_NAME);
-      const menu = await cache.match('/menu.html');
-      const game = await cache.match('/index.html');
-      return menu || game || fetch(event.request);
+      try {
+        // Let the network decide (so index.html can run its redirect logic)
+        return await fetch(event.request);
+      } catch (_) {
+        const cache = await caches.open(CACHE_NAME);
+        // Try to return the exact requested page from cache
+        const exact = await cache.match(event.request);
+        if (exact) return exact;
+        // Fallbacks: menu first, then game
+        const menu = await cache.match('/menu.html');
+        if (menu) return menu;
+        const game = await cache.match('/index.html');
+        if (game) return game;
+        // Last resort
+        return caches.match('/');
+      }
     })());
     return;
   }

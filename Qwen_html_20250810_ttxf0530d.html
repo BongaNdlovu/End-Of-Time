@@ -965,11 +965,17 @@
                 document.querySelector('[data-tab="feedTab"]').click();
             });
             
+            document.getElementById('nav-home-link')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector('[data-tab="feedTab"]').click();
+            });
+            
             document.getElementById('nav-about-link')?.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Load user's prayers
+                // Switch to dashboard tab and load user's prayers
+                document.querySelector('[data-tab="dashboardTab"]').click();
                 if (currentUser) {
-                    loadMyPrayers(currentUser.uid);
+                    loadUserDashboard(currentUser.uid);
                 }
             });
             

@@ -3045,7 +3045,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // Navigate back to main menu page (designate current page as the game menu)
         try {
-            window.location.href = 'index.html';
+            window.location.href = 'index.html?fromMenu=1';
         } catch (e) {
             console.warn('Menu navigation failed, staying on page:', e);
         }

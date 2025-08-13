@@ -52,6 +52,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>End of Time</title>
+    <script>
+        (function() {
+            try {
+                var params = new URLSearchParams(window.location.search);
+                var fromMenu = params.get('fromMenu') === '1';
+                if (!fromMenu) {
+                    window.location.replace('menu.html');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <link rel="stylesheet" href="styles.css">
     <!-- App Icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">

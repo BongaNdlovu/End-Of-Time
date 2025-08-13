@@ -125,6 +125,34 @@ body {
 .menu-item:hover .menu-glow, .menu-item.hovered .menu-glow, .menu-item.keyboard-selected .menu-glow { box-shadow: 0 0 30px 8px rgba(255,255,255,0.25), inset 0 0 18px rgba(139,0,0,0.5); }
 .menu-item:focus { outline: 3px solid #ffd700; outline-offset: 2px; }
 
+/* Disabled menu item */
+.menu-item.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(20%);
+}
+.menu-item.disabled:hover,
+.menu-item.disabled.hovered,
+.menu-item.disabled.keyboard-selected {
+  transform: none;
+  border-color: #8B0000;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+.menu-item.disabled .menu-glow { box-shadow: none !important; }
+.menu-item .coming-soon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(45deg,#e74c3c,#c0392b);
+  color: #fff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-family: 'Montserrat-Regular', Arial, sans-serif;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
 .menu-footer { margin-top: 2rem; text-align: center; opacity: 0.9; }
 .footer-logo { height: 22px; vertical-align: middle; }
 

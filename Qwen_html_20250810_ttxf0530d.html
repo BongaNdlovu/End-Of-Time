@@ -581,7 +581,7 @@
                         ${p.status === 'answered' ? '<div style="color: var(--success); font-weight: 600;">✓ Answered</div>' : ''}
                     </div>
                     <div class="prayer-actions">
-                        <button class="action-btn pray-btn"><i class="fas fa-pray"></i> I Prayed (<span class="pray-count">0</span>)</button>
+                        <button class="action-btn pray-btn"><i class="fas fa-pray"></i> I Prayed</button>
                         <button class="action-btn toggle-comments"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</button>
                         ${isOwner 
                             ? `<button class="action-btn toggle-status">${p.status === 'answered' ? '<i class="fas fa-undo"></i> Mark Ongoing' : '<i class="fas fa-check-circle"></i> Mark Answered'}</button>
@@ -598,15 +598,7 @@
 
                 // Wire up the pray button
                 const prayBtn = wrapper.querySelector('.pray-btn');
-                const prayCount = wrapper.querySelector('.pray-count');
                 const commentCount = wrapper.querySelector('.comment-count');
-                
-                // Update pray count
-                db.collection('prayers').doc(doc.id).collection('interactions')
-                    .where('type', '==', 'prayed')
-                    .onSnapshot(snapshot => {
-                        prayCount.textContent = snapshot.size;
-                    });
 
                 // Update comment count
                 db.collection('prayers').doc(doc.id).collection('interactions')
@@ -623,7 +615,7 @@
                         .get()
                         .then(snapshot => {
                             if (!snapshot.empty) {
-                                prayBtn.innerHTML = '<i class="fas fa-check"></i> You Prayed (<span class="pray-count">0</span>)';
+                                prayBtn.innerHTML = '<i class="fas fa-check"></i> You Prayed';
                                 prayBtn.classList.add('answered');
                                 prayBtn.disabled = true;
                             }
@@ -647,7 +639,7 @@
                             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                         });
                         
-                        prayBtn.innerHTML = '<i class="fas fa-check"></i> You Prayed (<span class="pray-count">0</span>)';
+                        prayBtn.innerHTML = '<i class="fas fa-check"></i> You Prayed';
                         prayBtn.classList.add('answered');
                         
                         showSuccess('Thank you for your prayers! God bless you.');

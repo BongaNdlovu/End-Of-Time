@@ -48,29 +48,68 @@
 
         <!-- Notification Settings Modal -->
         <div class="modal-backdrop" id="settings-modal" style="display:none;">
-            <div class="modal-card">
+            <div class="modal-card" style="max-width: 600px;">
                 <div class="modal-header">
-                    <div class="modal-title">Notification Settings</div>
+                    <div class="modal-title">Settings</div>
                     <button class="close-x" id="settings-close">Close</button>
                 </div>
-                <div class="form-row">
-                    <label for="settings-email">Email</label>
-                    <input type="email" id="settings-email" placeholder="you@example.com" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;">
+                
+                <!-- Settings Tabs -->
+                <div class="settings-tabs" style="display:flex; border-bottom:1px solid var(--border); margin-bottom:20px;">
+                    <button class="settings-tab active" data-settings-tab="notifications" style="flex:1; padding:10px; background:transparent; border:none; color:#fff; cursor:pointer; border-bottom:2px solid #4CAF50;">Notifications</button>
+                    <button class="settings-tab" data-settings-tab="reminders" style="flex:1; padding:10px; background:transparent; border:none; color:#999; cursor:pointer; border-bottom:2px solid transparent;">Prayer Reminders</button>
                 </div>
-                <div class="form-row">
-                    <label>Enable Email Alerts</label>
-                    <label class="switch"><input type="checkbox" id="settings-notify-email"> <span>Get email when someone prays for you</span></label>
+                
+                <!-- Notifications Tab -->
+                <div class="settings-tab-content active" id="notifications-settings">
+                    <div class="form-row">
+                        <label for="settings-email">Email</label>
+                        <input type="email" id="settings-email" placeholder="you@example.com" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;">
+                    </div>
+                    <div class="form-row">
+                        <label>Enable Email Alerts</label>
+                        <label class="switch"><input type="checkbox" id="settings-notify-email"> <span>Get email when someone prays for you</span></label>
+                    </div>
+                    <div class="form-row">
+                        <label>Weekly Summary</label>
+                        <label class="switch"><input type="checkbox" id="settings-weekly-summary"> <span>Receive weekly prayer summary</span></label>
+                    </div>
+                    <div class="form-row">
+                        <label>Enable Push Alerts</label>
+                        <label class="switch"><input type="checkbox" id="settings-notify-push"> <span>Browser notifications</span></label>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <label>Weekly Summary</label>
-                    <label class="switch"><input type="checkbox" id="settings-weekly-summary"> <span>Receive weekly prayer summary</span></label>
+                
+                <!-- Prayer Reminders Tab -->
+                <div class="settings-tab-content" id="reminders-settings" style="display:none;">
+                    <div class="reminders-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                        <div>
+                            <h3 style="margin:0; color:#fff;">Your Prayer Reminders</h3>
+                            <p style="margin:5px 0 0 0; color:#999; font-size:14px;">Set up reminders to help maintain your prayer habits</p>
+                        </div>
+                        <button class="cta-btn" id="add-reminder-btn"><i class="fas fa-plus"></i> Add Reminder</button>
+                    </div>
+                    
+                    <div id="reminders-list">
+                        <div style="text-align: center; padding: 20px; color: #999;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading your reminders...
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Setup Options -->
+                    <div class="quick-setup" style="margin-top:20px; padding:15px; background:rgba(255,255,255,0.05); border-radius:8px;">
+                        <h4 style="margin:0 0 10px 0; color:#fff; font-size:14px;">Quick Setup</h4>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <button class="quick-reminder-btn" data-time="09:00" data-title="Morning Prayer" style="padding:8px 12px; background:#4CAF50; border:none; border-radius:6px; color:white; font-size:12px; cursor:pointer;">Morning (9 AM)</button>
+                            <button class="quick-reminder-btn" data-time="12:00" data-title="Midday Prayer" style="padding:8px 12px; background:#2196F3; border:none; border-radius:6px; color:white; font-size:12px; cursor:pointer;">Lunch (12 PM)</button>
+                            <button class="quick-reminder-btn" data-time="18:00" data-title="Evening Prayer" style="padding:8px 12px; background:#FF9800; border:none; border-radius:6px; color:white; font-size:12px; cursor:pointer;">Evening (6 PM)</button>
+                            <button class="quick-reminder-btn" data-time="21:00" data-title="Night Prayer" style="padding:8px 12px; background:#9C27B0; border:none; border-radius:6px; color:white; font-size:12px; cursor:pointer;">Night (9 PM)</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <label>Enable Push Alerts</label>
-                    <label class="switch"><input type="checkbox" id="settings-notify-push"> <span>Browser notifications</span></label>
-                </div>
-                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:12px;">
-                    <button class="save-btn" id="settings-save">Save</button>
+                
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button class="save-btn" id="settings-save">Save All Settings</button>
                 </div>
             </div>
         </div>
@@ -122,6 +161,92 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Prayer Reminder Modal -->
+        <div class="modal-backdrop" id="reminder-modal" style="display:none;">
+            <div class="modal-card" style="max-width: 500px;">
+                <div class="modal-header">
+                    <div class="modal-title" id="reminder-modal-title">Create Prayer Reminder</div>
+                    <button class="close-x" id="reminder-close">Close</button>
+                </div>
+                <form id="reminder-form">
+                    <div class="form-row">
+                        <label for="reminder-title">Reminder Title</label>
+                        <input type="text" id="reminder-title" placeholder="e.g., Morning Prayer Time" maxlength="50" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="reminder-description">Description (Optional)</label>
+                        <textarea id="reminder-description" placeholder="What would you like to be reminded about?" maxlength="200" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;min-height:60px;"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="reminder-time">Time</label>
+                        <input type="time" id="reminder-time" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="reminder-frequency">Frequency</label>
+                        <select id="reminder-frequency" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;">
+                            <option value="daily">Daily</option>
+                            <option value="weekdays">Weekdays (Mon-Fri)</option>
+                            <option value="weekends">Weekends (Sat-Sun)</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="custom">Custom Days</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Custom Days Selection -->
+                    <div class="form-row" id="custom-days-row" style="display:none;">
+                        <label>Select Days</label>
+                        <div class="days-selector" style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <label class="day-checkbox" style="display:flex; align-items:center; gap:4px; padding:6px 10px; background:#444; border-radius:6px; cursor:pointer; user-select:none;">
+                                <input type="checkbox" value="0" style="margin:0;"> Sun
+                            </label>
+                            <label class="day-checkbox" style="display:flex; align-items:center; gap:4px; padding:6px 10px; background:#444; border-radius:6px; cursor:pointer; user-select:none;">
+                                <input type="checkbox" value="1" style="margin:0;"> Mon
+                            </label>
+                            <label class="day-checkbox" style="display:flex; align-items:center; gap:4px; padding:6px 10px; background:#444; border-radius:6px; cursor:pointer; user-select:none;">
+                                <input type="checkbox" value="2" style="margin:0;"> Tue
+                            </label>
+                            <label class="day-checkbox" style="display:flex; align-items:center; gap:4px; padding:6px 10px; background:#444; border-radius:6px; cursor:pointer; user-select:none;">
+                                <input type="checkbox" value="3" style="margin:0;"> Wed
+                            </label>
+                            <label class="day-checkbox" style="display:flex; align-items:center; gap:4px; padding:6px 10px; background:#444; border-radius:6px; cursor:pointer; user-select:none;">
+                                <input type="checkbox" value="4" style="margin:0;"> Thu
+                            </label>
+                            <label class="day-checkbox" style="display:flex; align-items:center; gap:4px; padding:6px 10px; background:#444; border-radius:6px; cursor:pointer; user-select:none;">
+                                <input type="checkbox" value="5" style="margin:0;"> Fri
+                            </label>
+                            <label class="day-checkbox" style="display:flex; align-items:center; gap:4px; padding:6px 10px; background:#444; border-radius:6px; cursor:pointer; user-select:none;">
+                                <input type="checkbox" value="6" style="margin:0;"> Sat
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="reminder-prayer-list">Prayer List (Optional)</label>
+                        <select id="reminder-prayer-list" style="padding:10px;border-radius:8px;border:1px solid var(--border);background:#333;color:#fff;">
+                            <option value="">General Reminder</option>
+                            <!-- Prayer lists will be loaded here -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label>Reminder Options</label>
+                        <div style="display:flex; flex-direction:column; gap:8px;">
+                            <label class="switch"><input type="checkbox" id="reminder-sound" checked> <span>Play sound</span></label>
+                            <label class="switch"><input type="checkbox" id="reminder-snooze" checked> <span>Allow snooze (10 minutes)</span></label>
+                        </div>
+                    </div>
+                    
+                    <div style="display:flex; justify-content:space-between; gap:10px; margin-top:20px;">
+                        <button type="button" class="save-btn" id="delete-reminder-btn" style="background:#e74c3c;display:none;">Delete Reminder</button>
+                        <button type="submit" class="save-btn" id="save-reminder-btn">Create Reminder</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -1892,6 +2017,850 @@
                 }
             });
         }
+
+        // ===== PRAYER REMINDERS FUNCTIONALITY =====
+        
+        let currentEditingReminderId = null;
+        let userReminders = [];
+        let activeReminderTimeouts = new Map(); // Track active reminder schedules
+
+        // Initialize default prayer reminder for new users
+        async function initializeDefaultReminder(uid) {
+            if (!uid || !db) return;
+            
+            try {
+                // Check if user already has reminders
+                const existingReminders = await db.collection('prayerReminders')
+                    .where('userId', '==', uid)
+                    .get();
+                
+                if (!existingReminders.empty) return; // User already has reminders
+                
+                // Create a default morning reminder
+                const defaultReminder = {
+                    userId: uid,
+                    title: 'Morning Prayer',
+                    description: 'Start your day with prayer and reflection',
+                    time: '09:00',
+                    frequency: 'daily',
+                    daysOfWeek: [1, 2, 3, 4, 5, 6, 0], // All days
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    prayerListId: '',
+                    reminderType: 'general',
+                    isActive: true,
+                    notificationMethod: ['browser'],
+                    soundEnabled: true,
+                    snoozeEnabled: true,
+                    snoozeDuration: 10,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    lastTriggered: null,
+                    nextScheduled: null,
+                    triggerCount: 0
+                };
+                
+                await db.collection('prayerReminders').add(defaultReminder);
+                console.log('✅ Default prayer reminder created for user');
+                
+            } catch (error) {
+                console.error('Error creating default reminder:', error);
+            }
+        }
+
+        // Load user's prayer reminders
+        function loadPrayerReminders(uid) {
+            if (!uid || !db) return;
+            
+            db.collection('prayerReminders')
+                .where('userId', '==', uid)
+                .orderBy('time', 'asc')
+                .onSnapshot(snapshot => {
+                    userReminders = [];
+                    const container = document.getElementById('reminders-list');
+                    const reminderPrayerListSelect = document.getElementById('reminder-prayer-list');
+                    
+                    if (snapshot.empty) {
+                        container.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">No prayer reminders yet. Create your first reminder!</div>';
+                        return;
+                    }
+                    
+                    container.innerHTML = '';
+                    
+                    snapshot.forEach(doc => {
+                        const reminder = { id: doc.id, ...doc.data() };
+                        userReminders.push(reminder);
+                        
+                        // Add to reminders list
+                        const reminderCard = createReminderCard(reminder);
+                        container.appendChild(reminderCard);
+                        
+                        // Schedule the reminder if active
+                        if (reminder.isActive) {
+                            scheduleReminder(reminder);
+                        }
+                    });
+                    
+                    // Update reminder dropdown in reminder form with prayer lists
+                    if (reminderPrayerListSelect && userPrayerLists) {
+                        reminderPrayerListSelect.innerHTML = '<option value="">General Reminder</option>';
+                        userPrayerLists.forEach(list => {
+                            const option = document.createElement('option');
+                            option.value = list.id;
+                            option.textContent = `📋 ${list.name}`;
+                            reminderPrayerListSelect.appendChild(option);
+                        });
+                    }
+                }, error => {
+                    console.error('Error loading prayer reminders:', error);
+                    showError('Failed to load prayer reminders');
+                });
+        }
+
+        // Create reminder card UI
+        function createReminderCard(reminder) {
+            const card = document.createElement('div');
+            card.className = 'reminder-card';
+            card.style.cssText = `
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 16px;
+                margin-bottom: 12px;
+                background: ${reminder.isActive ? 'rgba(76, 175, 80, 0.1)' : 'rgba(158, 158, 158, 0.1)'};
+                border-left: 4px solid ${reminder.isActive ? '#4CAF50' : '#9E9E9E'};
+                transition: all 0.2s ease;
+            `;
+            
+            const frequencyText = getFrequencyDisplayText(reminder.frequency, reminder.daysOfWeek);
+            const timeDisplay = formatTime(reminder.time);
+            const prayerListName = reminder.prayerListId ? 
+                (userPrayerLists.find(l => l.id === reminder.prayerListId)?.name || 'Unknown List') : 
+                'General';
+            
+            card.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <div class="reminder-icon" style="
+                                width: 36px; 
+                                height: 36px; 
+                                border-radius: 50%; 
+                                background: ${reminder.isActive ? '#4CAF50' : '#9E9E9E'}; 
+                                display: flex; 
+                                align-items: center; 
+                                justify-content: center; 
+                                color: white;
+                                font-size: 14px;
+                            ">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div>
+                                <div class="reminder-title" style="font-weight: 600; color: #fff; font-size: 16px;">${reminder.title}</div>
+                                <div class="reminder-time" style="color: #4CAF50; font-weight: 500; font-size: 14px;">${timeDisplay} - ${frequencyText}</div>
+                            </div>
+                        </div>
+                        
+                        ${reminder.description ? `
+                            <div class="reminder-description" style="color: #ccc; font-size: 14px; margin-bottom: 8px;">${reminder.description}</div>
+                        ` : ''}
+                        
+                        <div class="reminder-meta" style="display: flex; gap: 12px; align-items: center;">
+                            <span style="font-size: 12px; color: #999; background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px;">
+                                📋 ${prayerListName}
+                            </span>
+                            <span style="font-size: 12px; color: #999;">
+                                <i class="fas fa-volume-${reminder.soundEnabled ? 'up' : 'mute'}"></i>
+                                ${reminder.soundEnabled ? 'Sound On' : 'Silent'}
+                            </span>
+                            ${reminder.snoozeEnabled ? `
+                                <span style="font-size: 12px; color: #999;">
+                                    <i class="fas fa-clock"></i> Snooze ${reminder.snoozeDuration}min
+                                </span>
+                            ` : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="reminder-actions" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
+                        <label class="switch" style="margin: 0;">
+                            <input type="checkbox" class="reminder-toggle" data-reminder-id="${reminder.id}" ${reminder.isActive ? 'checked' : ''}>
+                            <span>${reminder.isActive ? 'Active' : 'Inactive'}</span>
+                        </label>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="edit-reminder-btn" data-reminder-id="${reminder.id}" style="
+                                background: rgba(255,255,255,0.1); 
+                                border: none; 
+                                color: #fff; 
+                                padding: 6px 8px; 
+                                border-radius: 4px; 
+                                cursor: pointer;
+                                font-size: 12px;
+                            " title="Edit Reminder">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Wire up toggle
+            const toggle = card.querySelector('.reminder-toggle');
+            toggle.addEventListener('change', async () => {
+                try {
+                    const isActive = toggle.checked;
+                    await db.collection('prayerReminders').doc(reminder.id).update({
+                        isActive: isActive,
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    
+                    if (isActive) {
+                        scheduleReminder({...reminder, isActive: true});
+                        showSuccess('Reminder activated');
+                    } else {
+                        cancelReminderSchedule(reminder.id);
+                        showSuccess('Reminder deactivated');
+                    }
+                } catch (error) {
+                    console.error('Error toggling reminder:', error);
+                    showError('Failed to update reminder');
+                    toggle.checked = !toggle.checked; // Revert toggle
+                }
+            });
+            
+            // Wire up edit button
+            card.querySelector('.edit-reminder-btn').addEventListener('click', () => {
+                editReminder(reminder.id);
+            });
+            
+            return card;
+        }
+
+        // Helper function to format time display
+        function formatTime(time24) {
+            const [hours, minutes] = time24.split(':');
+            const hour12 = parseInt(hours) % 12 || 12;
+            const ampm = parseInt(hours) >= 12 ? 'PM' : 'AM';
+            return `${hour12}:${minutes} ${ampm}`;
+        }
+
+        // Helper function to get frequency display text
+        function getFrequencyDisplayText(frequency, daysOfWeek) {
+            switch (frequency) {
+                case 'daily': return 'Daily';
+                case 'weekdays': return 'Weekdays';
+                case 'weekends': return 'Weekends';
+                case 'weekly': return 'Weekly';
+                case 'custom': 
+                    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                    const selectedDays = daysOfWeek.map(d => dayNames[d]).join(', ');
+                    return selectedDays;
+                default: return 'Custom';
+            }
+        }
+
+        // Schedule reminder notifications
+        function scheduleReminder(reminder) {
+            if (!reminder.isActive) return;
+            
+            // Cancel existing schedule if any
+            cancelReminderSchedule(reminder.id);
+            
+            const now = new Date();
+            const nextTrigger = calculateNextTriggerTime(reminder, now);
+            
+            if (!nextTrigger) return;
+            
+            const timeUntilTrigger = nextTrigger.getTime() - now.getTime();
+            
+            if (timeUntilTrigger > 0) {
+                const timeoutId = setTimeout(() => {
+                    triggerReminder(reminder);
+                    // Schedule the next occurrence
+                    scheduleReminder(reminder);
+                }, timeUntilTrigger);
+                
+                activeReminderTimeouts.set(reminder.id, timeoutId);
+                console.log(`📅 Reminder "${reminder.title}" scheduled for ${nextTrigger.toLocaleString()}`);
+            }
+        }
+
+        // Calculate next trigger time for a reminder
+        function calculateNextTriggerTime(reminder, fromTime) {
+            const [hours, minutes] = reminder.time.split(':').map(Number);
+            const next = new Date(fromTime);
+            
+            // Set to today at the reminder time
+            next.setHours(hours, minutes, 0, 0);
+            
+            // If time has passed today, move to next valid day
+            if (next <= fromTime) {
+                next.setDate(next.getDate() + 1);
+            }
+            
+            // Find next valid day based on frequency
+            let attempts = 0;
+            while (attempts < 8) { // Prevent infinite loop
+                const dayOfWeek = next.getDay();
+                
+                if (isValidDay(reminder.frequency, reminder.daysOfWeek, dayOfWeek)) {
+                    return next;
+                }
+                
+                next.setDate(next.getDate() + 1);
+                attempts++;
+            }
+            
+            return null; // No valid day found
+        }
+
+        // Check if a day is valid for the reminder frequency
+        function isValidDay(frequency, daysOfWeek, dayOfWeek) {
+            switch (frequency) {
+                case 'daily': return true;
+                case 'weekdays': return dayOfWeek >= 1 && dayOfWeek <= 5;
+                case 'weekends': return dayOfWeek === 0 || dayOfWeek === 6;
+                case 'weekly': return daysOfWeek.includes(dayOfWeek);
+                case 'custom': return daysOfWeek.includes(dayOfWeek);
+                default: return false;
+            }
+        }
+
+        // Cancel reminder schedule
+        function cancelReminderSchedule(reminderId) {
+            const timeoutId = activeReminderTimeouts.get(reminderId);
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                activeReminderTimeouts.delete(reminderId);
+            }
+        }
+
+        // Trigger reminder notification
+        async function triggerReminder(reminder) {
+            console.log(`🔔 Triggering reminder: ${reminder.title}`);
+            
+            try {
+                // Update last triggered time
+                await db.collection('prayerReminders').doc(reminder.id).update({
+                    lastTriggered: firebase.firestore.FieldValue.serverTimestamp(),
+                    triggerCount: firebase.firestore.FieldValue.increment(1)
+                });
+                
+                // Show browser notification
+                if (reminder.notificationMethod.includes('browser')) {
+                    showReminderNotification(reminder);
+                }
+                
+                // Create reminder instance for tracking
+                await db.collection('reminderInstances').add({
+                    reminderId: reminder.id,
+                    userId: reminder.userId,
+                    scheduledTime: firebase.firestore.FieldValue.serverTimestamp(),
+                    actualTriggerTime: firebase.firestore.FieldValue.serverTimestamp(),
+                    status: 'triggered',
+                    title: reminder.title,
+                    message: reminder.description || 'Time for prayer and reflection',
+                    userAction: null,
+                    actionTimestamp: null,
+                    snoozeUntil: null,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+            } catch (error) {
+                console.error('Error triggering reminder:', error);
+            }
+        }
+
+        // Show browser notification
+        function showReminderNotification(reminder) {
+            const title = reminder.title;
+            const message = reminder.description || 'Time for prayer and reflection';
+            const prayerListName = reminder.prayerListId ? 
+                (userPrayerLists.find(l => l.id === reminder.prayerListId)?.name || '') : '';
+            
+            const fullMessage = prayerListName ? 
+                `${message}\n📋 ${prayerListName}` : message;
+            
+            // Request permission if needed
+            if (Notification.permission === 'default') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        createNotification(title, fullMessage, reminder);
+                    }
+                });
+            } else if (Notification.permission === 'granted') {
+                createNotification(title, fullMessage, reminder);
+            }
+            
+            // Also show in-app notification
+            showInAppReminder(reminder);
+        }
+
+        // Create browser notification
+        function createNotification(title, message, reminder) {
+            const notification = new Notification(title, {
+                body: message,
+                icon: 'Fear God.png', // Your app icon
+                badge: 'Fear God.png',
+                tag: `prayer-reminder-${reminder.id}`,
+                requireInteraction: true,
+                actions: [
+                    { action: 'pray', title: '🙏 Start Praying' },
+                    { action: 'snooze', title: '⏰ Snooze 10min' }
+                ]
+            });
+            
+            notification.onclick = () => {
+                window.focus();
+                // Navigate to appropriate section
+                if (reminder.prayerListId) {
+                    document.querySelector('[data-tab="prayerListsTab"]').click();
+                    viewListPrayers(reminder.prayerListId, 
+                        userPrayerLists.find(l => l.id === reminder.prayerListId)?.name || 'Prayer List'
+                    );
+                } else {
+                    document.querySelector('[data-tab="submitTab"]').click();
+                }
+                notification.close();
+            };
+            
+            // Auto-close after 30 seconds
+            setTimeout(() => notification.close(), 30000);
+        }
+
+        // Show in-app reminder
+        function showInAppReminder(reminder) {
+            const reminderToast = document.createElement('div');
+            reminderToast.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: linear-gradient(135deg, #4CAF50, #45a049);
+                color: white;
+                padding: 16px 20px;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                z-index: 10001;
+                max-width: 350px;
+                border: 1px solid rgba(255,255,255,0.2);
+                backdrop-filter: blur(10px);
+            `;
+            
+            const prayerListName = reminder.prayerListId ? 
+                (userPrayerLists.find(l => l.id === reminder.prayerListId)?.name || '') : '';
+            
+            reminderToast.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="font-size: 24px;">🔔</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; margin-bottom: 4px;">${reminder.title}</div>
+                        <div style="font-size: 14px; opacity: 0.9;">${reminder.description || 'Time for prayer and reflection'}</div>
+                        ${prayerListName ? `<div style="font-size: 12px; opacity: 0.8; margin-top: 4px;">📋 ${prayerListName}</div>` : ''}
+                    </div>
+                    <button style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; opacity: 0.7;" onclick="this.parentElement.parentElement.remove()">×</button>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 12px;">
+                    <button class="reminder-action-btn" data-action="pray" style="flex: 1; padding: 8px 12px; background: rgba(255,255,255,0.2); border: none; color: white; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                        🙏 Start Praying
+                    </button>
+                    ${reminder.snoozeEnabled ? `
+                        <button class="reminder-action-btn" data-action="snooze" style="flex: 1; padding: 8px 12px; background: rgba(255,255,255,0.1); border: none; color: white; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                            ⏰ Snooze ${reminder.snoozeDuration}min
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Wire up action buttons
+            reminderToast.querySelectorAll('.reminder-action-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const action = btn.dataset.action;
+                    handleReminderAction(reminder, action);
+                    reminderToast.remove();
+                });
+            });
+            
+            document.body.appendChild(reminderToast);
+            
+            // Auto-remove after 60 seconds
+            setTimeout(() => {
+                if (reminderToast.parentElement) {
+                    reminderToast.remove();
+                }
+            }, 60000);
+            
+            // Play sound if enabled
+            if (reminder.soundEnabled) {
+                playNotificationSound();
+            }
+        }
+
+        // Handle reminder actions
+        function handleReminderAction(reminder, action) {
+            switch (action) {
+                case 'pray':
+                    // Navigate to prayer section
+                    if (reminder.prayerListId) {
+                        document.querySelector('[data-tab="prayerListsTab"]').click();
+                        viewListPrayers(reminder.prayerListId, 
+                            userPrayerLists.find(l => l.id === reminder.prayerListId)?.name || 'Prayer List'
+                        );
+                    } else {
+                        document.querySelector('[data-tab="submitTab"]').click();
+                    }
+                    break;
+                    
+                case 'snooze':
+                    // Schedule snooze
+                    if (reminder.snoozeEnabled) {
+                        const snoozeTime = new Date();
+                        snoozeTime.setMinutes(snoozeTime.getMinutes() + reminder.snoozeDuration);
+                        
+                        setTimeout(() => {
+                            showReminderNotification(reminder);
+                        }, reminder.snoozeDuration * 60 * 1000);
+                        
+                        showSuccess(`Snoozed for ${reminder.snoozeDuration} minutes`);
+                    }
+                    break;
+            }
+        }
+
+        // Play notification sound
+        function playNotificationSound() {
+            // Create audio context for notification sound
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (error) {
+                console.log('Could not play notification sound:', error);
+            }
+        }
+
+        // Show reminder modal
+        function showReminderModal(reminderId = null) {
+            const modal = document.getElementById('reminder-modal');
+            const title = document.getElementById('reminder-modal-title');
+            const form = document.getElementById('reminder-form');
+            const deleteBtn = document.getElementById('delete-reminder-btn');
+            const saveBtn = document.getElementById('save-reminder-btn');
+            
+            currentEditingReminderId = reminderId;
+            
+            if (reminderId) {
+                // Edit mode
+                const reminder = userReminders.find(r => r.id === reminderId);
+                if (!reminder) return;
+                
+                title.textContent = 'Edit Prayer Reminder';
+                document.getElementById('reminder-title').value = reminder.title;
+                document.getElementById('reminder-description').value = reminder.description || '';
+                document.getElementById('reminder-time').value = reminder.time;
+                document.getElementById('reminder-frequency').value = reminder.frequency;
+                document.getElementById('reminder-prayer-list').value = reminder.prayerListId || '';
+                document.getElementById('reminder-sound').checked = reminder.soundEnabled;
+                document.getElementById('reminder-snooze').checked = reminder.snoozeEnabled;
+                
+                // Handle custom days
+                if (reminder.frequency === 'custom') {
+                    document.getElementById('custom-days-row').style.display = 'block';
+                    // Set selected days
+                    document.querySelectorAll('.day-checkbox input').forEach(checkbox => {
+                        checkbox.checked = reminder.daysOfWeek.includes(parseInt(checkbox.value));
+                    });
+                }
+                
+                deleteBtn.style.display = 'block';
+                saveBtn.textContent = 'Update Reminder';
+            } else {
+                // Create mode
+                title.textContent = 'Create Prayer Reminder';
+                form.reset();
+                document.getElementById('reminder-sound').checked = true;
+                document.getElementById('reminder-snooze').checked = true;
+                document.getElementById('custom-days-row').style.display = 'none';
+                deleteBtn.style.display = 'none';
+                saveBtn.textContent = 'Create Reminder';
+            }
+            
+            modal.style.display = 'flex';
+        }
+
+        // Save reminder
+        async function saveReminder(formData) {
+            if (!currentUser || !db) return;
+            
+            try {
+                // Convert days for frequency
+                let daysOfWeek = [];
+                switch (formData.frequency) {
+                    case 'daily':
+                        daysOfWeek = [0, 1, 2, 3, 4, 5, 6];
+                        break;
+                    case 'weekdays':
+                        daysOfWeek = [1, 2, 3, 4, 5];
+                        break;
+                    case 'weekends':
+                        daysOfWeek = [0, 6];
+                        break;
+                    case 'weekly':
+                        daysOfWeek = [new Date().getDay()]; // Same day each week
+                        break;
+                    case 'custom':
+                        daysOfWeek = Array.from(document.querySelectorAll('.day-checkbox input:checked'))
+                            .map(cb => parseInt(cb.value));
+                        break;
+                }
+                
+                if (daysOfWeek.length === 0 && formData.frequency === 'custom') {
+                    showError('Please select at least one day for custom frequency');
+                    return;
+                }
+                
+                const reminderData = {
+                    userId: currentUser.uid,
+                    title: formData.title.trim(),
+                    description: formData.description.trim(),
+                    time: formData.time,
+                    frequency: formData.frequency,
+                    daysOfWeek: daysOfWeek,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    prayerListId: formData.prayerListId || '',
+                    reminderType: formData.prayerListId ? 'prayer_list' : 'general',
+                    isActive: true,
+                    notificationMethod: ['browser'],
+                    soundEnabled: formData.soundEnabled,
+                    snoozeEnabled: formData.snoozeEnabled,
+                    snoozeDuration: 10,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+                
+                if (currentEditingReminderId) {
+                    // Update existing reminder
+                    await db.collection('prayerReminders').doc(currentEditingReminderId).update(reminderData);
+                    showSuccess('Prayer reminder updated successfully!');
+                } else {
+                    // Create new reminder
+                    reminderData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    reminderData.lastTriggered = null;
+                    reminderData.nextScheduled = null;
+                    reminderData.triggerCount = 0;
+                    
+                    await db.collection('prayerReminders').add(reminderData);
+                    showSuccess('Prayer reminder created successfully!');
+                }
+                
+                document.getElementById('reminder-modal').style.display = 'none';
+            } catch (error) {
+                console.error('Error saving reminder:', error);
+                showError('Failed to save reminder. Please try again.');
+            }
+        }
+
+        // Delete reminder
+        async function deleteReminder(reminderId) {
+            if (!reminderId || !db) return;
+            
+            const reminder = userReminders.find(r => r.id === reminderId);
+            if (!reminder) return;
+            
+            if (!confirm(`Are you sure you want to delete the reminder "${reminder.title}"?`)) {
+                return;
+            }
+            
+            try {
+                // Cancel any active schedule
+                cancelReminderSchedule(reminderId);
+                
+                // Delete reminder instances
+                const instances = await db.collection('reminderInstances')
+                    .where('reminderId', '==', reminderId)
+                    .get();
+                
+                const batch = db.batch();
+                instances.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+                
+                // Delete the reminder itself
+                batch.delete(db.collection('prayerReminders').doc(reminderId));
+                
+                await batch.commit();
+                showSuccess('Prayer reminder deleted successfully');
+                document.getElementById('reminder-modal').style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error deleting reminder:', error);
+                showError('Failed to delete reminder');
+            }
+        }
+
+        // Edit reminder
+        function editReminder(reminderId) {
+            showReminderModal(reminderId);
+        }
+
+        // Create quick reminder
+        async function createQuickReminder(time, title) {
+            if (!currentUser) return;
+            
+            try {
+                const reminderData = {
+                    userId: currentUser.uid,
+                    title: title,
+                    description: 'A moment for prayer and reflection',
+                    time: time,
+                    frequency: 'daily',
+                    daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    prayerListId: '',
+                    reminderType: 'general',
+                    isActive: true,
+                    notificationMethod: ['browser'],
+                    soundEnabled: true,
+                    snoozeEnabled: true,
+                    snoozeDuration: 10,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    lastTriggered: null,
+                    nextScheduled: null,
+                    triggerCount: 0
+                };
+                
+                await db.collection('prayerReminders').add(reminderData);
+                showSuccess(`${title} reminder created!`);
+                
+            } catch (error) {
+                console.error('Error creating quick reminder:', error);
+                showError('Failed to create reminder');
+            }
+        }
+
+        // Initialize reminder UI handlers
+        function initReminderHandlers() {
+            // Settings tabs
+            document.querySelectorAll('.settings-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.dataset.settingsTab;
+                    
+                    // Update tab appearance
+                    document.querySelectorAll('.settings-tab').forEach(t => {
+                        t.classList.remove('active');
+                        t.style.color = '#999';
+                        t.style.borderBottomColor = 'transparent';
+                    });
+                    tab.classList.add('active');
+                    tab.style.color = '#fff';
+                    tab.style.borderBottomColor = '#4CAF50';
+                    
+                    // Show/hide tab content
+                    document.querySelectorAll('.settings-tab-content').forEach(content => {
+                        content.classList.remove('active');
+                        content.style.display = 'none';
+                    });
+                    document.getElementById(`${tabName}-settings`).classList.add('active');
+                    document.getElementById(`${tabName}-settings`).style.display = 'block';
+                    
+                    // Load reminders when switching to reminders tab
+                    if (tabName === 'reminders' && currentUser) {
+                        loadPrayerReminders(currentUser.uid);
+                    }
+                });
+            });
+            
+            // Add reminder button
+            document.getElementById('add-reminder-btn')?.addEventListener('click', () => {
+                showReminderModal();
+            });
+            
+            // Quick reminder buttons
+            document.querySelectorAll('.quick-reminder-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const time = btn.dataset.time;
+                    const title = btn.dataset.title;
+                    createQuickReminder(time, title);
+                });
+            });
+            
+            // Close reminder modal
+            document.getElementById('reminder-close')?.addEventListener('click', () => {
+                document.getElementById('reminder-modal').style.display = 'none';
+            });
+            
+            // Frequency change handler
+            document.getElementById('reminder-frequency')?.addEventListener('change', (e) => {
+                const customDaysRow = document.getElementById('custom-days-row');
+                if (e.target.value === 'custom') {
+                    customDaysRow.style.display = 'block';
+                } else {
+                    customDaysRow.style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            document.getElementById('reminder-form')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = {
+                    title: document.getElementById('reminder-title').value,
+                    description: document.getElementById('reminder-description').value,
+                    time: document.getElementById('reminder-time').value,
+                    frequency: document.getElementById('reminder-frequency').value,
+                    prayerListId: document.getElementById('reminder-prayer-list').value,
+                    soundEnabled: document.getElementById('reminder-sound').checked,
+                    snoozeEnabled: document.getElementById('reminder-snooze').checked
+                };
+                
+                if (!formData.title.trim()) {
+                    showError('Please enter a reminder title');
+                    return;
+                }
+                
+                if (!formData.time) {
+                    showError('Please select a time');
+                    return;
+                }
+                
+                await saveReminder(formData);
+            });
+            
+            // Delete button
+            document.getElementById('delete-reminder-btn')?.addEventListener('click', async () => {
+                if (currentEditingReminderId) {
+                    await deleteReminder(currentEditingReminderId);
+                }
+            });
+            
+            // Close modal when clicking outside
+            document.getElementById('reminder-modal')?.addEventListener('click', (e) => {
+                if (e.target.id === 'reminder-modal') {
+                    document.getElementById('reminder-modal').style.display = 'none';
+                }
+            });
+        }
+
+        // Request notification permission on first use
+        function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        showSuccess('Notifications enabled! You\'ll receive prayer reminders.');
+                    } else {
+                        showError('Notifications denied. You can enable them in browser settings.');
+                    }
+                });
+            }
+        }
         
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
@@ -1899,6 +2868,7 @@
             initFormHandling();
             initAuth();
             initPrayerListHandlers();
+            initReminderHandlers();
             
             // Show default tab (Feed)
             const defaultTab = document.getElementById('feedTab');
@@ -1927,6 +2897,18 @@
                         // Initialize prayer lists for user
                         await initializeDefaultPrayerLists(uid);
                         loadPrayerLists(uid);
+                        
+                        // Initialize prayer reminders for user
+                        await initializeDefaultReminder(uid);
+                        loadPrayerReminders(uid);
+                        
+                        // Request notification permission if needed
+                        if (Notification.permission === 'default') {
+                            // Delay to avoid overwhelming new users
+                            setTimeout(() => {
+                                requestNotificationPermission();
+                            }, 3000);
+                        }
                         
                         // Load notification settings
                         db.collection('users').doc(uid).get().then(doc => {

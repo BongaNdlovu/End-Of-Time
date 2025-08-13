@@ -265,14 +265,19 @@
     <script>
         // Suppress browser extension errors
         window.addEventListener('error', function(e) {
-            if (e.filename && e.filename.includes('chrome-extension://')) {
+            if (e.filename && (e.filename.includes('chrome-extension://') || e.filename.includes('moz-extension://'))) {
+                e.preventDefault();
+                return true;
+            }
+            // Also suppress if error message contains extension-related keywords
+            if (e.message && (e.message.includes('chrome-extension') || e.message.includes('content_script') || e.message.includes('getBestMatchFromCodes'))) {
                 e.preventDefault();
                 return true;
             }
         });
 
         window.addEventListener('unhandledrejection', function(e) {
-            if (e.reason && e.reason.toString().includes('chrome-extension')) {
+            if (e.reason && (e.reason.toString().includes('chrome-extension') || e.reason.toString().includes('content_script'))) {
                 e.preventDefault();
                 return true;
             }

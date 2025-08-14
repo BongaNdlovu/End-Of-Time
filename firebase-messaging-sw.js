@@ -31,9 +31,75 @@ messaging.onBackgroundMessage(function(payload) {
   self.registration.showNotification(title, options);
 });
 
-// Focus/open a client when a notification is clicked
+// Handle notification clicks (both Firebase messages and prayer reminders)
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
+  
+  // Handle prayer reminder notifications
+  if (event.notification.data && event.notification.data.type === 'prayer-reminder') {
+    const { reminderId, prayerListId } = event.notification.data;
+    
+    // Handle action buttons
+    if (event.action === 'pray') {
+      // Open app and navigate to prayer section
+      event.waitUntil(
+        self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+          .then(clients => {
+            // Try to focus existing window
+            for (const client of clients) {
+              if (client.url.includes(self.location.origin)) {
+                client.focus();
+                client.postMessage({
+                  type: 'notification-action',
+                  action: 'pray',
+                  reminderId,
+                  prayerListId
+                });
+                return;
+              }
+            }
+            // Open new window if none exists
+            return self.clients.openWindow('/');
+          })
+      );
+    } else if (event.action === 'snooze') {
+      // Handle snooze action
+      event.waitUntil(
+        self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+          .then(clients => {
+            clients.forEach(client => {
+              client.postMessage({
+                type: 'notification-action',
+                action: 'snooze',
+                reminderId
+              });
+            });
+          })
+      );
+    } else {
+      // Default click (no action button) - open app
+      event.waitUntil(
+        self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+          .then(clients => {
+            for (const client of clients) {
+              if (client.url.includes(self.location.origin)) {
+                client.focus();
+                client.postMessage({
+                  type: 'notification-click',
+                  reminderId,
+                  prayerListId
+                });
+                return;
+              }
+            }
+            return self.clients.openWindow('/');
+          })
+      );
+    }
+    return;
+  }
+  
+  // Handle Firebase messaging notifications (existing functionality)
   const urlToOpen = event.notification?.data?.click_action || '/';
   event.waitUntil((async () => {
     const allClients = await clients.matchAll({ type: 'window', includeUncontrolled: true });

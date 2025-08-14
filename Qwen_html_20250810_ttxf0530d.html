@@ -2393,36 +2393,61 @@
             showInAppReminder(reminder);
         }
 
-        // Create browser notification
-        function createNotification(title, message, reminder) {
-            const notification = new Notification(title, {
-                body: message,
-                icon: 'Fear God.png', // Your app icon
-                badge: 'Fear God.png',
-                tag: `prayer-reminder-${reminder.id}`,
-                requireInteraction: true,
-                actions: [
-                    { action: 'pray', title: '🙏 Start Praying' },
-                    { action: 'snooze', title: '⏰ Snooze 10min' }
-                ]
-            });
-            
-            notification.onclick = () => {
-                window.focus();
-                // Navigate to appropriate section
-                if (reminder.prayerListId) {
-                    document.querySelector('[data-tab="prayerListsTab"]').click();
-                    viewListPrayers(reminder.prayerListId, 
-                        userPrayerLists.find(l => l.id === reminder.prayerListId)?.name || 'Prayer List'
-                    );
+        // Create browser notification using Service Worker
+        async function createNotification(title, message, reminder) {
+            try {
+                // Check if service worker is supported
+                if ('serviceWorker' in navigator) {
+                    // Wait for service worker to be ready
+                    const registration = await navigator.serviceWorker.ready;
+                    
+                    // Use service worker registration to show persistent notification with actions
+                    await registration.showNotification(title, {
+                        body: message,
+                        icon: 'Fear God.png', // Your app icon
+                        badge: 'Fear God.png',
+                        tag: `prayer-reminder-${reminder.id}`,
+                        requireInteraction: true,
+                        data: { // Store reminder data for action handling
+                            reminderId: reminder.id,
+                            prayerListId: reminder.prayerListId,
+                            type: 'prayer-reminder'
+                        },
+                        actions: [
+                            { action: 'pray', title: '🙏 Start Praying' },
+                            { action: 'snooze', title: '⏰ Snooze 10min' }
+                        ]
+                    });
                 } else {
-                    document.querySelector('[data-tab="submitTab"]').click();
+                    // Fallback to basic notification without actions for unsupported browsers
+                    const notification = new Notification(title, {
+                        body: message,
+                        icon: 'Fear God.png',
+                        badge: 'Fear God.png',
+                        tag: `prayer-reminder-${reminder.id}`,
+                        requireInteraction: true
+                        // No actions for basic notification
+                    });
+                    
+                    notification.onclick = () => {
+                        window.focus();
+                        // Navigate to appropriate section
+                        if (reminder.prayerListId) {
+                            document.querySelector('[data-tab="prayerListsTab"]').click();
+                            viewListPrayers(reminder.prayerListId, 
+                                userPrayerLists.find(l => l.id === reminder.prayerListId)?.name || 'Prayer List'
+                            );
+                        } else {
+                            document.querySelector('[data-tab="submitTab"]').click();
+                        }
+                        notification.close();
+                    };
                 }
-                notification.close();
-            };
-            
-            // Auto-close after 30 seconds
-            setTimeout(() => notification.close(), 30000);
+            } catch (error) {
+                console.error('Error creating notification:', error);
+                // Show in-app notification as final fallback
+                showInAppReminder(reminder);
+            }
         }
 
         // Show in-app reminder
@@ -2545,6 +2570,48 @@
             } catch (error) {
                 console.log('Could not play notification sound:', error);
             }
+        }
+
+        // Log reminder action (for analytics/tracking)
+        async function logReminderAction(reminderId, action) {
+            if (!currentUser || !reminderId) return;
+            
+            try {
+                await db.collection('reminderInstances').add({
+                    reminderId,
+                    userId: currentUser.uid,
+                    action,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    source: 'notification-action'
+                });
+                console.log(`Logged reminder action: ${action} for reminder ${reminderId}`);
+            } catch (error) {
+                console.error('Error logging reminder action:', error);
+            }
+        }
+
+        // Snooze a specific reminder
+        async function snoozeReminder(reminderId) {
+            const reminder = userReminders.find(r => r.id === reminderId);
+            if (!reminder || !reminder.snoozeEnabled) return;
+            
+            // Clear existing timeout if any
+            unscheduleReminder(reminderId);
+            
+            // Schedule snooze
+            const snoozeTime = new Date();
+            snoozeTime.setMinutes(snoozeTime.getMinutes() + reminder.snoozeDuration);
+            
+            const timeoutId = setTimeout(() => {
+                triggerReminder(reminder);
+            }, reminder.snoozeDuration * 60 * 1000);
+            
+            activeReminderTimeouts.set(reminderId, timeoutId);
+            
+            // Log the snooze action
+            await logReminderAction(reminderId, 'snoozed');
+            
+            showSuccess(`Snoozed for ${reminder.snoozeDuration} minutes`);
         }
 
         // Show reminder modal
@@ -2862,8 +2929,57 @@
             }
         }
         
+        // Initialize service worker and message handling
+        async function initServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registration = await navigator.serviceWorker.register('/service-worker.js');
+                    console.log('Service Worker registered:', registration);
+                    
+                    // Listen for messages from service worker
+                    navigator.serviceWorker.addEventListener('message', (event) => {
+                        const { type, action, reminderId, prayerListId } = event.data;
+                        
+                        if (type === 'notification-action') {
+                            if (action === 'pray') {
+                                // Navigate to prayer section
+                                if (prayerListId) {
+                                    document.querySelector('[data-tab="prayerListsTab"]').click();
+                                    const list = userPrayerLists.find(l => l.id === prayerListId);
+                                    if (list) {
+                                        viewListPrayers(prayerListId, list.name);
+                                    }
+                                } else {
+                                    document.querySelector('[data-tab="submitTab"]').click();
+                                }
+                                // Log the prayer action
+                                logReminderAction(reminderId, 'prayed');
+                            } else if (action === 'snooze') {
+                                // Handle snooze
+                                snoozeReminder(reminderId);
+                            }
+                        } else if (type === 'notification-click') {
+                            // Handle general notification click
+                            if (prayerListId) {
+                                document.querySelector('[data-tab="prayerListsTab"]').click();
+                                const list = userPrayerLists.find(l => l.id === prayerListId);
+                                if (list) {
+                                    viewListPrayers(prayerListId, list.name);
+                                }
+                            } else {
+                                document.querySelector('[data-tab="submitTab"]').click();
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.log('Service Worker registration failed:', error);
+                }
+            }
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
+            initServiceWorker();
             initTabNavigation();
             initFormHandling();
             initAuth();

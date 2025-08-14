@@ -726,6 +726,12 @@
         async function sendEmailNotification(recipientUserId, type, data) {
             if (!recipientUserId) return;
             
+            // Check if user is authenticated
+            if (!firebase.auth().currentUser) {
+                console.log('User not authenticated - cannot queue email notification');
+                return;
+            }
+            
             try {
                 // Get recipient's email preferences
                 const userDoc = await db.collection('users').doc(recipientUserId).get();

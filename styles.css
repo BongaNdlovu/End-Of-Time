@@ -2944,3 +2944,168 @@ label {
         padding: 0.6rem 1rem;
     }
 }
+
+/* ===== ENHANCED ACHIEVEMENT ANIMATIONS ===== */
+
+/* Particle explosion for special achievements */
+@keyframes particleExplode {
+  0% {
+    transform: rotate(var(--angle, 0deg)) translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--angle, 0deg)) translateX(60px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Screen flash for mythic achievements */
+@keyframes screenFlash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Enhanced achievement badge animations */
+@keyframes achievementGlow {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 20px rgba(0,0,0,0.2);
+  }
+  50% {
+    box-shadow: 0 12px 48px rgba(0,0,0,0.5), 0 0 40px rgba(255,255,255,0.2);
+  }
+}
+
+@keyframes achievementShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes achievementRainbow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Milestone celebration animations */
+@keyframes milestoneAppear {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(5px);
+  }
+}
+
+@keyframes milestoneDisappear {
+  0% {
+    opacity: 1;
+    backdrop-filter: blur(5px);
+  }
+  100% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+@keyframes milestoneScale {
+  0% {
+    transform: scale(0) rotate(-10deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes milestoneIconSpin {
+  0%, 100% {
+    transform: rotateY(0deg) scale(1);
+  }
+  25% {
+    transform: rotateY(90deg) scale(0.8);
+  }
+  50% {
+    transform: rotateY(180deg) scale(1.1);
+  }
+  75% {
+    transform: rotateY(270deg) scale(0.9);
+  }
+}
+
+/* Achievement toast notifications */
+.achievement-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  border-left: 4px solid #FFD700;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transform: translateX(400px);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 9999;
+  max-width: 300px;
+}
+
+.achievement-toast.show {
+  transform: translateX(0);
+}
+
+/* Special effects for rare achievements */
+.achievement-badge[data-rarity="mythic"] {
+  animation: achievementBadgePulse 1s ease-in-out infinite, 
+             achievementGlow 1.5s ease-in-out infinite, 
+             achievementShimmer 1.5s linear infinite, 
+             achievementRainbow 5s linear infinite !important;
+}
+
+.achievement-badge[data-rarity="legendary"] {
+  animation: achievementBadgePulse 1.5s ease-in-out infinite, 
+             achievementGlow 2s ease-in-out infinite, 
+             achievementShimmer 2s linear infinite !important;
+}
+
+/* Mobile responsive for milestone celebrations */
+@media (max-width: 600px) {
+  .milestone-content {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+  
+  .milestone-content h2 {
+    font-size: 2rem !important;
+  }
+  
+  .milestone-content p {
+    font-size: 1rem !important;
+  }
+  
+  .milestone-icon {
+    font-size: 3rem !important;
+  }
+  
+  .achievement-toast {
+    right: 10px;
+    bottom: 10px;
+    max-width: 280px;
+  }
+}

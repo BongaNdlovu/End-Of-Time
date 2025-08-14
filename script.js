@@ -1174,6 +1174,18 @@ let currentGameStats = {
   lightningAnswers: 0
 };
 
+// Enhanced milestone tracking
+let sessionStats = {
+  gamesPlayed: 0,
+  totalCorrectAnswers: 0,
+  totalScore: 0,
+  streakRecord: 0,
+  consecutiveGames: 0,
+  perfectGames: 0,
+  dailyPlayTime: 0,
+  startTime: Date.now()
+};
+
 /**
  * Check and award achievements based on current game stats
  * @param {Object} stats - Current game statistics
@@ -1197,26 +1209,47 @@ function checkAchievements(stats) {
 }
 
 /**
- * Show an animated achievement badge
+ * Show an animated achievement badge with enhanced effects
  * @param {Object} achievement - The achievement object
+ * @param {Object} options - Display options (position, duration, etc.)
  */
-function showAchievementBadge(achievement) {
+function showAchievementBadge(achievement, options = {}) {
+  const config = {
+    duration: options.duration || 5000,
+    position: options.position || 'top-right',
+    showParticles: options.showParticles !== false,
+    playSound: options.playSound !== false,
+    showProgress: options.showProgress !== false,
+    ...options
+  };
+
   // Create achievement badge container
   const badge = document.createElement('div');
-  badge.className = 'achievement-badge';
+  badge.className = 'achievement-badge enhanced-achievement';
+  badge.setAttribute('data-rarity', achievement.rarity);
+  
+  // Position based on config
+  const positions = {
+    'top-right': { top: '20px', right: '20px', transform: 'translateX(400px)' },
+    'top-left': { top: '20px', left: '20px', transform: 'translateX(-400px)' },
+    'center': { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(0)' },
+    'bottom-right': { bottom: '20px', right: '20px', transform: 'translateX(400px)' }
+  };
+  
+  const pos = positions[config.position] || positions['top-right'];
   badge.style.cssText = `
     position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 300px;
-    background: linear-gradient(135deg, ${achievement.color}22, ${achievement.color}44);
+    ${Object.entries(pos).filter(([key]) => key !== 'transform').map(([key, value]) => `${key}: ${value}`).join(';')};
+    width: 320px;
+    background: linear-gradient(135deg, ${achievement.color}22, ${achievement.color}44, ${achievement.color}22);
     border: 3px solid ${achievement.color};
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 8px 32px ${achievement.color}66, 0 0 20px ${achievement.color}44;
+    box-shadow: 0 8px 32px ${achievement.color}66, 0 0 20px ${achievement.color}44, inset 0 1px 0 rgba(255,255,255,0.1);
     z-index: 10000;
-    transform: translateX(400px);
+    transform: ${pos.transform};
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     font-family: 'Montserrat-Regular', Arial, sans-serif;
@@ -1281,34 +1314,71 @@ function showAchievementBadge(achievement) {
   // Add to page
   document.body.appendChild(badge);
   
-  // Play achievement sound
-  playSound(audioRiser);
+  // Play achievement sound with variety
+  if (config.playSound) {
+    const sounds = [audioRiser, audioCorrect1, audioCorrect2];
+    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+    playSound(randomSound);
+    
+    // Special sound for rare achievements
+    if (achievement.rarity === 'legendary' || achievement.rarity === 'mythic') {
+      setTimeout(() => playSound(audioRiser), 200);
+    }
+  }
   
-  // Animate in
+  // Create particle effect for special achievements
+  if (config.showParticles && (achievement.rarity === 'epic' || achievement.rarity === 'legendary' || achievement.rarity === 'mythic')) {
+    createAchievementParticles(badge, achievement.color);
+  }
+  
+  // Enhanced screen flash for mythic achievements
+  if (achievement.rarity === 'mythic') {
+    createScreenFlash(achievement.color);
+  }
+  
+  // Animate in based on position
   setTimeout(() => {
-    badge.style.transform = 'translateX(0)';
+    if (config.position === 'center') {
+      badge.style.transform = 'translate(-50%, -50%) scale(1)';
+    } else {
+      badge.style.transform = config.position.includes('left') ? 'translateX(0)' : 'translateX(0)';
+    }
     
     // Animate progress bar
-    setTimeout(() => {
-      const progressBar = badge.querySelector('.achievement-progress-bar');
-      if (progressBar) {
-        progressBar.style.width = '100%';
-      }
-    }, 300);
+    if (config.showProgress) {
+      setTimeout(() => {
+        const progressBar = badge.querySelector('.achievement-progress-bar');
+        if (progressBar) {
+          progressBar.style.width = '100%';
+        }
+      }, 300);
+    }
   }, 100);
   
-  // Add pulsing animation
-  badge.style.animation = 'achievementBadgePulse 3s ease-in-out infinite';
+  // Add pulsing animation with rarity-specific effects
+  const rarityAnimations = {
+    'common': 'achievementBadgePulse 3s ease-in-out infinite',
+    'rare': 'achievementBadgePulse 2.5s ease-in-out infinite, achievementGlow 4s ease-in-out infinite',
+    'epic': 'achievementBadgePulse 2s ease-in-out infinite, achievementGlow 3s ease-in-out infinite, achievementShimmer 3s linear infinite',
+    'legendary': 'achievementBadgePulse 1.5s ease-in-out infinite, achievementGlow 2s ease-in-out infinite, achievementShimmer 2s linear infinite',
+    'mythic': 'achievementBadgePulse 1s ease-in-out infinite, achievementGlow 1.5s ease-in-out infinite, achievementShimmer 1.5s linear infinite, achievementRainbow 5s linear infinite'
+  };
   
-  // Remove after 5 seconds
+  badge.style.animation = rarityAnimations[achievement.rarity] || rarityAnimations['common'];
+  
+  // Remove after configured duration
   setTimeout(() => {
-    badge.style.transform = 'translateX(400px)';
+    const exitTransform = config.position === 'center' ? 'translate(-50%, -50%) scale(0)' :
+                         config.position.includes('left') ? 'translateX(-400px)' : 'translateX(400px)';
+    badge.style.transform = exitTransform;
+    badge.style.opacity = '0';
+    
     setTimeout(() => {
       if (badge.parentNode) {
         badge.parentNode.removeChild(badge);
       }
     }, 600);
-  }, 5000);
+  }, config.duration);
 }
 
 /**

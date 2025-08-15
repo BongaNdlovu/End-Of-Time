@@ -343,7 +343,7 @@ const confettiSettings = { target: 'confetti-canvas', respawn: false, clock: 30,
 const confetti = new ConfettiGenerator(confettiSettings);
 
 // --- Timer and Game State Variables ---
-let TIME_LIMIT = 40; // Extended to 40 seconds for better gameplay
+let TIME_LIMIT = 25; // Per-question time limit in seconds
 let questions = [];
 let currentQuestionIndex = 0;
 let currentPhase = 'question'; // 'question' or 'options'
@@ -2088,7 +2088,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isLightningRound = (currentQuestionIndex > 0 && currentQuestionIndex % roundSize === 0);
         
         // Dynamic wager limits based on game state
-        TIME_LIMIT = 40;
+        TIME_LIMIT = 25;
         
         if (isLightningRound) {
             // Higher stakes for lightning rounds

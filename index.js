@@ -43,17 +43,26 @@ const v1_2 = require("firebase-functions/v1");
 const v1_3 = require("firebase-functions/v1");
 const admin = __importStar(require("firebase-admin"));
 const nodemailer = __importStar(require("nodemailer"));
+const functions = __importStar(require("firebase-functions"));
 (0, v2_1.setGlobalOptions)({ maxInstances: 10 });
 admin.initializeApp();
 const db = admin.firestore();
-// Configure your email service (example with Gmail)
+// Configure your email service (Gmail via env vars or Firebase runtime config)
+const emailUser = process.env.EMAIL_USER || functions.config().email?.user;
+const emailPass = process.env.EMAIL_PASS || functions.config().email?.pass;
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER || 'your-email@gmail.com',
-        pass: process.env.EMAIL_PASS || 'your-app-password', // Use App Password for Gmail
+        user: emailUser,
+        pass: emailPass, // Use App Password for Gmail
     },
 });
+// Check if email configuration is valid
+const isEmailConfigured = () => {
+    return Boolean(emailUser && emailPass &&
+        emailUser !== 'your-email@gmail.com' &&
+        emailPass !== 'your-app-password');
+};
 // Helper: send FCM to tokens
 async function sendPush(tokens, title, body) {
     if (!tokens || tokens.length === 0)
@@ -241,6 +250,15 @@ exports.sendEmailNotificationV2 = (0, firestore_1.onDocumentCreated)('emailQueue
         await event.data?.ref.update({ status: 'failed', error: 'Missing recipient email' });
         return;
     }
+    // Check if email is properly configured
+    if (!isEmailConfigured()) {
+        console.error('Email configuration missing: EMAIL_USER and EMAIL_PASS environment variables not set');
+        await event.data?.ref.update({
+            status: 'failed',
+            error: 'Email service not configured - missing EMAIL_USER and EMAIL_PASS environment variables'
+        });
+        return;
+    }
     const mailOptions = {
         from: 'End of Time Prayer Network <noreply@endoftime.com>',
         to: data.to,
@@ -250,6 +268,7 @@ exports.sendEmailNotificationV2 = (0, firestore_1.onDocumentCreated)('emailQueue
     try {
         await transporter.sendMail(mailOptions);
         await event.data?.ref.update({ status: 'sent' });
+        console.log(`Email sent successfully to ${data.to}`);
     }
     catch (error) {
         console.error('Email send error:', error);
@@ -584,6 +603,15 @@ exports.sendEmailNotification = v1_1.firestore
         await snap.ref.update({ status: 'failed', error: 'Missing recipient email' });
         return;
     }
+    // Check if email is properly configured
+    if (!isEmailConfigured()) {
+        console.error('Email configuration missing: EMAIL_USER and EMAIL_PASS environment variables not set');
+        await snap.ref.update({
+            status: 'failed',
+            error: 'Email service not configured - missing EMAIL_USER and EMAIL_PASS environment variables'
+        });
+        return;
+    }
     const mailOptions = {
         from: 'End of Time Prayer Network <noreply@endoftime.com>',
         to: data.to,
@@ -593,6 +621,7 @@ exports.sendEmailNotification = v1_1.firestore
     try {
         await transporter.sendMail(mailOptions);
         await snap.ref.update({ status: 'sent' });
+        console.log(`Email sent successfully to ${data.to}`);
     }
     catch (error) {
         console.error('Email send error:', error);

@@ -3081,6 +3081,27 @@
                             notifOpen = !notifOpen;
                             panel.style.display = notifOpen ? 'block' : 'none';
                         });
+
+                        // Close notifications on outside click / Esc / scroll
+                        document.addEventListener('click', (e) => {
+                            if (!notifOpen) return;
+                            if (!panel.contains(e.target) && !bell.contains(e.target)) {
+                                notifOpen = false;
+                                panel.style.display = 'none';
+                            }
+                        });
+                        document.addEventListener('keydown', (e) => {
+                            if (!notifOpen) return;
+                            if (e.key === 'Escape') {
+                                notifOpen = false;
+                                panel.style.display = 'none';
+                            }
+                        });
+                        window.addEventListener('scroll', () => {
+                            if (!notifOpen) return;
+                            notifOpen = false;
+                            panel.style.display = 'none';
+                        }, { passive: true });
                         
                         // Listen for notifications
                         db.collection('notifications')

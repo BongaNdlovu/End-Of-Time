@@ -2362,28 +2362,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const currentQ = questions[currentQuestionIndex];
         if (currentQ.explanation) {
-            // Handle the new explanation object structure
+            // Build explanation content supporting both old and new schemas
             let explanationHTML = '<span style="color: #8B0000; font-weight: bold;">💡 Explanation:</span><br><br>';
             
             if (typeof currentQ.explanation === 'object') {
-                // New structured explanation format
-                if (currentQ.explanation.Relevance_and_Correctness) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Relevance & Correctness:</strong><br>${currentQ.explanation.Relevance_and_Correctness}</div>`;
-                }
-                if (currentQ.explanation.Importance_of_Wording) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Importance of Wording:</strong><br>${currentQ.explanation.Importance_of_Wording}</div>`;
-                }
-                if (currentQ.explanation.Factual_Explanation) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Factual Explanation:</strong><br>${currentQ.explanation.Factual_Explanation}</div>`;
-                }
-                if (currentQ.explanation.Theological_Meaning) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Theological Meaning:</strong><br>${currentQ.explanation.Theological_Meaning}</div>`;
-                }
-                if (currentQ.explanation.Christ_Centered_Meaning) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Christ-Centered Meaning:</strong><br>${currentQ.explanation.Christ_Centered_Meaning}</div>`;
+                // Known keys from both versions
+                const sections = [
+                    { key: 'Relevance_and_Correctness', label: 'Relevance & Correctness:' },
+                    { key: 'Importance_of_Wording', label: 'Importance of Wording:' },
+                    { key: 'Factual_Explanation', label: 'Factual Explanation:' },
+                    { key: 'Theological_Meaning', label: 'Theological Meaning:' },
+                    { key: 'Christ_Centered_Meaning', label: 'Christ-Centered Meaning:' },
+                    { key: 'The Big Idea', label: 'The Big Idea:' },
+                    { key: 'Why It Matters To You', label: 'Why It Matters:' },
+                    { key: 'Importance of Wording', label: 'Importance of Wording:' }
+                ];
+                sections.forEach(section => {
+                    if (currentQ.explanation[section.key]) {
+                        const isWhyMatters = section.key === 'Why It Matters To You';
+                        const wrapperClass = isWhyMatters ? 'why-matters-pulse' : '';
+                        explanationHTML += `<div class="${wrapperClass}" style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">${section.label}</strong><br>${currentQ.explanation[section.key]}</div>`;
+                    }
+                });
+                // If none of the known keys matched, stringify object as fallback
+                if (explanationHTML.endsWith('<br><br>')) {
+                    explanationHTML += Object.values(currentQ.explanation).join('<br><br>');
                 }
             } else {
-                // Fallback for old string format
+                // Fallback for plain string format
                 explanationHTML += currentQ.explanation;
             }
             

@@ -83,6 +83,13 @@
                     <p>Connect through prayer and community</p>
                     <div class="menu-glow"></div>
                 </div>
+
+                <div class="menu-item" onclick="openFgiStore()" tabindex="0">
+                    <div class="menu-icon"><img src="Fear God.png" alt="Fear God Imprints Logo"></div>
+                    <h2>FearGod Imprints Store</h2>
+                    <p>Please support us by visiting this store.</p>
+                    <div class="menu-glow"></div>
+                </div>
             </div>
         </main>
         
@@ -159,8 +166,16 @@
             }, 500);
         }
         
-        // Add hover effects and sounds
-        document.querySelectorAll('.menu-item').forEach(item => {
+        function openFgiStore() {
+            playSelectSound();
+            setTimeout(() => {
+                // Open the FearGod Imprints store in a new tab
+                window.open('https://feargodimprints.com', '_blank');
+            }, 500);
+        }
+        
+        // Add hover effects and sounds (exclude disabled items)
+        document.querySelectorAll('.menu-item:not(.disabled)').forEach(item => {
             item.addEventListener('mouseenter', () => {
                 playHoverSound();
                 item.classList.add('hovered');
@@ -181,7 +196,7 @@
 
         // Keyboard navigation
         let selectedIndex = -1;
-        const menuItems = document.querySelectorAll('.menu-item');
+        const menuItems = document.querySelectorAll('.menu-item:not(.disabled)');
 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowDown') {

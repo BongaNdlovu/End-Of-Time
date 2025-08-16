@@ -387,6 +387,14 @@ h1.glitch-effect {
     margin: 2rem 0 1.5rem 0;
     box-shadow: 0 2px 12px #8B000033, 0 0 8px #8B000055;
 }
+.question-breathe {
+    animation: questionBreathe 6s ease-in-out infinite !important;
+}
+@keyframes questionBreathe {
+    0% { transform: translateY(0); box-shadow: 0 2px 12px #8B000033, 0 0 8px #8B000055; }
+    50% { transform: translateY(-3px); box-shadow: 0 6px 18px #8B000044, 0 0 12px #8B000077; }
+    100% { transform: translateY(0); box-shadow: 0 2px 12px #8B000033, 0 0 8px #8B000055; }
+}
 .question p {
     font-size: 2rem;
     font-weight: bold;

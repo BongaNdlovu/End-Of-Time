@@ -118,6 +118,7 @@ body {
   transition: transform .25s cubic-bezier(.23,1,.32,1), box-shadow .25s, border-color .25s;
 }
 .menu-item .menu-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.menu-item .menu-icon img { height: 32px; width: auto; vertical-align: middle; filter: drop-shadow(0 0 6px rgba(255,255,255,0.25)); }
 .menu-item h2 { margin: 0.2rem 0 0.25rem 0; font-family: 'Montserrat-Regular', Arial, sans-serif; }
 .menu-item p { margin: 0; opacity: 0.9; }
 .menu-item .menu-glow { position: absolute; inset: 0; border-radius: 20px; box-shadow: 0 0 0 0 rgba(255,255,255,0.2); pointer-events: none; transition: box-shadow .25s; }
@@ -130,6 +131,7 @@ body {
   opacity: 0.6;
   cursor: not-allowed;
   filter: grayscale(20%);
+  pointer-events: none;
 }
 .menu-item.disabled:hover,
 .menu-item.disabled.hovered,

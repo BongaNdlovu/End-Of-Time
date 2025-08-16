@@ -59,49 +59,36 @@ function validateQuestion(question) {
 
 // Initialize the game questions array
 const gameQuestions = [{
+    
+  
     "id": "BP001",
     "question": "The Psalmist David, surrounded by nations worshipping gods of wood and stone, looks to the heavens and the earth. He seeks the ultimate truth about origins, a foundation for true worship that counters the chaotic myths of his neighbors. What foundational declaration in the Law of Moses establishes the singular, purposeful origin of the universe?",
     "options": [
-      "A) Genesis 1:1 - In the beginning the Lord formed the heaven and the earth.",
+      "A) Genesis 1:1 - In the beginning God made heaven and the wide earth.",
       "B) Genesis 1:1 - In the beginning God created the heaven and the earth.",
-      "C) Genesis 1:1 - At the first God made the heavens and the world.",
-      "D) Genesis 1:1 - In the beginning God brought forth the firmament and the land."
+      "C) Genesis 1:1 - At the first God made the heavens and the great, broad earth.",
+      "D) Genesis 1:1 - In the beginning God made the firmament and all land."
     ],
     "answer": "B) Genesis 1:1 - In the beginning God created the heaven and the earth.",
+    "full_verse": "In the beginning God created the heaven and the earth. [39]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This verse is the bedrock of biblical truth, establishing that a single, all-powerful God existed before all things and purposefully created the universe. It counters polytheistic and chaotic origin myths by presenting a deliberate and orderly beginning to time, space, and matter.",
       "Why It Matters To You": "This truth provides the foundation for our faith, establishing God's sovereignty and ownership over everything. It reminds us that our universe is not a cosmic accident but a deliberate creation, giving our lives and the world around us inherent purpose and meaning. It is the ultimate basis for worship, recognizing God as the source of all things.",
-      "Importance of Wording": "The word 'created' comes from the Hebrew *bara*, a verb used exclusively for God's divine activity, implying creation out of nothing. The title 'God' (*Elohim*) is a plural form suggesting majesty and is used to emphasize His power as the universal Creator, distinct from His personal, covenant name 'the Lord' (*Yahweh*), which is revealed later."
-    }
-  },
-  {
-    "id": "BP001",
-    "question": "The Psalmist David, surrounded by nations worshipping gods of wood and stone, looks to the heavens and the earth. He seeks the ultimate truth about origins, a foundation for true worship that counters the chaotic myths of his neighbors. What foundational declaration in the Law of Moses establishes the singular, purposeful origin of the universe?",
-    "options": [
-      "A) Genesis 1:1 - In the beginning the Lord formed the heaven and the earth.",
-      "B) Genesis 1:1 - In the beginning God created the heaven and the earth.",
-      "C) Genesis 1:1 - At the first God made the heavens and the world.",
-      "D) Genesis 1:1 - In the beginning God brought forth the firmament and the land."
-    ],
-    "answer": "B) Genesis 1:1 - In the beginning God created the heaven and the earth.",
-    "category": "Bible People",
-    "explanation": {
-      "The Big Idea": "This verse is the bedrock of biblical truth, establishing that a single, all-powerful God existed before all things and purposefully created the universe. It counters polytheistic and chaotic origin myths by presenting a deliberate and orderly beginning to time, space, and matter.",
-      "Why It Matters To You": "This truth provides the foundation for our faith, establishing God's sovereignty and ownership over everything. It reminds us that our universe is not a cosmic accident but a deliberate creation, giving our lives and the world around us inherent purpose and meaning. It is the ultimate basis for worship, recognizing God as the source of all things.",
-      "Importance of Wording": "The word 'created' comes from the Hebrew *bara*, a verb used exclusively for God's divine activity, implying creation out of nothing. The title 'God' (*Elohim*) is a plural form suggesting majesty and is used to emphasize His power as the universal Creator, distinct from His personal, covenant name 'the Lord' (*Yahweh*), which is revealed later."
+      "Importance of Wording": "The word 'created' comes from the Hebrew *bara*, a verb used exclusively for God's divine activity, implying creation out of nothing. The title 'God' (*Elohim*) is a plural form suggesting majesty and is used to emphasize His power as the universal Creator, distinct from His personal, covenant name 'The Lord' (*Yahweh*), which is revealed later."
     }
   },
   {
     "id": "BP002",
     "question": "The story begins in total chaos: a dark, watery, and lifeless planet. Before the first command is ever spoken, what is the very first sign of divine, life-giving energy preparing the world for transformation?",
     "options": [
-      "A) Genesis 1:2 - And the Spirit of God did move upon the face of the waters.",
+      "A) Genesis 1:2 - And the Spirit of God moved on the face of the deep waters.",
       "B) Genesis 1:2 - And the Spirit of God moved upon the face of the waters.",
-      "C) Genesis 1:2 - And a Spirit from God did pass over the face of the water.",
-      "D) Genesis 1:2 - And the Spirit of God moved above the great face of waters."
+      "C) Genesis 1:2 - And a divine Spirit from God passed over face of water.",
+      "D) Genesis 1:2 - And the Spirit of God moved above the dark face of waters."
     ],
     "answer": "B) Genesis 1:2 - And the Spirit of God moved upon the face of the waters.",
+    "full_verse": "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters. [23]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This isn't just about a divine force floating around; it's about God's personal, active presence bringing potential to a lifeless world. The Holy Spirit is depicted as a life-giving force, \"brooding\" over the chaos like a mother bird over her nest, preparing it for the creative word of Christ.",
@@ -114,11 +101,12 @@ const gameQuestions = [{
     "question": "In a world of ancient myths where the sun and moon were powerful gods to be feared, the Bible makes a radical claim. On Day Four, God defines their true job. What is their divine, practical purpose?",
     "options": [
       "A) Genesis 1:14 - and let them be for signs, and for seasons, and for days, and years:",
-      "B) Genesis 1:14 - and let them be as signs, for the seasons, for the days, and a year:",
-      "C) Genesis 1:14 - and for them to be a sign, for seasons, and also for days, and years:",
-      "D) Genesis 1:14 - and let them be for signs, for all seasons, and for the days, and year:"
+      "B) Genesis 1:14 - and let them be as signs, for the seasons, for the days, for a long year:",
+      "C) Genesis 1:14 - and for them to be as signs, for seasons, and also for times, and years:",
+      "D) Genesis 1:14 - and let them be for signs, for all seasons, and for days, and new year:"
     ],
     "answer": "A) Genesis 1:14 - and let them be for signs, and for seasons, and for days, and years:",
+    "full_verse": "And God said, Let there be lights in the firmament of the heaven to divide the day from the night; and let them be for signs, and for seasons, and for days, and years: [41]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "God demotes the sun and moon from being deities to being devices. They aren't in charge; they are created tools with a job: to serve as a cosmic clock and calendar for humanity, marking out God's appointed times for worship and life.",
@@ -131,11 +119,12 @@ const gameQuestions = [{
     "question": "At the peak of creation, God makes humanity. Unlike the animals made \"after their kind,\" humans are given a unique status that defines their value and purpose. What is this foundational statement of human identity?",
     "options": [
       "A) Genesis 1:27 - So God created man in his own image, in the image of God created he him;",
-      "B) Genesis 1:27 - So God did make man in his own image, in the image of God he made them;",
-      "C) Genesis 1:27 - So God made man after his own image, in the likeness of God created he him;",
-      "D) Genesis 1:27 - Thus God created man in his own image, in the image of God he did make him;"
+      "B) Genesis 1:27 - So God did make man in his own image, in the image of God he made of them;",
+      "C) Genesis 1:27 - So God made man after his own image, in the full likeness of God created him;",
+      "D) Genesis 1:27 - Thus God created man in his own image, in the image of God He did shape him;"
     ],
     "answer": "A) Genesis 1:27 - So God created man in his own image, in the image of God created he him;",
+    "full_verse": "So God created man in his own image, in the image of God created he him; male and female created he them. [41]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Being made in the \"image of God\" isn't about physical appearance; it's about being created with the capacity to reflect God's character. Humans were designed to be God's representatives on earth, gifted with the freedom to think, choose, love, and create.",
@@ -148,11 +137,12 @@ const gameQuestions = [{
     "question": "The six days of work are done. The universe is perfect. But God's creation week isn't complete until He does one final, defining act. What does He do to the seventh day to make it a perpetual memorial?",
     "options": [
       "A) Genesis 2:3 - And God blessed the seventh day, and sanctified it:",
-      "B) Genesis 2:3 - And God did bless the seventh day, and sanctified it:",
-      "C) Genesis 2:3 - And God blessed the seventh day, and made it holy to him:",
-      "D) Genesis 2:3 - And God blessed the new seventh day, and sanctified it:"
+      "B) Genesis 2:3 - And God did bless the seventh day, and blessed it also:",
+      "C) Genesis 2:3 - And God blessed the seventh day, and made it holy for man:",
+      "D) Genesis 2:3 - And God blessed the seventh day, then sanctified it so:"
     ],
     "answer": "A) Genesis 2:3 - And God blessed the seventh day, and sanctified it:",
+    "full_verse": "And God blessed the seventh day, and sanctified it: because that in it he had rested from all his work which God created and made. [4]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The Sabbath isn't just a day off; it's a space in time that God Himself declared holy. It's the grand finale of creation—a gift from God to humanity, inviting us to stop our work and remember that He is the Creator and we are His creatures.",
@@ -165,11 +155,12 @@ const gameQuestions = [{
     "question": "The story of Adam's creation is uniquely personal. While the rest of creation was spoken into existence, humanity's beginning is a hands-on, intimate act. How did a lifeless form of dust become a living person?",
     "options": [
       "A) Genesis 2:7 - and man became a living soul.",
-      "B) Genesis 2:7 - and man becomes a living soul.",
-      "C) Genesis 2:7 - so man became a living soul.",
-      "D) Genesis 2:7 - then man became a living soul."
+      "B) Genesis 2:7 - and man becomes a living soul, too.",
+      "C) Genesis 2:7 - so man became a living whole soul.",
+      "D) Genesis 2:7 - then man became the living soul."
     ],
     "answer": "A) Genesis 2:7 - and man became a living soul.",
+    "full_verse": "And the LORD God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul. [8]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This verse reveals that a human being is not a body with a soul inside it; a human being is a living soul. The \"soul\" is what you get when you combine a physical body (\"dust\") with the \"breath of life\" from God. We are a unified whole.",
@@ -182,11 +173,12 @@ const gameQuestions = [{
     "question": "In the perfect garden, Adam is given everything he needs, yet God declares his situation \"not good.\" A suitable partner is required. How does the Bible describe the creation of the woman from the man?",
     "options": [
       "A) Genesis 2:22 - and brought her unto the man.",
-      "B) Genesis 2:22 - so brought her unto the man.",
-      "C) Genesis 2:22 - and brought her to that man.",
-      "D) Genesis 2:22 - and brought her to the Adam."
+      "B) Genesis 2:22 - so brought her near to the man.",
+      "C) Genesis 2:22 - and brought her to that very man.",
+      "D) Genesis 2:22 - and brought her to the true Adam."
     ],
     "answer": "A) Genesis 2:22 - and brought her unto the man.",
+    "full_verse": "And the rib, which the LORD God had taken from man, made he a woman, and brought her unto the man. [7]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The woman's creation from the man's side is a powerful symbol of equality, partnership, and unity. She wasn't an afterthought; she was the masterful answer to Adam's incompleteness. God Himself acts as the father of the bride, personally presenting her to the man.",
@@ -199,11 +191,12 @@ const gameQuestions = [{
     "question": "After each stage of creation, God offers a divine assessment. But after the entire ecosystem, including humanity, is complete, He gives a final, ultimate verdict on His finished work. What is that declaration?",
     "options": [
       "A) Genesis 1:31 - and, behold, it was very good.",
-      "B) Genesis 1:31 - and, see now, it was very good.",
-      "C) Genesis 1:31 - and, behold, it was all so good.",
-      "D) Genesis 1:31 - and, behold, it was truly good."
+      "B) Genesis 1:31 - and, look now, it was very good.",
+      "C) Genesis 1:31 - and, behold, it was all so, so good.",
+      "D) Genesis 1:31 - and, behold, it was right and good."
     ],
     "answer": "A) Genesis 1:31 - and, behold, it was very good.",
+    "full_verse": "And God saw every thing that he had made, and, behold, it was very good. And the evening and the morning were the sixth day. [12]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The world God created was perfect. Not just \"good,\" but \"very good.\" This means there was no death, no decay, no suffering, no sin. It was a flawless expression of the Creator's love and power, a universe in perfect harmony.",
@@ -216,11 +209,12 @@ const gameQuestions = [{
     "question": "In the center of the Garden, two trees stand as symbols of the great choice facing humanity. One offers perpetual life. The other represents a critical test of loyalty. What are these two pivotal trees called?",
     "options": [
       "A) Genesis 2:9 - and the tree of knowledge of good and evil.",
-      "B) Genesis 2:9 - and the great tree of knowledge of good/evil.",
-      "C) Genesis 2:9 - and the one tree of knowledge of good and evil.",
-      "D) Genesis 2:9 - with the tree of knowledge of good and evil."
+      "B) Genesis 2:9 - and the tree of knowing good and bad and evil.",
+      "C) Genesis 2:9 - and the tree of knowing good and evil quickly.",
+      "D) Genesis 2:9 - with the tree for knowledge of good and evil."
     ],
     "answer": "A) Genesis 2:9 - and the tree of knowledge of good and evil.",
+    "full_verse": "And out of the ground made the LORD God to grow every tree that is pleasant to the sight, and good for food; the tree of life also in the midst of the garden, and the tree of knowledge of good and evil. [11]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "These trees represent the two paths available to humanity: a life of trust and dependence on God (the tree of life), or a life of self-reliance and independence from God (the tree of knowledge). The test wasn't about gaining information; it was about choosing the source of that information—God or self.",
@@ -233,11 +227,12 @@ const gameQuestions = [{
     "question": "God gives the first humans a job description, a divine mandate for how they are to interact with the world He just created. What is this foundational command for humanity's role on Planet Earth?",
     "options": [
       "A) Genesis 1:28 - and have dominion over the fish of the sea, and over the fowl of the air,",
-      "B) Genesis 1:28 - and have dominion over all fish of the sea, and over fowl of the skies,",
-      "C) Genesis 1:28 - and get dominion over the fish of the sea, and over the fowl of the air,",
-      "D) Genesis 1:28 - and have dominion over the fish of the sea, and over all fowl in the air,"
+      "B) Genesis 1:28 - and have dominion over all fish of the deep sea, and over fowl of skies,",
+      "C) Genesis 1:28 - and gain dominion over the fish of the sea, and over the fowl of the air,",
+      "D) Genesis 1:28 - and have dominion over the fish of the sea, and over every fowl in the air,"
     ],
     "answer": "A) Genesis 1:28 - and have dominion over the fish of the sea, and over the fowl of the air,",
+    "full_verse": "And God blessed them, and God said unto them, Be fruitful, and multiply, and replenish the earth, and subdue it: and have dominion over the fish of the sea, and over the fowl of the air, and over every living thing that moveth upon the earth. [15]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Humanity was created to be God's royal representatives, His caretakers for Planet Earth. This \"dominion\" wasn't a license to exploit and destroy; it was a sacred trust to manage, cultivate, and care for creation in a way that reflected the loving character of the Creator.",
@@ -250,11 +245,12 @@ const gameQuestions = [{
     "question": "The entire Creation account builds on one foundational principle: God's spoken word has absolute power. The very first time God speaks to create, He addresses the most fundamental problem: darkness. What is His world-changing command?",
     "options": [
       "A) Genesis 1:3 - And God said, Let there be light: and there was light.",
-      "B) Genesis 1:3 - And God spoke, Let there be light: and there was light.",
-      "C) Genesis 1:3 - And God said, Let there be a light: and there was light.",
-      "D) Genesis 1:3 - And God did say, Let there be light: and so was light."
+      "B) Genesis 1:3 - And God spoke, Let there be light; and there was light.",
+      "C) Genesis 1:3 - And God said, Let there be a light, and there was light.",
+      "D) Genesis 1:3 - And God did say, Let there be light: and thus was light."
     ],
     "answer": "A) Genesis 1:3 - And God said, Let there be light: and there was light.",
+    "full_verse": "And God said, Let there be light: and there was light. [19]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The power is in the Word. God doesn't struggle or fight; He simply speaks, and reality reorients itself to obey His command. The immediate and effortless appearance of light demonstrates His absolute authority over the universe.",
@@ -267,11 +263,12 @@ const gameQuestions = [{
     "question": "After sin entered the world, Adam and Eve's first reaction was to hide from God. When God confronts Adam about his disobedience, how does Adam immediately try to deflect responsibility for his choice?",
     "options": [
       "A) Genesis 3:12 - The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
-      "B) Genesis 3:12 - The woman whom you did give to be with me, she gave me of the tree, so I did eat.",
-      "C) Genesis 3:12 - The woman that thou gavest to be with me, she gave me of the fruit, so I did eat.",
-      "D) Genesis 3:12 - The woman whom thou gavest to be with me, she gave to me the tree, so I did eat."
+      "B) Genesis 3:12 - The woman whom you did give to be with me, she gave me of the tree, so I did eat,",
+      "C) Genesis 3:12 - The woman that thou gavest to be with me, she gave me of the fruit, and I did eat.",
+      "D) Genesis 3:12 - The woman whom thou gavest to be with me, she gave to me that tree, so I did eat."
     ],
     "answer": "A) Genesis 3:12 - The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
+    "full_verse": "And the man said, The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This is the birth of the blame game. Adam's response isn't just an excuse; it's a tragic attempt to shift responsibility from himself to Eve, and ultimately, back to God ('the woman whom thou gavest'). It reveals how sin immediately fractures relationships and distorts our perception of God.",
@@ -284,11 +281,12 @@ const gameQuestions = [{
     "question": "In the middle of the curses pronounced after the Fall, God gives the first glimmer of hope, a promise of a future Redeemer who would crush the serpent. What is this foundational prophecy of the gospel?",
     "options": [
       "A) Genesis 3:15 - and it shall bruise thy head, and thou shalt bruise his heel.",
-      "B) Genesis 3:15 - for it shall bruise thy head, and thou shalt bruise his heel.",
-      "C) Genesis 3:15 - but it shall bruise thy head, and thou shalt bruise his heel.",
-      "D) Genesis 3:15 - then it shall bruise thy head, and thou shalt bruise his heel."
+      "B) Genesis 3:15 - for it shall bruise thy head, and thou shalt bruise the heel.",
+      "C) Genesis 3:15 - but it shall crush thy head, and thou shalt bruise his heel.",
+      "D) Genesis 3:15 - then it shall bruise thy head, and thou shalt crush his heel."
     ],
     "answer": "A) Genesis 3:15 - and it shall bruise thy head, and thou shalt bruise his heel.",
+    "full_verse": "And I will put enmity between thee and the woman, and between thy seed and her seed; it shall bruise thy head, and thou shalt bruise his heel.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This is the first mention of the gospel in the Bible, often called the protoevangelium. It's a promise that while the serpent (Satan) would inflict a painful wound on the 'seed of the woman' (Christ), the Redeemer would ultimately deliver a crushing, fatal blow to the serpent's head, destroying his power forever.",
@@ -301,11 +299,12 @@ const gameQuestions = [{
     "question": "After Adam and Eve’s flimsy attempt to cover their shame with fig leaves, God Himself provides them with a more durable and meaningful covering. What did God make for them before sending them out of Eden?",
     "options": [
       "A) Genesis 3:21 - Unto Adam also and to his wife did the LORD God make coats of skins, and clothed them.",
-      "B) Genesis 3:21 - For Adam also and for his wife did the LORD God make coats of skins, and clothed them.",
-      "C) Genesis 3:21 - Unto Adam and to his beloved wife did the LORD God make coats of skins, and gave them.",
-      "D) Genesis 3:21 - Unto Adam also and to his wife did the LORD God make a coat of skin, and clothed them."
+      "B) Genesis 3:21 - For Adam also and for his wife did the LORD God craft coats of skins, and clothed them.",
+      "C) Genesis 3:21 - Unto Adam and to his true wife did the LORD God make coats of skins, and gave them.",
+      "D) Genesis 3:21 - Unto Adam also and to his wife did the LORD God make a coat of skin, and did clothe them."
     ],
     "answer": "A) Genesis 3:21 - Unto Adam also and to his wife did the LORD God make coats of skins, and clothed them.",
+    "full_verse": "Unto Adam also and to his wife did the LORD God make coats of skins, and clothed them.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The fig leaves represent humanity's pathetic, self-righteous attempts to cover its own sin. They are insufficient. God replaces them with 'coats of skins,' which required the death of an innocent animal. This is the first picture of substitutionary atonement: an innocent life must be taken to cover the guilt of the sinner.",
@@ -318,11 +317,12 @@ const gameQuestions = [{
     "question": "After the murder of Abel, his brother Cain is marked and sent away. In his despair, Cain cries out to God, lamenting the severity of his punishment. What is Cain's specific, fearful complaint to the Lord?",
     "options": [
       "A) Genesis 4:14 - every one that findeth me shall slay me.",
-      "B) Genesis 4:14 - any one that findeth me shall slay me.",
-      "C) Genesis 4:14 - every one that finds me now shall slay me.",
-      "D) Genesis 4:14 - all the men that find me shall slay me."
+      "B) Genesis 4:14 - any one that findeth me shall then slay me.",
+      "C) Genesis 4:14 - every one that finds me shall slay me indeed.",
+      "D) Genesis 4:14 - all the men who find me shall slay me now."
     ],
     "answer": "A) Genesis 4:14 - every one that findeth me shall slay me.",
+    "full_verse": "Behold, thou hast driven me out this day from the face of the earth; and from thy face shall I be hid; and I shall be a fugitive and a vagabond in the earth; and it shall come to pass, that every one that findeth me shall slay me.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Cain isn't sorry for his sin; he's sorry for his punishment. His fear is that by being cut off from his family and God's presence, he will be vulnerable to blood vengeance. He is consumed by self-pity and fear of retribution, not godly sorrow for murdering his brother.",
@@ -335,11 +335,12 @@ const gameQuestions = [{
     "question": "In the lineage of Cain, a man named Lamech appears as the embodiment of spiraling human arrogance and violence. He boasts to his wives about his vengeful nature. What is his chilling declaration?",
     "options": [
       "A) Genesis 4:24 - If Cain shall be avenged sevenfold, truly Lamech seventy and sevenfold.",
-      "B) Genesis 4:24 - If Cain shall be avenged sevenfold, truly Lamech is seventy and sevenfold.",
-      "C) Genesis 4:24 - If Cain is to be avenged sevenfold, truly Lamech seventy and sevenfold.",
-      "D) Genesis 4:24 - If Cain shall be avenged sevenfold, surely Lamech seventy and sevenfold."
+      "B) Genesis 4:24 - If Cain shall be avenged sevenfold, Lamech truly seventy and sevenfold.",
+      "C) Genesis 4:24 - If Cain is to be avenged sevenfold, for Lamech seventy and sevenfold.",
+      "D) Genesis 4:24 - If Cain shall be avenged sevenfold, then Lamech seventy and sevenfold."
     ],
     "answer": "A) Genesis 4:24 - If Cain shall be avenged sevenfold, truly Lamech seventy and sevenfold.",
+    "full_verse": "If Cain shall be avenged sevenfold, truly Lamech seventy and sevenfold.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Lamech takes the protective promise God gave to Cain and twists it into a personal manifesto of unlimited, disproportionate vengeance. He represents the rapid acceleration of sin, where human pride and violence escalate far beyond the original transgression.",
@@ -352,11 +353,12 @@ const gameQuestions = [{
     "question": "By the time of Noah, the world had become irredeemably corrupt. The Bible gives a damning summary of the state of human nature that prompted God's decision to bring the Flood. What was God's assessment?",
     "options": [
       "A) Genesis 6:5 - that every imagination of the thoughts of his heart was only evil continually.",
-      "B) Genesis 6:5 - that all the imaginations of the thoughts of his heart were only evil fully.",
-      "C) Genesis 6:5 - that every single thought and imagination of his heart was only evil always.",
-      "D) Genesis 6:5 - that every imagination of the thoughts of his heart was only evil, always."
+      "B) Genesis 6:5 - that all the imaginations of the thoughts of his heart were only evil, fully.",
+      "C) Genesis 6:5 - that every thought and imagination of his heart was only evil always.",
+      "D) Genesis 6:5 - that every imagination of the thoughts of his heart was only evil, all ways."
     ],
     "answer": "A) Genesis 6:5 - that every imagination of the thoughts of his heart was only evil continually.",
+    "full_verse": "And GOD saw that the wickedness of man was great in the earth, and that every imagination of the thoughts of his heart was only evil continually.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This is one of the most absolute statements in the Bible about the depth of human sinfulness. The corruption wasn't just in people's actions; it had infected the very source—their thoughts and desires. The problem was internal, total, and constant.",
@@ -369,11 +371,12 @@ const gameQuestions = [{
     "question": "In a world filled with violence and corruption, one man stood out. The Bible gives a short but powerful description of Noah's character that qualified him for salvation from the Flood. How is he described?",
     "options": [
       "A) Genesis 6:9 - Noah was a just man and perfect in his generations, and Noah walked with God.",
-      "B) Genesis 6:9 - Noah was a just man and upright in his generations, and Noah walked with God.",
-      "C) Genesis 6:9 - Noah was a good man and perfect in his generations, and Noah walked with God.",
-      "D) Genesis 6:9 - Noah was a just man and blameless in his generations, for Noah walked with God."
+      "B) Genesis 6:9 - Noah was a just man and upright in his generations, and did walk with God.",
+      "C) Genesis 6:9 - Noah was a good man and perfect in his generations, then Noah walked with God.",
+      "D) Genesis 6:9 - Noah was a just man and blameless in his generation, for Noah walked with God."
     ],
     "answer": "A) Genesis 6:9 - Noah was a just man and perfect in his generations, and Noah walked with God.",
+    "full_verse": "These are the generations of Noah: Noah was a just man and perfect in his generations, and Noah walked with God.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Noah's righteousness wasn't sinless perfection but a life of consistent faith and integrity in a faithless world. The key to his character is the final phrase: 'Noah walked with God.' His daily relationship with God was the source of his moral strength and his distinction from the world around him.",
@@ -386,11 +389,12 @@ const gameQuestions = [{
     "question": "After the Flood, God establishes a covenant with Noah and all living creatures, promising never again to destroy the earth with water. He sets a beautiful, visible sign in the sky to seal this promise. What is that sign?",
     "options": [
       "A) Genesis 9:13 - I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth.",
-      "B) Genesis 9:13 - I do set my bow in the cloud, and it will be for a sign of my great covenant between me and the earth.",
-      "C) Genesis 9:13 - I have set my bow in the cloud, and it shall be for a token of a covenant from me to the earth.",
-      "D) Genesis 9:13 - I now set my bow in the cloud, and it shall be for a token of a covenant between me and the world."
+      "B) Genesis 9:13 - I do set my bow in the cloud, and it will be for a token of a covenant between me and the land.",
+      "C) Genesis 9:13 - I have set my bow in the cloud, and it shall be for a token of a covenant from me to the world.",
+      "D) Genesis 9:13 - I now set my bow in the cloud, and it shall be for a token of that covenant with the world."
     ],
     "answer": "A) Genesis 9:13 - I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth.",
+    "full_verse": "I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The rainbow is a symbol of God's grace and faithfulness. A 'bow' in the ancient world was a weapon of war. By hanging His war bow in the clouds, pointed away from the earth, God is symbolizing that His wrath against sin (in the form of a flood) is set aside, replaced by a promise of mercy.",
@@ -403,11 +407,12 @@ const gameQuestions = [{
     "question": "At the Tower of Babel, humanity is united in a single, arrogant project to make a name for themselves and reach the heavens. What is their stated, prideful motivation for building the city and tower?",
     "options": [
       "A) Genesis 11:4 - lest we be scattered abroad upon the face of the whole earth.",
-      "B) Genesis 11:4 - lest we be sent out abroad upon the face of the whole earth.",
-      "C) Genesis 11:4 - lest we be scattered abroad upon the face of the entire earth.",
-      "D) Genesis 11:4 - lest we be scattered far abroad upon the face of the whole earth."
+      "B) Genesis 11:4 - lest we be sent forth abroad upon the face of the whole earth.",
+      "C) Genesis 11:4 - lest we be scattered abroad upon the face of all the earth.",
+      "D) Genesis 11:4 - lest we be scattered abroad upon the face of the earth, whole."
     ],
     "answer": "A) Genesis 11:4 - lest we be scattered abroad upon the face of the whole earth.",
+    "full_verse": "And they said, Go to, let us build us a city and a tower, whose top may reach unto heaven; and let us make us a name, lest we be scattered abroad upon the face of the whole earth.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The project at Babel was a direct act of rebellion against God's command to 'be fruitful, and multiply, and replenish the earth' (Genesis 9:1). Instead of scattering and filling the earth as God intended, they centralized in defiance, seeking unity, security, and fame apart from God.",
@@ -420,11 +425,12 @@ const gameQuestions = [{
     "question": "The entire book of Genesis pivots when God calls one man, Abram, out of a pagan world to begin a new nation. What is the very first command God gives to Abram, initiating the covenant?",
     "options": [
       "A) Genesis 12:1 - Get thee out of thy country, and from thy kindred, and from thy father's house,",
-      "B) Genesis 12:1 - Now get thee out of thy country, and from thy kindred, from thy father's house,",
-      "C) Genesis 12:1 - Get thyself out of thy country, and from thy kindred, and from thy father's home,",
-      "D) Genesis 12:1 - Get thee from out of thy country, and from thy kindred, and from thy father's house,"
+      "B) Genesis 12:1 - Now get thee forth of thy country, and from thy kindred, from thy father's house,",
+      "C) Genesis 12:1 - Get thyself out of thy country, and from thy kindred, and from thy family home,",
+      "D) Genesis 12:1 - Get thee from out thy country, and from thy kindred, and from thy father's house,"
     ],
     "answer": "A) Genesis 12:1 - Get thee out of thy country, and from thy kindred, and from thy father's house,",
+    "full_verse": "Now the LORD had said unto Abram, Get thee out of thy country, and from thy kindred, and from thy father's house, unto a land that I will shew thee:",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The call of Abram is a call to total separation and absolute faith. God asks him to leave behind every source of earthly security—his national identity ('country'), his social network ('kindred'), and his immediate family ('father's house')—to follow God into a completely unknown future.",
@@ -437,11 +443,12 @@ const gameQuestions = [{
     "question": "God calls Abram with an incredible promise of blessing and future greatness. Beyond making his name great, what is the ultimate purpose God declares for Abram's life and lineage?",
     "options": [
       "A) Genesis 12:2 - and thou shalt be a blessing.",
-      "B) Genesis 12:2 - and thou shalt become a blessing.",
-      "C) Genesis 12:2 - that you will be a blessing.",
-      "D) Genesis 12:2 - and thou shalt be for a blessing."
+      "B) Genesis 12:2 - and thou shalt be a true blessing.",
+      "C) Genesis 12:2 - that you will be a rich blessing.",
+      "D) Genesis 12:2 - and thou shalt be a new blessing."
     ],
     "answer": "A) Genesis 12:2 - and thou shalt be a blessing.",
+    "full_verse": "And I will make of thee a great nation, and I will bless thee, and make thy name great; and thou shalt be a blessing:",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Abram isn't just called to be blessed; he's called to be a channel of blessing. God's promise isn't self-centered; it's outward-focused. His greatness is directly linked to his role in extending God's favor to the world.",
@@ -454,11 +461,12 @@ const gameQuestions = [{
     "question": "After entering the promised land, Abram doesn't immediately build a house or a city. Instead, at key locations, he performs a consistent act of worship that signifies his commitment to God. What did he do?",
     "options": [
       "A) Genesis 12:8 - and built an altar unto the LORD, and called upon the name of the LORD.",
-      "B) Genesis 12:8 - and built an altar to the LORD, and called upon the name of the LORD.",
-      "C) Genesis 12:8 - and built an altar to the LORD, and called upon the name of Jehovah.",
-      "D) Genesis 12:8 - and built an altar unto the LORD, and then called upon the name of the Lord."
+      "B) Genesis 12:8 - and built an altar to the LORD, and called forth the name of the LORD.",
+      "C) Genesis 12:8 - and built an altar to the LORD, and called out the name of Jehovah.",
+      "D) Genesis 12:8 - and built an altar unto the LORD, and did call upon the name of the Lord."
     ],
     "answer": "A) Genesis 12:8 - and built an altar unto the LORD, and called upon the name of the LORD.",
+    "full_verse": "And he removed from thence unto a mountain on the east of Bethel, and pitched his tent, having Bethel on the west, and Hai on the east: and there he builded an altar unto the LORD, and called upon the name of the LORD.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Abram's response to God's call was immediate and tangible worship. Building altars was an act of declaring God's ownership of the land and his personal surrender to God's presence. It marked his journey as one of faith and ongoing communion.",
@@ -471,11 +479,12 @@ const gameQuestions = [{
     "question": "Faced with limited resources, Abram and Lot needed to separate. Lot, given the first choice, made a decision based purely on what seemed best for his immediate gain. What kind of land did Lot choose for himself?",
     "options": [
       "A) Genesis 13:10 - that it was well watered every where, before the LORD destroyed Sodom and Gomorrah.",
-      "B) Genesis 13:10 - that it was very well watered every where, before the LORD destroyed Sodom and Gomorrah.",
-      "C) Genesis 13:10 - that it was watered every where, before the LORD destroyed Sodom and Gomorrah.",
-      "D) Genesis 13:10 - that it was well watered on every side, before the LORD destroyed Sodom and Gomorrah."
+      "B) Genesis 13:10 - that it was well watered every way, before the LORD destroyed Sodom and Gomorrah.",
+      "C) Genesis 13:10 - that it was fully watered every where, before the LORD destroyed Sodom and Gomorrah.",
+      "D) Genesis 13:10 - that it was well watered on all sides, before the LORD destroyed Sodom and Gomorrah."
     ],
     "answer": "A) Genesis 13:10 - that it was well watered every where, before the LORD destroyed Sodom and Gomorrah.",
+    "full_verse": "And Lot lifted up his eyes, and beheld all the plain of Jordan, that it was well watered every where, before the LORD destroyed Sodom and Gomorrah, even as the garden of the LORD, like the land of Egypt, as thou comest unto Zoar.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Lot chose based on sight, not faith. He saw the lush, seemingly prosperous plain, ignoring the moral decay of its inhabitants. This decision, seemingly practical, ultimately led to his family's entanglement with corruption and eventual loss.",
@@ -488,11 +497,12 @@ const gameQuestions = [{
     "question": "After Abram's victory over the kings, God reiterates His covenant, promising an heir and countless descendants. To illustrate the vastness of this promise, what does God tell Abram to look at?",
     "options": [
       "A) Genesis 15:5 - Look now toward heaven, and tell the stars, if thou be able to number them:",
-      "B) Genesis 15:5 - Look now toward heaven, and count the stars, if thou be able to number them:",
-      "C) Genesis 15:5 - Look now unto heaven, and tell the stars, if thou art able to number them:",
-      "D) Genesis 15:5 - Look now to the heavens, and tell the stars, if thou be able to number them:"
+      "B) Genesis 15:5 - Look now toward heaven, and count the stars, if thou canst them now number:",
+      "C) Genesis 15:5 - Look now unto heaven, and tell the stars, if thou canst now number them:",
+      "D) Genesis 15:5 - Look now to the heavens, and tell them stars, if thou be able to number them:"
     ],
     "answer": "A) Genesis 15:5 - Look now toward heaven, and tell the stars, if thou be able to number them:",
+    "full_verse": "And he brought him forth abroad, and said, Look now toward heaven, and tell the stars, if thou be able to number them: and he said unto him, So shall thy seed be.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This vivid imagery underlines the seemingly impossible nature of God's promise to Abram, an old man without children. The countless stars represent a lineage beyond human counting, emphasizing that God's power and faithfulness transcend all human limitations.",
@@ -505,11 +515,12 @@ const gameQuestions = [{
     "question": "Following God's magnificent promise of descendants as numerous as the stars, the Bible records a pivotal moment in Abram's spiritual journey. What was the immediate, defining response of Abram to this promise?",
     "options": [
       "A) Genesis 15:6 - And he believed in the LORD; and he counted it to him for righteousness.",
-      "B) Genesis 15:6 - And he believed the LORD; and he counted it to him for righteousness.",
-      "C) Genesis 15:6 - And he believed unto the LORD; and he counted it to him for righteousness.",
-      "D) Genesis 15:6 - And he believed God; and he counted it to him for righteousness."
+      "B) Genesis 15:6 - And he believed the LORD; and he counted it for him unto righteousness.",
+      "C) Genesis 15:6 - And he believed unto the LORD; and he counted it to him as righteousness.",
+      "D) Genesis 15:6 - And he believed God; and he counted it to him for all righteousness."
     ],
     "answer": "A) Genesis 15:6 - And he believed in the LORD; and he counted it to him for righteousness.",
+    "full_verse": "And he believed in the LORD; and he counted it to him for righteousness.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This verse is a cornerstone of biblical theology. It reveals that righteousness is not earned by works or rituals but is a gift credited to us by God when we simply believe in Him and His promises. Abram's faith, despite outward circumstances, was the basis of his right standing with God.",
@@ -522,11 +533,12 @@ const gameQuestions = [{
     "question": "Driven by impatience and cultural custom, Sarai urged Abram to have a child through her servant Hagar. When Hagar became pregnant and faced Sarai's harshness, she fled into the wilderness. What specific promise did the angel of the Lord give to Hagar about her unborn son, Ishmael?",
     "options": [
       "A) Genesis 16:12 - and he shall be a wild man; his hand will be against every man, and every man's hand against him;",
-      "B) Genesis 16:12 - and he shall be a wild man; his hand is against every man, and every man's hand against him;",
-      "C) Genesis 16:12 - and he will be a wild man; his hand will be against every man, and every man's hand against him;",
-      "D) Genesis 16:12 - and he shall be a wild man; his hand against every man, and every man's hand against him;"
+      "B) Genesis 16:12 - and he shall be a wild man; his hand is against all men, and every man's hand against him;",
+      "C) Genesis 16:12 - and he will be a wild man; his hand will be against each man, and every man's hand against him;",
+      "D) Genesis 16:12 - and he shall be a wild man; his hand against every man, and every man's hand against him, too;"
     ],
     "answer": "A) Genesis 16:12 - and he shall be a wild man; his hand will be against every man, and every man's hand against him;",
+    "full_verse": "And he will be a wild man; his hand will be against every man, and every man's hand against him; and he shall dwell in the presence of all his brethren.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This prophecy reveals God's sovereign knowledge even over choices made outside His perfect will. While Ishmael was not the promised heir, God still had a plan for him, describing his strong, independent, and often confrontational nature, which would be reflected in his descendants.",
@@ -539,11 +551,12 @@ const gameQuestions = [{
     "question": "As a sign and seal of the Abrahamic Covenant, God instituted a physical rite that marked Abram and his descendants as His chosen people. What was the central commandment of this covenant sign?",
     "options": [
       "A) Genesis 17:10 - Every man child among you shall be circumcised.",
-      "B) Genesis 17:10 - Every male child among you shall be circumcised.",
-      "C) Genesis 17:10 - Each man child among you shall be circumcised.",
-      "D) Genesis 17:10 - Each man child with you shall be circumcised."
+      "B) Genesis 17:10 - Every male child among you shall be so circumcised.",
+      "C) Genesis 17:10 - Each man child among you shall all be circumcised.",
+      "D) Genesis 17:10 - Each man child with you shall be circumcised too."
     ],
     "answer": "A) Genesis 17:10 - Every man child among you shall be circumcised.",
+    "full_verse": "This is my covenant, which ye shall keep, between me and you and thy seed after thee; Every man child among you shall be circumcised. [9]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Circumcision was a physical, outward sign of an inward spiritual covenant relationship with God. It symbolized separation from the world and dedication to God, a mark of belonging to His chosen family and inheriting the promises given to Abraham.",
@@ -556,11 +569,12 @@ const gameQuestions = [{
     "question": "As part of confirming His covenant, God changed Abram's name, signifying a profound shift in his identity and destiny. What new name did God give him, reflecting the magnitude of His promise?",
     "options": [
       "A) Genesis 17:5 - for a father of many nations have I made thee.",
-      "B) Genesis 17:5 - for a father of many nations I have made thee.",
-      "C) Genesis 17:5 - for a father of all nations have I made thee.",
-      "D) Genesis 17:5 - for a father of many nations had I made thee."
+      "B) Genesis 17:5 - for a father of many nations I did make thee.",
+      "C) Genesis 17:5 - for a father of all nations have I made you here.",
+      "D) Genesis 17:5 - for a father of many nations had I formed thee."
     ],
     "answer": "A) Genesis 17:5 - for a father of many nations have I made thee.",
+    "full_verse": "Neither shall thy name any more be called Abram, but thy name shall be Abraham; for a father of many nations have I made thee. [31]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "God doesn't just change Abram's name; He changes his destiny. 'Abraham' means 'father of a multitude.' This renaming was a powerful act of faith, calling into existence what was not yet, and binding Abraham's identity inextricably to God's promise.",
@@ -573,11 +587,12 @@ const gameQuestions = [{
     "question": "As God prepared to judge Sodom and Gomorrah, Abraham bravely interceded, appealing to God's justice. What was Abraham's core argument regarding God's character in this desperate plea?",
     "options": [
       "A) Genesis 18:25 - Shall not the Judge of all the earth do right?",
-      "B) Genesis 18:25 - Shall not the Judge of the earth do what is right?",
-      "C) Genesis 18:25 - Should not the Judge of all the earth do right?",
-      "D) Genesis 18:25 - Shall not the Judge of all the world do right?"
+      "B) Genesis 18:25 - Shall not the Judge of the world do what is right?",
+      "C) Genesis 18:25 - Should not the Judge of all the earth act right?",
+      "D) Genesis 18:25 - Shall not the Judge of all the lands do right?"
     ],
     "answer": "A) Genesis 18:25 - Shall not the Judge of all the earth do right?",
+    "full_verse": "That be far from thee to do after this manner, to slay the righteous with the wicked: and that the righteous should be as the wicked, that be far from thee: Shall not the Judge of all the earth do right?",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Abraham's bold question reveals his deep understanding of God's unwavering righteousness. He isn't questioning God's power but appealing to His character, trusting that God's justice would always distinguish between the righteous and the wicked.",
@@ -595,6 +610,7 @@ const gameQuestions = [{
       "D) Genesis 19:24 - Then the LORD rained upon Sodom and upon Gomorrah brimstone and fire from the LORD down from heaven;"
     ],
     "answer": "A) Genesis 19:24 - Then the LORD rained upon Sodom and upon Gomorrah brimstone and fire from the LORD out of heaven;",
+    "full_verse": "Then the LORD rained upon Sodom and upon Gomorrah brimstone and fire from the LORD out of heaven;",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This act of judgment serves as a terrifying warning of the consequences of unrepentant sin and a clear demonstration of God's holiness and justice. It shows that there are limits to God's patience when evil becomes utterly pervasive and defiant.",
@@ -612,6 +628,7 @@ const gameQuestions = [{
       "D) Genesis 21:6 - For God hath made me to laugh, so that all that hear shall laugh with me."
     ],
     "answer": "A) Genesis 21:6 - For God hath made me to laugh, so that all that hear will laugh with me.",
+    "full_verse": "And Sarah said, God hath made me to laugh, so that all that hear will laugh with me.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The name 'Isaac' means 'he laughs' or 'laughter.' Sarah's words reflect a mix of joy, wonder, and perhaps a touch of disbelief that God had finally fulfilled His impossible promise in her old age. It's a testament to God's faithfulness beyond all human expectation.",
@@ -629,6 +646,7 @@ const gameQuestions = [{
       "D) Genesis 22:2 - and offer him there for a burnt offering on one of the mountains which I will tell thee of."
     ],
     "answer": "A) Genesis 22:2 - and offer him there for a burnt offering upon one of the mountains which I will tell thee of.",
+    "full_verse": "And he said, Take now thy son, thine only son Isaac, whom thou lovest, and get thee into the land of Moriah; and offer him there for a burnt offering upon one of the mountains which I will tell thee of. [5]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This is the most profound test of faith in the Old Testament. God asks Abraham to surrender the very promise (Isaac) through which all other promises would be fulfilled. It's a test of absolute obedience and trust in God's character and His ability to keep His word.",
@@ -646,6 +664,7 @@ const gameQuestions = [{
       "D) Genesis 22:8 - My son, God will provide Himself a lamb for a burnt offering: so they went both of them together."
     ],
     "answer": "A) Genesis 22:8 - My son, God will provide himself a lamb for a burnt offering: so they went both of them together.",
+    "full_verse": "And Abraham said, My son, God will provide himself a lamb for a burnt offering: so they went both of them together. [10]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This is a powerful prophetic statement. Abraham's faith was not blind; it was rooted in the conviction that God could raise Isaac from the dead (Hebrews 11:19) or provide an alternative. He believed God would provide, even if it meant a miracle.",
@@ -663,6 +682,7 @@ const gameQuestions = [{
       "D) Genesis 22:13 - and behold behind him a ram caught in a thicket by its horns:"
     ],
     "answer": "A) Genesis 22:13 - and behold behind him a ram caught in a thicket by his horns:",
+    "full_verse": "And Abraham lifted up his eyes, and looked, and behold behind him a ram caught in a thicket by his horns: and Abraham went and took the ram, and offered him up for a burnt offering in the stead of his son. [13]",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This ram, caught in the thicket, is a powerful foreshadowing of Christ. It symbolizes the substitutionary sacrifice—an innocent life provided by God to take the place of the one condemned. This event solidified God's promise and demonstrated His mercy.",
@@ -680,6 +700,7 @@ const gameQuestions = [{
       "D) Genesis 24:46 - Then she let down her pitcher from her shoulder, and said, Drink, and I will give your camels drink too:"
     ],
     "answer": "A) Genesis 24:46 - Then she let down her pitcher from her shoulder, and said, Drink, and I will give thy camels drink also:",
+    "full_verse": "And she made haste, and let down her pitcher from her shoulder, and said, Drink, and I will give thy camels drink also: so I drank, and she made the camels drink also.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Rebekah's immediate and generous offer to water all of the camels (a task requiring immense effort) revealed her humble, compassionate, and hospitable character. This selfless act was the divine sign the servant sought, confirming her as God's chosen bride for Isaac.",
@@ -697,6 +718,7 @@ const gameQuestions = [{
       "D) Genesis 25:34 - Then Jacob gave Esau bread and pottage of lentils; and he did eat and drink, and got up, and went his way:"
     ],
     "answer": "A) Genesis 25:34 - Then Jacob gave Esau bread and pottage of lentils; and he did eat and drink, and rose up, and went his way:",
+    "full_verse": "Then Jacob gave Esau bread and pottage of lentils; and he did eat and drink, and rose up, and went his way: thus Esau despised his birthright.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Esau's casual disregard for his birthright reveals a profound spiritual indifference. He valued immediate gratification over long-term blessings and spiritual inheritance. His contempt for his birthright led him to make a foolish, irrevocable decision.",
@@ -714,6 +736,7 @@ const gameQuestions = [{
       "D) Genesis 28:12 - and behold a ladder placed on the ground, and the top of it reached to heaven:"
     ],
     "answer": "A) Genesis 28:12 - and behold a ladder set up on the earth, and the top of it reached to heaven:",
+    "full_verse": "And he dreamed, and behold a ladder set up on the earth, and the top of it reached to heaven: and behold the angels of God ascending and descending on it.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Jacob's ladder symbolizes God's open communication with humanity, providing a pathway between the earthly and the divine. It's a reassurance that even when we feel alone and far from God, He is always accessible and actively involved in our lives.",
@@ -731,6 +754,7 @@ const gameQuestions = [{
       "D) Genesis 32:28 - Thy name shall be called no more Jacob, but Israel: for as a prince hast thou power with God and with men, for thou hast prevailed."
     ],
     "answer": "A) Genesis 32:28 - Thy name shall be called no more Jacob, but Israel: for as a prince hast thou power with God and with men, and hast prevailed.",
+    "full_verse": "And he said, Thy name shall be called no more Jacob, but Israel: for as a prince hast thou power with God and with men, and hast prevailed.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Jacob's wrestling match wasn't just physical; it was a spiritual struggle where he refused to let go until he received a blessing. His new name, 'Israel' (meaning 'he strives with God' or 'God strives'), reflects this transformed character—one who prevails through persistent prayer and dependence on God.",
@@ -748,6 +772,7 @@ const gameQuestions = [{
       "D) Genesis 37:7 - For, behold, we were binding bundles in the field, and, lo, my sheaf arose, and also stood upright;"
     ],
     "answer": "A) Genesis 37:7 - For, behold, we were binding sheaves in the field, and, lo, my sheaf arose, and also stood upright;",
+    "full_verse": "For, behold, we were binding sheaves in the field, and, lo, my sheaf arose, and also stood upright; and, behold, your sheaves stood round about, and made obeisance to my sheaf.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Joseph's dreams were prophetic revelations of God's sovereign plan for his life. Despite his humble beginnings and the immediate jealousy they provoked, these dreams signaled God's intention to elevate him to a position of authority and influence for a greater purpose.",
@@ -760,11 +785,12 @@ const gameQuestions = [{
     "question": "Years later, Joseph, now in prison, was called upon to interpret Pharaoh's troubling dreams. Joseph immediately deflected credit from himself and pointed to the true source of understanding. What was his humble and faithful declaration to Pharaoh?",
     "options": [
       "A) Genesis 41:16 - It is not in me: God shall give Pharaoh an answer of peace.",
-      "B) Genesis 41:16 - It is not in me: God will give Pharaoh an answer of peace.",
-      "C) Genesis 41:16 - It is not in me: God shall give Pharaoh a clear answer.",
-      "D) Genesis 41:16 - It is not in me: God will give to Pharaoh an answer of peace."
+      "B) Genesis 41:16 - The power is not mine: God will grant Pharaoh a word of comfort.",
+      "C) Genesis 41:16 - I cannot say: for God shall provide Pharaoh his peaceful reply.",
+      "D) Genesis 41:16 - It is not my wisdom: God Himself will deliver a calming word."
     ],
     "answer": "A) Genesis 41:16 - It is not in me: God shall give Pharaoh an answer of peace.",
+    "full_verse": "And Joseph answered Pharaoh, saying, It is not in me: God shall give Pharaoh an answer of peace.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Even after years of suffering and injustice, Joseph maintained his unwavering faith and humility. He didn't seize the moment for self-promotion; instead, he immediately gave all glory to God, acknowledging that divine wisdom was the only source of true insight.",
@@ -777,11 +803,12 @@ const gameQuestions = [{
     "question": "Years after his brothers sold him into slavery, Joseph, now the powerful ruler of Egypt, faces them as they come seeking grain. He observes them carefully, remembering his dreams. What is the specific action he takes before speaking to them?",
     "options": [
       "A) Genesis 42:7 - And Joseph knew his brethren, but made himself strange unto them, and spake roughly unto them;",
-      "B) Genesis 42:7 - And Joseph knew his brethren, and made himself strange unto them, and spoke roughly unto them;",
-      "C) Genesis 42:7 - And Joseph knew his brethren, yet made himself strange unto them, and spake roughly to them;",
-      "D) Genesis 42:7 - And Joseph knew his brothers, but made himself strange unto them, and spoke roughly to them;"
+      "B) Genesis 42:7 - And Joseph recognized his brethren, yet concealed his face from them, and spoke harshly to them;",
+      "C) Genesis 42:7 - And Joseph saw his brethren, but acted as a stranger, and his words were stern unto them;",
+      "D) Genesis 42:7 - And Joseph beheld his brethren, but turned his countenance away, and spake to them with a severe tone;"
     ],
     "answer": "A) Genesis 42:7 - And Joseph knew his brethren, but made himself strange unto them, and spake roughly unto them;",
+    "full_verse": "And Joseph saw his brethren, and he knew them, but made himself strange unto them, and spake roughly unto them; and he said unto them, Whence come ye? And they said, From the land of Canaan to buy food.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Joseph's initial harshness wasn't cruelty but a strategic test. He needed to assess if his brothers had truly changed, if they showed repentance and compassion, especially concerning Benjamin. This hidden identity allowed him to orchestrate events that would lead to their confession and transformation.",
@@ -794,11 +821,12 @@ const gameQuestions = [{
     "question": "When Benjamin finally arrives in Egypt, Joseph can no longer contain his deep emotion. He withdraws from his brothers to weep privately. What is the precise KJV description of Joseph's intense grief?",
     "options": [
       "A) Genesis 43:30 - And Joseph made haste, for his bowels did yearn upon his brother: and he sought where to weep;",
-      "B) Genesis 43:30 - And Joseph made haste, for his heart did yearn upon his brother: and he sought where to weep;",
-      "C) Genesis 43:30 - And Joseph made haste, for his spirit did yearn upon his brother: and he sought where to weep;",
-      "D) Genesis 43:30 - And Joseph made haste, for his soul did yearn upon his brother: and he sought where to weep;"
+      "B) Genesis 43:30 - And Joseph departed, for his very soul was moved for his brother: and he looked for a place to mourn;",
+      "C) Genesis 43:30 - And Joseph hurried, for his spirit was overcome for his brother: and he sought a chamber for his tears;",
+      "D) Genesis 43:30 - And Joseph went quickly, for his heart was greatly stirred for his brother: and he found a place to hide his grief;"
     ],
     "answer": "A) Genesis 43:30 - And Joseph made haste, for his bowels did yearn upon his brother: and he sought where to weep;",
+    "full_verse": "And Joseph made haste; for his bowels did yearn upon his brother: and he sought where to weep; and he entered into his chamber, and wept there.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Joseph's deep emotional response to Benjamin's presence reveals the profound affection he still held for his full brother and the intense pain he had endured since their separation. It underscores the powerful bonds of family, even after years of betrayal.",
@@ -811,11 +839,12 @@ const gameQuestions = [{
     "question": "After the final test involving the stolen cup in Benjamin's sack, Judah steps forward, demonstrating remarkable transformation. He offers himself as a substitute for Benjamin. What is Judah's powerful plea to Joseph?",
     "options": [
       "A) Genesis 44:33 - for I am thy servant, instead of the lad, a bondman to my lord;",
-      "B) Genesis 44:33 - for I am thy servant, instead of the lad, a bondman to my master;",
-      "C) Genesis 44:33 - for I am thy servant, in the place of the lad, a bondman to my lord;",
-      "D) Genesis 44:33 - for I am thy servant, instead of this lad, a bondman to my lord;"
+      "B) Genesis 44:33 - let me, your servant, remain in place of the boy, as a slave to my master;",
+      "C) Genesis 44:33 - for I will be a servant in his stead, and be a bondman to my lord;",
+      "D) Genesis 44:33 - I pray thee, let me stay in place of the lad, as thy servant and thy bondman;"
     ],
     "answer": "A) Genesis 44:33 - for I am thy servant, instead of the lad, a bondman to my lord;",
+    "full_verse": "Now therefore, I pray thee, let thy servant abide instead of the lad a bondman to my lord; and let the lad go up with his brethren.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Judah's offer to substitute himself for Benjamin is the climax of the brothers' transformation. It's a powerful act of selfless love and repentance, a stark contrast to their willingness to sell Joseph into slavery years earlier. This moment reveals true change of heart.",
@@ -828,11 +857,12 @@ const gameQuestions = [{
     "question": "The moment of truth arrives. Joseph, seeing his brothers' changed hearts, can no longer hide his identity. Overwhelmed with emotion, he finally reveals himself to them. What are his immediate, world-shaking words?",
     "options": [
       "A) Genesis 45:3 - I am Joseph; doth my father yet live?",
-      "B) Genesis 45:3 - I am Joseph; does my father yet live?",
-      "C) Genesis 45:3 - I am Joseph; is my father still living?",
-      "D) Genesis 45:3 - I am Joseph; is my father still alive?"
+      "B) Genesis 45:3 - Behold, I am Joseph; tell me if my father still lives?",
+      "C) Genesis 45:3 - It is I, Joseph; is my father still in health?",
+      "D) Genesis 45:3 - I am your brother, Joseph; I ask, is my father living?"
     ],
     "answer": "A) Genesis 45:3 - I am Joseph; doth my father yet live?",
+    "full_verse": "And Joseph said unto his brethren, I am Joseph; doth my father yet live? And his brethren could not answer him; for they were troubled at his presence.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This is one of the most dramatic reveals in Scripture, a moment of profound recognition and emotional release. Joseph's immediate question about his father shows his deep filial love and his concern for Jacob, who believed him dead for so many years.",
@@ -845,11 +875,12 @@ const gameQuestions = [{
     "question": "After the initial shock, Joseph reassures his terrified brothers that their past actions, though evil, were ultimately part of God's larger, benevolent plan. What specific purpose did Joseph say God had in sending him to Egypt?",
     "options": [
       "A) Genesis 45:5 - to preserve life.",
-      "B) Genesis 45:5 - to preserve our life.",
-      "C) Genesis 45:5 - to preserve a great life.",
-      "D) Genesis 45:5 - to keep our lives."
+      "B) Genesis 45:5 - for the saving of your lives.",
+      "C) Genesis 45:5 - to keep many souls alive.",
+      "D) Genesis 45:5 - for the sake of your preservation."
     ],
     "answer": "A) Genesis 45:5 - to preserve life.",
+    "full_verse": "Now therefore be not grieved, nor angry with yourselves, that ye sold me hither: for God did send me before you to preserve life.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Joseph articulates a profound truth of divine providence: God can use human sin and suffering to accomplish His righteous purposes. His brothers intended evil, but God intended it for good—to save many lives from the famine.",
@@ -862,11 +893,12 @@ const gameQuestions = [{
     "question": "Before Jacob and his entire household journey to Egypt, God appears to him in a vision, reassuring him and revealing His plan for the future. What specific promise does God make to Jacob about his descent into Egypt?",
     "options": [
       "A) Genesis 46:3 - Fear not to go down into Egypt; for I will there make of thee a great nation:",
-      "B) Genesis 46:3 - Fear not to go down to Egypt; for I will there make of thee a great nation:",
-      "C) Genesis 46:3 - Fear not to go down into Egypt; for I will make of thee a great nation there:",
-      "D) Genesis 46:3 - Fear not to go down to Egypt; for I will make of thee a great nation there:"
+      "B) Genesis 46:3 - Do not be afraid to enter Egypt; for there I will fashion from you a mighty people:",
+      "C) Genesis 46:3 - Have no fear of the journey to Egypt; for in that place you shall become a great nation:",
+      "D) Genesis 46:3 - Be not fearful of Egypt; for I will surely make your descendants a great nation there:"
     ],
     "answer": "A) Genesis 46:3 - Fear not to go down into Egypt; for I will there make of thee a great nation:",
+    "full_verse": "And he said, I am God, the God of thy father: fear not to go down into Egypt; for I will there make of thee a great nation:",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "God's reassurance to Jacob about going to Egypt is critical. It confirms that the move, though seemingly taking them away from the Promised Land, was part of God's larger plan to multiply them into a great nation, fulfilling His covenant promises to Abraham.",
@@ -879,11 +911,12 @@ const gameQuestions = [{
     "question": "As Jacob blesses his sons before his death, he pronounces a powerful and prophetic blessing over Judah, foreshadowing his future leadership and the coming Messiah. What specific symbol does Jacob use to describe Judah's kingly authority?",
     "options": [
       "A) Genesis 49:10 - The scepter shall not depart from Judah, nor a lawgiver from between his feet,",
-      "B) Genesis 49:10 - The scepter shall not depart from Judah, nor a ruler from between his feet,",
-      "C) Genesis 49:10 - The scepter shall not depart from Judah, nor a lawgiver from between his legs,",
-      "D) Genesis 49:10 - The scepter shall not depart from Judah, nor a lawgiver from between his feet."
+      "B) Genesis 49:10 - The royal staff shall not be taken from Judah, nor the ruler's rod from his descendants,",
+      "C) Genesis 49:10 - The kingship will not leave Judah, nor the commander's staff from his lineage,",
+      "D) Genesis 49:10 - The throne shall not pass from Judah, nor the authority from his house,"
     ],
     "answer": "A) Genesis 49:10 - The scepter shall not depart from Judah, nor a lawgiver from between his feet,",
+    "full_verse": "The scepter shall not depart from Judah, nor a lawgiver from between his feet, until Shiloh come; and unto him shall the gathering of the people be.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This is one of the most significant messianic prophecies in Genesis. It foretells that the lineage of kings and law-givers would come through Judah, culminating in the ultimate ruler, the Messiah, who would bring ultimate peace and obedience.",
@@ -896,11 +929,12 @@ const gameQuestions = [{
     "question": "At the end of Genesis, Joseph, having seen God's faithfulness throughout his tumultuous life, makes a final, hopeful declaration to his brothers regarding God's future actions for the Israelite nation. What does he tell them God will surely do?",
     "options": [
       "A) Genesis 50:24 - God will surely visit you, and bring you out of this land unto the land which he sware to Abraham, to Isaac, and to Jacob.",
-      "B) Genesis 50:24 - God will surely visit you, and bring you out of this land unto the land that he sware to Abraham, to Isaac, and to Jacob.",
-      "C) Genesis 50:24 - God will surely come for you, and bring you out of this land unto the land which he sware to Abraham, to Isaac, and to Jacob.",
-      "D) Genesis 50:24 - God will surely visit you, and bring you from this land unto the land which he sware to Abraham, to Isaac, and to Jacob."
+      "B) Genesis 50:24 - God will certainly come to you, and lead you from this place to the country he promised to Abraham, Isaac, and Jacob.",
+      "C) Genesis 50:24 - God will verily remember you, and take you from this land to the land which was sworn to Abraham, Isaac, and Jacob.",
+      "D) Genesis 50:24 - God will surely come to your aid, and guide you from this land to the land of the oath he made to Abraham, Isaac, and Jacob."
     ],
     "answer": "A) Genesis 50:24 - God will surely visit you, and bring you out of this land unto the land which he sware to Abraham, to Isaac, and to Jacob.",
+    "full_verse": "And Joseph said unto his brethren, I die: and God will surely visit you, and bring you out of this land unto the land which he sware to Abraham, to Isaac, and to Jacob.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Joseph's dying words are a powerful testament to his unwavering faith in God's covenant promises. Despite living his entire adult life in Egypt, he knew that God's ultimate plan was to bring his people back to the Promised Land.",
@@ -913,11 +947,12 @@ const gameQuestions = [{
     "question": "Generations after Joseph, a new pharaoh arises in Egypt who knows nothing of Joseph's legacy. He quickly becomes fearful of the growing number of Israelites. What specific, oppressive action did this pharaoh take against the Israelites to curb their growth?",
     "options": [
       "A) Exodus 1:11 - Therefore they did set over them taskmasters to afflict them with their burdens.",
-      "B) Exodus 1:11 - Therefore they set over them taskmasters to afflict them with their burdens.",
-      "C) Exodus 1:11 - Therefore they did set over them taskmasters to oppress them with their burdens.",
-      "D) Exodus 1:11 - Therefore they set over them taskmasters to bring them with their burdens."
+      "B) Exodus 1:11 - So they placed upon them foremen to oppress them with hard labor.",
+      "C) Exodus 1:11 - Therefore they appointed overseers to cause them suffering with their tasks.",
+      "D) Exodus 1:11 - And so they put masters of tribute over them to crush them with heavy work."
     ],
     "answer": "A) Exodus 1:11 - Therefore they did set over them taskmasters to afflict them with their burdens.",
+    "full_verse": "Therefore they did set over them taskmasters to afflict them with their burdens. And they built for Pharaoh treasure cities, Pithom and Raamses.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This marks the beginning of Israel's long bondage in Egypt. Pharaoh's fear-driven oppression is a clear example of how prejudice and insecurity lead to injustice and cruelty. Despite the hardship, God's promise to make them a great nation continued to unfold.",
@@ -930,11 +965,12 @@ const gameQuestions = [{
     "question": "When Pharaoh's attempts to suppress the Israelites failed, he escalated his cruelty by commanding the Hebrew midwives to kill all newborn male babies. What specific lie did the midwives tell Pharaoh to save the lives of the male infants?",
     "options": [
       "A) Exodus 1:19 - For they are lively, and are delivered ere the midwives come unto them.",
-      "B) Exodus 1:19 - For they are quick, and are delivered ere the midwives come unto them.",
-      "C) Exodus 1:19 - For they are lively, and are delivered ere the midwives get to them.",
-      "D) Exodus 1:19 - For they are quick, and are delivered ere the midwives get to them."
+      "B) Exodus 1:19 - Because they are vigorous, and give birth before the midwives can reach them.",
+      "C) Exodus 1:19 - For they are hearty women, and their children are born before we arrive.",
+      "D) Exodus 1:19 - Because they are strong, and deliver their babies ere we can attend to them."
     ],
     "answer": "A) Exodus 1:19 - For they are lively, and are delivered ere the midwives come unto them.",
+    "full_verse": "And the midwives said unto Pharaoh, Because the Hebrew women are not as the Egyptian women; for they are lively, and are delivered ere the midwives come in unto them.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The midwives' courageous act of civil disobedience, born out of their \"fear of God,\" demonstrates that there are times when obeying God's moral law takes precedence over human law, especially when human law commands evil. Their faith saved many lives.",
@@ -947,11 +983,12 @@ const gameQuestions = [{
     "question": "Despite Pharaoh's decree to kill all male Hebrew infants, one mother bravely devised a plan to save her baby. She placed him in a waterproof basket on the Nile. Who discovered the baby floating among the reeds?",
     "options": [
       "A) Exodus 2:5 - And the daughter of Pharaoh came down to wash herself at the river; and her maidens walked along by the river's side;",
-      "B) Exodus 2:5 - And the daughter of Pharaoh came down to wash herself at the river; and her servants walked along by the river's side;",
-      "C) Exodus 2:5 - And the daughter of Pharaoh came down to wash herself by the river; and her maidens walked along by the river's side;",
-      "D) Exodus 2:5 - And the daughter of Pharaoh came down to wash herself at the river; and her maidens walked along by the waterside;"
+      "B) Exodus 2:5 - And Pharaoh's daughter went to bathe in the Nile; and her attendants strolled upon the riverbank;",
+      "C) Exodus 2:5 - And the daughter of the king came to the river to wash; and her handmaidens went along the shore of the river;",
+      "D) Exodus 2:5 - And the princess of Egypt descended to the water; and her servants did walk beside the river's edge;"
     ],
     "answer": "A) Exodus 2:5 - And the daughter of Pharaoh came down to wash herself at the river; and her maidens walked along by the river's side;",
+    "full_verse": "And the daughter of Pharaoh came down to wash herself at the river; and her maidens walked along by the river's side; and when she saw the ark among the flags, she sent her maid to fetch it.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This seemingly coincidental encounter is a powerful display of divine providence. God, working behind the scenes, used the very family enacting the oppression to rescue the future deliverer of His people. It shows His meticulous care and strategic planning.",
@@ -964,11 +1001,12 @@ const gameQuestions = [{
     "question": "After Moses inadvertently killed an Egyptian, he fled to Midian, where he married and became a shepherd. Decades later, while tending his flock, God dramatically appears to him in a miraculous, fiery vision. What was the central phenomenon Moses saw?",
     "options": [
       "A) Exodus 3:2 - and, behold, the bush burned with fire, and the bush was not consumed.",
-      "B) Exodus 3:2 - and, behold, the bush burned with flame, and the bush was not consumed.",
-      "C) Exodus 3:2 - and, behold, the bush was on fire, and the bush was not consumed.",
-      "D) Exodus 3:2 - and, behold, the bush did burn with fire, and the bush was not consumed."
+      "B) Exodus 3:2 - and, lo, the shrub was aflame with fire, but the shrub was not destroyed.",
+      "C) Exodus 3:2 - and he saw that the bush was engulfed in fire, yet the bush did not burn up.",
+      "D) Exodus 3:2 - and, behold, the bush did blaze with fire, yet the bush remained whole."
     ],
     "answer": "A) Exodus 3:2 - and, behold, the bush burned with fire, and the bush was not consumed.",
+    "full_verse": "And the angel of the LORD appeared unto him in a flame of fire out of the midst of a bush: and he looked, and, behold, the bush burned with fire, and the bush was not consumed.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The burning bush is a powerful symbol of God's holy presence and His living, active power. The fire signifies His consuming holiness, yet the bush remaining unconsumed points to His ability to dwell with His people without destroying them, even in their sinful state.",
@@ -981,11 +1019,12 @@ const gameQuestions = [{
     "question": "From the burning bush, God calls Moses to a monumental task: to lead His people out of Egyptian bondage. Moses, feeling inadequate, questions God's authority. What essential question does Moses ask God to prove His identity to the Israelites?",
     "options": [
       "A) Exodus 3:13 - What is his name?",
-      "B) Exodus 3:13 - What is His name?",
-      "C) Exodus 3:13 - And what is His name?",
-      "D) Exodus 3:13 - And what is his name?"
+      "B) Exodus 3:13 - By what name is he called?",
+      "C) Exodus 3:13 - What name shall I speak?",
+      "D) Exodus 3:13 - How shall I name him?"
     ],
     "answer": "A) Exodus 3:13 - What is his name?",
+    "full_verse": "And Moses said unto God, Behold, when I come unto the children of Israel, and shall say unto them, The God of your fathers hath sent me unto you; and they shall say to me, What is his name? what shall I say unto them?",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Moses' question is about divine identity and authority. In a polytheistic world, knowing a god's specific name was crucial for understanding their character and invoking their power. Moses needed a name that would distinguish this God from all others.",
@@ -998,11 +1037,12 @@ const gameQuestions = [{
     "question": "When Moses expresses his unsuitability for the task, citing his slow speech, God patiently addresses his objection. What fundamental truth about human ability does God declare to Moses to reassure him?",
     "options": [
       "A) Exodus 4:11 - Who hath made man's mouth? or who maketh the dumb, or deaf, or the seeing, or the blind? have not I the LORD?",
-      "B) Exodus 4:11 - Who hath made man's mouth? or who maketh the dumb, or deaf, or the seeing, or the blind? is it not I the LORD?",
-      "C) Exodus 4:11 - Who hath made man's mouth? or who makes the dumb, or deaf, or the seeing, or the blind? have not I the LORD?",
-      "D) Exodus 4:11 - Who hath made man's mouth? or who maketh the dumb, or deaf, or the seeing, or the blind? for it is I the LORD?"
+      "B) Exodus 4:11 - Who formed the mouth of man? or who created the mute, or the deaf, or the sighted, or the blind? Is it not I, the LORD?",
+      "C) Exodus 4:11 - Who gives man a mouth to speak? Or makes him unable to speak, or to hear, or to see? Is it not the LORD who does this?",
+      "D) Exodus 4:11 - Did I not fashion the mouth of man? And who makes one silent, or deaf, or seeing, or without sight? Am I not the LORD?"
     ],
     "answer": "A) Exodus 4:11 - Who hath made man's mouth? or who maketh the dumb, or deaf, or the seeing, or the blind? have not I the LORD?",
+    "full_verse": "And the LORD said unto him, Who hath made man's mouth? or who maketh the dumb, or deaf, or the seeing, or the blind? have not I the LORD?",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "God reminds Moses that He is the ultimate Creator and Controller of all human faculties. He highlights His sovereign power over physical abilities and disabilities, reassuring Moses that if God calls, He will also equip.",
@@ -1015,11 +1055,12 @@ const gameQuestions = [{
     "question": "Despite God's reassurance, Moses still expressed reluctance, prompting God to provide him with an assistant. Who did God say would speak on Moses' behalf to Pharaoh and the Israelites?",
     "options": [
       "A) Exodus 4:14 - Is not Aaron the Levite thy brother? I know that he can speak well.",
-      "B) Exodus 4:14 - Is not Aaron the Levite thy brother? I know that he can speak much.",
-      "C) Exodus 4:14 - Is not Aaron the Levite thy brother? I know that he can talk well.",
-      "D) Exodus 4:14 - Is not Aaron the Levite thy brother? I know that he can speak good."
+      "B) Exodus 4:14 - What of thy brother, Aaron the Levite? I know he is an eloquent man.",
+      "C) Exodus 4:14 - Have you not a brother, Aaron the Levite? I know he speaks with ease.",
+      "D) Exodus 4:14 - Is not Aaron of the tribe of Levi thy kinsman? Verily, I know he is a gifted speaker."
     ],
     "answer": "A) Exodus 4:14 - Is not Aaron the Levite thy brother? I know that he can speak well.",
+    "full_verse": "And the anger of the LORD was kindled against Moses, and he said, Is not Aaron the Levite thy brother? I know that he can speak well. And also, behold, he cometh forth to meet thee: and when he seeth thee, he will be glad in his heart.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "God is patient with our weaknesses and provides us with the resources we need to fulfill His calling. Even when we lack confidence, God provides partners and helpers to complement our abilities and ensure His work gets done.",
@@ -1032,11 +1073,12 @@ const gameQuestions = [{
     "question": "When Moses and Aaron first approached Pharaoh, they made a simple request to let the Israelites go. What was Pharaoh's immediate, defiant response, dismissing their request and their God?",
     "options": [
       "A) Exodus 5:2 - Who is the LORD, that I should obey his voice to let Israel go? I know not the LORD, neither will I let Israel go.",
-      "B) Exodus 5:2 - Who is the LORD, that I should obey his voice to let Israel go? I know not the LORD, nor will I let Israel go.",
-      "C) Exodus 5:2 - Who is the LORD, that I should obey his voice to let Israel go? I know not the LORD, and I will not let Israel go.",
-      "D) Exodus 5:2 - Who is the LORD, that I should obey his voice to let Israel go? I know not the LORD, or will I let Israel go."
+      "B) Exodus 5:2 - Who is this LORD, that I should heed his word and let Israel go? I do not recognize this LORD, and I shall not let Israel go.",
+      "C) Exodus 5:2 - What God is the LORD, that I must listen to him concerning Israel? I have not known the LORD, therefore I will not let Israel go.",
+      "D) Exodus 5:2 - Who is the LORD, whose command I should obey? I am not acquainted with the LORD, nor will I permit Israel's departure."
     ],
     "answer": "A) Exodus 5:2 - Who is the LORD, that I should obey his voice to let Israel go? I know not the LORD, neither will I let Israel go.",
+    "full_verse": "And Pharaoh said, Who is the LORD, that I should obey his voice to let Israel go? I know not the LORD, neither will I let Israel go.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Pharaoh's arrogant question reveals his spiritual ignorance and hardened heart. He rejects the authority of Yahweh, placing himself and his gods above the true God. This defiance sets the stage for the dramatic showdown of the plagues.",
@@ -1049,11 +1091,12 @@ const gameQuestions = [{
     "question": "In response to Moses' request, Pharaoh intensified the Israelites' forced labor, refusing to provide straw for brick-making, yet demanding the same quota. What was Pharaoh's cruel reasoning for this increased burden?",
     "options": [
       "A) Exodus 5:7 - Let them get straw for themselves.",
-      "B) Exodus 5:7 - Let them get the straw for themselves.",
-      "C) Exodus 5:7 - Let them get their straw for themselves.",
-      "D) Exodus 5:7 - Let them get more straw for themselves."
+      "B) Exodus 5:7 - Henceforth they shall gather their own straw.",
+      "C) Exodus 5:7 - Let them now seek out their own straw.",
+      "D) Exodus 5:7 - They must find their straw where they can."
     ],
     "answer": "A) Exodus 5:7 - Let them get straw for themselves.",
+    "full_verse": "Ye shall no more give the people straw to make brick, as heretofore: let them go and gather straw for themselves.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Pharaoh's oppressive tactics were designed to crush the Israelites' spirit and extinguish any hope of freedom. By increasing their burdens, he aimed to make them too exhausted to even consider Moses' message of deliverance.",
@@ -1066,11 +1109,12 @@ const gameQuestions = [{
     "question": "After the initial confrontation with Pharaoh, the discouraged Israelites blamed Moses and Aaron for their increased suffering. How did Moses, feeling the weight of their despair, cry out to God?",
     "options": [
       "A) Exodus 5:22 - wherefore hast thou so evil entreated this people? why is it that thou hast sent me?",
-      "B) Exodus 5:22 - wherefore hast thou so evil entreated this people? why is it that you have sent me?",
-      "C) Exodus 5:22 - wherefore hast thou so badly entreated this people? why is it that thou hast sent me?",
-      "D) Exodus 5:22 - wherefore hast thou so evil entreated this people? why is it that thou sent me?"
+      "B) Exodus 5:22 - for what reason have you brought this trouble upon the people? and why did you send me?",
+      "C) Exodus 5:22 - why have you dealt so harshly with this people? to what purpose have you sent me here?",
+      "D) Exodus 5:22 - for what cause has this evil befallen the people? and why was I the one you sent?"
     ],
     "answer": "A) Exodus 5:22 - wherefore hast thou so evil entreated this people? why is it that thou hast sent me?",
+    "full_verse": "And Moses returned unto the LORD, and said, Lord, wherefore hast thou so evil entreated this people? why is it that thou hast sent me?",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Moses' raw, honest cry reflects his human frustration and confusion in the face of escalating suffering. He questioned God's timing and wisdom, feeling the immense pressure of leadership and the broken hopes of his people.",
@@ -1083,11 +1127,12 @@ const gameQuestions = [{
     "question": "To reassure Moses and steel his resolve, God powerfully re-affirms His covenant name and His unwavering commitment to His people, promising to bring them out of bondage. What specific, powerful declaration does God make about His identity?",
     "options": [
       "A) Exodus 6:3 - And I appeared unto Abraham, unto Isaac, and unto Jacob, by the name of God Almighty, but by my name JEHOVAH was I not known to them.",
-      "B) Exodus 6:3 - And I appeared unto Abraham, unto Isaac, and unto Jacob, by the name of God Almighty, but by my name JEHOVAH I was not known to them.",
-      "C) Exodus 6:3 - And I appeared unto Abraham, unto Isaac, and unto Jacob, by the name of God Almighty, but my name JEHOVAH was I not known to them.",
-      "D) Exodus 6:3 - And I appeared unto Abraham, unto Isaac, and unto Jacob, by the name of God Almighty, but by my name JEHOVAH was I not known."
+      "B) Exodus 6:3 - I did show myself to Abraham, Isaac, and Jacob, as God Almighty, but my name the LORD was not revealed to them.",
+      "C) Exodus 6:3 - To Abraham, Isaac, and Jacob I was known as God Almighty, yet my true name JEHOVAH was not made known to them.",
+      "D) Exodus 6:3 - And I came to Abraham, to Isaac, and to Jacob, by the title God Almighty, but they did not know me by my name JEHOVAH."
     ],
     "answer": "A) Exodus 6:3 - And I appeared unto Abraham, unto Isaac, and unto Jacob, by the name of God Almighty, but by my name JEHOVAH was I not known to them.",
+    "full_verse": "And I appeared unto Abraham, unto Isaac, and unto Jacob, by the name of God Almighty, but by my name JEHOVAH was I not known to them.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "God reveals a deeper aspect of His covenant name, Yahweh (JEHOVAH in KJV). While the patriarchs knew Him as \"God Almighty\" (El Shaddai), signifying His power and provision, they would now experience Him specifically as Yahweh, the God who keeps His covenant promises through active, redemptive intervention.",
@@ -1100,11 +1145,12 @@ const gameQuestions = [{
     "question": "Before the plague of blood, Aaron was commanded to strike the Nile River, the lifeblood of Egypt. What specific instrument was Aaron to use to turn the waters into blood?",
     "options": [
       "A) Exodus 7:19 - Take thy rod, and stretch out thine hand upon the waters of Egypt, upon their streams, upon their rivers, and upon their ponds, and upon all their pools of water, that they may become blood;",
-      "B) Exodus 7:19 - Take thy staff, and stretch out thine hand upon the waters of Egypt, upon their streams, upon their rivers, and upon their ponds, and upon all their pools of water, that they may become blood;",
-      "C) Exodus 7:19 - Take thy rod, and stretch forth thine hand upon the waters of Egypt, upon their streams, upon their rivers, and upon their ponds, and upon all their pools of water, that they may become blood;",
-      "D) Exodus 7:19 - Take thy rod, and stretch out thy hand upon the waters of Egypt, upon their streams, upon their rivers, and upon their ponds, and upon all their pools of water, that they may become blood;"
+      "B) Exodus 7:19 - Take up thy staff, and reach out over the waters of Egypt, their streams, their canals, their marshes, and all their reservoirs, so they will turn to blood;",
+      "C) Exodus 7:19 - Grasp thy rod, and extend thy hand over the Egyptian waters, their rivers, their channels, and their lakes, and all their collections of water, turning them into blood;",
+      "D) Exodus 7:19 - Hold thy rod, and stretch thine hand over the waters of Egypt, and over their streams, their rivers, and all their bodies of water, that they shall be as blood;"
     ],
     "answer": "A) Exodus 7:19 - Take thy rod, and stretch out thine hand upon the waters of Egypt, upon their streams, upon their rivers, and upon their ponds, and upon all their pools of water, that they may become blood;",
+    "full_verse": "And the LORD spake unto Moses, Say unto Aaron, Take thy rod, and stretch out thine hand upon the waters of Egypt, upon their streams, upon their rivers, and upon their ponds, and upon all their pools of water, that they may become blood; and that there may be blood throughout all the land of Egypt, both in vessels of wood, and in vessels of stone.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The first plague directly attacked one of Egypt's primary deities, the Nile River, and turned it into a source of death and defilement. It demonstrated God's absolute sovereignty over creation and His power to humble false gods and their worshippers.",
@@ -1117,11 +1163,12 @@ const gameQuestions = [{
     "question": "During the plague of frogs, Pharaoh's magicians could replicate the miracle, initially making more frogs appear. However, when Moses and Aaron brought the plague of lice (or gnats), what humbling confession did Pharaoh's magicians make to Pharaoh?",
     "options": [
       "A) Exodus 8:19 - This is the finger of God:",
-      "B) Exodus 8:19 - This is the hand of God:",
-      "C) Exodus 8:19 - This is the power of God:",
-      "D) Exodus 8:19 - This is the work of God:"
+      "B) Exodus 8:19 - This is a work of God:",
+      "C) Exodus 8:19 - This is from the hand of God:",
+      "D) Exodus 8:19 - This is a sign from God:"
     ],
     "answer": "A) Exodus 8:19 - This is the finger of God:",
+    "full_verse": "Then the magicians said unto Pharaoh, This is the finger of God: and Pharaoh's heart was hardened, and he hearkened not unto them; as the LORD had said.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This confession marks a turning point in the contest between God and the magicians. The magicians' inability to replicate the lice, a plague involving tiny, numerous creatures, forced them to acknowledge a divine power beyond their sorcery, admitting defeat to God's superior might.",
@@ -1134,11 +1181,12 @@ const gameQuestions = [{
     "question": "During the plague of flies, a remarkable distinction was made between the Israelites and the Egyptians. What specific protection did God provide for His people regarding this plague?",
     "options": [
       "A) Exodus 8:22 - In that day I will sever the land of Goshen, in which my people dwell, that no swarms of flies shall be there;",
-      "B) Exodus 8:22 - In that day I will separate the land of Goshen, in which my people dwell, that no swarms of flies shall be there;",
-      "C) Exodus 8:22 - In that day I will divide the land of Goshen, in which my people dwell, that no swarms of flies shall be there;",
-      "D) Exodus 8:22 - In that day I will save the land of Goshen, in which my people dwell, that no swarms of flies shall be there;"
+      "B) Exodus 8:22 - On that day I will separate the region of Goshen, where my people live, so that no flies will be found there;",
+      "C) Exodus 8:22 - And I will set apart the land of Goshen, where my people have their homes, and no swarms of flies will come there;",
+      "D) Exodus 8:22 - But in that day I will make a distinction for the land of Goshen, where my people are, so no flies shall infest it;"
     ],
     "answer": "A) Exodus 8:22 - In that day I will sever the land of Goshen, in which my people dwell, that no swarms of flies shall be there;",
+    "full_verse": "And I will sever in that day the land of Goshen, in which my people dwell, that no swarms of flies shall be there; to the end thou mayest know that I am the LORD in the midst of the earth.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This marks the beginning of the clear distinction between the Egyptians and the Israelites in the plagues. God protected His people, demonstrating His covenant love and proving that these judgments were precisely targeted against Egypt, not random natural disasters.",
@@ -1151,11 +1199,12 @@ const gameQuestions = [{
     "question": "The devastating plague of hail struck Egypt, destroying crops, trees, and animals, but God again made a clear distinction. What specific element of creation was miraculously unaffected in the land of Goshen?",
     "options": [
       "A) Exodus 9:26 - Only in the land of Goshen, where the children of Israel were, was there no hail.",
-      "B) Exodus 9:26 - Only in the land of Goshen, where the children of Israel resided, was there no hail.",
-      "C) Exodus 9:26 - Only in the land of Goshen, where the children of Israel did dwell, was there no hail.",
-      "D) Exodus 9:26 - Only in the land of Goshen, where the children of Israel were, there was no hail."
+      "B) Exodus 9:26 - But in the region of Goshen, where the Israelites lived, no hail did fall.",
+      "C) Exodus 9:26 - Except in the land of Goshen, which was home to the Israelites, the hail was not present.",
+      "D) Exodus 9:26 - Alone in the land of Goshen, where Israel's children were dwelling, there was no hail."
     ],
     "answer": "A) Exodus 9:26 - Only in the land of Goshen, where the children of Israel were, was there no hail.",
+    "full_verse": "Only in the land of Goshen, where the children of Israel were, was there no hail.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The precision of this plague further emphasized God's sovereignty and His deliberate distinction between His people and their oppressors. It was not a random storm but a targeted judgment, demonstrating God's complete control over natural forces.",
@@ -1168,11 +1217,12 @@ const gameQuestions = [{
     "question": "After the plague of locusts, Pharaoh briefly admitted his sin and begged Moses to intercede. What exact words did Pharaoh use to confess his transgression to Moses and Aaron?",
     "options": [
       "A) Exodus 10:16 - I have sinned against the LORD your God, and against you.",
-      "B) Exodus 10:16 - I have sinned against the LORD your God, and also against you.",
-      "C) Exodus 10:16 - I have sinned against the LORD your God, and against you both.",
-      "D) Exodus 10:16 - I have sinned against the LORD your God, and against you."
+      "B) Exodus 10:16 - I have offended the LORD your God, and also you.",
+      "C) Exodus 10:16 - My sin is against the LORD your God, and against you as well.",
+      "D) Exodus 10:16 - I have trespassed against the LORD your God, and against you both."
     ],
     "answer": "A) Exodus 10:16 - I have sinned against the LORD your God, and against you.",
+    "full_verse": "Then Pharaoh called for Moses and Aaron in haste; and he said, I have sinned against the LORD your God, and against you.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Pharaoh's confession, while seemingly humble, was a temporary and self-serving response driven by the pain of the plague, not true repentance. He continued to harden his heart after the relief, revealing the superficiality of his admission.",
@@ -1185,11 +1235,12 @@ const gameQuestions = [{
     "question": "Before the final and most devastating plague, God instituted the Passover, commanding the Israelites to mark their homes for protection. What specific part of their doorways were they instructed to put the blood of the lamb on?",
     "options": [
       "A) Exodus 12:7 - and put it on the two side posts and on the upper door post of the houses,",
-      "B) Exodus 12:7 - and place it on the two side posts and on the upper door post of the houses,",
-      "C) Exodus 12:7 - and lay it on the two side posts and on the high door post of the houses,",
-      "D) Exodus 12:7 - and put it on the two side posts and on the upper door frame of the houses,"
+      "B) Exodus 12:7 - and apply it to the two doorframes and upon the lintel of each house,",
+      "C) Exodus 12:7 - and smear it upon the sides and the top of the doorway of the houses,",
+      "D) Exodus 12:7 - and strike it on the left post and the right post and above the door of the houses,"
     ],
     "answer": "A) Exodus 12:7 - and put it on the two side posts and on the upper door post of the houses,",
+    "full_verse": "And they shall take of the blood, and strike it on the two side posts and on the upper door post of the houses, wherein they shall eat it.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The blood on the doorposts was a visual sign of obedience and faith. It distinguished the homes of God's people from the Egyptians, ensuring that the angel of death would \"pass over\" them. It signified that salvation came through a sacrificial substitute.",
@@ -1202,11 +1253,12 @@ const gameQuestions = [{
     "question": "After the final plague and Pharaoh's desperate command for them to leave, the Israelites finally began their Exodus. How did the Lord lead them by day through the wilderness?",
     "options": [
       "A) Exodus 13:21 - And the LORD went before them by day in a pillar of a cloud, to lead them the way;",
-      "B) Exodus 13:21 - And the LORD went before them by day in a pillar of cloud, to lead them on their way;",
-      "C) Exodus 13:21 - And the LORD went before them by day in a pillar of a mist, to lead them the way;",
-      "D) Exodus 13:21 - And the LORD went before them by day in a pillar of a cloud, to lead them on the way;"
+      "B) Exodus 13:21 - And the LORD guided them during the day with a column of cloud, to show them the path;",
+      "C) Exodus 13:21 - And the LORD preceded them in the daytime in a great cloud, to direct them on the journey;",
+      "D) Exodus 13:21 - And the LORD went ahead of them by day as a pillar of vapor, to mark their way;"
     ],
     "answer": "A) Exodus 13:21 - And the LORD went before them by day in a pillar of a cloud, to lead them the way;",
+    "full_verse": "And the LORD went before them by day in a pillar of a cloud, to lead them the way; and by night in a pillar of fire, to give them light; to go by day and night:",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This visible manifestation of God's presence, the pillar of cloud and fire, demonstrated God's constant, personal leadership and protection. It signified His commitment to guide His people through the wilderness, just as He promised.",
@@ -1219,11 +1271,12 @@ const gameQuestions = [{
     "question": "Trapped between Pharaoh's army and the Red Sea, the Israelites cried out in fear. What confident and powerful command did Moses give them in that desperate moment, promising divine intervention?",
     "options": [
       "A) Exodus 14:13 - Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day:",
-      "B) Exodus 14:13 - Fear ye not, stand firm, and see the salvation of the LORD, which he will shew to you to day:",
-      "C) Exodus 14:13 - Fear ye not, stand still, and see the salvation of the LORD, which he will show to you to day:",
-      "D) Exodus 14:13 - Fear ye not, stand still, and see the deliverance of the LORD, which he will shew to you to day:"
+      "B) Exodus 14:13 - Do not be afraid, be steadfast, and witness the deliverance of the LORD, which he will perform for you today:",
+      "C) Exodus 14:13 - Have no fear, hold your ground, and behold the mighty rescue of the LORD, which he will accomplish this day:",
+      "D) Exodus 14:13 - Be not afraid, remain where you are, and watch the victory of the LORD, which he will give to you at this time:"
     ],
     "answer": "A) Exodus 14:13 - Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day:",
+    "full_verse": "And Moses said unto the people, Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day: for the Egyptians whom ye have seen to day, ye shall see them again no more for ever.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This is a classic command for divine deliverance. When human efforts are exhausted and the situation seems impossible, God calls His people to step back in faith and watch Him act. It was a test of their trust in His omnipotent power.",
@@ -1236,11 +1289,12 @@ const gameQuestions = [{
     "question": "After miraculously crossing the Red Sea, the Israelites journeyed into the wilderness of Sin. When they complained about hunger, God promised to provide food. What specific bread-like substance did God begin to provide for them each morning?",
     "options": [
       "A) Exodus 16:14 - and when the dew that lay was gone up, behold, upon the face of the wilderness there lay a small round thing,",
-      "B) Exodus 16:14 - and when the dew that lay was gone up, behold, upon the face of the desert there lay a small round thing,",
-      "C) Exodus 16:14 - and when the dew that lay was gone up, behold, upon the face of the wilderness there lay a little round thing,",
-      "D) Exodus 16:14 - and when the dew that lay was gone, behold, upon the face of the wilderness there lay a small round thing,"
+      "B) Exodus 16:14 - and as the morning mist departed, lo, on the surface of the desert was a fine, flaky substance,",
+      "C) Exodus 16:14 - and after the dew had vanished, there appeared on the desert floor a small, granular thing,",
+      "D) Exodus 16:14 - and when the layer of dew lifted, behold, on the ground of the wilderness lay a tiny, circular food,"
     ],
     "answer": "A) Exodus 16:14 - and when the dew that lay was gone up, behold, upon the face of the wilderness there lay a small round thing,",
+    "full_verse": "And when the dew that lay was gone up, behold, upon the face of the wilderness there lay a small round thing, as small as the hoar frost on the ground.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The manna was a daily miracle, God's direct provision for His people in the desolate wilderness. It taught them daily dependence on Him and distinguished them from other nations, who could not survive in such conditions.",
@@ -1253,11 +1307,12 @@ const gameQuestions = [{
     "question": "At Rephidim, the Israelites again complained bitterly about a lack of water. God instructed Moses to strike a specific object to bring forth water for the thirsty multitude. What was Moses commanded to strike?",
     "options": [
       "A) Exodus 17:6 - Behold, I will stand before thee there upon the rock in Horeb; and thou shalt smite the rock,",
-      "B) Exodus 17:6 - Behold, I will stand before thee there upon the rock in Horeb; and you shall smite the rock,",
-      "C) Exodus 17:6 - Behold, I will stand before thee there upon the stone in Horeb; and thou shalt smite the rock,",
-      "D) Exodus 17:6 - Behold, I will stand before thee there upon the rock in Horeb; and thou shalt hit the rock,"
+      "B) Exodus 17:6 - Lo, I shall be there before thee on the great stone at Horeb; and thou must strike the stone,",
+      "C) Exodus 17:6 - See, I will present myself before thee on the rock at Sinai; and thou shalt strike the rock,",
+      "D) Exodus 17:6 - Behold, I will appear to thee there on the cliff face at Horeb; and thou art to hit the cliff,"
     ],
     "answer": "A) Exodus 17:6 - Behold, I will stand before thee there upon the rock in Horeb; and thou shalt smite the rock,",
+    "full_verse": "Behold, I will stand before thee there upon the rock in Horeb; and thou shalt smite the rock, and there shall come water out of it, that the people may drink. And Moses did so in the sight of the elders of Israel.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "God's command to strike the rock reveals His miraculous power to bring life from unlikely sources. It also foreshadows Christ, who was \"smitten\" (crucified) so that spiritual living water could flow to humanity.",
@@ -1270,11 +1325,12 @@ const gameQuestions = [{
     "question": "At Mount Sinai, God descended in fire and smoke to establish His covenant with Israel. Before delivering the Ten Commandments, what solemn warning did God give to the people about approaching the mountain?",
     "options": [
       "A) Exodus 19:12 - Take heed to yourselves, that ye go not up into the mount, or touch the border of it:",
-      "B) Exodus 19:12 - Take heed to yourselves, that ye go not up into the mount, or touch the edges of it:",
-      "C) Exodus 19:12 - Take heed to yourselves, that ye go not up to the mount, or touch the border of it:",
-      "D) Exodus 19:12 - Take heed to yourselves, that ye go not up into the mountain, or touch the border of it:"
+      "B) Exodus 19:12 - Be warned among yourselves, that you do not ascend the mountain, or draw near its edge:",
+      "C) Exodus 19:12 - See to it that you do not climb the mount, nor even handle the boundary of it:",
+      "D) Exodus 19:12 - Be very careful, that ye do not go up the mountain, or so much as touch the perimeter:"
     ],
     "answer": "A) Exodus 19:12 - Take heed to yourselves, that ye go not up into the mount, or touch the border of it:",
+    "full_verse": "And thou shalt set bounds unto the people round about, saying, Take heed to yourselves, that ye go not up into the mount, or touch the border of it: whosoever toucheth the mount shall be surely put to death:",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The strict boundary around Mount Sinai emphasized God's awesome holiness and the separation between a holy God and sinful humanity. It instilled reverence and fear, highlighting the seriousness of the covenant.",
@@ -1287,11 +1343,12 @@ const gameQuestions = [{
     "question": "The first commandment reveals the foundational principle of all true worship. What is the explicit prohibition against other deities that God declares at the beginning of the Ten Commandments?",
     "options": [
       "A) Exodus 20:3 - Thou shalt have no other gods before me.",
-      "B) Exodus 20:3 - Thou shalt have no other gods before my face.",
-      "C) Exodus 20:3 - Thou shalt have no other gods before my presence.",
-      "D) Exodus 20:3 - Thou shalt have no other gods but me."
+      "B) Exodus 20:3 - Thou shalt place no other gods in my presence.",
+      "C) Exodus 20:3 - Thou shalt not worship false gods beside me.",
+      "D) Exodus 20:3 - Thou shalt keep no other gods in my sight."
     ],
     "answer": "A) Exodus 20:3 - Thou shalt have no other gods before me.",
+    "full_verse": "Thou shalt have no other gods before me.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This commandment establishes monotheism—the worship of one true God—as the absolute foundation for a relationship with Him. It directly counters polytheism and idolatry, demanding exclusive allegiance to the Creator.",
@@ -1304,11 +1361,12 @@ const gameQuestions = [{
     "question": "After the giving of the Law, Moses spent forty days on Mount Sinai receiving further instructions from God. While he was gone, the impatient Israelites pressured Aaron to create a physical object of worship. What did Aaron make for them?",
     "options": [
       "A) Exodus 32:4 - And he received them at their hand, and fashioned it with a graving tool, after he had made it a molten calf:",
-      "B) Exodus 32:4 - And he received them at their hand, and formed it with a graving tool, after he had made it a molten calf:",
-      "C) Exodus 32:4 - And he received them at their hand, and made it with a graving tool, after he had made it a molten calf:",
-      "D) Exodus 32:4 - And he received them at their hand, and cast it with a graving tool, after he had made it a molten calf:"
+      "B) Exodus 32:4 - And he took them from their hands, and shaped it with an instrument, having cast it into a golden bull:",
+      "C) Exodus 32:4 - And he accepted their offering, and formed it with a sharp tool, after creating it as a calf of gold:",
+      "D) Exodus 32:4 - And he took the gold, and using a tool, he fashioned it into the shape of a young ox:"
     ],
     "answer": "A) Exodus 32:4 - And he received them at their hand, and fashioned it with a graving tool, after he had made it a molten calf:",
+    "full_verse": "And he received them at their hand, and fashioned it with a graving tool, after he had made it a molten calf: and they said, These be thy gods, O Israel, which brought thee up out of the land of Egypt.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The golden calf incident is a tragic demonstration of human impatience, idolatry, and a profound failure of leadership. It highlights Israel's tendency to turn away from the invisible, living God to worship tangible, man-made objects.",
@@ -1321,11 +1379,12 @@ const gameQuestions = [{
     "question": "When Moses descended from Sinai and saw the idolatry of the golden calf, his righteous anger erupted. What physical action did he immediately take with the very tablets of the Law that God had given him?",
     "options": [
       "A) Exodus 32:19 - and he cast the tables out of his hands, and brake them beneath the mount.",
-      "B) Exodus 32:19 - and he cast the tablets out of his hands, and broke them beneath the mount.",
-      "C) Exodus 32:19 - and he cast the tables from his hands, and broke them beneath the mount.",
-      "D) Exodus 32:19 - and he threw the tables from his hands, and brake them beneath the mount."
+      "B) Exodus 32:19 - and he threw the tablets down from his hands, and shattered them at the foot of the mountain.",
+      "C) Exodus 32:19 - and he hurled the tables from his grasp, and they were broken at the base of the mount.",
+      "D) Exodus 32:19 - and from his hands he let the tables fall, and he smashed them on the rocks below the mount."
     ],
     "answer": "A) Exodus 32:19 - and he cast the tables out of his hands, and brake them beneath the mount.",
+    "full_verse": "And it came to pass, as soon as he came nigh unto the camp, that he saw the calf, and the dancing: and Moses' anger waxed hot, and he cast the tables out of his hands, and brake them beneath the mount.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Moses' breaking of the tablets was a powerful symbolic act. It visually represented the breaking of the covenant by the Israelites through their idolatry, demonstrating that their unfaithfulness had severed their relationship with God.",
@@ -1338,11 +1397,12 @@ const gameQuestions = [{
     "question": "After the Golden Calf incident, Moses pleaded with God not to destroy Israel. In a remarkable display of grace, God revealed His merciful character to Moses. What specific attributes of God did He declare?",
     "options": [
       "A) Exodus 34:6 - The LORD, The LORD God, merciful and gracious, longsuffering, and abundant in goodness and truth,",
-      "B) Exodus 34:6 - The LORD, The LORD God, merciful and gracious, longsuffering, and abundant in good and truth,",
-      "C) Exodus 34:6 - The LORD, The LORD God, merciful and gracious, slow to anger, and abundant in goodness and truth,",
-      "D) Exodus 34:6 - The LORD, The LORD God, merciful and kind, longsuffering, and abundant in goodness and truth,"
+      "B) Exodus 34:6 - The LORD, The LORD God, compassionate and kind, slow to anger, and filled with love and faithfulness,",
+      "C) Exodus 34:6 - The LORD, The LORD God, showing mercy and favor, patient, and overflowing with goodness and fidelity,",
+      "D) Exodus 34:6 - The LORD, The LORD God, merciful and benevolent, patient in spirit, and great in lovingkindness and sincerity,"
     ],
     "answer": "A) Exodus 34:6 - The LORD, The LORD God, merciful and gracious, longsuffering, and abundant in goodness and truth,",
+    "full_verse": "And the LORD passed by before him, and proclaimed, The LORD, The LORD God, merciful and gracious, longsuffering, and abundant in goodness and truth,",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This is one of the most profound and self-revelations of God's character in the Old Testament. Despite Israel's rebellion, God emphasizes His steadfast love, patience, and faithfulness, demonstrating that His grace triumphs over judgment for those who repent.",
@@ -1355,11 +1415,12 @@ const gameQuestions = [{
     "question": "As the Tabernacle was being completed, filled with the glory of God, a specific action was performed with the Ark of the Testimony, symbolizing God's presence among His people. Where was the Ark finally placed within the Tabernacle?",
     "options": [
       "A) Exodus 40:21 - And he brought the ark into the tabernacle, and set up the veil of the covering, and covered the ark of the testimony;",
-      "B) Exodus 40:21 - And he brought the ark into the tabernacle, and set up the veil of the covering, and covered the ark of the testimony.",
-      "C) Exodus 40:21 - And he brought the ark into the tabernacle, and set the veil of the covering, and covered the ark of the testimony;",
-      "D) Exodus 40:21 - And he brought the ark into the Tabernacle, and set up the veil of the covering, and covered the ark of the testimony;"
+      "B) Exodus 40:21 - And he carried the ark into the holy place, and hung the curtain of separation, and shielded the ark of the covenant;",
+      "C) Exodus 40:21 - And he placed the ark inside the tabernacle, and put up the dividing veil, and did hide the ark of the law;",
+      "D) Exodus 40:21 - And he took the ark into the tent of meeting, and raised the screening veil, and concealed the ark of witness;"
     ],
     "answer": "A) Exodus 40:21 - And he brought the ark into the tabernacle, and set up the veil of the covering, and covered the ark of the testimony;",
+    "full_verse": "And he brought the ark into the tabernacle, and set up the vail of the covering, and covered the ark of the testimony; as the LORD commanded Moses.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The Ark of the Covenant, containing the tablets of the Law, represented God's throne and His very presence. Its placement in the Most Holy Place, behind the veil, symbolized God's dwelling among His people and the sacred, yet veiled, nature of His holiness.",
@@ -1372,11 +1433,12 @@ const gameQuestions = [{
     "question": "As the Israelites prepared to enter the Promised Land, Moses sent twelve spies to explore the land. Upon their return, ten of the spies brought a terrifying report that discouraged the people. What did they specifically say about the inhabitants of the land?",
     "options": [
       "A) Numbers 13:33 - And there we saw the giants, the sons of Anak, which come of the giants: and we were in our own sight as grasshoppers, and so we were in their sight.",
-      "B) Numbers 13:33 - And there we saw the giants, the sons of Anak, which come of the giants: and we were in our own eyes as grasshoppers, and so we were in their sight.",
-      "C) Numbers 13:33 - And there we saw the giants, the sons of Anak, which came from the giants: and we were in our own sight as grasshoppers, and so we were in their sight.",
-      "D) Numbers 13:33 - And there we saw the giants, the sons of Anak, which come of giants: and we were in our own sight as grasshoppers, and so we were in their sight."
+      "B) Numbers 13:33 - And we also saw the Nephilim, the sons of Anak, a race of giants: and we appeared to ourselves as locusts, and so we were in their eyes.",
+      "C) Numbers 13:33 - And there we beheld the giants, from the line of Anak, who are mighty: and we seemed to ourselves as mere insects, and so we were in their estimation.",
+      "D) Numbers 13:33 - And there were giants in the land, the sons of Anak: and we were but as grasshoppers to ourselves, and surely we were the same in their perception."
     ],
     "answer": "A) Numbers 13:33 - And there we saw the giants, the sons of Anak, which come of the giants: and we were in our own sight as grasshoppers, and so we were in their sight.",
+    "full_verse": "And there we saw the giants, the sons of Anak, which come of the giants: and we were in our own sight as grasshoppers, and so we were in their sight.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "The ten spies allowed fear to dominate their perception. Their report, though containing some truth, was colored by their lack of faith in God's power. They focused on the obstacles rather than on God's promises and their own perceived inadequacy compared to the strength of the giants.",
@@ -1389,11 +1451,12 @@ const gameQuestions = [{
     "question": "Amidst the fearful report of the ten spies, two men stood firm, bravely urging the Israelites to trust God and go up to conquer the land. Who were these two faithful spies who urged the people forward?",
     "options": [
       "A) Numbers 14:6 - And Joshua the son of Nun, and Caleb the son of Jephunneh, which were of them that searched the land,",
-      "B) Numbers 14:6 - And Joshua the son of Nun, and Caleb the son of Jephunneh, which were from among them that searched the land,",
-      "C) Numbers 14:6 - And Joshua the son of Nun, and Caleb the son of Jephunneh, which were of those that searched the land,",
-      "D) Numbers 14:6 - And Joshua the son of Nun, and Caleb the son of Jephunneh, who were of them that searched the land,"
+      "B) Numbers 14:6 - Then Joshua, son of Nun, and Caleb, son of Jephunneh, who had been among the spies of the land,",
+      "C) Numbers 14:6 - And Joshua ben Nun, with Caleb ben Jephunneh, two of those who had explored the land,",
+      "D) Numbers 14:6 - And among them that spied out the land were Joshua son of Nun, and Caleb son of Jephunneh,"
     ],
     "answer": "A) Numbers 14:6 - And Joshua the son of Nun, and Caleb the son of Jephunneh, which were of them that searched the land,",
+    "full_verse": "And Joshua the son of Nun, and Caleb the son of Jephunneh, which were of them that searched the land, rent their clothes:",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Joshua and Caleb represent courageous faith. While the majority yielded to fear and unbelief, these two men chose to trust God's promises, demonstrating that true leadership involves standing firm on God's Word even when it's unpopular.",
@@ -1406,11 +1469,12 @@ const gameQuestions = [{
     "question": "When the prophet Balaam was hired to curse Israel, he found himself repeatedly unable to do so because God intervened. What happened to Balaam's donkey when he struck it for resisting his command?",
     "options": [
       "A) Numbers 22:28 - And the LORD opened the mouth of the ass, and she said unto Balaam, What have I done unto thee,",
-      "B) Numbers 22:28 - And the LORD opened the mouth of the donkey, and she said unto Balaam, What have I done unto thee,",
-      "C) Numbers 22:28 - And the LORD opened the mouth of the ass, and she said unto Balaam, What did I do unto thee,",
-      "D) Numbers 22:28 - And the LORD opened the mouth of the ass, and she did say unto Balaam, What have I done unto thee,"
+      "B) Numbers 22:28 - And the LORD gave voice to the donkey, and she spoke to Balaam, saying, What is my offense to you,",
+      "C) Numbers 22:28 - And the LORD caused the ass to speak, and she questioned Balaam, What transgression have I committed,",
+      "D) Numbers 22:28 - And the LORD let the mouth of the ass speak, and she asked of Balaam, How have I wronged you,"
     ],
     "answer": "A) Numbers 22:28 - And the LORD opened the mouth of the ass, and she said unto Balaam, What have I done unto thee,",
+    "full_verse": "And the LORD opened the mouth of the ass, and she said unto Balaam, What have I done unto thee, that thou hast smitten me these three times?",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "This bizarre event demonstrates God's absolute sovereignty, using even an animal to rebuke a prophet who was resisting His will. It shows that God can speak through any means necessary to convey His message and protect His people.",
@@ -1423,11 +1487,12 @@ const gameQuestions = [{
     "question": "After the wilderness wanderings, Moses climbed Mount Nebo to view the Promised Land, but God told him he would not enter it. What was the specific reason God gave for Moses not being allowed to cross into the land?",
     "options": [
       "A) Deuteronomy 32:51 - Because ye trespassed against me among the children of Israel at the waters of Meribah-Kadesh, in the wilderness of Zin;",
-      "B) Deuteronomy 32:51 - Because ye trespassed against me among the children of Israel at the waters of Meribah, in the wilderness of Zin;",
-      "C) Deuteronomy 32:51 - Because you trespassed against me among the children of Israel at the waters of Meribah-Kadesh, in the wilderness of Zin;",
-      "D) Deuteronomy 32:51 - Because ye trespassed against me among the children of Israel at the waters of Meribah-Kadesh, in the wilderness of Zin."
+      "B) Deuteronomy 32:51 - For you were unfaithful to me in the presence of the Israelites at the waters of Meribah in Kadesh, in the Desert of Zin;",
+      "C) Deuteronomy 32:51 - Because you broke faith with me before the sons of Israel at the waters of contention at Kadesh, in the wilderness of Zin;",
+      "D) Deuteronomy 32:51 - For you rebelled against my command before all Israel at the waters of Meribah-Kadesh, which is in the wilderness of Zin;"
     ],
     "answer": "A) Deuteronomy 32:51 - Because ye trespassed against me among the children of Israel at the waters of Meribah-Kadesh, in the wilderness of Zin;",
+    "full_verse": "Because ye trespassed against me among the children of Israel at the waters of Meribah-Kadesh, in the wilderness of Zin; because ye sanctified me not in the midst of the children of Israel.",
     "category": "Bible People",
     "explanation": {
       "The Big Idea": "Moses' exclusion from the Promised Land, despite his overall faithfulness, highlights the seriousness of disobedience, even from God's chosen leaders. His sin at Meribah was striking the rock in anger instead of speaking to it, failing to glorify God before the people.",
@@ -1610,11 +1675,12 @@ const gameQuestions = [{
     "question": "The very opening of Matthew's Gospel connects Jesus directly to a specific Old Testament prophecy, declaring His unique lineage and purpose through a virgin birth. What is the specific prophecy quoted to explain His miraculous conception?",
     "options": [
       "A) Matthew 1:23 - Behold, a virgin shall be with child, and shall bring forth a son, and they shall call his name Emmanuel,",
-      "B) Matthew 1:23 - Behold, a virgin shall be with child, and shall bring forth a son, and they will call his name Emmanuel,",
-      "C) Matthew 1:23 - Behold, a virgin shall be with child, and shall bring forth a Son, and they shall call his name Emmanuel,",
-      "D) Matthew 1:23 - Behold, a virgin shall be with child, and she shall bring forth a son, and they shall call his name Emmanuel,"
+      "B) Matthew 1:23 - Behold, a maiden shall be with child, and shall bring forth a son, and men shall call his name Emmanuel,",
+      "C) Matthew 1:23 - Behold, a virgin shall be with child, and shall give birth to a son, and they will call his name Emmanuel,",
+      "D) Matthew 1:23 - Behold, a virgin shall be with child, and shall bring forth a son, and he shall be known as Emmanuel,"
     ],
     "answer": "A) Matthew 1:23 - Behold, a virgin shall be with child, and shall bring forth a son, and they shall call his name Emmanuel,",
+    "full_verse": "Behold, a virgin shall be with child, and shall bring forth a son, and they shall call his name Emmanuel, which being interpreted is, God with us.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This prophecy, first given in Isaiah, confirms Jesus' unique origin. He is born of a virgin, fulfilling divine prediction, and His name \"Emmanuel\" (\"God with us\") signifies God's personal dwelling among humanity, establishing Him as the promised Messiah.",
@@ -1627,11 +1693,12 @@ const gameQuestions = [{
     "question": "An angel appeared to Joseph in a dream, revealing the divine origin of Mary's pregnancy and giving him a critical instruction regarding the child's identity and mission. What specific name was Joseph commanded to give the child, along with its meaning?",
     "options": [
       "A) Matthew 1:21 - and thou shalt call his name JESUS: for he shall save his people from their sins.",
-      "B) Matthew 1:21 - and thou shalt call his name JESUS: for he shall save his people from their past sins.",
-      "C) Matthew 1:21 - and thou shalt call his name JESUS: for he will save his people from their sins.",
-      "D) Matthew 1:21 - and thou shalt call his name JESUS: for he shall save all people from their sins."
+      "B) Matthew 1:21 - and thou shalt call his name JESUS: for he shall redeem his folk from their sins.",
+      "C) Matthew 1:21 - and thou shalt call his name JESUS: for he shall save his people from their faults.",
+      "D) Matthew 1:21 - and thou shalt call his name JESUS: for he is to save his people from their sins."
     ],
     "answer": "A) Matthew 1:21 - and thou shalt call his name JESUS: for he shall save his people from their sins.",
+    "full_verse": "And she shall bring forth a son, and thou shalt call his name JESUS: for he shall save his people from their sins.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "The name \"Jesus\" (Yeshua in Hebrew) means \"the LORD saves.\" The angel's instruction clarifies that this child's primary mission is salvation. He is the prophesied Redeemer who would deliver His people, not from political oppression, but from the bondage of sin itself.",
@@ -1644,11 +1711,12 @@ const gameQuestions = [{
     "question": "After Jesus' birth, wise men from the East arrived in Jerusalem, stirring up King Herod with their quest. What specific question did these wise men ask, revealing their prophetic understanding of a unique, newly born king?",
     "options": [
       "A) Matthew 2:2 - Where is he that is born King of the Jews? for we have seen his star in the east,",
-      "B) Matthew 2:2 - Where is he that is born King of the Jews? for we have seen his star from the east,",
-      "C) Matthew 2:2 - Where is he that is born King of the Jews? for we have seen his bright star in the east,",
-      "D) Matthew 2:2 - Where is he that is born King of the Jews? for we have seen his star in the Eastern sky,"
+      "B) Matthew 2:2 - Where is he that is born King of the Jews? for we have beheld his sign in the east,",
+      "C) Matthew 2:2 - Where is he that is born King of the Jews? for we have seen his star in the dawn,",
+      "D) Matthew 2:2 - Where is he that is born King of the Jews? we did see there his star in the east,"
     ],
     "answer": "A) Matthew 2:2 - Where is he that is born King of the Jews? for we have seen his star in the east,",
+    "full_verse": "Saying, Where is he that is born King of the Jews? for we have seen his star in the east, and are come to worship him.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "The Wise Men, likely Gentile astrologers, were guided by a unique celestial event to seek the prophesied \"King of the Jews.\" Their question, even among the pagan nations, reveals a widespread expectation of the Messiah's coming, a truth confirmed by Old Testament prophecies.",
@@ -1661,11 +1729,12 @@ const gameQuestions = [{
     "question": "Disturbed by the Wise Men's inquiry, King Herod secretly gathered the chief priests and scribes to uncover the prophetic details of the Messiah's birth. What specific city did they identify as the prophesied birthplace?",
     "options": [
       "A) Matthew 2:5 - And they said unto him, In Bethlehem of Judæa: for thus it is written by the prophet,",
-      "B) Matthew 2:5 - And they said unto him, In Bethlehem of Judæa: for thus it is put down by the prophet,",
-      "C) Matthew 2:5 - And they said unto him, In Bethlehem of Judæa: for thus it is declared by the prophet,",
-      "D) Matthew 2:5 - And they said unto him, In Bethlehem of Judæa: for thus it is written by a prophet,"
+      "B) Matthew 2:5 - And they said unto him, In Bethlehem of Judæa: for thus it is told now by the prophet,",
+      "C) Matthew 2:5 - And they said unto him, In Bethlehem of Judæa: for thus it is in the words of the prophet,",
+      "D) Matthew 2:5 - And they said unto him, In Bethlehem of Judæa: for thus it is foretold by the seers,"
     ],
     "answer": "A) Matthew 2:5 - And they said unto him, In Bethlehem of Judæa: for thus it is written by the prophet,",
+    "full_verse": "And they said unto him, In Bethlehem of Judæa: for thus it is written by the prophet,",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "The religious leaders correctly identified Bethlehem, fulfilling Micah 5:2. This demonstrates that the specific details of Christ's birth were known from prophecy, yet their knowledge was detached from genuine faith, as they failed to worship Him.",
@@ -1678,11 +1747,12 @@ const gameQuestions = [{
     "question": "After their encounter with Herod, the Wise Men continued their journey to find Jesus. What celestial sign miraculously reappeared to guide them directly to the young child?",
     "options": [
       "A) Matthew 2:9 - When they had heard the king, they departed; and, lo, the star, which they saw in the east, went before them,",
-      "B) Matthew 2:9 - When they had heard the king, they departed; and, lo, the star, which they saw in the east, did go before them,",
-      "C) Matthew 2:9 - When they had heard the king, they went; and, lo, the star, which they saw in the east, went before them,",
-      "D) Matthew 2:9 - When they had heard the king, they departed; and, lo, the star, which they saw in the east, lead before them,"
+      "B) Matthew 2:9 - When they had heard the king, they went forth; and, lo, the star, which they saw in the east, did guide them,",
+      "C) Matthew 2:9 - When they had heard the king, they left him; and, lo, the star, that they saw in the east, shone before them,",
+      "D) Matthew 2:9 - When they had heard the king, they did depart; and, lo, the star, which they saw at first, moved before them,"
     ],
     "answer": "A) Matthew 2:9 - When they had heard the king, they departed; and, lo, the star, which they saw in the east, went before them,",
+    "full_verse": "When they had heard the king, they departed; and, lo, the star, which they saw in the east, went before them, till it came and stood over where the young child was.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "God's guidance is precise and persistent. The reappearing star served as a divine beacon, leading the Wise Men directly to Jesus, ensuring His safety and the fulfillment of their worshipful mission despite Herod's deceptive intentions.",
@@ -1695,11 +1765,12 @@ const gameQuestions = [{
     "question": "After the Wise Men had found and worshipped Jesus, God intervened directly to protect the child from Herod's murderous intentions. What specific instruction did God give the Wise Men in a dream to safeguard Jesus?",
     "options": [
       "A) Matthew 2:12 - And being warned of God in a dream that they should not return to Herod, they departed into their own country another way.",
-      "B) Matthew 2:12 - And being warned by God in a dream that they should not return to Herod, they departed into their own country another way.",
-      "C) Matthew 2:12 - And being warned of God in a dream that they should not return to Herod, they went into their own country another way.",
-      "D) Matthew 2:12 - And being warned by God in a dream that they should not return to Herod, they went into their own country another way."
+      "B) Matthew 2:12 - And being told by God in a dream that they must not return to Herod, they departed to their own land by another path.",
+      "C) Matthew 2:12 - And being warned of God in a vision that they should not go back to Herod, they returned to their own country a new way.",
+      "D) Matthew 2:12 - And being shown by God in a dream that they should not go to Herod, they did depart for their own country a side way."
     ],
     "answer": "A) Matthew 2:12 - And being warned of God in a dream that they should not return to Herod, they departed into their own country another way.",
+    "full_verse": "And being warned of God in a dream that they should not return to Herod, they departed into their own country another way.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "God actively protects His Messiah and His divine plan from human opposition. This direct divine intervention highlights God's sovereignty, thwarting Herod's malicious scheme and ensuring the safety of the infant Jesus.",
@@ -1712,11 +1783,12 @@ const gameQuestions = [{
     "question": "Following the Wise Men's departure, an angel appeared to Joseph again, warning him of Herod's murderous intent and directing him to flee with Mary and Jesus to a specific foreign land. What was this destination?",
     "options": [
       "A) Matthew 2:13 - Arise, and take the young child and his mother, and flee into Egypt, and be thou there until I bring thee word:",
-      "B) Matthew 2:13 - Arise, and take the young child and his mother, and flee into Egypt, and abide thou there until I bring thee word:",
-      "C) Matthew 2:13 - Arise, and take the young child and his mother, and flee into Egypt, and stay thou there until I bring thee word:",
-      "D) Matthew 2:13 - Arise, and take the young child and his mother, and flee into Egypt, and remain thou there until I bring thee word:"
+      "B) Matthew 2:13 - Arise, and take the young child and his mother, and go now to Egypt, and be thou there till I send thee a word:",
+      "C) Matthew 2:13 - Arise, and take the young child and his mother, and flee into Egypt, and do thou stay there till I bring to thee word:",
+      "D) Matthew 2:13 - Arise, and take the young child and his mother, and escape to Egypt, and be thou there until I give to thee a word:"
     ],
     "answer": "A) Matthew 2:13 - Arise, and take the young child and his mother, and flee into Egypt, and be thou there until I bring thee word:",
+    "full_verse": "And when they were departed, behold, the angel of the Lord appeareth to Joseph in a dream, saying, Arise, and take the young child and his mother, and flee into Egypt, and be thou there until I bring thee word: for Herod will seek the young child to destroy him.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This flight to Egypt directly fulfills a prophecy from Hosea, demonstrating God's meticulous plan for His Son. It shows God's sovereign control over seemingly random events, orchestrating circumstances to protect the Messiah and fulfill ancient predictions.",
@@ -1729,11 +1801,12 @@ const gameQuestions = [{
     "question": "After the death of Herod, an angel again appeared to Joseph in Egypt, giving him the clear command to return to the land of Israel. What crucial truth about Herod's reign and intention was revealed?",
     "options": [
       "A) Matthew 2:20 - saying, Arise, and take the young child and his mother, and go into the land of Israel: for they are dead which sought the young child's life.",
-      "B) Matthew 2:20 - saying, Arise, and take the young child and his mother, and go into the land of Israel: for they are dead who sought the young child's life.",
-      "C) Matthew 2:20 - saying, Arise, and take the young child and his mother, and go to the land of Israel: for they are dead which sought the young child's life.",
-      "D) Matthew 2:20 - saying, Arise, and take the young child and his mother, and go into the land of Israel: for they are gone which sought the young child's life."
+      "B) Matthew 2:20 - saying, Arise, and take the young child and his mother, and return to the land of Israel: for they are gone who did seek the young child's life.",
+      "C) Matthew 2:20 - saying, Arise, and take the young child and his mother, and go unto the land of Israel: for they are dead which did desire the young child's life.",
+      "D) Matthew 2:20 - saying, Arise, and take the young child and his mother, and go back to the land of Israel: for they are no more which sought the young child's life."
     ],
     "answer": "A) Matthew 2:20 - saying, Arise, and take the young child and his mother, and go into the land of Israel: for they are dead which sought the young child's life.",
+    "full_verse": "Saying, Arise, and take the young child and his mother, and go into the land of Israel: for they are dead which sought the young child's life.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "God's timing is perfect. The angel's message signals that the threat has passed, and it's safe to return. It reiterates God's active protection of Jesus and the fulfillment of His divine purposes, even amidst political turmoil.",
@@ -1746,11 +1819,12 @@ const gameQuestions = [{
     "question": "Upon returning to Israel, Joseph was cautious about settling in Judea due to Herod's son, Archelaus. He received another divine warning that led him to a specific region. Where did Joseph settle with his family, fulfilling an obscure prophecy about Jesus' identity?",
     "options": [
       "A) Matthew 2:23 - And he came and dwelt in a city called Nazareth: that it might be fulfilled which was spoken by the prophets, He shall be called a Nazarene.",
-      "B) Matthew 2:23 - And he came and dwelt in a city called Nazareth: that it might be fulfilled which was spoken by the prophets, He will be called a Nazarene.",
-      "C) Matthew 2:23 - And he came and dwelt in a city called Nazareth: that it might be fulfilled which was declared by the prophets, He shall be called a Nazarene.",
-      "D) Matthew 2:23 - And he came and dwelt in a city called Nazareth: that it might be fulfilled which was told by the prophets, He shall be called a Nazarene."
+      "B) Matthew 2:23 - And he came and did live in a city called Nazareth: that it might be fulfilled which was said by the prophets, He shall be called a Nazarene.",
+      "C) Matthew 2:23 - And he came and dwelt in a town named Nazareth: that it might be fulfilled which was spoken by the prophets, He should be called a Nazarene.",
+      "D) Matthew 2:23 - And he came and dwelt in a place called Nazareth: that it might be fulfilled which was spoken by the prophets, He shall be known as a Nazarene."
     ],
     "answer": "A) Matthew 2:23 - And he came and dwelt in a city called Nazareth: that it might be fulfilled which was spoken by the prophets, He shall be called a Nazarene.",
+    "full_verse": "And he came and dwelt in a city called Nazareth: that it might be fulfilled which was spoken by the prophets, He shall be called a Nazarene.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus' upbringing in Nazareth, a humble and often disdained town, fulfilled a subtle prophecy about His identity. Being called a \"Nazarene\" carried connotations of lowliness and being despised, aligning with the prophetic descriptions of the Messiah.",
@@ -1763,11 +1837,12 @@ const gameQuestions = [{
     "question": "Decades later, John the Baptist emerged in the wilderness of Judea, powerfully calling the nation to repentance. His ministry directly fulfilled a specific prophetic voice foretelling a messenger preparing the way for the Lord. What was the essence of his message?",
     "options": [
       "A) Matthew 3:2 - Repent ye: for the kingdom of heaven is at hand.",
-      "B) Matthew 3:2 - Repent ye: for the kingdom of God is at hand.",
-      "C) Matthew 3:2 - Repent now: for the kingdom of heaven is at hand.",
-      "D) Matthew 3:2 - Repent ye: for the new kingdom is at hand."
+      "B) Matthew 3:2 - Turn now: for the kingdom of heaven is at hand.",
+      "C) Matthew 3:2 - Repent ye: for the rule of the heavens is near.",
+      "D) Matthew 3:2 - Repent all: for the kingdom from heaven is here."
     ],
     "answer": "A) Matthew 3:2 - Repent ye: for the kingdom of heaven is at hand.",
+    "full_verse": "And saying, Repent ye: for the kingdom of heaven is at hand.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "John's message was a direct fulfillment of Isaiah's prophecy (Isaiah 40:3), announcing the imminent arrival of God's promised kingdom through the Messiah. His call to \"repentance\" was foundational, signaling a need for a moral and spiritual transformation to prepare for this new era.",
@@ -1780,11 +1855,12 @@ const gameQuestions = [{
     "question": "John the Baptist lived a distinct and austere life in the wilderness. His unique attire and diet were symbolic of his prophetic role, setting him apart. What was John's specific clothing and food described to be?",
     "options": [
       "A) Matthew 3:4 - And the same John had his raiment of camel's hair, and a leathern girdle about his loins; and his meat was locusts and wild honey.",
-      "B) Matthew 3:4 - And the same John had his clothing of camel's hair, and a leathern girdle about his loins; and his meat was locusts and wild honey.",
-      "C) Matthew 3:4 - And the same John had his raiment of camel's hair, and a leathern belt about his loins; and his meat was locusts and wild honey.",
-      "D) Matthew 3:4 - And the same John had his raiment of camel's hair, and a leathern girdle about his waist; and his meat was locusts and wild honey."
+      "B) Matthew 3:4 - And this same John had his robe of camel's hair, and a leather strap about his loins; and his food was the locusts and wild honey.",
+      "C) Matthew 3:4 - And the same John had his garment of camel's hair, and a leather belt around his loins; and his meal was just locusts and honey.",
+      "D) Matthew 3:4 - And the same John had his cloak made of camel's hair, and a leathern band about his loins; and his diet was locusts and wild honey."
     ],
     "answer": "A) Matthew 3:4 - And the same John had his raiment of camel's hair, and a leathern girdle about his loins; and his meat was locusts and wild honey.",
+    "full_verse": "And the same John had his raiment of camel's hair, and a leathern girdle about his loins; and his meat was locusts and wild honey.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "John's appearance and lifestyle deliberately evoked the prophet Elijah (2 Kings 1:8), fulfilling the prophecy that Elijah would precede the Messiah (Malachi 4:5-6). His detachment from worldly comforts underscored his commitment to his divine mission.",
@@ -1797,11 +1873,12 @@ const gameQuestions = [{
     "question": "John the Baptist famously confronted the religious leaders who came to his baptism, exposing their hypocrisy. What scathing rebuke did he deliver to the Pharisees and Sadducees, recognizing their lack of genuine repentance?",
     "options": [
       "A) Matthew 3:7 - O generation of vipers, who hath warned you to flee from the wrath to come?",
-      "B) Matthew 3:7 - O generation of snakes, who hath warned you to flee from the wrath to come?",
-      "C) Matthew 3:7 - O generation of vipers, who has warned you to flee from the wrath to come?",
-      "D) Matthew 3:7 - O generation of vipers, who hath warned you to run from the wrath to come?"
+      "B) Matthew 3:7 - O brood of serpents, who hath told you to run from the anger to come?",
+      "C) Matthew 3:7 - O generation of snakes, who did warn you to flee from the coming wrath?",
+      "D) Matthew 3:7 - O spawn of vipers, who hath warned you to escape the wrath that comes?"
     ],
     "answer": "A) Matthew 3:7 - O generation of vipers, who hath warned you to flee from the wrath to come?",
+    "full_verse": "But when he saw many of the Pharisees and Sadducees come to his baptism, he said unto them, O generation of vipers, who hath warned you to flee from the wrath to come?",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "John's harsh words reveal that outward religious observance without inward transformation is worthless. He saw through their superficial attendance, recognizing their deep-seated pride and resistance to genuine repentance, which would lead to future judgment.",
@@ -1814,11 +1891,12 @@ const gameQuestions = [{
     "question": "John the Baptist consistently declared that one far greater than himself was coming after him. He humbly distinguished his water baptism from the powerful spiritual baptism of the coming Messiah. How did John describe the baptism of the One who would follow him?",
     "options": [
       "A) Matthew 3:11 - He shall baptize you with the Holy Ghost, and with fire:",
-      "B) Matthew 3:11 - He shall baptize you with the Holy Spirit, and with fire:",
-      "C) Matthew 3:11 - He will baptize you with the Holy Ghost, and with fire:",
-      "D) Matthew 3:11 - He shall baptize you with the Holy Ghost, and with fire now:"
+      "B) Matthew 3:11 - He will immerse you with the Holy Ghost, and with fire:",
+      "C) Matthew 3:11 - He shall baptize you in the Holy Spirit, and in flame:",
+      "D) Matthew 3:11 - He shall baptize you with the Holy Ghost, and with flame:"
     ],
     "answer": "A) Matthew 3:11 - He shall baptize you with the Holy Ghost, and with fire:",
+    "full_verse": "I indeed baptize you with water unto repentance: but he that cometh after me is mightier than I, whose shoes I am not worthy to bear: he shall baptize you with the Holy Ghost, and with fire:",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "John's prophecy points to the empowering and purifying work of the Messiah. The \"Holy Ghost\" refers to the Holy Spirit's indwelling power, while \"fire\" symbolizes both purification (refining) and judgment, indicating a more profound and transformative work than mere water baptism.",
@@ -1831,11 +1909,12 @@ const gameQuestions = [{
     "question": "After many had been baptized by John, Jesus Himself came to the Jordan to be baptized. John initially protested, feeling unworthy to baptize the Messiah. What was John's humble objection to baptizing Jesus?",
     "options": [
       "A) Matthew 3:14 - I have need to be baptized of thee, and comest thou to me?",
-      "B) Matthew 3:14 - I have need to be baptized by thee, and comest thou to me?",
-      "C) Matthew 3:14 - I need to be baptized of thee, and comest thou to me?",
-      "D) Matthew 3:14 - I have need to be baptized by thee, and you come to me?"
+      "B) Matthew 3:14 - I have a need to be baptized by thee, and you come to me?",
+      "C) Matthew 3:14 - I must be baptized by thee, and yet thou comest to me?",
+      "D) Matthew 3:14 - I do need to be baptized by you, and thou comest here?"
     ],
     "answer": "A) Matthew 3:14 - I have need to be baptized of thee, and comest thou to me?",
+    "full_verse": "But John forbad him, saying, I have need to be baptized of thee, and comest thou to me?",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "John's protest shows his profound understanding of Jesus' true identity and sinlessness. He recognized Jesus' superiority and his own unworthiness to perform such a sacred act on the Messiah, highlighting the reversal of roles and the humility of both John and Jesus.",
@@ -1848,11 +1927,12 @@ const gameQuestions = [{
     "question": "Despite John's reluctance, Jesus insisted on being baptized, not because He needed repentance, but for a greater purpose that established a divine precedent. What was Jesus' profound explanation for His baptism?",
     "options": [
       "A) Matthew 3:15 - Suffer it to be so now: for thus it becometh us to fulfil all righteousness.",
-      "B) Matthew 3:15 - Suffer it to be so now: for thus it becomes us to fulfil all righteousness.",
-      "C) Matthew 3:15 - Permit it to be so now: for thus it becometh us to fulfil all righteousness.",
-      "D) Matthew 3:15 - Suffer it to be so now: for thus it is right for us to fulfil all righteousness."
+      "B) Matthew 3:15 - Permit it to be so now: for thus it is proper for us to do all righteousness.",
+      "C) Matthew 3:15 - Allow it to be so now: for so it is fitting for us to fulfil all that is right.",
+      "D) Matthew 3:15 - Let it be so for now: for thus it is for us to complete all righteousness."
     ],
     "answer": "A) Matthew 3:15 - Suffer it to be so now: for thus it becometh us to fulfil all righteousness.",
+    "full_verse": "And Jesus answering said unto him, Suffer it to be so now: for thus it becometh us to fulfil all righteousness. Then he suffered him.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus' baptism was an act of perfect obedience, fulfilling \"all righteousness.\" He identified with humanity's need for cleansing and commitment, inaugurating His public ministry by submitting to God's ordained process, thus providing an example for all believers.",
@@ -1865,11 +1945,12 @@ const gameQuestions = [{
     "question": "Immediately following Jesus' baptism, a powerful divine affirmation occurred, revealing the Trinity. What specific manifestation accompanied the descent of the Holy Spirit upon Jesus?",
     "options": [
       "A) Matthew 3:17 - And lo a voice from heaven, saying, This is my beloved Son, in whom I am well pleased.",
-      "B) Matthew 3:17 - And lo a voice from heaven, saying, This is my beloved Son, in whom I am pleased.",
-      "C) Matthew 3:17 - And lo a voice from Heaven, saying, This is my beloved Son, in whom I am well pleased.",
-      "D) Matthew 3:17 - And lo a voice from heaven, saying, This is my dear Son, in whom I am well pleased."
+      "B) Matthew 3:17 - And see a voice from heaven, saying, This is my own dear Son, in whom I am well pleased.",
+      "C) Matthew 3:17 - And lo a sound from heaven, saying, This is my Son, the beloved, in whom I am pleased.",
+      "D) Matthew 3:17 - And then a voice from heaven, saying, This is my beloved Son, in whom I find my joy."
     ],
     "answer": "A) Matthew 3:17 - And lo a voice from heaven, saying, This is my beloved Son, in whom I am well pleased.",
+    "full_verse": "And lo a voice from heaven, saying, This is my beloved Son, in whom I am well pleased.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This pivotal moment reveals the three Persons of the Godhead (Father speaking, Son being baptized, Holy Spirit descending) and publicly affirms Jesus as the Messiah and Son of God, validating His identity and approving His mission.",
@@ -1882,11 +1963,12 @@ const gameQuestions = [{
     "question": "Matthew's Gospel emphasizes how Jesus' early life, including His family's flight to Egypt, fulfilled specific prophecies. Which Old Testament prophet's words were fulfilled by Jesus' return from Egypt to Israel?",
     "options": [
       "A) Matthew 2:15 - that it might be fulfilled which was spoken of the Lord by the prophet, saying, Out of Egypt have I called my son.",
-      "B) Matthew 2:15 - that it might be fulfilled which was spoken by the Lord by the prophet, saying, Out of Egypt have I called my son.",
-      "C) Matthew 2:15 - that it might be fulfilled which was spoken of the Lord through the prophet, saying, Out of Egypt have I called my son.",
-      "D) Matthew 2:15 - that it might be fulfilled which was spoken of the Lord by the prophet, saying, From Egypt have I called my son."
+      "B) Matthew 2:15 - that it should be fulfilled which was spoken of the Lord by the prophet, saying, Out of Egypt did I call my son.",
+      "C) Matthew 2:15 - that it would be fulfilled which was spoken by the Lord from the prophet, saying, Out of Egypt have I called a son.",
+      "D) Matthew 2:15 - that it might be fulfilled which was said from the Lord by the prophet, saying, Out of Egypt have I called my boy."
     ],
     "answer": "A) Matthew 2:15 - that it might be fulfilled which was spoken of the Lord by the prophet, saying, Out of Egypt have I called my son.",
+    "full_verse": "And was there until the death of Herod: that it might be fulfilled which was spoken of the Lord by the prophet, saying, Out of Egypt have I called my son.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This fulfillment of Hosea 11:1 (originally referring to Israel's exodus) is reapplied to Jesus, demonstrating that Jesus embodies and perfectly fulfills the entire history and purpose of Israel. He is the true Israel, the ultimate Son called out of Egypt.",
@@ -1899,11 +1981,12 @@ const gameQuestions = [{
     "question": "When Herod realized the Wise Men had defied him, he became enraged and ordered a horrific act of violence. What specific, tragic command did Herod give in his fury to eliminate the perceived threat to his throne?",
     "options": [
       "A) Matthew 2:16 - Then Herod, when he saw that he was mocked of the wise men, was exceeding wroth, and sent forth, and slew all the children that were in Bethlehem, and in all the coasts thereof, from two years old and under, according to the time which he had diligently inquired of the wise men.",
-      "B) Matthew 2:16 - Then Herod, when he saw that he was mocked of the wise men, was exceeding wroth, and sent forth, and slew all the children that were in Bethlehem, and in all the coasts thereof, from two years old and under, according to the time that he had diligently inquired of the wise men.",
-      "C) Matthew 2:16 - Then Herod, when he saw that he was mocked by the wise men, was exceeding wroth, and sent forth, and slew all the children that were in Bethlehem, and in all the coasts thereof, from two years old and under, according to the time which he had diligently inquired of the wise men.",
-      "D) Matthew 2:16 - Then Herod, when he saw that he was mocked of the wise men, was exceeding wrath, and sent forth, and slew all the children that were in Bethlehem, and in all the coasts thereof, from two years old and under, according to the time which he had diligently inquired of the wise men."
+      "B) Matthew 2:16 - Then Herod, when he saw that he was tricked by the wise men, was greatly enraged, and sent out, and killed all the infants that were in Bethlehem, and in all the regions thereof, from two years old and under, according to the date which he had carefully inquired of the wise men.",
+      "C) Matthew 2:16 - Then Herod, when he saw that he was fooled by the wise men, was greatly angered, and did send forth, and slew all the male children in Bethlehem, and in all the lands thereof, from two years old and under, as per the time which he had diligently asked of the wise men.",
+      "D) Matthew 2:16 - Then Herod, when he saw that he was deceived of the wise men, was exceeding wroth, and did send forth, and slew all the boys that were born in Bethlehem, and in all the parts thereof, from two years old and less, as per the time he had inquired of the wise men."
     ],
-    "answer": "A) Matthew 2:16 - Then Herod, when he saw that he was mocked of the wise men, was exceeding wroth, and sent forth, and slew all the children that were in Bethlehem, and in all the coasts thereof, from two years old and under, according_to the time which he had diligently inquired of the wise men.",
+    "answer": "A) Matthew 2:16 - Then Herod, when he saw that he was mocked of the wise men, was exceeding wroth, and sent forth, and slew all the children that were in Bethlehem, and in all the coasts thereof, from two years old and under, according to the time which he had diligently inquired of the wise men.",
+    "full_verse": "Then Herod, when he saw that he was mocked of the wise men, was exceeding wroth, and sent forth, and slew all the children that were in Bethlehem, and in all the coasts thereof, from two years old and under, according to the time which he had diligently enquired of the wise men.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Herod's desperate act of slaughter, driven by fear and lust for power, fulfills a prophecy from Jeremiah about Rachel weeping for her children. It reveals the escalating conflict between evil (Satan's attempt to destroy the Messiah) and God's protective plan.",
@@ -1916,11 +1999,12 @@ const gameQuestions = [{
     "question": "Matthew clearly states that Herod's massacre of the infants in Bethlehem was a direct fulfillment of an Old Testament prophet's words, depicting profound grief and lamentation. What was the specific prophetic lament quoted?",
     "options": [
       "A) Matthew 2:18 - In Rama was there a voice heard, lamentation, and weeping, and great mourning, Rachel weeping for her children, and would not be comforted, because they are not.",
-      "B) Matthew 2:18 - In Rama was there a voice heard, lamentation, and weeping, and great mourning, Rachel weeping for her children, and would not be comforted, because they were not.",
-      "C) Matthew 2:18 - In Rama was there a voice heard, great lamentation, and weeping, and great mourning, Rachel weeping for her children, and would not be comforted, because they are not.",
-      "D) Matthew 2:18 - In Rama was there a voice heard, lamentation, and weeping, and deep mourning, Rachel weeping for her children, and would not be comforted, because they are not."
+      "B) Matthew 2:18 - In Rama was there a voice heard, a great lamentation, and sorrow, and deep mourning, Rachel crying for her children, and she would not be consoled, because they are not.",
+      "C) Matthew 2:18 - In Rama was there a voice heard, lamentation, and much weeping, and great sorrow, Rachel weeping for her own children, and she was not comforted, as they were no more.",
+      "D) Matthew 2:18 - In Rama was a great voice heard, of lamentation, and of weeping, and of mourning, Rachel weeping for her children, and she could not be comforted, as they are no more."
     ],
     "answer": "A) Matthew 2:18 - In Rama was there a voice heard, lamentation, and weeping, and great mourning, Rachel weeping for her children, and would not be comforted, because they are not.",
+    "full_verse": "In Rama was there a voice heard, lamentation, and weeping, and great mourning, Rachel weeping for her children, and would not be comforted, because they are not.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This quote from Jeremiah 31:15, originally referring to Israel's exile and suffering, is reapplied to the Bethlehem massacre. It emphasizes the depth of the suffering caused by sin and evil, yet also subtly hints at a future hope, as Jeremiah's prophecy ultimately leads to comfort and restoration.",
@@ -1933,11 +2017,12 @@ const gameQuestions = [{
     "question": "John the Baptist's arrival and ministry perfectly fulfilled an ancient prophecy about the messenger who would prepare the way for the Messiah. Which prophet foretold this \"voice crying in the wilderness\"?",
     "options": [
       "A) Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight.",
-      "B) Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths right.",
-      "C) Matthew 3:3 - For this is he that was spoken of by the prophet Isaiah, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight.",
-      "D) Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one calling in the wilderness, Prepare ye the way of the Lord, make his paths straight."
+      "B) Matthew 3:3 - For this is he that was told of by the prophet Esaias, saying, The voice of one calling in the wilderness, Prepare ye the path of the Lord, make all his ways straight.",
+      "C) Matthew 3:3 - For this is he that was spoken of from the prophet Esaias, saying, The sound of one crying in the desert land, Prepare ye the way of the Lord, make all his paths straight.",
+      "D) Matthew 3:3 - For this is him that was spoken of by the holy prophet Esaias, saying, The voice of one in the wilderness, Prepare ye the way of the Lord, make all his paths straight."
     ],
     "answer": "A) Matthew 3:3 - For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight.",
+    "full_verse": "For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "John the Baptist's entire ministry was a direct fulfillment of Isaiah 40:3. He was the prophesied herald, passionately preparing the hearts of people for the imminent arrival of the Messiah by calling them to repentance and spiritual preparation.",
@@ -1950,11 +2035,12 @@ const gameQuestions = [{
     "question": "After Jesus' baptism, He was led into the wilderness to be tempted. When the devil challenged Him to turn stones into bread, Jesus responded by quoting Scripture. What foundational truth did He declare about true sustenance?",
     "options": [
       "A) Matthew 4:4 - Man shall not live by bread alone, but by every word that proceedeth out of the mouth of God.",
-      "B) Matthew 4:4 - Man shall not live by bread alone, but by every word that proceedeth forth from the mouth of God.",
-      "C) Matthew 4:4 - Man shall not live by bread alone, but by every word that cometh forth from the mouth of God.",
-      "D) Matthew 4:4 - Man shall not live by bread alone, but by every word that proceedeth out of the holy mouth of God."
+      "B) Matthew 4:4 - Man shall not live on bread alone, but on every word that doth proceed out of the mouth of God.",
+      "C) Matthew 4:4 - Man will not live by bread alone, but by every word that doth come forth from the mouth of God.",
+      "D) Matthew 4:4 - Man shall not live by just bread alone, but by every single word that comes out of the mouth of God."
     ],
     "answer": "A) Matthew 4:4 - Man shall not live by bread alone, but by every word that proceedeth out of the mouth of God.",
+    "full_verse": "But he answered and said, It is written, Man shall not live by bread alone, but by every word that proceedeth out of the mouth of God.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus' first response to temptation quotes Deuteronomy 8:3, emphasizing that spiritual nourishment from God's Word is more essential than physical food. This established His reliance on Scripture and His identity as the true bread of life.",
@@ -1967,11 +2053,12 @@ const gameQuestions = [{
     "question": "In the second temptation, the devil took Jesus to the pinnacle of the temple and twisted Scripture, challenging Him to throw Himself down. What specific promise from the Psalms did Satan deceptively quote?",
     "options": [
       "A) Matthew 4:6 - He shall give his angels charge concerning thee: and in their hands they shall bear thee up,",
-      "B) Matthew 4:6 - He shall give His angels charge concerning thee: and in their hands they shall bear thee up,",
-      "C) Matthew 4:6 - He shall give his angels charge regarding thee: and in their hands they shall bear thee up,",
-      "D) Matthew 4:6 - He shall give his angels charge over thee: and in their hands they shall bear thee up,"
+      "B) Matthew 4:6 - He will give his angels a charge for thee: and in their hands they shall hold thee up,",
+      "C) Matthew 4:6 - He shall give his angels orders for thee: and in their hands they shall lift thee up,",
+      "D) Matthew 4:6 - He shall command his holy angels for thee: and with their hands they shall bear thee up,"
     ],
     "answer": "A) Matthew 4:6 - He shall give his angels charge concerning thee: and in their hands they shall bear thee up,",
+    "full_verse": "And saith unto him, If thou be the Son of God, cast thyself down: for it is written, He shall give his angels charge concerning thee: and in their hands they shall bear thee up, lest at any time thou dash thy foot against a stone.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Satan’s misuse of Psalm 91:11-12 reveals his deceptive nature: he quotes Scripture out of context to tempt Jesus to presumptuous testing of God. Jesus' refusal highlights that true faith does not demand God to prove Himself through reckless acts.",
@@ -1984,11 +2071,12 @@ const gameQuestions = [{
     "question": "Responding to Satan's second temptation, Jesus again quoted from Deuteronomy, rebuking the devil's attempt to lead Him into a presumptuous test of God. What powerful command did Jesus declare?",
     "options": [
       "A) Matthew 4:7 - Thou shalt not tempt the Lord thy God.",
-      "B) Matthew 4:7 - Thou shalt not tempt the LORD thy God.",
-      "C) Matthew 4:7 - You shalt not tempt the Lord thy God.",
-      "D) Matthew 4:7 - Thou shalt not tempt the LORD your God."
+      "B) Matthew 4:7 - Thou shalt not test the Lord thy God.",
+      "C) Matthew 4:7 - Do not put to test the Lord thy God.",
+      "D) Matthew 4:7 - Thou shalt not try the Lord thy God."
     ],
     "answer": "A) Matthew 4:7 - Thou shalt not tempt the Lord thy God.",
+    "full_verse": "Jesus said unto him, It is written again, Thou shalt not tempt the Lord thy God.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus' quote from Deuteronomy 6:16 affirms that putting God to the test is an act of unbelief and disrespect. True faith trusts God's promises without demanding sensational proof, especially when it involves reckless behavior.",
@@ -2001,11 +2089,12 @@ const gameQuestions = [{
     "question": "In the final temptation, the devil offered Jesus all the kingdoms of the world in exchange for worship. Jesus decisively rebuked Satan, quoting Deuteronomy once more to declare the absolute supremacy of God. What was Jesus' ultimate declaration?",
     "options": [
       "A) Matthew 4:10 - Thou shalt worship the Lord thy God, and him only shalt thou serve.",
-      "B) Matthew 4:10 - Thou shalt worship the LORD thy God, and him only shalt thou serve.",
-      "C) Matthew 4:10 - Thou shalt worship the Lord thy God, and him alone shalt thou serve.",
-      "D) Matthew 4:10 - Thou shalt worship the LORD thy God, and him only thou shalt serve."
+      "B) Matthew 4:10 - Thou shalt worship the Lord thy God, and only him shalt thou serve.",
+      "C) Matthew 4:10 - Thou shalt revere the Lord thy God, and him alone shalt thou serve.",
+      "D) Matthew 4:10 - Thou shalt serve the Lord thy God, and only him shalt thou worship."
     ],
     "answer": "A) Matthew 4:10 - Thou shalt worship the Lord thy God, and him only shalt thou serve.",
+    "full_verse": "Then saith Jesus unto him, Get thee hence, Satan: for it is written, Thou shalt worship the Lord thy God, and him only shalt thou serve.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This quote from Deuteronomy 6:13 is the climax of Jesus' resistance to temptation. It affirms the first commandment: only God is worthy of worship and ultimate service. Jesus refused to compromise His loyalty to God for worldly power.",
@@ -2018,11 +2107,12 @@ const gameQuestions = [{
     "question": "After the temptation, Jesus withdrew to Galilee and began His public ministry, settling in Capernaum. Matthew connects this move to a specific ancient prophecy about light coming to a previously darkened region. Which region is specifically mentioned as receiving light?",
     "options": [
       "A) Matthew 4:15 - The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles;",
-      "B) Matthew 4:15 - The land of Zebulun, and the land of Naphtali, by the way of the sea, beyond Jordan, Galilee of the Gentiles;",
-      "C) Matthew 4:15 - The land of Zabulon, and the land of Naphtali, by the way of the sea, beyond Jordan, Galilee of the Gentiles;",
-      "D) Matthew 4:15 - The land of Zabulon, and the land of Naphtali, by the way of the sea, beyond the Jordan, Galilee of the Gentiles;"
+      "B) Matthew 4:15 - The land of Zabulon, and the land of Nephthalim, near the path of the sea, past Jordan, Galilee of the Gentiles;",
+      "C) Matthew 4:15 - The land of Zabulon, and the land of Nephthalim, by the way of the water, across Jordan, Galilee of the nations;",
+      "D) Matthew 4:15 - The land of Zabulon, and the land of Nephthalim, by the coast of the sea, over Jordan, Galilee of the heathen;"
     ],
     "answer": "A) Matthew 4:15 - The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles;",
+    "full_verse": "The land of Zabulon, and the land of Nephthalim, by the way of the sea, beyond Jordan, Galilee of the Gentiles;",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus' ministry in Galilee, a region often seen as religiously impure or \"Gentile\" due to its mixed population, directly fulfilled Isaiah 9:1-2. It marked the beginning of light shining into spiritual darkness, demonstrating that God's salvation extends beyond the traditional centers of Jewish religion.",
@@ -2035,11 +2125,12 @@ const gameQuestions = [{
     "question": "Jesus' teaching began with the Beatitudes, a radical redefinition of blessedness. What condition did Jesus declare would bring blessing to those who recognized their spiritual emptiness?",
     "options": [
       "A) Matthew 5:3 - Blessed are the poor in spirit: for theirs is the kingdom of heaven.",
-      "B) Matthew 5:3 - Blessed are the poor in spirit: for theirs is the kingdom of God.",
-      "C) Matthew 5:3 - Blessed are the needy in spirit: for theirs is the kingdom of heaven.",
-      "D) Matthew 5:3 - Blessed are the poor in heart: for theirs is the kingdom of heaven."
+      "B) Matthew 5:3 - Blessed are the meek in spirit: for theirs is the rule of heaven.",
+      "C) Matthew 5:3 - Happy are the poor in spirit: for theirs is the kingdom from heaven.",
+      "D) Matthew 5:3 - Blessed are the low in spirit: for theirs is the kingdom of heaven."
     ],
     "answer": "A) Matthew 5:3 - Blessed are the poor in spirit: for theirs is the kingdom of heaven.",
+    "full_verse": "Blessed are the poor in spirit: for theirs is the kingdom of heaven.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This Beatitude challenges human pride. \"Poor in spirit\" means recognizing one's complete spiritual bankruptcy and utter dependence on God for salvation. It's the opposite of self-sufficiency and is the first step towards receiving God's grace and entering His kingdom.",
@@ -2052,11 +2143,12 @@ const gameQuestions = [{
     "question": "In the Sermon on the Mount, Jesus describes various qualities that bring true blessedness. What specific quality of heart did Jesus say would enable a person to truly perceive God?",
     "options": [
       "A) Matthew 5:8 - Blessed are the pure in heart: for they shall see God.",
-      "B) Matthew 5:8 - Blessed are the clean in heart: for they shall see God.",
-      "C) Matthew 5:8 - Blessed are the pure in soul: for they shall see God.",
-      "D) Matthew 5:8 - Blessed are the pure in spirit: for they shall see God."
+      "B) Matthew 5:8 - Happy are the clean in heart: for they shall see God.",
+      "C) Matthew 5:8 - Blessed are the true in heart: for they will see God.",
+      "D) Matthew 5:8 - Blessed are the pure of soul: for they will see God."
     ],
     "answer": "A) Matthew 5:8 - Blessed are the pure in heart: for they shall see God.",
+    "full_verse": "Blessed are the pure in heart: for they shall see God.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "\"Pure in heart\" speaks to internal integrity, freedom from hypocrisy, and undivided loyalty to God. This inner purity allows for a clear spiritual vision, enabling one to truly know and experience God, both now and in the future.",
@@ -2069,11 +2161,12 @@ const gameQuestions = [{
     "question": "Jesus used a powerful metaphor to describe His followers' role in the world, emphasizing their influence and visibility. What illuminating comparison did Jesus use to define His disciples' identity?",
     "options": [
       "A) Matthew 5:14 - Ye are the light of the world. A city that is set on an hill cannot be hid.",
-      "B) Matthew 5:14 - Ye are the light of the world. A town that is set on an hill cannot be hid.",
-      "C) Matthew 5:14 - You are the light of the world. A city that is set on an hill cannot be hid.",
-      "D) Matthew 5:14 - Ye are the light of the world. A city that is set on a hill cannot be hid."
+      "B) Matthew 5:14 - You are the world's great light. A city that is set on a hill cannot be hid.",
+      "C) Matthew 5:14 - Ye are the light to the world. A town that is set on an hill cannot be hid.",
+      "D) Matthew 5:14 - Ye are the light of the world. A city that is built on a hill cannot be hid."
     ],
     "answer": "A) Matthew 5:14 - Ye are the light of the world. A city that is set on an hill cannot be hid.",
+    "full_verse": "Ye are the light of the world. A city that is set on an hill cannot be hid.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus calls His followers to be a visible witness, to live lives that illuminate God's truth and goodness in a world shrouded in spiritual darkness. Their influence is meant to be transformative and undeniable.",
@@ -2086,11 +2179,12 @@ const gameQuestions = [{
     "question": "Addressing common misunderstandings, Jesus clarified His relationship to the Old Testament Law and the Prophets. What fundamental declaration did He make about His purpose regarding these sacred texts?",
     "options": [
       "A) Matthew 5:17 - Think not that I am come to destroy the law, or the prophets: I am not come to destroy, but to fulfil.",
-      "B) Matthew 5:17 - Think not that I am come to destroy the law, or the prophets: I am not come to destroy, but to fulfill.",
-      "C) Matthew 5:17 - Think not that I came to destroy the law, or the prophets: I am not come to destroy, but to fulfil.",
-      "D) Matthew 5:17 - Think not that I am come to destroy the law, or the prophets: I am not come to take away, but to fulfil."
+      "B) Matthew 5:17 - Do not think that I am come to undo the law, or the prophets: I am not come to undo, but to fulfil.",
+      "C) Matthew 5:17 - Think not that I am come to abolish the law, or the prophets: I am not come to abolish, but to finish.",
+      "D) Matthew 5:17 - Suppose not that I am come to destroy the law, or the prophets: I am not come to destroy, but to uphold."
     ],
     "answer": "A) Matthew 5:17 - Think not that I am come to destroy the law, or the prophets: I am not come to destroy, but to fulfil.",
+    "full_verse": "Think not that I am come to destroy the law, or the prophets: I am not come to destroy, but to fulfil.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus affirmed the eternal validity and purpose of the Old Testament. He did not come to abolish it, but to perfectly obey its demands, embody its principles, and fulfill its prophecies, bringing it to its intended completion and ultimate meaning.",
@@ -2103,11 +2197,12 @@ const gameQuestions = [{
     "question": "Jesus stated that entry into the kingdom of heaven required a righteousness exceeding that of the most respected religious leaders of His day. What specific type of righteousness did He say was insufficient?",
     "options": [
       "A) Matthew 5:20 - For I say unto you, That except your righteousness shall exceed the righteousness of the scribes and Pharisees, ye shall in no case enter into the kingdom of heaven.",
-      "B) Matthew 5:20 - For I say unto you, That unless your righteousness shall exceed the righteousness of the scribes and Pharisees, ye shall in no case enter into the kingdom of heaven.",
-      "C) Matthew 5:20 - For I say unto you, That except your righteousness shall exceed the righteousness of the scribes and Pharisees, you shall in no case enter into the kingdom of heaven.",
-      "D) Matthew 5:20 - For I say unto you, That except your righteousness shall exceed the righteousness of the scribes and Pharisees, ye shall not enter into the kingdom of heaven."
+      "B) Matthew 5:20 - For I say unto you, That unless your righteousness should exceed the righteousness of the scribes and Pharisees, ye shall in no way ever enter into the kingdom of heaven.",
+      "C) Matthew 5:20 - For I say unto you, That except your own righteousness exceeds the righteousness of the scribes and Pharisees, ye shall in no case come into the kingdom of heaven.",
+      "D) Matthew 5:20 - For I say unto you, That except your righteousness does now exceed the righteousness of the scribes and Pharisees, ye shall not be able to enter the kingdom of heaven."
     ],
     "answer": "A) Matthew 5:20 - For I say unto you, That except your righteousness shall exceed the righteousness of the scribes and Pharisees, ye shall in no case enter into the kingdom of heaven.",
+    "full_verse": "For I say unto you, That except your righteousness shall exceed the righteousness of the scribes and Pharisees, ye shall in no case enter into the kingdom of heaven.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "The righteousness of the scribes and Pharisees was external and self-achieved, focusing on outward adherence to rules. Jesus declared that true righteousness must come from the heart, a perfect obedience that only Christ's imputed and imparted righteousness can provide.",
@@ -2120,11 +2215,12 @@ const gameQuestions = [{
     "question": "Jesus deepened the understanding of the Sixth Commandment, moving beyond the outward act to address the inner condition. What spiritual truth did He teach about anger and hateful words?",
     "options": [
       "A) Matthew 5:22 - whosoever is angry with his brother without a cause shall be in danger of the judgment:",
-      "B) Matthew 5:22 - whosoever is angry with his brother without a reason shall be in danger of the judgment:",
-      "C) Matthew 5:22 - whosoever is angry at his brother without a cause shall be in danger of the judgment:",
-      "D) Matthew 5:22 - whosoever is angry with his brother for no cause shall be in danger of the judgment:"
+      "B) Matthew 5:22 - whosoever is mad with his brother without a reason shall be in the danger of the judgment:",
+      "C) Matthew 5:22 - whosoever is wroth with his brother without a cause shall be in danger of the final judgment:",
+      "D) Matthew 5:22 - whosoever is vexed with his brother without a cause shall be in danger of the same judgment:"
     ],
     "answer": "A) Matthew 5:22 - whosoever is angry with his brother without a cause shall be in danger of the judgment:",
+    "full_verse": "But I say unto you, That whosoever is angry with his brother without a cause shall be in danger of the judgment: and whosoever shall say to his brother, Raca, shall be in danger of the council: but whosoever shall say, Thou fool, shall be in danger of hell fire.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus reveals that God's law applies not only to outward actions but to the intentions and attitudes of the heart. Uncontrolled anger and hateful words are considered as serious as the act of murder in God's eyes, striking at the very root of human life.",
@@ -2137,11 +2233,12 @@ const gameQuestions = [{
     "question": "Jesus also expanded on the Seventh Commandment, going beyond the physical act of adultery to address the thoughts and desires of the heart. What specific inner thought did Jesus equate to committing adultery?",
     "options": [
       "A) Matthew 5:28 - whosoever looketh on a woman to lust after her hath committed adultery with her already in his heart.",
-      "B) Matthew 5:28 - whosoever looks on a woman to lust after her hath committed adultery with her already in his heart.",
-      "C) Matthew 5:28 - whosoever looketh on a woman to lust after her has committed adultery with her already in his heart.",
-      "D) Matthew 5:28 - whosoever looketh on a woman to lust after her hath done adultery with her already in his heart."
+      "B) Matthew 5:28 - whosoever gazeth on a woman to desire after her hath committed adultery with her even now in his heart.",
+      "C) Matthew 5:28 - whosoever looketh on a woman with lust for her hath committed adultery with her in his own heart.",
+      "D) Matthew 5:28 - whosoever looketh at a woman to covet after her hath committed adultery with her in his very heart."
     ],
     "answer": "A) Matthew 5:28 - whosoever looketh on a woman to lust after her hath committed adultery with her already in his heart.",
+    "full_verse": "But I say unto you, That whosoever looketh on a woman to lust after her hath committed adultery with her already in his heart.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus reveals that sin begins in the mind and heart, not just in outward actions. Lustful thoughts, when entertained and cultivated, are considered spiritual adultery by God, underscoring the purity demanded by His divine law.",
@@ -2154,11 +2251,12 @@ const gameQuestions = [{
     "question": "Addressing the prevalent practice of divorce in His day, Jesus clarified God's original intent for marriage, allowing only one specific exception to the indissoluble bond. What was this narrow exception?",
     "options": [
       "A) Matthew 5:32 - saving for the cause of fornication, causeth her to commit adultery:",
-      "B) Matthew 5:32 - saving for the cause of fornication, causes her to commit adultery:",
-      "C) Matthew 5:32 - saving for the cause of unfaithfulness, causeth her to commit adultery:",
-      "D) Matthew 5:32 - saving for the reason of fornication, causeth her to commit adultery:"
+      "B) Matthew 5:32 - except for the cause of unchastity, maketh her to commit adultery:",
+      "C) Matthew 5:32 - saving for the sin of fornication, doth cause her to commit adultery:",
+      "D) Matthew 5:32 - but for the cause of fornication, she is then made to commit adultery:"
     ],
     "answer": "A) Matthew 5:32 - saving for the cause of fornication, causeth her to commit adultery:",
+    "full_verse": "But I say unto you, That whosoever shall put away his wife, saving for the cause of fornication, causeth her to commit adultery: and whosoever shall marry her that is divorced committeth adultery.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus upheld the sanctity of marriage as a lifelong covenant, mirroring God's faithfulness to His covenant people. His single exception, \"fornication\" (porneia, which can include sexual immorality or unfaithfulness), reaffirms the sacredness of the marital bond and the gravity of breaking it.",
@@ -2171,11 +2269,12 @@ const gameQuestions = [{
     "question": "Challenging the common understanding of \"an eye for an eye,\" Jesus taught a radical principle of non-retaliation. What specific, surprising action did He instruct His followers to take when struck on one cheek?",
     "options": [
       "A) Matthew 5:39 - but whosoever shall smite thee on thy right cheek, turn to him the other also.",
-      "B) Matthew 5:39 - but whosoever shall smite thee on thy right cheek, turn to him another also.",
-      "C) Matthew 5:39 - but whosoever shall hit thee on thy right cheek, turn to him the other also.",
-      "D) Matthew 5:39 - but whosoever shall strike thee on thy right cheek, turn to him the other also."
+      "B) Matthew 5:39 - but whosoever shall hit thee on thy right cheek, show to him the other also.",
+      "C) Matthew 5:39 - but whosoever shall strike thee on thy right cheek, give to him the other also.",
+      "D) Matthew 5:39 - but whosoever may smite thee on thy right cheek, turn to him the left also."
     ],
     "answer": "A) Matthew 5:39 - but whosoever shall smite thee on thy right cheek, turn to him the other also.",
+    "full_verse": "But I say unto you, That ye resist not evil: but whosoever shall smite thee on thy right cheek, turn to him the other also.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus teaches a principle of radical love and non-resistance to evil. It’s not about passivity, but about breaking the cycle of violence and demonstrating a kingdom ethic that transcends personal revenge, leaving room for divine justice and showing surprising grace.",
@@ -2188,11 +2287,12 @@ const gameQuestions = [{
     "question": "Extending His teaching on love beyond friends and neighbors, Jesus gave a truly revolutionary command that defied human nature and prevailing social norms. Who did Jesus explicitly instruct His followers to love?",
     "options": [
       "A) Matthew 5:44 - But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and persecute you;",
-      "B) Matthew 5:44 - But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for those which despitefully use you, and persecute you;",
-      "C) Matthew 5:44 - But I say unto you, Love your enemies, bless them that curse you, do good to those that hate you, and pray for them which despitefully use you, and persecute you;",
-      "D) Matthew 5:44 - But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them that despitefully use you, and persecute you;"
+      "B) Matthew 5:44 - But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them who wrongly abuse you, and persecute you;",
+      "C) Matthew 5:44 - But I say unto you, Love your foes, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and do pursue you;",
+      "D) Matthew 5:44 - But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which do mistreat you, and persecute you;"
     ],
     "answer": "A) Matthew 5:44 - But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and persecute you;",
+    "full_verse": "But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and persecute you;",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This command is the ultimate expression of kingdom ethics, distinguishing God's children from the world. It transcends human justice and retaliation, mirroring God's own unconditional love and grace extended even to those who oppose Him.",
@@ -2205,11 +2305,12 @@ const gameQuestions = [{
     "question": "In His teaching on prayer, Jesus warned against hypocrisy and drawing attention to oneself. What specific instruction did He give about the proper way to approach God in personal prayer?",
     "options": [
       "A) Matthew 6:6 - But thou, when thou prayest, enter into thy closet, and when thou hast shut thy door, pray to thy Father which is in secret;",
-      "B) Matthew 6:6 - But thou, when thou prayest, enter into thy closet, and when thou hast closed thy door, pray to thy Father which is in secret;",
-      "C) Matthew 6:6 - But thou, when thou prayest, go into thy closet, and when thou hast shut thy door, pray to thy Father which is in secret;",
-      "D) Matthew 6:6 - But thou, when thou prayest, go into thy room, and when thou hast shut thy door, pray to thy Father which is in secret;"
+      "B) Matthew 6:6 - But thou, when thou prayest, go into thy own room, and when thou hast shut the door, pray to thy Father which is in secret;",
+      "C) Matthew 6:6 - But thou, when thou dost pray, enter into thy chamber, and when thou hast shut thy door, pray to thy Father who is in secret;",
+      "D) Matthew 6:6 - But thou, when thou prayest, enter into thy own space, and when thou hast shut thy door, pray to the Father which is in secret;"
     ],
     "answer": "A) Matthew 6:6 - But thou, when thou prayest, enter into thy closet, and when thou hast shut thy door, pray to thy Father which is in secret;",
+    "full_verse": "But thou, when thou prayest, enter into thy closet, and when thou hast shut thy door, pray to thy Father which is in secret; and thy Father which seeth in secret shall reward thee openly.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus advocates for sincere, private prayer, emphasizing intimacy with God over public display. True prayer is about connecting with the Father who sees and rewards genuine devotion, not about gaining human admiration.",
@@ -2222,11 +2323,12 @@ const gameQuestions = [{
     "question": "In the Lord's Prayer, Jesus taught His disciples how to pray, beginning with reverence for God's name and a desire for His reign. What were the opening petitions regarding God's name and kingdom?",
     "options": [
       "A) Matthew 6:9-10 - Hallowed be thy name. Thy kingdom come. Thy will be done in earth, as it is in heaven.",
-      "B) Matthew 6:9-10 - Hallowed be thy name. Thy kingdom come. Thy will be done on earth, as it is in heaven.",
-      "C) Matthew 6:9-10 - Holy be thy name. Thy kingdom come. Thy will be done in earth, as it is in heaven.",
-      "D) Matthew 6:9-10 - Hallowed be thy name. Thy kingdom come. Thy will be done on the earth, as it is in heaven."
+      "B) Matthew 6:9-10 - May thy name be holy. Thy kingdom come. Thy will be done on earth, as it is in heaven.",
+      "C) Matthew 6:9-10 - Hallowed be thy name. Thy kingdom arrive. Thy will be done on earth, as it is in heaven.",
+      "D) Matthew 6:9-10 - Hallowed be thy name. Thy kingdom come. Thy will be done below on earth, as it is above."
     ],
     "answer": "A) Matthew 6:9-10 - Hallowed be thy name. Thy kingdom come. Thy will be done in earth, as it is in heaven.",
+    "full_verse": "After this manner therefore pray ye: Our Father which art in heaven, Hallowed be thy name. Thy kingdom come. Thy will be done in earth, as it is in heaven.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This prayer prioritizes God's glory and His sovereign rule. It's a prayer for His name (character) to be reverenced and for His spiritual kingdom to break into earth, aligning our will with His perfect plan for redemption and restoration.",
@@ -2239,11 +2341,12 @@ const gameQuestions = [{
     "question": "Continuing the Lord's Prayer, Jesus immediately linked God's forgiveness of us to our forgiveness of others, making it a conditional principle. What was Jesus' clear statement about the necessity of forgiving others?",
     "options": [
       "A) Matthew 6:14 - For if ye forgive men their trespasses, your heavenly Father will also forgive you:",
-      "B) Matthew 6:14 - For if you forgive men their trespasses, your heavenly Father will also forgive you:",
-      "C) Matthew 6:14 - For if ye forgive men their trespasses, your Father in heaven will also forgive you:",
-      "D) Matthew 6:14 - For if ye forgive men their trespasses, your heavenly Father will also forgive thee:"
+      "B) Matthew 6:14 - For if ye forgive men their own sins, your heavenly Father will also forgive you:",
+      "C) Matthew 6:14 - For if ye forgive men their bad debts, your heavenly Father will also forgive you:",
+      "D) Matthew 6:14 - For if ye forgive men their trespasses, your Father which is in heaven will forgive you:"
     ],
     "answer": "A) Matthew 6:14 - For if ye forgive men their trespasses, your heavenly Father will also forgive you:",
+    "full_verse": "For if ye forgive men their trespasses, your heavenly Father will also forgive you:",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Forgiveness is not optional for believers; it's a vital expression of our faith and a prerequisite for receiving God's continued forgiveness. Our willingness to forgive others reflects the measure of grace we have received from God.",
@@ -2256,11 +2359,12 @@ const gameQuestions = [{
     "question": "Jesus gave a crucial warning about the danger of misplaced priorities, cautioning against accumulating earthly possessions that are vulnerable to loss and decay. What did He instruct His followers not to lay up for themselves on earth?",
     "options": [
       "A) Matthew 6:19 - Lay not up for yourselves treasures upon earth, where moth and rust doth corrupt, and where thieves break through and steal:",
-      "B) Matthew 6:19 - Lay not up for yourselves treasures upon earth, where moth and rust does corrupt, and where thieves break through and steal:",
-      "C) Matthew 6:19 - Lay not up for yourselves treasures upon earth, where moth and rust doth destroy, and where thieves break through and steal:",
-      "D) Matthew 6:19 - Lay not up for yourselves treasures upon earth, where moth and rust doth spoil, and where thieves break through and steal:"
+      "B) Matthew 6:19 - Store not up for yourselves treasures on the earth, where moth and rust can corrupt, and where thieves break in and steal:",
+      "C) Matthew 6:19 - Lay not up for yourselves riches upon earth, where moth and decay doth corrupt, and where thieves break through and steal:",
+      "D) Matthew 6:19 - Gather not for yourselves treasures upon earth, where moth and rust doth consume, and where the thieves break through and steal:"
     ],
     "answer": "A) Matthew 6:19 - Lay not up for yourselves treasures upon earth, where moth and rust doth corrupt, and where thieves break through and steal:",
+    "full_verse": "Lay not up for yourselves treasures upon earth, where moth and rust doth corrupt, and where thieves break through and steal:",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Earthly possessions are temporary and vulnerable to loss. Jesus calls His followers to invest in eternal, spiritual treasures that are imperishable and secure, shifting their focus from temporal gain to lasting spiritual wealth.",
@@ -2273,11 +2377,12 @@ const gameQuestions = [{
     "question": "Jesus made an absolute declaration about ultimate allegiance, emphasizing that one's primary loyalty cannot be divided between two opposing masters. What famous statement did He make about serving God and wealth?",
     "options": [
       "A) Matthew 6:24 - No man can serve two masters: for either he will hate the one, and love the other; or else he will hold to the one, and despise the other. Ye cannot serve God and mammon.",
-      "B) Matthew 6:24 - No man can serve two masters: for either he will hate the one, and love the other; or else he will hold to the one, and despise the other. You cannot serve God and mammon.",
-      "C) Matthew 6:24 - No man can serve two masters: for either he will hate the one, and love the other; or else he will hold to the one, and scorn the other. Ye cannot serve God and mammon.",
-      "D) Matthew 6:24 - No man can serve two masters: for either he will hate the one, and love the other; or else he will hold to the one, and despise the other. Ye cannot serve God and money."
+      "B) Matthew 6:24 - No man can serve two masters: for either he will hate the one, and love the other; or else he will hold to the one, and reject the other. You cannot serve both God and mammon.",
+      "C) Matthew 6:24 - No man can serve two lords: for either he will hate the one, and love the other; or else he will hold to the one, and despise the other. Ye are not able to serve God and mammon.",
+      "D) Matthew 6:24 - No man can serve two masters: for either he will hate the first, and love the second; or else he will hold to the first, and despise the second. Ye cannot serve God and mammon."
     ],
     "answer": "A) Matthew 6:24 - No man can serve two masters: for either he will hate the one, and love the other; or else he will hold to the one, and despise the other. Ye cannot serve God and mammon.",
+    "full_verse": "No man can serve two masters: for either he will hate the one, and love the other; or else he will hold to the one, and despise the other. Ye cannot serve God and mammon.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Absolute loyalty is required in serving God. \"Mammon\" (wealth) often demands competing allegiance, forcing a choice between the spiritual and the material. One cannot sincerely serve both masters, as their demands are fundamentally at odds.",
@@ -2290,11 +2395,12 @@ const gameQuestions = [{
     "question": "In His teaching on anxiety and priorities, Jesus gave a powerful command about seeking the most important thing in life, with a promise of God's provision. What was the core instruction He gave regarding the kingdom of God?",
     "options": [
       "A) Matthew 6:33 - But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.",
-      "B) Matthew 6:33 - But seek ye first the kingdom of God, and his righteousness; and all these things will be added unto you.",
-      "C) Matthew 6:33 - But seek ye first the kingdom of God, and his great righteousness; and all these things shall be added unto you.",
-      "D) Matthew 6:33 - But seek ye first the kingdom of God, and his righteousness; and all these things shall be given unto you."
+      "B) Matthew 6:33 - But seek ye first the kingdom of God, and his great justice; and all these things shall be added unto you.",
+      "C) Matthew 6:33 - But seek ye first the kingdom of God, and all his goodness; and all of these things shall be added unto you.",
+      "D) Matthew 6:33 - But seek ye first the kingdom of God, and his holiness; and then all these things shall be added unto you."
     ],
     "answer": "A) Matthew 6:33 - But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.",
+    "full_verse": "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This is a fundamental principle of kingdom living. When we prioritize God's reign and His perfect character, our ultimate needs (both spiritual and physical) are met by His divine providence. It shifts our focus from anxiety to trust.",
@@ -2307,11 +2413,12 @@ const gameQuestions = [{
     "question": "Jesus gave a direct warning against a common human tendency, emphasizing that our judgment of others would have a direct consequence for ourselves. What warning did He give about judging?",
     "options": [
       "A) Matthew 7:1 - Judge not, that ye be not judged.",
-      "B) Matthew 7:1 - Judge not, that you be not judged.",
-      "C) Matthew 7:1 - Judge not, lest ye be not judged.",
-      "D) Matthew 7:1 - Judge not, that ye might not be judged."
+      "B) Matthew 7:1 - Judge not, lest ye be judged too.",
+      "C) Matthew 7:1 - Condemn not, that ye be not judged.",
+      "D) Matthew 7:1 - Judge not, that ye be not condemned."
     ],
     "answer": "A) Matthew 7:1 - Judge not, that ye be not judged.",
+    "full_verse": "Judge not, that ye be not judged.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus teaches against hypocritical and self-righteous judgment of others. Our critical spirit towards others reveals a lack of self-awareness and an intolerance that ultimately invites God's scrutiny upon our own lives.",
@@ -2324,11 +2431,12 @@ const gameQuestions = [{
     "question": "In His teaching on prayer, Jesus encouraged persistence and confidence, using a memorable triplet of actions to illustrate how to receive from God. What three actions did He instruct His followers to take?",
     "options": [
       "A) Matthew 7:7 - Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you:",
-      "B) Matthew 7:7 - Ask, and it will be given you; seek, and ye shall find; knock, and it shall be opened unto you:",
-      "C) Matthew 7:7 - Ask, and it shall be given you; seek, and you shall find; knock, and it shall be opened unto you:",
-      "D) Matthew 7:7 - Ask, and it shall be given you; seek, and ye shall find; knock, and it will be opened unto you:"
+      "B) Matthew 7:7 - Ask, and it shall be given you; seek, and ye will find; knock, and it shall be opened to you:",
+      "C) Matthew 7:7 - Ask, and it shall be given you; search, and ye shall find; knock, and it shall be opened to you:",
+      "D) Matthew 7:7 - Ask, and it shall be given you; seek, and ye shall find; knock, and the door shall be opened to you:"
     ],
     "answer": "A) Matthew 7:7 - Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you:",
+    "full_verse": "Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you:",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This promise emphasizes the accessibility and responsiveness of God to persistent, faithful prayer. It teaches that God delights in answering the earnest requests of His children, encouraging bold and continuous petition.",
@@ -2341,11 +2449,12 @@ const gameQuestions = [{
     "question": "Jesus concluded His teaching on judging others with a profound ethical principle that has come to be known as the Golden Rule, summarizing a crucial aspect of living righteously. What was this foundational command?",
     "options": [
       "A) Matthew 7:12 - Therefore all things whatsoever ye would that men should do to you, do ye even so to them: for this is the law and the prophets.",
-      "B) Matthew 7:12 - Therefore all things whatsoever ye would that men should do to you, do ye also to them: for this is the law and the prophets.",
-      "C) Matthew 7:12 - Therefore all things whatsoever you would that men should do to you, do ye even so to them: for this is the law and the prophets.",
-      "D) Matthew 7:12 - Therefore all things whatsoever ye would that men should do for you, do ye even so to them: for this is the law and the prophets."
+      "B) Matthew 7:12 - Therefore all things whatsoever ye wish that men should do to you, do ye even so to them: for this is the law and the prophets.",
+      "C) Matthew 7:12 - Therefore all things whatsoever ye would that men should do for you, do ye also so to them: for this is the law and the prophets.",
+      "D) Matthew 7:12 - Therefore in all things whatsoever ye would that men should do to you, do ye so to them: for this is the law and the prophets."
     ],
     "answer": "A) Matthew 7:12 - Therefore all things whatsoever ye would that men should do to you, do ye even so to them: for this is the law and the prophets.",
+    "full_verse": "Therefore all things whatsoever ye would that men should do to you, do ye even so to them: for this is the law and the prophets.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "The Golden Rule encapsulates the essence of biblical ethics in one simple, powerful command. It summarizes the spirit of the Law and the Prophets regarding human relationships, advocating for proactive, empathetic love that treats others as we desire to be treated.",
@@ -2358,11 +2467,12 @@ const gameQuestions = [{
     "question": "Jesus warned His disciples about two distinct paths that lead to very different eternal destinations. What did He say about the two gates and their respective ways?",
     "options": [
       "A) Matthew 7:13 - Enter ye in at the strait gate: for wide is the gate, and broad is the way, that leadeth to destruction, and many there be which go in thereat:",
-      "B) Matthew 7:13 - Enter ye in at the strait gate: for wide is the gate, and broad is the way, that leadeth to destruction, and many are there which go in thereat:",
-      "C) Matthew 7:13 - Enter ye in at the narrow gate: for wide is the gate, and broad is the way, that leadeth to destruction, and many there be which go in thereat:",
-      "D) Matthew 7:13 - Enter ye in at the strait gate: for wide is the gate, and broad is the way, that leads to destruction, and many there be which go in thereat:"
+      "B) Matthew 7:13 - Enter ye in at the strait gate: for wide is the gate, and broad is the path, that leadeth to destruction, and many there are which go in thereat:",
+      "C) Matthew 7:13 - Enter ye in at the hard gate: for wide is the gate, and broad is the way, that leadeth to damnation, and many there be which go in thereat:",
+      "D) Matthew 7:13 - Enter ye in at the strait gate: for wide is the portal, and broad is the way, that leadeth to destruction, and many there be which go in thereat:"
     ],
     "answer": "A) Matthew 7:13 - Enter ye in at the strait gate: for wide is the gate, and broad is the way, that leadeth to destruction, and many there be which go in thereat:",
+    "full_verse": "Enter ye in at the strait gate: for wide is the gate, and broad is the way, that leadeth to destruction, and many there be which go in thereat:",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "This illustrates the exclusive nature of salvation. The \"strait\" (narrow) gate represents the demanding path of discipleship, requiring self-denial and commitment to Christ, which few choose. The \"wide\" gate represents the easy, popular path of compromise that leads to eternal ruin.",
@@ -2375,11 +2485,12 @@ const gameQuestions = [{
     "question": "Jesus warned against false professions of faith, stating that not everyone who claims to know Him will enter the kingdom of heaven. What ultimate requirement did He declare for those who truly belong to His kingdom?",
     "options": [
       "A) Matthew 7:21 - Not every one that saith unto me, Lord, Lord, shall enter into the kingdom of heaven; but he that doeth the will of my Father which is in heaven.",
-      "B) Matthew 7:21 - Not every one that saith unto me, Lord, Lord, shall enter into the kingdom of heaven; but he that does the will of my Father which is in heaven.",
-      "C) Matthew 7:21 - Not every one that saith unto me, Lord, Lord, shall enter into the kingdom of heaven; but he that doeth the will of my Father who is in heaven.",
-      "D) Matthew 7:21 - Not every one that saith to me, Lord, Lord, shall enter into the kingdom of heaven; but he that doeth the will of my Father which is in heaven."
+      "B) Matthew 7:21 - Not every one that saith unto me, Lord, Lord, shall get into the kingdom of heaven; but he that doeth the will of my Father which is in heaven.",
+      "C) Matthew 7:21 - Not every one that saith unto me, Lord, Lord, shall enter in the kingdom of heaven; but he that doeth the will of my own Father which is in heaven.",
+      "D) Matthew 7:21 - Not every one that saith unto me, Lord, Lord, shall enter into the kingdom of God; but he that doeth the will of my good Father which is in heaven."
     ],
     "answer": "A) Matthew 7:21 - Not every one that saith unto me, Lord, Lord, shall enter into the kingdom of heaven; but he that doeth the will of my Father which is in heaven.",
+    "full_verse": "Not every one that saith unto me, Lord, Lord, shall enter into the kingdom of heaven; but he that doeth the will of my Father which is in heaven.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Mere verbal profession or religious enthusiasm is insufficient for salvation. True faith is demonstrated by active obedience to God's will, indicating a genuine transformation of the heart that translates into righteous living.",
@@ -2392,11 +2503,12 @@ const gameQuestions = [{
     "question": "Jesus concluded the Sermon on the Mount with a parable comparing two builders, one wise and one foolish, emphasizing the importance of acting on His words. What did the wise builder do with Jesus' sayings?",
     "options": [
       "A) Matthew 7:24 - Therefore whosoever heareth these sayings of mine, and doeth them, I will liken him unto a wise man, which built his house upon a rock:",
-      "B) Matthew 7:24 - Therefore whosoever heareth these sayings of mine, and doeth them, I will liken him unto a wise man, which built his house upon a rock.",
-      "C) Matthew 7:24 - Therefore whosoever hears these sayings of mine, and doeth them, I will liken him unto a wise man, which built his house upon a rock:",
-      "D) Matthew 7:24 - Therefore whosoever heareth these sayings of mine, and does them, I will liken him unto a wise man, which built his house upon a rock:"
+      "B) Matthew 7:24 - Therefore whosoever heareth these words of mine, and doeth them, I will liken him unto a prudent man, which built his house upon a rock:",
+      "C) Matthew 7:24 - Therefore whosoever heareth these sayings of mine, and obeys them, I will liken him unto a wise man, which built his home upon a rock:",
+      "D) Matthew 7:24 - Therefore whosoever heareth these sayings of mine, and acts on them, I will liken him unto a wise man, which built his house on a rock:"
     ],
     "answer": "A) Matthew 7:24 - Therefore whosoever heareth these sayings of mine, and doeth them, I will liken him unto a wise man, which built his house upon a rock:",
+    "full_verse": "Therefore whosoever heareth these sayings of mine, and doeth them, I will liken him unto a wise man, which built his house upon a rock:",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "True wisdom is not just hearing God's Word but actively obeying it. Building one's life on the solid foundation of Jesus' teachings ensures stability and endurance, even when faced with life's inevitable storms and trials.",
@@ -2409,11 +2521,12 @@ const gameQuestions = [{
     "question": "Following the parable of the two builders, Jesus then described the foolish builder and the outcome of his construction. What was the fate of the house built on a faulty foundation when the storms came?",
     "options": [
       "A) Matthew 7:27 - And the rain descended, and the floods came, and the winds blew, and beat upon that house; and it fell: and great was the fall of it.",
-      "B) Matthew 7:27 - And the rain descended, and the floods came, and the winds blew, and hit upon that house; and it fell: and great was the fall of it.",
-      "C) Matthew 7:27 - And the rain descended, and the floods came, and the winds blew, and beat on that house; and it fell: and great was the fall of it.",
-      "D) Matthew 7:27 - And the rain descended, and the floods came, and the winds blew, and beat upon that house; and it fell; and great was the fall of it."
+      "B) Matthew 7:27 - And the rain descended, and the floods came, and the winds blew, and did strike upon that house; and it fell: and great was the fall of it.",
+      "C) Matthew 7:27 - And the rain descended, and the floods came, and the winds blew, and beat upon that house; and it did fall: and great was its destruction.",
+      "D) Matthew 7:27 - And the rain descended, and the floods came, and the winds blew, and beat upon that home; and it fell: and great was the ruin of it."
     ],
     "answer": "A) Matthew 7:27 - And the rain descended, and the floods came, and the winds blew, and beat upon that house; and it fell: and great was the fall of it.",
+    "full_verse": "And the rain descended, and the floods came, and the winds blew, and beat upon that house; and it fell: and great was the fall of it.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Building one's life on anything other than Jesus' teachings is precarious. The \"rains, floods, and winds\" symbolize the inevitable trials and judgments of life. A foundation of mere hearing without doing leads to utter collapse and ruin.",
@@ -2426,11 +2539,12 @@ const gameQuestions = [{
     "question": "After Jesus finished His Sermon on the Mount, the crowds were deeply affected by His teaching. What specific aspect of Jesus' teaching left them astonished and distinguished Him from their traditional religious instructors?",
     "options": [
       "A) Matthew 7:29 - For he taught them as one having authority, and not as the scribes.",
-      "B) Matthew 7:29 - For he taught them as one having true authority, and not as the scribes.",
-      "C) Matthew 7:29 - For he taught them as one with authority, and not as the scribes.",
-      "D) Matthew 7:29 - For he taught them as one possessing authority, and not as the scribes."
+      "B) Matthew 7:29 - For he taught them as one with real authority, and not as the scribes.",
+      "C) Matthew 7:29 - For he taught them as one having power, and not like the scribes.",
+      "D) Matthew 7:29 - For he taught them as one having a mandate, and not as the scribes."
     ],
     "answer": "A) Matthew 7:29 - For he taught them as one having authority, and not as the scribes.",
+    "full_verse": "For he taught them as one having authority, and not as the scribes.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "Jesus' authority derived directly from God, unlike the scribes who relied on quoting rabbinic tradition. His teaching was fresh, powerful, and penetrating, speaking with intrinsic divine power that demanded a response.",
@@ -2443,11 +2557,12 @@ const gameQuestions = [{
     "question": "After descending from the mountain following the Sermon, Jesus encountered a man suffering from a serious skin disease. What was the immediate, humble request the leper made to Jesus?",
     "options": [
       "A) Matthew 8:2 - Lord, if thou wilt, thou canst make me clean.",
-      "B) Matthew 8:2 - Lord, if you wilt, thou canst make me clean.",
-      "C) Matthew 8:2 - Lord, if thou wilt, you canst make me clean.",
-      "D) Matthew 8:2 - Lord, if thou wilt, thou canst make me pure."
+      "B) Matthew 8:2 - Lord, if thou wish, thou canst make me well.",
+      "C) Matthew 8:2 - Lord, if thou wilt, thou canst make me whole.",
+      "D) Matthew 8:2 - Lord, if thou desire, thou canst make me clean."
     ],
     "answer": "A) Matthew 8:2 - Lord, if thou wilt, thou canst make me clean.",
+    "full_verse": "And, behold, there came a leper and worshipped him, saying, Lord, if thou wilt, thou canst make me clean.",
     "category": "Prophecy",
     "explanation": {
       "The Big Idea": "The leper's request demonstrates profound faith in Jesus' power (\"thou canst\") and submits to His will (\"if thou wilt\"). He didn't demand healing but humbly trusted in Jesus' ability and sovereignty.",

@@ -388,7 +388,7 @@ h1.glitch-effect {
     box-shadow: 0 2px 12px #8B000033, 0 0 8px #8B000055;
 }
 .question p {
-    font-size: 1.7rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 2rem;
     color: #ffffff;
@@ -2383,7 +2383,7 @@ label {
 
 .question-options-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 1.5rem;
     align-items: start;
     height: 100%;
@@ -2393,14 +2393,14 @@ label {
     background: rgba(30,30,30,0.98) !important;
     border: 2px solid #8B0000 !important;
     border-radius: 12px;
-    padding: 1.5rem 1rem 1rem 1rem;
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
     margin: 0;
     box-shadow: 0 2px 8px #8B000033, 0 0 6px #8B000055;
     height: fit-content;
 }
 
 .question p {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: bold;
     margin-bottom: 1rem;
     color: #ffffff;

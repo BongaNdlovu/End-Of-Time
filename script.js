@@ -68,7 +68,27 @@ if (questionOptionsContainer) {
 // --- Sound Integration ---
 const audioCorrect1 = document.getElementById('audio-correct-1');
 const audioCorrect2 = document.getElementById('audio-correct-2');
+const audioCorrect3 = document.getElementById('audio-correct-3');
+const audioCorrect4 = document.getElementById('audio-correct-4');
+const audioCorrect5 = document.getElementById('audio-correct-5');
+const audioCorrect6 = document.getElementById('audio-correct-6');
+const audioCorrect7 = document.getElementById('audio-correct-7');
+const audioCorrect8 = document.getElementById('audio-correct-8');
+const audioCorrect9 = document.getElementById('audio-correct-9');
+const audioCorrect10 = document.getElementById('audio-correct-10');
+const audioCorrect11 = document.getElementById('audio-correct-11');
+const audioCorrect12 = document.getElementById('audio-correct-12');
 const audioWrong = document.getElementById('audio-wrong');
+const audioIncorrect1 = document.getElementById('audio-incorrect-1');
+const audioIncorrect2 = document.getElementById('audio-incorrect-2');
+const audioIncorrect3 = document.getElementById('audio-incorrect-3');
+const audioIncorrect4 = document.getElementById('audio-incorrect-4');
+const audioIncorrect5 = document.getElementById('audio-incorrect-5');
+const audioIncorrect6 = document.getElementById('audio-incorrect-6');
+const audioIncorrect7 = document.getElementById('audio-incorrect-7');
+const audioIncorrect8 = document.getElementById('audio-incorrect-8');
+const audioIncorrect9 = document.getElementById('audio-incorrect-9');
+const audioIncorrect10 = document.getElementById('audio-incorrect-10');
 const audioTimeup = document.getElementById('audio-timeup');
 const audioRiser = document.getElementById('audio-riser');
 // Background music tracks - now includes 5 soundtracks for variety
@@ -93,7 +113,27 @@ function debugAudioElements() {
     const audioElements = {
         'audioCorrect1': audioCorrect1,
         'audioCorrect2': audioCorrect2,
+        'audioCorrect3': audioCorrect3,
+        'audioCorrect4': audioCorrect4,
+        'audioCorrect5': audioCorrect5,
+        'audioCorrect6': audioCorrect6,
+        'audioCorrect7': audioCorrect7,
+        'audioCorrect8': audioCorrect8,
+        'audioCorrect9': audioCorrect9,
+        'audioCorrect10': audioCorrect10,
+        'audioCorrect11': audioCorrect11,
+        'audioCorrect12': audioCorrect12,
         'audioWrong': audioWrong,
+        'audioIncorrect1': audioIncorrect1,
+        'audioIncorrect2': audioIncorrect2,
+        'audioIncorrect3': audioIncorrect3,
+        'audioIncorrect4': audioIncorrect4,
+        'audioIncorrect5': audioIncorrect5,
+        'audioIncorrect6': audioIncorrect6,
+        'audioIncorrect7': audioIncorrect7,
+        'audioIncorrect8': audioIncorrect8,
+        'audioIncorrect9': audioIncorrect9,
+        'audioIncorrect10': audioIncorrect10,
         'audioTimeup': audioTimeup,
         'audioRiser': audioRiser,
         'audioTickingTime': audioTickingTime,
@@ -165,8 +205,33 @@ function playSound(audio) {
     }
 }
 function playCorrectSound() {
-    const which = Math.random() < 0.5 ? audioCorrect1 : audioCorrect2;
-    playSound(which);
+    // Play one of the original correct sounds
+    const originalSounds = [audioCorrect1, audioCorrect2];
+    const randomOriginal = originalSounds[Math.floor(Math.random() * originalSounds.length)];
+    playSound(randomOriginal);
+    
+    // Also play one of the "Correct 1-10" sounds on top
+    const additionalSounds = [
+        audioCorrect3, audioCorrect4, audioCorrect5, audioCorrect6, 
+        audioCorrect7, audioCorrect8, audioCorrect9, audioCorrect10, 
+        audioCorrect11, audioCorrect12
+    ];
+    const randomAdditional = additionalSounds[Math.floor(Math.random() * additionalSounds.length)];
+    playSound(randomAdditional);
+}
+
+function playIncorrectSound() {
+    // Play the original wrong sound
+    playSound(audioWrong);
+    
+    // Also play one of the "Incorrect 1-10" sounds on top
+    const incorrectSounds = [
+        audioIncorrect1, audioIncorrect2, audioIncorrect3, audioIncorrect4, 
+        audioIncorrect5, audioIncorrect6, audioIncorrect7, audioIncorrect8, 
+        audioIncorrect9, audioIncorrect10
+    ];
+    const randomIncorrect = incorrectSounds[Math.floor(Math.random() * incorrectSounds.length)];
+    playSound(randomIncorrect);
 }
 function playBgMusic() {
     if (!isMuted) {
@@ -272,8 +337,13 @@ muteToggle.addEventListener('click', () => {
     
     // Create an array of all audio elements
     const allAudioElements = [
-        audioCorrect1, audioCorrect2, audioWrong, audioTimeup,
-        audioRiser, ...audioBgTracks, audioTimerTick, audioTickingTime,
+        audioCorrect1, audioCorrect2, audioCorrect3, audioCorrect4, 
+        audioCorrect5, audioCorrect6, audioCorrect7, audioCorrect8, 
+        audioCorrect9, audioCorrect10, audioCorrect11, audioCorrect12,
+        audioWrong, audioIncorrect1, audioIncorrect2, audioIncorrect3, 
+        audioIncorrect4, audioIncorrect5, audioIncorrect6, audioIncorrect7, 
+        audioIncorrect8, audioIncorrect9, audioIncorrect10, audioTimeup, 
+        audioRiser, ...audioBgTracks, audioTimerTick, audioTickingTime, 
         audioTransition, audioTransition2
     ];
     
@@ -1316,7 +1386,11 @@ function showAchievementBadge(achievement, options = {}) {
   
   // Play achievement sound with variety
   if (config.playSound) {
-    const sounds = [audioRiser, audioCorrect1, audioCorrect2];
+    const sounds = [
+      audioRiser, audioCorrect1, audioCorrect2, audioCorrect3, audioCorrect4, 
+      audioCorrect5, audioCorrect6, audioCorrect7, audioCorrect8, 
+      audioCorrect9, audioCorrect10, audioCorrect11, audioCorrect12
+    ];
     const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
     playSound(randomSound);
     
@@ -2309,7 +2383,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 wagerFeedback.style.color = '#4caf50';
             }
         } else {
-            playSound(audioWrong);
+            playIncorrectSound();
             shakeElement(selectedBtn);
             if (gameMode === 'solo') {
                 const oldScore = playerScore;

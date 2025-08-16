@@ -2338,7 +2338,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (correct) {
             playCorrectSound();
-            selectedBtn.classList.add('correct', 'highlight-correct');
+            selectedBtn.classList.add('correct', 'highlight-correct', 'green-flash');
+            // Remove green flash after animation completes
+            setTimeout(() => selectedBtn.classList.remove('green-flash'), 500);
             console.log('🎯 Debug: Added highlight to correct answer:', selectedBtn.innerText);
             
             // Use computed points to ensure the awarded score matches the wager
@@ -2385,6 +2387,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             playIncorrectSound();
             shakeElement(selectedBtn);
+            selectedBtn.classList.add('incorrect', 'red-flash');
+            // Remove red flash after animation completes
+            setTimeout(() => selectedBtn.classList.remove('red-flash'), 500);
             if (gameMode === 'solo') {
                 const oldScore = playerScore;
                 playerScore = Math.max(0, playerScore - wager);
@@ -2395,7 +2400,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 else teamBlackScore = Math.max(0, teamBlackScore - wager);
                 currentStreak = 0;
             }
-            selectedBtn.classList.add('incorrect');
             // Visual feedback for wager result
             wagerInput.classList.remove('wager-success', 'wager-failure');
             wagerInput.classList.add('wager-failure');
@@ -2590,7 +2594,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => gameDiv.classList.remove('container-shake'), 500);
         
         Array.from(optionsDiv.children).forEach(btn => {
-            if (btn.innerText === questions[currentQuestionIndex].answer) btn.classList.add('correct');
+            if (btn.innerText === questions[currentQuestionIndex].answer) {
+                btn.classList.add('correct', 'green-flash');
+                // Remove green flash after animation completes
+                setTimeout(() => btn.classList.remove('green-flash'), 500);
+            }
             btn.disabled = true;
         });
 

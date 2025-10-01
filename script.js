@@ -4996,12 +4996,6 @@ function submitToLeaderboard(score, time) {
 */
 
 // This function is no longer needed to submit the score, just to show the modal
-function showLeaderboardAfterGame() {
-  console.log('showLeaderboardAfterGame called');
-  fetchAndDisplayLeaderboard(); // Refresh the data
-  // The rest of the logic to show the modal is handled by event listeners
-}
-
 // --- END LEADERBOARD LOGIC ---
 
 // --- AUTHENTICATION SETUP ---

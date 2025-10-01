@@ -1749,10 +1749,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setupAuthListener();
 
-            testFirebaseConnection();
-
-            fetchAndDisplayLeaderboard();
-
             completePendingRedirectSignIn();
 
         } else if (typeof firebaseConfig === 'undefined') {
@@ -4611,6 +4607,12 @@ function testFirebaseConnection() {
     return;
   }
 
+  const activeUser = auth && auth.currentUser;
+  if (!activeUser) {
+    console.log('ℹ️ Skipping Firestore connection test - no authenticated user. Sign in to verify database access.');
+    return;
+  }
+
   // Try to access leaderboard collection instead of test
   db.collection('leaderboard').limit(1).get()
     .then((snapshot) => {
@@ -5161,6 +5163,7 @@ function setupAuthListener() {
             updateUserInfoUI();
 
             if (user) {
+                testFirebaseConnection();
                 fetchAndDisplayLeaderboard();
             } else {
                 renderLeaderboardMessage('Sign in with Google to view the leaderboard.', { icon: '🔒', color: '#ffcc80' });

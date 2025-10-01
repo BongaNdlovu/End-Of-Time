@@ -1693,10 +1693,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateUserInfoUI();
                 }
             }).catch(error => {
-                if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/internal-error') {
-                    console.error('❌ Google sign-in failed:', error);
+                // Don't suppress auth/internal-error - we need to see it
+                if (error.code !== 'auth/popup-closed-by-user') {
+                    console.error('❌ Sign-in error:', error);
+                    console.error('Error code:', error.code);
+                    console.error('Error message:', error.message);
+                    
+                    // Provide helpful diagnostic information
+                    if (error.code === 'auth/internal-error') {
+                        console.error('🔧 TROUBLESHOOTING auth/internal-error:');
+                        console.error('1. Check Firebase Console → Authentication → Settings → Authorized domains');
+                        console.error('   Add: ' + window.location.hostname);
+                        console.error('2. Check Google Cloud Console → APIs & Services → Credentials');
+                        console.error('   OAuth 2.0 Client → Authorized redirect URIs should include:');
+                        console.error('   https://' + firebaseConfig.authDomain + '/__/auth/handler');
+                        console.error('3. Clear browser cache and cookies, then try again');
+                        console.error('4. Try in a different browser or incognito mode');
+                        console.error('5. Ensure third-party cookies are enabled');
+                        
+                        // Show user-friendly error message
+                        alert('Sign-in configuration error. Please check:\n\n' +
+                              '1. Your browser allows third-party cookies\n' +
+                              '2. You\'re not in incognito/private mode\n' +
+                              '3. Your browser cache is cleared\n\n' +
+                              'If the problem persists, the app administrator needs to verify Firebase OAuth settings.');
+                    }
                 }
             });
+
+            // Add Firebase configuration diagnostic
+            console.log('🔍 Firebase Configuration Check:');
+            console.log('  Project ID:', firebaseConfig.projectId);
+            console.log('  Auth Domain:', firebaseConfig.authDomain);
+            console.log('  Current URL:', window.location.href);
+            console.log('  Current Domain:', window.location.hostname);
+            console.log('  Protocol:', window.location.protocol);
+            
+            // Check if running locally
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log('⚠️ Running locally - Make sure localhost is in Firebase authorized domains');
+            }
 
             // Test Firebase connection
             testFirebaseConnection();
@@ -3847,6 +3883,16 @@ googleSigninBtn.onclick = function() {
           case 'auth/operation-not-allowed':
             errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
             break;
+          case 'auth/internal-error':
+            errorMessage = 'Authentication configuration error.\n\n' +
+                          'Please try:\n' +
+                          '1. Clear your browser cache and cookies\n' +
+                          '2. Enable third-party cookies in browser settings\n' +
+                          '3. Disable any ad blockers or privacy extensions\n' +
+                          '4. Try a different browser\n\n' +
+                          'If the issue persists, contact the administrator.';
+            console.error('🔧 Admin: Check Firebase OAuth configuration');
+            break;
           default:
             errorMessage += 'Please try again.';
         }
@@ -3867,8 +3913,21 @@ googleSignoutBtn.onclick = function() {
 const mainSigninBtn = document.getElementById('main-signin-btn');
 if (mainSigninBtn) {
   mainSigninBtn.onclick = function() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithRedirect(provider);  // Changed from signInWithPopup to signInWithRedirect
+    console.log('🔐 Initiating Google sign-in with redirect...');
+    console.log('Current domain:', window.location.hostname);
+    console.log('Auth domain:', firebaseConfig.authDomain);
+    
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      // Add custom parameters to improve reliability
+      provider.setCustomParameters({
+        prompt: 'select_account'
+      });
+      auth.signInWithRedirect(provider);  // Changed from signInWithPopup to signInWithRedirect
+    } catch (error) {
+      console.error('❌ Error initiating sign-in:', error);
+      alert('Failed to start sign-in process. Please refresh the page and try again.');
+    }
   };
 }
 

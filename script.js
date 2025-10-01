@@ -3855,16 +3855,25 @@ const mainSigninBtn = document.getElementById('main-signin-btn');
 if (mainSigninBtn) {
   mainSigninBtn.onclick = function() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider).then(result => {
-      console.log('✅ Google sign-in successful:', result.user.displayName);
-      currentUser = result.user;
-      updateUserInfoUI();
-    }).catch(error => {
-      console.error('❌ Google sign-in failed:', error);
-      alert('Failed to sign in with Google. Please try again.');
-    });
+    auth.signInWithRedirect(provider);  // Changed from signInWithPopup to signInWithRedirect
   };
-  
+}
+
+// Handle redirect result when user returns from Google sign-in
+auth.getRedirectResult().then(result => {
+  if (result.user) {
+    console.log('✅ Google sign-in successful:', result.user.displayName);
+    currentUser = result.user;
+    updateUserInfoUI();
+  }
+}).catch(error => {
+  if (error.code !== 'auth/popup-closed-by-user') {
+    console.error('❌ Google sign-in failed:', error);
+    alert('Failed to sign in with Google. Please try again.');
+  }
+});
+
+if (mainSigninBtn) {
   // Add hover effects
   mainSigninBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';

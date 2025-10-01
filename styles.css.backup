@@ -1,0 +1,60 @@
+/**
+ * SDA Trivia Challenge - Styles
+ * =============================
+ *
+ * This file contains the CSS styles for the SDA Trivia Challenge game.
+ * It implements a modern comic-inspired glassmorphism design with responsive layouts,
+ * animations, and visual feedback elements.
+ *
+ * STYLE FEATURES:
+ * --------------
+ * - Glassmorphism containers with backdrop filters and subtle borders
+ * - Comic-inspired typography using 'Bangers' for headings and 'Inter' for body text
+ * - Animated feedback for user interactions (correct/incorrect answers, score changes)
+ * - Responsive design with breakpoints at 800px and 500px
+ * - Visual feedback for game states (wager success/failure, progress bar)
+ * - Comic-style animations (fireworks, countdown, slide transitions)
+ * - Special "prophecy mode" with grayscale color scheme
+ *
+ * COLOR PALETTE:
+ * -------------
+ * - Background: Dark gradient (#232526 to #414345)
+ * - Primary accent: Gold (#ffd700)
+ * - Secondary accent: Coral red (#ff4b5c)
+ * - Success: Green (#4caf50)
+ * - Error: Red (#ff4b5c)
+ * - Text: White (#fff) on dark backgrounds, Dark (#222) on light backgrounds
+ *
+ * FUTURE IMPROVEMENTS:
+ * ------------------
+ * 1. Implement CSS variables for colors and common values for easier theming
+ * 2. Add more theme options beyond the prophecy mode (e.g., "Great Controversy" theme)
+ * 3. Improve accessibility with better contrast ratios and focus states
+ * 4. Optimize animations for performance on lower-end devices
+ * 5. Add print styles for downloadable content
+ * 6. Consider using CSS Grid for more complex layouts
+ * 7. Add dark/light mode toggle with prefers-color-scheme support
+ * 8. Implement smoother transitions between game states
+ * 9. Add more responsive breakpoints for larger screens
+ * 10. Consider using SCSS/SASS for better organization of styles
+ */
+
+/* --- Montserrat Local Fonts --- */
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url('Montserrat-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat-BoldItalic';
+    src: url('Montserrat-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}

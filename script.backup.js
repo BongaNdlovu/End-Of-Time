@@ -4875,8 +4875,11 @@ function fetchAndDisplayLeaderboard() {
         return;
     }
 
-    // Allow viewing leaderboard without authentication (per Firebase rules: allow read: if true)
-    // User row highlighting will still work conditionally when signed in
+    if (!auth || !currentUser) {
+        leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ffcc00;">Sign in with Google to view the global leaderboard.</td></tr>';
+        return;
+    }
+
     leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">Loading...</td></tr>';
 
     db.collection('leaderboard')
@@ -4889,26 +4892,6 @@ function fetchAndDisplayLeaderboard() {
             if (querySnapshot.empty) {
                 leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">The leaderboard is empty. Be the first!</td></tr>';
                 return;
-            }
-
-            // Add sign-in prompt for unauthenticated users
-            if (!currentUser) {
-                const signInPrompt = `
-                    <tr style="background:rgba(139,0,0,0.15);border-bottom:2px solid rgba(139,0,0,0.3);">
-                        <td colspan="5" style="padding:1.2rem;text-align:center;">
-                            <p style="margin:0 0 0.8rem;color:#ffcc00;font-weight:bold;font-size:1.05rem;">
-                                🎮 Sign in to save your scores and compete on the leaderboard!
-                            </p>
-                            <button onclick="document.getElementById('google-signin-btn').click()"
-                                    class="comic-button"
-                                    style="background:#4285f4;color:#fff;border:none;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:bold;box-shadow:0 4px 8px rgba(66,133,244,0.3);transition:all 0.2s;">
-                                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" style="width:18px;height:18px;vertical-align:middle;margin-right:0.5rem;">
-                                Sign In with Google
-                            </button>
-                        </td>
-                    </tr>
-                `;
-                leaderboardBody.insertAdjacentHTML('beforeend', signInPrompt);
             }
 
             querySnapshot.forEach((doc, index) => {

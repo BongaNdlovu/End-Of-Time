@@ -223,6 +223,22 @@
             firebase.initializeApp(firebaseConfig);
             auth = firebase.auth();
             console.log('✅ Firebase initialized for menu page');
+
+            // Handle redirect result when user returns from Google sign-in
+            auth.getRedirectResult()
+                .then(result => {
+                    if (result.user) {
+                        console.log('✅ Google sign-in successful:', result.user.displayName);
+                        currentUser = result.user;
+                        updateAuthUI();
+                        playSelectSound();
+                    }
+                })
+                .catch(error => {
+                    if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/internal-error') {
+                        console.error('❌ Sign-in error:', error);
+                    }
+                });
         } else {
             console.log('⚠️ Running locally - Firebase features disabled');
             auth = {
@@ -273,34 +289,6 @@
 
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithRedirect(provider);  // Changed from signInWithPopup to signInWithRedirect
-        }
-
-        // Handle redirect result when user returns from Google sign-in
-        auth.getRedirectResult()
-            .then(result => {
-                if (result.user) {
-                    console.log('✅ Google sign-in successful:', result.user.displayName);
-                    currentUser = result.user;
-                    updateAuthUI();
-                    playSelectSound();
-                }
-            })
-            .catch(error => {
-                if (error.code !== 'auth/popup-closed-by-user') {
-                    console.error('❌ Sign-in error:', error);
-                    let errorMessage = 'Failed to sign in with Google. ';
-                    switch(error.code) {
-                        case 'auth/popup-closed-by-user':
-                            errorMessage += 'Sign-in was cancelled.';
-                            break;
-                        case 'auth/popup-blocked':
-                            errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
-                            break;
-                        default:
-                            errorMessage += 'Please try again.';
-                    }
-                    alert(errorMessage);
-                });
         }
 
         function signOut() {

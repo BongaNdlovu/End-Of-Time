@@ -216,20 +216,37 @@
             measurementId: "G-E5R3NG1533"
         };
 
-        let auth, currentUser = null;
+        let auth = null, currentUser = null;
+        const isFileProtocol = window.location.protocol === 'file:';
 
-        // Initialize Firebase
-        if (window.location.protocol !== 'file:') {
-            firebase.initializeApp(firebaseConfig);
+        if (!isFileProtocol) {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
             auth = firebase.auth();
-            console.log('✅ Firebase initialized for menu page');
+            console.log('Firebase initialized for menu page');
+
+            auth.getRedirectResult()
+                .then(result => {
+                    if (result && result.user) {
+                        console.log('Google redirect sign-in successful:', result.user.displayName);
+                        currentUser = result.user;
+                        updateAuthUI();
+                        playSelectSound();
+                    }
+                })
+                .catch(error => {
+                    if (error && error.code && error.code !== 'auth/no-auth-event') {
+                        console.error('Redirect sign-in error:', error);
+                    }
+                });
         } else {
-            console.log('⚠️ Running locally - Firebase features disabled');
-            auth = {
-                onAuthStateChanged: (callback) => callback(null),
-                signInWithPopup: () => Promise.reject(new Error('Firebase disabled locally')),
-                signOut: () => Promise.resolve()
-            };
+            console.log('Running locally - Firebase features disabled');
+            const signinBtn = document.getElementById('google-signin-btn');
+            if (signinBtn) {
+                signinBtn.disabled = true;
+                signinBtn.textContent = 'Sign-in unavailable offline';
+            }
         }
 
         // Authentication Functions
@@ -258,54 +275,90 @@
                     userName.textContent = currentUser.displayName || currentUser.email || 'User';
                 }
             } else {
-                authMessage.textContent = 'Sign in to save your progress and compete on leaderboards';
+                if (isFileProtocol) {
+                    authMessage.textContent = 'Sign-in is unavailable while running offline.';
+                    signinBtn.disabled = true;
+                } else {
+                    authMessage.textContent = 'Sign in to save your progress and compete on leaderboards';
+                    signinBtn.disabled = false;
+                }
                 signinBtn.style.display = 'block';
                 signoutBtn.style.display = 'none';
                 userInfo.style.display = 'none';
             }
         }
 
-        function signInWithGoogle() {
+        async function signInWithGoogle() {
             if (window.location.protocol === 'file:') {
                 alert('Firebase authentication is not available when running locally. Please host the files on a web server.');
                 return;
             }
 
+            if (!auth) {
+                alert('Firebase authentication is not available right now. Please try again later.');
+                return;
+            }
+
             const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then(result => {
-                    console.log('✅ Google sign-in successful:', result.user.displayName);
+            try {
+                const result = await auth.signInWithPopup(provider);
+                if (result && result.user) {
+                    console.log('Google sign-in successful:', result.user.displayName);
                     currentUser = result.user;
                     updateAuthUI();
                     playSelectSound();
-                })
-                .catch(error => {
-                    console.error('❌ Sign-in error:', error);
-                    let errorMessage = 'Failed to sign in with Google. ';
-                    switch(error.code) {
-                        case 'auth/popup-closed-by-user':
-                            errorMessage += 'Sign-in was cancelled.';
-                            break;
-                        case 'auth/popup-blocked':
-                            errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
-                            break;
-                        default:
-                            errorMessage += 'Please try again.';
+                }
+            } catch (error) {
+                if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+                    console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
+                    try {
+                        await auth.signInWithRedirect(provider);
+                        return;
+                    } catch (redirectError) {
+                        console.error('Redirect sign-in failed:', redirectError);
+                        alert('Failed to sign in with Google. Please try again.');
+                        return;
                     }
-                    alert(errorMessage);
-                });
+                }
+
+                console.error('Sign-in error:', error);
+                let errorMessage = 'Failed to sign in with Google. ';
+                switch(error && error.code) {
+                    case 'auth/popup-closed-by-user':
+                        errorMessage += 'Sign-in was cancelled.';
+                        break;
+                    case 'auth/popup-blocked':
+                        errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
+                        break;
+                    case 'auth/unauthorized-domain':
+                        errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
+                        break;
+                    case 'auth/operation-not-allowed':
+                        errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
+                        break;
+                    default:
+                        errorMessage += 'Please try again.';
+                }
+                alert(errorMessage);
+            }
         }
 
         function signOut() {
+            if (!auth) {
+                currentUser = null;
+                updateAuthUI();
+                return;
+            }
+
             auth.signOut()
                 .then(() => {
-                    console.log('✅ Sign out successful');
+                    console.log('Sign out successful');
                     currentUser = null;
                     updateAuthUI();
                     playSelectSound();
                 })
                 .catch(error => {
-                    console.error('❌ Sign-out error:', error);
+                    console.error('Sign-out error:', error);
                     alert('Failed to sign out. Please try again.');
                 });
         }

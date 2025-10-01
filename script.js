@@ -1680,26 +1680,110 @@ const debounce = (func, wait) => {
 // --- DOMContentLoaded for all DOM queries and listeners ---
 document.addEventListener('DOMContentLoaded', () => {
     // --- INITIALIZE FIREBASE APP ---
-    try {
-        if (typeof firebaseConfig !== 'undefined') {
-            firebase.initializeApp(firebaseConfig);
-            db = firebase.firestore();
-            auth = firebase.auth();
-            console.log("✅ Firebase initialized successfully.");
 
-            // Now that Firebase is initialized, set up auth state listener
+    const isFileProtocol = window.location.protocol === 'file:';
+
+    try {
+
+        if (isFileProtocol) {
+
+            console.warn('Firebase features are disabled when running from local files. Sign-in and leaderboard will be unavailable.');
+
+            const statusContainer = document.getElementById('signin-status-container');
+
+            if (statusContainer) {
+
+                statusContainer.innerHTML = '<p style="color:#d4af37;">Firebase features are disabled while running offline.</p>';
+
+            }
+
+            const inlineGoogleSigninBtn = document.getElementById('google-signin-btn');
+
+            if (inlineGoogleSigninBtn) {
+
+                inlineGoogleSigninBtn.disabled = true;
+
+                inlineGoogleSigninBtn.textContent = 'Sign-in unavailable offline';
+
+            }
+
+            const mainSigninBtnElement = document.getElementById('main-signin-btn');
+
+            if (mainSigninBtnElement) {
+
+                mainSigninBtnElement.disabled = true;
+
+                mainSigninBtnElement.textContent = 'Sign-in unavailable offline';
+
+            }
+
+            const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+
+            if (leaderboardBtn) {
+
+                leaderboardBtn.disabled = true;
+
+            }
+
+        }
+
+        if (typeof firebase === 'undefined') {
+
+            throw new Error('Firebase SDK not detected. Ensure firebase-app-compat.js is loaded before script.js.');
+
+        }
+
+        if (typeof firebaseConfig !== 'undefined' && !isFileProtocol) {
+
+            if (!firebase.apps.length) {
+
+                firebase.initializeApp(firebaseConfig);
+
+            }
+
+            db = firebase.firestore();
+
+            auth = firebase.auth();
+
+            console.log('Firebase initialized successfully.');
+
             setupAuthListener();
 
-            // Test Firebase connection
             testFirebaseConnection();
 
-            // Fetch leaderboard now that Firestore is available
             fetchAndDisplayLeaderboard();
-        } else {
-            console.error("❌ Firebase config object is missing. Cannot initialize Firebase.");
-            document.getElementById('signin-status-container').innerHTML = '<p style="color:red;">Firebase not configured.</p>';
-            document.getElementById('view-leaderboard-btn').disabled = true;
+
+            completePendingRedirectSignIn();
+
+        } else if (typeof firebaseConfig === 'undefined') {
+
+            console.error('Firebase config object is missing. Cannot initialize Firebase.');
+
+            const statusContainer = document.getElementById('signin-status-container');
+
+            if (statusContainer) {
+
+                statusContainer.innerHTML = '<p style="color:red;">Firebase not configured.</p>';
+
+            }
+
+            const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+
+            if (leaderboardBtn) {
+
+                leaderboardBtn.disabled = true;
+
+            }
+
         }
+
+    } catch (error) {
+
+        console.error('Error initializing Firebase:', error);
+
+    }
+
+
 
         // Initialize audio system
         if (typeof AudioManager !== 'undefined' && AudioManager.init) {
@@ -1708,9 +1792,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             console.warn("⚠️ AudioManager not available. Audio features may not work.");
         }
-    } catch (error) {
-        console.error("❌ Error initializing Firebase:", error);
-    }
     
     // Debug audio elements to check if they're properly loaded
     debugAudioElements();
@@ -1810,19 +1891,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const skipBtn = document.getElementById('signin-prompt-skip-btn');
             const closeBtn = document.getElementById('signin-prompt-close-btn');
             
-            googleBtn.onclick = () => {
+            googleBtn.onclick = async () => {
+                if (!auth) {
+                    alert('Firebase authentication is not available right now. Please try again later.');
+                    return;
+                }
                 const provider = new firebase.auth.GoogleAuthProvider();
-                auth.signInWithPopup(provider).then(result => {
-                    console.log('✅ Google sign-in successful:', result.user.displayName);
-                    currentUser = result.user;
-                    hideSignInPromptModal();
-                    // Start game after successful sign-in
-                    exitBtn.style.display = 'block';
-                    startGame(gameMode, currentGameLevel || 1);
-                }).catch(error => {
-                    console.error('❌ Google sign-in failed:', error);
+                try {
+                    const result = await auth.signInWithPopup(provider);
+                    if (result && result.user) {
+                        console.log('Google sign-in successful:', result.user.displayName);
+                        currentUser = result.user;
+                        hideSignInPromptModal();
+                        exitBtn.style.display = 'block';
+                        startGame(gameMode, currentGameLevel || 1);
+                    }
+                } catch (error) {
+                    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+                        console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
+                        try {
+                            await auth.signInWithRedirect(provider);
+                            return;
+                        } catch (redirectError) {
+                            console.error('Redirect sign-in failed:', redirectError);
+                            alert('Failed to sign in with Google. Please try again.');
+                            return;
+                        }
+                    }
+                    console.error('Google sign-in failed:', error);
                     alert('Failed to sign in with Google. Please try again.');
-                });
+                }
             };
             
             skipBtn.onclick = () => {
@@ -3789,64 +3887,78 @@ function updateUserInfoUI() {
 }
 
 // Enhanced Google sign-in with proper error handling
-googleSigninBtn.onclick = function() {
+googleSigninBtn.onclick = async function() {
   console.log('Attempting Google sign-in...');
-  
-  // Check if page is still active
+
   if (document.hidden) {
-    console.log('⚠️ Page is hidden, skipping sign-in');
+    console.log('Warning: Page is hidden, skipping sign-in');
     return;
   }
-  
+
+  if (!auth) {
+    alert('Firebase authentication is not available right now. Please try again later.');
+    return;
+  }
+
   const provider = new firebase.auth.GoogleAuthProvider();
-  
-  // Add timeout to prevent hanging
   const signInPromise = auth.signInWithPopup(provider);
   const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => reject(new Error('Sign-in timeout')), 30000); // 30 second timeout
+    setTimeout(() => reject(new Error('Sign-in timeout')), 30000);
   });
-  
-  Promise.race([signInPromise, timeoutPromise])
-    .then(result => {
-      // Check if page is still active before updating UI
-      if (!document.hidden) {
-        console.log('✅ Google sign-in successful:', result.user.displayName);
-        currentUser = result.user;
-        updateUserInfoUI();
-      } else {
-        console.log('⚠️ Page became hidden during sign-in, skipping UI update');
+
+  try {
+    const result = await Promise.race([signInPromise, timeoutPromise]);
+    if (!document.hidden && result && result.user) {
+      console.log('Google sign-in successful:', result.user.displayName);
+      currentUser = result.user;
+      updateUserInfoUI();
+    } else if (document.hidden) {
+      console.log('Warning: Page became hidden during sign-in, skipping UI update');
+    }
+  } catch (error) {
+    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+      console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
+      try {
+        await auth.signInWithRedirect(provider);
+        return;
+      } catch (redirectError) {
+        console.error('Redirect sign-in failed:', redirectError);
+        error = redirectError;
       }
-    })
-    .catch(error => {
-      // Only log errors if page is still active
-      if (!document.hidden) {
-        console.error('❌ Google sign-in failed:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
-        
-        // More specific error messages
-        let errorMessage = 'Failed to sign in with Google. ';
-        switch(error.code) {
-          case 'auth/popup-closed-by-user':
-            errorMessage += 'Sign-in was cancelled.';
-            break;
-          case 'auth/popup-blocked':
-            errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
-            break;
-          case 'auth/unauthorized-domain':
-            errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
-            break;
-          case 'auth/operation-not-allowed':
-            errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
-            break;
-          default:
-            errorMessage += 'Please try again.';
-        }
-        alert(errorMessage);
+    }
+
+    if (!document.hidden) {
+      console.error('Google sign-in failed:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
+
+      let errorMessage = 'Failed to sign in with Google. ';
+      switch (error && error.code) {
+        case 'auth/popup-closed-by-user':
+          errorMessage += 'Sign-in was cancelled.';
+          break;
+        case 'auth/popup-blocked':
+          errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
+          break;
+        case 'auth/unauthorized-domain':
+          errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
+          break;
+        case 'auth/operation-not-allowed':
+          errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
+          break;
+        default:
+          errorMessage += 'Please try again.';
       }
-    });
+      alert(errorMessage);
+    }
+  }
 };
 googleSignoutBtn.onclick = function() {
+  if (!auth) {
+    currentUser = null;
+    updateUserInfoUI();
+    return;
+  }
   auth.signOut().then(() => {
     currentUser = null;
     updateUserInfoUI();
@@ -3858,24 +3970,42 @@ googleSignoutBtn.onclick = function() {
 // Main menu sign-in button
 const mainSigninBtn = document.getElementById('main-signin-btn');
 if (mainSigninBtn) {
-  mainSigninBtn.onclick = function() {
+  mainSigninBtn.onclick = async function() {
+    if (!auth) {
+      alert('Firebase authentication is not available right now. Please try again later.');
+      return;
+    }
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider).then(result => {
-      console.log('✅ Google sign-in successful:', result.user.displayName);
-      currentUser = result.user;
-      updateUserInfoUI();
-    }).catch(error => {
-      console.error('❌ Google sign-in failed:', error);
+    try {
+      const result = await auth.signInWithPopup(provider);
+      if (result && result.user) {
+        console.log('Google sign-in successful:', result.user.displayName);
+        currentUser = result.user;
+        updateUserInfoUI();
+      }
+    } catch (error) {
+      if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+        console.warn('Popup sign-in failed, falling back to redirect flow.', error);
+        try {
+          await auth.signInWithRedirect(provider);
+          return;
+        } catch (redirectError) {
+          console.error('Redirect sign-in failed:', redirectError);
+          alert('Failed to sign in with Google. Please try again.');
+          return;
+        }
+      }
+      console.error('Google sign-in failed:', error);
       alert('Failed to sign in with Google. Please try again.');
-    });
+    }
   };
-  
+
   // Add hover effects
   mainSigninBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';
     this.style.boxShadow = '0 6px 20px rgba(66,133,244,0.4)';
   });
-  
+
   mainSigninBtn.addEventListener('mouseleave', function() {
     this.style.transform = 'translateY(0) scale(1)';
     this.style.boxShadow = '0 4px 15px rgba(66,133,244,0.3)';
@@ -3886,6 +4016,11 @@ if (mainSigninBtn) {
 const mainSignoutBtn = document.getElementById('main-signout-btn');
 if (mainSignoutBtn) {
   mainSignoutBtn.onclick = function() {
+    if (!auth) {
+      currentUser = null;
+      updateUserInfoUI();
+      return;
+    }
     auth.signOut().then(() => {
       currentUser = null;
       updateUserInfoUI();
@@ -3893,13 +4028,13 @@ if (mainSignoutBtn) {
       console.error('Error signing out:', error);
     });
   };
-  
+
   // Add hover effects
   mainSignoutBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';
     this.style.boxShadow = '0 6px 20px rgba(102,102,102,0.4)';
   });
-  
+
   mainSignoutBtn.addEventListener('mouseleave', function() {
     this.style.transform = 'translateY(0) scale(1)';
     this.style.boxShadow = '0 4px 15px rgba(102,102,102,0.3)';
@@ -4983,6 +5118,25 @@ function setupAuthListener() {
             updateUserInfoUI();
         });
     }
+}
+
+function completePendingRedirectSignIn() {
+    if (!auth || typeof auth.getRedirectResult !== 'function') {
+        return;
+    }
+    auth.getRedirectResult()
+        .then((result) => {
+            if (result && result.user) {
+                console.log('Google redirect sign-in successful:', result.user.displayName);
+                currentUser = result.user;
+                updateUserInfoUI();
+            }
+        })
+        .catch((error) => {
+            if (error && error.code && error.code !== 'auth/no-auth-event') {
+                console.error('Google redirect sign-in failed:', error);
+            }
+        });
 }
 
 // ... existing code ...

@@ -1888,35 +1888,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const closeBtn = document.getElementById('signin-prompt-close-btn');
             
             googleBtn.onclick = async () => {
-                if (!auth) {
-                    alert('Firebase authentication is not available right now. Please try again later.');
-                    return;
-                }
-                const provider = new firebase.auth.GoogleAuthProvider();
-                try {
-                    const result = await auth.signInWithPopup(provider);
-                    if (result && result.user) {
-                        console.log('Google sign-in successful:', result.user.displayName);
-                        currentUser = result.user;
+                await startGoogleSignIn({
+                    source: 'signin-prompt-modal',
+                    onSuccess: () => {
                         hideSignInPromptModal();
                         exitBtn.style.display = 'block';
                         startGame(gameMode, currentGameLevel || 1);
+                    },
+                    onRedirect: () => {
+                        storePostSignInAction({
+                            type: 'startGame',
+                            mode: gameMode,
+                            level: currentGameLevel || 1
+                        });
                     }
-                } catch (error) {
-                    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
-                        console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
-                        try {
-                            await auth.signInWithRedirect(provider);
-                            return;
-                        } catch (redirectError) {
-                            console.error('Redirect sign-in failed:', redirectError);
-                            alert('Failed to sign in with Google. Please try again.');
-                            return;
-                        }
-                    }
-                    console.error('Google sign-in failed:', error);
-                    alert('Failed to sign in with Google. Please try again.');
-                }
+                });
             };
             
             skipBtn.onclick = () => {
@@ -3823,6 +3809,209 @@ const userInfoDiv = document.getElementById('user-info');
 const optoutCheckbox = document.getElementById('optout-leaderboard');
 const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
 
+const POST_SIGNIN_ACTION_STORAGE_KEY = 'endOfTime:postSignInAction';
+const GOOGLE_POPUP_FALLBACK_ERROR_CODES = new Set([
+  'auth/operation-not-supported-in-this-environment',
+  'auth/popup-blocked',
+  'auth/internal-error',
+  'auth/network-request-failed',
+  'auth/web-storage-unsupported',
+  'auth/cors-unsupported'
+]);
+const GOOGLE_SIGNIN_CANCELLATION_CODES = new Set([
+  'auth/popup-closed-by-user',
+  'auth/cancelled-popup-request'
+]);
+
+function prefersRedirectSignIn() {
+  const ua = navigator.userAgent || '';
+  const isIOS = /iP(ad|hone|od)/i.test(ua);
+  const isStandalonePWA = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  const isEmbeddedWebView = /(FBAN|FBAV|Instagram|Line|LinkedInApp|WebView|wv)/i.test(ua);
+  return isIOS || isStandalonePWA || isEmbeddedWebView;
+}
+
+function shouldFallbackToRedirect(error) {
+  if (!error) return false;
+  if (!error.code && error.message === 'Sign-in timeout') {
+    return true;
+  }
+  return GOOGLE_POPUP_FALLBACK_ERROR_CODES.has(error.code || '');
+}
+
+function showGoogleSignInError(error) {
+  if (!error) {
+    return;
+  }
+
+  const errorCode = error.code || '';
+  if (GOOGLE_SIGNIN_CANCELLATION_CODES.has(errorCode)) {
+    console.warn('Google sign-in cancelled or interrupted by the user/browser.', error);
+    return;
+  }
+
+  console.error('Google sign-in failed:', error);
+
+  let errorMessage = 'Failed to sign in with Google. ';
+  switch (errorCode) {
+    case 'auth/popup-blocked':
+      errorMessage += 'Pop-up was blocked by your browser. Please allow pop-ups for this site or try again.';
+      break;
+    case 'auth/unauthorized-domain':
+      errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
+      break;
+    case 'auth/operation-not-allowed':
+      errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
+      break;
+    case 'auth/operation-not-supported-in-this-environment':
+      errorMessage += 'Your browser does not support pop-up sign-in. We attempted to fall back to redirect, but it was blocked.';
+      break;
+    default:
+      errorMessage += 'Please try again.';
+  }
+
+  alert(errorMessage);
+}
+
+function storePostSignInAction(action) {
+  if (!action) return;
+  try {
+    sessionStorage.setItem(POST_SIGNIN_ACTION_STORAGE_KEY, JSON.stringify(action));
+  } catch (error) {
+    console.warn('Unable to persist post sign-in action:', error);
+  }
+}
+
+function consumePostSignInAction() {
+  try {
+    const raw = sessionStorage.getItem(POST_SIGNIN_ACTION_STORAGE_KEY);
+    if (!raw) {
+      return null;
+    }
+    sessionStorage.removeItem(POST_SIGNIN_ACTION_STORAGE_KEY);
+    return JSON.parse(raw);
+  } catch (error) {
+    console.warn('Unable to read post sign-in action:', error);
+    sessionStorage.removeItem(POST_SIGNIN_ACTION_STORAGE_KEY);
+    return null;
+  }
+}
+
+function executePostSignInAction(action) {
+  if (!action || typeof action !== 'object') {
+    return;
+  }
+
+  switch (action.type) {
+    case 'startGame': {
+      const mode = action.mode || 'solo';
+      const level = action.level || currentGameLevel || 1;
+      const signInModal = document.getElementById('signin-prompt-modal');
+      if (signInModal) {
+        signInModal.style.display = 'none';
+      }
+      if (exitBtn) {
+        exitBtn.style.display = 'block';
+      }
+      if (typeof window.startGame === 'function') {
+        window.startGame(mode, level);
+      } else {
+        console.warn('startGame is not available when trying to resume play after sign-in.');
+      }
+      break;
+    }
+    default:
+      console.log('No handler for post sign-in action:', action);
+  }
+}
+
+function createGoogleAuthProvider() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  if (typeof provider.setCustomParameters === 'function') {
+    provider.setCustomParameters({ prompt: 'select_account' });
+  }
+  return provider;
+}
+
+async function startGoogleSignIn({ source = 'unknown', onSuccess, onRedirect } = {}) {
+  console.log(`Attempting Google sign-in (${source})...`);
+
+  if (document.hidden) {
+    console.log('Warning: Page is hidden, skipping sign-in');
+    return null;
+  }
+
+  if (!auth) {
+    alert('Firebase authentication is not available right now. Please try again later.');
+    return null;
+  }
+
+  const provider = createGoogleAuthProvider();
+  const handleRedirectPreparation = () => {
+    if (typeof onRedirect === 'function') {
+      try {
+        onRedirect();
+      } catch (callbackError) {
+        console.error('Error in onRedirect callback:', callbackError);
+      }
+    }
+  };
+
+  if (prefersRedirectSignIn()) {
+    console.log('Environment prefers redirect sign-in. Using redirect flow.');
+    handleRedirectPreparation();
+    try {
+      await auth.signInWithRedirect(provider);
+      return null;
+    } catch (redirectError) {
+      console.error('Redirect sign-in failed:', redirectError);
+      showGoogleSignInError(redirectError);
+      consumePostSignInAction();
+      return null;
+    }
+  }
+
+  let timeoutId;
+  try {
+    const signInPromise = auth.signInWithPopup(provider);
+    const timeoutPromise = new Promise((_, reject) => {
+      timeoutId = setTimeout(() => reject(new Error('Sign-in timeout')), 30000);
+    });
+    const result = await Promise.race([signInPromise, timeoutPromise]);
+    clearTimeout(timeoutId);
+
+    if (result && result.user) {
+      console.log('Google sign-in successful:', result.user.displayName);
+      currentUser = result.user;
+      updateUserInfoUI();
+      if (typeof onSuccess === 'function') {
+        onSuccess(result.user);
+      }
+      return result.user;
+    }
+    return null;
+  } catch (error) {
+    clearTimeout(timeoutId);
+
+    if (shouldFallbackToRedirect(error)) {
+      console.warn('Popup sign-in failed or unsupported. Falling back to redirect flow.', error);
+      handleRedirectPreparation();
+      try {
+        await auth.signInWithRedirect(provider);
+        return null;
+      } catch (redirectError) {
+        console.error('Redirect sign-in failed:', redirectError);
+        showGoogleSignInError(redirectError);
+        consumePostSignInAction();
+        return null;
+      }
+    }
+
+    showGoogleSignInError(error);
+    return null;
+  }
+}
+
 function showLeaderboardModal() {
   leaderboardModal.style.display = 'flex';
   leaderboardModal.style.opacity = '0';
@@ -3884,70 +4073,7 @@ function updateUserInfoUI() {
 
 // Enhanced Google sign-in with proper error handling
 googleSigninBtn.onclick = async function() {
-  console.log('Attempting Google sign-in...');
-
-  if (document.hidden) {
-    console.log('Warning: Page is hidden, skipping sign-in');
-    return;
-  }
-
-  if (!auth) {
-    alert('Firebase authentication is not available right now. Please try again later.');
-    return;
-  }
-
-  const provider = new firebase.auth.GoogleAuthProvider();
-  const signInPromise = auth.signInWithPopup(provider);
-  const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => reject(new Error('Sign-in timeout')), 30000);
-  });
-
-  try {
-    const result = await Promise.race([signInPromise, timeoutPromise]);
-    if (!document.hidden && result && result.user) {
-      console.log('Google sign-in successful:', result.user.displayName);
-      currentUser = result.user;
-      updateUserInfoUI();
-    } else if (document.hidden) {
-      console.log('Warning: Page became hidden during sign-in, skipping UI update');
-    }
-  } catch (error) {
-    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
-      console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
-      try {
-        await auth.signInWithRedirect(provider);
-        return;
-      } catch (redirectError) {
-        console.error('Redirect sign-in failed:', redirectError);
-        error = redirectError;
-      }
-    }
-
-    if (!document.hidden) {
-      console.error('Google sign-in failed:', error);
-      console.error('Error code:', error.code);
-      console.error('Error message:', error.message);
-
-      let errorMessage = 'Failed to sign in with Google. ';
-      switch (error && error.code) {
-        case 'auth/popup-closed-by-user':
-          errorMessage += 'Sign-in was cancelled.';
-          break;
-        case 'auth/popup-blocked':
-          errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
-          break;
-        case 'auth/unauthorized-domain':
-          errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
-          break;
-        case 'auth/operation-not-allowed':
-          errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
-          break;
-        default:
-          errorMessage += 'Please try again.';
-      }
-      alert(errorMessage);
-    }
-  }
+  await startGoogleSignIn({ source: 'leaderboard-modal' });
 };
 googleSignoutBtn.onclick = function() {
   if (!auth) {
@@ -3967,33 +4093,7 @@ googleSignoutBtn.onclick = function() {
 const mainSigninBtn = document.getElementById('main-signin-btn');
 if (mainSigninBtn) {
   mainSigninBtn.onclick = async function() {
-    if (!auth) {
-      alert('Firebase authentication is not available right now. Please try again later.');
-      return;
-    }
-    const provider = new firebase.auth.GoogleAuthProvider();
-    try {
-      const result = await auth.signInWithPopup(provider);
-      if (result && result.user) {
-        console.log('Google sign-in successful:', result.user.displayName);
-        currentUser = result.user;
-        updateUserInfoUI();
-      }
-    } catch (error) {
-      if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
-        console.warn('Popup sign-in failed, falling back to redirect flow.', error);
-        try {
-          await auth.signInWithRedirect(provider);
-          return;
-        } catch (redirectError) {
-          console.error('Redirect sign-in failed:', redirectError);
-          alert('Failed to sign in with Google. Please try again.');
-          return;
-        }
-      }
-      console.error('Google sign-in failed:', error);
-      alert('Failed to sign in with Google. Please try again.');
-    }
+    await startGoogleSignIn({ source: 'main-menu' });
   };
 
   // Add hover effects
@@ -5163,6 +5263,10 @@ function setupAuthListener() {
             updateUserInfoUI();
 
             if (user) {
+                const pendingAction = consumePostSignInAction();
+                if (pendingAction) {
+                    executePostSignInAction(pendingAction);
+                }
                 testFirebaseConnection();
                 fetchAndDisplayLeaderboard();
             } else {

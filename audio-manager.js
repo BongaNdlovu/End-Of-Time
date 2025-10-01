@@ -189,7 +189,7 @@ function initCorrectSoundPool() {
     existingCorrectFiles.forEach((filename) => {
         try {
             const a = new Audio(filename);
-            a.preload = 'auto';
+            a.preload = 'metadata'; // Changed from 'auto' to 'metadata' to prevent aggressive preloading
             setBaseVolume(a, 0.8);
             a.muted = isMuted;
 
@@ -220,8 +220,8 @@ function initCorrectSoundPool() {
             };
             a.addEventListener('canplaythrough', onReady);
 
-            // Start loading
-            a.load();
+            // Lazy load - don't call a.load() immediately
+            // The audio will load when first played
         } catch (e) {
             // Ignore any exceptions
         }
@@ -239,7 +239,7 @@ function initIncorrectSoundPool() {
     existingIncorrectFiles.forEach((filename) => {
         try {
             const a = new Audio(filename);
-            a.preload = 'auto';
+            a.preload = 'metadata'; // Changed from 'auto' to 'metadata' to prevent aggressive preloading
             setBaseVolume(a, 0.8);
             a.muted = isMuted;
 
@@ -270,8 +270,8 @@ function initIncorrectSoundPool() {
             };
             a.addEventListener('canplaythrough', onReady);
 
-            // Start loading
-            a.load();
+            // Lazy load - don't call a.load() immediately
+            // The audio will load when first played
         } catch (e) {
             // Ignore any exceptions
         }

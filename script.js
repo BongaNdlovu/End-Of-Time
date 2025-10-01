@@ -1749,9 +1749,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setupAuthListener();
 
-            testFirebaseConnection();
-
-            fetchAndDisplayLeaderboard();
+            // Wait for Firestore to be ready before fetching data
+            setTimeout(() => {
+                testFirebaseConnection();
+                fetchAndDisplayLeaderboard();
+            }, 500);
 
             completePendingRedirectSignIn();
 
@@ -4879,75 +4881,99 @@ function fetchAndDisplayLeaderboard() {
     // User row highlighting will still work conditionally when signed in
     leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">Loading...</td></tr>';
 
-    db.collection('leaderboard')
-        .orderBy('totalCumulativeScore', 'desc')
-        .limit(100)
-        .get()
-        .then(querySnapshot => {
-            leaderboardBody.innerHTML = '';
-
-            if (querySnapshot.empty) {
-                leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">The leaderboard is empty. Be the first!</td></tr>';
-                return;
-            }
-
-            // Add sign-in prompt for unauthenticated users
-            if (!currentUser) {
-                const signInPrompt = `
-                    <tr style="background:rgba(139,0,0,0.15);border-bottom:2px solid rgba(139,0,0,0.3);">
-                        <td colspan="5" style="padding:1.2rem;text-align:center;">
-                            <p style="margin:0 0 0.8rem;color:#ffcc00;font-weight:bold;font-size:1.05rem;">
-                                🎮 Sign in to save your scores and compete on the leaderboard!
-                            </p>
-                            <button onclick="document.getElementById('google-signin-btn').click()"
-                                    class="comic-button"
-                                    style="background:#4285f4;color:#fff;border:none;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:bold;box-shadow:0 4px 8px rgba(66,133,244,0.3);transition:all 0.2s;">
-                                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" style="width:18px;height:18px;vertical-align:middle;margin-right:0.5rem;">
-                                Sign In with Google
-                            </button>
-                        </td>
-                    </tr>
-                `;
-                leaderboardBody.insertAdjacentHTML('beforeend', signInPrompt);
-            }
-
-            querySnapshot.forEach((doc, index) => {
-                const data = doc.data();
-                const rank = index + 1;
-                const name = data.name || 'Anonymous';
-                const score = data.totalCumulativeScore || 0;
-                const level = data.lastCompletedLevel || 1;
-                const lastUpdated = data.lastUpdated && data.lastUpdated.seconds ? new Date(data.lastUpdated.seconds * 1000) : null;
-                const date = lastUpdated ? lastUpdated.toLocaleDateString() : 'N/A';
-
-                const row = `
-                    <tr style="background:${currentUser && currentUser.uid === doc.id ? 'rgba(139,0,0,0.25)' : 'transparent'};">
-                        <td style="padding:0.8rem;text-align:center;">${rank}</td>
-                        <td style="padding:0.8rem;text-align:left;display:flex;align-items:center;gap:0.8rem;">
-                            <img src="${data.photoURL || 'icon-192.png'}" style="width:32px;height:32px;border-radius:50%;">
-                            <span>${name}</span>
-                        </td>
-                        <td style="padding:0.8rem;text-align:center;">${score}</td>
-                        <td style="padding:0.8rem;text-align:center;">${level}</td>
-                        <td style="padding:0.8rem;text-align:center;">${date}</td>
-                    </tr>
-                `;
-                leaderboardBody.insertAdjacentHTML('beforeend', row);
+    // Add retry logic with timeout to handle initialization delays
+    const fetchWithRetry = (retries = 3, delay = 1000) => {
+        db.collection('leaderboard')
+            .orderBy('totalCumulativeScore', 'desc')
+            .limit(100)
+            .get()
+            .then(querySnapshot => {
+                handleLeaderboardData(querySnapshot, leaderboardBody);
+            })
+            .catch(error => {
+                if (retries > 0 && error.code === 'permission-denied') {
+                    console.warn(`Retrying leaderboard fetch... (${retries} attempts left)`);
+                    setTimeout(() => fetchWithRetry(retries - 1, delay), delay);
+                } else {
+                    handleLeaderboardError(error, leaderboardBody);
+                }
             });
-        })
-        .catch(error => {
-            console.error('Error in fetchAndDisplayLeaderboard:', error);
+    };
 
-            let errorMessage = 'Could not load leaderboard.';
-            if (error.code === 'permission-denied') {
-                errorMessage = 'Sign in and double-check your Firestore security rules allow read access for authenticated users.';
-            } else if (error.code === 'failed-precondition') {
-                errorMessage = 'Leaderboard index is still building. Please wait a moment and refresh.';
-            }
-
-            leaderboardBody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ff6b6b;">${errorMessage}</td></tr>`;
-        });
+    fetchWithRetry();
 }
+
+function handleLeaderboardData(querySnapshot, leaderboardBody) {
+    leaderboardBody.innerHTML = '';
+
+    if (querySnapshot.empty) {
+        leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">The leaderboard is empty. Be the first!</td></tr>';
+        return;
+    }
+
+    // Add sign-in prompt for unauthenticated users
+    if (!currentUser) {
+        const signInPrompt = `
+            <tr style="background:rgba(139,0,0,0.15);border-bottom:2px solid rgba(139,0,0,0.3);">
+                <td colspan="5" style="padding:1.2rem;text-align:center;">
+                    <p style="margin:0 0 0.8rem;color:#ffcc00;font-weight:bold;font-size:1.05rem;">
+                        🎮 Sign in to save your scores and compete on the leaderboard!
+                    </p>
+                    <button onclick="document.getElementById('google-signin-btn').click()"
+                            class="comic-button"
+                            style="background:#4285f4;color:#fff;border:none;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:bold;box-shadow:0 4px 8px rgba(66,133,244,0.3);transition:all 0.2s;">
+                        <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" style="width:18px;height:18px;vertical-align:middle;margin-right:0.5rem;">
+                        Sign In with Google
+                    </button>
+                </td>
+            </tr>
+        `;
+        leaderboardBody.insertAdjacentHTML('beforeend', signInPrompt);
+    }
+
+    querySnapshot.forEach((doc, index) => {
+        const data = doc.data();
+        const rank = index + 1;
+        const name = data.name || 'Anonymous';
+        const score = data.totalCumulativeScore || 0;
+        const level = data.lastCompletedLevel || 1;
+        const lastUpdated = data.lastUpdated && data.lastUpdated.seconds ? new Date(data.lastUpdated.seconds * 1000) : null;
+        const date = lastUpdated ? lastUpdated.toLocaleDateString() : 'N/A';
+
+        const row = `
+            <tr style="background:${currentUser && currentUser.uid === doc.id ? 'rgba(139,0,0,0.25)' : 'transparent'};">
+                <td style="padding:0.8rem;text-align:center;">${rank}</td>
+                <td style="padding:0.8rem;text-align:left;display:flex;align-items:center;gap:0.8rem;">
+                    <img src="${data.photoURL || 'icon-192.png'}" style="width:32px;height:32px;border-radius:50%;">
+                    <span>${name}</span>
+                </td>
+                <td style="padding:0.8rem;text-align:center;">${score}</td>
+                <td style="padding:0.8rem;text-align:center;">${level}</td>
+                <td style="padding:0.8rem;text-align:center;">${date}</td>
+            </tr>
+        `;
+        leaderboardBody.insertAdjacentHTML('beforeend', row);
+    });
+}
+
+function handleLeaderboardError(error, leaderboardBody) {
+    console.error('Error in fetchAndDisplayLeaderboard:', error);
+    console.error('Error details:', {
+        code: error.code,
+        message: error.message,
+        name: error.name
+    });
+
+    let errorMessage = 'Could not load leaderboard.';
+    if (error.code === 'permission-denied') {
+        errorMessage = 'Unable to load leaderboard. Please sign in or check your connection.';
+    } else if (error.code === 'failed-precondition') {
+        errorMessage = 'Leaderboard index is still building. Please wait a moment and refresh.';
+    }
+
+    leaderboardBody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ff6b6b;">${errorMessage}</td></tr>`;
+}
+
 
 
 // --- OLD LEADERBOARD FUNCTIONS (to be deprecated/removed) ---

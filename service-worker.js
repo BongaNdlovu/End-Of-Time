@@ -177,6 +177,20 @@ self.addEventListener('fetch', (event) => {
       }
       return response;
     } catch (error) {
+      // For audio files, return a silent failure instead of throwing
+      const url = new URL(request.url);
+      const isAudioFile = /\.(wav|mp3|ogg|m4a)$/i.test(url.pathname);
+
+      if (isAudioFile) {
+        console.warn('[SW] Audio file failed to load (non-critical):', url.pathname);
+        // Return empty 404 response for audio files
+        return new Response(null, {
+          status: 404,
+          statusText: 'Audio file not found',
+          headers: { 'Content-Type': 'audio/wav' }
+        });
+      }
+
       console.warn('[SW] Fetch failed, attempting fallback.', error);
       const cache = await caches.open(CACHE_NAME);
       const fallback = await cache.match('/menu.html') || await cache.match('/index.html');

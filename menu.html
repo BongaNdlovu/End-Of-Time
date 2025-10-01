@@ -272,14 +272,21 @@
             }
 
             const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then(result => {
+            auth.signInWithRedirect(provider);  // Changed from signInWithPopup to signInWithRedirect
+        }
+
+        // Handle redirect result when user returns from Google sign-in
+        auth.getRedirectResult()
+            .then(result => {
+                if (result.user) {
                     console.log('✅ Google sign-in successful:', result.user.displayName);
                     currentUser = result.user;
                     updateAuthUI();
                     playSelectSound();
-                })
-                .catch(error => {
+                }
+            })
+            .catch(error => {
+                if (error.code !== 'auth/popup-closed-by-user') {
                     console.error('❌ Sign-in error:', error);
                     let errorMessage = 'Failed to sign in with Google. ';
                     switch(error.code) {

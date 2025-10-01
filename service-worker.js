@@ -1,0 +1,81 @@
+const CACHE_NAME = 'sda-trivia-v5';
+const ASSETS = [
+  '/',
+  '/menu.html',
+  '/index.html',
+  '/menu-styles.css',
+  '/styles.css',
+  '/audio-manager.js',
+  '/script.js',
+  '/questions.js',
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/Fear God.png',
+  '/background.mp4',
+  '/Transition.wav',
+  '/Transition 2.wav',
+  '/soundtrack 1.mp3',
+  '/correct_answer_1.wav',
+  '/correct_answer_2.wav',
+  '/WRONG BUZZER 7.wav',
+  '/Motionarray_Floraphonic_Gameshow_Buzzer_1.wav',
+  '/Semi Impact Risers-001.wav',
+  '/ticking_time.wav',
+  // '/offline.html', // Optional offline fallback
+];
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+  );
+});
+self.addEventListener('fetch', event => {
+  // Navigation fallback: prefer menu, then game
+  if (event.request.mode === 'navigate') {
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const menu = await cache.match('/menu.html');
+      const game = await cache.match('/index.html');
+      return menu || game || fetch(event.request);
+    })());
+    return;
+  }
+  // Stale-while-revalidate (optional, for assets like questions.js)
+  // if (event.request.url.endsWith('questions.js')) {
+  //   event.respondWith(
+  //     caches.open(CACHE_NAME).then(cache =>
+  //       fetch(event.request).then(response => {
+  //         cache.put(event.request, response.clone());
+  //         return response;
+  //       }).catch(() => caches.match(event.request))
+  //     )
+  //   );
+  //   return;
+  // }
+  // Error handling/offline fallback
+  event.respondWith(
+    caches.match(event.request).then(response => response || fetch(event.request))
+  );
+});
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+    ))
+  );
+}); 
+
+// Generic message responder so pages can confirm SW connectivity
+self.addEventListener('message', (event) => {
+  try {
+    if (event.ports && event.ports[0]) {
+      event.ports[0].postMessage({ status: 'received' });
+    } else if (self.clients && self.clients.matchAll) {
+      event.waitUntil(
+        self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
+          clients.forEach(client => client.postMessage({ status: 'received' }));
+        })
+      );
+    }
+  } catch (e) {}
+});

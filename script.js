@@ -1907,19 +1907,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         startGame(gameMode, currentGameLevel || 1);
                     }
                 } catch (error) {
-                    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+                    if (shouldRetrySignInWithRedirect(error)) {
                         console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
                         try {
                             await auth.signInWithRedirect(provider);
                             return;
                         } catch (redirectError) {
-                            console.error('Redirect sign-in failed:', redirectError);
-                            alert('Failed to sign in with Google. Please try again.');
+                            handleGoogleAuthError(redirectError, { context: 'Game start Google sign-in (redirect fallback)' });
                             return;
                         }
                     }
-                    console.error('Google sign-in failed:', error);
-                    alert('Failed to sign in with Google. Please try again.');
+                    handleGoogleAuthError(error, { context: 'Game start Google sign-in' });
                 }
             };
             
@@ -3916,40 +3914,20 @@ googleSigninBtn.onclick = async function() {
       console.log('Warning: Page became hidden during sign-in, skipping UI update');
     }
   } catch (error) {
-    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+    if (shouldRetrySignInWithRedirect(error)) {
       console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
       try {
         await auth.signInWithRedirect(provider);
         return;
       } catch (redirectError) {
-        console.error('Redirect sign-in failed:', redirectError);
         error = redirectError;
       }
     }
 
     if (!document.hidden) {
-      console.error('Google sign-in failed:', error);
-      console.error('Error code:', error.code);
-      console.error('Error message:', error.message);
-
-      let errorMessage = 'Failed to sign in with Google. ';
-      switch (error && error.code) {
-        case 'auth/popup-closed-by-user':
-          errorMessage += 'Sign-in was cancelled.';
-          break;
-        case 'auth/popup-blocked':
-          errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
-          break;
-        case 'auth/unauthorized-domain':
-          errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
-          break;
-        case 'auth/operation-not-allowed':
-          errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
-          break;
-        default:
-          errorMessage += 'Please try again.';
-      }
-      alert(errorMessage);
+      handleGoogleAuthError(error, { context: 'Leaderboard Google sign-in', surfaceLeaderboard: true });
+    } else {
+      console.warn('Google sign-in failed while document was hidden.', error);
     }
   }
 };
@@ -3984,19 +3962,17 @@ if (mainSigninBtn) {
         updateUserInfoUI();
       }
     } catch (error) {
-      if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+      if (shouldRetrySignInWithRedirect(error)) {
         console.warn('Popup sign-in failed, falling back to redirect flow.', error);
         try {
           await auth.signInWithRedirect(provider);
           return;
         } catch (redirectError) {
-          console.error('Redirect sign-in failed:', redirectError);
-          alert('Failed to sign in with Google. Please try again.');
+          handleGoogleAuthError(redirectError, { context: 'Main menu Google sign-in (redirect fallback)' });
           return;
         }
       }
-      console.error('Google sign-in failed:', error);
-      alert('Failed to sign in with Google. Please try again.');
+      handleGoogleAuthError(error, { context: 'Main menu Google sign-in' });
     }
   };
 
@@ -4065,6 +4041,76 @@ if (viewLeaderboardBtn) {
 // --- Firestore Leaderboard Integration ---
 // Note: db is already initialized in the main Firebase configuration above
 const leaderboardTableBody = document.querySelector('#leaderboard-table tbody');
+
+function renderLeaderboardMessage(message, { icon = 'ℹ️', color = '#d1d8e0' } = {}) {
+  const body = document.querySelector('#leaderboard-table tbody');
+  if (!body) {
+    console.warn('Leaderboard table body not found while trying to render message.');
+    return;
+  }
+
+  body.innerHTML = `
+    <tr>
+      <td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:${color};">
+        <span style="font-size:1.4rem;margin-right:0.5rem;">${icon}</span>${message}
+      </td>
+    </tr>
+  `;
+}
+
+function shouldRetrySignInWithRedirect(error) {
+  if (!error || !error.code) {
+    return false;
+  }
+
+  return [
+    'auth/internal-error',
+    'auth/network-request-failed',
+    'auth/popup-blocked',
+  ].includes(error.code);
+}
+
+function buildGoogleAuthErrorMessage(error, { action = 'sign in' } = {}) {
+  const baseMessage = `Failed to ${action} with Google.`;
+
+  if (!error || !error.code) {
+    return `${baseMessage} Please try again.`;
+  }
+
+  const currentHost = window.location.host || window.location.hostname || 'this site';
+
+  switch (error.code) {
+    case 'auth/internal-error':
+      return `${baseMessage} Firebase returned an internal error, which usually means the domain (${currentHost}) is missing from Authentication → Settings → Authorized domains or the browser blocked third-party cookies. Add the domain in Firebase Console, enable cookies, then try again.`;
+    case 'auth/network-request-failed':
+      return `${baseMessage} The network request failed. Check your internet connection, disable VPN/ad blockers temporarily, and try again.`;
+    case 'auth/popup-blocked':
+      return `${baseMessage} The browser blocked the pop-up window. Allow pop-ups for this site or try the redirect sign-in flow.`;
+    case 'auth/popup-closed-by-user':
+      return `${baseMessage} The pop-up was closed before completing sign-in.`;
+    case 'auth/unauthorized-domain':
+      return `${baseMessage} This domain (${currentHost}) is not authorized for Firebase Authentication. Add it under Authentication → Settings → Authorized domains.`;
+    case 'auth/operation-not-allowed':
+      return `${baseMessage} Google sign-in is disabled for this Firebase project. Enable it under Authentication → Sign-in method in Firebase Console.`;
+    default:
+      return `${baseMessage} ${error.message || 'Please try again.'}`;
+  }
+}
+
+function handleGoogleAuthError(error, { context = 'Google sign-in', action = 'sign in', surfaceLeaderboard = false } = {}) {
+  console.error(`${context} failed:`, error);
+  if (error && error.customData) {
+    console.error(`${context} additional details:`, error.customData);
+  }
+
+  const message = buildGoogleAuthErrorMessage(error, { action });
+
+  if (surfaceLeaderboard) {
+    renderLeaderboardMessage(message, { icon: '⚠️', color: '#ffcc80' });
+  }
+
+  alert(message);
+}
 
 // Helper: format time (seconds) as mm:ss
 function formatLeaderboardTime(seconds) {
@@ -4218,7 +4264,15 @@ function fetchAndDisplayLeaderboard() {
       console.error('Firebase db object not found!');
       return;
     }
-    leaderboardTableBody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>';
+
+    const activeUser = currentUser || (auth && auth.currentUser);
+    if (!activeUser) {
+      console.warn('Skipping leaderboard fetch - user must be signed in to read Firestore leaderboard.');
+      renderLeaderboardMessage('Sign in with Google to view the leaderboard.', { icon: '🔒', color: '#ffcc80' });
+      return;
+    }
+
+    renderLeaderboardMessage('Loading leaderboard…', { icon: '⏳', color: '#ccc' });
     console.log('Executing Firebase query...');
     
     // Use Firebase compat mode API
@@ -4347,13 +4401,15 @@ function fetchAndDisplayLeaderboard() {
     })
     .catch(error => {
       console.error('Error fetching leaderboard:', error);
-      leaderboardTableBody.innerHTML = '<tr><td colspan="5" style="color: #ff6b6b;">Unable to load leaderboard. Please check your Firebase configuration.</td></tr>';
+      if (error.code === 'permission-denied') {
+        renderLeaderboardMessage('Sign in with Google to view the leaderboard. Access is restricted by Firestore security rules.', { icon: '🔒', color: '#ffcc80' });
+      } else {
+        renderLeaderboardMessage('Unable to load leaderboard. Please check your Firebase configuration.', { icon: '❌', color: '#ff6b6b' });
+      }
     });
   } catch (error) {
     console.error('Error in fetchAndDisplayLeaderboard:', error);
-    if (leaderboardTableBody) {
-      leaderboardTableBody.innerHTML = '<tr><td colspan="5" style="color: #ff6b6b;">Error loading leaderboard.</td></tr>';
-    }
+    renderLeaderboardMessage('Error loading leaderboard.', { icon: '❌', color: '#ff6b6b' });
   }
 }
 
@@ -4599,8 +4655,13 @@ function testFirebaseConnection() {
         name: error.name
       });
 
-      // Don't show error to user, just log it
-      console.log('💡 This might be normal if the database is empty or rules are still propagating');
+      if (error.code === 'permission-denied') {
+        console.warn('🔒 Firestore denied access. Ensure the user is signed in before requesting leaderboard data.');
+        renderLeaderboardMessage('Sign in with Google to view the leaderboard. Anonymous access is blocked by Firestore rules.', { icon: '🔒', color: '#ffcc80' });
+      } else {
+        // Don't show error to user, just log it
+        console.log('💡 This might be normal if the database is empty or rules are still propagating');
+      }
     });
 
   // Test Auth connection
@@ -4737,10 +4798,12 @@ function retryFirebaseOperation() {
     
     // Test connection
     testFirebaseConnection();
-    
+
     // If user is signed in, try to refresh leaderboard
     if (currentUser) {
         fetchAndDisplayLeaderboard();
+    } else {
+        renderLeaderboardMessage('Sign in with Google to view the leaderboard.', { icon: '🔒', color: '#ffcc80' });
     }
 }
 
@@ -5023,7 +5086,15 @@ function fetchAndDisplayLeaderboard() {
         console.error("Leaderboard table body not found!");
         return;
     }
-    leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">Loading...</td></tr>';
+
+    const activeUser = currentUser || (auth && auth.currentUser);
+    if (!activeUser) {
+        console.warn('Skipping leaderboard fetch - user must be signed in to read Firestore leaderboard.');
+        renderLeaderboardMessage('Sign in with Google to view the leaderboard.', { icon: '🔒', color: '#ffcc80' });
+        return;
+    }
+
+    renderLeaderboardMessage('Loading leaderboard…', { icon: '⏳', color: '#ccc' });
 
     db.collection('leaderboard')
       .orderBy('totalCumulativeScore', 'desc')
@@ -5032,7 +5103,7 @@ function fetchAndDisplayLeaderboard() {
       .then(querySnapshot => {
           leaderboardBody.innerHTML = ''; // Clear loading text
           if (querySnapshot.empty) {
-              leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">The leaderboard is empty. Be the first!</td></tr>';
+              renderLeaderboardMessage('The leaderboard is empty. Be the first!', { icon: '🌟', color: '#ccc' });
               return;
           }
           querySnapshot.forEach((doc, index) => {
@@ -5069,14 +5140,16 @@ function fetchAndDisplayLeaderboard() {
           // Show helpful error message based on error type
           let errorMessage = 'Could not load leaderboard.';
           if (error.code === 'permission-denied') {
-              errorMessage = '🔒 Leaderboard permissions are being configured. Please try again in a moment.';
-              console.log('💡 Tip: Firestore rules may still be propagating. Wait 1-2 minutes and refresh.');
+              errorMessage = 'Sign in with Google to view the leaderboard. Access is restricted by Firestore security rules.';
+              console.log('💡 Tip: Make sure the user is authenticated before accessing Firestore data.');
           } else if (error.code === 'failed-precondition') {
               errorMessage = '📊 Leaderboard index is being created. Please wait a moment and refresh.';
               console.log('💡 Tip: Click the index creation link in the console if provided.');
           }
 
-          leaderboardBody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ff6b6b;">${errorMessage}</td></tr>`;
+          const icon = error.code === 'permission-denied' ? '🔒' : '❌';
+          const color = error.code === 'permission-denied' ? '#ffcc80' : '#ff6b6b';
+          renderLeaderboardMessage(errorMessage, { icon, color });
       });
 }
 
@@ -5116,6 +5189,12 @@ function setupAuthListener() {
         auth.onAuthStateChanged(user => {
             currentUser = user;
             updateUserInfoUI();
+
+            if (user) {
+                fetchAndDisplayLeaderboard();
+            } else {
+                renderLeaderboardMessage('Sign in with Google to view the leaderboard.', { icon: '🔒', color: '#ffcc80' });
+            }
         });
     }
 }

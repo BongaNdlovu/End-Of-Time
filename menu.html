@@ -288,6 +288,50 @@
             }
         }
 
+        function shouldRetrySignInWithRedirect(error) {
+            if (!error || !error.code) {
+                return false;
+            }
+
+            return ['auth/internal-error', 'auth/network-request-failed', 'auth/popup-blocked'].includes(error.code);
+        }
+
+        function buildGoogleAuthErrorMessage(error, { action = 'sign in' } = {}) {
+            const baseMessage = `Failed to ${action} with Google.`;
+
+            if (!error || !error.code) {
+                return `${baseMessage} Please try again.`;
+            }
+
+            const currentHost = window.location.host || window.location.hostname || 'this site';
+
+            switch (error.code) {
+                case 'auth/internal-error':
+                    return `${baseMessage} Firebase returned an internal error, which usually means the domain (${currentHost}) is missing from Authentication → Settings → Authorized domains or the browser blocked third-party cookies. Add the domain in Firebase Console, enable cookies, then try again.`;
+                case 'auth/network-request-failed':
+                    return `${baseMessage} The network request failed. Check your internet connection, disable VPN/ad blockers temporarily, and try again.`;
+                case 'auth/popup-blocked':
+                    return `${baseMessage} The browser blocked the pop-up window. Allow pop-ups for this site or try the redirect sign-in flow.`;
+                case 'auth/popup-closed-by-user':
+                    return `${baseMessage} The pop-up was closed before completing sign-in.`;
+                case 'auth/unauthorized-domain':
+                    return `${baseMessage} This domain (${currentHost}) is not authorized for Firebase Authentication. Add it under Authentication → Settings → Authorized domains.`;
+                case 'auth/operation-not-allowed':
+                    return `${baseMessage} Google sign-in is disabled for this Firebase project. Enable it under Authentication → Sign-in method in Firebase Console.`;
+                default:
+                    return `${baseMessage} ${error.message || 'Please try again.'}`;
+            }
+        }
+
+        function handleGoogleAuthError(error, { context = 'Google sign-in', action = 'sign in' } = {}) {
+            console.error(`${context} failed:`, error);
+            if (error && error.customData) {
+                console.error(`${context} additional details:`, error.customData);
+            }
+
+            alert(buildGoogleAuthErrorMessage(error, { action }));
+        }
+
         async function signInWithGoogle() {
             if (window.location.protocol === 'file:') {
                 alert('Firebase authentication is not available when running locally. Please host the files on a web server.');
@@ -309,37 +353,18 @@
                     playSelectSound();
                 }
             } catch (error) {
-                if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+                if (shouldRetrySignInWithRedirect(error)) {
                     console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
                     try {
                         await auth.signInWithRedirect(provider);
                         return;
                     } catch (redirectError) {
-                        console.error('Redirect sign-in failed:', redirectError);
-                        alert('Failed to sign in with Google. Please try again.');
+                        handleGoogleAuthError(redirectError, { context: 'Menu Google sign-in (redirect fallback)' });
                         return;
                     }
                 }
 
-                console.error('Sign-in error:', error);
-                let errorMessage = 'Failed to sign in with Google. ';
-                switch(error && error.code) {
-                    case 'auth/popup-closed-by-user':
-                        errorMessage += 'Sign-in was cancelled.';
-                        break;
-                    case 'auth/popup-blocked':
-                        errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
-                        break;
-                    case 'auth/unauthorized-domain':
-                        errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
-                        break;
-                    case 'auth/operation-not-allowed':
-                        errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
-                        break;
-                    default:
-                        errorMessage += 'Please try again.';
-                }
-                alert(errorMessage);
+                handleGoogleAuthError(error, { context: 'Menu Google sign-in' });
             }
         }
 

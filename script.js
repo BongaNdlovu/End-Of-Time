@@ -4427,7 +4427,6 @@ function testFirebaseConnection() {
     apiKey: firebaseConfig.apiKey ? '***' + firebaseConfig.apiKey.slice(-4) : 'MISSING'
   });
 
-  // Test Firestore connection
   if (window.location.protocol === 'file:') {
     console.log('⚠️ Running locally - Firebase features will be limited');
     return;
@@ -4438,22 +4437,21 @@ function testFirebaseConnection() {
     return;
   }
 
-  // Try to access leaderboard collection instead of test
+  // Try to access leaderboard collection
   db.collection('leaderboard').limit(1).get()
     .then((snapshot) => {
       console.log('✅ Firestore connection successful!');
       console.log(`📊 Leaderboard has ${snapshot.size} entries`);
     })
     .catch(error => {
-      console.error('❌ Firestore connection failed:', error);
-      console.error('Error details:', {
-        code: error.code,
-        message: error.message,
-        name: error.name
-      });
-
-      // Don't show error to user, just log it
-      console.log('💡 This might be normal if the database is empty or rules are still propagating');
+      // Don't show error to user during initial connection test
+      // Only log it for debugging
+      if (error.code === 'permission-denied') {
+        console.warn('⚠️ Firestore permission denied - Deploying security rules will fix this');
+        console.log('💡 Rules needed: Public read access for leaderboard collection');
+      } else {
+        console.error('❌ Firestore connection failed:', error);
+      }
     });
 
   // Test Auth connection

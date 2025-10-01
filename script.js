@@ -14,6 +14,11 @@
  * @author SDA Trivia Challenge Team
  * @version 1.1.0
  */
+
+// --- Firebase Global Variables ---
+let db = null;
+let auth = null;
+
 // --- DOM Elements ---
 const soloBtn = document.getElementById('solo');
 const teamsBtn = document.getElementById('teams');
@@ -1684,7 +1689,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Now that Firebase is initialized, set up auth state listener
             setupAuthListener();
-            
+
+            // Test Firebase connection
+            testFirebaseConnection();
+
             // Fetch leaderboard now that Firestore is available
             fetchAndDisplayLeaderboard();
         } else {
@@ -3691,7 +3699,7 @@ if (deepInsightNextBtn) {
 // NOTE: Firebase config is now loaded from firebase-config.js
 
 // Only initialize Firebase if not running locally
-let auth, db, currentUser = null;
+let currentUser = null;
 
 // Page visibility handling to prevent async errors
 let isPageActive = true;
@@ -4423,20 +4431,25 @@ function testFirebaseConnection() {
     showFirebaseErrorMessage('Firebase SDK not loaded. Please refresh the page.', true);
     return;
   }
-  
+
   console.log('✅ Firebase SDK loaded successfully');
   console.log('📋 Firebase config:', {
     projectId: firebaseConfig.projectId,
     authDomain: firebaseConfig.authDomain,
     apiKey: firebaseConfig.apiKey ? '***' + firebaseConfig.apiKey.slice(-4) : 'MISSING'
   });
-  
+
   // Test Firestore connection
   if (window.location.protocol === 'file:') {
     console.log('⚠️ Running locally - Firebase features will be limited');
     return;
   }
-  
+
+  if (!db) {
+    console.error('❌ Firestore (db) is not initialized!');
+    return;
+  }
+
   db.collection('test').doc('test').get()
     .then(() => {
       console.log('✅ Firestore connection successful!');
@@ -4445,8 +4458,13 @@ function testFirebaseConnection() {
       console.error('❌ Firestore connection failed:', error);
       handleFirebaseError(error, 'Firestore connection test');
     });
-    
+
   // Test Auth connection
+  if (!auth) {
+    console.error('❌ Auth is not initialized!');
+    return;
+  }
+
   auth.onAuthStateChanged(user => {
     if (user) {
       console.log('✅ Auth connection successful! User:', user.displayName);
@@ -4459,8 +4477,8 @@ function testFirebaseConnection() {
   });
 }
 
-  // Test Firebase connection when the page loads
-  testFirebaseConnection();
+  // Test Firebase connection when the page loads (moved to DOMContentLoaded)
+  // testFirebaseConnection();
 
 // Optionally, call showLeaderboardAfterGame(finalScore, finalTime) at game end
 
@@ -4803,7 +4821,11 @@ async function updateLeaderboardScore(level, score) {
         return;
     }
 
-    const db = firebase.firestore();
+    if (!db) {
+        console.error("Firestore not initialized");
+        return;
+    }
+
     const leaderboardRef = db.collection('leaderboard').doc(currentUser.uid);
 
     try {
@@ -4847,7 +4869,11 @@ async function updateLeaderboardScore(level, score) {
 
 // Fetches and displays the new leaderboard data
 function fetchAndDisplayLeaderboard() {
-    const db = firebase.firestore();
+    if (!db) {
+        console.error("Firestore not initialized");
+        return;
+    }
+
     const leaderboardBody = document.querySelector("#leaderboard-table tbody");
     if (!leaderboardBody) {
         console.error("Leaderboard table body not found!");

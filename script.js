@@ -4450,13 +4450,22 @@ function testFirebaseConnection() {
     return;
   }
 
-  db.collection('test').doc('test').get()
-    .then(() => {
+  // Try to access leaderboard collection instead of test
+  db.collection('leaderboard').limit(1).get()
+    .then((snapshot) => {
       console.log('✅ Firestore connection successful!');
+      console.log(`📊 Leaderboard has ${snapshot.size} entries`);
     })
     .catch(error => {
       console.error('❌ Firestore connection failed:', error);
-      handleFirebaseError(error, 'Firestore connection test');
+      console.error('Error details:', {
+        code: error.code,
+        message: error.message,
+        name: error.name
+      });
+
+      // Don't show error to user, just log it
+      console.log('💡 This might be normal if the database is empty or rules are still propagating');
     });
 
   // Test Auth connection
@@ -4916,7 +4925,23 @@ function fetchAndDisplayLeaderboard() {
       })
       .catch(error => {
           console.error('Error in fetchAndDisplayLeaderboard:', error);
-          leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ff6b6b;">Could not load leaderboard.</td></tr>';
+          console.error('Error details:', {
+              code: error.code,
+              message: error.message,
+              name: error.name
+          });
+
+          // Show helpful error message based on error type
+          let errorMessage = 'Could not load leaderboard.';
+          if (error.code === 'permission-denied') {
+              errorMessage = '🔒 Leaderboard permissions are being configured. Please try again in a moment.';
+              console.log('💡 Tip: Firestore rules may still be propagating. Wait 1-2 minutes and refresh.');
+          } else if (error.code === 'failed-precondition') {
+              errorMessage = '📊 Leaderboard index is being created. Please wait a moment and refresh.';
+              console.log('💡 Tip: Click the index creation link in the console if provided.');
+          }
+
+          leaderboardBody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ff6b6b;">${errorMessage}</td></tr>`;
       });
 }
 

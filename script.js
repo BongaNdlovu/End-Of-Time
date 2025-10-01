@@ -4066,6 +4066,22 @@ if (viewLeaderboardBtn) {
 // Note: db is already initialized in the main Firebase configuration above
 const leaderboardTableBody = document.querySelector('#leaderboard-table tbody');
 
+function renderLeaderboardMessage(message, { icon = 'ℹ️', color = '#d1d8e0' } = {}) {
+  const body = document.querySelector('#leaderboard-table tbody');
+  if (!body) {
+    console.warn('Leaderboard table body not found while trying to render message.');
+    return;
+  }
+
+  body.innerHTML = `
+    <tr>
+      <td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:${color};">
+        <span style="font-size:1.4rem;margin-right:0.5rem;">${icon}</span>${message}
+      </td>
+    </tr>
+  `;
+}
+
 // Helper: format time (seconds) as mm:ss
 function formatLeaderboardTime(seconds) {
   const m = Math.floor(seconds / 60);
@@ -4218,7 +4234,15 @@ function fetchAndDisplayLeaderboard() {
       console.error('Firebase db object not found!');
       return;
     }
-    leaderboardTableBody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>';
+
+    const activeUser = currentUser || (auth && auth.currentUser);
+    if (!activeUser) {
+      console.warn('Skipping leaderboard fetch - user must be signed in to read Firestore leaderboard.');
+      renderLeaderboardMessage('Sign in with Google to view the leaderboard.', { icon: '🔒', color: '#ffcc80' });
+      return;
+    }
+
+    renderLeaderboardMessage('Loading leaderboard…', { icon: '⏳', color: '#ccc' });
     console.log('Executing Firebase query...');
     
     // Use Firebase compat mode API
@@ -4347,13 +4371,15 @@ function fetchAndDisplayLeaderboard() {
     })
     .catch(error => {
       console.error('Error fetching leaderboard:', error);
-      leaderboardTableBody.innerHTML = '<tr><td colspan="5" style="color: #ff6b6b;">Unable to load leaderboard. Please check your Firebase configuration.</td></tr>';
+      if (error.code === 'permission-denied') {
+        renderLeaderboardMessage('Sign in with Google to view the leaderboard. Access is restricted by Firestore security rules.', { icon: '🔒', color: '#ffcc80' });
+      } else {
+        renderLeaderboardMessage('Unable to load leaderboard. Please check your Firebase configuration.', { icon: '❌', color: '#ff6b6b' });
+      }
     });
   } catch (error) {
     console.error('Error in fetchAndDisplayLeaderboard:', error);
-    if (leaderboardTableBody) {
-      leaderboardTableBody.innerHTML = '<tr><td colspan="5" style="color: #ff6b6b;">Error loading leaderboard.</td></tr>';
-    }
+    renderLeaderboardMessage('Error loading leaderboard.', { icon: '❌', color: '#ff6b6b' });
   }
 }
 
@@ -4599,8 +4625,13 @@ function testFirebaseConnection() {
         name: error.name
       });
 
-      // Don't show error to user, just log it
-      console.log('💡 This might be normal if the database is empty or rules are still propagating');
+      if (error.code === 'permission-denied') {
+        console.warn('🔒 Firestore denied access. Ensure the user is signed in before requesting leaderboard data.');
+        renderLeaderboardMessage('Sign in with Google to view the leaderboard. Anonymous access is blocked by Firestore rules.', { icon: '🔒', color: '#ffcc80' });
+      } else {
+        // Don't show error to user, just log it
+        console.log('💡 This might be normal if the database is empty or rules are still propagating');
+      }
     });
 
   // Test Auth connection
@@ -4737,10 +4768,12 @@ function retryFirebaseOperation() {
     
     // Test connection
     testFirebaseConnection();
-    
+
     // If user is signed in, try to refresh leaderboard
     if (currentUser) {
         fetchAndDisplayLeaderboard();
+    } else {
+        renderLeaderboardMessage('Sign in with Google to view the leaderboard.', { icon: '🔒', color: '#ffcc80' });
     }
 }
 
@@ -5023,7 +5056,15 @@ function fetchAndDisplayLeaderboard() {
         console.error("Leaderboard table body not found!");
         return;
     }
-    leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">Loading...</td></tr>';
+
+    const activeUser = currentUser || (auth && auth.currentUser);
+    if (!activeUser) {
+        console.warn('Skipping leaderboard fetch - user must be signed in to read Firestore leaderboard.');
+        renderLeaderboardMessage('Sign in with Google to view the leaderboard.', { icon: '🔒', color: '#ffcc80' });
+        return;
+    }
+
+    renderLeaderboardMessage('Loading leaderboard…', { icon: '⏳', color: '#ccc' });
 
     db.collection('leaderboard')
       .orderBy('totalCumulativeScore', 'desc')
@@ -5032,7 +5073,7 @@ function fetchAndDisplayLeaderboard() {
       .then(querySnapshot => {
           leaderboardBody.innerHTML = ''; // Clear loading text
           if (querySnapshot.empty) {
-              leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">The leaderboard is empty. Be the first!</td></tr>';
+              renderLeaderboardMessage('The leaderboard is empty. Be the first!', { icon: '🌟', color: '#ccc' });
               return;
           }
           querySnapshot.forEach((doc, index) => {
@@ -5069,14 +5110,16 @@ function fetchAndDisplayLeaderboard() {
           // Show helpful error message based on error type
           let errorMessage = 'Could not load leaderboard.';
           if (error.code === 'permission-denied') {
-              errorMessage = '🔒 Leaderboard permissions are being configured. Please try again in a moment.';
-              console.log('💡 Tip: Firestore rules may still be propagating. Wait 1-2 minutes and refresh.');
+              errorMessage = 'Sign in with Google to view the leaderboard. Access is restricted by Firestore security rules.';
+              console.log('💡 Tip: Make sure the user is authenticated before accessing Firestore data.');
           } else if (error.code === 'failed-precondition') {
               errorMessage = '📊 Leaderboard index is being created. Please wait a moment and refresh.';
               console.log('💡 Tip: Click the index creation link in the console if provided.');
           }
 
-          leaderboardBody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ff6b6b;">${errorMessage}</td></tr>`;
+          const icon = error.code === 'permission-denied' ? '🔒' : '❌';
+          const color = error.code === 'permission-denied' ? '#ffcc80' : '#ff6b6b';
+          renderLeaderboardMessage(errorMessage, { icon, color });
       });
 }
 
@@ -5116,6 +5159,12 @@ function setupAuthListener() {
         auth.onAuthStateChanged(user => {
             currentUser = user;
             updateUserInfoUI();
+
+            if (user) {
+                fetchAndDisplayLeaderboard();
+            } else {
+                renderLeaderboardMessage('Sign in with Google to view the leaderboard.', { icon: '🔒', color: '#ffcc80' });
+            }
         });
     }
 }

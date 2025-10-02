@@ -241,8 +241,26 @@
             .limit(100)
             .get()
             .then(renderLeaderboardRows)
-            .catch((error) => {
+            .catch(async (error) => {
                 console.error('Leaderboard fetch error:', error);
+                if (error && error.code === 'permission-denied') {
+                    // Fallback to HTTPS function
+                    try {
+                        const projectId = (firebase && firebase.app && firebase.app().options && firebase.app().options.projectId) || '';
+                        const url = `https://us-central1-${projectId}.cloudfunctions.net/getLeaderboardTop`;
+                        const resp = await fetch(url, { method: 'GET' });
+                        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                        const data = await resp.json();
+                        const fakeSnapshot = {
+                            empty: !data.items || data.items.length === 0,
+                            forEach: (cb) => (data.items || []).forEach((item) => cb({ id: item.id, data: () => item }))
+                        };
+                        renderLeaderboardRows(fakeSnapshot);
+                        return;
+                    } catch (e) {
+                        console.error('HTTPS fallback failed:', e);
+                    }
+                }
                 let message = 'Could not load leaderboard.';
                 if (error && error.code === 'failed-precondition') {
                     message = 'Leaderboard index is building. Please wait and refresh.';

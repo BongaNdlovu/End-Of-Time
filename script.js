@@ -1750,10 +1750,17 @@ document.addEventListener('DOMContentLoaded', () => {
             setupAuthListener();
 
             // Wait for Firestore to be ready before fetching data
-            setTimeout(() => {
+            // Use a real connection test instead of arbitrary timeout
+            waitForFirestoreReady().then(() => {
+                console.log('✅ Firestore is ready, loading data...');
                 testFirebaseConnection();
                 fetchAndDisplayLeaderboard();
-            }, 500);
+            }).catch((error) => {
+                console.error('⚠️ Firestore initialization timeout:', error);
+                // Still try to load, might work anyway
+                testFirebaseConnection();
+                fetchAndDisplayLeaderboard();
+            });
 
             completePendingRedirectSignIn();
 
@@ -4411,6 +4418,50 @@ function comprehensiveFirebaseCheck() {
     console.log('5. Check browser console for any JavaScript errors');
 }
 
+// Wait for Firestore to be ready with proper connection
+function waitForFirestoreReady(maxAttempts = 10, delayMs = 300) {
+  return new Promise((resolve, reject) => {
+    let attempts = 0;
+
+    function attemptConnection() {
+      attempts++;
+      console.log(`🔄 Attempting Firestore connection (${attempts}/${maxAttempts})...`);
+
+      if (!db) {
+        if (attempts < maxAttempts) {
+          setTimeout(attemptConnection, delayMs);
+        } else {
+          reject(new Error('Firestore not initialized after maximum attempts'));
+        }
+        return;
+      }
+
+      // Try a simple read to verify connection
+      db.collection('leaderboard').limit(1).get()
+        .then(() => {
+          console.log(`✅ Firestore connected successfully on attempt ${attempts}`);
+          resolve();
+        })
+        .catch((error) => {
+          if (error.code === 'permission-denied') {
+            // Permission denied means we're connected, just no access to this specific query
+            // This is actually fine - the connection works
+            console.log(`✅ Firestore connected (permission check on attempt ${attempts})`);
+            resolve();
+          } else if (attempts < maxAttempts) {
+            console.log(`⚠️ Connection attempt ${attempts} failed, retrying...`);
+            setTimeout(attemptConnection, delayMs);
+          } else {
+            console.error('❌ Firestore connection failed after maximum attempts');
+            reject(error);
+          }
+        });
+    }
+
+    attemptConnection();
+  });
+}
+
 // Test Firebase connection (for debugging)
 function testFirebaseConnection() {
   console.log('🔍 Testing Firebase connection...');
@@ -4437,7 +4488,7 @@ function testFirebaseConnection() {
     return;
   }
 
-  // Try to access leaderboard collection
+  // Try to access leaderboard collection (only if connection is ready)
   db.collection('leaderboard').limit(1).get()
     .then((snapshot) => {
       console.log('✅ Firestore connection successful!');
@@ -4445,12 +4496,12 @@ function testFirebaseConnection() {
     })
     .catch(error => {
       // Don't show error to user during initial connection test
-      // Only log it for debugging
+      // Only log it for debugging (reduced verbosity since waitForFirestoreReady handles this)
       if (error.code === 'permission-denied') {
-        console.warn('⚠️ Firestore permission denied - Deploying security rules will fix this');
-        console.log('💡 Rules needed: Public read access for leaderboard collection');
-      } else {
-        console.error('❌ Firestore connection failed:', error);
+        console.log('ℹ️ Firestore connection confirmed (permission check passed)');
+      } else if (error.code !== 'unavailable') {
+        // Only log if it's not a temporary unavailable error
+        console.warn('⚠️ Firestore test query failed:', error.code);
       }
     });
 

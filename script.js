@@ -3727,18 +3727,7 @@ explanationDiv.style.maxWidth = '95%';
 explanationDiv.style.textAlign = 'left';
 explanationDiv.style.display = 'none';
 
-// Register service worker for PWA/offline support
-if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(registration => {
-        console.log('ServiceWorker registration successful');
-      })
-      .catch(error => {
-        console.log('ServiceWorker registration failed:', error);
-      });
-  });
-}
+// Service worker already registered above (line 3566) - duplicate removed
 
 // --- Background video sequential playback ---
 let currentBgVideoIndex = 0;

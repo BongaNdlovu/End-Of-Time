@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'sda-trivia-v6';
+﻿const CACHE_NAME = 'sda-trivia-v7';
 
 const CORE_ASSETS = [
   '/',
@@ -148,8 +148,15 @@ self.addEventListener('fetch', (event) => {
   const requestURL = new URL(request.url);
   const sameOrigin = requestURL.origin === self.location.origin;
 
-  if (!sameOrigin) {
-    // Let cross-origin requests (Firebase, CDNs, etc.) pass through untouched
+  // Skip Firebase Auth URLs completely (Google OAuth, Firebase domains)
+  const isAuthURL = requestURL.hostname.includes('google.com') ||
+                    requestURL.hostname.includes('googleapis.com') ||
+                    requestURL.hostname.includes('firebase.com') ||
+                    requestURL.hostname.includes('firebaseapp.com') ||
+                    requestURL.hostname.includes('gstatic.com');
+
+  if (isAuthURL || !sameOrigin) {
+    // Let cross-origin requests and auth requests pass through untouched
     return;
   }
 

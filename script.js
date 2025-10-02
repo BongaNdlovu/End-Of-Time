@@ -3884,12 +3884,12 @@ function updateUserInfoUI() {
   }
 }
 
-// Enhanced Google sign-in with proper error handling
+// Enhanced Google sign-in with redirect flow as primary method
 googleSigninBtn.onclick = async function() {
-  console.log('Attempting Google sign-in...');
+  console.log('🔐 Attempting Google sign-in...');
 
   if (document.hidden) {
-    console.log('Warning: Page is hidden, skipping sign-in');
+    console.log('⚠️ Warning: Page is hidden, skipping sign-in');
     return;
   }
 
@@ -3898,38 +3898,49 @@ googleSigninBtn.onclick = async function() {
     return;
   }
 
+  if (typeof firebase === 'undefined' || !firebase.auth) {
+    console.error('❌ Firebase Auth SDK not loaded');
+    alert('Authentication service not loaded. Please refresh the page.');
+    return;
+  }
+
   const provider = new firebase.auth.GoogleAuthProvider();
-  const signInPromise = auth.signInWithPopup(provider);
-  const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => reject(new Error('Sign-in timeout')), 30000);
+  provider.setCustomParameters({
+    prompt: 'select_account'
   });
 
+  console.log('✅ Provider configured, attempting sign-in...');
+
   try {
-    const result = await Promise.race([signInPromise, timeoutPromise]);
-    if (!document.hidden && result && result.user) {
-      console.log('Google sign-in successful:', result.user.displayName);
+    // Try popup first (works better in some environments)
+    console.log('📱 Attempting popup sign-in...');
+    const result = await auth.signInWithPopup(provider);
+
+    if (result && result.user) {
+      console.log('✅ Google sign-in successful:', result.user.displayName);
       currentUser = result.user;
       updateUserInfoUI();
-    } else if (document.hidden) {
-      console.log('Warning: Page became hidden during sign-in, skipping UI update');
     }
   } catch (error) {
-    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
-      console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
+    console.error('❌ Popup sign-in failed:', error);
+    console.error('Error code:', error?.code);
+    console.error('Error message:', error?.message);
+
+    // Handle popup blocked or closed
+    if (error && (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user')) {
+      console.log('🔄 Popup blocked or closed, switching to redirect flow...');
       try {
         await auth.signInWithRedirect(provider);
         return;
       } catch (redirectError) {
-        console.error('Redirect sign-in failed:', redirectError);
-        error = redirectError;
+        console.error('❌ Redirect sign-in failed:', redirectError);
+        alert('Sign-in failed. Please check your browser settings and allow popups for this site.');
+        return;
       }
     }
 
+    // Handle other errors
     if (!document.hidden) {
-      console.error('Google sign-in failed:', error);
-      console.error('Error code:', error.code);
-      console.error('Error message:', error.message);
-
       let errorMessage = 'Failed to sign in with Google. ';
       switch (error && error.code) {
         case 'auth/popup-closed-by-user':

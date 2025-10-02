@@ -15,9 +15,9 @@
  * @version 1.1.0
  */
 
-// --- Firebase Global Variables ---
-let db = null;
-let auth = null;
+// --- Firebase Global Variables (managed by auth-leaderboard.js) ---
+let db = null; // reserved (do not use directly)
+let auth = null; // reserved (do not use directly)
 
 // --- DOM Elements ---
 const soloBtn = document.getElementById('solo');
@@ -1679,121 +1679,24 @@ const debounce = (func, wait) => {
 
 // --- DOMContentLoaded for all DOM queries and listeners ---
 document.addEventListener('DOMContentLoaded', () => {
-    // --- INITIALIZE FIREBASE APP ---
-
-    const isFileProtocol = window.location.protocol === 'file:';
-
-    try {
-
-        if (isFileProtocol) {
-
-            console.warn('Firebase features are disabled when running from local files. Sign-in and leaderboard will be unavailable.');
-
+    // Initialize Auth/Leaderboard module
+    if (window.AuthManager && typeof window.AuthManager.init === 'function') {
+        window.AuthManager.init();
+        // Subscribe to auth changes to update UI
+        window.AuthManager.subscribe((user) => {
+            updateUserInfoUI(user);
+            // After auth ready, refresh leaderboard display
+            if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
+                window.LeaderboardService.refresh();
+            }
+        });
+    } else {
+        console.warn('AuthManager not available. Sign-in and leaderboard disabled.');
             const statusContainer = document.getElementById('signin-status-container');
-
             if (statusContainer) {
-
-                statusContainer.innerHTML = '<p style="color:#d4af37;">Firebase features are disabled while running offline.</p>';
-
-            }
-
-            const inlineGoogleSigninBtn = document.getElementById('google-signin-btn');
-
-            if (inlineGoogleSigninBtn) {
-
-                inlineGoogleSigninBtn.disabled = true;
-
-                inlineGoogleSigninBtn.textContent = 'Sign-in unavailable offline';
-
-            }
-
-            const mainSigninBtnElement = document.getElementById('main-signin-btn');
-
-            if (mainSigninBtnElement) {
-
-                mainSigninBtnElement.disabled = true;
-
-                mainSigninBtnElement.textContent = 'Sign-in unavailable offline';
-
-            }
-
-            const leaderboardBtn = document.getElementById('view-leaderboard-btn');
-
-            if (leaderboardBtn) {
-
-                leaderboardBtn.disabled = true;
-
-            }
-
+            statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
         }
-
-        if (typeof firebase === 'undefined') {
-
-            throw new Error('Firebase SDK not detected. Ensure firebase-app-compat.js is loaded before script.js.');
-
-        }
-
-        if (typeof firebaseConfig !== 'undefined' && !isFileProtocol) {
-
-            if (!firebase.apps.length) {
-
-                firebase.initializeApp(firebaseConfig);
-
-            }
-
-            db = firebase.firestore();
-
-            auth = firebase.auth();
-
-            console.log('Firebase initialized successfully.');
-
-            setupAuthListener();
-
-            // Wait for Firestore to be ready before fetching data
-            // Use a real connection test instead of arbitrary timeout
-            waitForFirestoreReady().then(() => {
-                console.log('✅ Firestore is ready, loading data...');
-                testFirebaseConnection();
-                fetchAndDisplayLeaderboard();
-            }).catch((error) => {
-                console.error('⚠️ Firestore initialization timeout:', error);
-                // Still try to load, might work anyway
-                testFirebaseConnection();
-                fetchAndDisplayLeaderboard();
-            });
-
-            completePendingRedirectSignIn();
-
-        } else if (typeof firebaseConfig === 'undefined') {
-
-            console.error('Firebase config object is missing. Cannot initialize Firebase.');
-
-            const statusContainer = document.getElementById('signin-status-container');
-
-            if (statusContainer) {
-
-                statusContainer.innerHTML = '<p style="color:red;">Firebase not configured.</p>';
-
-            }
-
-            const leaderboardBtn = document.getElementById('view-leaderboard-btn');
-
-            if (leaderboardBtn) {
-
-                leaderboardBtn.disabled = true;
-
-            }
-
-        }
-
-    } catch (error) {
-
-        console.error('Error initializing Firebase:', error);
-
     }
-
-
-
         // Initialize audio system
         if (typeof AudioManager !== 'undefined' && AudioManager.init) {
             AudioManager.init();
@@ -1901,21 +1804,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const closeBtn = document.getElementById('signin-prompt-close-btn');
             
             googleBtn.onclick = async () => {
-                if (!auth) {
-                    alert('Firebase authentication is not available right now. Please try again later.');
-                    return;
-                }
-                const provider = new firebase.auth.GoogleAuthProvider();
-                provider.setCustomParameters({ prompt: 'select_account' });
-
-                try {
-                    console.log('🔄 Starting sign-in with redirect flow...');
-                    // Use redirect flow directly (avoids auth/internal-error with popups)
-                    await auth.signInWithRedirect(provider);
-                    // User will be redirected and come back signed in
-                } catch (error) {
-                    console.error('Sign-in failed:', error);
-                    alert('Failed to sign in with Google. Please try again.');
+                if (window.AuthManager && typeof window.AuthManager.signIn === 'function') {
+                    await window.AuthManager.signIn();
+                } else {
+                    alert('Authentication is not available right now. Please try again later.');
                 }
             };
             
@@ -3804,7 +3696,7 @@ window.addEventListener('beforeunload', () => {
 // Firebase initialization is now handled in the DOMContentLoaded event listener above
 // This eliminates duplicate initialization and ensures proper load order
 
-// --- Leaderboard Modal Logic ---
+// --- Leaderboard Modal & UI Wiring (delegates to LeaderboardService/AuthManager) ---
 const leaderboardModal = document.getElementById('leaderboard-modal');
 const googleSigninBtn = document.getElementById('google-signin-btn');
 const googleSignoutBtn = document.getElementById('google-signout-btn');
@@ -3813,412 +3705,105 @@ const optoutCheckbox = document.getElementById('optout-leaderboard');
 const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
 
 function showLeaderboardModal() {
-  leaderboardModal.style.display = 'flex';
-  leaderboardModal.style.opacity = '0';
-  leaderboardModal.style.transform = 'scale(0.9)';
-  
-  // Animate modal appearance
-  setTimeout(() => {
-    leaderboardModal.style.transition = 'all 0.3s ease';
-    leaderboardModal.style.opacity = '1';
-    leaderboardModal.style.transform = 'scale(1)';
-  }, 10);
-  
-  updateUserInfoUI();
-}
-function hideLeaderboardModal() {
-  // Animate modal disappearance
-  if (leaderboardModal) {
-    leaderboardModal.style.transition = 'all 0.3s ease';
-    leaderboardModal.style.opacity = '0';
-    leaderboardModal.style.transform = 'scale(0.9)';
-    
-    setTimeout(() => {
-      leaderboardModal.style.display = 'none';
-    }, 300);
+  if (window.LeaderboardService && typeof window.LeaderboardService.openModal === 'function') {
+    window.LeaderboardService.openModal();
+    if (typeof window.LeaderboardService.refresh === 'function') {
+      window.LeaderboardService.refresh();
+    }
   }
 }
-closeLeaderboardBtn.onclick = hideLeaderboardModal;
+function hideLeaderboardModal() {
+  if (window.LeaderboardService && typeof window.LeaderboardService.closeModal === 'function') {
+    window.LeaderboardService.closeModal();
+  }
+}
+if (closeLeaderboardBtn) closeLeaderboardBtn.onclick = hideLeaderboardModal;
 
-// Google Auth logic
-function updateUserInfoUI() {
-  if (currentUser) {
-    userInfoDiv.innerHTML = `<img src="${currentUser.photoURL}" style="width:32px;height:32px;border-radius:50%;vertical-align:middle;margin-right:0.5em;">${currentUser.displayName}`;
-    googleSigninBtn.style.display = 'none';
-    googleSignoutBtn.style.display = 'inline-block';
-    
-    // Update main menu sign-in status
-    const statusText = document.getElementById('signin-status-text');
+function updateUserInfoUI(user) {
+  currentUser = user || null;
     const mainSigninBtn = document.getElementById('main-signin-btn');
     const mainSignoutBtn = document.getElementById('main-signout-btn');
+  const statusText = document.getElementById('signin-status-text');
     
+  if (currentUser) {
+    if (userInfoDiv) userInfoDiv.innerHTML = `<img src="${currentUser.photoURL}" style="width:32px;height:32px;border-radius:50%;vertical-align:middle;margin-right:0.5em;">${currentUser.displayName}`;
+    if (googleSigninBtn) googleSigninBtn.style.display = 'none';
+    if (googleSignoutBtn) googleSignoutBtn.style.display = 'inline-block';
     if (statusText) statusText.textContent = `Signed in as ${currentUser.displayName}`;
     if (mainSigninBtn) mainSigninBtn.style.display = 'none';
     if (mainSignoutBtn) mainSignoutBtn.style.display = 'inline-block';
   } else {
-    userInfoDiv.innerHTML = '';
-    googleSigninBtn.style.display = 'inline-block';
-    googleSignoutBtn.style.display = 'none';
-    
-    // Update main menu sign-in status
-    const statusText = document.getElementById('signin-status-text');
-    const mainSigninBtn = document.getElementById('main-signin-btn');
-    const mainSignoutBtn = document.getElementById('main-signout-btn');
-    
+    if (userInfoDiv) userInfoDiv.innerHTML = '';
+    if (googleSigninBtn) googleSigninBtn.style.display = 'inline-block';
+    if (googleSignoutBtn) googleSignoutBtn.style.display = 'none';
     if (statusText) statusText.textContent = 'Not signed in - Your scores won\'t be saved';
     if (mainSigninBtn) mainSigninBtn.style.display = 'inline-block';
     if (mainSignoutBtn) mainSignoutBtn.style.display = 'none';
   }
 }
 
-// Enhanced Google sign-in with redirect flow as primary method
-googleSigninBtn.onclick = async function() {
-  console.log('🔐 Attempting Google sign-in...');
-
-  if (document.hidden) {
-    console.log('⚠️ Warning: Page is hidden, skipping sign-in');
-    return;
-  }
-
-  if (!auth) {
-    alert('Firebase authentication is not available right now. Please try again later.');
-    return;
-  }
-
-  if (typeof firebase === 'undefined' || !firebase.auth) {
-    console.error('❌ Firebase Auth SDK not loaded');
-    alert('Authentication service not loaded. Please refresh the page.');
-    return;
-  }
-
-  const provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({
-    prompt: 'select_account'
-  });
-
-  console.log('✅ Provider configured, attempting sign-in...');
-
-  try {
-    // Use redirect flow directly (more reliable for auth/internal-error)
-    console.log('🔄 Using redirect flow (more reliable)...');
-    await auth.signInWithRedirect(provider);
-    // User will be redirected - page will reload after sign-in
-  } catch (error) {
-    console.error('❌ Sign-in failed:', error);
-    console.error('Error code:', error?.code);
-    console.error('Error message:', error?.message);
-
-    // Handle errors
-    if (!document.hidden) {
-      let errorMessage = 'Failed to sign in with Google. ';
-      switch (error && error.code) {
-        case 'auth/popup-closed-by-user':
-          errorMessage += 'Sign-in was cancelled.';
-          break;
-        case 'auth/popup-blocked':
-          errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
-          break;
-        case 'auth/unauthorized-domain':
-          errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
-          break;
-        case 'auth/operation-not-allowed':
-          errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
-          break;
-        case 'auth/internal-error':
-          errorMessage += 'Internal authentication error. Please check Firebase Console settings or try again.';
-          break;
-        default:
-          errorMessage += 'Please try again.';
-      }
-      alert(errorMessage);
-    }
-  }
-};
-googleSignoutBtn.onclick = function() {
-  if (!auth) {
-    currentUser = null;
-    updateUserInfoUI();
-    return;
-  }
-  auth.signOut().then(() => {
-    currentUser = null;
-    updateUserInfoUI();
-  }).catch(error => {
-    console.error('Error signing out:', error);
-  });
-};
-
-// Main menu sign-in button
-const mainSigninBtn = document.getElementById('main-signin-btn');
-if (mainSigninBtn) {
-  mainSigninBtn.onclick = async function() {
-    if (!auth) {
-      alert('Firebase authentication is not available right now. Please try again later.');
-      return;
-    }
-    const provider = new firebase.auth.GoogleAuthProvider();
-    try {
-      const result = await auth.signInWithPopup(provider);
-      if (result && result.user) {
-        console.log('Google sign-in successful:', result.user.displayName);
-        currentUser = result.user;
-        updateUserInfoUI();
-      }
-    } catch (error) {
-      if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
-        console.warn('Popup sign-in failed, falling back to redirect flow.', error);
-        try {
-          await auth.signInWithRedirect(provider);
-          return;
-        } catch (redirectError) {
-          console.error('Redirect sign-in failed:', redirectError);
-          alert('Failed to sign in with Google. Please try again.');
-          return;
-        }
-      }
-      console.error('Google sign-in failed:', error);
-      alert('Failed to sign in with Google. Please try again.');
+if (googleSigninBtn) {
+  googleSigninBtn.onclick = function() {
+    if (window.AuthManager && typeof window.AuthManager.signIn === 'function') {
+      window.AuthManager.signIn();
     }
   };
+}
+if (googleSignoutBtn) {
+googleSignoutBtn.onclick = function() {
+    if (window.AuthManager && typeof window.AuthManager.signOut === 'function') {
+      window.AuthManager.signOut();
+    }
+  };
+}
 
-  // Add hover effects
+const mainSigninBtn = document.getElementById('main-signin-btn');
+if (mainSigninBtn) {
+  mainSigninBtn.onclick = function() {
+    if (window.AuthManager && typeof window.AuthManager.signIn === 'function') {
+      window.AuthManager.signIn();
+    }
+  };
   mainSigninBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';
     this.style.boxShadow = '0 6px 20px rgba(66,133,244,0.4)';
   });
-
   mainSigninBtn.addEventListener('mouseleave', function() {
     this.style.transform = 'translateY(0) scale(1)';
     this.style.boxShadow = '0 4px 15px rgba(66,133,244,0.3)';
   });
 }
 
-// Main menu sign-out button
 const mainSignoutBtn = document.getElementById('main-signout-btn');
 if (mainSignoutBtn) {
   mainSignoutBtn.onclick = function() {
-    if (!auth) {
-      currentUser = null;
-      updateUserInfoUI();
-      return;
+    if (window.AuthManager && typeof window.AuthManager.signOut === 'function') {
+      window.AuthManager.signOut();
     }
-    auth.signOut().then(() => {
-      currentUser = null;
-      updateUserInfoUI();
-    }).catch(error => {
-      console.error('Error signing out:', error);
-    });
   };
-
-  // Add hover effects
   mainSignoutBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';
     this.style.boxShadow = '0 6px 20px rgba(102,102,102,0.4)';
   });
-
   mainSignoutBtn.addEventListener('mouseleave', function() {
     this.style.transform = 'translateY(0) scale(1)';
     this.style.boxShadow = '0 4px 15px rgba(102,102,102,0.3)';
   });
 }
 
-// View leaderboard button
 const viewLeaderboardBtn = document.getElementById('view-leaderboard-btn');
 if (viewLeaderboardBtn) {
   viewLeaderboardBtn.onclick = function() {
     showLeaderboardModal();
-    fetchAndDisplayLeaderboard();
   };
-  
-  // Add hover effects
   viewLeaderboardBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';
     this.style.boxShadow = '0 6px 20px rgba(56,142,60,0.4)';
   });
-  
   viewLeaderboardBtn.addEventListener('mouseleave', function() {
     this.style.transform = 'translateY(0) scale(1)';
     this.style.boxShadow = '0 4px 15px rgba(56,142,60,0.3)';
   });
-}
-// Auth state listener is now handled in setupAuthListener() function called from DOMContentLoaded
-
-// --- Firestore Leaderboard Integration ---
-// Note: db is already initialized in the main Firebase configuration above
-
-// Helper: format time (seconds) as mm:ss
-function formatLeaderboardTime(seconds) {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${m}:${s.toString().padStart(2, '0')}`;
-}
-
-// Helper function to format Firebase timestamps
-function formatFirebaseDate(timestamp) {
-  if (!timestamp) return 'Recent';
-  
-  try {
-    let jsDate;
-    
-    if (timestamp.toDate && typeof timestamp.toDate === 'function') {
-      // Firebase Timestamp object (v8)
-      jsDate = timestamp.toDate();
-    } else if (timestamp.seconds !== undefined) {
-      // Firebase Timestamp object (v9) - convert seconds to milliseconds
-      jsDate = new Date(timestamp.seconds * 1000);
-    } else if (timestamp instanceof Date) {
-      // Regular Date object
-      jsDate = timestamp;
-    } else if (typeof timestamp === 'string') {
-      // String date
-      jsDate = new Date(timestamp);
-      if (isNaN(jsDate.getTime())) return 'Recent';
-    } else if (typeof timestamp === 'number') {
-      // Timestamp number (milliseconds)
-      jsDate = new Date(timestamp);
-    } else {
-      return 'Recent';
-    }
-    
-    // Check if date is valid
-    if (isNaN(jsDate.getTime())) return 'Recent';
-    
-    // Format the date
-    const now = new Date();
-    const diffInHours = (now - jsDate) / (1000 * 60 * 60);
-    
-    if (diffInHours < 1) {
-      return 'Just now';
-    } else if (diffInHours < 24) {
-      const hours = Math.floor(diffInHours);
-      return `${hours}h ago`;
-    } else if (diffInHours < 168) { // 7 days
-      const days = Math.floor(diffInHours / 24);
-      return `${days}d ago`;
-    } else {
-      return jsDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      });
-    }
-  } catch (error) {
-    console.error('Error formatting date:', error);
-    return 'Recent';
-  }
-}
-
-// Submit score to leaderboard
-function submitToLeaderboard(score, time) {
-  // Check if user is authenticated
-  if (!currentUser) {
-    console.log('⚠️ No user signed in - skipping leaderboard submission');
-    return;
-  }
-  
-  if (optoutCheckbox && optoutCheckbox.checked) {
-    console.log('⚠️ User opted out of leaderboard - skipping submission');
-    return;
-  }
-  
-  // Ensure score and time are valid numbers
-  const finalScore = parseInt(score, 10) || 0;
-  const finalTime = parseInt(time, 10) || 0;
-  
-  console.log('Submitting score to leaderboard:', { 
-    originalScore: score, 
-    originalTime: time,
-    finalScore: finalScore, 
-    finalTime: finalTime, 
-    user: currentUser.displayName,
-    uid: currentUser.uid,
-    currentPlayerScore: playerScore,
-    timeAttackBlueTeamFinalScore: timeAttackBlueTeamFinalScore
-  });
-  
-  // Validate user data
-  if (!currentUser.uid) {
-    console.error('❌ User UID is missing');
-    return;
-  }
-  
-  const entry = {
-    uid: currentUser.uid,
-    displayName: currentUser.displayName || 'Anonymous',
-    photoURL: currentUser.photoURL || 'https://via.placeholder.com/24x24',
-    score: finalScore,
-    time: finalTime,
-    date: firebase.firestore.FieldValue.serverTimestamp()
-  };
-  
-  // Validate entry data
-  if (!entry.uid || typeof entry.score !== 'number' || typeof entry.time !== 'number') {
-    console.error('❌ Invalid entry data:', entry);
-    return;
-  }
-  
-  console.log('📝 Submitting entry to Firestore:', entry);
-  
-  // Submit to leaderboard with enhanced error handling
-  db.collection('leaderboard').doc(currentUser.uid).set(entry)
-    .then(() => {
-      console.log('✅ Score submitted successfully:', finalScore);
-    })
-    .catch(error => {
-      console.error('❌ Error submitting score:', error);
-      
-      // Handle specific error cases
-      if (error.code === 'permission-denied') {
-        console.error('🔒 Permission denied - check Firestore security rules');
-        showFirebaseErrorMessage('Permission denied. Please check if you are signed in correctly.', false);
-      } else if (error.code === 'unauthenticated') {
-        console.error('🔐 User not authenticated');
-        showFirebaseErrorMessage('Please sign in to save your score.', false);
-      } else if (error.code === 'invalid-argument') {
-        console.error('📝 Invalid data format');
-        showFirebaseErrorMessage('Invalid score data. Please try again.', true);
-      } else {
-        console.error('🌐 Network or server error:', error.message);
-        showFirebaseErrorMessage('Failed to save score. Please check your connection and try again.', true);
-      }
-    });
-}
-
-// Fetch and display Top 100 leaderboard
-
-
-// Show leaderboard after game end
-function showLeaderboardAfterGame(score, time) {
-  console.log('showLeaderboardAfterGame called with:', { score, time, currentUser: currentUser ? currentUser.displayName : 'none' });
-  console.log('Current game state:', { 
-    isTimeAttackMode, 
-    gameMode, 
-    playerScore, 
-    timeAttackBlueTeamFinalScore,
-    teamBlueScore,
-    teamBlackScore 
-  });
-  
-  // Optionally, prompt for sign-in if not signed in
-  if (!currentUser) {
-    console.log('No user signed in, showing leaderboard modal');
-    showLeaderboardModal();
-    return;
-  }
-  
-  // Ensure score and time are valid
-  const finalScore = parseInt(score, 10) || 0;
-  const finalTime = parseInt(time, 10) || 0;
-  
-  console.log('Submitting to leaderboard:', { finalScore, finalTime });
-  
-  // Submit score if not opted out
-  submitToLeaderboard(finalScore, finalTime);
-  // Fetch and display leaderboard after a short delay to ensure submission is complete
-  setTimeout(() => {
-    fetchAndDisplayLeaderboard();
-    showLeaderboardModal();
-  }, 1000);
 }
 
 /**
@@ -4831,224 +4416,33 @@ function resetToLevelSelection() {
 
 // --- NEW LEADERBOARD LOGIC ---
 
-// This function updates a player's cumulative score on the leaderboard.
-// It's called only when a player successfully completes a level.
+// Delegate leaderboard update to the new service
 async function updateLeaderboardScore(level, score) {
-    if (!currentUser || getOptOutStatus()) {
-        console.log("User not signed in or has opted out of leaderboard. Skipping score update.");
-        return;
-    }
-
-    if (!db) {
-        console.error("Firestore not initialized");
-        return;
-    }
-
-    const leaderboardRef = db.collection('leaderboard').doc(currentUser.uid);
-
-    try {
-        await db.runTransaction(async (transaction) => {
-            const userDoc = await transaction.get(leaderboardRef);
-
-            if (!userDoc.exists) {
-                // First time this user is being added to the leaderboard
-                transaction.set(leaderboardRef, {
-                    name: currentUser.displayName,
-                    photoURL: currentUser.photoURL,
-                    levelScores: { [level]: score },
-                    totalCumulativeScore: score,
-                    lastCompletedLevel: level,
-                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-                });
-            } else {
-                // User already exists, update their record
-                const data = userDoc.data();
-                const newLevelScores = data.levelScores || {};
-                newLevelScores[level] = Math.max(score, newLevelScores[level] || 0); // Keep the highest score for the level
-
-                // Recalculate total score
-                const totalCumulativeScore = Object.values(newLevelScores).reduce((sum, current) => sum + current, 0);
-
-                transaction.update(leaderboardRef, {
-                    name: currentUser.displayName, // Update name in case it changed
-                    photoURL: currentUser.photoURL,
-                    levelScores: newLevelScores,
-                    totalCumulativeScore: totalCumulativeScore,
-                    lastCompletedLevel: Math.max(level, data.lastCompletedLevel || 0),
-                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-                });
-            }
-        });
-        console.log("Leaderboard score updated successfully.");
-    } catch (error) {
-        console.error("Error updating leaderboard score:", error);
+    if (typeof window.LeaderboardService !== 'undefined' && typeof window.LeaderboardService.submitLevelScore === 'function') {
+        await window.LeaderboardService.submitLevelScore(level, score);
     }
 }
 
 // Fetches and displays the new leaderboard data
 function fetchAndDisplayLeaderboard() {
-    if (!db) {
-        console.error('Firestore not initialized');
-        return;
-    }
-
-    const leaderboardBody = document.querySelector('#leaderboard-table tbody');
-    if (!leaderboardBody) {
-        console.error('Leaderboard table body not found!');
-        return;
-    }
-
-    // Allow viewing leaderboard without authentication (per Firebase rules: allow read: if true)
-    // User row highlighting will still work conditionally when signed in
-    leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">Loading...</td></tr>';
-
-    // Add retry logic with timeout to handle initialization delays
-    const fetchWithRetry = (retries = 3, delay = 1000) => {
-        db.collection('leaderboard')
-            .orderBy('totalCumulativeScore', 'desc')
-            .limit(100)
-            .get()
-            .then(querySnapshot => {
-                handleLeaderboardData(querySnapshot, leaderboardBody);
-            })
-            .catch(error => {
-                if (retries > 0 && error.code === 'permission-denied') {
-                    console.warn(`Retrying leaderboard fetch... (${retries} attempts left)`);
-                    setTimeout(() => fetchWithRetry(retries - 1, delay), delay);
-                } else {
-                    handleLeaderboardError(error, leaderboardBody);
-                }
-            });
-    };
-
-    fetchWithRetry();
-}
-
-function handleLeaderboardData(querySnapshot, leaderboardBody) {
-    leaderboardBody.innerHTML = '';
-
-    if (querySnapshot.empty) {
-        leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">The leaderboard is empty. Be the first!</td></tr>';
-        return;
-    }
-
-    // Add sign-in prompt for unauthenticated users
-    if (!currentUser) {
-        const signInPrompt = `
-            <tr style="background:rgba(139,0,0,0.15);border-bottom:2px solid rgba(139,0,0,0.3);">
-                <td colspan="5" style="padding:1.2rem;text-align:center;">
-                    <p style="margin:0 0 0.8rem;color:#ffcc00;font-weight:bold;font-size:1.05rem;">
-                        🎮 Sign in to save your scores and compete on the leaderboard!
-                    </p>
-                    <button onclick="document.getElementById('google-signin-btn').click()"
-                            class="comic-button"
-                            style="background:#4285f4;color:#fff;border:none;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:bold;box-shadow:0 4px 8px rgba(66,133,244,0.3);transition:all 0.2s;">
-                        <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" style="width:18px;height:18px;vertical-align:middle;margin-right:0.5rem;">
-                        Sign In with Google
-                    </button>
-                </td>
-            </tr>
-        `;
-        leaderboardBody.insertAdjacentHTML('beforeend', signInPrompt);
-    }
-
-    querySnapshot.forEach((doc, index) => {
-        const data = doc.data();
-        const rank = index + 1;
-        const name = data.name || 'Anonymous';
-        const score = data.totalCumulativeScore || 0;
-        const level = data.lastCompletedLevel || 1;
-        const lastUpdated = data.lastUpdated && data.lastUpdated.seconds ? new Date(data.lastUpdated.seconds * 1000) : null;
-        const date = lastUpdated ? lastUpdated.toLocaleDateString() : 'N/A';
-
-        const row = `
-            <tr style="background:${currentUser && currentUser.uid === doc.id ? 'rgba(139,0,0,0.25)' : 'transparent'};">
-                <td style="padding:0.8rem;text-align:center;">${rank}</td>
-                <td style="padding:0.8rem;text-align:left;display:flex;align-items:center;gap:0.8rem;">
-                    <img src="${data.photoURL || 'icon-192.png'}" style="width:32px;height:32px;border-radius:50%;">
-                    <span>${name}</span>
-                </td>
-                <td style="padding:0.8rem;text-align:center;">${score}</td>
-                <td style="padding:0.8rem;text-align:center;">${level}</td>
-                <td style="padding:0.8rem;text-align:center;">${date}</td>
-            </tr>
-        `;
-        leaderboardBody.insertAdjacentHTML('beforeend', row);
-    });
-}
-
-function handleLeaderboardError(error, leaderboardBody) {
-    console.error('Error in fetchAndDisplayLeaderboard:', error);
-    console.error('Error details:', {
-        code: error.code,
-        message: error.message,
-        name: error.name
-    });
-
-    let errorMessage = 'Could not load leaderboard.';
-    if (error.code === 'permission-denied') {
-        errorMessage = 'Unable to load leaderboard. Please sign in or check your connection.';
-    } else if (error.code === 'failed-precondition') {
-        errorMessage = 'Leaderboard index is still building. Please wait a moment and refresh.';
-    }
-
-    leaderboardBody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ff6b6b;">${errorMessage}</td></tr>`;
-}
-
-
-
-// --- OLD LEADERBOARD FUNCTIONS (to be deprecated/removed) ---
-/*
-function submitToLeaderboard(score, time) {
-    if (currentUser && !getOptOutStatus()) {
-        const db = firebase.firestore();
-        const scoreData = {
-            name: currentUser.displayName,
-            photoURL: currentUser.photoURL,
-            score: score,
-            time: time,
-            date: firebase.firestore.FieldValue.serverTimestamp(),
-            userId: currentUser.uid,
-            questionCount: gameQuestionCount
-        };
-        db.collection('leaderboard').add(scoreData)
-            .then(() => console.log('Score submitted successfully!'))
-            .catch(error => console.error('Error submitting score: ', error));
+    if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
+        window.LeaderboardService.refresh();
     }
 }
-*/
+
+// Removed local rendering helpers; handled by LeaderboardService
+
+// Removed error handler; service will report
+
+
+
+// Removed deprecated local submission
 
 // This function is no longer needed to submit the score, just to show the modal
 // --- END LEADERBOARD LOGIC ---
 
 // --- AUTHENTICATION SETUP ---
-function setupAuthListener() {
-    if (auth) {
-        auth.onAuthStateChanged(user => {
-            currentUser = user;
-            updateUserInfoUI();
-        });
-    }
-}
-
-function completePendingRedirectSignIn() {
-    if (!auth || typeof auth.getRedirectResult !== 'function') {
-        return;
-    }
-    auth.getRedirectResult()
-        .then((result) => {
-            if (result && result.user) {
-                console.log('Google redirect sign-in successful:', result.user.displayName);
-                currentUser = result.user;
-                updateUserInfoUI();
-            }
-        })
-        .catch((error) => {
-            if (error && error.code && error.code !== 'auth/no-auth-event') {
-                console.error('Google redirect sign-in failed:', error);
-            }
-        });
-}
+// Removed legacy auth listener; handled by AuthManager
 
 // ... existing code ...
 function showEndScreen(stats) {

@@ -1906,28 +1906,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 const provider = new firebase.auth.GoogleAuthProvider();
+                provider.setCustomParameters({ prompt: 'select_account' });
+
                 try {
-                    const result = await auth.signInWithPopup(provider);
-                    if (result && result.user) {
-                        console.log('Google sign-in successful:', result.user.displayName);
-                        currentUser = result.user;
-                        hideSignInPromptModal();
-                        exitBtn.style.display = 'block';
-                        startGame(gameMode, currentGameLevel || 1);
-                    }
+                    console.log('🔄 Starting sign-in with redirect flow...');
+                    // Use redirect flow directly (avoids auth/internal-error with popups)
+                    await auth.signInWithRedirect(provider);
+                    // User will be redirected and come back signed in
                 } catch (error) {
-                    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
-                        console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
-                        try {
-                            await auth.signInWithRedirect(provider);
-                            return;
-                        } catch (redirectError) {
-                            console.error('Redirect sign-in failed:', redirectError);
-                            alert('Failed to sign in with Google. Please try again.');
-                            return;
-                        }
-                    }
-                    console.error('Google sign-in failed:', error);
+                    console.error('Sign-in failed:', error);
                     alert('Failed to sign in with Google. Please try again.');
                 }
             };
@@ -3912,34 +3899,16 @@ googleSigninBtn.onclick = async function() {
   console.log('✅ Provider configured, attempting sign-in...');
 
   try {
-    // Try popup first (works better in some environments)
-    console.log('📱 Attempting popup sign-in...');
-    const result = await auth.signInWithPopup(provider);
-
-    if (result && result.user) {
-      console.log('✅ Google sign-in successful:', result.user.displayName);
-      currentUser = result.user;
-      updateUserInfoUI();
-    }
+    // Use redirect flow directly (more reliable for auth/internal-error)
+    console.log('🔄 Using redirect flow (more reliable)...');
+    await auth.signInWithRedirect(provider);
+    // User will be redirected - page will reload after sign-in
   } catch (error) {
-    console.error('❌ Popup sign-in failed:', error);
+    console.error('❌ Sign-in failed:', error);
     console.error('Error code:', error?.code);
     console.error('Error message:', error?.message);
 
-    // Handle popup blocked or closed
-    if (error && (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user')) {
-      console.log('🔄 Popup blocked or closed, switching to redirect flow...');
-      try {
-        await auth.signInWithRedirect(provider);
-        return;
-      } catch (redirectError) {
-        console.error('❌ Redirect sign-in failed:', redirectError);
-        alert('Sign-in failed. Please check your browser settings and allow popups for this site.');
-        return;
-      }
-    }
-
-    // Handle other errors
+    // Handle errors
     if (!document.hidden) {
       let errorMessage = 'Failed to sign in with Google. ';
       switch (error && error.code) {
@@ -3954,6 +3923,9 @@ googleSigninBtn.onclick = async function() {
           break;
         case 'auth/operation-not-allowed':
           errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
+          break;
+        case 'auth/internal-error':
+          errorMessage += 'Internal authentication error. Please check Firebase Console settings or try again.';
           break;
         default:
           errorMessage += 'Please try again.';

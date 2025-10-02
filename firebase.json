@@ -1,6 +1,8 @@
 {
   "functions": [
-    { "source": "functions" }
+    {
+      "source": "functions"
+    }
   ],
   "hosting": {
     "public": ".",
@@ -12,6 +14,8 @@
     "site": "end-of-time-94cd3"
   },
   "firestore": {
+    "database": "(default)",
+    "location": "africa-south1",
     "rules": "firestore-rules.txt",
     "indexes": "firestore.indexes.json"
   }

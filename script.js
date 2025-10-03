@@ -1749,13 +1749,32 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('keydown', ensureUserInteraction, { once: true });
     // --- Check Sign In and Start Game ---
     function checkSignInAndStartGame(mode) {
+        const levelNumber = currentGameLevel || 1;
+        console.log(`🎮 checkSignInAndStartGame called: mode=${mode}, level=${levelNumber}, currentUser=${currentUser ? 'signed in' : 'not signed in'}`);
+
+        // Function to actually start the game (after tutorial if needed)
+        const actuallyStartGame = () => {
+            console.log(`🚀 actuallyStartGame called for level ${levelNumber}`);
+            exitBtn.style.display = 'block';
+            startGame(mode, levelNumber);
+        };
+
         if (!currentUser) {
+            console.log(`🔐 User not signed in, showing sign-in modal`);
             // Show sign-in prompt modal
             showSignInPromptModal(mode);
         } else {
-            // User is already signed in, start game directly
-            exitBtn.style.display = 'block';
-            startGame(mode, currentGameLevel || 1);
+            console.log(`✅ User signed in`);
+            // User is already signed in, check if tutorial should be shown
+            const showTut = shouldShowTutorial(levelNumber);
+            console.log(`📚 Should show tutorial for level ${levelNumber}? ${showTut}`);
+            if (showTut) {
+                console.log(`🎓 Showing tutorial for level ${levelNumber}`);
+                showTutorial(levelNumber, mode, actuallyStartGame);
+            } else {
+                console.log(`⏭️ Skipping tutorial, starting game directly`);
+                actuallyStartGame();
+            }
         }
     }
 
@@ -1814,8 +1833,18 @@ document.addEventListener('DOMContentLoaded', () => {
             skipBtn.onclick = () => {
                 hideSignInPromptModal();
                 // Start game without sign-in
-                exitBtn.style.display = 'block';
-                startGame(gameMode, currentGameLevel || 1);
+                const levelNumber = currentGameLevel || 1;
+                const actuallyStartGame = () => {
+                    exitBtn.style.display = 'block';
+                    startGame(gameMode, levelNumber);
+                };
+
+                // Check if tutorial should be shown
+                if (shouldShowTutorial(levelNumber)) {
+                    showTutorial(levelNumber, gameMode, actuallyStartGame);
+                } else {
+                    actuallyStartGame();
+                }
             };
             
             closeBtn.onclick = hideSignInPromptModal;
@@ -1829,6 +1858,264 @@ document.addEventListener('DOMContentLoaded', () => {
         if (signInModal) {
             signInModal.style.display = 'none';
         }
+    }
+
+    // --- Tutorial System ---
+    const allTutorials = [
+        typeof tutorialLevel1 !== 'undefined' ? tutorialLevel1 : null,
+        typeof tutorialLevel2 !== 'undefined' ? tutorialLevel2 : null,
+        typeof tutorialLevel3 !== 'undefined' ? tutorialLevel3 : null,
+        typeof tutorialLevel4 !== 'undefined' ? tutorialLevel4 : null,
+        typeof tutorialLevel5 !== 'undefined' ? tutorialLevel5 : null,
+        typeof tutorialLevel6 !== 'undefined' ? tutorialLevel6 : null,
+        typeof tutorialLevel7 !== 'undefined' ? tutorialLevel7 : null
+    ];
+
+    function shouldShowTutorial(levelNumber) {
+        try {
+            const skipTutorials = localStorage.getItem('endOfTime_skipTutorials');
+            if (skipTutorials === 'true') return false;
+
+            const viewedTutorials = JSON.parse(localStorage.getItem('endOfTime_viewedTutorials') || '[]');
+            return !viewedTutorials.includes(levelNumber);
+        } catch (e) {
+            console.error("Error checking tutorial status:", e);
+            return true; // Show tutorial if error
+        }
+    }
+
+    function markTutorialAsViewed(levelNumber) {
+        try {
+            const viewedTutorials = JSON.parse(localStorage.getItem('endOfTime_viewedTutorials') || '[]');
+            if (!viewedTutorials.includes(levelNumber)) {
+                viewedTutorials.push(levelNumber);
+                localStorage.setItem('endOfTime_viewedTutorials', JSON.stringify(viewedTutorials));
+            }
+        } catch (e) {
+            console.error("Error marking tutorial as viewed:", e);
+        }
+    }
+
+    function showTutorial(levelNumber, mode, callback) {
+        console.log(`📖 showTutorial called for level ${levelNumber}`);
+        const tutorial = allTutorials[levelNumber - 1];
+        console.log(`Tutorial data:`, tutorial);
+        if (!tutorial) {
+            console.warn(`Tutorial for level ${levelNumber} not found`);
+            callback();
+            return;
+        }
+
+        const modal = document.getElementById('tutorial-modal');
+        const title = document.getElementById('tutorial-title');
+        const subtitle = document.getElementById('tutorial-subtitle');
+        const sectionsContainer = document.getElementById('tutorial-sections');
+        const watchVideoBtn = document.getElementById('watch-video-btn');
+        const skipToLevelBtn = document.getElementById('skip-to-level-btn');
+        const skipCheckbox = document.getElementById('skip-tutorials-checkbox');
+
+        console.log(`📝 Modal elements:`, {modal, title, subtitle, sectionsContainer, watchVideoBtn, skipToLevelBtn, skipCheckbox});
+
+        // Set title and subtitle
+        title.textContent = tutorial.title;
+        subtitle.textContent = tutorial.subtitle;
+
+        // Clear previous sections
+        sectionsContainer.innerHTML = '';
+
+        // Create sections
+        const sections = [tutorial.mechanics, tutorial.content, tutorial.tools, tutorial.tips];
+        sections.forEach(section => {
+            if (!section) return;
+
+            const sectionDiv = document.createElement('div');
+            sectionDiv.style.cssText = `
+                background: rgba(42, 42, 42, 0.6);
+                border: 2px solid rgba(139, 0, 0, 0.3);
+                border-radius: 16px;
+                padding: 1.5rem;
+                backdrop-filter: blur(5px);
+            `;
+
+            const sectionTitle = document.createElement('h3');
+            sectionTitle.style.cssText = `
+                color: #ffffff;
+                font-family: 'Montserrat-Bold', Arial, sans-serif;
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            `;
+            sectionTitle.innerHTML = `<span style="font-size: 1.8rem;">${section.icon}</span> ${section.title}`;
+
+            const descList = document.createElement('div');
+            descList.style.cssText = `
+                color: #e0e0e0;
+                font-family: 'Montserrat-Regular', Arial, sans-serif;
+                font-size: 1rem;
+                line-height: 1.8;
+            `;
+            descList.innerHTML = section.description.map(item => `<p style="margin: 0.5rem 0;">${item}</p>`).join('');
+
+            sectionDiv.appendChild(sectionTitle);
+            sectionDiv.appendChild(descList);
+            sectionsContainer.appendChild(sectionDiv);
+        });
+
+        // Reset skip checkbox
+        skipCheckbox.checked = false;
+
+        // Show modal with animation
+        modal.style.display = 'flex';
+        requestAnimationFrame(() => {
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity 0.3s';
+            requestAnimationFrame(() => {
+                modal.style.opacity = '1';
+            });
+        });
+
+        // Handle "Watch Video" button
+        watchVideoBtn.onclick = () => {
+            // Check if user wants to skip future tutorials
+            if (skipCheckbox.checked) {
+                try {
+                    localStorage.setItem('endOfTime_skipTutorials', 'true');
+                } catch (e) {
+                    console.error("Error saving skip tutorials preference:", e);
+                }
+            }
+
+            // Mark this tutorial as viewed
+            markTutorialAsViewed(levelNumber);
+
+            // Hide tutorial modal with animation
+            modal.style.transition = 'opacity 0.3s';
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+                // Show the video
+                playLevelVideo(levelNumber, mode, callback);
+            }, 300);
+        };
+
+        // Handle "Skip to Level" button
+        skipToLevelBtn.onclick = () => {
+            // Check if user wants to skip future tutorials
+            if (skipCheckbox.checked) {
+                try {
+                    localStorage.setItem('endOfTime_skipTutorials', 'true');
+                } catch (e) {
+                    console.error("Error saving skip tutorials preference:", e);
+                }
+            }
+
+            // Mark this tutorial as viewed
+            markTutorialAsViewed(levelNumber);
+
+            // Hide modal and start game directly
+            modal.style.transition = 'opacity 0.3s';
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+                callback();
+            }, 300);
+        };
+    }
+
+    // --- Video Player System ---
+    function hasWatchedVideo(levelNumber) {
+        try {
+            const watchedVideos = JSON.parse(localStorage.getItem('endOfTime_watchedVideos') || '[]');
+            return watchedVideos.includes(levelNumber);
+        } catch (e) {
+            console.error("Error checking watched videos:", e);
+            return false;
+        }
+    }
+
+    function markVideoAsWatched(levelNumber) {
+        try {
+            const watchedVideos = JSON.parse(localStorage.getItem('endOfTime_watchedVideos') || '[]');
+            if (!watchedVideos.includes(levelNumber)) {
+                watchedVideos.push(levelNumber);
+                localStorage.setItem('endOfTime_watchedVideos', JSON.stringify(watchedVideos));
+            }
+        } catch (e) {
+            console.error("Error marking video as watched:", e);
+        }
+    }
+
+    function playLevelVideo(levelNumber, mode, callback) {
+        const videoModal = document.getElementById('video-player-modal');
+        const video = document.getElementById('level-intro-video');
+        const videoSource = document.getElementById('video-source');
+        const skipVideoBtn = document.getElementById('skip-video-btn');
+        const videoTitleOverlay = document.getElementById('video-title-overlay');
+
+        // Set video source
+        videoSource.src = `Video ${levelNumber}.mp4`;
+        video.load();
+
+        // Update title overlay
+        videoTitleOverlay.textContent = `Level ${levelNumber} Introduction`;
+
+        // Update skip button text if already watched
+        if (hasWatchedVideo(levelNumber)) {
+            skipVideoBtn.textContent = 'Skip (Watched) ⏭️';
+            skipVideoBtn.style.background = 'rgba(68,68,68,0.9)';
+        } else {
+            skipVideoBtn.textContent = 'Skip Video ⏭️';
+            skipVideoBtn.style.background = 'rgba(139,0,0,0.9)';
+        }
+
+        // Show video modal
+        videoModal.style.display = 'flex';
+
+        // Play video
+        video.play().catch(err => {
+            console.error("Error playing video:", err);
+            // If video fails to play, skip to game
+            hideVideoAndStartGame();
+        });
+
+        // When video ends, start the game
+        const onVideoEnded = () => {
+            markVideoAsWatched(levelNumber);
+            hideVideoAndStartGame();
+        };
+
+        // Skip video button
+        const onSkipVideo = () => {
+            hideVideoAndStartGame();
+        };
+
+        function hideVideoAndStartGame() {
+            video.pause();
+            video.currentTime = 0;
+            videoModal.style.display = 'none';
+
+            // Remove event listeners
+            video.removeEventListener('ended', onVideoEnded);
+            skipVideoBtn.removeEventListener('click', onSkipVideo);
+
+            // Start the game
+            callback();
+        }
+
+        // Add event listeners
+        video.addEventListener('ended', onVideoEnded);
+        skipVideoBtn.addEventListener('click', onSkipVideo);
+
+        // Also allow Escape key to skip
+        const onEscapeKey = (e) => {
+            if (e.key === 'Escape') {
+                hideVideoAndStartGame();
+                document.removeEventListener('keydown', onEscapeKey);
+            }
+        };
+        document.addEventListener('keydown', onEscapeKey);
     }
 
     // --- Start Game ---

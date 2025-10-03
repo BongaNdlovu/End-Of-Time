@@ -68,7 +68,16 @@
     <script src="questions-level5.js" defer></script>
     <script src="questions-level6.js" defer></script>
     <script src="questions-level7.js" defer></script>
-    
+
+    <!-- Tutorial files -->
+    <script src="tutorial-level1.js" defer></script>
+    <script src="tutorial-level2.js" defer></script>
+    <script src="tutorial-level3.js" defer></script>
+    <script src="tutorial-level4.js" defer></script>
+    <script src="tutorial-level5.js" defer></script>
+    <script src="tutorial-level6.js" defer></script>
+    <script src="tutorial-level7.js" defer></script>
+
     <!-- Firebase Config MUST be loaded before auth-leaderboard.js and script.js -->
     <script src="firebase-config.js" defer></script>
 
@@ -395,6 +404,52 @@
         </div>
         
         <button id="close-leaderboard-btn" style="margin-top:1.5rem;background:linear-gradient(45deg,#e74c3c,#c0392b);color:#fff;border:none;padding:0.8rem 2rem;border-radius:10px;font-size:1.1rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 15px rgba(231,76,60,0.4);transition:all 0.3s ease;font-family:'Montserrat-Bold',Arial,sans-serif;">Close</button>
+      </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorial-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10001;background:linear-gradient(135deg,rgba(18,18,18,0.98),rgba(30,30,30,0.98));align-items:center;justify-content:center;backdrop-filter:blur(15px);">
+      <div id="tutorial-content" style="background:linear-gradient(145deg,#1a1a1a,#2a2a2a);border:3px solid #6b0000;border-radius:24px;box-shadow:0 12px 48px rgba(139,0,0,0.6),0 0 80px rgba(139,0,0,0.3);padding:2.5rem;max-width:95vw;width:800px;max-height:90vh;overflow-y:auto;position:relative;">
+        <!-- Tutorial header -->
+        <div style="text-align:center;margin-bottom:2rem;border-bottom:2px solid rgba(139,0,0,0.4);padding-bottom:1.5rem;">
+          <div style="position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:40%;height:4px;background:linear-gradient(90deg,transparent,#8B0000,transparent);border-radius:2px;"></div>
+          <h2 id="tutorial-title" style="color:#ffffff;font-family:'Montserrat-BoldItalic',Arial,sans-serif;font-size:2.2rem;margin-bottom:0.5rem;text-shadow:0 0 20px rgba(139,0,0,0.8);">Level Tutorial</h2>
+          <p id="tutorial-subtitle" style="color:#ff6b6b;font-family:'Montserrat-Light',Arial,sans-serif;font-size:1.3rem;margin:0;">Question Type</p>
+        </div>
+
+        <!-- Tutorial sections container -->
+        <div id="tutorial-sections" style="display:grid;gap:1.5rem;">
+          <!-- Sections will be dynamically inserted here -->
+        </div>
+
+        <!-- Tutorial footer with buttons -->
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:2px solid rgba(139,0,0,0.3);display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:0.5rem;color:#cccccc;font-family:'Montserrat-Regular',Arial,sans-serif;font-size:0.95rem;cursor:pointer;">
+            <input type="checkbox" id="skip-tutorials-checkbox" style="width:18px;height:18px;accent-color:#8B0000;cursor:pointer;">
+            Don't show tutorials again
+          </label>
+        </div>
+        <div style="display:flex;gap:1rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;">
+          <button id="watch-video-btn" class="comic-button" style="background:linear-gradient(45deg,#8B0000,#6b0000);color:#fff;border:none;padding:1rem 2.5rem;border-radius:12px;font-size:1.2rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 20px rgba(139,0,0,0.5);transition:all 0.3s ease;font-family:'Montserrat-Bold',Arial,sans-serif;">Watch Intro Video 📺</button>
+          <button id="skip-to-level-btn" class="comic-button" style="background:linear-gradient(45deg,#444,#666);color:#fff;border:none;padding:1rem 2rem;border-radius:12px;font-size:1rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 20px rgba(102,102,102,0.4);transition:all 0.3s ease;font-family:'Montserrat-Regular',Arial,sans-serif;">Skip to Level ⏭️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="video-player-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10002;background:#000000;align-items:center;justify-content:center;">
+      <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+        <!-- Video element -->
+        <video id="level-intro-video" style="max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;" controls>
+          <source id="video-source" src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- Skip video button -->
+        <button id="skip-video-btn" style="position:absolute;top:20px;right:20px;background:rgba(139,0,0,0.9);color:#fff;border:2px solid #ffffff;padding:0.8rem 1.5rem;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,0.5);transition:all 0.3s ease;font-family:'Montserrat-Bold',Arial,sans-serif;z-index:10003;">Skip Video ⏭️</button>
+
+        <!-- Video title overlay -->
+        <div id="video-title-overlay" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(0,0,0,0.8),transparent);color:#ffffff;padding:1rem 3rem;border-radius:8px;font-family:'Montserrat-BoldItalic',Arial,sans-serif;font-size:1.5rem;text-shadow:0 0 10px rgba(139,0,0,0.8);pointer-events:none;">Level Introduction</div>
       </div>
     </div>
 </body>

@@ -64,6 +64,26 @@ const MEDIA_ASSETS = [
   '/Incorrect 10.wav'
 ];
 
+const TRANSITION_SVGS = [
+  '/1.svg',
+  '/2.svg',
+  '/3.svg',
+  '/4.svg',
+  '/5.svg',
+  '/6.svg',
+  '/7.svg',
+  '/8.svg',
+  '/9.svg',
+  '/10.svg',
+  '/11.svg',
+  '/12.svg',
+  '/13.svg',
+  '/14.svg',
+  '/15.svg',
+  '/16.svg',
+  '/17.svg'
+];
+
 async function precacheAssets(cache, urls, options = {}) {
   const { skipPartial = true } = options;
   for (const url of urls) {
@@ -126,6 +146,7 @@ self.addEventListener('install', (event) => {
     const cache = await caches.open(CACHE_NAME);
     await precacheAssets(cache, CORE_ASSETS);
     await precacheAssets(cache, MEDIA_ASSETS);
+    await precacheAssets(cache, TRANSITION_SVGS);
     await self.skipWaiting();
   })());
 });

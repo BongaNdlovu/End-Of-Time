@@ -14,13 +14,16 @@ const audioCorrect2 = document.getElementById('audio-correct-2');
 const audioWrong = document.getElementById('audio-wrong');
 const audioTimeup = document.getElementById('audio-timeup');
 const audioRiser = document.getElementById('audio-riser');
-// Background music tracks - now includes 5 soundtracks for variety
+const audioKeyFact = document.getElementById('audio-key-fact');
+// Background music tracks - updated to cycle 2-8 (removing 1)
 const audioBgTracks = [
-    document.getElementById('audio-bg-1'),
     document.getElementById('audio-bg-2'),
     document.getElementById('audio-bg-3'),
     document.getElementById('audio-bg-4'),
-    document.getElementById('audio-bg-5')
+    document.getElementById('audio-bg-5'),
+    document.getElementById('audio-bg-6'),
+    document.getElementById('audio-bg-7'),
+    document.getElementById('audio-bg-8')
 ];
 let currentBgTrackIndex = 0;
 let currentBgTrack = null;
@@ -74,7 +77,7 @@ function applyVolume(audio) {
 function applyVolumeToAll() {
     const elements = [
         audioCorrect1, audioCorrect2, audioWrong, audioTimeup, audioRiser,
-        audioTickingTime, audioTimerTick,
+        audioKeyFact, audioTickingTime, audioTimerTick,
         ...audioBgTracks,
         ...correctSoundPool,
         ...incorrectSoundPool
@@ -127,9 +130,10 @@ function initializeBaseVolumes() {
     setBaseVolume(audioWrong, 1);
     setBaseVolume(audioTimeup, 1);
     setBaseVolume(audioRiser, 1);
+    setBaseVolume(audioKeyFact, 1);
     setBaseVolume(audioTickingTime, 0.4);
     setBaseVolume(audioTimerTick, 0.4);
-    audioBgTracks.forEach(track => setBaseVolume(track, 0.4));
+    audioBgTracks.forEach(track => setBaseVolume(track, 0.3));
 }
 
 function initializeVolumeControls() {
@@ -142,7 +146,7 @@ function setMuteState(muted) {
     isMuted = muted;
     const elements = [
         audioCorrect1, audioCorrect2, audioWrong, audioTimeup, audioRiser,
-        audioTickingTime, audioTimerTick,
+        audioKeyFact, audioTickingTime, audioTimerTick,
         ...audioBgTracks,
         ...correctSoundPool,
         ...incorrectSoundPool
@@ -301,10 +305,11 @@ function debugAudioElements() {
         console.log(`audio-bg-${index + 1}: ${track ? 'Found' : 'Missing'}`);
     });
 
-    // Test ticking sound if available
+    // Test ticking sound only after user gesture to avoid autoplay restrictions
     if (audioTickingTime) {
-        console.log('Testing ticking sound...');
-        setTimeout(() => {
+        const testOnce = () => {
+            document.removeEventListener('click', testOnce);
+            document.removeEventListener('keydown', testOnce);
             try {
                 audioTickingTime.currentTime = 0;
                 applyVolume(audioTickingTime);
@@ -313,14 +318,19 @@ function debugAudioElements() {
                     setTimeout(() => {
                         audioTickingTime.pause();
                         audioTickingTime.currentTime = 0;
-                    }, 1000);
+                    }, 300);
                 }).catch(e => {
-                    console.warn('❌ Ticking sound test failed:', e);
+                    // Swallow NotAllowedError quietly; it's non-fatal
+                    if (e && e.name !== 'NotAllowedError') {
+                        console.warn('❌ Ticking sound test failed:', e);
+                    }
                 });
             } catch (e) {
                 console.warn('❌ Ticking sound test error:', e);
             }
-        }, 1000);
+        };
+        document.addEventListener('click', testOnce, { once: true });
+        document.addEventListener('keydown', testOnce, { once: true });
     }
 
     if (window.AUDIO_DEBUG) {
@@ -400,28 +410,24 @@ function playIncorrectSound() {
  * @returns {{element: HTMLAudioElement, globalIndex: number}|null} The selected track or null if none available.
  */
 function pickNextRandomTrack(excludeIndex) {
-    const availableTracks = audioBgTracks.filter(track => track && track.readyState >= 2);
-    if (availableTracks.length === 0) {
-        return null;
-    }
-    let nextLocalIndex;
-    if (availableTracks.length > 1) {
-        let excludeLocal = -1;
-        for (let i = 0; i < availableTracks.length; i++) {
-            if (audioBgTracks.indexOf(availableTracks[i]) === excludeIndex) {
-                excludeLocal = i;
-                break;
+    // Sequential picker: advance to the next available track in list order
+    if (!audioBgTracks || audioBgTracks.length === 0) return null;
+    const total = audioBgTracks.length;
+    // If nothing has played yet, start from the first available
+    let start = excludeIndex >= 0 ? (excludeIndex + 1) % total : 0;
+    for (let i = 0; i < total; i++) {
+        const idx = (start + i) % total;
+        const candidate = audioBgTracks[idx];
+        if (candidate) {
+            // Prefer tracks that are ready to play but don't strictly require it
+            if (!candidate.readyState || candidate.readyState >= 2) {
+                return { element: candidate, globalIndex: idx };
             }
         }
-        do {
-            nextLocalIndex = Math.floor(Math.random() * availableTracks.length);
-        } while (nextLocalIndex === excludeLocal);
-    } else {
-        nextLocalIndex = 0;
     }
-    const selectedTrack = availableTracks[nextLocalIndex];
-    const globalIndex = audioBgTracks.indexOf(selectedTrack);
-    return { element: selectedTrack, globalIndex };
+    // Fallback: return the start index even if readiness is not confirmed
+    const fallback = audioBgTracks[start];
+    return fallback ? { element: fallback, globalIndex: start } : null;
 }
 function playBgMusic() {
     if (!isMuted) {
@@ -439,8 +445,8 @@ function playBgMusic() {
                 currentBgTrack = nextTrack.element;
                 currentBgTrackIndex = nextTrack.globalIndex;
 
-                // Ensure base volume
-                setBaseVolume(currentBgTrack, 0.4);
+                // Ensure base volume (slightly lowered)
+                setBaseVolume(currentBgTrack, 0.3);
 
                 // Play the track
                 const playPromise = currentBgTrack.play();
@@ -491,7 +497,7 @@ function playNextBgTrack() {
         currentBgTrack = nextTrack.element;
         currentBgTrackIndex = nextTrack.globalIndex;
 
-        setBaseVolume(currentBgTrack, 0.4);
+        setBaseVolume(currentBgTrack, 0.3);
 
         if (oldTrack && !oldTrack.paused) {
             crossfadeTracks(oldTrack, currentBgTrack);
@@ -695,7 +701,8 @@ const AudioManager = {
     getVolume: () => masterVolume,
     debug: debugAudioElements,
     enableDebug: () => { window.AUDIO_DEBUG = true; console.log('Audio debug mode enabled'); },
-    disableDebug: () => { window.AUDIO_DEBUG = false; console.log('Audio debug mode disabled'); }
+    disableDebug: () => { window.AUDIO_DEBUG = false; console.log('Audio debug mode disabled'); },
+    playKeyFact: () => playSound(audioKeyFact)
 };
 
 // Export for use in other modules

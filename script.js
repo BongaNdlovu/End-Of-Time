@@ -41,6 +41,15 @@ const mainMenuBtn = document.getElementById('main-menu');
 const backToGameMenuBtn = document.getElementById('back-to-game-menu');
 const feedbackOverlay = document.querySelector('.feedback-overlay');
 const achievementTitle = document.getElementById('achievement-title');
+const resetTutorialsBtn = document.getElementById('reset-tutorials-btn');
+const resetVideosBtn = document.getElementById('reset-videos-btn');
+
+// Video modal elements
+const levelVideoModal = document.getElementById('level-video-modal');
+const levelVideoTitle = document.getElementById('level-video-title');
+const levelVideoPlayer = document.getElementById('level-video-player');
+const skipVideoBtn = document.getElementById('skip-video-btn');
+const skipVideosCheckbox = document.getElementById('skip-videos-checkbox');
 const teamWinner = document.getElementById('team-winner');
 const teamTurnIndicator = document.getElementById('team-turn-indicator'); // <-- ADD THIS
 const hintBtn = document.getElementById('hint-btn');
@@ -147,6 +156,8 @@ const allLevels = [
     { id: 7, questions: typeof level7Questions !== 'undefined' ? level7Questions : [], name: "Level 7" }
 ];
 
+const TRANSITION_SVG_COUNT = 17; // Enables 1.svg .. 17.svg as transition art across all levels
+
 function getPlayerProgress() {
     try {
         const progress = localStorage.getItem('endOfTime_levelProgress');
@@ -205,10 +216,7 @@ class AnimationEffects {
     // 2. Spawn floating chip
     this.spawnTokenChip(tokenElement, amount);
 
-    // 3. Optional: Play sound if audio system is available
-    if (AudioManager && typeof AudioManager.play === 'function') {
-      AudioManager.play(audioRiser);
-    }
+    // Removed riser sound here to ensure it only plays once at game start
   }
 
   /**
@@ -1112,8 +1120,7 @@ function showAchievementBadge(achievement) {
   // Add to page
   document.body.appendChild(badge);
   
-  // Play achievement sound
-  AudioManager.play(audioRiser);
+  // Removed riser sound here to ensure it only plays once at game start
   
   // Animate in
   setTimeout(() => {
@@ -1718,6 +1725,16 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
         console.warn('AnimationEffects initialization failed:', e);
     }
+
+    // Preload transition SVGs (1.svg .. 17.svg) to avoid flicker on first display
+    (function preloadTransitionSvgs(){
+        try {
+            for (let i = 1; i <= TRANSITION_SVG_COUNT; i++) {
+                const img = new Image();
+                img.src = i + '.svg';
+            }
+        } catch (_) {}
+    })();
     
     // Initialize DOM elements (category dropdown no longer needed for level system)
     // categoryDropdown = document.getElementById('category-dropdown'); // Removed - using level system now
@@ -1731,6 +1748,140 @@ document.addEventListener('DOMContentLoaded', () => {
         buttons.style.display = 'none';
     }
 
+    // --- Level Video Logic ---
+    // Allow override via global map if present
+    const defaultLevelVideoMap = {
+        1: 'video1.mp4',
+        2: 'video2.mp4',
+        3: 'video3.mp4',
+        4: 'video4.mp4',
+        5: 'video5.mp4',
+        6: 'video6.mp4',
+        7: 'video7.mp4'
+    };
+    const levelVideoMap = (window && window.LEVEL_VIDEO_MAP) ? window.LEVEL_VIDEO_MAP : defaultLevelVideoMap;
+
+    function candidateVideoNames(levelNumber) {
+        const n = Number(levelNumber);
+        const baseCandidates = [
+            levelVideoMap[n],
+            `Video ${n}.mp4`,
+            `video ${n}.mp4`,
+            `Level ${n}.mp4`,
+            `level ${n}.mp4`,
+            `level${n}.mp4`,
+            `video${n}.mp4`,
+            `background ${n}.mp4`,
+            `background${n}.mp4`
+        ];
+        // Deduplicate and filter falsy
+        return Array.from(new Set(baseCandidates.filter(Boolean)));
+    }
+
+    function openLevelVideoModal() {
+        if (!levelVideoModal) return;
+        levelVideoModal.style.display = 'flex';
+        requestAnimationFrame(() => {
+            levelVideoModal.style.opacity = '0';
+            levelVideoModal.style.transition = 'opacity 0.3s';
+            requestAnimationFrame(() => { levelVideoModal.style.opacity = '1'; });
+        });
+    }
+
+    function closeLevelVideoModal() {
+        if (!levelVideoModal) return;
+        levelVideoModal.style.transition = 'opacity 0.3s';
+        levelVideoModal.style.opacity = '0';
+        setTimeout(() => {
+            levelVideoModal.style.display = 'none';
+            if (levelVideoPlayer) {
+                try { levelVideoPlayer.pause(); } catch (_) {}
+                levelVideoPlayer.removeAttribute('src');
+                levelVideoPlayer.load();
+            }
+        }, 300);
+    }
+
+    window.showLevelVideo = function(levelNumber, { afterVideo, viewOnly, ignoreGating } = {}) {
+        // Respect skipVideos only if not viewOnly
+        if (!viewOnly && !ignoreGating && !shouldShowLevelVideo(levelNumber)) {
+            if (typeof afterVideo === 'function') afterVideo();
+            return;
+        }
+
+        if (!levelVideoPlayer) {
+            console.warn(`No video source found for level ${levelNumber} or player missing.`);
+            if (typeof afterVideo === 'function') afterVideo();
+            return;
+        }
+
+        if (levelVideoTitle) levelVideoTitle.textContent = `Level ${levelNumber} Video`;
+        levelVideoPlayer.autoplay = true;
+        levelVideoPlayer.controls = true;
+
+        // Reset checkbox each time
+        if (skipVideosCheckbox) skipVideosCheckbox.checked = false;
+
+        // Wire skip behavior
+        if (skipVideoBtn) {
+            skipVideoBtn.onclick = () => {
+                // Persist skip preference only if not viewOnly
+                if (!viewOnly && skipVideosCheckbox && skipVideosCheckbox.checked) {
+                    try { localStorage.setItem('endOfTime_skipVideos', 'true'); } catch (e) { console.error('Error saving skip videos preference:', e); }
+                }
+                // Mark video viewed if not viewOnly
+                if (!viewOnly) markLevelVideoAsViewed(levelNumber);
+                closeLevelVideoModal();
+                if (typeof afterVideo === 'function') afterVideo();
+            };
+        }
+
+        // On video end
+        const onEnded = () => {
+            if (!viewOnly) markLevelVideoAsViewed(levelNumber);
+            closeLevelVideoModal();
+            if (typeof afterVideo === 'function') afterVideo();
+            levelVideoPlayer.removeEventListener('ended', onEnded);
+            levelVideoPlayer.removeEventListener('error', onError);
+        };
+        const onError = () => {
+            // Try next candidate if available
+            tryNextCandidate();
+        };
+        levelVideoPlayer.addEventListener('ended', onEnded);
+        levelVideoPlayer.addEventListener('error', onError);
+
+        let candidates = candidateVideoNames(levelNumber);
+        let idx = -1;
+
+        function tryNextCandidate() {
+            idx += 1;
+            if (idx >= candidates.length) {
+                console.warn('Video failed to play; continuing.');
+                levelVideoPlayer.removeEventListener('ended', onEnded);
+                levelVideoPlayer.removeEventListener('error', onError);
+                closeLevelVideoModal();
+                if (typeof afterVideo === 'function') afterVideo();
+                return;
+            }
+            const nextSrc = candidates[idx];
+            // Swap source and attempt immediate play to keep gesture chain
+            levelVideoPlayer.src = nextSrc;
+            openLevelVideoModal();
+            try {
+                const p = levelVideoPlayer.play();
+                if (p && typeof p.then === 'function') {
+                    p.catch(() => {
+                        // Will trigger 'error' and advance
+                    });
+                }
+            } catch (_) {
+                // Will trigger 'error' and advance
+            }
+        }
+
+        tryNextCandidate();
+    }
     // Show a random fun fact/verse/tip on the start screen
     const funFactBox = document.getElementById('fun-fact-box');
     if (funFactBox) {
@@ -1747,33 +1898,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.addEventListener('click', ensureUserInteraction, { once: true });
     document.body.addEventListener('keydown', ensureUserInteraction, { once: true });
+
+    // --- Reset Tutorials Button ---
+    if (resetTutorialsBtn) {
+        resetTutorialsBtn.onclick = () => {
+            try {
+                localStorage.removeItem('endOfTime_skipTutorials');
+                localStorage.removeItem('endOfTime_viewedTutorials');
+                alert('Tutorials have been reset. You will see them again for each level.');
+            } catch (e) {
+                console.error('Failed to reset tutorials:', e);
+            }
+        };
+    }
+
+    // --- Reset Videos Button ---
+    if (resetVideosBtn) {
+        resetVideosBtn.onclick = () => {
+            try {
+                localStorage.removeItem('endOfTime_skipVideos');
+                localStorage.removeItem('endOfTime_viewedLevelVideos');
+                alert('Level videos have been reset. You will see them again.');
+            } catch (e) {
+                console.error('Failed to reset videos:', e);
+            }
+        };
+    }
     // --- Check Sign In and Start Game ---
     function checkSignInAndStartGame(mode) {
         const levelNumber = currentGameLevel || 1;
-        console.log(`🎮 checkSignInAndStartGame called: mode=${mode}, level=${levelNumber}, currentUser=${currentUser ? 'signed in' : 'not signed in'}`);
 
         // Function to actually start the game (after tutorial if needed)
         const actuallyStartGame = () => {
-            console.log(`🚀 actuallyStartGame called for level ${levelNumber}`);
             exitBtn.style.display = 'block';
-            startGame(mode, levelNumber);
+            // After tutorial, if we should show video, do so before starting
+            if (shouldShowLevelVideo(levelNumber)) {
+                window.showLevelVideo(levelNumber, {
+                    afterVideo: () => startGame(mode, levelNumber)
+                });
+            } else {
+                startGame(mode, levelNumber);
+            }
         };
 
         if (!currentUser) {
-            console.log(`🔐 User not signed in, showing sign-in modal`);
             // Show sign-in prompt modal
             showSignInPromptModal(mode);
         } else {
-            console.log(`✅ User signed in`);
             // User is already signed in, check if tutorial should be shown
-            const showTut = shouldShowTutorial(levelNumber);
-            console.log(`📚 Should show tutorial for level ${levelNumber}? ${showTut}`);
-            if (showTut) {
-                console.log(`🎓 Showing tutorial for level ${levelNumber}`);
-                showTutorial(levelNumber, mode, actuallyStartGame);
+            if (shouldShowTutorial(levelNumber)) {
+                window.showTutorial(levelNumber, mode, actuallyStartGame);
             } else {
-                console.log(`⏭️ Skipping tutorial, starting game directly`);
-                actuallyStartGame();
+                // If no tutorial, still respect video gate
+                if (shouldShowLevelVideo(levelNumber)) {
+                    window.showLevelVideo(levelNumber, {
+                        afterVideo: () => actuallyStartGame()
+                    });
+                } else {
+                    actuallyStartGame();
+                }
             }
         }
     }
@@ -1841,7 +2024,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Check if tutorial should be shown
                 if (shouldShowTutorial(levelNumber)) {
-                    showTutorial(levelNumber, gameMode, actuallyStartGame);
+                    window.showTutorial(levelNumber, gameMode, actuallyStartGame);
                 } else {
                     actuallyStartGame();
                 }
@@ -1875,12 +2058,36 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const skipTutorials = localStorage.getItem('endOfTime_skipTutorials');
             if (skipTutorials === 'true') return false;
-
-            const viewedTutorials = JSON.parse(localStorage.getItem('endOfTime_viewedTutorials') || '[]');
-            return !viewedTutorials.includes(levelNumber);
+            // Always show tutorial before each level unless globally skipped
+            return true;
         } catch (e) {
             console.error("Error checking tutorial status:", e);
             return true; // Show tutorial if error
+        }
+    }
+
+    // --- Video Gating Helpers ---
+    function shouldShowLevelVideo(levelNumber) {
+        try {
+            const skipVideos = localStorage.getItem('endOfTime_skipVideos');
+            if (skipVideos === 'true') return false;
+            const viewedVideos = JSON.parse(localStorage.getItem('endOfTime_viewedLevelVideos') || '[]');
+            return !viewedVideos.includes(levelNumber);
+        } catch (e) {
+            console.error('Error checking level video status:', e);
+            return true;
+        }
+    }
+
+    function markLevelVideoAsViewed(levelNumber) {
+        try {
+            const viewed = JSON.parse(localStorage.getItem('endOfTime_viewedLevelVideos') || '[]');
+            if (!viewed.includes(levelNumber)) {
+                viewed.push(levelNumber);
+                localStorage.setItem('endOfTime_viewedLevelVideos', JSON.stringify(viewed));
+            }
+        } catch (e) {
+            console.error('Error marking level video as viewed:', e);
         }
     }
 
@@ -1896,10 +2103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function showTutorial(levelNumber, mode, callback) {
-        console.log(`📖 showTutorial called for level ${levelNumber}`);
+    window.showTutorial = function(levelNumber, mode, callback, options) {
+        const isViewOnly = options && options.viewOnly === true;
         const tutorial = allTutorials[levelNumber - 1];
-        console.log(`Tutorial data:`, tutorial);
         if (!tutorial) {
             console.warn(`Tutorial for level ${levelNumber} not found`);
             callback();
@@ -1910,11 +2116,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = document.getElementById('tutorial-title');
         const subtitle = document.getElementById('tutorial-subtitle');
         const sectionsContainer = document.getElementById('tutorial-sections');
-        const watchVideoBtn = document.getElementById('watch-video-btn');
-        const skipToLevelBtn = document.getElementById('skip-to-level-btn');
+        const startBtn = document.getElementById('start-level-btn');
         const skipCheckbox = document.getElementById('skip-tutorials-checkbox');
-
-        console.log(`📝 Modal elements:`, {modal, title, subtitle, sectionsContainer, watchVideoBtn, skipToLevelBtn, skipCheckbox});
 
         // Set title and subtitle
         title.textContent = tutorial.title;
@@ -1963,8 +2166,19 @@ document.addEventListener('DOMContentLoaded', () => {
             sectionsContainer.appendChild(sectionDiv);
         });
 
-        // Reset skip checkbox
+        // Reset skip checkbox, hide in view-only mode
         skipCheckbox.checked = false;
+        if (isViewOnly) {
+            // Hide the skip tutorials row by hiding its container label
+            const label = skipCheckbox && skipCheckbox.parentElement;
+            if (label && label.style) label.style.display = 'none';
+            // Change CTA label for clarity
+            if (startBtn) startBtn.textContent = 'Play Video 🎬';
+        } else {
+            const label = skipCheckbox && skipCheckbox.parentElement;
+            if (label && label.style) label.style.display = '';
+            if (startBtn) startBtn.textContent = 'Play Video 🎬';
+        }
 
         // Show modal with animation
         modal.style.display = 'flex';
@@ -1976,146 +2190,37 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Handle "Watch Video" button
-        watchVideoBtn.onclick = () => {
-            // Check if user wants to skip future tutorials
-            if (skipCheckbox.checked) {
-                try {
-                    localStorage.setItem('endOfTime_skipTutorials', 'true');
-                } catch (e) {
-                    console.error("Error saving skip tutorials preference:", e);
-                }
-            }
-
-            // Mark this tutorial as viewed
-            markTutorialAsViewed(levelNumber);
-
-            // Hide tutorial modal with animation
+        // Handle start/close button
+        startBtn.onclick = () => {
+            // Hide tutorial modal first
             modal.style.transition = 'opacity 0.3s';
             modal.style.opacity = '0';
             setTimeout(() => {
                 modal.style.display = 'none';
-                // Show the video
-                playLevelVideo(levelNumber, mode, callback);
-            }, 300);
-        };
 
-        // Handle "Skip to Level" button
-        skipToLevelBtn.onclick = () => {
-            // Check if user wants to skip future tutorials
-            if (skipCheckbox.checked) {
-                try {
-                    localStorage.setItem('endOfTime_skipTutorials', 'true');
-                } catch (e) {
-                    console.error("Error saving skip tutorials preference:", e);
+                // For non-view-only, persist tutorial prefs and viewed
+                if (!isViewOnly) {
+                    if (skipCheckbox.checked) {
+                        try { localStorage.setItem('endOfTime_skipTutorials', 'true'); } catch (e) { console.error('Error saving skip tutorials preference:', e); }
+                    }
+                    markTutorialAsViewed(levelNumber);
                 }
-            }
 
-            // Mark this tutorial as viewed
-            markTutorialAsViewed(levelNumber);
-
-            // Hide modal and start game directly
-            modal.style.transition = 'opacity 0.3s';
-            modal.style.opacity = '0';
-            setTimeout(() => {
-                modal.style.display = 'none';
-                callback();
+                // Next: show level video (view-only returns to selection, normal starts level after video)
+                window.showLevelVideo(levelNumber, {
+                    afterVideo: () => {
+                        if (isViewOnly) {
+                            // Return to mode selection only
+                            showModeSelection();
+                        } else {
+                            callback();
+                        }
+                    },
+                    viewOnly: isViewOnly,
+                    ignoreGating: true
+                });
             }, 300);
         };
-    }
-
-    // --- Video Player System ---
-    function hasWatchedVideo(levelNumber) {
-        try {
-            const watchedVideos = JSON.parse(localStorage.getItem('endOfTime_watchedVideos') || '[]');
-            return watchedVideos.includes(levelNumber);
-        } catch (e) {
-            console.error("Error checking watched videos:", e);
-            return false;
-        }
-    }
-
-    function markVideoAsWatched(levelNumber) {
-        try {
-            const watchedVideos = JSON.parse(localStorage.getItem('endOfTime_watchedVideos') || '[]');
-            if (!watchedVideos.includes(levelNumber)) {
-                watchedVideos.push(levelNumber);
-                localStorage.setItem('endOfTime_watchedVideos', JSON.stringify(watchedVideos));
-            }
-        } catch (e) {
-            console.error("Error marking video as watched:", e);
-        }
-    }
-
-    function playLevelVideo(levelNumber, mode, callback) {
-        const videoModal = document.getElementById('video-player-modal');
-        const video = document.getElementById('level-intro-video');
-        const videoSource = document.getElementById('video-source');
-        const skipVideoBtn = document.getElementById('skip-video-btn');
-        const videoTitleOverlay = document.getElementById('video-title-overlay');
-
-        // Set video source
-        videoSource.src = `Video ${levelNumber}.mp4`;
-        video.load();
-
-        // Update title overlay
-        videoTitleOverlay.textContent = `Level ${levelNumber} Introduction`;
-
-        // Update skip button text if already watched
-        if (hasWatchedVideo(levelNumber)) {
-            skipVideoBtn.textContent = 'Skip (Watched) ⏭️';
-            skipVideoBtn.style.background = 'rgba(68,68,68,0.9)';
-        } else {
-            skipVideoBtn.textContent = 'Skip Video ⏭️';
-            skipVideoBtn.style.background = 'rgba(139,0,0,0.9)';
-        }
-
-        // Show video modal
-        videoModal.style.display = 'flex';
-
-        // Play video
-        video.play().catch(err => {
-            console.error("Error playing video:", err);
-            // If video fails to play, skip to game
-            hideVideoAndStartGame();
-        });
-
-        // When video ends, start the game
-        const onVideoEnded = () => {
-            markVideoAsWatched(levelNumber);
-            hideVideoAndStartGame();
-        };
-
-        // Skip video button
-        const onSkipVideo = () => {
-            hideVideoAndStartGame();
-        };
-
-        function hideVideoAndStartGame() {
-            video.pause();
-            video.currentTime = 0;
-            videoModal.style.display = 'none';
-
-            // Remove event listeners
-            video.removeEventListener('ended', onVideoEnded);
-            skipVideoBtn.removeEventListener('click', onSkipVideo);
-
-            // Start the game
-            callback();
-        }
-
-        // Add event listeners
-        video.addEventListener('ended', onVideoEnded);
-        skipVideoBtn.addEventListener('click', onSkipVideo);
-
-        // Also allow Escape key to skip
-        const onEscapeKey = (e) => {
-            if (e.key === 'Escape') {
-                hideVideoAndStartGame();
-                document.removeEventListener('keydown', onEscapeKey);
-            }
-        };
-        document.addEventListener('keydown', onEscapeKey);
     }
 
     // --- Start Game ---
@@ -2162,6 +2267,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Store the current level being played
         currentGameLevel = levelNumber;
+
+        const keyFactOverlay = document.getElementById('key-fact-overlay');
+        if (keyFactOverlay) {
+            keyFactOverlay.style.display = 'none';
+            keyFactOverlay.classList.remove('show');
+            keyFactOverlay.textContent = '';
+        }
+
+        const totalLevels = allLevels.length;
+        const keyFacts = Array.isArray(window.KEY_FACTS) ? window.KEY_FACTS : [];
+        const perLevel = totalLevels > 0 ? Math.ceil(keyFacts.length / totalLevels) : 0;
+        const factsStartIndex = (currentGameLevel - 1) * perLevel;
+        const levelFacts = keyFacts.slice(factsStartIndex, factsStartIndex + perLevel);
+
+        function computeShowIndices(totalQuestions, factsCount) {
+            if (factsCount <= 0 || totalQuestions <= 0) return [];
+            const slots = [];
+            for (let i = 1; i <= factsCount; i++) {
+                const rawPos = Math.round((i * totalQuestions) / (factsCount + 1)) - 1;
+                const clampedPos = Math.min(Math.max(rawPos, 0), totalQuestions - 1);
+                slots.push(clampedPos);
+            }
+            return [...new Set(slots)].sort((a, b) => a - b);
+        }
         
         // Set timer based on the current level
         TIME_LIMIT = getTimeLimitForLevel(currentGameLevel);
@@ -2197,6 +2326,13 @@ document.addEventListener('DOMContentLoaded', () => {
             maxWagerValue = 20;
             currentWager = 5;
 
+        window.keyFactsState = {
+            levelFacts,
+            nextFactIdx: 0,
+            showAfterQuestionIndices: computeShowIndices(questions.length, levelFacts.length),
+            lastShownQuestionIndex: null
+        };
+
         if (questions.length === 0) {
             alert('No questions found for this category!');
             return;
@@ -2229,7 +2365,12 @@ document.addEventListener('DOMContentLoaded', () => {
             updateScoreDisplay(); // Use the new function
         }
         
-        showQuestion();
+		// Show transition before the first question (ensures transition features on every question)
+		const firstQ = questions[0];
+		const isProphecyFirst = firstQ && (firstQ.category === 'Prophecy' || firstQ.category === 'The Great Controversy');
+        showGlitchTransition(isProphecyFirst, () => {
+		showQuestion();
+	});
         exitBtn.style.display = 'block';
     };
 
@@ -2238,6 +2379,56 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPhase = 'question';
         gameDiv.classList.remove('options-phase');
         gameDiv.classList.add('question-phase');
+    }
+
+    function hideKeyFactOverlay() {
+        const overlay = document.getElementById('key-fact-overlay');
+        if (!overlay) return;
+        overlay.classList.remove('show');
+        overlay.style.display = 'none';
+    }
+
+    function showKeyFactForCurrentQuestion() {
+        const overlay = document.getElementById('key-fact-overlay');
+        if (!overlay) return;
+
+        const state = window.keyFactsState;
+        if (!state || !Array.isArray(state.levelFacts) || state.levelFacts.length === 0) {
+            hideKeyFactOverlay();
+            return;
+        }
+
+        if (!state.showAfterQuestionIndices || !state.showAfterQuestionIndices.includes(currentQuestionIndex)) {
+            hideKeyFactOverlay();
+            return;
+        }
+
+        if (state.nextFactIdx >= state.levelFacts.length) {
+            hideKeyFactOverlay();
+            return;
+        }
+
+        if (state.lastShownQuestionIndex === currentQuestionIndex && overlay.style.display === 'block') {
+            overlay.classList.add('show');
+            return;
+        }
+
+        const fact = `Key fact - Genesis: ` + state.levelFacts[state.nextFactIdx];
+        if (!fact) {
+            hideKeyFactOverlay();
+            return;
+        }
+
+        overlay.textContent = fact;
+        overlay.style.display = 'block';
+        overlay.classList.add('show');
+
+        if (typeof AudioManager !== 'undefined' && typeof AudioManager.playKeyFact === 'function') {
+            AudioManager.playKeyFact();
+        }
+
+        state.lastShownQuestionIndex = currentQuestionIndex;
+        state.nextFactIdx = Math.min(state.nextFactIdx + 1, state.levelFacts.length);
     }
     
     function showQuestionOnly() {
@@ -2375,6 +2566,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             fadeIn(document.querySelector('.question'));
         }, 50);
+
+        showKeyFactForCurrentQuestion();
         
         // Clear encouragement message if it exists
         const encouragementDiv = document.getElementById('encouragement-message');
@@ -2384,6 +2577,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function showOptionsWithTimer() {
+        hideKeyFactOverlay();
         currentPhase = 'options';
         gameDiv.classList.remove('question-phase');
         gameDiv.classList.add('options-phase');
@@ -3463,6 +3657,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     showOptionsBtn.onclick = () => {
+        hideKeyFactOverlay();
         // Transition from question-only to options-with-timer phase
         showOptionsWithTimer();
     };
@@ -3860,7 +4055,21 @@ function showGlitchTransition(isProphecy, cb) {
     const overlay = document.createElement('div');
     overlay.id = 'glitch-transition-overlay';
     overlay.className = 'glitch-effect';
-    overlay.innerText = '✝️';
+    // Transition art: randomly use 1.svg–17.svg across all levels
+    try {
+        const img = document.createElement('img');
+        const idx = 1 + Math.floor(Math.random() * TRANSITION_SVG_COUNT);
+        img.src = idx + '.svg';
+        img.alt = 'Transition';
+        img.onerror = () => { overlay.innerText = '✝️'; };
+        img.style.width = '100vw';
+        img.style.height = '100vh';
+        img.style.objectFit = 'cover';
+        img.style.display = 'block';
+        overlay.appendChild(img);
+    } catch (e) {
+        overlay.innerText = '✝️';
+    }
     overlay.style.position = 'fixed';
     overlay.style.left = '50%';
     overlay.style.top = '50%';
@@ -3868,9 +4077,19 @@ function showGlitchTransition(isProphecy, cb) {
     overlay.style.fontSize = '10vw';
     overlay.style.zIndex = 9999;
     overlay.style.pointerEvents = 'none';
-    overlay.style.opacity = '0.93';
+    overlay.style.opacity = '0.98';
     overlay.style.textAlign = 'center';
     overlay.style.userSelect = 'none';
+    // Make the overlay full-screen to fill the viewport with the SVG
+    overlay.style.left = '0';
+    overlay.style.top = '0';
+    overlay.style.transform = 'none';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.fontSize = '';
     document.body.appendChild(overlay);
     // Play sound
     playSound(isProphecy ? audioTransition2 : audioTransition);
@@ -4622,6 +4841,43 @@ function showModeSelection() {
     if (buttons) {
         buttons.style.display = 'flex';
     }
+    
+    // Ensure a View Tutorial button exists and is wired
+    let viewTutorialBtn = document.getElementById('view-tutorial-btn');
+    if (!viewTutorialBtn) {
+        viewTutorialBtn = document.createElement('button');
+        viewTutorialBtn.id = 'view-tutorial-btn';
+        viewTutorialBtn.className = 'comic-button';
+        viewTutorialBtn.textContent = 'View Tutorial';
+        buttons.appendChild(viewTutorialBtn);
+    }
+    viewTutorialBtn.onclick = () => {
+        // Show tutorial without marking as viewed or starting the game automatically
+        const levelNumber = currentGameLevel || 1;
+        window.showTutorial(levelNumber, gameMode, () => {
+            // After closing tutorial in view-only mode, just return to mode selection
+        }, { viewOnly: true });
+    };
+
+    // Ensure a View Video button exists and is wired
+    let viewVideoBtn = document.getElementById('view-video-btn');
+    if (!viewVideoBtn) {
+        viewVideoBtn = document.createElement('button');
+        viewVideoBtn.id = 'view-video-btn';
+        viewVideoBtn.className = 'comic-button';
+        viewVideoBtn.textContent = 'View Video';
+        buttons.appendChild(viewVideoBtn);
+    }
+    viewVideoBtn.onclick = () => {
+        const levelNumber = currentGameLevel || 1;
+        window.showLevelVideo(levelNumber, {
+            afterVideo: () => {
+                // Return to mode selection after viewing
+                showModeSelection();
+            },
+            viewOnly: true
+        });
+    };
     
     // Update the intro text to show selected level
     const introText = container.querySelector('.intro-text');

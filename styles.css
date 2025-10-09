@@ -3286,6 +3286,38 @@ label {
     line-height: 1.5;
 }
 
+#key-fact-overlay {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    max-width: min(520px, 80vw);
+    max-height: 60vh;
+    z-index: 1000;
+    pointer-events: auto; /* allow scrolling for long content */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    color: var(--text-primary, #ffffff);
+    background: var(--card-bg, rgba(0, 0, 0, 0.78));
+    border: 1px solid var(--card-border, rgba(255, 255, 255, 0.12));
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    backdrop-filter: blur(6px);
+    transform: translateY(12px);
+    opacity: 0;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+#key-fact-overlay.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Show Options button styling */
 #show-options {
     background: #8B0000 !important;
@@ -3331,6 +3363,14 @@ label {
         padding: 0.7rem 1.2rem;
     }
 }
+
+/* Remove Visual Aid and expand question area */
+.quiz-layout { grid-template-columns: 1fr !important; }
+.quiz-visual { display: none !important; }
+/* Ensure the interaction section spans full width in the grid */
+.quiz-interaction { grid-column: 1 / -1; }
+/* Widen the question text container during question-only phase */
+.game.question-phase .question { max-width: min(1100px, 95vw); }
 
 /* Deep insight layout */
 #deep-insight-div {

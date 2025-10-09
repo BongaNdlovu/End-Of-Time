@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'sda-trivia-v7';
+﻿const CACHE_NAME = 'sda-trivia-v8';
 
 const CORE_ASSETS = [
   '/',
@@ -31,7 +31,6 @@ const MEDIA_ASSETS = [
   '/background 2.mp4',
   '/Transition.wav',
   '/Transition 2.wav',
-  '/soundtrack 1.mp3',
   '/soundtrack 2.mp3',
   '/soundtrack 3.mp3',
   '/soundtrack 4.mp3',

@@ -1327,7 +1327,7 @@ function comprehensiveBugCheck() {
     console.log('\n🎵 Audio Elements Check:');
     const audioElements = [
         'audio-correct-1', 'audio-correct-2', 'audio-wrong', 'audio-timeup',
-        'audio-riser', 'audio-bg-1', 'audio-bg-2', 'audio-bg-3', 'audio-bg-4', 'audio-bg-5'
+        'audio-riser', 'audio-bg-2', 'audio-bg-3', 'audio-bg-4', 'audio-bg-5'
     ];
     
     let missingAudio = 0;
@@ -1549,7 +1549,7 @@ function setLoadingProgress(percent) {
 // --- Asset Preload Logic ---
 const audioElements = [
     'audio-correct-1','audio-correct-2','audio-wrong','audio-timeup','audio-riser',
-    'audio-bg-1','audio-bg-2','audio-bg-3','audio-bg-4','audio-bg-5','audio-timer-tick','audio-ticking-time',
+    'audio-bg-2','audio-bg-3','audio-bg-4','audio-bg-5','audio-timer-tick','audio-ticking-time',
     'audio-transition', 'audio-transition2'
 ].map(id => document.getElementById(id)).filter(Boolean);
 

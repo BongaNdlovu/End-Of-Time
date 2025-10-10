@@ -4423,7 +4423,20 @@ const mainSigninBtn = document.getElementById('main-signin-btn');
 if (mainSigninBtn) {
   mainSigninBtn.onclick = function() {
     if (window.AuthManager && typeof window.AuthManager.signIn === 'function') {
-      window.AuthManager.signIn();
+      window.AuthManager.signIn().catch((error) => {
+        console.error('Sign-in failed:', error);
+        // Display user-friendly error message
+        if (error.code === 'auth/popup-blocked') {
+          alert('Popup was blocked! Please allow popups for this site and try again.');
+        } else if (error.code === 'auth/unauthorized-domain') {
+          alert('This domain is not authorized for sign-in. Please check your Firebase configuration.');
+        } else {
+          alert('Sign-in failed. Please try again.\n\nError: ' + error.message);
+        }
+      });
+    } else {
+      console.error('AuthManager not available');
+      alert('Authentication service not available. Please refresh the page and try again.');
     }
   };
   mainSigninBtn.addEventListener('mouseenter', function() {

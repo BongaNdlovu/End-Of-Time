@@ -79,30 +79,50 @@
             const error = new Error('Authentication is not available right now.');
             notifySignInError({ stage: 'unavailable', error });
             alert('Authentication is not available right now. Please try again later.');
-            return Promise.resolve();
+            return Promise.reject(error);
         }
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' });
-        // Prefer redirect for reliability across browsers
-        return auth.signInWithRedirect(provider)
+        provider.addScope('email');
+        provider.addScope('profile');
+        
+        // Try popup first for better UX, fall back to redirect
+        return auth.signInWithPopup(provider)
+            .then((result) => {
+                console.log('signInWithPopup successful. Result:', result);
+                if (result && result.user) {
+                    currentUser = result.user;
+                    notifySubscribers(currentUser);
+                    return result;
+                } else {
+                    throw new Error('No user returned from sign-in');
+                }
+            })
             .catch(async (err) => {
-                console.warn('Redirect sign-in failed, attempting popup. Error:', err);
-                notifySignInError({ stage: 'redirect', error: err });
+                console.warn('Popup sign-in failed, attempting redirect. Error:', err);
+                notifySignInError({ stage: 'popup', error: err });
+                
                 try {
-                    console.log('Attempting signInWithPopup...');
-                    const result = await auth.signInWithPopup(provider);
-                    console.log('signInWithPopup successful. Result:', result);
-                    if (result && result.user) {
-                        console.log('User found in popup result. Manually updating state.');
-                        currentUser = result.user;
-                        notifySubscribers(currentUser);
+                    console.log('Attempting signInWithRedirect...');
+                    await auth.signInWithRedirect(provider);
+                } catch (redirectErr) {
+                    console.error('Redirect sign-in failed. Full error object:', redirectErr);
+                    notifySignInError({ stage: 'redirect', error: redirectErr });
+                    
+                    // Provide more specific error messages
+                    let errorMessage = 'Failed to sign in with Google. ';
+                    if (redirectErr.code === 'auth/popup-blocked') {
+                        errorMessage += 'Popup was blocked by browser. Please allow popups and try again.';
+                    } else if (redirectErr.code === 'auth/popup-closed-by-user') {
+                        errorMessage += 'Sign-in popup was closed. Please try again.';
+                    } else if (redirectErr.code === 'auth/unauthorized-domain') {
+                        errorMessage += 'This domain is not authorized for sign-in. Please check your Firebase configuration.';
                     } else {
-                        console.warn('signInWithPopup completed, but no user was found in the result.');
+                        errorMessage += 'Please try again.';
                     }
-                } catch (popupErr) {
-                    console.error('Popup sign-in failed. Full error object:', popupErr);
-                    notifySignInError({ stage: 'popup', error: popupErr });
-                    alert('Failed to sign in with Google. Please try again.');
+                    
+                    alert(errorMessage);
+                    throw redirectErr;
                 }
             });
     }

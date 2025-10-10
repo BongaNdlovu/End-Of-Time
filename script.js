@@ -1861,11 +1861,11 @@ document.addEventListener('DOMContentLoaded', () => {
         function tryNextCandidate() {
             idx += 1;
             if (idx >= candidates.length) {
-                console.warn('Video failed to play; continuing.');
+                console.warn('Video failed to play; keeping modal open with controls.');
                 levelVideoPlayer.removeEventListener('ended', onEnded);
                 levelVideoPlayer.removeEventListener('error', onError);
-                closeLevelVideoModal();
-                if (typeof afterVideo === 'function') afterVideo();
+                openLevelVideoModal();
+                if (levelVideoPlayer) levelVideoPlayer.controls = true;
                 return;
             }
             const nextSrc = candidates[idx];
@@ -1875,8 +1875,13 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const p = levelVideoPlayer.play();
                 if (p && typeof p.then === 'function') {
-                    p.catch(() => {
-                        // Will trigger 'error' and advance
+                    p.catch((err) => {
+                        // If autoplay is blocked, keep modal open with controls
+                        if (err && err.name === 'NotAllowedError') {
+                            try { openLevelVideoModal(); } catch (_) {}
+                            if (levelVideoPlayer) levelVideoPlayer.controls = true;
+                        }
+                        // Let 'error' handler advance
                     });
                 }
             } catch (_) {
@@ -4234,8 +4239,15 @@ function showGlitchTransition(isProphecy, cb) {
     overlay.style.justifyContent = 'center';
     overlay.style.fontSize = '';
     document.body.appendChild(overlay);
-    // Play sound
-    playSound(isProphecy ? audioTransition2 : audioTransition);
+    // Play sound via AudioManager for consistency
+    try {
+        if (typeof AudioManager !== 'undefined' && typeof AudioManager.play === 'function') {
+            AudioManager.play(isProphecy ? audioTransition2 : audioTransition);
+        } else {
+            const s = isProphecy ? audioTransition2 : audioTransition;
+            if (s && typeof s.play === 'function') s.play();
+        }
+    } catch (_) {}
     // Remove after 650ms
     setTimeout(() => {
         overlay.remove();

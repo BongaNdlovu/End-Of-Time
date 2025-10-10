@@ -4381,22 +4381,23 @@ function hideLeaderboardModal() {
 if (closeLeaderboardBtn) closeLeaderboardBtn.onclick = hideLeaderboardModal;
 
 function updateUserInfoUI(user) {
+  console.log('updateUserInfoUI called with user:', user);
   currentUser = user || null;
-    const mainSigninBtn = document.getElementById('main-signin-btn');
-    const mainSignoutBtn = document.getElementById('main-signout-btn');
+  const mainSigninBtn = document.getElementById('main-signin-btn');
+  const mainSignoutBtn = document.getElementById('main-signout-btn');
   const statusText = document.getElementById('signin-status-text');
-    
+  
+  // These are in the leaderboard modal, let's not touch them from the main script
+  // to avoid conflicts. The leaderboard has its own UI update logic.
+  // const googleSigninBtn = document.getElementById('google-signin-btn');
+  // const googleSignoutBtn = document.getElementById('google-signout-btn');
+  // const userInfoDiv = document.getElementById('user-info');
+
   if (currentUser) {
-    if (userInfoDiv) userInfoDiv.innerHTML = `<img src="${currentUser.photoURL}" style="width:32px;height:32px;border-radius:50%;vertical-align:middle;margin-right:0.5em;">${currentUser.displayName}`;
-    if (googleSigninBtn) googleSigninBtn.style.display = 'none';
-    if (googleSignoutBtn) googleSignoutBtn.style.display = 'inline-block';
     if (statusText) statusText.textContent = `Signed in as ${currentUser.displayName}`;
     if (mainSigninBtn) mainSigninBtn.style.display = 'none';
     if (mainSignoutBtn) mainSignoutBtn.style.display = 'inline-block';
   } else {
-    if (userInfoDiv) userInfoDiv.innerHTML = '';
-    if (googleSigninBtn) googleSigninBtn.style.display = 'inline-block';
-    if (googleSignoutBtn) googleSignoutBtn.style.display = 'none';
     if (statusText) statusText.textContent = 'Not signed in - Your scores won\'t be saved';
     if (mainSigninBtn) mainSigninBtn.style.display = 'inline-block';
     if (mainSignoutBtn) mainSignoutBtn.style.display = 'none';

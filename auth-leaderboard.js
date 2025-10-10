@@ -115,9 +115,8 @@
                 }
             })
             .catch((error) => {
-                // Ignore no-auth-event; report others
-                if (!error || error.code === 'auth/no-auth-event') return;
-                console.error('Redirect result error:', error);
+                // We are debugging a silent failure, so let's log everything.
+                console.error('Auth redirect result error. Full error object:', error);
                 notifySignInError({ stage: 'redirect-result', error });
             });
     }

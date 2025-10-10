@@ -86,12 +86,21 @@
         // Prefer redirect for reliability across browsers
         return auth.signInWithRedirect(provider)
             .catch(async (err) => {
-                console.warn('Redirect sign-in failed, attempting popup:', err);
+                console.warn('Redirect sign-in failed, attempting popup. Error:', err);
                 notifySignInError({ stage: 'redirect', error: err });
                 try {
-                    await auth.signInWithPopup(provider);
+                    console.log('Attempting signInWithPopup...');
+                    const result = await auth.signInWithPopup(provider);
+                    console.log('signInWithPopup successful. Result:', result);
+                    if (result && result.user) {
+                        console.log('User found in popup result. Manually updating state.');
+                        currentUser = result.user;
+                        notifySubscribers(currentUser);
+                    } else {
+                        console.warn('signInWithPopup completed, but no user was found in the result.');
+                    }
                 } catch (popupErr) {
-                    console.error('Popup sign-in failed:', popupErr);
+                    console.error('Popup sign-in failed. Full error object:', popupErr);
                     notifySignInError({ stage: 'popup', error: popupErr });
                     alert('Failed to sign in with Google. Please try again.');
                 }

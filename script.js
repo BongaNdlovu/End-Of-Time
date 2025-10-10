@@ -2561,7 +2561,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const fact = `Key fact - Genesis: ` + state.levelFacts[state.nextFactIdx];
+        const fact = `Key Facts: ` + state.levelFacts[state.nextFactIdx];
         if (!fact) {
             hideKeyFactOverlay();
             return;
@@ -2763,7 +2763,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // START TIMER ONLY NOW
         if (!isTimeAttackMode) {
-            startTimer();
+            // Reset visual timer to 00 before starting
+            timerDiv.classList.remove('low-time');
+            if (timerDiv.parentElement && timerDiv.parentElement.parentElement) {
+                timerDiv.parentElement.parentElement.classList.remove('urgent');
+            }
+            timerDiv.innerText = '00';
+
+            // Slight delay to show the reset before countdown
+            setTimeout(() => startTimer(), 200);
         }
         
         // Fade in options
@@ -3729,9 +3737,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (funFactBox) {
             funFactBox.innerText = getRandomFunFact();
         }
-        // Navigate back to main menu page (designate current page as the game menu)
+        // Navigate back to hub main menu page
         try {
-            window.location.href = 'index.html';
+            window.location.href = 'menu.html';
         } catch (e) {
             console.warn('Menu navigation failed, staying on page:', e);
         }

@@ -13,8 +13,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "npx serve .",
-    "serve": "npx serve .",
-    "build:academy:css": "tailwindcss -c tailwind.config.cjs -i ./styles/academy.tailwind.css -o ./styles/academy.css --minify"
+    "serve": "npx serve ."
   },
   "dependencies": {
     "firebase": "^10.7.0",

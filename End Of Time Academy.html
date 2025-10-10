@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/academy.css">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{
       --blood:#7f0a0a;
@@ -488,7 +488,7 @@
 
     // Particle system
     const particleCanvas = document.getElementById('particleCanvas');
-    const pctx = particleCanvas.getContext('2d', { willReadFrequently: true });
+    const pctx = particleCanvas.getContext('2d');
     const particles = [];
     const particleCount = 80;
 
@@ -539,7 +539,7 @@
 
     // Wave animation
     const canvas = document.getElementById('waveCanvas');
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const ctx = canvas.getContext('2d');
     let mouseX = 0;
     let mouseY = 0;
 

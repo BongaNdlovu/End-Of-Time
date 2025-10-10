@@ -43,6 +43,8 @@ const feedbackOverlay = document.querySelector('.feedback-overlay');
 const achievementTitle = document.getElementById('achievement-title');
 const resetTutorialsBtn = document.getElementById('reset-tutorials-btn');
 const resetVideosBtn = document.getElementById('reset-videos-btn');
+const CONTENT_SKIP_PROMPT_ID = 'content-skip-alert';
+const CONTENT_SKIP_PROMPT_SESSION_KEY = 'endOfTime_skipPromptDismissed';
 
 // Video modal elements
 const levelVideoModal = document.getElementById('level-video-modal');
@@ -1828,6 +1830,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Persist skip preference only if not viewOnly
                 if (!viewOnly && skipVideosCheckbox && skipVideosCheckbox.checked) {
                     try { localStorage.setItem('endOfTime_skipVideos', 'true'); } catch (e) { console.error('Error saving skip videos preference:', e); }
+                    try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (storageError) { /* ignore */ }
+                    surfaceContentSkipPrompt({ force: true });
                 }
                 // Mark video viewed if not viewOnly
                 if (!viewOnly) markLevelVideoAsViewed(levelNumber);
@@ -1899,31 +1903,168 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', ensureUserInteraction, { once: true });
     document.body.addEventListener('keydown', ensureUserInteraction, { once: true });
 
-    // --- Reset Tutorials Button ---
+    // --- Reset Tutorials & Videos helpers ---
+    function resetTutorialPreferences(showAlert = true) {
+        try {
+            localStorage.removeItem('endOfTime_skipTutorials');
+            localStorage.removeItem('endOfTime_viewedTutorials');
+            if (showAlert) {
+                alert('Tutorials have been reset. You will see them again for each level.');
+            }
+        } catch (e) {
+            console.error('Failed to reset tutorials:', e);
+            if (showAlert) {
+                alert('Failed to reset tutorials. Please try again.');
+            }
+        }
+        try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (storageError) {
+            // Ignore sessionStorage failures
+        }
+    }
+
+    function resetVideoPreferences(showAlert = true) {
+        try {
+            localStorage.removeItem('endOfTime_skipVideos');
+            localStorage.removeItem('endOfTime_viewedLevelVideos');
+            if (showAlert) {
+                alert('Level videos have been reset. You will see them again.');
+            }
+        } catch (e) {
+            console.error('Failed to reset videos:', e);
+            if (showAlert) {
+                alert('Failed to reset videos. Please try again.');
+            }
+        }
+        try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (storageError) {
+            // Ignore sessionStorage failures
+        }
+    }
+
+    function skipPromptDismissed() {
+        try {
+            return sessionStorage.getItem(CONTENT_SKIP_PROMPT_SESSION_KEY) === 'true';
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function surfaceContentSkipPrompt(options = {}) {
+        if (options.force) {
+            try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (e) { /* ignore */ }
+        }
+
+        const skipTutorialsEnabled = (() => {
+            try { return localStorage.getItem('endOfTime_skipTutorials') === 'true'; }
+            catch (e) { return false; }
+        })();
+        const skipVideosEnabled = (() => {
+            try { return localStorage.getItem('endOfTime_skipVideos') === 'true'; }
+            catch (e) { return false; }
+        })();
+
+        const dismissed = options.force ? false : skipPromptDismissed();
+        let promptEl = document.getElementById(CONTENT_SKIP_PROMPT_ID);
+
+        if (!skipTutorialsEnabled && !skipVideosEnabled) {
+            if (promptEl) {
+                promptEl.remove();
+            }
+            return;
+        }
+
+        if (dismissed && !promptEl) {
+            return;
+        }
+
+        if (!promptEl) {
+            promptEl = document.createElement('div');
+            promptEl.id = CONTENT_SKIP_PROMPT_ID;
+            promptEl.style.cssText = 'position:fixed;bottom:1.5rem;right:1.5rem;z-index:10000;background:rgba(22,22,26,0.94);border:1px solid rgba(139,0,0,0.6);border-radius:14px;padding:1rem 1.2rem;width:min(320px,calc(100vw - 2.4rem));box-shadow:0 10px 24px rgba(0,0,0,0.45);font-family:"Montserrat-Regular",Arial,sans-serif;color:#f5f5f5;';
+            const title = document.createElement('p');
+            title.id = 'content-skip-title';
+            title.textContent = 'Content currently skipped';
+            title.style.cssText = 'margin:0 0 0.6rem 0;font-size:1rem;font-weight:600;color:#ffcc66;';
+            const messageEl = document.createElement('p');
+            messageEl.id = 'content-skip-message';
+            messageEl.style.cssText = 'margin:0 0 0.8rem 0;font-size:0.95rem;line-height:1.6;';
+            const actionsEl = document.createElement('div');
+            actionsEl.id = 'content-skip-actions';
+            actionsEl.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.5rem;';
+            promptEl.appendChild(title);
+            promptEl.appendChild(messageEl);
+            promptEl.appendChild(actionsEl);
+            document.body.appendChild(promptEl);
+        }
+
+        const summaryParts = [];
+        if (skipTutorialsEnabled) summaryParts.push('tutorials');
+        if (skipVideosEnabled) summaryParts.push('level videos');
+
+        const messageEl = promptEl.querySelector('#content-skip-message');
+        if (messageEl && summaryParts.length > 0) {
+            const descriptor = summaryParts.length === 2
+                ? 'Tutorials and level videos are currently disabled because you chose to skip them earlier.'
+                : `${summaryParts[0].charAt(0).toUpperCase()}${summaryParts[0].slice(1)} are currently disabled because you chose to skip them earlier.`;
+            messageEl.textContent = `${descriptor} This can make Chrome behave differently from other browsers. Reset now to restore the full experience.`;
+        }
+
+        const actionsEl = promptEl.querySelector('#content-skip-actions');
+        if (actionsEl) {
+            actionsEl.innerHTML = '';
+            if (skipTutorialsEnabled) {
+                const resetTutorialBtn = document.createElement('button');
+                resetTutorialBtn.id = 'alert-reset-tutorials';
+                resetTutorialBtn.className = 'comic-button';
+                resetTutorialBtn.textContent = 'Reset tutorials';
+                resetTutorialBtn.style.flex = '1 1 140px';
+                resetTutorialBtn.onclick = () => {
+                    resetTutorialPreferences(true);
+                    surfaceContentSkipPrompt({ force: true });
+                };
+                actionsEl.appendChild(resetTutorialBtn);
+            }
+            if (skipVideosEnabled) {
+                const resetVideosButton = document.createElement('button');
+                resetVideosButton.id = 'alert-reset-videos';
+                resetVideosButton.className = 'comic-button';
+                resetVideosButton.textContent = 'Reset videos';
+                resetVideosButton.style.flex = '1 1 140px';
+                resetVideosButton.onclick = () => {
+                    resetVideoPreferences(true);
+                    surfaceContentSkipPrompt({ force: true });
+                };
+                actionsEl.appendChild(resetVideosButton);
+            }
+            const dismissBtn = document.createElement('button');
+            dismissBtn.id = 'alert-dismiss-skip';
+            dismissBtn.className = 'comic-button';
+            dismissBtn.textContent = 'Maybe later';
+            dismissBtn.style.flex = '1 1 140px';
+            dismissBtn.style.background = '#444';
+            dismissBtn.style.border = '1px solid rgba(255,255,255,0.2)';
+            dismissBtn.onclick = () => {
+                try { sessionStorage.setItem(CONTENT_SKIP_PROMPT_SESSION_KEY, 'true'); } catch (e) { /* ignore */ }
+                promptEl.remove();
+            };
+            actionsEl.appendChild(dismissBtn);
+        }
+    }
+
     if (resetTutorialsBtn) {
         resetTutorialsBtn.onclick = () => {
-            try {
-                localStorage.removeItem('endOfTime_skipTutorials');
-                localStorage.removeItem('endOfTime_viewedTutorials');
-                alert('Tutorials have been reset. You will see them again for each level.');
-            } catch (e) {
-                console.error('Failed to reset tutorials:', e);
-            }
+            resetTutorialPreferences(true);
+            surfaceContentSkipPrompt({ force: true });
         };
     }
 
-    // --- Reset Videos Button ---
     if (resetVideosBtn) {
         resetVideosBtn.onclick = () => {
-            try {
-                localStorage.removeItem('endOfTime_skipVideos');
-                localStorage.removeItem('endOfTime_viewedLevelVideos');
-                alert('Level videos have been reset. You will see them again.');
-            } catch (e) {
-                console.error('Failed to reset videos:', e);
-            }
+            resetVideoPreferences(true);
+            surfaceContentSkipPrompt({ force: true });
         };
     }
+
+    surfaceContentSkipPrompt();
     // --- Check Sign In and Start Game ---
     function checkSignInAndStartGame(mode) {
         const levelNumber = currentGameLevel || 1;
@@ -2202,6 +2343,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!isViewOnly) {
                     if (skipCheckbox.checked) {
                         try { localStorage.setItem('endOfTime_skipTutorials', 'true'); } catch (e) { console.error('Error saving skip tutorials preference:', e); }
+                        try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (storageError) { /* ignore */ }
+                        surfaceContentSkipPrompt({ force: true });
                     }
                     markTutorialAsViewed(levelNumber);
                 }

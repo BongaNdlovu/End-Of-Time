@@ -8,10 +8,17 @@
     let db = null;
     let currentUser = null;
     const subscribers = [];
+    const signInErrorSubscribers = [];
 
     function notifySubscribers(user) {
         for (const cb of subscribers) {
             try { cb(user || null); } catch (e) { console.warn('Auth subscriber error:', e); }
+        }
+    }
+
+    function notifySignInError(payload) {
+        for (const cb of signInErrorSubscribers) {
+            try { cb(payload); } catch (e) { console.warn('Auth sign-in error subscriber error:', e); }
         }
     }
 
@@ -58,8 +65,19 @@
         }
     }
 
+    function onSignInError(callback) {
+        if (typeof callback !== 'function') return () => {};
+        signInErrorSubscribers.push(callback);
+        return () => {
+            const index = signInErrorSubscribers.indexOf(callback);
+            if (index >= 0) signInErrorSubscribers.splice(index, 1);
+        };
+    }
+
     function signIn() {
         if (!auth) {
+            const error = new Error('Authentication is not available right now.');
+            notifySignInError({ stage: 'unavailable', error });
             alert('Authentication is not available right now. Please try again later.');
             return Promise.resolve();
         }
@@ -69,10 +87,12 @@
         return auth.signInWithRedirect(provider)
             .catch(async (err) => {
                 console.warn('Redirect sign-in failed, attempting popup:', err);
+                notifySignInError({ stage: 'redirect', error: err });
                 try {
                     await auth.signInWithPopup(provider);
                 } catch (popupErr) {
                     console.error('Popup sign-in failed:', popupErr);
+                    notifySignInError({ stage: 'popup', error: popupErr });
                     alert('Failed to sign in with Google. Please try again.');
                 }
             });
@@ -98,6 +118,7 @@
                 // Ignore no-auth-event; report others
                 if (!error || error.code === 'auth/no-auth-event') return;
                 console.error('Redirect result error:', error);
+                notifySignInError({ stage: 'redirect-result', error });
             });
     }
 
@@ -275,7 +296,8 @@
         signIn,
         signOut,
         completeRedirect,
-        getUser
+        getUser,
+        onSignInError
     };
 
     window.LeaderboardService = {

@@ -4,6 +4,7 @@
 const firebaseConfig = {
   apiKey: "AIzaSyA78bvzjP-b7K9TPCbIL3ttzPJr07VR8kY",
   authDomain: "end-of-time-94cd3.firebaseapp.com",
+  databaseURL: "https://end-of-time-94cd3-default-rtdb.firebaseio.com",
   projectId: "end-of-time-94cd3",
   storageBucket: "end-of-time-94cd3.appspot.com",
   messagingSenderId: "628602476853",

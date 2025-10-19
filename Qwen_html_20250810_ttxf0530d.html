@@ -11,6 +11,10 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase Configuration and Auth -->
+    <script src="firebase-config.js"></script>
+    <script src="auth-leaderboard.js"></script>
 </head>
 <body>
     <video id="background-video" src="background.mp4" autoplay loop muted playsinline></video>
@@ -214,7 +218,6 @@
         </div>
     </div>
 
-    <script src="firebase-config.js"></script>
     <script>
         // --- End of Time Prayer Network ---
 
@@ -246,9 +249,9 @@
         let currentUser = null;
         let activeUnsub = null;
         
-        // Initialize Firebase with better conflict handling
+        // Initialize Firebase with proper error handling
         try {
-            // Check if firebaseConfig is available from firebase-config.js
+            // Check if firebaseConfig is available
             if (typeof firebaseConfig === 'undefined') {
                 throw new Error('Firebase configuration not found. Make sure firebase-config.js is loaded.');
             }
@@ -268,9 +271,19 @@
             auth = firebase.auth();
             db = firebase.firestore();
             console.log('✅ Firebase services ready for Prayer Network');
+            
+            // Initialize AuthManager if available but don't depend on it for auth/db
+            if (typeof window.AuthManager !== 'undefined') {
+                try {
+                    window.AuthManager.init();
+                    console.log('✅ AuthManager initialized alongside direct Firebase');
+                } catch (authManagerError) {
+                    console.warn('AuthManager initialization failed, but direct Firebase still works:', authManagerError);
+                }
+            }
+            
         } catch (e) {
             console.error('❌ Firebase initialization failed for Prayer Network:', e);
-            // Show user-friendly error
             showError('Unable to connect to prayer network. Please refresh the page.');
         }
 

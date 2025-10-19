@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(firebase deploy:*)",
+      "Bash(node:*)",
+      "Bash(firebase projects:list:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

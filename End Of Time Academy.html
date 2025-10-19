@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cinematic Bible Study</title>
+  <title>End of Time Academy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
@@ -263,35 +263,310 @@
       transition: transform 0.1s ease-out;
     }
 
+    /* Gradient Title Effect */
+    .gradient-title {
+      position: relative;
+      color: var(--paper);
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 0 15px rgba(177,15,26,.3), 0 0 3px rgba(255,255,255,.5);
+      animation: titlePulse 6s ease-in-out infinite;
+    }
+
+    @keyframes titlePulse {
+      0%, 100% { 
+        text-shadow: 0 0 15px rgba(177,15,26,.3), 0 0 3px rgba(255,255,255,.5);
+        filter: brightness(1);
+      }
+      50% { 
+        text-shadow: 0 0 20px rgba(177,15,26,.4), 0 0 6px rgba(242,201,76,.3);
+        filter: brightness(1.05);
+      }
+    }
+
+    .title-glow {
+      animation: titleGlow 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { 
+        text-shadow: 0 0 15px rgba(177,15,26,.3), 0 0 3px rgba(255,255,255,.5);
+        filter: brightness(1);
+      }
+      50% { 
+        text-shadow: 0 0 20px rgba(177,15,26,.4), 0 0 6px rgba(242,201,76,.3);
+        filter: brightness(1.05);
+      }
+    }
+
+    /* Navigation Title Styling */
+    .nav-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #f8f8f8;
+      letter-spacing: 0.5px;
+    }
+
+    /* Bible Book Title Styling */
+    .bible-book-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #f8f8f8;
+      letter-spacing: 0.3px;
+      text-transform: none;
+    }
+
+    /* Ensure all headings use Playfair Display */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif !important;
+    }
+
+    /* Ensure all buttons use Playfair Display */
+    button, .cta-btn, .nav-button, a[class*="button"], a[href*="#"], a[href*=".html"], .nav-title {
+      font-family: 'Playfair Display', serif !important;
+    }
+
+    /* Smooth Page Transitions */
+    body {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+
+    /* Transition overlay */
+    .page-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--ink);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .page-transition.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Tab Navigation */
+    .tab-navigation {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 0 1rem;
+      margin: 2rem auto;
+      max-width: 900px;
+      flex-wrap: wrap;
+    }
+
+    .tab-button {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 1rem 2rem;
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .tab-button:hover {
+      color: rgba(255,255,255,0.9);
+    }
+
+    .tab-button.active {
+      color: #ffffff;
+      border-bottom-color: var(--blood-2);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeInTab 0.5s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeInTab {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    /* First Principles Content Styling */
+    .principles-intro {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      padding: 2rem;
+      background: rgba(177,15,26,0.08);
+      border-left: 4px solid var(--blood-2);
+      border-radius: 0.5rem;
+    }
+
+    .principle-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .principle-card:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(177,15,26,0.3);
+      transform: translateY(-2px);
+    }
+
+    .principle-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      background: linear-gradient(135deg, var(--blood-2), var(--blood));
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .principle-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+
+    .principle-description {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .glitch { font-size: 2.5rem !important; }
+      .gradient-title { font-size: 3.5rem !important; }
       .scripture-carousel::before { font-size: 4rem; }
+      .tab-button {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.25rem;
+      }
+      .principle-card {
+        padding: 1.5rem;
+      }
+    }
+
+    /* ===== UNIVERSAL TITLE CLASSES ===== */
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: #f8f8f8;
+      letter-spacing: 0.4px;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: #f8f8f8;
+      letter-spacing: 0.3px;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .content-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: #f8f8f8;
+      letter-spacing: 0.3px;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #f8f8f8;
+      letter-spacing: 0.3px;
+    }
+
+    .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #cccccc;
+      letter-spacing: 0.2px;
+      text-align: center;
+      line-height: 1.4;
+    }
     }
   </style>
 </head>
 <body>
+  <!-- Page Transition Overlay -->
+  <div class="page-transition" id="pageTransition"></div>
+
   <!-- HERO -->
   <header class="hero">
-    <canvas id="particleCanvas" aria-hidden="true"></canvas>
-    <canvas id="waveCanvas" aria-hidden="true"></canvas>
+    <canvas id="particleCanvas" aria-hidden="true" willReadFrequently="true"></canvas>
+    <canvas id="waveCanvas" aria-hidden="true" willReadFrequently="true"></canvas>
     <div class="scanlines"></div>
 
     <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 max-w-7xl mx-auto flex items-center justify-between px-6 pt-6">
-      <a class="flex items-center gap-3 parallax" href="#">
-        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/5 shadow-lg backdrop-blur-sm transition-transform hover:scale-110">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-90">
-            <rect x="10.25" y="3" width="3.5" height="18" rx="1.2" fill="#fff" />
-            <rect x="3" y="10.25" width="18" height="3.5" rx="1.2" fill="#B10F1A" />
-          </svg>
-        </span>
-        <span class="text-sm tracking-widest uppercase text-white/80 font-semibold">Cinematic Bible Study</span>
-      </a>
-      <div class="hidden md:flex gap-6 text-sm text-white/70 font-medium">
-        <a href="#studies" class="hover:text-white transition-colors">Studies</a>
-        <a href="#series" class="hover:text-white transition-colors">Series</a>
-        <a href="#verses" class="hover:text-white transition-colors">Verses</a>
-        <a href="#about" class="hover:text-white transition-colors">About</a>
+      <div class="flex items-center gap-4">
+        <a class="flex items-center gap-3 parallax" href="menu.html">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/5 shadow-lg backdrop-blur-sm transition-transform hover:scale-110">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-90">
+              <rect x="3" y="3" width="7" height="7" rx="1" fill="#fff" />
+              <rect x="14" y="3" width="7" height="7" rx="1" fill="#B10F1A" />
+              <rect x="3" y="14" width="7" height="7" rx="1" fill="#B10F1A" />
+              <rect x="14" y="14" width="7" height="7" rx="1" fill="#fff" />
+            </svg>
+          </span>
+          <span class="nav-title">Main Menu</span>
+        </a>
+        <div class="h-6 w-px bg-white/20"></div>
+        <a class="flex items-center gap-3 parallax" href="#">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/5 shadow-lg backdrop-blur-sm transition-transform hover:scale-110">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-90">
+              <rect x="10.25" y="3" width="3.5" height="18" rx="1.2" fill="#fff" />
+              <rect x="3" y="10.25" width="18" height="3.5" rx="1.2" fill="#B10F1A" />
+            </svg>
+          </span>
+          <span class="nav-title">End of Time Academy</span>
+        </a>
+      </div>
+      <div class="hidden md:flex gap-6">
+        <a href="#studies" class="nav-title hover:text-white transition-colors">Studies</a>
+        <a href="#series" class="nav-title hover:text-white transition-colors">Series</a>
+        <a href="#verses" class="nav-title hover:text-white transition-colors">Verses</a>
+        <a href="#about" class="nav-title hover:text-white transition-colors">About</a>
       </div>
       <a href="#start" class="cta-btn z-10 px-4 py-2 rounded-xl text-sm font-semibold text-white backdrop-blur">
         Start Reading
@@ -300,7 +575,7 @@
 
     <section class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-28 md:pt-44 md:pb-40">
       <div class="max-w-3xl parallax">
-        <h1 class="glitch text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4" data-text="Bible Study">
+        <h1 class="gradient-title title-glow text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4">
           Bible Study
         </h1>
         <p class="mt-4 md:mt-6 text-xl md:text-2xl text-white/90 font-light">
@@ -317,7 +592,16 @@
     </section>
   </header>
 
+  <!-- Tab Navigation -->
+  <div class="tab-navigation">
+    <button class="tab-button active" onclick="switchTab('studies')">Bible Studies</button>
+    <button class="tab-button" onclick="switchTab('methodology')">How We Are Going To Study The Bible</button>
+  </div>
+
   <main>
+    <!-- Tab Content: Bible Studies -->
+    <div id="studies-content" class="tab-content active">
+      
     <!-- Scripture Carousel -->
     <section id="verses" class="section py-16 md:py-20">
       <div class="max-w-4xl mx-auto px-6">
@@ -359,29 +643,26 @@
         </div>
         <div class="grid md:grid-cols-3 gap-6">
           <article class="card p-6 fade-in">
-            <div class="mb-3 inline-flex px-3 py-1 rounded-full bg-blood-2/20 border border-blood-2/30 text-xs font-semibold text-blood-2">Prophecy</div>
-            <h3 class="text-xl font-bold mb-3">Daniel 7 – The Ancient of Days</h3>
-            <p class="mt-2 text-white/70 leading-relaxed">Thrones set, books opened—trace the prophetic timeline with careful exegesis anchored in Scripture.</p>
-            <a href="#" class="mt-5 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white font-semibold transition-colors group">
-              Read study 
+            <h3 class="bible-book-title mb-3">Genesis</h3>
+            <p class="mt-2 text-white/70 leading-relaxed">The beginning of all things—creation, fall, and God's redemptive plan unfolds from the first book of Scripture.</p>
+            <a href="genesis.html" class="mt-5 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white font-semibold transition-colors group">
+              Explore Genesis 
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </a>
           </article>
           <article class="card p-6 fade-in">
-            <div class="mb-3 inline-flex px-3 py-1 rounded-full bg-blood-2/20 border border-blood-2/30 text-xs font-semibold text-blood-2">End Times</div>
-            <h3 class="text-xl font-bold mb-3">Revelation 14 – Three Angels</h3>
-            <p class="mt-2 text-white/70 leading-relaxed">Fear God, give glory to Him—unpack the everlasting gospel's final message with cross‑references.</p>
+            <h3 class="bible-book-title mb-3">Exodus</h3>
+            <p class="mt-2 text-white/70 leading-relaxed">Deliverance from bondage, the law given at Sinai, and God's presence among His people in the wilderness journey.</p>
             <a href="#" class="mt-5 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white font-semibold transition-colors group">
-              Read study 
+              Coming Soon 
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </a>
           </article>
           <article class="card p-6 fade-in">
-            <div class="mb-3 inline-flex px-3 py-1 rounded-full bg-blood-2/20 border border-blood-2/30 text-xs font-semibold text-blood-2">Doctrine</div>
-            <h3 class="text-xl font-bold mb-3">Sabbath Rest – Creation to Consummation</h3>
-            <p class="mt-2 text-white/70 leading-relaxed">From Eden's blessing to Revelation's people of patience—see the scarlet thread of rest.</p>
+            <h3 class="bible-book-title mb-3">Leviticus</h3>
+            <p class="mt-2 text-white/70 leading-relaxed">Holiness, sacrifice, and worship—understanding God's requirements for approaching Him in the sacrificial system.</p>
             <a href="#" class="mt-5 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white font-semibold transition-colors group">
-              Read study 
+              Coming Soon 
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </a>
           </article>
@@ -431,16 +712,165 @@
         </div>
       </div>
     </section>
+
+    </div>
+    <!-- End of Bible Studies Tab Content -->
+
+    <!-- Tab Content: How We Are Going To Study The Bible -->
+    <div id="methodology-content" class="tab-content">
+      
+      <section class="section py-16 md:py-24">
+        <div class="max-w-5xl mx-auto px-6">
+          
+          <!-- Introduction -->
+          <div class="principles-intro fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Studying the Bible Using First Principles</h2>
+            <p class="text-lg text-white/90 leading-relaxed">
+              At End of Time Academy, we approach Scripture through <strong>first principles thinking</strong>—breaking down complex theological concepts to their foundational truths, then building understanding from the ground up. This method ensures we're not simply accepting tradition or interpretation without examination, but discovering what God's Word actually says at its most fundamental level.
+            </p>
+          </div>
+
+          <!-- The Principles -->
+          <div class="max-w-4xl mx-auto">
+            
+            <!-- Principle 1 -->
+            <div class="principle-card fade-in">
+              <div class="principle-number">1</div>
+              <h3 class="principle-title">Scripture Interprets Scripture</h3>
+              <p class="principle-description">
+                We let the Bible be its own interpreter. Rather than imposing external frameworks, we compare Scripture with Scripture, allowing clearer passages to illuminate difficult ones. The whole counsel of God reveals the meaning of its parts.
+              </p>
+              <p class="principle-description mt-3 text-white/60 italic">
+                <strong>Foundation:</strong> 2 Timothy 3:16-17, 2 Peter 1:20-21
+              </p>
+            </div>
+
+            <!-- Principle 2 -->
+            <div class="principle-card fade-in">
+              <div class="principle-number">2</div>
+              <h3 class="principle-title">Context is King</h3>
+              <p class="principle-description">
+                Every verse exists within historical, cultural, and literary contexts. We examine who wrote it, to whom, when, why, and what literary genre it belongs to. Understanding context prevents misinterpretation and reveals the author's intended meaning.
+              </p>
+              <p class="principle-description mt-3 text-white/60 italic">
+                <strong>Foundation:</strong> 2 Timothy 2:15, Acts 17:11
+              </p>
+            </div>
+
+            <!-- Principle 3 -->
+            <div class="principle-card fade-in">
+              <div class="principle-number">3</div>
+              <h3 class="principle-title">The Plain Meaning Principle</h3>
+              <p class="principle-description">
+                We take Scripture in its natural, literal sense unless the passage itself indicates figurative language. God communicates to be understood, not to confuse. When the plain sense makes sense, seek no other sense.
+              </p>
+              <p class="principle-description mt-3 text-white/60 italic">
+                <strong>Foundation:</strong> Nehemiah 8:8, Luke 24:27
+              </p>
+            </div>
+
+            <!-- Principle 4 -->
+            <div class="principle-card fade-in">
+              <div class="principle-number">4</div>
+              <h3 class="principle-title">Original Languages Matter</h3>
+              <p class="principle-description">
+                While translations are valuable, consulting Hebrew (Old Testament) and Greek (New Testament) helps us understand nuances, word meanings, and linguistic patterns that deepen our comprehension. Words carry weight, and original meanings illuminate truth.
+              </p>
+              <p class="principle-description mt-3 text-white/60 italic">
+                <strong>Foundation:</strong> Ezra 7:10, Psalm 119:18
+              </p>
+            </div>
+
+            <!-- Principle 5 -->
+            <div class="principle-card fade-in">
+              <div class="principle-number">5</div>
+              <h3 class="principle-title">Progressive Revelation</h3>
+              <p class="principle-description">
+                God revealed His truth progressively throughout Scripture. Earlier passages lay foundations; later ones build upon and clarify. The Old Testament is revealed in the New; the New Testament is concealed in the Old. We must understand where each passage fits in God's unfolding plan.
+              </p>
+              <p class="principle-description mt-3 text-white/60 italic">
+                <strong>Foundation:</strong> Hebrews 1:1-2, Luke 24:44-45
+              </p>
+            </div>
+
+            <!-- Principle 6 -->
+            <div class="principle-card fade-in">
+              <div class="principle-number">6</div>
+              <h3 class="principle-title">Christ is the Center</h3>
+              <p class="principle-description">
+                All Scripture ultimately points to Jesus Christ—His person, work, and glory. Every study must connect to the gospel narrative and God's redemptive plan through Christ. He is the key that unlocks all of Scripture.
+              </p>
+              <p class="principle-description mt-3 text-white/60 italic">
+                <strong>Foundation:</strong> John 5:39, Luke 24:27, Colossians 1:15-20
+              </p>
+            </div>
+
+            <!-- Principle 7 -->
+            <div class="principle-card fade-in">
+              <div class="principle-number">7</div>
+              <h3 class="principle-title">Application Flows from Understanding</h3>
+              <p class="principle-description">
+                True application begins with accurate interpretation. We first ask, "What did this mean to the original audience?" Then we identify timeless principles and apply them faithfully to our lives today. Transformation comes through truth rightly understood and obediently applied.
+              </p>
+              <p class="principle-description mt-3 text-white/60 italic">
+                <strong>Foundation:</strong> James 1:22-25, 2 Timothy 3:16-17
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Closing Statement -->
+          <div class="principles-intro fade-in mt-12">
+            <h3 class="text-2xl font-bold mb-3">Our Commitment</h3>
+            <p class="text-lg text-white/85 leading-relaxed">
+              By adhering to these first principles, we ensure that our Bible studies are rooted in truth, not tradition or speculation. We invite you to join us in this journey of discovery—examining the Scriptures with fresh eyes, humble hearts, and unwavering commitment to God's revealed Word.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+    <!-- End of Methodology Tab Content -->
+
   </main>
 
   <footer class="py-12 border-t border-white/10 text-center text-white/50 text-sm">
-    <p class="mb-2">© <span id="year"></span> Cinematic Bible Study</p>
+    <p class="mb-2">© <span id="year"></span> End of Time Academy</p>
     <p class="italic">"The entrance of thy words giveth light" — Psalm 119:130</p>
   </footer>
 
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tab Switching Function
+    function switchTab(tabName) {
+      // Hide all tab contents
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Remove active class from all tab buttons
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+      });
+      
+      // Show selected tab content
+      const selectedContent = document.getElementById(tabName + '-content');
+      if (selectedContent) {
+        selectedContent.classList.add('active');
+      }
+      
+      // Add active class to clicked button
+      event.target.classList.add('active');
+      
+      // Scroll to top of content smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Make switchTab available globally
+    window.switchTab = switchTab;
 
     // Floating nav on scroll
     const nav = document.getElementById('mainNav');
@@ -645,6 +1075,32 @@
     sizeParticleCanvas();
     requestAnimationFrame(draw);
     animateParticles();
+
+    // Smooth Page Transitions
+    document.addEventListener('DOMContentLoaded', () => {
+      // Fade in page on load
+      document.body.classList.add('loaded');
+    });
+
+    // Handle navigation links with smooth transitions
+    const transitionLinks = document.querySelectorAll('a[href*=".html"]:not([href="#"]):not([href*="#"]), a[href="menu.html"]');
+    
+    transitionLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const targetUrl = link.getAttribute('href');
+        const transitionOverlay = document.getElementById('pageTransition');
+        
+        // Show transition overlay
+        transitionOverlay.classList.add('active');
+        
+        // Navigate after transition
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 300);
+      });
+    });
   </script>
 </body>
 </html>

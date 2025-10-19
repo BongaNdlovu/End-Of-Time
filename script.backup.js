@@ -15,9 +15,9 @@
  * @version 1.1.0
  */
 
-// --- Firebase Global Variables (managed by auth-leaderboard.js) ---
-let db = null; // reserved (do not use directly)
-let auth = null; // reserved (do not use directly)
+// --- Firebase Global Variables ---
+let db = null;
+let auth = null;
 
 // --- DOM Elements ---
 const soloBtn = document.getElementById('solo');
@@ -41,17 +41,6 @@ const mainMenuBtn = document.getElementById('main-menu');
 const backToGameMenuBtn = document.getElementById('back-to-game-menu');
 const feedbackOverlay = document.querySelector('.feedback-overlay');
 const achievementTitle = document.getElementById('achievement-title');
-const resetTutorialsBtn = document.getElementById('reset-tutorials-btn');
-const resetVideosBtn = document.getElementById('reset-videos-btn');
-const CONTENT_SKIP_PROMPT_ID = 'content-skip-alert';
-const CONTENT_SKIP_PROMPT_SESSION_KEY = 'endOfTime_skipPromptDismissed';
-
-// Video modal elements
-const levelVideoModal = document.getElementById('level-video-modal');
-const levelVideoTitle = document.getElementById('level-video-title');
-const levelVideoPlayer = document.getElementById('level-video-player');
-const skipVideoBtn = document.getElementById('skip-video-btn');
-const skipVideosCheckbox = document.getElementById('skip-videos-checkbox');
 const teamWinner = document.getElementById('team-winner');
 const teamTurnIndicator = document.getElementById('team-turn-indicator'); // <-- ADD THIS
 const hintBtn = document.getElementById('hint-btn');
@@ -158,8 +147,6 @@ const allLevels = [
     { id: 7, questions: typeof level7Questions !== 'undefined' ? level7Questions : [], name: "Level 7" }
 ];
 
-const TRANSITION_SVG_COUNT = 17; // Enables 1.svg .. 17.svg as transition art across all levels
-
 function getPlayerProgress() {
     try {
         const progress = localStorage.getItem('endOfTime_levelProgress');
@@ -218,7 +205,10 @@ class AnimationEffects {
     // 2. Spawn floating chip
     this.spawnTokenChip(tokenElement, amount);
 
-    // Removed riser sound here to ensure it only plays once at game start
+    // 3. Optional: Play sound if audio system is available
+    if (AudioManager && typeof AudioManager.play === 'function') {
+      AudioManager.play(audioRiser);
+    }
   }
 
   /**
@@ -1122,7 +1112,8 @@ function showAchievementBadge(achievement) {
   // Add to page
   document.body.appendChild(badge);
   
-  // Removed riser sound here to ensure it only plays once at game start
+  // Play achievement sound
+  AudioManager.play(audioRiser);
   
   // Animate in
   setTimeout(() => {
@@ -1329,7 +1320,7 @@ function comprehensiveBugCheck() {
     console.log('\n🎵 Audio Elements Check:');
     const audioElements = [
         'audio-correct-1', 'audio-correct-2', 'audio-wrong', 'audio-timeup',
-        'audio-riser', 'audio-bg-2', 'audio-bg-3', 'audio-bg-4', 'audio-bg-5'
+        'audio-riser', 'audio-bg-1', 'audio-bg-2', 'audio-bg-3', 'audio-bg-4', 'audio-bg-5'
     ];
     
     let missingAudio = 0;
@@ -1551,7 +1542,7 @@ function setLoadingProgress(percent) {
 // --- Asset Preload Logic ---
 const audioElements = [
     'audio-correct-1','audio-correct-2','audio-wrong','audio-timeup','audio-riser',
-    'audio-bg-2','audio-bg-3','audio-bg-4','audio-bg-5','audio-timer-tick','audio-ticking-time',
+    'audio-bg-1','audio-bg-2','audio-bg-3','audio-bg-4','audio-bg-5','audio-timer-tick','audio-ticking-time',
     'audio-transition', 'audio-transition2'
 ].map(id => document.getElementById(id)).filter(Boolean);
 
@@ -1688,24 +1679,112 @@ const debounce = (func, wait) => {
 
 // --- DOMContentLoaded for all DOM queries and listeners ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Auth/Leaderboard module
-    if (window.AuthManager && typeof window.AuthManager.init === 'function') {
-        window.AuthManager.init();
-        // Subscribe to auth changes to update UI
-        window.AuthManager.subscribe((user) => {
-            updateUserInfoUI(user);
-            // After auth ready, refresh leaderboard display
-            if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
-                window.LeaderboardService.refresh();
-            }
-        });
-    } else {
-        console.warn('AuthManager not available. Sign-in and leaderboard disabled.');
+    // --- INITIALIZE FIREBASE APP ---
+
+    const isFileProtocol = window.location.protocol === 'file:';
+
+    try {
+
+        if (isFileProtocol) {
+
+            console.warn('Firebase features are disabled when running from local files. Sign-in and leaderboard will be unavailable.');
+
             const statusContainer = document.getElementById('signin-status-container');
+
             if (statusContainer) {
-            statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
+
+                statusContainer.innerHTML = '<p style="color:#d4af37;">Firebase features are disabled while running offline.</p>';
+
+            }
+
+            const inlineGoogleSigninBtn = document.getElementById('google-signin-btn');
+
+            if (inlineGoogleSigninBtn) {
+
+                inlineGoogleSigninBtn.disabled = true;
+
+                inlineGoogleSigninBtn.textContent = 'Sign-in unavailable offline';
+
+            }
+
+            const mainSigninBtnElement = document.getElementById('main-signin-btn');
+
+            if (mainSigninBtnElement) {
+
+                mainSigninBtnElement.disabled = true;
+
+                mainSigninBtnElement.textContent = 'Sign-in unavailable offline';
+
+            }
+
+            const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+
+            if (leaderboardBtn) {
+
+                leaderboardBtn.disabled = true;
+
+            }
+
         }
+
+        if (typeof firebase === 'undefined') {
+
+            throw new Error('Firebase SDK not detected. Ensure firebase-app-compat.js is loaded before script.js.');
+
+        }
+
+        if (typeof firebaseConfig !== 'undefined' && !isFileProtocol) {
+
+            if (!firebase.apps.length) {
+
+                firebase.initializeApp(firebaseConfig);
+
+            }
+
+            db = firebase.firestore();
+
+            auth = firebase.auth();
+
+            console.log('Firebase initialized successfully.');
+
+            setupAuthListener();
+
+            testFirebaseConnection();
+
+            fetchAndDisplayLeaderboard();
+
+            completePendingRedirectSignIn();
+
+        } else if (typeof firebaseConfig === 'undefined') {
+
+            console.error('Firebase config object is missing. Cannot initialize Firebase.');
+
+            const statusContainer = document.getElementById('signin-status-container');
+
+            if (statusContainer) {
+
+                statusContainer.innerHTML = '<p style="color:red;">Firebase not configured.</p>';
+
+            }
+
+            const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+
+            if (leaderboardBtn) {
+
+                leaderboardBtn.disabled = true;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.error('Error initializing Firebase:', error);
+
     }
+
+
+
         // Initialize audio system
         if (typeof AudioManager !== 'undefined' && AudioManager.init) {
             AudioManager.init();
@@ -1727,16 +1806,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
         console.warn('AnimationEffects initialization failed:', e);
     }
-
-    // Preload transition SVGs (1.svg .. 17.svg) to avoid flicker on first display
-    (function preloadTransitionSvgs(){
-        try {
-            for (let i = 1; i <= TRANSITION_SVG_COUNT; i++) {
-                const img = new Image();
-                img.src = i + '.svg';
-            }
-        } catch (_) {}
-    })();
     
     // Initialize DOM elements (category dropdown no longer needed for level system)
     // categoryDropdown = document.getElementById('category-dropdown'); // Removed - using level system now
@@ -1750,164 +1819,6 @@ document.addEventListener('DOMContentLoaded', () => {
         buttons.style.display = 'none';
     }
 
-    // --- Level Video Logic ---
-    // Allow override via global map if present
-    const defaultLevelVideoMap = {
-        1: 'video1.mp4',
-        2: 'video2.mp4',
-        3: 'video3.mp4',
-        4: 'video4.mp4',
-        5: 'video5.mp4',
-        6: 'video6.mp4',
-        7: 'video7.mp4'
-    };
-    const levelVideoMap = (window && window.LEVEL_VIDEO_MAP) ? window.LEVEL_VIDEO_MAP : defaultLevelVideoMap;
-
-    function candidateVideoNames(levelNumber) {
-        const n = Number(levelNumber);
-        const baseCandidates = [
-            levelVideoMap[n],
-            `Video ${n}.mp4`,
-            `video ${n}.mp4`,
-            `Level ${n}.mp4`,
-            `level ${n}.mp4`,
-            `level${n}.mp4`,
-            `video${n}.mp4`,
-            `background ${n}.mp4`,
-            `background${n}.mp4`
-        ];
-        // Deduplicate and filter falsy
-        return Array.from(new Set(baseCandidates.filter(Boolean)));
-    }
-
-    function openLevelVideoModal() {
-        if (!levelVideoModal) return;
-        levelVideoModal.style.display = 'flex';
-        requestAnimationFrame(() => {
-            levelVideoModal.style.opacity = '0';
-            levelVideoModal.style.transition = 'opacity 0.3s';
-            requestAnimationFrame(() => { levelVideoModal.style.opacity = '1'; });
-        });
-    }
-
-    function closeLevelVideoModal() {
-        if (!levelVideoModal) return;
-        levelVideoModal.style.transition = 'opacity 0.3s';
-        levelVideoModal.style.opacity = '0';
-        setTimeout(() => {
-            levelVideoModal.style.display = 'none';
-            if (levelVideoPlayer) {
-                try { levelVideoPlayer.pause(); } catch (_) {}
-                levelVideoPlayer.removeAttribute('src');
-                levelVideoPlayer.load();
-            }
-        }, 300);
-    }
-
-    window.showLevelVideo = function(levelNumber, { afterVideo, viewOnly, ignoreGating } = {}) {
-        // Respect skipVideos only if not viewOnly
-        if (!viewOnly && !ignoreGating && !shouldShowLevelVideo(levelNumber)) {
-            if (typeof afterVideo === 'function') afterVideo();
-            return;
-        }
-
-        if (!levelVideoPlayer) {
-            console.warn(`No video source found for level ${levelNumber} or player missing.`);
-            if (typeof afterVideo === 'function') afterVideo();
-            return;
-        }
-
-        if (levelVideoTitle) levelVideoTitle.textContent = `Level ${levelNumber} Video`;
-        levelVideoPlayer.autoplay = true;
-        levelVideoPlayer.controls = true;
-
-        // Reset checkbox each time
-        if (skipVideosCheckbox) skipVideosCheckbox.checked = false;
-
-        // Wire skip behavior
-        if (skipVideoBtn) {
-            skipVideoBtn.onclick = () => {
-                // Persist skip preference only if not viewOnly
-                if (!viewOnly && skipVideosCheckbox && skipVideosCheckbox.checked) {
-                    try { localStorage.setItem('endOfTime_skipVideos', 'true'); } catch (e) { console.error('Error saving skip videos preference:', e); }
-                    try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (storageError) { /* ignore */ }
-                    surfaceContentSkipPrompt({ force: true });
-                }
-                // Mark video viewed if not viewOnly
-                if (!viewOnly) markLevelVideoAsViewed(levelNumber);
-                closeLevelVideoModal();
-                if (typeof afterVideo === 'function') afterVideo();
-            };
-        }
-
-        // On video end
-        const onEnded = () => {
-            if (!viewOnly) markLevelVideoAsViewed(levelNumber);
-            closeLevelVideoModal();
-            if (typeof afterVideo === 'function') afterVideo();
-            levelVideoPlayer.removeEventListener('ended', onEnded);
-            levelVideoPlayer.removeEventListener('error', onError);
-        };
-        const onError = () => {
-            // Try next candidate if available
-            tryNextCandidate();
-        };
-        levelVideoPlayer.addEventListener('ended', onEnded);
-        levelVideoPlayer.addEventListener('error', onError);
-
-        let candidates = candidateVideoNames(levelNumber);
-        let idx = -1;
-
-        function tryNextCandidate() {
-            idx += 1;
-            if (idx >= candidates.length) {
-                console.warn('Video failed to play; keeping modal open with controls.');
-                levelVideoPlayer.removeEventListener('ended', onEnded);
-                levelVideoPlayer.removeEventListener('error', onError);
-                openLevelVideoModal();
-                if (levelVideoPlayer) levelVideoPlayer.controls = true;
-                return;
-            }
-            const nextSrc = candidates[idx];
-            // Swap source and attempt immediate play to keep gesture chain
-            levelVideoPlayer.src = nextSrc;
-            openLevelVideoModal();
-            try {
-                const p = levelVideoPlayer.play();
-                if (p && typeof p.then === 'function') {
-                    p.catch((err) => {
-                        // If autoplay is blocked, keep modal open with controls and show user notification
-                        if (err && err.name === 'NotAllowedError') {
-                            console.log('🎥 Autoplay blocked - showing video with controls');
-                            try { 
-                                openLevelVideoModal(); 
-                                // Show user-friendly message about autoplay
-                                const modalContent = document.getElementById('level-video-content');
-                                if (modalContent) {
-                                    const notification = document.createElement('div');
-                                    notification.style.cssText = 'background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: center;';
-                                    notification.innerHTML = '🎥 Autoplay blocked by browser. Please click play to start the video.';
-                                    modalContent.insertBefore(notification, modalContent.firstChild);
-                                    // Auto-remove notification after 5 seconds
-                                    setTimeout(() => {
-                                        if (notification.parentNode) {
-                                            notification.parentNode.removeChild(notification);
-                                        }
-                                    }, 5000);
-                                }
-                            } catch (_) {}
-                            if (levelVideoPlayer) levelVideoPlayer.controls = true;
-                        }
-                        // Let 'error' handler advance
-                    });
-                }
-            } catch (_) {
-                // Will trigger 'error' and advance
-            }
-        }
-
-        tryNextCandidate();
-    }
     // Show a random fun fact/verse/tip on the start screen
     const funFactBox = document.getElementById('fun-fact-box');
     if (funFactBox) {
@@ -1924,203 +1835,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.addEventListener('click', ensureUserInteraction, { once: true });
     document.body.addEventListener('keydown', ensureUserInteraction, { once: true });
-
-    // --- Reset Tutorials & Videos helpers ---
-    function resetTutorialPreferences(showAlert = true) {
-        try {
-            localStorage.removeItem('endOfTime_skipTutorials');
-            localStorage.removeItem('endOfTime_viewedTutorials');
-            if (showAlert) {
-                alert('Tutorials have been reset. You will see them again for each level.');
-            }
-        } catch (e) {
-            console.error('Failed to reset tutorials:', e);
-            if (showAlert) {
-                alert('Failed to reset tutorials. Please try again.');
-            }
-        }
-        try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (storageError) {
-            // Ignore sessionStorage failures
-        }
-    }
-
-    function resetVideoPreferences(showAlert = true) {
-        try {
-            localStorage.removeItem('endOfTime_skipVideos');
-            localStorage.removeItem('endOfTime_viewedLevelVideos');
-            if (showAlert) {
-                alert('Level videos have been reset. You will see them again.');
-            }
-        } catch (e) {
-            console.error('Failed to reset videos:', e);
-            if (showAlert) {
-                alert('Failed to reset videos. Please try again.');
-            }
-        }
-        try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (storageError) {
-            // Ignore sessionStorage failures
-        }
-    }
-
-    function skipPromptDismissed() {
-        try {
-            return sessionStorage.getItem(CONTENT_SKIP_PROMPT_SESSION_KEY) === 'true';
-        } catch (e) {
-            return false;
-        }
-    }
-
-    function surfaceContentSkipPrompt(options = {}) {
-        if (options.force) {
-            try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (e) { /* ignore */ }
-        }
-
-        const skipTutorialsEnabled = (() => {
-            try { return localStorage.getItem('endOfTime_skipTutorials') === 'true'; }
-            catch (e) { return false; }
-        })();
-        const skipVideosEnabled = (() => {
-            try { return localStorage.getItem('endOfTime_skipVideos') === 'true'; }
-            catch (e) { return false; }
-        })();
-
-        const dismissed = options.force ? false : skipPromptDismissed();
-        let promptEl = document.getElementById(CONTENT_SKIP_PROMPT_ID);
-
-        if (!skipTutorialsEnabled && !skipVideosEnabled) {
-            if (promptEl) {
-                promptEl.remove();
-            }
-            return;
-        }
-
-        if (dismissed && !promptEl) {
-            return;
-        }
-
-        if (!promptEl) {
-            promptEl = document.createElement('div');
-            promptEl.id = CONTENT_SKIP_PROMPT_ID;
-            promptEl.style.cssText = 'position:fixed;bottom:1.5rem;right:1.5rem;z-index:10000;background:rgba(22,22,26,0.94);border:1px solid rgba(139,0,0,0.6);border-radius:14px;padding:1rem 1.2rem;width:min(320px,calc(100vw - 2.4rem));box-shadow:0 10px 24px rgba(0,0,0,0.45);font-family:"Montserrat-Regular",Arial,sans-serif;color:#f5f5f5;';
-            const title = document.createElement('p');
-            title.id = 'content-skip-title';
-            title.textContent = 'Content currently skipped';
-            title.style.cssText = 'margin:0 0 0.6rem 0;font-size:1rem;font-weight:600;color:#ffcc66;';
-            const messageEl = document.createElement('p');
-            messageEl.id = 'content-skip-message';
-            messageEl.style.cssText = 'margin:0 0 0.8rem 0;font-size:0.95rem;line-height:1.6;';
-            const actionsEl = document.createElement('div');
-            actionsEl.id = 'content-skip-actions';
-            actionsEl.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.5rem;';
-            promptEl.appendChild(title);
-            promptEl.appendChild(messageEl);
-            promptEl.appendChild(actionsEl);
-            document.body.appendChild(promptEl);
-        }
-
-        const summaryParts = [];
-        if (skipTutorialsEnabled) summaryParts.push('tutorials');
-        if (skipVideosEnabled) summaryParts.push('level videos');
-
-        const messageEl = promptEl.querySelector('#content-skip-message');
-        if (messageEl && summaryParts.length > 0) {
-            const descriptor = summaryParts.length === 2
-                ? 'Tutorials and level videos are currently disabled because you chose to skip them earlier.'
-                : `${summaryParts[0].charAt(0).toUpperCase()}${summaryParts[0].slice(1)} are currently disabled because you chose to skip them earlier.`;
-            messageEl.textContent = `${descriptor} This can make Chrome behave differently from other browsers. Reset now to restore the full experience.`;
-        }
-
-        const actionsEl = promptEl.querySelector('#content-skip-actions');
-        if (actionsEl) {
-            actionsEl.innerHTML = '';
-            if (skipTutorialsEnabled) {
-                const resetTutorialBtn = document.createElement('button');
-                resetTutorialBtn.id = 'alert-reset-tutorials';
-                resetTutorialBtn.className = 'comic-button';
-                resetTutorialBtn.textContent = 'Reset tutorials';
-                resetTutorialBtn.style.flex = '1 1 140px';
-                resetTutorialBtn.onclick = () => {
-                    resetTutorialPreferences(true);
-                    surfaceContentSkipPrompt({ force: true });
-                };
-                actionsEl.appendChild(resetTutorialBtn);
-            }
-            if (skipVideosEnabled) {
-                const resetVideosButton = document.createElement('button');
-                resetVideosButton.id = 'alert-reset-videos';
-                resetVideosButton.className = 'comic-button';
-                resetVideosButton.textContent = 'Reset videos';
-                resetVideosButton.style.flex = '1 1 140px';
-                resetVideosButton.onclick = () => {
-                    resetVideoPreferences(true);
-                    surfaceContentSkipPrompt({ force: true });
-                };
-                actionsEl.appendChild(resetVideosButton);
-            }
-            const dismissBtn = document.createElement('button');
-            dismissBtn.id = 'alert-dismiss-skip';
-            dismissBtn.className = 'comic-button';
-            dismissBtn.textContent = 'Maybe later';
-            dismissBtn.style.flex = '1 1 140px';
-            dismissBtn.style.background = '#444';
-            dismissBtn.style.border = '1px solid rgba(255,255,255,0.2)';
-            dismissBtn.onclick = () => {
-                try { sessionStorage.setItem(CONTENT_SKIP_PROMPT_SESSION_KEY, 'true'); } catch (e) { /* ignore */ }
-                promptEl.remove();
-            };
-            actionsEl.appendChild(dismissBtn);
-        }
-    }
-
-    if (resetTutorialsBtn) {
-        resetTutorialsBtn.onclick = () => {
-            resetTutorialPreferences(true);
-            surfaceContentSkipPrompt({ force: true });
-        };
-    }
-
-    if (resetVideosBtn) {
-        resetVideosBtn.onclick = () => {
-            resetVideoPreferences(true);
-            surfaceContentSkipPrompt({ force: true });
-        };
-    }
-
-    surfaceContentSkipPrompt();
     // --- Check Sign In and Start Game ---
     function checkSignInAndStartGame(mode) {
-        const levelNumber = currentGameLevel || 1;
-
-        // Function to actually start the game (after tutorial if needed)
-        const actuallyStartGame = () => {
-            exitBtn.style.display = 'block';
-            // After tutorial, if we should show video, do so before starting
-            if (shouldShowLevelVideo(levelNumber)) {
-                window.showLevelVideo(levelNumber, {
-                    afterVideo: () => startGame(mode, levelNumber)
-                });
-            } else {
-                startGame(mode, levelNumber);
-            }
-        };
-
         if (!currentUser) {
             // Show sign-in prompt modal
             showSignInPromptModal(mode);
         } else {
-            // User is already signed in, check if tutorial should be shown
-            if (shouldShowTutorial(levelNumber)) {
-                window.showTutorial(levelNumber, mode, actuallyStartGame);
-            } else {
-                // If no tutorial, still respect video gate
-                if (shouldShowLevelVideo(levelNumber)) {
-                    window.showLevelVideo(levelNumber, {
-                        afterVideo: () => actuallyStartGame()
-                    });
-                } else {
-                    actuallyStartGame();
-                }
-            }
+            // User is already signed in, start game directly
+            exitBtn.style.display = 'block';
+            startGame(mode, currentGameLevel || 1);
         }
     }
 
@@ -2169,28 +1892,42 @@ document.addEventListener('DOMContentLoaded', () => {
             const closeBtn = document.getElementById('signin-prompt-close-btn');
             
             googleBtn.onclick = async () => {
-                if (window.AuthManager && typeof window.AuthManager.signIn === 'function') {
-                    await window.AuthManager.signIn();
-                } else {
-                    alert('Authentication is not available right now. Please try again later.');
+                if (!auth) {
+                    alert('Firebase authentication is not available right now. Please try again later.');
+                    return;
+                }
+                const provider = new firebase.auth.GoogleAuthProvider();
+                try {
+                    const result = await auth.signInWithPopup(provider);
+                    if (result && result.user) {
+                        console.log('Google sign-in successful:', result.user.displayName);
+                        currentUser = result.user;
+                        hideSignInPromptModal();
+                        exitBtn.style.display = 'block';
+                        startGame(gameMode, currentGameLevel || 1);
+                    }
+                } catch (error) {
+                    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+                        console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
+                        try {
+                            await auth.signInWithRedirect(provider);
+                            return;
+                        } catch (redirectError) {
+                            console.error('Redirect sign-in failed:', redirectError);
+                            alert('Failed to sign in with Google. Please try again.');
+                            return;
+                        }
+                    }
+                    console.error('Google sign-in failed:', error);
+                    alert('Failed to sign in with Google. Please try again.');
                 }
             };
             
             skipBtn.onclick = () => {
                 hideSignInPromptModal();
                 // Start game without sign-in
-                const levelNumber = currentGameLevel || 1;
-                const actuallyStartGame = () => {
-                    exitBtn.style.display = 'block';
-                    startGame(gameMode, levelNumber);
-                };
-
-                // Check if tutorial should be shown
-                if (shouldShowTutorial(levelNumber)) {
-                    window.showTutorial(levelNumber, gameMode, actuallyStartGame);
-                } else {
-                    actuallyStartGame();
-                }
+                exitBtn.style.display = 'block';
+                startGame(gameMode, currentGameLevel || 1);
             };
             
             closeBtn.onclick = hideSignInPromptModal;
@@ -2204,188 +1941,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (signInModal) {
             signInModal.style.display = 'none';
         }
-    }
-
-    // --- Tutorial System ---
-    const allTutorials = [
-        typeof tutorialLevel1 !== 'undefined' ? tutorialLevel1 : null,
-        typeof tutorialLevel2 !== 'undefined' ? tutorialLevel2 : null,
-        typeof tutorialLevel3 !== 'undefined' ? tutorialLevel3 : null,
-        typeof tutorialLevel4 !== 'undefined' ? tutorialLevel4 : null,
-        typeof tutorialLevel5 !== 'undefined' ? tutorialLevel5 : null,
-        typeof tutorialLevel6 !== 'undefined' ? tutorialLevel6 : null,
-        typeof tutorialLevel7 !== 'undefined' ? tutorialLevel7 : null
-    ];
-
-    function shouldShowTutorial(levelNumber) {
-        try {
-            const skipTutorials = localStorage.getItem('endOfTime_skipTutorials');
-            if (skipTutorials === 'true') return false;
-            // Always show tutorial before each level unless globally skipped
-            return true;
-        } catch (e) {
-            console.error("Error checking tutorial status:", e);
-            return true; // Show tutorial if error
-        }
-    }
-
-    // --- Video Gating Helpers ---
-    function shouldShowLevelVideo(levelNumber) {
-        try {
-            const skipVideos = localStorage.getItem('endOfTime_skipVideos');
-            if (skipVideos === 'true') return false;
-            const viewedVideos = JSON.parse(localStorage.getItem('endOfTime_viewedLevelVideos') || '[]');
-            return !viewedVideos.includes(levelNumber);
-        } catch (e) {
-            console.error('Error checking level video status:', e);
-            return true;
-        }
-    }
-
-    function markLevelVideoAsViewed(levelNumber) {
-        try {
-            const viewed = JSON.parse(localStorage.getItem('endOfTime_viewedLevelVideos') || '[]');
-            if (!viewed.includes(levelNumber)) {
-                viewed.push(levelNumber);
-                localStorage.setItem('endOfTime_viewedLevelVideos', JSON.stringify(viewed));
-            }
-        } catch (e) {
-            console.error('Error marking level video as viewed:', e);
-        }
-    }
-
-    function markTutorialAsViewed(levelNumber) {
-        try {
-            const viewedTutorials = JSON.parse(localStorage.getItem('endOfTime_viewedTutorials') || '[]');
-            if (!viewedTutorials.includes(levelNumber)) {
-                viewedTutorials.push(levelNumber);
-                localStorage.setItem('endOfTime_viewedTutorials', JSON.stringify(viewedTutorials));
-            }
-        } catch (e) {
-            console.error("Error marking tutorial as viewed:", e);
-        }
-    }
-
-    window.showTutorial = function(levelNumber, mode, callback, options) {
-        const isViewOnly = options && options.viewOnly === true;
-        const tutorial = allTutorials[levelNumber - 1];
-        if (!tutorial) {
-            console.warn(`Tutorial for level ${levelNumber} not found`);
-            callback();
-            return;
-        }
-
-        const modal = document.getElementById('tutorial-modal');
-        const title = document.getElementById('tutorial-title');
-        const subtitle = document.getElementById('tutorial-subtitle');
-        const sectionsContainer = document.getElementById('tutorial-sections');
-        const startBtn = document.getElementById('start-level-btn');
-        const skipCheckbox = document.getElementById('skip-tutorials-checkbox');
-
-        // Set title and subtitle
-        title.textContent = tutorial.title;
-        subtitle.textContent = tutorial.subtitle;
-
-        // Clear previous sections
-        sectionsContainer.innerHTML = '';
-
-        // Create sections
-        const sections = [tutorial.mechanics, tutorial.content, tutorial.tools, tutorial.tips];
-        sections.forEach(section => {
-            if (!section) return;
-
-            const sectionDiv = document.createElement('div');
-            sectionDiv.style.cssText = `
-                background: rgba(42, 42, 42, 0.6);
-                border: 2px solid rgba(139, 0, 0, 0.3);
-                border-radius: 16px;
-                padding: 1.5rem;
-                backdrop-filter: blur(5px);
-            `;
-
-            const sectionTitle = document.createElement('h3');
-            sectionTitle.style.cssText = `
-                color: #ffffff;
-                font-family: 'Montserrat-Bold', Arial, sans-serif;
-                font-size: 1.4rem;
-                margin-bottom: 1rem;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            `;
-            sectionTitle.innerHTML = `<span style="font-size: 1.8rem;">${section.icon}</span> ${section.title}`;
-
-            const descList = document.createElement('div');
-            descList.style.cssText = `
-                color: #e0e0e0;
-                font-family: 'Montserrat-Regular', Arial, sans-serif;
-                font-size: 1rem;
-                line-height: 1.8;
-            `;
-            descList.innerHTML = section.description.map(item => `<p style="margin: 0.5rem 0;">${item}</p>`).join('');
-
-            sectionDiv.appendChild(sectionTitle);
-            sectionDiv.appendChild(descList);
-            sectionsContainer.appendChild(sectionDiv);
-        });
-
-        // Reset skip checkbox, hide in view-only mode
-        skipCheckbox.checked = false;
-        if (isViewOnly) {
-            // Hide the skip tutorials row by hiding its container label
-            const label = skipCheckbox && skipCheckbox.parentElement;
-            if (label && label.style) label.style.display = 'none';
-            // Change CTA label for clarity
-            if (startBtn) startBtn.textContent = 'Play Video 🎬';
-        } else {
-            const label = skipCheckbox && skipCheckbox.parentElement;
-            if (label && label.style) label.style.display = '';
-            if (startBtn) startBtn.textContent = 'Play Video 🎬';
-        }
-
-        // Show modal with animation
-        modal.style.display = 'flex';
-        requestAnimationFrame(() => {
-            modal.style.opacity = '0';
-            modal.style.transition = 'opacity 0.3s';
-            requestAnimationFrame(() => {
-                modal.style.opacity = '1';
-            });
-        });
-
-        // Handle start/close button
-        startBtn.onclick = () => {
-            // Hide tutorial modal first
-            modal.style.transition = 'opacity 0.3s';
-            modal.style.opacity = '0';
-            setTimeout(() => {
-                modal.style.display = 'none';
-
-                // For non-view-only, persist tutorial prefs and viewed
-                if (!isViewOnly) {
-                    if (skipCheckbox.checked) {
-                        try { localStorage.setItem('endOfTime_skipTutorials', 'true'); } catch (e) { console.error('Error saving skip tutorials preference:', e); }
-                        try { sessionStorage.removeItem(CONTENT_SKIP_PROMPT_SESSION_KEY); } catch (storageError) { /* ignore */ }
-                        surfaceContentSkipPrompt({ force: true });
-                    }
-                    markTutorialAsViewed(levelNumber);
-                }
-
-                // Next: show level video (view-only returns to selection, normal starts level after video)
-                window.showLevelVideo(levelNumber, {
-                    afterVideo: () => {
-                        if (isViewOnly) {
-                            // Return to mode selection only
-                            showModeSelection();
-                        } else {
-                            callback();
-                        }
-                    },
-                    viewOnly: isViewOnly,
-                    ignoreGating: true
-                });
-            }, 300);
-        };
     }
 
     // --- Start Game ---
@@ -2432,30 +1987,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Store the current level being played
         currentGameLevel = levelNumber;
-
-        const keyFactOverlay = document.getElementById('key-fact-overlay');
-        if (keyFactOverlay) {
-            keyFactOverlay.style.display = 'none';
-            keyFactOverlay.classList.remove('show');
-            keyFactOverlay.textContent = '';
-        }
-
-        const totalLevels = allLevels.length;
-        const keyFacts = Array.isArray(window.KEY_FACTS) ? window.KEY_FACTS : [];
-        const perLevel = totalLevels > 0 ? Math.ceil(keyFacts.length / totalLevels) : 0;
-        const factsStartIndex = (currentGameLevel - 1) * perLevel;
-        const levelFacts = keyFacts.slice(factsStartIndex, factsStartIndex + perLevel);
-
-        function computeShowIndices(totalQuestions, factsCount) {
-            if (factsCount <= 0 || totalQuestions <= 0) return [];
-            const slots = [];
-            for (let i = 1; i <= factsCount; i++) {
-                const rawPos = Math.round((i * totalQuestions) / (factsCount + 1)) - 1;
-                const clampedPos = Math.min(Math.max(rawPos, 0), totalQuestions - 1);
-                slots.push(clampedPos);
-            }
-            return [...new Set(slots)].sort((a, b) => a - b);
-        }
         
         // Set timer based on the current level
         TIME_LIMIT = getTimeLimitForLevel(currentGameLevel);
@@ -2491,13 +2022,6 @@ document.addEventListener('DOMContentLoaded', () => {
             maxWagerValue = 20;
             currentWager = 5;
 
-        window.keyFactsState = {
-            levelFacts,
-            nextFactIdx: 0,
-            showAfterQuestionIndices: computeShowIndices(questions.length, levelFacts.length),
-            lastShownQuestionIndex: null
-        };
-
         if (questions.length === 0) {
             alert('No questions found for this category!');
             return;
@@ -2530,12 +2054,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateScoreDisplay(); // Use the new function
         }
         
-		// Show transition before the first question (ensures transition features on every question)
-		const firstQ = questions[0];
-		const isProphecyFirst = firstQ && (firstQ.category === 'Prophecy' || firstQ.category === 'The Great Controversy');
-        showGlitchTransition(isProphecyFirst, () => {
-		showQuestion();
-	});
+        showQuestion();
         exitBtn.style.display = 'block';
     };
 
@@ -2544,56 +2063,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPhase = 'question';
         gameDiv.classList.remove('options-phase');
         gameDiv.classList.add('question-phase');
-    }
-
-    function hideKeyFactOverlay() {
-        const overlay = document.getElementById('key-fact-overlay');
-        if (!overlay) return;
-        overlay.classList.remove('show');
-        overlay.style.display = 'none';
-    }
-
-    function showKeyFactForCurrentQuestion() {
-        const overlay = document.getElementById('key-fact-overlay');
-        if (!overlay) return;
-
-        const state = window.keyFactsState;
-        if (!state || !Array.isArray(state.levelFacts) || state.levelFacts.length === 0) {
-            hideKeyFactOverlay();
-            return;
-        }
-
-        if (!state.showAfterQuestionIndices || !state.showAfterQuestionIndices.includes(currentQuestionIndex)) {
-            hideKeyFactOverlay();
-            return;
-        }
-
-        if (state.nextFactIdx >= state.levelFacts.length) {
-            hideKeyFactOverlay();
-            return;
-        }
-
-        if (state.lastShownQuestionIndex === currentQuestionIndex && overlay.style.display === 'block') {
-            overlay.classList.add('show');
-            return;
-        }
-
-        const fact = `Key Facts: ` + state.levelFacts[state.nextFactIdx];
-        if (!fact) {
-            hideKeyFactOverlay();
-            return;
-        }
-
-        overlay.textContent = fact;
-        overlay.style.display = 'block';
-        overlay.classList.add('show');
-
-        if (typeof AudioManager !== 'undefined' && typeof AudioManager.playKeyFact === 'function') {
-            AudioManager.playKeyFact();
-        }
-
-        state.lastShownQuestionIndex = currentQuestionIndex;
-        state.nextFactIdx = Math.min(state.nextFactIdx + 1, state.levelFacts.length);
     }
     
     function showQuestionOnly() {
@@ -2731,8 +2200,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             fadeIn(document.querySelector('.question'));
         }, 50);
-
-        showKeyFactForCurrentQuestion();
         
         // Clear encouragement message if it exists
         const encouragementDiv = document.getElementById('encouragement-message');
@@ -2742,7 +2209,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function showOptionsWithTimer() {
-        hideKeyFactOverlay();
         currentPhase = 'options';
         gameDiv.classList.remove('question-phase');
         gameDiv.classList.add('options-phase');
@@ -2780,15 +2246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // START TIMER ONLY NOW
         if (!isTimeAttackMode) {
-            // Reset visual timer to 00 before starting
-            timerDiv.classList.remove('low-time');
-            if (timerDiv.parentElement && timerDiv.parentElement.parentElement) {
-                timerDiv.parentElement.parentElement.classList.remove('urgent');
-            }
-            timerDiv.innerText = '00';
-
-            // Slight delay to show the reset before countdown
-            setTimeout(() => startTimer(), 200);
+            startTimer();
         }
         
         // Fade in options
@@ -3754,9 +3212,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (funFactBox) {
             funFactBox.innerText = getRandomFunFact();
         }
-        // Navigate back to hub main menu page
+        // Navigate back to main menu page (designate current page as the game menu)
         try {
-            window.location.href = 'menu.html';
+            window.location.href = 'index.html';
         } catch (e) {
             console.warn('Menu navigation failed, staying on page:', e);
         }
@@ -3830,7 +3288,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     showOptionsBtn.onclick = () => {
-        hideKeyFactOverlay();
         // Transition from question-only to options-with-timer phase
         showOptionsWithTimer();
     };
@@ -4228,21 +3685,7 @@ function showGlitchTransition(isProphecy, cb) {
     const overlay = document.createElement('div');
     overlay.id = 'glitch-transition-overlay';
     overlay.className = 'glitch-effect';
-    // Transition art: randomly use 1.svg–17.svg across all levels
-    try {
-        const img = document.createElement('img');
-        const idx = 1 + Math.floor(Math.random() * TRANSITION_SVG_COUNT);
-        img.src = idx + '.svg';
-        img.alt = 'Transition';
-        img.onerror = () => { overlay.innerText = '✝️'; };
-        img.style.width = '100vw';
-        img.style.height = '100vh';
-        img.style.objectFit = 'cover';
-        img.style.display = 'block';
-        overlay.appendChild(img);
-    } catch (e) {
-        overlay.innerText = '✝️';
-    }
+    overlay.innerText = '✝️';
     overlay.style.position = 'fixed';
     overlay.style.left = '50%';
     overlay.style.top = '50%';
@@ -4250,29 +3693,12 @@ function showGlitchTransition(isProphecy, cb) {
     overlay.style.fontSize = '10vw';
     overlay.style.zIndex = 9999;
     overlay.style.pointerEvents = 'none';
-    overlay.style.opacity = '0.98';
+    overlay.style.opacity = '0.93';
     overlay.style.textAlign = 'center';
     overlay.style.userSelect = 'none';
-    // Make the overlay full-screen to fill the viewport with the SVG
-    overlay.style.left = '0';
-    overlay.style.top = '0';
-    overlay.style.transform = 'none';
-    overlay.style.width = '100vw';
-    overlay.style.height = '100vh';
-    overlay.style.display = 'flex';
-    overlay.style.alignItems = 'center';
-    overlay.style.justifyContent = 'center';
-    overlay.style.fontSize = '';
     document.body.appendChild(overlay);
-    // Play sound via AudioManager for consistency
-    try {
-        if (typeof AudioManager !== 'undefined' && typeof AudioManager.play === 'function') {
-            AudioManager.play(isProphecy ? audioTransition2 : audioTransition);
-        } else {
-            const s = isProphecy ? audioTransition2 : audioTransition;
-            if (s && typeof s.play === 'function') s.play();
-        }
-    } catch (_) {}
+    // Play sound
+    playSound(isProphecy ? audioTransition2 : audioTransition);
     // Remove after 650ms
     setTimeout(() => {
         overlay.remove();
@@ -4292,7 +3718,18 @@ explanationDiv.style.maxWidth = '95%';
 explanationDiv.style.textAlign = 'left';
 explanationDiv.style.display = 'none';
 
-// Service worker already registered above (line 3566) - duplicate removed
+// Register service worker for PWA/offline support
+if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(registration => {
+        console.log('ServiceWorker registration successful');
+      })
+      .catch(error => {
+        console.log('ServiceWorker registration failed:', error);
+      });
+  });
+}
 
 // --- Background video sequential playback ---
 let currentBgVideoIndex = 0;
@@ -4382,7 +3819,7 @@ window.addEventListener('beforeunload', () => {
 // Firebase initialization is now handled in the DOMContentLoaded event listener above
 // This eliminates duplicate initialization and ensures proper load order
 
-// --- Leaderboard Modal & UI Wiring (delegates to LeaderboardService/AuthManager) ---
+// --- Leaderboard Modal Logic ---
 const leaderboardModal = document.getElementById('leaderboard-modal');
 const googleSigninBtn = document.getElementById('google-signin-btn');
 const googleSignoutBtn = document.getElementById('google-signout-btn');
@@ -4391,119 +3828,416 @@ const optoutCheckbox = document.getElementById('optout-leaderboard');
 const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
 
 function showLeaderboardModal() {
-  if (window.LeaderboardService && typeof window.LeaderboardService.openModal === 'function') {
-    window.LeaderboardService.openModal();
-    if (typeof window.LeaderboardService.refresh === 'function') {
-      window.LeaderboardService.refresh();
-    }
-  }
+  leaderboardModal.style.display = 'flex';
+  leaderboardModal.style.opacity = '0';
+  leaderboardModal.style.transform = 'scale(0.9)';
+  
+  // Animate modal appearance
+  setTimeout(() => {
+    leaderboardModal.style.transition = 'all 0.3s ease';
+    leaderboardModal.style.opacity = '1';
+    leaderboardModal.style.transform = 'scale(1)';
+  }, 10);
+  
+  updateUserInfoUI();
 }
 function hideLeaderboardModal() {
-  if (window.LeaderboardService && typeof window.LeaderboardService.closeModal === 'function') {
-    window.LeaderboardService.closeModal();
+  // Animate modal disappearance
+  if (leaderboardModal) {
+    leaderboardModal.style.transition = 'all 0.3s ease';
+    leaderboardModal.style.opacity = '0';
+    leaderboardModal.style.transform = 'scale(0.9)';
+    
+    setTimeout(() => {
+      leaderboardModal.style.display = 'none';
+    }, 300);
   }
 }
-if (closeLeaderboardBtn) closeLeaderboardBtn.onclick = hideLeaderboardModal;
+closeLeaderboardBtn.onclick = hideLeaderboardModal;
 
-function updateUserInfoUI(user) {
-  console.log('updateUserInfoUI called with user:', user);
-  currentUser = user || null;
-  const mainSigninBtn = document.getElementById('main-signin-btn');
-  const mainSignoutBtn = document.getElementById('main-signout-btn');
-  const statusText = document.getElementById('signin-status-text');
-  
-  // These are in the leaderboard modal, let's not touch them from the main script
-  // to avoid conflicts. The leaderboard has its own UI update logic.
-  // const googleSigninBtn = document.getElementById('google-signin-btn');
-  // const googleSignoutBtn = document.getElementById('google-signout-btn');
-  // const userInfoDiv = document.getElementById('user-info');
-
+// Google Auth logic
+function updateUserInfoUI() {
   if (currentUser) {
+    userInfoDiv.innerHTML = `<img src="${currentUser.photoURL}" style="width:32px;height:32px;border-radius:50%;vertical-align:middle;margin-right:0.5em;">${currentUser.displayName}`;
+    googleSigninBtn.style.display = 'none';
+    googleSignoutBtn.style.display = 'inline-block';
+    
+    // Update main menu sign-in status
+    const statusText = document.getElementById('signin-status-text');
+    const mainSigninBtn = document.getElementById('main-signin-btn');
+    const mainSignoutBtn = document.getElementById('main-signout-btn');
+    
     if (statusText) statusText.textContent = `Signed in as ${currentUser.displayName}`;
     if (mainSigninBtn) mainSigninBtn.style.display = 'none';
     if (mainSignoutBtn) mainSignoutBtn.style.display = 'inline-block';
   } else {
+    userInfoDiv.innerHTML = '';
+    googleSigninBtn.style.display = 'inline-block';
+    googleSignoutBtn.style.display = 'none';
+    
+    // Update main menu sign-in status
+    const statusText = document.getElementById('signin-status-text');
+    const mainSigninBtn = document.getElementById('main-signin-btn');
+    const mainSignoutBtn = document.getElementById('main-signout-btn');
+    
     if (statusText) statusText.textContent = 'Not signed in - Your scores won\'t be saved';
     if (mainSigninBtn) mainSigninBtn.style.display = 'inline-block';
     if (mainSignoutBtn) mainSignoutBtn.style.display = 'none';
   }
 }
 
-if (googleSigninBtn) {
-  googleSigninBtn.onclick = function() {
-    if (window.AuthManager && typeof window.AuthManager.signIn === 'function') {
-      window.AuthManager.signIn();
-    }
-  };
-}
-if (googleSignoutBtn) {
-googleSignoutBtn.onclick = function() {
-    if (window.AuthManager && typeof window.AuthManager.signOut === 'function') {
-      window.AuthManager.signOut();
-    }
-  };
-}
+// Enhanced Google sign-in with proper error handling
+googleSigninBtn.onclick = async function() {
+  console.log('Attempting Google sign-in...');
 
+  if (document.hidden) {
+    console.log('Warning: Page is hidden, skipping sign-in');
+    return;
+  }
+
+  if (!auth) {
+    alert('Firebase authentication is not available right now. Please try again later.');
+    return;
+  }
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+  const signInPromise = auth.signInWithPopup(provider);
+  const timeoutPromise = new Promise((_, reject) => {
+    setTimeout(() => reject(new Error('Sign-in timeout')), 30000);
+  });
+
+  try {
+    const result = await Promise.race([signInPromise, timeoutPromise]);
+    if (!document.hidden && result && result.user) {
+      console.log('Google sign-in successful:', result.user.displayName);
+      currentUser = result.user;
+      updateUserInfoUI();
+    } else if (document.hidden) {
+      console.log('Warning: Page became hidden during sign-in, skipping UI update');
+    }
+  } catch (error) {
+    if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+      console.warn('Popup sign-in failed due to environment restrictions. Falling back to redirect flow.', error);
+      try {
+        await auth.signInWithRedirect(provider);
+        return;
+      } catch (redirectError) {
+        console.error('Redirect sign-in failed:', redirectError);
+        error = redirectError;
+      }
+    }
+
+    if (!document.hidden) {
+      console.error('Google sign-in failed:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
+
+      let errorMessage = 'Failed to sign in with Google. ';
+      switch (error && error.code) {
+        case 'auth/popup-closed-by-user':
+          errorMessage += 'Sign-in was cancelled.';
+          break;
+        case 'auth/popup-blocked':
+          errorMessage += 'Pop-up was blocked by browser. Please allow pop-ups for this site.';
+          break;
+        case 'auth/unauthorized-domain':
+          errorMessage += 'This domain is not authorized. Please check Firebase Console settings.';
+          break;
+        case 'auth/operation-not-allowed':
+          errorMessage += 'Google sign-in is not enabled. Please enable it in Firebase Console.';
+          break;
+        default:
+          errorMessage += 'Please try again.';
+      }
+      alert(errorMessage);
+    }
+  }
+};
+googleSignoutBtn.onclick = function() {
+  if (!auth) {
+    currentUser = null;
+    updateUserInfoUI();
+    return;
+  }
+  auth.signOut().then(() => {
+    currentUser = null;
+    updateUserInfoUI();
+  }).catch(error => {
+    console.error('Error signing out:', error);
+  });
+};
+
+// Main menu sign-in button
 const mainSigninBtn = document.getElementById('main-signin-btn');
 if (mainSigninBtn) {
-  mainSigninBtn.onclick = function() {
-    if (window.AuthManager && typeof window.AuthManager.signIn === 'function') {
-      window.AuthManager.signIn().catch((error) => {
-        console.error('Sign-in failed:', error);
-        // Display user-friendly error message
-        if (error.code === 'auth/popup-blocked') {
-          alert('Popup was blocked! Please allow popups for this site and try again.');
-        } else if (error.code === 'auth/unauthorized-domain') {
-          alert('This domain is not authorized for sign-in. Please check your Firebase configuration.');
-        } else {
-          alert('Sign-in failed. Please try again.\n\nError: ' + error.message);
+  mainSigninBtn.onclick = async function() {
+    if (!auth) {
+      alert('Firebase authentication is not available right now. Please try again later.');
+      return;
+    }
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+      const result = await auth.signInWithPopup(provider);
+      if (result && result.user) {
+        console.log('Google sign-in successful:', result.user.displayName);
+        currentUser = result.user;
+        updateUserInfoUI();
+      }
+    } catch (error) {
+      if (error && (error.code === 'auth/internal-error' || error.code === 'auth/network-request-failed')) {
+        console.warn('Popup sign-in failed, falling back to redirect flow.', error);
+        try {
+          await auth.signInWithRedirect(provider);
+          return;
+        } catch (redirectError) {
+          console.error('Redirect sign-in failed:', redirectError);
+          alert('Failed to sign in with Google. Please try again.');
+          return;
         }
-      });
-    } else {
-      console.error('AuthManager not available');
-      alert('Authentication service not available. Please refresh the page and try again.');
+      }
+      console.error('Google sign-in failed:', error);
+      alert('Failed to sign in with Google. Please try again.');
     }
   };
+
+  // Add hover effects
   mainSigninBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';
     this.style.boxShadow = '0 6px 20px rgba(66,133,244,0.4)';
   });
+
   mainSigninBtn.addEventListener('mouseleave', function() {
     this.style.transform = 'translateY(0) scale(1)';
     this.style.boxShadow = '0 4px 15px rgba(66,133,244,0.3)';
   });
 }
 
+// Main menu sign-out button
 const mainSignoutBtn = document.getElementById('main-signout-btn');
 if (mainSignoutBtn) {
   mainSignoutBtn.onclick = function() {
-    if (window.AuthManager && typeof window.AuthManager.signOut === 'function') {
-      window.AuthManager.signOut();
+    if (!auth) {
+      currentUser = null;
+      updateUserInfoUI();
+      return;
     }
+    auth.signOut().then(() => {
+      currentUser = null;
+      updateUserInfoUI();
+    }).catch(error => {
+      console.error('Error signing out:', error);
+    });
   };
+
+  // Add hover effects
   mainSignoutBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';
     this.style.boxShadow = '0 6px 20px rgba(102,102,102,0.4)';
   });
+
   mainSignoutBtn.addEventListener('mouseleave', function() {
     this.style.transform = 'translateY(0) scale(1)';
     this.style.boxShadow = '0 4px 15px rgba(102,102,102,0.3)';
   });
 }
 
+// View leaderboard button
 const viewLeaderboardBtn = document.getElementById('view-leaderboard-btn');
 if (viewLeaderboardBtn) {
   viewLeaderboardBtn.onclick = function() {
     showLeaderboardModal();
+    fetchAndDisplayLeaderboard();
   };
+  
+  // Add hover effects
   viewLeaderboardBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';
     this.style.boxShadow = '0 6px 20px rgba(56,142,60,0.4)';
   });
+  
   viewLeaderboardBtn.addEventListener('mouseleave', function() {
     this.style.transform = 'translateY(0) scale(1)';
     this.style.boxShadow = '0 4px 15px rgba(56,142,60,0.3)';
   });
+}
+// Auth state listener is now handled in setupAuthListener() function called from DOMContentLoaded
+
+// --- Firestore Leaderboard Integration ---
+// Note: db is already initialized in the main Firebase configuration above
+
+// Helper: format time (seconds) as mm:ss
+function formatLeaderboardTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+// Helper function to format Firebase timestamps
+function formatFirebaseDate(timestamp) {
+  if (!timestamp) return 'Recent';
+  
+  try {
+    let jsDate;
+    
+    if (timestamp.toDate && typeof timestamp.toDate === 'function') {
+      // Firebase Timestamp object (v8)
+      jsDate = timestamp.toDate();
+    } else if (timestamp.seconds !== undefined) {
+      // Firebase Timestamp object (v9) - convert seconds to milliseconds
+      jsDate = new Date(timestamp.seconds * 1000);
+    } else if (timestamp instanceof Date) {
+      // Regular Date object
+      jsDate = timestamp;
+    } else if (typeof timestamp === 'string') {
+      // String date
+      jsDate = new Date(timestamp);
+      if (isNaN(jsDate.getTime())) return 'Recent';
+    } else if (typeof timestamp === 'number') {
+      // Timestamp number (milliseconds)
+      jsDate = new Date(timestamp);
+    } else {
+      return 'Recent';
+    }
+    
+    // Check if date is valid
+    if (isNaN(jsDate.getTime())) return 'Recent';
+    
+    // Format the date
+    const now = new Date();
+    const diffInHours = (now - jsDate) / (1000 * 60 * 60);
+    
+    if (diffInHours < 1) {
+      return 'Just now';
+    } else if (diffInHours < 24) {
+      const hours = Math.floor(diffInHours);
+      return `${hours}h ago`;
+    } else if (diffInHours < 168) { // 7 days
+      const days = Math.floor(diffInHours / 24);
+      return `${days}d ago`;
+    } else {
+      return jsDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return 'Recent';
+  }
+}
+
+// Submit score to leaderboard
+function submitToLeaderboard(score, time) {
+  // Check if user is authenticated
+  if (!currentUser) {
+    console.log('⚠️ No user signed in - skipping leaderboard submission');
+    return;
+  }
+  
+  if (optoutCheckbox && optoutCheckbox.checked) {
+    console.log('⚠️ User opted out of leaderboard - skipping submission');
+    return;
+  }
+  
+  // Ensure score and time are valid numbers
+  const finalScore = parseInt(score, 10) || 0;
+  const finalTime = parseInt(time, 10) || 0;
+  
+  console.log('Submitting score to leaderboard:', { 
+    originalScore: score, 
+    originalTime: time,
+    finalScore: finalScore, 
+    finalTime: finalTime, 
+    user: currentUser.displayName,
+    uid: currentUser.uid,
+    currentPlayerScore: playerScore,
+    timeAttackBlueTeamFinalScore: timeAttackBlueTeamFinalScore
+  });
+  
+  // Validate user data
+  if (!currentUser.uid) {
+    console.error('❌ User UID is missing');
+    return;
+  }
+  
+  const entry = {
+    uid: currentUser.uid,
+    displayName: currentUser.displayName || 'Anonymous',
+    photoURL: currentUser.photoURL || 'https://via.placeholder.com/24x24',
+    score: finalScore,
+    time: finalTime,
+    date: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  
+  // Validate entry data
+  if (!entry.uid || typeof entry.score !== 'number' || typeof entry.time !== 'number') {
+    console.error('❌ Invalid entry data:', entry);
+    return;
+  }
+  
+  console.log('📝 Submitting entry to Firestore:', entry);
+  
+  // Submit to leaderboard with enhanced error handling
+  db.collection('leaderboard').doc(currentUser.uid).set(entry)
+    .then(() => {
+      console.log('✅ Score submitted successfully:', finalScore);
+    })
+    .catch(error => {
+      console.error('❌ Error submitting score:', error);
+      
+      // Handle specific error cases
+      if (error.code === 'permission-denied') {
+        console.error('🔒 Permission denied - check Firestore security rules');
+        showFirebaseErrorMessage('Permission denied. Please check if you are signed in correctly.', false);
+      } else if (error.code === 'unauthenticated') {
+        console.error('🔐 User not authenticated');
+        showFirebaseErrorMessage('Please sign in to save your score.', false);
+      } else if (error.code === 'invalid-argument') {
+        console.error('📝 Invalid data format');
+        showFirebaseErrorMessage('Invalid score data. Please try again.', true);
+      } else {
+        console.error('🌐 Network or server error:', error.message);
+        showFirebaseErrorMessage('Failed to save score. Please check your connection and try again.', true);
+      }
+    });
+}
+
+// Fetch and display Top 100 leaderboard
+
+
+// Show leaderboard after game end
+function showLeaderboardAfterGame(score, time) {
+  console.log('showLeaderboardAfterGame called with:', { score, time, currentUser: currentUser ? currentUser.displayName : 'none' });
+  console.log('Current game state:', { 
+    isTimeAttackMode, 
+    gameMode, 
+    playerScore, 
+    timeAttackBlueTeamFinalScore,
+    teamBlueScore,
+    teamBlackScore 
+  });
+  
+  // Optionally, prompt for sign-in if not signed in
+  if (!currentUser) {
+    console.log('No user signed in, showing leaderboard modal');
+    showLeaderboardModal();
+    return;
+  }
+  
+  // Ensure score and time are valid
+  const finalScore = parseInt(score, 10) || 0;
+  const finalTime = parseInt(time, 10) || 0;
+  
+  console.log('Submitting to leaderboard:', { finalScore, finalTime });
+  
+  // Submit score if not opted out
+  submitToLeaderboard(finalScore, finalTime);
+  // Fetch and display leaderboard after a short delay to ensure submission is complete
+  setTimeout(() => {
+    fetchAndDisplayLeaderboard();
+    showLeaderboardModal();
+  }, 1000);
 }
 
 /**
@@ -4675,50 +4409,6 @@ function comprehensiveFirebaseCheck() {
     console.log('5. Check browser console for any JavaScript errors');
 }
 
-// Wait for Firestore to be ready with proper connection
-function waitForFirestoreReady(maxAttempts = 10, delayMs = 300) {
-  return new Promise((resolve, reject) => {
-    let attempts = 0;
-
-    function attemptConnection() {
-      attempts++;
-      console.log(`🔄 Attempting Firestore connection (${attempts}/${maxAttempts})...`);
-
-      if (!db) {
-        if (attempts < maxAttempts) {
-          setTimeout(attemptConnection, delayMs);
-        } else {
-          reject(new Error('Firestore not initialized after maximum attempts'));
-        }
-        return;
-      }
-
-      // Try a simple read to verify connection
-      db.collection('leaderboard').limit(1).get()
-        .then(() => {
-          console.log(`✅ Firestore connected successfully on attempt ${attempts}`);
-          resolve();
-        })
-        .catch((error) => {
-          if (error.code === 'permission-denied') {
-            // Permission denied means we're connected, just no access to this specific query
-            // This is actually fine - the connection works
-            console.log(`✅ Firestore connected (permission check on attempt ${attempts})`);
-            resolve();
-          } else if (attempts < maxAttempts) {
-            console.log(`⚠️ Connection attempt ${attempts} failed, retrying...`);
-            setTimeout(attemptConnection, delayMs);
-          } else {
-            console.error('❌ Firestore connection failed after maximum attempts');
-            reject(error);
-          }
-        });
-    }
-
-    attemptConnection();
-  });
-}
-
 // Test Firebase connection (for debugging)
 function testFirebaseConnection() {
   console.log('🔍 Testing Firebase connection...');
@@ -4735,6 +4425,7 @@ function testFirebaseConnection() {
     apiKey: firebaseConfig.apiKey ? '***' + firebaseConfig.apiKey.slice(-4) : 'MISSING'
   });
 
+  // Test Firestore connection
   if (window.location.protocol === 'file:') {
     console.log('⚠️ Running locally - Firebase features will be limited');
     return;
@@ -4745,21 +4436,22 @@ function testFirebaseConnection() {
     return;
   }
 
-  // Try to access leaderboard collection (only if connection is ready)
+  // Try to access leaderboard collection instead of test
   db.collection('leaderboard').limit(1).get()
     .then((snapshot) => {
       console.log('✅ Firestore connection successful!');
       console.log(`📊 Leaderboard has ${snapshot.size} entries`);
     })
     .catch(error => {
-      // Don't show error to user during initial connection test
-      // Only log it for debugging (reduced verbosity since waitForFirestoreReady handles this)
-      if (error.code === 'permission-denied') {
-        console.log('ℹ️ Firestore connection confirmed (permission check passed)');
-      } else if (error.code !== 'unavailable') {
-        // Only log if it's not a temporary unavailable error
-        console.warn('⚠️ Firestore test query failed:', error.code);
-      }
+      console.error('❌ Firestore connection failed:', error);
+      console.error('Error details:', {
+        code: error.code,
+        message: error.message,
+        name: error.name
+      });
+
+      // Don't show error to user, just log it
+      console.log('💡 This might be normal if the database is empty or rules are still propagating');
     });
 
   // Test Auth connection
@@ -5036,43 +4728,6 @@ function showModeSelection() {
         buttons.style.display = 'flex';
     }
     
-    // Ensure a View Tutorial button exists and is wired
-    let viewTutorialBtn = document.getElementById('view-tutorial-btn');
-    if (!viewTutorialBtn) {
-        viewTutorialBtn = document.createElement('button');
-        viewTutorialBtn.id = 'view-tutorial-btn';
-        viewTutorialBtn.className = 'comic-button';
-        viewTutorialBtn.textContent = 'View Tutorial';
-        buttons.appendChild(viewTutorialBtn);
-    }
-    viewTutorialBtn.onclick = () => {
-        // Show tutorial without marking as viewed or starting the game automatically
-        const levelNumber = currentGameLevel || 1;
-        window.showTutorial(levelNumber, gameMode, () => {
-            // After closing tutorial in view-only mode, just return to mode selection
-        }, { viewOnly: true });
-    };
-
-    // Ensure a View Video button exists and is wired
-    let viewVideoBtn = document.getElementById('view-video-btn');
-    if (!viewVideoBtn) {
-        viewVideoBtn = document.createElement('button');
-        viewVideoBtn.id = 'view-video-btn';
-        viewVideoBtn.className = 'comic-button';
-        viewVideoBtn.textContent = 'View Video';
-        buttons.appendChild(viewVideoBtn);
-    }
-    viewVideoBtn.onclick = () => {
-        const levelNumber = currentGameLevel || 1;
-        window.showLevelVideo(levelNumber, {
-            afterVideo: () => {
-                // Return to mode selection after viewing
-                showModeSelection();
-            },
-            viewOnly: true
-        });
-    };
-    
     // Update the intro text to show selected level
     const introText = container.querySelector('.intro-text');
     if (introText) {
@@ -5153,33 +4808,189 @@ function resetToLevelSelection() {
 
 // --- NEW LEADERBOARD LOGIC ---
 
-// Delegate leaderboard update to the new service
+// This function updates a player's cumulative score on the leaderboard.
+// It's called only when a player successfully completes a level.
 async function updateLeaderboardScore(level, score) {
-    if (typeof window.LeaderboardService !== 'undefined' && typeof window.LeaderboardService.submitLevelScore === 'function') {
-        await window.LeaderboardService.submitLevelScore(level, score);
+    if (!currentUser || getOptOutStatus()) {
+        console.log("User not signed in or has opted out of leaderboard. Skipping score update.");
+        return;
+    }
+
+    if (!db) {
+        console.error("Firestore not initialized");
+        return;
+    }
+
+    const leaderboardRef = db.collection('leaderboard').doc(currentUser.uid);
+
+    try {
+        await db.runTransaction(async (transaction) => {
+            const userDoc = await transaction.get(leaderboardRef);
+
+            if (!userDoc.exists) {
+                // First time this user is being added to the leaderboard
+                transaction.set(leaderboardRef, {
+                    name: currentUser.displayName,
+                    photoURL: currentUser.photoURL,
+                    levelScores: { [level]: score },
+                    totalCumulativeScore: score,
+                    lastCompletedLevel: level,
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            } else {
+                // User already exists, update their record
+                const data = userDoc.data();
+                const newLevelScores = data.levelScores || {};
+                newLevelScores[level] = Math.max(score, newLevelScores[level] || 0); // Keep the highest score for the level
+
+                // Recalculate total score
+                const totalCumulativeScore = Object.values(newLevelScores).reduce((sum, current) => sum + current, 0);
+
+                transaction.update(leaderboardRef, {
+                    name: currentUser.displayName, // Update name in case it changed
+                    photoURL: currentUser.photoURL,
+                    levelScores: newLevelScores,
+                    totalCumulativeScore: totalCumulativeScore,
+                    lastCompletedLevel: Math.max(level, data.lastCompletedLevel || 0),
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            }
+        });
+        console.log("Leaderboard score updated successfully.");
+    } catch (error) {
+        console.error("Error updating leaderboard score:", error);
     }
 }
 
 // Fetches and displays the new leaderboard data
 function fetchAndDisplayLeaderboard() {
-    if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
-        window.LeaderboardService.refresh();
+    if (!db) {
+        console.error('Firestore not initialized');
+        return;
     }
+
+    const leaderboardBody = document.querySelector('#leaderboard-table tbody');
+    if (!leaderboardBody) {
+        console.error('Leaderboard table body not found!');
+        return;
+    }
+
+    if (!auth || !currentUser) {
+        leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ffcc00;">Sign in with Google to view the global leaderboard.</td></tr>';
+        return;
+    }
+
+    leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">Loading...</td></tr>';
+
+    db.collection('leaderboard')
+        .orderBy('totalCumulativeScore', 'desc')
+        .limit(100)
+        .get()
+        .then(querySnapshot => {
+            leaderboardBody.innerHTML = '';
+
+            if (querySnapshot.empty) {
+                leaderboardBody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;font-style:italic;color:#ccc;">The leaderboard is empty. Be the first!</td></tr>';
+                return;
+            }
+
+            querySnapshot.forEach((doc, index) => {
+                const data = doc.data();
+                const rank = index + 1;
+                const name = data.name || 'Anonymous';
+                const score = data.totalCumulativeScore || 0;
+                const level = data.lastCompletedLevel || 1;
+                const lastUpdated = data.lastUpdated && data.lastUpdated.seconds ? new Date(data.lastUpdated.seconds * 1000) : null;
+                const date = lastUpdated ? lastUpdated.toLocaleDateString() : 'N/A';
+
+                const row = `
+                    <tr style="background:${currentUser && currentUser.uid === doc.id ? 'rgba(139,0,0,0.25)' : 'transparent'};">
+                        <td style="padding:0.8rem;text-align:center;">${rank}</td>
+                        <td style="padding:0.8rem;text-align:left;display:flex;align-items:center;gap:0.8rem;">
+                            <img src="${data.photoURL || 'icon-192.png'}" style="width:32px;height:32px;border-radius:50%;">
+                            <span>${name}</span>
+                        </td>
+                        <td style="padding:0.8rem;text-align:center;">${score}</td>
+                        <td style="padding:0.8rem;text-align:center;">${level}</td>
+                        <td style="padding:0.8rem;text-align:center;">${date}</td>
+                    </tr>
+                `;
+                leaderboardBody.insertAdjacentHTML('beforeend', row);
+            });
+        })
+        .catch(error => {
+            console.error('Error in fetchAndDisplayLeaderboard:', error);
+
+            let errorMessage = 'Could not load leaderboard.';
+            if (error.code === 'permission-denied') {
+                errorMessage = 'Sign in and double-check your Firestore security rules allow read access for authenticated users.';
+            } else if (error.code === 'failed-precondition') {
+                errorMessage = 'Leaderboard index is still building. Please wait a moment and refresh.';
+            }
+
+            leaderboardBody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:#ff6b6b;">${errorMessage}</td></tr>`;
+        });
 }
 
-// Removed local rendering helpers; handled by LeaderboardService
 
-// Removed error handler; service will report
-
-
-
-// Removed deprecated local submission
+// --- OLD LEADERBOARD FUNCTIONS (to be deprecated/removed) ---
+/*
+function submitToLeaderboard(score, time) {
+    if (currentUser && !getOptOutStatus()) {
+        const db = firebase.firestore();
+        const scoreData = {
+            name: currentUser.displayName,
+            photoURL: currentUser.photoURL,
+            score: score,
+            time: time,
+            date: firebase.firestore.FieldValue.serverTimestamp(),
+            userId: currentUser.uid,
+            questionCount: gameQuestionCount
+        };
+        db.collection('leaderboard').add(scoreData)
+            .then(() => console.log('Score submitted successfully!'))
+            .catch(error => console.error('Error submitting score: ', error));
+    }
+}
+*/
 
 // This function is no longer needed to submit the score, just to show the modal
+function showLeaderboardAfterGame() {
+  console.log('showLeaderboardAfterGame called');
+  fetchAndDisplayLeaderboard(); // Refresh the data
+  // The rest of the logic to show the modal is handled by event listeners
+}
+
 // --- END LEADERBOARD LOGIC ---
 
 // --- AUTHENTICATION SETUP ---
-// Removed legacy auth listener; handled by AuthManager
+function setupAuthListener() {
+    if (auth) {
+        auth.onAuthStateChanged(user => {
+            currentUser = user;
+            updateUserInfoUI();
+        });
+    }
+}
+
+function completePendingRedirectSignIn() {
+    if (!auth || typeof auth.getRedirectResult !== 'function') {
+        return;
+    }
+    auth.getRedirectResult()
+        .then((result) => {
+            if (result && result.user) {
+                console.log('Google redirect sign-in successful:', result.user.displayName);
+                currentUser = result.user;
+                updateUserInfoUI();
+            }
+        })
+        .catch((error) => {
+            if (error && error.code && error.code !== 'auth/no-auth-event') {
+                console.error('Google redirect sign-in failed:', error);
+            }
+        });
+}
 
 // ... existing code ...
 function showEndScreen(stats) {

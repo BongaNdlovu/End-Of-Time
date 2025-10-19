@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+/**
+ * SDA Trivia Challenge - Main HTML
+ * ================================
+ *
+ * This file contains the HTML structure for the SDA Trivia Challenge game.
+ * It defines the user interface components, game screens, and includes
+ * necessary scripts and stylesheets.
+ *
+ * STRUCTURE:
+ * ---------
+ * - Header with meta tags, title, and external resources
+ * - Main container with game title and mode selection
+ * - Game screen with question display, options, and game tools
+ * - Game over screen with results and play again options
+ * - Audio elements for sound effects and background music
+ *
+ * FEATURES:
+ * --------
+ * - Responsive design for various screen sizes
+ * - Multiple game modes (Solo Player and Two Teams)
+ * - Power-ups and game tools (Hint, Take Away Two, Double Points, etc.)
+ * - Score tracking and achievement system
+ * - Audio feedback for game events
+ * - Confetti animation for celebrations
+ *
+ * DEPENDENCIES:
+ * -----------
+ * - questions.js: Contains the trivia question database
+ * - script.js: Main game logic and functionality
+ * - styles.css: Styling for the game interface
+ * - confetti-js: External library for confetti animations
+ * - Google Fonts: Bangers and Inter fonts
+ *
+ * FUTURE IMPROVEMENTS:
+ * ------------------
+ * 1. Add proper semantic HTML5 elements (header, main, footer, etc.)
+ * 2. Improve accessibility with ARIA attributes and keyboard navigation
+ * 3. Implement proper form validation for inputs
+ * 4. Add loading indicators for assets and game initialization
+ * 5. Implement local storage for saving game progress and settings
+ * 6. Add more interactive elements like tooltips for game features
+ * 7. Optimize audio loading with async loading patterns
+ * 8. Add support for internationalization (i18n)
+ * 9. Implement PWA features for offline play
+ * 10. Add more detailed documentation for custom data attributes
+ */
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>End of Time</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dark-theme.css">
+    <!-- App Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="shortcut icon" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <!-- Remove Google Fonts, we will use local Montserrat fonts -->
+    <script src="questions.js" defer></script>
+    <script src="questions-level1.js" defer></script>
+    <script src="questions-level2.js" defer></script>
+    <script src="questions-level3.js" defer></script>
+    <script src="questions-level4.js" defer></script>
+    <script src="questions-level5.js" defer></script>
+    <script src="questions-level6.js" defer></script>
+    <script src="questions-level7.js" defer></script>
+    
+    <!-- Firebase Config MUST be loaded before script.js -->
+    <script src="firebase-config.js" defer></script>
+
+    <script src="script.js?v=8" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js/dist/index.min.js"></script>
+    <!-- Manifest only loaded when not running locally -->
+    <script>
+        if (window.location.protocol !== 'file:') {
+            const link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = 'manifest.json';
+            document.head.appendChild(link);
+        }
+    </script>
+</head>
+<body>

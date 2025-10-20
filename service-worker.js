@@ -201,7 +201,17 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (request.headers.has('range')) {
-    event.respondWith(fetch(request));
+    event.respondWith(
+      fetch(request).catch(async () => {
+        const cache = await caches.open(CACHE_NAME);
+        const cached = await cache.match(request);
+        if (cached) return cached;
+        const pathname = new URL(request.url).pathname;
+        const ext = (pathname.split('.').pop() || '').toLowerCase();
+        const types = { wav: 'audio/wav', mp3: 'audio/mpeg', m4a: 'audio/mp4', mp4: 'video/mp4', webm: 'video/webm', ogg: 'application/octet-stream' };
+        return new Response('', { status: 404, statusText: 'Not Found', headers: types[ext] ? { 'Content-Type': types[ext] } : {} });
+      })
+    );
     return;
   }
 

@@ -1571,7 +1571,7 @@ function preloadAudioAssets(onProgress, onComplete) {
 
 // --- Video Preload Logic ---
 const allBackgroundVideos = [
-    'background.mp4',
+    'Background.mp4',
     'background 1.mp4',
     'background 2.mp4'
 ];
@@ -1753,13 +1753,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Level Video Logic ---
     // Allow override via global map if present
     const defaultLevelVideoMap = {
-        1: 'video1.mp4',
-        2: 'video2.mp4',
-        3: 'video3.mp4',
-        4: 'video4.mp4',
-        5: 'video5.mp4',
-        6: 'video6.mp4',
-        7: 'video7.mp4'
+        1: 'video 1.mp4',
+        2: 'video 2.mp4',
+        3: 'video 3.mp4',
+        4: 'video 4.mp4',
+        5: 'video 5.mp4',
+        6: 'video 6.mp4',
+        7: 'video 7.mp4'
     };
     const levelVideoMap = (window && window.LEVEL_VIDEO_MAP) ? window.LEVEL_VIDEO_MAP : defaultLevelVideoMap;
 

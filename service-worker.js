@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'sda-trivia-v10';
+﻿const CACHE_NAME = 'sda-trivia-v11';
 
 const CORE_ASSETS = [
   '/',
@@ -26,21 +26,33 @@ const CORE_ASSETS = [
 ];
 
 const MEDIA_ASSETS = [
-  '/background.mp4',
-  '/background 1.mp4',
+  // Background videos (exact casing)
+  '/Background.mp4',
+  '/Background 1.mp4',
   '/background 2.mp4',
+  '/background 3.mp4',
+  '/background 5.mp4',
+  '/background 6.mp4',
+  '/background 7.mp4',
+  // Level videos (exact casing)
+  '/video 1.mp4',
+  '/video 2.mp4',
+  '/video 3.mp4',
+  '/video 4.mp4',
+  '/video 5.mp4',
+  '/video 6.mp4',
+  '/video 7.mp4',
+  // UI/FX audio
   '/Transition.wav',
   '/Transition 2.wav',
-  '/soundtrack 2.mp3',
-  '/soundtrack 3.mp3',
-  '/soundtrack 4.mp3',
-  '/soundtrack 5.mp3',
   '/correct_answer_1.wav',
   '/correct_answer_2.wav',
   '/WRONG BUZZER 7.wav',
   '/Motionarray_Floraphonic_Gameshow_Buzzer_1.wav',
   '/Semi Impact Risers-001.wav',
   '/ticking_time.wav',
+  '/Key Facts.wav',
+  // Gameplay SFX pools
   '/Correct 1.wav',
   '/Correct 2.wav',
   '/Correct 3.wav',
@@ -60,7 +72,15 @@ const MEDIA_ASSETS = [
   '/Incorrect 7.wav',
   '/Incorrect 8.wav',
   '/Incorrect 9.wav',
-  '/Incorrect 10.wav'
+  '/Incorrect 10.wav',
+  // Background music tracks
+  '/soundtrack 2.mp3',
+  '/soundtrack 3.mp3',
+  '/soundtrack 4.mp3',
+  '/soundtrack 5.mp3',
+  '/soundtrack 6.mp3',
+  '/soundtrack 7.mp3',
+  '/soundtrack 8.mp3'
 ];
 
 const TRANSITION_SVGS = [
@@ -204,18 +224,24 @@ self.addEventListener('fetch', (event) => {
       }
       return response;
     } catch (error) {
-      // For audio files, return a silent failure instead of throwing
       const url = new URL(request.url);
-      const isAudioFile = /\.(wav|mp3|ogg|m4a)$/i.test(url.pathname);
+      const pathname = url.pathname;
+      const isAudioFile = /\.(wav|mp3|ogg|m4a)$/i.test(pathname);
+      const isVideoFile = /\.(mp4|webm|ogg)$/i.test(pathname);
 
-      if (isAudioFile) {
-        console.warn('[SW] Audio file failed to load (non-critical):', url.pathname);
-        // Return empty 404 response for audio files
-        return new Response(null, {
-          status: 404,
-          statusText: 'Audio file not found',
-          headers: { 'Content-Type': 'audio/wav' }
-        });
+      if (isAudioFile || isVideoFile) {
+        console.warn('[SW] Media file failed to load (non-critical):', pathname);
+        const ext = (pathname.split('.').pop() || '').toLowerCase();
+        const typeByExt = {
+          wav: 'audio/wav',
+          mp3: 'audio/mpeg',
+          ogg: isAudioFile ? 'audio/ogg' : 'video/ogg',
+          m4a: 'audio/mp4',
+          mp4: 'video/mp4',
+          webm: 'video/webm'
+        };
+        const headers = typeByExt[ext] ? { 'Content-Type': typeByExt[ext] } : {};
+        return new Response('', { status: 404, statusText: 'Not Found', headers });
       }
 
       console.warn('[SW] Fetch failed, attempting fallback.', error);
@@ -224,7 +250,8 @@ self.addEventListener('fetch', (event) => {
       if (fallback) {
         return fallback;
       }
-      throw error;
+      // Return a generic 404 response instead of throwing
+      return new Response('Not Found', { status: 404, statusText: 'Not Found' });
     }
   })());
 });

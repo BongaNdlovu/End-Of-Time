@@ -11,7 +11,19 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "site": "end-of-time-94cd3"
+    "site": "end-of-time-94cd3",
+    "redirects": [
+      {
+        "source": "/presentations.html",
+        "destination": "/academy/index2.html",
+        "type": 301
+      },
+      {
+        "source": "/presentations",
+        "destination": "/academy/index2.html",
+        "type": 301
+      }
+    ]
   },
   "firestore": {
     "database": "(default)",

@@ -64,6 +64,8 @@ function loadProgress() {
 
   presentations.forEach(card => {
     const presentationId = card.dataset.presentation;
+    if (!presentationId) return;
+    
     const storageKey = `genesis-presentation-${presentationId}-progress`;
     const progress = localStorage.getItem(storageKey) || '0';
 

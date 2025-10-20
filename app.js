@@ -775,6 +775,9 @@ function updateTimerDisplay() {
 // ===== LOCAL STORAGE =====
 function saveProgress() {
     try {
+        // Save presentation-specific progress
+        const slideProgress = currentSlide >= 0 ? Math.round((currentSlide / total_slides) * 100) : 0;
+        localStorage.setItem('genesis-presentation-1-progress', slideProgress.toString());
         localStorage.setItem('academy-last-slide', currentSlide);
         localStorage.setItem('academy-timer-start', timerStartTime);
     } catch (e) {

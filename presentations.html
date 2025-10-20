@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.tailwindcss.com https://fonts.googleapis.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.tailwindcss.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data: https://www.endoftime7.com; img-src 'self' data: blob: https://developers.google.com https://www.endoftime7.com https://lh3.googleusercontent.com; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://identitytoolkit.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://www.gstatic.com https://www.endoftime7.com;">
   <title>Genesis Presentations - End of Time Academy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,7 +80,7 @@
                   <span class="progress-text">0%</span>
                 </div>
               </div>
-              <a href="index1.html" class="presentation-button">
+              <a href="index1.html" class="presentation-button" onclick="window.genesisPresentation?.saveProgress('1', 0)">
                 <span>Start Presentation</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -261,5 +261,33 @@
   </script>
 
   <script src="presentations.js"></script>
+  
+  <script>
+    // Ensure presentation functionality works
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load progress again after JS loads
+      if (window.genesisPresentation && window.genesisPresentation.loadProgress) {
+        window.genesisPresentation.loadProgress();
+      }
+      
+      // Add smooth transitions for all presentation buttons
+      const presentationButtons = document.querySelectorAll('.presentation-button:not(.disabled)');
+      presentationButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetUrl = this.getAttribute('href');
+          const transitionOverlay = document.getElementById('pageTransition');
+          
+          // Show transition overlay
+          transitionOverlay.classList.add('active');
+          
+          // Navigate after transition
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 300);
+        });
+      });
+    });
+  </script>
 </body>
 </html>

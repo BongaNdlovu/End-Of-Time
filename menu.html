@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://www.gstatic.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' blob: https://www.gstatic.com; style-src 'self' 'unsafe-inline'; font-src 'self' data: https://www.endoftime7.com; img-src 'self' data: blob: https://developers.google.com https://www.endoftime7.com https://lh3.googleusercontent.com; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://identitytoolkit.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://www.gstatic.com https://www.endoftime7.com;">
+    <title>End of Time - Hub Menu</title>
+    <link rel="stylesheet" href="menu-styles.css">
+    <link rel="stylesheet" href="menu-dark-theme.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="shortcut icon" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
+
+    <script src="auth-leaderboard.js"></script>
+    <script>
+        // Attach PWA manifest when hosted
+        if (window.location.protocol !== 'file:') {
+            const link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = 'manifest.json';
+            document.head.appendChild(link);
+        }
+    </script>
+</head>
+<body>
+    <!-- Background video with same styling as the game -->
+    <video id="background-video" src="Background.mp4" autoplay loop muted playsinline 
+           style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen;"></video>
+    
+    <div class="menu-container">
+        <!-- Header with logo -->
+        <header class="menu-header">
+            <div class="logo-container">
+                <img src="Fear God.png" alt="Fear God Imprints Logo" class="logo logo-pulse" />
+            </div>
+            <h1 class="game-title glitch-effect">END OF TIME</h1>
+            <p class="subtitle">Choose Your Path</p>
+        </header>
+        
+        <!-- Authentication Section -->
+        <div class="auth-section" id="auth-section">
+            <div class="auth-status" id="auth-status">
+                <p id="auth-message">Sign in to save your progress and compete on leaderboards</p>
+                <p id="auth-error" class="auth-error" style="display: none;"></p>
+            </div>
+            <div class="auth-buttons" id="auth-buttons">
+                <button id="google-signin-btn" class="auth-btn signin-btn">
+                    <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-icon">
+                    Sign In with Google
+                </button>
+                <button id="google-signout-btn" class="auth-btn signout-btn" style="display: none;">
+                    Sign Out
+                </button>
+            </div>
+            <div class="user-info" id="user-info" style="display: none;">
+                <img id="user-photo" src="" alt="User" class="user-photo">
+                <span id="user-name"></span>
+            </div>
+        </div>
+
+        <!-- Main menu options -->
+        <main class="main-menu">
+            <div class="menu-options">
+                <div class="menu-item" onclick="enterGame()" tabindex="0">
+                    <div class="menu-icon">⚔️</div>
+                    <h2>Enter the Game</h2>
+                    <p>Test your biblical knowledge and faith</p>
+                    <div class="menu-glow"></div>
+                </div>
+                
+                <div class="menu-item" onclick="openAcademy()" tabindex="0">
+                    <div class="menu-icon">📚</div>
+                    <h2>End of Time Academy</h2>
+                    <p>Study mode - Learn and practice your faith</p>
+                    <div class="menu-glow"></div>
+                </div>
+                
+                <div class="menu-item" onclick="openPrayerNetwork()" tabindex="0">
+                    <div class="menu-icon">✞</div>
+                    <h2>End of Time Prayer Network</h2>
+                    <p>Connect through prayer and community</p>
+                    <div class="menu-glow"></div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="menu-footer">
+            <p>&copy; 2024 End of Time. All rights reserved.</p>
+            <p class="powered-by">Powered by <img src="Fear God.png" alt="Fear God Imprints" class="footer-logo" /></p>
+        </footer>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="audio-hover" src="Transition.wav" preload="auto"></audio>
+    <audio id="audio-select" src="Transition 2.wav" preload="auto"></audio>
+    <audio id="audio-bg" src="soundtrack 2.mp3" preload="auto" loop></audio>
+
+    <script>
+        // Play background music on first interaction
+        let audioStarted = false;
+        function startAudio() {
+            if (!audioStarted) {
+                const bgAudio = document.getElementById('audio-bg');
+                bgAudio.volume = 0.3;
+                bgAudio.play().catch(e => console.log('Audio play failed:', e));
+                audioStarted = true;
+            }
+        }
+
+        function playHoverSound() {
+            startAudio();
+            const hoverAudio = document.getElementById('audio-hover');
+            hoverAudio.volume = 0.5;
+            hoverAudio.currentTime = 0;
+            hoverAudio.play().catch(e => console.log('Hover sound failed:', e));
+        }
+
+        function playSelectSound() {
+            const selectAudio = document.getElementById('audio-select');
+            selectAudio.volume = 0.7;
+            selectAudio.currentTime = 0;
+            selectAudio.play().catch(e => console.log('Select sound failed:', e));
+        }
+
+        function enterGame() {
+            playSelectSound();
+            // Store auth state in localStorage for the game to use
+            if (currentUser) {
+                localStorage.setItem('endOfTime_user', JSON.stringify({
+                    uid: currentUser.uid,
+                    displayName: currentUser.displayName,
+                    email: currentUser.email,
+                    photoURL: currentUser.photoURL
+                }));
+            } else {
+                localStorage.removeItem('endOfTime_user');
+            }
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 500);
+        }
+        
+        function openAcademy() {
+            playSelectSound();
+            setTimeout(() => {
+                // Open the End of Time Academy page
+                window.location.href = 'End Of Time Academy.html';
+            }, 500);
+        }
+        
+        function openPrayerNetwork() {
+            playSelectSound();
+            setTimeout(() => {
+                // Open the Prayer Network page
+                window.location.href = 'Qwen_html_20250810_ttxf0530d.html';
+            }, 500);
+        }
+        
+        // Add hover effects and sounds
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                playHoverSound();
+                item.classList.add('hovered');
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.classList.remove('hovered');
+            });
+            
+            // Keyboard support
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                }
+            });
+        });
+
+        // Keyboard navigation
+        let selectedIndex = -1;
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (selectedIndex >= 0) {
+                    menuItems[selectedIndex].classList.remove('keyboard-selected');
+                }
+                selectedIndex = (selectedIndex + 1) % menuItems.length;
+                menuItems[selectedIndex].classList.add('keyboard-selected');
+                menuItems[selectedIndex].focus();
+                playHoverSound();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (selectedIndex >= 0) {
+                    menuItems[selectedIndex].classList.remove('keyboard-selected');
+                }
+                selectedIndex = selectedIndex <= 0 ? menuItems.length - 1 : selectedIndex - 1;
+                menuItems[selectedIndex].classList.add('keyboard-selected');
+                menuItems[selectedIndex].focus();
+                playHoverSound();
+            }
+        });
+
+
+
+        const isFileProtocol = window.location.protocol === 'file:';
+
+        let currentUser = null;
+
+        let detachSignInError = null;
+
+
+
+        const authElements = {
+
+            message: document.getElementById('auth-message'),
+
+            error: document.getElementById('auth-error'),
+
+            signin: document.getElementById('google-signin-btn'),
+
+            signout: document.getElementById('google-signout-btn'),
+
+            userInfo: document.getElementById('user-info'),
+
+            photo: document.getElementById('user-photo'),
+
+            name: document.getElementById('user-name')
+
+        };
+
+        const defaultSigninLabel = authElements.signin ? authElements.signin.textContent.trim() : 'Sign In with Google';
+
+
+
+        function showAuthError(message) {
+
+            if (!authElements.error) return;
+
+            authElements.error.textContent = message;
+
+            authElements.error.style.display = 'block';
+
+            authElements.error.setAttribute('role', 'alert');
+
+        }
+
+
+
+        function clearAuthError() {
+
+            if (!authElements.error) return;
+
+            authElements.error.textContent = '';
+
+            authElements.error.style.display = 'none';
+
+            authElements.error.removeAttribute('role');
+
+        }
+
+
+
+        function updateAuthUI(userOverride) {
+
+            if (typeof userOverride !== 'undefined') {
+
+                currentUser = userOverride || null;
+
+            }
+
+
+
+            const { message, signin, signout, userInfo, photo, name } = authElements;
+
+            if (!message || !signin || !signout || !userInfo) return;
+
+
+
+            if (currentUser) {
+
+                message.textContent = `Welcome back, ${currentUser.displayName || currentUser.email || 'Player'}!`;
+
+                signin.style.display = 'none';
+
+                signin.disabled = false;
+
+                signin.textContent = defaultSigninLabel;
+
+                signout.style.display = 'block';
+
+                userInfo.style.display = 'flex';
+
+
+
+                if (photo && currentUser.photoURL) {
+
+                    photo.src = currentUser.photoURL;
+
+                    photo.style.display = 'block';
+
+                } else if (photo) {
+
+                    photo.style.display = 'none';
+
+                }
+
+
+
+                if (name) {
+
+                    name.textContent = currentUser.displayName || currentUser.email || 'Player';
+
+                }
+
+
+
+                clearAuthError();
+
+            } else {
+
+                message.textContent = isFileProtocol
+
+                    ? 'Sign-in is unavailable while running offline.'
+
+                    : 'Sign in to save your progress and compete on leaderboards';
+
+
+
+                signin.style.display = 'block';
+
+                signin.disabled = isFileProtocol;
+
+                signin.textContent = isFileProtocol ? 'Sign-in unavailable offline' : defaultSigninLabel;
+
+
+
+                signout.style.display = 'none';
+
+                userInfo.style.display = 'none';
+
+
+
+                if (photo) {
+
+                    photo.style.display = 'none';
+
+                }
+
+
+
+                if (!isFileProtocol) {
+
+                    clearAuthError();
+
+                }
+
+            }
+
+        }
+
+
+
+        function handleSignInError(detail) {
+
+            const { stage, error } = detail || {};
+
+            const code = error && error.code;
+
+            let message = "We couldn't complete Google sign-in. Check your popup settings and try again.";
+
+
+
+            if (code === 'auth/popup-blocked') {
+
+                message = 'Your browser blocked the Google sign-in window. Enable pop-ups for this site and try again.';
+
+            } else if (code === 'auth/network-request-failed') {
+
+                message = 'Network issue prevented Google sign-in. Please check your connection and try again.';
+
+            } else if (code === 'auth/cancelled-popup-request') {
+
+                message = 'Another sign-in attempt was already in progress. Please try again.';
+
+            }
+
+
+
+            showAuthError(message);
+
+            if (authElements.signin) {
+
+                authElements.signin.disabled = isFileProtocol;
+
+                authElements.signin.textContent = isFileProtocol ? 'Sign-in unavailable offline' : defaultSigninLabel;
+
+            }
+
+            console.warn('[Menu] Google sign-in issue (stage:', stage || 'unknown', 'code:', code || 'n/a', '):', error);
+
+        }
+
+
+
+        async function signInWithGoogle() {
+
+            if (isFileProtocol) {
+
+                alert('Firebase authentication is not available when running locally. Please host the files on a web server.');
+
+                return;
+
+            }
+
+
+
+            if (!window.AuthManager || typeof window.AuthManager.signIn !== 'function') {
+
+                const fallback = 'Authentication is not available right now. Please try again later.';
+
+                showAuthError(fallback);
+
+                alert(fallback);
+
+                return;
+
+            }
+
+
+
+            if (authElements.signin) {
+
+                authElements.signin.disabled = true;
+
+                authElements.signin.textContent = 'Signing in...';
+
+            }
+
+
+
+            clearAuthError();
+
+
+
+            try {
+
+                await window.AuthManager.signIn();
+
+            } catch (err) {
+
+                console.error('Unexpected menu sign-in error:', err);
+
+            } finally {
+
+                if (authElements.signin) {
+
+                    authElements.signin.disabled = isFileProtocol;
+
+                    authElements.signin.textContent = isFileProtocol ? 'Sign-in unavailable offline' : defaultSigninLabel;
+
+                }
+
+            }
+
+        }
+
+
+
+        function signOut() {
+
+            if (!window.AuthManager || typeof window.AuthManager.signOut !== 'function') {
+
+                console.warn('AuthManager.signOut is unavailable.');
+
+                return;
+
+            }
+
+
+
+            window.AuthManager.signOut()
+
+                .then(() => {
+
+                    updateAuthUI(null);
+
+                    playSelectSound();
+
+                })
+
+                .catch(error => {
+
+                    console.error('Sign-out error:', error);
+
+                    showAuthError('Failed to sign out. Please try again.');
+
+                    alert('Failed to sign out. Please try again.');
+
+                });
+
+        }
+
+
+
+        function setupAuth() {
+
+            if (detachSignInError) {
+
+                detachSignInError();
+
+                detachSignInError = null;
+
+            }
+
+
+
+            if (isFileProtocol) {
+
+                updateAuthUI(null);
+
+                showAuthError('Sign-in is unavailable while running offline.');
+
+                return;
+
+            }
+
+
+
+            if (!window.AuthManager) {
+
+                console.error('AuthManager is not available. Ensure auth-leaderboard.js is loaded.');
+
+                showAuthError('Authentication is not available right now. Please try again later.');
+
+                return;
+
+            }
+
+
+
+            try {
+
+                window.AuthManager.init();
+
+            } catch (e) {
+
+                console.error('Failed to initialize AuthManager:', e);
+
+            }
+
+
+
+            window.AuthManager.subscribe(user => {
+
+                updateAuthUI(user);
+
+            });
+
+
+
+            if (typeof window.AuthManager.onSignInError === 'function') {
+
+                detachSignInError = window.AuthManager.onSignInError(handleSignInError);
+
+            }
+
+
+
+            if (typeof window.AuthManager.getUser === 'function') {
+
+                updateAuthUI(window.AuthManager.getUser());
+
+            } else {
+
+                updateAuthUI(null);
+
+            }
+
+        }
+
+
+
+        // Initialize on page load
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            document.addEventListener('click', startAudio, { once: true });
+
+            document.addEventListener('keydown', startAudio, { once: true });
+
+
+
+            if (authElements.signin) {
+
+                authElements.signin.addEventListener('click', signInWithGoogle);
+
+            }
+
+
+
+            if (authElements.signout) {
+
+                authElements.signout.addEventListener('click', signOut);
+
+            }
+
+
+
+            setupAuth();
+
+
+
+            // Register service worker for PWA/offline support
+
+            if ('serviceWorker' in navigator && !isFileProtocol) {
+
+                navigator.serviceWorker.register('service-worker.js').then(() => {
+
+                    console.log('Service worker registered from menu');
+
+                }).catch(err => console.warn('SW registration failed:', err));
+
+            }
+
+        });
+
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'sda-trivia-v9';
+﻿const CACHE_NAME = 'sda-trivia-v10';
 
 const CORE_ASSETS = [
   '/',

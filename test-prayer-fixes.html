@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Network Fixes Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1a1a; color: #fff; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #4CAF50; }
+        .error { background: #f44336; }
+        .info { background: #2196F3; }
+        button { background: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🙏 Prayer Network Fixes Test</h1>
+    <p>This page tests the critical fixes made to the prayer network system.</p>
+    
+    <button onclick="testPrayerNetworkAccess()">Test Prayer Network Access</button>
+    <button onclick="testFirebaseAuth()">Test Firebase Authentication</button>
+    <button onclick="testMobileResponsiveness()">Test Mobile Responsiveness</button>
+    
+    <div id="results"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <!-- Load Firebase config and auth -->
+    <script src="firebase-config.js"></script>
+    <script src="auth-leaderboard.js"></script>
+
+    <script>
+        function log(message, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+            console.log(`[Test] ${message}`);
+        }
+
+        function testPrayerNetworkAccess() {
+            log('🔍 Testing Prayer Network Access...', 'info');
+            
+            // Test if the function exists in menu context
+            fetch('menu.html')
+                .then(response => response.text())
+                .then(html => {
+                    if (html.includes('function openPrayerNetwork()')) {
+                        log('✅ openPrayerNetwork() function exists in menu.html', 'success');
+                        if (html.includes('window.open("Qwen_html_20250810_ttxf0530d.html", "_self")')) {
+                            log('✅ Prayer network correctly opens the prayer page', 'success');
+                        } else {
+                            log('❌ Prayer network function does not open correct page', 'error');
+                        }
+                    } else {
+                        log('❌ openPrayerNetwork() function not found in menu.html', 'error');
+                    }
+                })
+                .catch(error => {
+                    log(`❌ Error loading menu.html: ${error.message}`, 'error');
+                });
+        }
+
+        function testFirebaseAuth() {
+            log('🔍 Testing Firebase Authentication...', 'info');
+            
+            try {
+                // Test Firebase config
+                if (typeof firebaseConfig !== 'undefined') {
+                    log('✅ Firebase configuration loaded', 'success');
+                    
+                    // Test AuthManager
+                    if (typeof window.AuthManager !== 'undefined') {
+                        log('✅ AuthManager loaded successfully', 'success');
+                        
+                        // Try to initialize AuthManager
+                        window.AuthManager.init();
+                        log('✅ AuthManager initialized successfully', 'success');
+                        
+                    } else {
+                        log('❌ AuthManager not loaded', 'error');
+                    }
+                } else {
+                    log('❌ Firebase configuration not loaded', 'error');
+                }
+            } catch (error) {
+                log(`❌ Firebase test failed: ${error.message}`, 'error');
+            }
+        }
+
+        function testMobileResponsiveness() {
+            log('🔍 Testing Mobile Responsiveness...', 'info');
+            
+            // Check if mobile CSS exists
+            fetch('prayer-dark-theme.css')
+                .then(response => response.text())
+                .then(css => {
+                    if (css.includes('@media (max-width: 480px)')) {
+                        log('✅ Mobile responsive styles found', 'success');
+                    } else {
+                        log('❌ Mobile responsive styles not found', 'error');
+                    }
+                    
+                    if (css.includes('.mobile-menu-toggle')) {
+                        log('✅ Mobile menu toggle styles found', 'success');
+                    } else {
+                        log('⚠️ Mobile menu toggle styles not found', 'info');
+                    }
+                })
+                .catch(error => {
+                    log(`❌ Error loading CSS: ${error.message}`, 'error');
+                });
+        }
+
+        // Run initial tests
+        window.addEventListener('load', () => {
+            log('🚀 Prayer Network Fixes Test Page Loaded', 'info');
+            log('📋 Available tests: Prayer Network Access, Firebase Auth, Mobile Responsiveness', 'info');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-In Test - End of Time</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        button {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover {
+            background: #357ae8;
+        }
+        .log {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .success { color: #4caf50; }
+        .error { color: #f44336; }
+        .warning { color: #ff9800; }
+        .info { color: #2196f3; }
+    </style>
+</head>
+<body>
+    <h1>🔐 Google Sign-In Test</h1>
+    <p>This page tests Google authentication in isolation.</p>
+
+    <button id="popup-signin-btn">Sign in with Popup</button>
+    <button id="redirect-signin-btn">Sign in with Redirect</button>
+    <button id="signout-btn" style="display:none; background:#f44336;">Sign Out</button>
+
+    <div id="user-info"></div>
+
+    <h3>Console Log:</h3>
+    <div class="log" id="log"></div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+    <script>
+        const logDiv = document.getElementById('log');
+        const userInfoDiv = document.getElementById('user-info');
+        const popupBtn = document.getElementById('popup-signin-btn');
+        const redirectBtn = document.getElementById('redirect-signin-btn');
+        const signoutBtn = document.getElementById('signout-btn');
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const div = document.createElement('div');
+            div.className = type;
+            div.textContent = `[${timestamp}] ${message}`;
+            logDiv.appendChild(div);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA78bvzjP-b7K9TPCbIL3ttzPJr07VR8kY",
+            authDomain: "end-of-time-94cd3.firebaseapp.com",
+            projectId: "end-of-time-94cd3",
+            storageBucket: "end-of-time-94cd3.firebasestorage.app",
+            messagingSenderId: "628602476853",
+            appId: "1:628602476853:web:181df03c3374465811147c",
+            measurementId: "G-E5R3NG1533"
+        };
+
+        log('🔄 Initializing Firebase...', 'info');
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        log('✅ Firebase initialized', 'success');
+
+        // Auth state observer
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                log(`✅ User signed in: ${user.displayName} (${user.email})`, 'success');
+                userInfoDiv.innerHTML = `
+                    <div style="background:#2a2a2a; padding:15px; border-radius:5px; margin-top:20px;">
+                        <img src="${user.photoURL}" style="width:64px; height:64px; border-radius:50%; vertical-align:middle; margin-right:15px;">
+                        <div style="display:inline-block;">
+                            <div style="font-size:20px; font-weight:bold;">${user.displayName}</div>
+                            <div style="color:#aaa;">${user.email}</div>
+                            <div style="color:#4caf50; margin-top:5px;">✅ Signed In</div>
+                        </div>
+                    </div>
+                `;
+                popupBtn.style.display = 'none';
+                redirectBtn.style.display = 'none';
+                signoutBtn.style.display = 'inline-block';
+            } else {
+                log('ℹ️ No user signed in', 'info');
+                userInfoDiv.innerHTML = '<p style="color:#aaa;">Not signed in</p>';
+                popupBtn.style.display = 'inline-block';
+                redirectBtn.style.display = 'inline-block';
+                signoutBtn.style.display = 'none';
+            }
+        });
+
+        // Check for redirect result
+        auth.getRedirectResult()
+            .then(result => {
+                if (result && result.user) {
+                    log(`✅ Redirect sign-in successful: ${result.user.displayName}`, 'success');
+                }
+            })
+            .catch(error => {
+                log(`❌ Redirect result error: ${error.code} - ${error.message}`, 'error');
+            });
+
+        // Popup sign-in
+        popupBtn.onclick = async () => {
+            log('🔐 Starting popup sign-in...', 'info');
+            const provider = new firebase.auth.GoogleAuthProvider();
+            provider.setCustomParameters({ prompt: 'select_account' });
+
+            try {
+                log('📱 Opening popup window...', 'info');
+                const result = await auth.signInWithPopup(provider);
+                log(`✅ Popup sign-in successful: ${result.user.displayName}`, 'success');
+            } catch (error) {
+                log(`❌ Popup sign-in failed: ${error.code}`, 'error');
+                log(`Error message: ${error.message}`, 'error');
+
+                if (error.code === 'auth/popup-blocked') {
+                    log('⚠️ Popup was blocked by browser!', 'warning');
+                    log('💡 Try using "Sign in with Redirect" instead', 'info');
+                }
+            }
+        };
+
+        // Redirect sign-in
+        redirectBtn.onclick = async () => {
+            log('🔐 Starting redirect sign-in...', 'info');
+            const provider = new firebase.auth.GoogleAuthProvider();
+            provider.setCustomParameters({ prompt: 'select_account' });
+
+            try {
+                log('🔄 Redirecting to Google...', 'info');
+                await auth.signInWithRedirect(provider);
+            } catch (error) {
+                log(`❌ Redirect sign-in failed: ${error.code}`, 'error');
+                log(`Error message: ${error.message}`, 'error');
+            }
+        };
+
+        // Sign out
+        signoutBtn.onclick = async () => {
+            try {
+                await auth.signOut();
+                log('✅ Signed out successfully', 'success');
+            } catch (error) {
+                log(`❌ Sign out failed: ${error.message}`, 'error');
+            }
+        };
+
+        // Browser info
+        log(`Browser: ${navigator.userAgent}`, 'info');
+        log(`Protocol: ${window.location.protocol}`, 'info');
+        log(`Host: ${window.location.host}`, 'info');
+    </script>
+</body>
+</html>

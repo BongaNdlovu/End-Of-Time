@@ -1,0 +1,138 @@
+/* Dark Theme - A flatter, darker theme for the trivia game. */
+
+body, html {
+    background: #121212 !important; /* A very dark grey, not pure black */
+}
+
+/* --- Containers --- */
+.container, .game, .game-over {
+    background: rgba(18, 18, 18, 0.85); /* Darker, semi-transparent background */
+    border: 2px solid #6b0000; /* Dark blood red border */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.6); /* Slightly deeper shadow */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.game {
+    width: 90vw;
+    max-width: 1100px; /* Wider layout */
+    margin: 2rem auto; /* Center it */
+    height: auto;      /* Let content define height */
+    max-height: 650px; /* Prevent excessive height */
+    min-height: initial; /* Reset min-height from base styles */
+    padding: 1rem 2rem;
+}
+
+.container:hover, .game:hover, .game-over:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    transform: translateY(-2px);
+}
+
+/* --- Typography --- */
+h1, h2, h3, .glitch-effect, .intro-text, label {
+    text-shadow: none; /* Remove text glow */
+}
+
+/* --- Buttons --- */
+.comic-button, .game-tools button, #next, #exit, #mute-toggle {
+    background: #6b0000; /* Dark blood red background */
+    border: 2px solid #9d0000; /* Lighter red border */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.comic-button:hover, .game-tools button:hover, #next:hover, #exit:hover, #mute-toggle:hover {
+    background: #9d0000;
+    border-color: #ff4d4d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* Remove shiny effects from buttons */
+.comic-button::before, .comic-button::after, #next::before {
+    display: none;
+}
+
+/* --- Options --- */
+.options button {
+    background: rgba(40, 40, 40, 0.8);
+    border: 2px solid #6b0000; /* Dark blood red border */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.options button:hover, .options button:focus {
+    background: #8B0000 !important;
+    color: #ffffff !important;
+    border-color: #ff6b6b !important;
+    box-shadow: 0 0 15px #8B0000;
+}
+
+/* --- Progress Bar --- */
+#progress-bar-container {
+    background: rgba(51, 51, 51, 0.7);
+    box-shadow: none;
+    border: 1px solid #6b0000;
+}
+
+#progress-bar {
+    background: #8B0000 !important; /* Solid color */
+    box-shadow: none;
+}
+
+#progress-bar::after {
+    display: none; /* Remove shine animation */
+}
+
+/* --- Score and Timer --- */
+.score-solo, .score-teams {
+    background: rgba(42, 42, 42, 0.8);
+    border: 1px solid #6b0000;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.timer p {
+    text-shadow: none;
+}
+
+.digital-timer {
+    background: #222;
+    border: 2px solid #6b0000;
+    box-shadow: none;
+}
+
+.digital-timer::before {
+    display: none; /* remove border glow */
+}
+
+.timer-label, .timer-value {
+    text-shadow: none;
+}
+
+/* --- Question Container --- */
+.question {
+    background: rgba(25, 25, 25, 0.9) !important;
+    border: 2px solid #6b0000 !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
+
+/* --- Remove Misc Glows and Shadows --- */
+.logo-pulse {
+    animation: none;
+    filter: none;
+}
+
+.game-logo {
+    filter: none;
+}
+
+#faith-tokens {
+    text-shadow: none;
+}
+
+.options button.highlight-correct {
+    animation: none;
+    box-shadow: 0 0 15px #ffffff;
+}

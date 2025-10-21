@@ -3,9 +3,10 @@
 
 const firebaseConfig = {
   apiKey: "AIzaSyA78bvzjP-b7K9TPCbIL3ttzPJr07VR8kY",
-  authDomain: "end-of-time-94cd3.firebaseapp.com",
+  authDomain: "endoftime7.com",  // Use base domain (covers both with and without www)
+  databaseURL: "https://end-of-time-94cd3-default-rtdb.firebaseio.com",
   projectId: "end-of-time-94cd3",
-  storageBucket: "end-of-time-94cd3.firebasestorage.app",
+  storageBucket: "end-of-time-94cd3.appspot.com",
   messagingSenderId: "628602476853",
   appId: "1:628602476853:web:181df03c3374465811147c",
   measurementId: "G-E5R3NG1533"

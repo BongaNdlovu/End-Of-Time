@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Debug - End of Time Academy</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; padding: 20px; }
+        .debug-section { background: #2a2a2a; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #ff9800; }
+        button { background: #ff9800; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin: 5px; }
+        button:hover { background: #e68900; }
+        pre { background: #000; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+        .warning { color: #ff9800; }
+        .result { margin: 10px 0; padding: 10px; background: #333; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🔥 Firebase Debug Tool</h1>
+    <p>This page will help diagnose Firebase deployment and configuration issues.</p>
+    
+    <div class="debug-section">
+        <h2>🌐 Hosting Configuration</h2>
+        <button onclick="checkFirebaseConfig()">Check Firebase Config</button>
+        <button onclick="testHostingUrls()">Test Hosting URLs</button>
+        <button onclick="checkDeployStatus()">Check Deploy Status</button>
+        <div id="config-results"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>📁 File Structure Analysis</h2>
+        <button onclick="analyzeFileStructure()">Analyze File Structure</button>
+        <button onclick="testFileAccessibility()">Test File Accessibility</button>
+        <div id="file-results"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>🔍 CSP Header Analysis</h2>
+        <button onclick="checkCspHeaders()">Check CSP Headers</button>
+        <button onclick="compareCspSources()">Compare CSP Sources</button>
+        <div id="csp-results"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>📡 Network Configuration</h2>
+        <button onclick="checkNetworkConfig()">Network Analysis</button>
+        <button onclick="testRedirects()">Test Redirects</button>
+        <div id="network-results"></div>
+    </div>
+
+    <script>
+        // Firebase Hosting URLs
+        const firebaseUrls = [
+            'https://end-of-time-94cd3.web.app',
+            'https://end-of-time-94cd3.firebaseapp.com'
+        ];
+
+        const academyUrls = [
+            'https://end-of-time-94cd3.web.app/academy/',
+            'https://end-of-time-94cd3.web.app/academy/index2.html',
+            'https://end-of-time-94cd3.web.app/academy/index1.html',
+            'https://end-of-time-94cd3.web.app/csp-debug.html',
+            'https://end-of-time-94cd3.web.app/network-debug.html',
+            'https://end-of-time-94cd3.web.app/firebase-debug.html'
+        ];
+
+        function logResult(containerId, title, status, message, details = null) {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = 'result';
+            
+            let statusClass = status === 'success' ? 'success' : status === 'error' ? 'error' : 'warning';
+            let statusIcon = status === 'success' ? '✅' : status === 'error' ? '❌' : '⚠️';
+            
+            div.innerHTML = `
+                <h3 class="${statusClass}">${statusIcon} ${title}: ${status.toUpperCase()}</h3>
+                <p>${message}</p>
+                ${details ? `<pre>${JSON.stringify(details, null, 2)}</pre>` : ''}
+            `;
+            
+            container.appendChild(div);
+        }
+
+        async function checkFirebaseConfig() {
+            const configResults = document.getElementById('config-results');
+            configResults.innerHTML = '';
+            
+            for (const url of firebaseUrls) {
+                try {
+                    const response = await fetch(url, { method: 'HEAD' });
+                    
+                    if (response.ok) {
+                        const server = response.headers.get('server');
+                        const cache = response.headers.get('cache-control');
+                        
+                        logResult('config-results', `Firebase Hosting (${url})`, 'success', 
+                            `Firebase hosting is accessible`, {
+                            status: response.status,
+                            server: server,
+                            cacheControl: cache,
+                            headers: Object.fromEntries(response.headers.entries())
+                        });
+                    } else {
+                        logResult('config-results', `Firebase Hosting (${url})`, 'error', 
+                            `Failed to access Firebase hosting`, {
+                            status: response.status,
+                            statusText: response.statusText
+                        });
+                    }
+                } catch (error) {
+                    logResult('config-results', `Firebase Hosting (${url})`, 'error', 
+                        `Network error: ${error.message}`, { error: error.toString() });
+                }
+            }
+        }
+
+        async function testHostingUrls() {
+            const configResults = document.getElementById('config-results');
+            
+            for (const url of academyUrls) {
+                try {
+                    const response = await fetch(url, { method: 'HEAD' });
+                    
+                    if (response.ok) {
+                        logResult('config-results', `URL Test`, 'success', 
+                            `${url} - Accessible`, {
+                            status: response.status,
+                            contentType: response.headers.get('content-type'),
+                            contentLength: response.headers.get('content-length')
+                        });
+                    } else {
+                        logResult('config-results', `URL Test`, 'error', 
+                            `${url} - Not accessible`, {
+                            status: response.status,
+                            statusText: response.statusText
+                        });
+                    }
+                } catch (error) {
+                    logResult('config-results', `URL Test`, 'error', 
+                        `${url} - Network error: ${error.message}`);
+                }
+            }
+        }
+
+        async function checkDeployStatus() {
+            try {
+                // Try to access the Firebase hosting status
+                const response = await fetch('https://end-of-time-94cd3.web.app/firebase-debug.html');
+                
+                if (response.ok) {
+                    logResult('config-results', 'Deploy Status', 'success', 
+                        'Firebase hosting is responding correctly');
+                } else {
+                    logResult('config-results', 'Deploy Status', 'error', 
+                        'Firebase hosting may have deployment issues');
+                }
+            } catch (error) {
+                logResult('config-results', 'Deploy Status', 'error', 
+                    `Cannot verify deployment: ${error.message}`);
+            }
+        }
+
+        function analyzeFileStructure() {
+            const fileResults = document.getElementById('file-results');
+            
+            // Log current page information
+            logResult('file-results', 'Current Page', 'success', 
+                `Debug page loaded successfully`, {
+                url: window.location.href,
+                path: window.location.pathname,
+                origin: window.location.origin
+            });
+            
+            // Check relative paths
+            const relativePaths = [
+                './index2.html',
+                './presentations.js',
+                './presentations-styles.css',
+                '../index.html',
+                '../styles.css',
+                '../script.js'
+            ];
+            
+            relativePaths.forEach(path => {
+                logResult('file-results', 'Relative Path Check', 'warning', 
+                    `Testing path: ${path}`, { path: path });
+            });
+        }
+
+        async function testFileAccessibility() {
+            const fileResults = document.getElementById('file-results');
+            const testFiles = [
+                'index2.html',
+                'index1.html',
+                'presentations.js',
+                'presentations-styles.css',
+                '../index.html',
+                '../academy/index2.html'
+            ];
+            
+            for (const file of testFiles) {
+                try {
+                    const response = await fetch(file, { method: 'HEAD' });
+                    
+                    if (response.ok) {
+                        logResult('file-results', 'File Accessibility', 'success', 
+                            `Accessible: ${file}`, {
+                            status: response.status,
+                            contentType: response.headers.get('content-type')
+                        });
+                    } else {
+                        logResult('file-results', 'File Accessibility', 'error', 
+                            `Not accessible: ${file}`, {
+                            status: response.status,
+                            statusText: response.statusText
+                        });
+                    }
+                } catch (error) {
+                    logResult('file-results', 'File Accessibility', 'error', 
+                        `Error accessing ${file}: ${error.message}`);
+                }
+            }
+        }
+
+        async function checkCspHeaders() {
+            const cspResults = document.getElementById('csp-results');
+            
+            try {
+                const response = await fetch(window.location.href, { method: 'HEAD' });
+                const cspHeader = response.headers.get('content-security-policy');
+                
+                if (cspHeader) {
+                    logResult('csp-results', 'CSP Header Found', 'success', 
+                        'CSP header is present in response headers', {
+                        csp: cspHeader,
+                        headerLength: cspHeader.length
+                    });
+                } else {
+                    logResult('csp-results', 'CSP Header Missing', 'warning', 
+                        'No CSP header found in response headers');
+                }
+                
+                // Check other security headers
+                const stsHeader = response.headers.get('strict-transport-security');
+                const xFrameOptions = response.headers.get('x-frame-options');
+                
+                logResult('csp-results', 'Other Security Headers', 'success', 
+                    'Additional security headers checked', {
+                        'Strict-Transport-Security': stsHeader,
+                        'X-Frame-Options': xFrameOptions
+                    });
+                
+            } catch (error) {
+                logResult('csp-results', 'CSP Header Check', 'error', 
+                    `Failed to check headers: ${error.message}`);
+            }
+        }
+
+        async function compareCspSources() {
+            const cspResults = document.getElementById('csp-results');
+            
+            // Try to fetch the firebase.json CSP configuration
+            logResult('csp-results', 'CSP Comparison', 'warning', 
+                'The CSP configuration should be in firebase.json at the server level', {
+                    serverConfigPath: 'firebase.json > hosting > headers > Content-Security-Policy',
+                    pageConfigPath: 'HTML meta tag: http-equiv="Content-Security-Policy"',
+                    note: 'The server-level CSP in firebase.json overrides page-level CSP headers'
+                });
+        }
+
+        async function checkNetworkConfig() {
+            const networkResults = document.getElementById('network-results');
+            
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            
+            logResult('network-results', 'Network Analysis', 'success', 
+                'Network configuration analyzed', {
+                online: navigator.onLine,
+                effectiveType: connection ? connection.effectiveType : 'N/A',
+                downlink: connection ? connection.downlink + ' Mbps' : 'N/A',
+                rtt: connection ? connection.rtt + ' ms' : 'N/A'
+            });
+        }
+
+        async function testRedirects() {
+            const networkResults = document.getElementById('network-results');
+            
+            // Test the configured redirects from firebase.json
+            const redirectTests = [
+                { from: 'presentations.html', to: '/academy/index2.html' },
+                { from: 'presentations', to: '/academy/index2.html' }
+            ];
+            
+            for (const test of redirectTests) {
+                try {
+                    const response = await fetch(test.from, { 
+                        method: 'GET',
+                        redirect: 'manual' // Don't follow redirects automatically
+                    });
+                    
+                    if (response.status === 301 || response.status === 302) {
+                        logResult('network-results', 'Redirect Test', 'success', 
+                            `Redirect working: ${test.from} → ${test.to}`, {
+                            status: response.status,
+                            location: response.headers.get('location')
+                        });
+                    } else {
+                        logResult('network-results', 'Redirect Test', 'warning', 
+                            `Redirect not working for: ${test.from}`, {
+                            status: response.status,
+                            statusText: response.statusText
+                        });
+                    }
+                } catch (error) {
+                    logResult('network-results', 'Redirect Test', 'error', 
+                        `Error testing redirect: ${test.from} - ${error.message}`);
+                }
+            }
+        }
+
+        // Monitor CSP violations
+        window.addEventListener('securitypolicyviolation', (event) => {
+            console.error('CSP Violation in Firebase Debug:', event);
+            logResult('csp-results', 'CSP Violation', 'error', 
+                `CSP violation detected`, {
+                violatedDirective: event.violatedDirective,
+                blockedURI: event.blockedURI,
+                sourceFile: event.sourceFile,
+                originalPolicy: event.originalPolicy
+            });
+        });
+
+        // Initialize
+        window.addEventListener('load', () => {
+            console.log('Firebase Debug Page Initialized');
+            logResult('config-results', 'Initialization', 'success', 
+                'Firebase debug page loaded successfully');
+        });
+    </script>
+</body>
+</html>

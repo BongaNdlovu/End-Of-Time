@@ -87,3 +87,33 @@ module.exports = {
 };
 
 
+
+// Public HTTPS function to fetch leaderboard top 100 as a fallback
+// Useful when client-side Firestore reads are blocked by App Check enforcement
+exports.getLeaderboardTop = functions.region('us-central1').https.onRequest(async (req, res) => {
+  // Basic CORS handling
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+  if (req.method !== 'GET') {
+    res.status(405).json({ error: 'Method Not Allowed' });
+    return;
+  }
+  try {
+    const snapshot = await admin
+      .firestore()
+      .collection('leaderboard')
+      .orderBy('totalCumulativeScore', 'desc')
+      .limit(100)
+      .get();
+    const items = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    res.status(200).json({ items });
+  } catch (e) {
+    console.error('getLeaderboardTop error:', e);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});

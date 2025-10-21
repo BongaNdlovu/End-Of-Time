@@ -1,3 +1,33 @@
+# Node dependencies
+node_modules/
+functions/node_modules/
+
+# Build and cache
+dist/
+build/
+.cache/
+coverage/
+
+# Firebase local state and logs
+.firebase/
+firebase-debug.log
+
+# Editor/OS artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Tooling/workspace
+.cursor/
+.agent-tools/
+
+# Logs
+*.log
+
+# TypeScript build output (functions)
+functions/lib/
+
 # Logs
 logs
 *.log

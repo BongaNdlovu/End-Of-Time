@@ -1572,7 +1572,7 @@ function preloadAudioAssets(onProgress, onComplete) {
 // --- Video Preload Logic ---
 const allBackgroundVideos = [
     'Background.mp4',
-    'background 1.mp4',
+    'Background 1.mp4',
     'background 2.mp4'
 ];
 let videoPreloadCount = 0;
@@ -4334,8 +4334,18 @@ function setBackgroundVideoForQuestion(isProphecy) {
     if (!bgVideo) return;
     
     // Use background 2 for prophecy questions, background 1 for others
-    const backgroundFile = isProphecy ? 'background 2.mp4' : 'background 1.mp4';
+    const backgroundFile = isProphecy ? 'background 2.mp4' : 'Background 1.mp4';
     if (!bgVideo.src.endsWith(backgroundFile)) {
+        // Attach a temporary error handler for this assignment to fallback gracefully
+        const previousOnError = bgVideo.onerror;
+        bgVideo.onerror = () => {
+            bgVideo.onerror = previousOnError || null;
+            if (!bgVideo.src.endsWith('Background.mp4')) {
+                bgVideo.src = 'Background.mp4';
+                bgVideo.load();
+                bgVideo.play().catch(()=>{});
+            }
+        };
         bgVideo.src = backgroundFile;
         bgVideo.load();
         bgVideo.play().catch(()=>{});

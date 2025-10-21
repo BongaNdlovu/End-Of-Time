@@ -29,11 +29,6 @@ const MEDIA_ASSETS = [
   // Background videos (exact casing)
   '/Background.mp4',
   '/Background 1.mp4',
-  '/background 2.mp4',
-  '/background 3.mp4',
-  '/background 5.mp4',
-  '/background 6.mp4',
-  '/background 7.mp4',
   // Level videos (exact casing)
   '/video 1.mp4',
   '/video 2.mp4',

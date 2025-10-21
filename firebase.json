@@ -15,12 +15,12 @@
     "redirects": [
       {
         "source": "/presentations.html",
-        "destination": "/academy/index2.html",
+        "destination": "/index2.html",
         "type": 301
       },
       {
         "source": "/presentations",
-        "destination": "/academy/index2.html",
+        "destination": "/index2.html",
         "type": 301
       }
     ]

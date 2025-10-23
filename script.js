@@ -1788,64 +1788,62 @@ const debounce = (func, wait) => {
 
 // --- DOMContentLoaded for all DOM queries and listeners ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Auth/Leaderboard module (lazy-load if not present yet)
-    if (window.AuthManager && typeof window.AuthManager.init === 'function') {
-        window.AuthManager.init();
-        // Subscribe to auth changes to update UI
-        window.AuthManager.subscribe((user) => {
-            updateUserInfoUI(user);
-            // After auth ready, refresh leaderboard display
-            if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
-                window.LeaderboardService.refresh();
-            }
-        });
-    } else {
+    // Initialize Auth/Leaderboard module
+    const initAuth = async () => {
         const statusContainer = document.getElementById('signin-status-container');
-        if (statusContainer) {
-            statusContainer.innerHTML = '<p style="color:#cccccc;">Loading sign-in…</p>';
-        }
-        const lazyAuthInit = async () => {
-            try {
+        
+        try {
+            // If AuthManager is not loaded, try to load it
+            if (!window.AuthManager) {
+                if (statusContainer) {
+                    statusContainer.innerHTML = '<p id="signin-status-text" style="color:#cccccc;">Loading sign-in…</p>';
+                }
                 await ensureAuthLoaded();
-                if (window.AuthManager && typeof window.AuthManager.init === 'function') {
-                    window.AuthManager.init();
-                    window.AuthManager.subscribe((user) => {
-                        updateUserInfoUI(user);
-                        if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
-                            window.LeaderboardService.refresh();
-                        }
-                    });
-                    if (statusContainer) {
-                        // Clear the loading message; AuthManager UI will update
-                        statusContainer.querySelector('#signin-status-text')?.remove?.();
+            }
+            
+            // If AuthManager is available after loading, initialize it
+            if (window.AuthManager && typeof window.AuthManager.init === 'function') {
+                window.AuthManager.init();
+                // Subscribe to auth changes to update UI
+                window.AuthManager.subscribe((user) => {
+                    updateUserInfoUI(user);
+                    if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
+                        window.LeaderboardService.refresh();
                     }
-                } else {
-                    console.warn('AuthManager not available. Sign-in and leaderboard disabled.');
-                    if (statusContainer) {
-                        statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
+                });
+                
+                // Clear loading message
+                if (statusContainer) {
+                    const loadingText = statusContainer.querySelector('#signin-status-text');
+                    if (loadingText) {
+                        loadingText.remove();
                     }
                 }
-            } catch (e) {
-                console.warn('Auth module failed to load:', e);
+            } else {
+                console.warn('AuthManager not available. Sign-in and leaderboard disabled.');
                 if (statusContainer) {
                     statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
                 }
             }
-        };
-        if (typeof window.requestIdleCallback === 'function') {
-            requestIdleCallback(() => lazyAuthInit(), { timeout: 2000 });
-        } else {
-            setTimeout(lazyAuthInit, 600);
+        } catch (e) {
+            console.error('Auth initialization failed:', e);
+            if (statusContainer) {
+                statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
+            }
         }
-    }
-        // Initialize audio system
-        if (typeof AudioManager !== 'undefined' && AudioManager.init) {
-            AudioManager.init();
-            console.log("✅ Audio system initialized.");
-        } else {
-            console.warn("⚠️ AudioManager not available. Audio features may not work.");
-        }
+    };
     
+    // Start auth initialization immediately
+    initAuth();
+    
+    // Initialize audio system
+    if (typeof AudioManager !== 'undefined' && AudioManager.init) {
+        AudioManager.init();
+        console.log("✅ Audio system initialized.");
+    } else {
+        console.warn("⚠️ AudioManager not available. Audio features may not work.");
+    }
+
     // Debug audio elements to check if they're properly loaded
     debugAudioElements();
     // Build the pool of correct-answer sounds (includes existing and optional Correct 1..10 files)

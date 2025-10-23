@@ -1827,6 +1827,31 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('==========================');
     };
     
+    // Function to manually show sign-in UI (useful for debugging)
+    window.showAuthUI = function() {
+        console.log('[Auth] Manually showing auth UI elements...');
+        
+        const signinButtons = document.getElementById('signin-buttons');
+        if (signinButtons) {
+            signinButtons.style.display = 'flex';
+            signinButtons.style.visibility = 'visible';
+        }
+        
+        const statusContainer = document.getElementById('signin-status-container');
+        if (statusContainer) {
+            statusContainer.style.display = 'block';
+            statusContainer.style.visibility = 'visible';
+        }
+        
+        const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+        if (leaderboardBtn) {
+            leaderboardBtn.style.display = 'inline-block';
+            leaderboardBtn.style.visibility = 'visible';
+        }
+        
+        console.log('[Auth] Auth UI elements forced visible');
+    };
+    
     // Function to manually retry auth initialization if it failed
     window.retryAuth = async function() {
         console.log('[Auth] Manually retrying auth initialization...');
@@ -1853,6 +1878,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
                 console.log('[Auth] Manual retry successful');
+                
+                // Force UI visibility
+                const signinButtons = document.getElementById('signin-buttons');
+                if (signinButtons) {
+                    signinButtons.style.display = 'flex';
+                }
+                
+                const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+                if (leaderboardBtn) {
+                    leaderboardBtn.style.display = 'inline-block';
+                    leaderboardBtn.style.visibility = 'visible';
+                }
             } else {
                 throw new Error('AuthManager still not available after retry');
             }
@@ -1860,6 +1897,18 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('[Auth] Manual retry failed:', e);
             if (statusContainer) {
                 statusContainer.innerHTML = `<p style="color:#d4af37;">Retry failed: ${e.message}</p>`;
+            }
+            
+            // Still show UI elements even if retry fails
+            const signinButtons = document.getElementById('signin-buttons');
+            if (signinButtons) {
+                signinButtons.style.display = 'flex';
+            }
+            
+            const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+            if (leaderboardBtn) {
+                leaderboardBtn.style.display = 'inline-block';
+                leaderboardBtn.style.visibility = 'visible';
             }
         }
     };
@@ -1896,24 +1945,68 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
                 
-                // Clear loading message
+                // Initialize UI state immediately after subscription
+                const currentUser = window.AuthManager.getUser();
+                updateUserInfoUI(currentUser);
+                
+                // Clear loading message and ensure UI is visible
                 if (statusContainer) {
                     const loadingText = statusContainer.querySelector('#signin-status-text');
                     if (loadingText) {
                         loadingText.remove();
                     }
+                    
+                    // Make sure the sign-in buttons are visible
+                    const signinButtons = document.getElementById('signin-buttons');
+                    if (signinButtons) {
+                        signinButtons.style.display = 'flex';
+                    }
+                    
+                    // Make sure the sign-in status container is visible
+                    statusContainer.style.display = 'block';
+                    statusContainer.style.visibility = 'visible';
                 }
+                
+                // Ensure leaderboard button is visible
+                const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+                if (leaderboardBtn) {
+                    leaderboardBtn.style.display = 'inline-block';
+                    leaderboardBtn.style.visibility = 'visible';
+                }
+                
                 console.log('[Auth] Auth initialization completed successfully');
             } else {
                 console.warn('AuthManager not available after loading attempt. Sign-in and leaderboard disabled.');
                 if (statusContainer) {
                     statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
+                    // Still make sure buttons are visible even if auth fails
+                    const signinButtons = document.getElementById('signin-buttons');
+                    if (signinButtons) {
+                        signinButtons.style.display = 'flex';
+                    }
+                    
+                    const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+                    if (leaderboardBtn) {
+                        leaderboardBtn.style.display = 'inline-block';
+                        leaderboardBtn.style.visibility = 'visible';
+                    }
                 }
             }
         } catch (e) {
             console.error('[Auth] Auth initialization failed:', e);
             if (statusContainer) {
                 statusContainer.innerHTML = `<p style="color:#d4af37;">Auth error: ${e.message}</p>`;
+                // Still make sure buttons are visible even if auth fails
+                const signinButtons = document.getElementById('signin-buttons');
+                if (signinButtons) {
+                    signinButtons.style.display = 'flex';
+                }
+                
+                const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+                if (leaderboardBtn) {
+                    leaderboardBtn.style.display = 'inline-block';
+                    leaderboardBtn.style.visibility = 'visible';
+                }
             }
         }
     };

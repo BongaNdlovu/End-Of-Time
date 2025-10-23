@@ -92,7 +92,30 @@ if (questionOptionsContainer) {
 
 // --- Confetti Setup ---
 const confettiSettings = { target: 'confetti-canvas', respawn: false, clock: 30, colors: [[230, 57, 70], [183, 28, 28], [255, 215, 0]] };
-const confetti = new ConfettiGenerator(confettiSettings);
+try { if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) { confettiSettings.clock = 20; } } catch (_) {}
+let confetti = { render: function() {}, clear: function() {} };
+try {
+	if (typeof window !== 'undefined' && typeof window.ConfettiGenerator === 'function') {
+		confetti = new window.ConfettiGenerator(confettiSettings);
+	} else {
+		// Not loaded yet; will be initialized lazily in ensureConfettiReady()
+	}
+} catch (e) {
+	console.warn('[Confetti] Initialization deferred; will use lazy load.', e);
+}
+
+async function ensureConfettiReady() {
+    try {
+        if (typeof window === 'undefined' || typeof window.ConfettiGenerator !== 'function') {
+            await loadScriptOnce('https://cdn.jsdelivr.net/npm/confetti-js/dist/index.min.js');
+        }
+        if (typeof window !== 'undefined' && typeof window.ConfettiGenerator === 'function' && (!confetti || typeof confetti.render !== 'function')) {
+            confetti = new window.ConfettiGenerator(confettiSettings);
+        }
+    } catch (e) {
+        console.warn('[Confetti] ensureConfettiReady failed:', e);
+    }
+}
 
 // --- Timer and Game State Variables ---
 let TIME_LIMIT = 40; // Default timer, will be dynamically set based on level
@@ -192,6 +215,69 @@ function shuffle(array) {
     }
     
     return shuffled;
+}
+
+// --- Lightweight dynamic loader (lazy-load large bundles) ---
+async function loadScriptOnce(src) {
+    return new Promise((resolve, reject) => {
+        try {
+            if (document.querySelector(`script[data-dyn="${src}"]`)) {
+                resolve();
+                return;
+            }
+            const s = document.createElement('script');
+            s.src = src;
+            s.defer = true;
+            s.dataset.dyn = src;
+            s.onload = () => resolve();
+            s.onerror = (e) => reject(e);
+            document.head.appendChild(s);
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
+async function ensureLevelLoaded(levelNumber) {
+    const idx = Math.max(1, Math.min(7, Number(levelNumber))) - 1;
+    if (Array.isArray(allLevels[idx].questions) && allLevels[idx].questions.length > 0) return;
+    const file = `questions-level${idx + 1}.js`;
+    try {
+        await loadScriptOnce(file);
+        const key = `level${idx + 1}Questions`;
+        if (Array.isArray(window[key])) {
+            allLevels[idx].questions = window[key];
+        }
+    } catch (e) {
+        console.warn(`[Loader] Failed to load ${file}:`, e);
+    }
+}
+
+async function ensureTutorialLoaded(levelNumber) {
+    const idx = Math.max(1, Math.min(7, Number(levelNumber))) - 1;
+    if (allTutorials && allTutorials[idx]) return;
+    const file = `tutorial-level${idx + 1}.js`;
+    try {
+        await loadScriptOnce(file);
+        const key = `tutorialLevel${idx + 1}`;
+        if (window[key]) {
+            allTutorials[idx] = window[key];
+        }
+    } catch (e) {
+        console.warn(`[Loader] Failed to load ${file}:`, e);
+    }
+}
+
+async function ensureAuthLoaded() {
+    if (window.AuthManager) return;
+    try {
+        await loadScriptOnce('auth-leaderboard.js');
+        if (window.AuthManager && typeof window.AuthManager.init === 'function') {
+            window.AuthManager.init();
+        }
+    } catch (e) {
+        console.warn('[Loader] Failed to load auth-leaderboard.js:', e);
+    }
 }
 
 /**
@@ -533,9 +619,24 @@ function triggerConfetti(type = 'normal') {
         confettiSettings.colors = [[230, 57, 70], [183, 28, 28], [255, 215, 0]];
         confettiSettings.clock = 30;
     }
-    confetti.clear();
-    confetti.render();
-    setTimeout(() => { confetti.clear(); }, 3000);
+    
+    // Ensure confetti is ready before using it
+    if (typeof window.ConfettiGenerator === 'function' && confetti && typeof confetti.render === 'function') {
+        confetti.clear();
+        confetti.render();
+        setTimeout(() => { confetti.clear(); }, 3000);
+    } else {
+        // If not ready, load it and then trigger confetti
+        ensureConfettiReady().then(() => {
+            if (confetti && typeof confetti.render === 'function') {
+                confetti.clear();
+                confetti.render();
+                setTimeout(() => { confetti.clear(); }, 3000);
+            }
+        }).catch(err => {
+            console.warn('[Confetti] Failed to trigger confetti:', err);
+        });
+    }
 }
 
 function animateScoreChange(element, up) {
@@ -1572,7 +1673,7 @@ function preloadAudioAssets(onProgress, onComplete) {
 // --- Video Preload Logic ---
 const allBackgroundVideos = [
     'Background.mp4',
-    'Background 1.mp4'
+    'Background_1.mp4'
 ];
 let videoPreloadCount = 0;
 function preloadVideoAssets(onProgress, onComplete) {
@@ -1687,7 +1788,7 @@ const debounce = (func, wait) => {
 
 // --- DOMContentLoaded for all DOM queries and listeners ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Auth/Leaderboard module
+    // Initialize Auth/Leaderboard module (lazy-load if not present yet)
     if (window.AuthManager && typeof window.AuthManager.init === 'function') {
         window.AuthManager.init();
         // Subscribe to auth changes to update UI
@@ -1699,10 +1800,42 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     } else {
-        console.warn('AuthManager not available. Sign-in and leaderboard disabled.');
-            const statusContainer = document.getElementById('signin-status-container');
-            if (statusContainer) {
-            statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
+        const statusContainer = document.getElementById('signin-status-container');
+        if (statusContainer) {
+            statusContainer.innerHTML = '<p style="color:#cccccc;">Loading sign-in…</p>';
+        }
+        const lazyAuthInit = async () => {
+            try {
+                await ensureAuthLoaded();
+                if (window.AuthManager && typeof window.AuthManager.init === 'function') {
+                    window.AuthManager.init();
+                    window.AuthManager.subscribe((user) => {
+                        updateUserInfoUI(user);
+                        if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
+                            window.LeaderboardService.refresh();
+                        }
+                    });
+                    if (statusContainer) {
+                        // Clear the loading message; AuthManager UI will update
+                        statusContainer.querySelector('#signin-status-text')?.remove?.();
+                    }
+                } else {
+                    console.warn('AuthManager not available. Sign-in and leaderboard disabled.');
+                    if (statusContainer) {
+                        statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
+                    }
+                }
+            } catch (e) {
+                console.warn('Auth module failed to load:', e);
+                if (statusContainer) {
+                    statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
+                }
+            }
+        };
+        if (typeof window.requestIdleCallback === 'function') {
+            requestIdleCallback(() => lazyAuthInit(), { timeout: 2000 });
+        } else {
+            setTimeout(lazyAuthInit, 600);
         }
     }
         // Initialize audio system
@@ -2107,7 +2240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // User is already signed in, check if tutorial should be shown
             if (shouldShowTutorial(levelNumber)) {
-                window.showTutorial(levelNumber, mode, actuallyStartGame);
+                loadAndShowTutorial(levelNumber, mode, actuallyStartGame);
             } else {
                 // If no tutorial, still respect video gate
                 if (shouldShowLevelVideo(levelNumber)) {
@@ -2184,7 +2317,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Check if tutorial should be shown
                 if (shouldShowTutorial(levelNumber)) {
-                    window.showTutorial(levelNumber, gameMode, actuallyStartGame);
+                    loadAndShowTutorial(levelNumber, gameMode, actuallyStartGame);
                 } else {
                     actuallyStartGame();
                 }
@@ -2261,6 +2394,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) {
             console.error("Error marking tutorial as viewed:", e);
         }
+    }
+
+    async function loadAndShowTutorial(levelNumber, mode, callback, options) {
+        await ensureTutorialLoaded(levelNumber);
+        window.showTutorial(levelNumber, mode, callback, options);
     }
 
     window.showTutorial = function(levelNumber, mode, callback, options) {
@@ -2386,7 +2524,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Start Game ---
-    window.startGame = function(mode, levelNumber) { // Modified to accept levelNumber
+    window.startGame = async function(mode, levelNumber) { // Modified to accept levelNumber and allow lazy loads
         // --- NEW: VALIDATE LEVEL ---
         if (typeof levelNumber === 'undefined' || levelNumber === null) {
             console.error("startGame called without a level number. Defaulting to Level 1.");
@@ -2394,6 +2532,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         ensureUserInteraction();
+        await ensureLevelLoaded(levelNumber);
         AudioManager.play(audioRiser);
         setTimeout(() => AudioManager.playBgMusic(), 800);
         gameMode = mode;
@@ -2703,6 +2842,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (gameMode === 'solo') updateSoloStats();
         else updateScoreDisplay();
         
+        // Ensure timer is reset and stopped during question-only phase
+        if (!isTimeAttackMode) {
+            try { clearInterval(timer); } catch (e) {}
+            if (typeof AudioManager !== 'undefined' && typeof AudioManager.stopTicking === 'function') {
+                AudioManager.stopTicking();
+            }
+            if (timerDiv) {
+                timerDiv.classList.remove('low-time');
+                if (timerDiv.parentElement && timerDiv.parentElement.parentElement) {
+                    timerDiv.parentElement.parentElement.classList.remove('urgent');
+                }
+                timerDiv.innerText = '00';
+            }
+            const timerLabel = document.querySelector('.timer-label');
+            if (timerLabel) {
+                timerLabel.textContent = `TIME (${TIME_LIMIT}s)`;
+            }
+        }
+        
         // NO TIMER STARTED YET
         explanationDiv.style.display = 'none';
         explanationDiv.innerText = '';
@@ -2777,6 +2935,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // START TIMER ONLY NOW
         if (!isTimeAttackMode) {
+            // Make sure any previous per-question timer is fully stopped
+            try { clearInterval(timer); } catch (e) {}
+            if (typeof AudioManager !== 'undefined' && typeof AudioManager.stopTicking === 'function') {
+                AudioManager.stopTicking();
+            }
             // Reset visual timer to 00 before starting
             timerDiv.classList.remove('low-time');
             if (timerDiv.parentElement && timerDiv.parentElement.parentElement) {
@@ -3188,7 +3351,8 @@ document.addEventListener('DOMContentLoaded', () => {
             celebrationOverlay.remove();
         }, 2000);
         
-        // Trigger confetti based on type
+        // Trigger confetti based on type (lazy-load library if needed)
+        ensureConfettiReady().then(() => {
         switch(type) {
             case 'perfect':
                 triggerConfetti('perfect');
@@ -3205,7 +3369,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             default:
                 triggerConfetti('default');
-        }
+        }}).catch(() => {});
     }
 
     // Enhanced end game function with better mobile experience
@@ -3949,7 +4113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
-        });
+        }, { passive: true });
         
         document.addEventListener('touchmove', (e) => {
             if (!touchStartX || !touchStartY) return;
@@ -4173,11 +4337,27 @@ function setCategoryBackground(category) {
     const video = document.getElementById('background-video');
     if (video) {
         video.style.filter = '';
-        video.style.opacity = '0.45';
+        try {
+            if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+                video.style.opacity = '0.35';
+            } else {
+                video.style.opacity = '0.45';
+            }
+        } catch (_) {
+            video.style.opacity = '0.45';
+        }
         video.style.mixBlendMode = 'screen';
         // Always show video, but adjust for prophecy
         if (category === 'Prophecy' || category === 'The Great Controversy') {
-            video.style.filter = 'contrast(1.5) brightness(0.7) grayscale(0.2)';
+            try {
+                if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+                    video.style.filter = 'contrast(1.2) brightness(0.8) grayscale(0.1)';
+                } else {
+                    video.style.filter = 'contrast(1.5) brightness(0.7) grayscale(0.2)';
+                }
+            } catch (_) {
+                video.style.filter = 'contrast(1.5) brightness(0.7) grayscale(0.2)';
+            }
             video.style.opacity = '0.7';
             video.style.mixBlendMode = 'multiply';
             // Add a dark overlay for drama
@@ -4437,7 +4617,8 @@ function updateUserInfoUI(user) {
 }
 
 if (googleSigninBtn) {
-  googleSigninBtn.onclick = function() {
+  googleSigninBtn.onclick = async function() {
+    await ensureAuthLoaded();
     if (window.AuthManager && typeof window.AuthManager.signIn === 'function') {
       window.AuthManager.signIn();
     }
@@ -4453,7 +4634,8 @@ googleSignoutBtn.onclick = function() {
 
 const mainSigninBtn = document.getElementById('main-signin-btn');
 if (mainSigninBtn) {
-  mainSigninBtn.onclick = function() {
+  mainSigninBtn.onclick = async function() {
+    await ensureAuthLoaded();
     if (window.AuthManager && typeof window.AuthManager.signIn === 'function') {
       window.AuthManager.signIn().catch((error) => {
         console.error('Sign-in failed:', error);
@@ -4483,7 +4665,8 @@ if (mainSigninBtn) {
 
 const mainSignoutBtn = document.getElementById('main-signout-btn');
 if (mainSignoutBtn) {
-  mainSignoutBtn.onclick = function() {
+  mainSignoutBtn.onclick = async function() {
+    await ensureAuthLoaded();
     if (window.AuthManager && typeof window.AuthManager.signOut === 'function') {
       window.AuthManager.signOut();
     }
@@ -4500,7 +4683,8 @@ if (mainSignoutBtn) {
 
 const viewLeaderboardBtn = document.getElementById('view-leaderboard-btn');
 if (viewLeaderboardBtn) {
-  viewLeaderboardBtn.onclick = function() {
+  viewLeaderboardBtn.onclick = async function() {
+    await ensureAuthLoaded();
     showLeaderboardModal();
   };
   viewLeaderboardBtn.addEventListener('mouseenter', function() {
@@ -5055,7 +5239,7 @@ function showModeSelection() {
     viewTutorialBtn.onclick = () => {
         // Show tutorial without marking as viewed or starting the game automatically
         const levelNumber = currentGameLevel || 1;
-        window.showTutorial(levelNumber, gameMode, () => {
+        loadAndShowTutorial(levelNumber, gameMode, () => {
             // After closing tutorial in view-only mode, just return to mode selection
         }, { viewOnly: true });
     };

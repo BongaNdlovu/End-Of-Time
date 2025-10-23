@@ -268,15 +268,43 @@ async function ensureTutorialLoaded(levelNumber) {
     }
 }
 
+async function ensureFirebaseReady() {
+    // Wait for Firebase to be fully loaded
+    if (typeof firebase === 'undefined') {
+        console.log('[Auth] Firebase not loaded, waiting...');
+        let attempts = 0;
+        while (typeof firebase === 'undefined' && attempts < 50) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            attempts++;
+        }
+        if (typeof firebase === 'undefined') {
+            throw new Error('Firebase SDK failed to load after timeout');
+        }
+    }
+    console.log('[Auth] Firebase is ready');
+}
+
 async function ensureAuthLoaded() {
-    if (window.AuthManager) return;
+    if (window.AuthManager) {
+        console.log('[Auth] AuthManager already loaded');
+        return;
+    }
     try {
+        // First ensure Firebase is loaded
+        await ensureFirebaseReady();
+        
+        console.log('[Auth] Loading auth-leaderboard.js...');
         await loadScriptOnce('auth-leaderboard.js');
+        console.log('[Auth] auth-leaderboard.js loaded, checking AuthManager...');
         if (window.AuthManager && typeof window.AuthManager.init === 'function') {
+            console.log('[Auth] Initializing AuthManager...');
             window.AuthManager.init();
+            console.log('[Auth] AuthManager initialized successfully');
+        } else {
+            console.error('[Auth] AuthManager not found after loading script');
         }
     } catch (e) {
-        console.warn('[Loader] Failed to load auth-leaderboard.js:', e);
+        console.error('[Loader] Failed to load auth-leaderboard.js:', e);
     }
 }
 
@@ -1788,24 +1816,80 @@ const debounce = (func, wait) => {
 
 // --- DOMContentLoaded for all DOM queries and listeners ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Debug function to check Firebase availability
+    window.debugFirebase = function() {
+        console.log('=== Firebase Debug Info ===');
+        console.log('firebase available:', typeof firebase !== 'undefined');
+        console.log('firebase.auth available:', typeof firebase !== 'undefined' && typeof firebase.auth === 'function');
+        console.log('auth available:', typeof firebase !== 'undefined' && firebase.auth());
+        console.log('AuthManager available:', typeof window.AuthManager !== 'undefined');
+        console.log('Firebase apps:', typeof firebase !== 'undefined' ? firebase.apps.length : 'N/A');
+        console.log('==========================');
+    };
+    
+    // Function to manually retry auth initialization if it failed
+    window.retryAuth = async function() {
+        console.log('[Auth] Manually retrying auth initialization...');
+        const statusContainer = document.getElementById('signin-status-container');
+        if (statusContainer) {
+            statusContainer.innerHTML = '<p id="signin-status-text" style="color:#cccccc;">Retrying sign-in…</p>';
+        }
+        
+        try {
+            await ensureAuthLoaded();
+            if (window.AuthManager && typeof window.AuthManager.init === 'function') {
+                window.AuthManager.init();
+                window.AuthManager.subscribe((user) => {
+                    updateUserInfoUI(user);
+                    if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
+                        window.LeaderboardService.refresh();
+                    }
+                });
+                
+                if (statusContainer) {
+                    const loadingText = statusContainer.querySelector('#signin-status-text');
+                    if (loadingText) {
+                        loadingText.remove();
+                    }
+                }
+                console.log('[Auth] Manual retry successful');
+            } else {
+                throw new Error('AuthManager still not available after retry');
+            }
+        } catch (e) {
+            console.error('[Auth] Manual retry failed:', e);
+            if (statusContainer) {
+                statusContainer.innerHTML = `<p style="color:#d4af37;">Retry failed: ${e.message}</p>`;
+            }
+        }
+    };
+    
     // Initialize Auth/Leaderboard module
     const initAuth = async () => {
         const statusContainer = document.getElementById('signin-status-container');
         
         try {
+            console.log('[Auth] Starting auth initialization...');
+            
             // If AuthManager is not loaded, try to load it
             if (!window.AuthManager) {
+                console.log('[Auth] AuthManager not available, attempting to load...');
                 if (statusContainer) {
                     statusContainer.innerHTML = '<p id="signin-status-text" style="color:#cccccc;">Loading sign-in…</p>';
                 }
                 await ensureAuthLoaded();
+                
+                // Give AuthManager a moment to initialize
+                await new Promise(resolve => setTimeout(resolve, 100));
             }
             
             // If AuthManager is available after loading, initialize it
             if (window.AuthManager && typeof window.AuthManager.init === 'function') {
+                console.log('[Auth] AuthManager available, initializing...');
                 window.AuthManager.init();
                 // Subscribe to auth changes to update UI
                 window.AuthManager.subscribe((user) => {
+                    console.log('[Auth] Auth state changed:', user ? user.displayName : 'No user');
                     updateUserInfoUI(user);
                     if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
                         window.LeaderboardService.refresh();
@@ -1819,16 +1903,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         loadingText.remove();
                     }
                 }
+                console.log('[Auth] Auth initialization completed successfully');
             } else {
-                console.warn('AuthManager not available. Sign-in and leaderboard disabled.');
+                console.warn('AuthManager not available after loading attempt. Sign-in and leaderboard disabled.');
                 if (statusContainer) {
                     statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
                 }
             }
         } catch (e) {
-            console.error('Auth initialization failed:', e);
+            console.error('[Auth] Auth initialization failed:', e);
             if (statusContainer) {
-                statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
+                statusContainer.innerHTML = `<p style="color:#d4af37;">Auth error: ${e.message}</p>`;
             }
         }
     };

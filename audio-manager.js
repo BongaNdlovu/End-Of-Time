@@ -185,20 +185,28 @@ if (muteToggle) {
 function initCorrectSoundPool() {
     // Known existing files that we can load (from directory listing)
     const existingCorrectFiles = [
-        'Correct 1.wav', 'Correct 2.wav', 'Correct 3.wav', 'Correct 4.wav', 'Correct 5.wav',
+        'Correct 1.wav', 'Correct 2.wav', 'Correct 3.wav', 'Correct 4.wav', 'Correct_5.wav',
         'Correct 6.wav', 'Correct 7.wav', 'Correct 8.wav', 'Correct 9.wav', 'Correct 10.wav'
     ];
 
     // Try to load each file with robust error handling
     existingCorrectFiles.forEach((filename) => {
         try {
-            const a = new Audio(filename);
+            const url = encodeURI(filename);
+            const a = new Audio(url);
             a.preload = 'metadata'; // Changed from 'auto' to 'metadata' to prevent aggressive preloading
             setBaseVolume(a, 0.8);
             a.muted = isMuted;
 
             // Conditional error handling based on debug mode
             const silenceErrors = (e) => {
+                // Try a root-path fallback once if relative path fails
+                if (!a.__attemptedRootFallback) {
+                    a.__attemptedRootFallback = true;
+                    a.src = '/' + encodeURI(filename);
+                    try { a.load(); } catch (_) {}
+                    return false;
+                }
                 if (window.AUDIO_DEBUG) {
                     console.error('Audio load error for', filename, ':', e);
                 }
@@ -242,13 +250,21 @@ function initIncorrectSoundPool() {
     // Try to load each file with robust error handling
     existingIncorrectFiles.forEach((filename) => {
         try {
-            const a = new Audio(filename);
+            const url = encodeURI(filename);
+            const a = new Audio(url);
             a.preload = 'metadata'; // Changed from 'auto' to 'metadata' to prevent aggressive preloading
             setBaseVolume(a, 0.8);
             a.muted = isMuted;
 
             // Conditional error handling based on debug mode
             const silenceErrors = (e) => {
+                // Try a root-path fallback once if relative path fails
+                if (!a.__attemptedRootFallback) {
+                    a.__attemptedRootFallback = true;
+                    a.src = '/' + encodeURI(filename);
+                    try { a.load(); } catch (_) {}
+                    return false;
+                }
                 if (window.AUDIO_DEBUG) {
                     console.error('Audio load error for', filename, ':', e);
                 }

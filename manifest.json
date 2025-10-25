@@ -5,7 +5,6 @@
   "display": "standalone",
   "background_color": "#232526",
   "theme_color": "#ffd700",
-  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self';",
   "icons": [
     {
       "src": "icon-192.png",

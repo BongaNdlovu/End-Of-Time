@@ -38,15 +38,28 @@ service cloud.firestore {
     // Interactions subcollection
     match /prayers/{prayerId}/interactions/{interactionId} {
       allow read: if true;
-      allow create: if true;
+      allow create: if request.auth != null;
       allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
 
     // Notifications
     match /notifications/{notificationId} {
       allow read: if request.auth != null && request.auth.uid == resource.data.userId;
-      allow create: if true;
+      // Allow creating a notification for another user if authenticated and actorId matches caller
+      allow create: if request.auth != null && request.resource.data.actorId == request.auth.uid && request.resource.data.userId is string;
       allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // Email queue (write-only for authenticated clients; reads by Admin SDK)
+    match /emailQueue/{docId} {
+      allow read: if false; // clients should not read the email queue
+      allow create: if request.auth != null
+                    && request.resource.data.actorId == request.auth.uid
+                    && request.resource.data.recipientUserId is string
+                    && request.resource.data.to is string
+                    && request.resource.data.type in ['prayer_received', 'comment_received']
+                    && request.resource.data.createdAt == request.time;
+      allow update, delete: if false; // updates done by Admin SDK
     }
 
     // User profiles

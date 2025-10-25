@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="icon-192.png">
     <link rel="apple-touch-icon" href="icon-192.png">
     
+    <script src="polyfills.js"></script>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -32,8 +33,8 @@
 </head>
 <body>
     <!-- Background video with same styling as the game -->
-    <video id="background-video" src="Background.mp4" autoplay loop muted playsinline 
-           style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen;"></video>
+    <video id="background-video" src="Background.mp4" autoplay loop muted playsinline preload="metadata" poster="1.jpg"
+           style="position:fixed;top:0;left:0;width:100vw;height:100svh;object-fit:cover;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen;"></video>
     
     <div class="menu-container">
         <!-- Header with logo -->

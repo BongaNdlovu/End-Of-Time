@@ -54,7 +54,9 @@ window.addEventListener('load', async () => {
     initDotNavigation();
     initTouchGestures();
     initShortcutsModal();
-    initChatbot();
+    if (document.getElementById('chat-widget') && document.getElementById('chat-toggle-button')) {
+        initChatbot();
+    }
     initKeyboardShortcuts();
 
     // Start presentation
@@ -776,7 +778,7 @@ function updateTimerDisplay() {
 function saveProgress() {
     try {
         // Save presentation-specific progress
-        const slideProgress = currentSlide >= 0 ? Math.round((currentSlide / total_slides) * 100) : 0;
+        const slideProgress = currentSlide >= 0 && totalSlides > 0 ? Math.round((currentSlide / totalSlides) * 100) : 0;
         localStorage.setItem('genesis-presentation-1-progress', slideProgress.toString());
         localStorage.setItem('academy-last-slide', currentSlide);
         localStorage.setItem('academy-timer-start', timerStartTime);
@@ -844,13 +846,32 @@ function initKeyboardShortcuts() {
 
 // ===== FULLSCREEN =====
 function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
-            console.warn('Fullscreen request failed:', err);
+    const doc = document;
+    const docEl = document.documentElement;
+    const isFs = doc.fullscreenElement || doc.webkitFullscreenElement || doc.mozFullScreenElement || doc.msFullscreenElement;
+    if (!isFs) {
+        const req = docEl.requestFullscreen || docEl.webkitRequestFullscreen || docEl.mozRequestFullScreen || docEl.msRequestFullscreen;
+        if (typeof req === 'function') {
+            try {
+                const p = req.call(docEl);
+                if (p && typeof p.catch === 'function') {
+                    p.catch(err => {
+                        console.warn('Fullscreen request failed:', err);
+                        showNotification('Fullscreen mode not available');
+                    });
+                }
+            } catch (err) {
+                console.warn('Fullscreen request threw:', err);
+                showNotification('Fullscreen mode not available');
+            }
+        } else {
             showNotification('Fullscreen mode not available');
-        });
+        }
     } else {
-        document.exitFullscreen();
+        const exit = doc.exitFullscreen || doc.webkitExitFullscreen || doc.mozCancelFullScreen || doc.msExitFullscreen;
+        if (typeof exit === 'function') {
+            try { exit.call(doc); } catch (_) {}
+        }
     }
 }
 
@@ -983,6 +1004,11 @@ function initChatbot() {
     const chatForm = document.getElementById('chat-input-form');
     const chatInput = document.getElementById('chat-input');
     const messagesContainer = document.getElementById('chat-messages');
+
+    // Gracefully no-op if any required elements are missing
+    if (!chatToggleButton || !chatWidget || !closeChatButton || !chatForm || !chatInput || !messagesContainer) {
+        return;
+    }
 
     chatToggleButton.addEventListener('click', () => {
         chatWidget.classList.toggle('visible');

@@ -255,13 +255,17 @@ async function ensureLevelLoaded(levelNumber) {
 
 async function ensureTutorialLoaded(levelNumber) {
     const idx = Math.max(1, Math.min(7, Number(levelNumber))) - 1;
-    if (allTutorials && allTutorials[idx]) return;
+    // Ensure global tutorial array exists and is shared
+    if (!Array.isArray(window.allTutorials)) {
+        window.allTutorials = new Array(7).fill(null);
+    }
+    if (window.allTutorials[idx]) return;
     const file = `tutorial-level${idx + 1}.js`;
     try {
         await loadScriptOnce(file);
         const key = `tutorialLevel${idx + 1}`;
         if (window[key]) {
-            allTutorials[idx] = window[key];
+            window.allTutorials[idx] = window[key];
         }
     } catch (e) {
         console.warn(`[Loader] Failed to load ${file}:`, e);
@@ -1852,13 +1856,48 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('[Auth] Auth UI elements forced visible');
     };
     
+    // Helper: safely update sign-in status text without removing buttons/markup
+    function setSigninStatusText(text) {
+        try {
+            const el = document.getElementById('signin-status-text');
+            if (el) {
+                el.textContent = text;
+                return;
+            }
+            const container = document.getElementById('signin-status-container');
+            if (container) {
+                const p = document.createElement('p');
+                p.id = 'signin-status-text';
+                p.style.color = '#cccccc';
+                p.textContent = text;
+                container.insertBefore(p, container.firstChild || null);
+            }
+        } catch (_) {}
+    }
+
+    // Toasts
+    function ensureToastContainer() {
+        let c = document.getElementById('toast-container');
+        if (!c) {
+            c = document.createElement('div');
+            c.id = 'toast-container';
+            document.body.appendChild(c);
+        }
+        return c;
+    }
+    function showToast(message, type = 'info', timeout = 2500) {
+        const c = ensureToastContainer();
+        const t = document.createElement('div');
+        t.className = `toast toast--${type}`;
+        t.textContent = message;
+        c.appendChild(t);
+        setTimeout(() => { if (t.parentNode) t.parentNode.removeChild(t); }, timeout);
+    }
+
     // Function to manually retry auth initialization if it failed
     window.retryAuth = async function() {
         console.log('[Auth] Manually retrying auth initialization...');
-        const statusContainer = document.getElementById('signin-status-container');
-        if (statusContainer) {
-            statusContainer.innerHTML = '<p id="signin-status-text" style="color:#cccccc;">Retrying sign-in…</p>';
-        }
+        setSigninStatusText('Retrying sign-in…');
         
         try {
             await ensureAuthLoaded();
@@ -1895,9 +1934,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (e) {
             console.error('[Auth] Manual retry failed:', e);
-            if (statusContainer) {
-                statusContainer.innerHTML = `<p style="color:#d4af37;">Retry failed: ${e.message}</p>`;
-            }
+            setSigninStatusText(`Retry failed: ${e.message}`);
             
             // Still show UI elements even if retry fails
             const signinButtons = document.getElementById('signin-buttons');
@@ -1923,9 +1960,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // If AuthManager is not loaded, try to load it
             if (!window.AuthManager) {
                 console.log('[Auth] AuthManager not available, attempting to load...');
-                if (statusContainer) {
-                    statusContainer.innerHTML = '<p id="signin-status-text" style="color:#cccccc;">Loading sign-in…</p>';
-                }
+                setSigninStatusText('Loading sign-in…');
                 await ensureAuthLoaded();
                 
                 // Give AuthManager a moment to initialize
@@ -1977,8 +2012,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('[Auth] Auth initialization completed successfully');
             } else {
                 console.warn('AuthManager not available after loading attempt. Sign-in and leaderboard disabled.');
+                setSigninStatusText('Auth not available in this environment.');
                 if (statusContainer) {
-                    statusContainer.innerHTML = '<p style="color:#d4af37;">Auth not available in this environment.</p>';
                     // Still make sure buttons are visible even if auth fails
                     const signinButtons = document.getElementById('signin-buttons');
                     if (signinButtons) {
@@ -1994,8 +2029,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (e) {
             console.error('[Auth] Auth initialization failed:', e);
+            setSigninStatusText(`Auth error: ${e.message}`);
             if (statusContainer) {
-                statusContainer.innerHTML = `<p style="color:#d4af37;">Auth error: ${e.message}</p>`;
                 // Still make sure buttons are visible even if auth fails
                 const signinButtons = document.getElementById('signin-buttons');
                 if (signinButtons) {
@@ -2513,7 +2548,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Tutorial System ---
-    const allTutorials = [
+    const allTutorials = (window.allTutorials = window.allTutorials || [
         typeof tutorialLevel1 !== 'undefined' ? tutorialLevel1 : null,
         typeof tutorialLevel2 !== 'undefined' ? tutorialLevel2 : null,
         typeof tutorialLevel3 !== 'undefined' ? tutorialLevel3 : null,
@@ -2521,7 +2556,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typeof tutorialLevel5 !== 'undefined' ? tutorialLevel5 : null,
         typeof tutorialLevel6 !== 'undefined' ? tutorialLevel6 : null,
         typeof tutorialLevel7 !== 'undefined' ? tutorialLevel7 : null
-    ];
+    ]);
 
     function shouldShowTutorial(levelNumber) {
         try {

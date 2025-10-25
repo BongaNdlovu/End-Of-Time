@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'sda-trivia-v12';
+﻿const CACHE_NAME = 'sda-trivia-v17';
 
 const CORE_ASSETS = [
   '/',
@@ -10,15 +10,10 @@ const CORE_ASSETS = [
   '/menu-dark-theme.css',
   '/audio-manager.js',
   '/script.js',
+  '/polyfills.js',
   '/firebase-config.js',
   '/questions.js',
-  '/questions-level1.js',
-  '/questions-level2.js',
-  '/questions-level3.js',
-  '/questions-level4.js',
-  '/questions-level5.js',
-  '/questions-level6.js',
-  '/questions-level7.js',
+  // questions-level*.js are lazy-loaded per level selection
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
@@ -28,7 +23,7 @@ const CORE_ASSETS = [
 const MEDIA_ASSETS = [
   // Background videos (exact casing)
   '/Background.mp4',
-  '/Background 1.mp4',
+  '/Background_1.mp4',
   // Level videos (exact casing)
   '/video 1.mp4',
   '/video 2.mp4',
@@ -52,7 +47,7 @@ const MEDIA_ASSETS = [
   '/Correct 2.wav',
   '/Correct 3.wav',
   '/Correct 4.wav',
-  '/Correct 5.wav',
+  '/Correct_5.wav',
   '/Correct 6.wav',
   '/Correct 7.wav',
   '/Correct 8.wav',
@@ -97,6 +92,10 @@ const TRANSITION_SVGS = [
   '/16.svg',
   '/17.svg'
 ];
+
+function isSupportedProtocol(protocol) {
+  return protocol === 'http:' || protocol === 'https:';
+}
 
 async function precacheAssets(cache, urls, options = {}) {
   const { skipPartial = true } = options;
@@ -159,8 +158,6 @@ self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
     await precacheAssets(cache, CORE_ASSETS);
-    await precacheAssets(cache, MEDIA_ASSETS);
-    await precacheAssets(cache, TRANSITION_SVGS);
     await self.skipWaiting();
   })());
 });
@@ -181,7 +178,17 @@ self.addEventListener('fetch', (event) => {
   }
 
   const requestURL = new URL(request.url);
+  // Ignore requests with non-HTTP(S) protocols (e.g., chrome-extension://, moz-extension://, data:, blob:)
+  if (!isSupportedProtocol(requestURL.protocol)) {
+    return;
+  }
   const sameOrigin = requestURL.origin === self.location.origin;
+
+  // Allow Firebase reserved endpoints to pass through untouched (e.g., /__/auth/*)
+  const isFirebaseReservedPath = requestURL.pathname.startsWith('/__/');
+  if (isFirebaseReservedPath) {
+    return;
+  }
 
   // Skip Firebase Auth URLs completely (Google OAuth, Firebase domains)
   const isAuthURL = requestURL.hostname.includes('google.com') ||
@@ -212,6 +219,24 @@ self.addEventListener('fetch', (event) => {
 
   if (request.mode === 'navigate') {
     event.respondWith(handleNavigationRequest(request));
+    return;
+  }
+
+  // Stale-While-Revalidate for JS/CSS
+  const pathname = requestURL.pathname || '';
+  const isJSorCSS = /\.(js|css)$/i.test(pathname);
+  if (isJSorCSS) {
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const cached = await cache.match(request);
+      const networkPromise = fetch(request).then(async (response) => {
+        if (shouldCache(request, response)) {
+          try { await cache.put(request, response.clone()); } catch (_) {}
+        }
+        return response;
+      }).catch(() => cached);
+      return cached || networkPromise;
+    })());
     return;
   }
 

@@ -1,5 +1,6 @@
-const functions = require('firebase-functions');
+const functions = require('firebase-functions/v1');
 const admin = require('firebase-admin');
+const { defineSecret } = require('firebase-functions/params');
 const nodemailer = require('nodemailer');
 
 // Load existing compiled TypeScript exports (e.g., onInteractionCreate)
@@ -14,14 +15,81 @@ if (!admin.apps.length) {
   admin.initializeApp();
 }
 
-// Configure your email service (example with Gmail)
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: functions.config().email?.user || process.env.EMAIL_USER || 'your-email@gmail.com',
-    pass: functions.config().email?.pass || process.env.EMAIL_PASS || 'your-app-password', // Use App Password for Gmail
-  },
-});
+// Configure email transport (Prefer dotenv/secrets env vars; fallback to legacy functions.config())
+const emailCfgEnv = {
+  user: process.env.EMAIL_USER,
+  pass: process.env.EMAIL_PASS,
+  from: process.env.EMAIL_FROM,
+};
+const smtpCfgEnv = {
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  secure: process.env.SMTP_SECURE,
+};
+
+// Legacy config (will be removed before March 2026)
+let emailCfgLegacy = {};
+let smtpCfgLegacy = {};
+try {
+  const cfg = functions.config ? functions.config() : {};
+  emailCfgLegacy = (cfg && cfg.email) || {};
+  smtpCfgLegacy = (cfg && cfg.smtp) || {};
+} catch (e) {
+  // ignore if not available
+}
+
+function buildTransporter() {
+  const useSmtpEnv = Boolean(smtpCfgEnv.host);
+  const useEmailEnv = Boolean(emailCfgEnv.user && emailCfgEnv.pass);
+  if (useSmtpEnv) {
+    return nodemailer.createTransport({
+      host: smtpCfgEnv.host,
+      port: Number(smtpCfgEnv.port || 465),
+      secure: String(smtpCfgEnv.secure ?? 'true') === 'true',
+      auth: {
+        user: emailCfgEnv.user,
+        pass: emailCfgEnv.pass,
+      },
+    });
+  }
+  if (useEmailEnv) {
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: emailCfgEnv.user,
+        pass: emailCfgEnv.pass,
+      },
+    });
+  }
+  if (smtpCfgLegacy.host) {
+    return nodemailer.createTransport({
+      host: smtpCfgLegacy.host,
+      port: Number(smtpCfgLegacy.port || 465),
+      secure: String(smtpCfgLegacy.secure || 'true') === 'true',
+      auth: {
+        user: emailCfgLegacy.user,
+        pass: emailCfgLegacy.pass,
+      },
+    });
+  }
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: emailCfgLegacy.user,
+      pass: emailCfgLegacy.pass,
+    },
+  });
+}
+
+function computeFromAddress() {
+  return emailCfgEnv.from
+    || emailCfgLegacy.from
+    || `End of Time Prayer Network <${emailCfgEnv.user || emailCfgLegacy.user || 'noreply@endoftime.com'}>`;
+}
+
+// Declare secrets and attach to functions so they load into env at runtime (1st Gen)
+const SECRET_EMAIL_USER = defineSecret('EMAIL_USER');
+const SECRET_EMAIL_PASS = defineSecret('EMAIL_PASS');
 
 // Helper subject/body builders
 function getEmailSubject(type) {
@@ -55,8 +123,13 @@ function getEmailBody(type, data = {}) {
   }
 }
 
-// Listen for email queue entries
-const sendEmailNotification = functions.firestore
+// Listen for email queue entries (attach secrets so env is populated at invocation time)
+const sendEmailNotification = functions
+  .runWith({ secrets: [
+    SECRET_EMAIL_USER,
+    SECRET_EMAIL_PASS,
+  ]})
+  .firestore
   .document('emailQueue/{docId}')
   .onCreate(async (snap) => {
     const data = snap.data();
@@ -66,12 +139,13 @@ const sendEmailNotification = functions.firestore
     }
 
     const mailOptions = {
-      from: 'End of Time Prayer Network <noreply@endoftime.com>',
+      from: computeFromAddress(),
       to: data.to,
       subject: getEmailSubject(data.type),
       html: getEmailBody(data.type, data.data),
     };
     try {
+      const transporter = buildTransporter();
       await transporter.sendMail(mailOptions);
       await snap.ref.update({ status: 'sent' });
     } catch (error) {

@@ -46,6 +46,29 @@
             auth = firebase.auth();
             db = firebase.firestore();
 
+            // Apply persistence fallback for broader browser compatibility
+            (async () => {
+                if (!auth || !auth.setPersistence || !firebase.auth || !firebase.auth.Auth) return;
+                try {
+                    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+                    console.log('[Auth] Persistence set to LOCAL');
+                } catch (e1) {
+                    console.warn('[Auth] LOCAL persistence not available, trying SESSION', e1 && e1.code);
+                    try {
+                        await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+                        console.log('[Auth] Persistence set to SESSION');
+                    } catch (e2) {
+                        console.warn('[Auth] SESSION persistence not available, falling back to NONE', e2 && e2.code);
+                        try {
+                            await auth.setPersistence(firebase.auth.Auth.Persistence.NONE);
+                            console.log('[Auth] Persistence set to NONE (in-memory)');
+                        } catch (e3) {
+                            console.error('[Auth] Failed to set any persistence mode', e3);
+                        }
+                    }
+                }
+            })();
+
             // Complete pending redirect if any, then set listener
             completeRedirect().finally(() => {
                 auth.onAuthStateChanged((user) => {

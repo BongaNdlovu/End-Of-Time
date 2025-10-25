@@ -50,9 +50,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://apis.google.com" crossorigin>
+    <link rel="preconnect" href="https://firebase.googleapis.com" crossorigin>
 
     <title>End of Time</title>
+    <script src="polyfills.js" defer></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dark-theme.css">
     <!-- App Icons -->
@@ -62,30 +70,17 @@
     <link rel="apple-touch-icon" href="icon-192.png">
     <!-- Remove Google Fonts, we will use local Montserrat fonts -->
     <script src="questions.js" defer></script>
-    <script src="questions-level1.js" defer></script>
-    <script src="questions-level2.js" defer></script>
-    <script src="questions-level3.js" defer></script>
-    <script src="questions-level4.js" defer></script>
-    <script src="questions-level5.js" defer></script>
-    <script src="questions-level6.js" defer></script>
-    <script src="questions-level7.js" defer></script>
+    <!-- questions-level*.js will be lazy-loaded per level selection -->
 
     <!-- Tutorial files -->
-    <script src="tutorial-level1.js" defer></script>
-    <script src="tutorial-level2.js" defer></script>
-    <script src="tutorial-level3.js" defer></script>
-    <script src="tutorial-level4.js" defer></script>
-    <script src="tutorial-level5.js" defer></script>
-    <script src="tutorial-level6.js" defer></script>
-    <script src="tutorial-level7.js" defer></script>
+    <!-- tutorial-level*.js will be lazy-loaded when opened -->
 
     <!-- Firebase Config MUST be loaded before auth-leaderboard.js and script.js -->
     <script src="firebase-config.js" defer></script>
 
     <script src="audio-manager.js" defer></script>
     <script src="key-facts.js" defer></script>
-    <!-- Auth/Leaderboard module -->
-    <script src="auth-leaderboard.js" defer></script>
+    <!-- auth-leaderboard.js will be lazy-loaded on demand -->
     <script>
         // Explicit level-to-video mapping based on your filenames
         window.LEVEL_VIDEO_MAP = {
@@ -99,7 +94,7 @@
         };
     </script>
     <script src="script.js?v=8" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/confetti-js/dist/index.min.js"></script>
+    <!-- Confetti library will be lazy-loaded when celebration triggers -->
     <!-- Manifest only loaded when not running locally -->
     <script>
         if (window.location.protocol !== 'file:') {
@@ -111,7 +106,7 @@
     </script>
 </head>
 <body>
-<video id="background-video" src="Background.mp4" autoplay loop muted playsinline style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen;"></video>
+<video id="background-video" src="Background.mp4" autoplay loop muted playsinline preload="metadata" poster="1.jpg" style="position:fixed;top:0;left:0;width:100vw;height:100svh;object-fit:cover;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen;"></video>
     <div id="loading-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(30,32,40,0.95);display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.4s;">
                     <div style="color:#ffffff;font-family:'Montserrat-Regular', Arial, sans-serif;font-size:2.2rem;text-shadow:0 0 12px #111;">Loading End of Time...</div>
         <div id="loading-progress" style="margin-top:1.2rem;width:60vw;max-width:320px;height:12px;background:#333;border-radius:8px;overflow:hidden;">
@@ -211,7 +206,7 @@
                                 <div class="digital-timer">
                                     <div class="timer-display">
                                         <span class="timer-label">TIME</span>
-                                        <span class="timer-value">08</span>
+                                        <span class="timer-value">00</span>
                                     </div>
                                 </div>
                             </div>
@@ -363,26 +358,26 @@
         </div>
     </div>
     <!-- Audio elements (hidden) -->
-    <audio id="audio-correct-1" src="correct_answer_1.wav" preload="auto"></audio>
-    <audio id="audio-correct-2" src="correct_answer_2.wav" preload="auto"></audio>
-    <audio id="audio-wrong" src="WRONG BUZZER 7.wav" preload="auto"></audio>
-    <audio id="audio-timeup" src="Motionarray_Floraphonic_Gameshow_Buzzer_1.wav" preload="auto"></audio>
-    <audio id="audio-riser" src="Semi Impact Risers-001.wav" preload="auto"></audio>
+    <audio id="audio-correct-1" src="correct_answer_1.wav" preload="none"></audio>
+    <audio id="audio-correct-2" src="correct_answer_2.wav" preload="none"></audio>
+    <audio id="audio-wrong" src="WRONG BUZZER 7.wav" preload="none"></audio>
+    <audio id="audio-timeup" src="Motionarray_Floraphonic_Gameshow_Buzzer_1.wav" preload="none"></audio>
+    <audio id="audio-riser" src="Semi Impact Risers-001.wav" preload="none"></audio>
     <!-- Remove old background music -->
     <!-- <audio id="audio-bg" src="2024-12-08_-_Detective_Revelation_-_www.FesliyanStudios.com.mp3" preload="auto" loop></audio> -->
     <!-- Background music tracks -->
-    <audio id="audio-bg-2" src="soundtrack 2.mp3" preload="auto"></audio>
-    <audio id="audio-bg-3" src="soundtrack 3.mp3" preload="auto"></audio>
-    <audio id="audio-bg-4" src="soundtrack 4.mp3" preload="auto"></audio>
-    <audio id="audio-bg-5" src="soundtrack 5.mp3" preload="auto"></audio>
-    <audio id="audio-bg-6" src="soundtrack 6.mp3" preload="auto"></audio>
-    <audio id="audio-bg-7" src="soundtrack 7.mp3" preload="auto"></audio>
-    <audio id="audio-bg-8" src="soundtrack 8.mp3" preload="auto"></audio>
-    <audio id="audio-timer-tick" src="Motionarray_Floraphonic_Gameshow_Buzzer_1.wav" preload="auto"></audio>
-    <audio id="audio-ticking-time" src="ticking_time.wav" preload="auto"></audio>
-    <audio id="audio-transition" src="Transition.wav" preload="auto"></audio>
-    <audio id="audio-transition2" src="Transition 2.wav" preload="auto"></audio>
-    <audio id="audio-key-fact" src="Key Facts.wav" preload="auto"></audio>
+    <audio id="audio-bg-2" src="soundtrack 2.mp3" preload="none"></audio>
+    <audio id="audio-bg-3" src="soundtrack 3.mp3" preload="none"></audio>
+    <audio id="audio-bg-4" src="soundtrack 4.mp3" preload="none"></audio>
+    <audio id="audio-bg-5" src="soundtrack 5.mp3" preload="none"></audio>
+    <audio id="audio-bg-6" src="soundtrack 6.mp3" preload="none"></audio>
+    <audio id="audio-bg-7" src="soundtrack 7.mp3" preload="none"></audio>
+    <audio id="audio-bg-8" src="soundtrack 8.mp3" preload="none"></audio>
+    <audio id="audio-timer-tick" src="Motionarray_Floraphonic_Gameshow_Buzzer_1.wav" preload="none"></audio>
+    <audio id="audio-ticking-time" src="ticking_time.wav" preload="none"></audio>
+    <audio id="audio-transition" src="Transition.wav" preload="none"></audio>
+    <audio id="audio-transition2" src="Transition 2.wav" preload="none"></audio>
+    <audio id="audio-key-fact" src="Key Facts.wav" preload="none"></audio>
     <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <!-- Firebase Auth -->

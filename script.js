@@ -2614,7 +2614,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.showTutorial = function(levelNumber, mode, callback, options) {
         const isViewOnly = options && options.viewOnly === true;
-        const tutorial = allTutorials[levelNumber - 1];
+        const tutorial = window.allTutorials[levelNumber - 1];
         if (!tutorial) {
             console.warn(`Tutorial for level ${levelNumber} not found`);
             callback();

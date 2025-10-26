@@ -73,12 +73,97 @@ explanationDiv.style.padding = '1rem 1.2rem';
 explanationDiv.style.boxShadow = '0 2px 8px rgba(139,0,0,0.2)';
 explanationDiv.style.gridColumn = '1 / -1';
 explanationDiv.style.marginTop = '1rem';
+explanationDiv.style.maxHeight = '60vh';
+explanationDiv.style.overflowY = 'auto';
+explanationDiv.style.overscrollBehavior = 'contain';
+explanationDiv.style.scrollBehavior = 'smooth';
+explanationDiv.style.position = 'relative';
+explanationDiv.style.zIndex = '10';
 // Insert after the question-options-container in the DOM
 const questionOptionsContainer = document.querySelector('.question-options-container');
 if (questionOptionsContainer) {
     questionOptionsContainer.parentNode.insertBefore(explanationDiv, questionOptionsContainer.nextSibling);
 } else {
     optionsDiv.parentNode.appendChild(explanationDiv);
+}
+
+function escapeHtml(text) {
+    if (text === null || text === undefined) return '';
+    return String(text).replace(/[&<>"]|'/g, (char) => {
+        switch (char) {
+            case '&': return '&amp;';
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '"': return '&quot;';
+            case "'": return '&#39;';
+            default: return char;
+        }
+    });
+}
+
+function formatExplanationContent(explanation) {
+    if (!explanation) return '';
+
+    const sections = [];
+
+    const appendSection = (title, body) => {
+        if (!body) return;
+        const normalizedBody = escapeHtml(body)
+            .replace(/\u0000/g, '')
+            .replace(/\r\n|\n|\r/g, '<br>');
+        const label = escapeHtml(title);
+        sections.push(`<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">${label}</strong><br>${normalizedBody}</div>`);
+    };
+
+    if (typeof explanation === 'string') {
+        const body = escapeHtml(explanation).replace(/\r\n|\n|\r/g, '<br>');
+        sections.push(`<div style="margin-bottom: 0;">${body}</div>`);
+        return sections.join('');
+    }
+
+    if (Array.isArray(explanation)) {
+        explanation.forEach((item, index) => {
+            if (!item) return;
+            if (typeof item === 'string') {
+                const body = escapeHtml(item).replace(/\r\n|\n|\r/g, '<br>');
+                sections.push(`<div style="margin-bottom: 1rem;">${body}</div>`);
+            } else if (item.title || item.heading || item.label) {
+                const title = item.title || item.heading || item.label || `Section ${index + 1}`;
+                appendSection(title, item.body || item.text || item.content || item.description || '');
+            } else if (typeof item === 'object') {
+                Object.entries(item).forEach(([key, value]) => {
+                    appendSection(key.replace(/_/g, ' '), value);
+                });
+            }
+        });
+        return sections.join('');
+    }
+
+    if (typeof explanation === 'object') {
+        const labelMap = {
+            Relevance_and_Correctness: 'Relevance & Correctness',
+            Importance_of_Wording: 'Importance of Wording',
+            Factual_Explanation: 'Factual Explanation',
+            Theological_Meaning: 'Theological Meaning',
+            Christ_Centered_Meaning: 'Christ-Centered Meaning',
+            Application: 'Application',
+            Key_Takeaway: 'Key Takeaway'
+        };
+
+        Object.entries(explanation).forEach(([key, value]) => {
+            if (value === null || value === undefined || value === '') return;
+            const title = labelMap[key] || key.replace(/_/g, ' ');
+            appendSection(title, value);
+        });
+
+        if (sections.length === 0) {
+            sections.push(`<div style="margin-bottom: 0;">${escapeHtml(JSON.stringify(explanation))}</div>`);
+        }
+
+        return sections.join('');
+    }
+
+    return `<div style="margin-bottom: 0;">${escapeHtml(String(explanation))}</div>`;
 }
 
 // Audio system is now handled by audio-manager.js
@@ -171,6 +256,7 @@ let blueTeamQuestions = [];
 // --- NEW FOR LEVEL SYSTEM ---
 let currentGameLevel = 1;
 const LEVEL_PASS_PERCENTAGE = 0.7; // 70% to pass a level
+const ASSET_VERSION = '20250127a';
 const allLevels = [
     { id: 1, questions: typeof level1Questions !== 'undefined' ? level1Questions : [], name: "Level 1" },
     { id: 2, questions: typeof level2Questions !== 'undefined' ? level2Questions : [], name: "Level 2" },
@@ -218,17 +304,29 @@ function shuffle(array) {
 }
 
 // --- Lightweight dynamic loader (lazy-load large bundles) ---
+function versionedAsset(src) {
+    const joinChar = src.includes('?') ? '&' : '?';
+    return `${src}${joinChar}v=${ASSET_VERSION}`;
+}
+
 async function loadScriptOnce(src) {
     return new Promise((resolve, reject) => {
         try {
-            if (document.querySelector(`script[data-dyn="${src}"]`)) {
-                resolve();
-                return;
+            const existing = document.querySelector(`script[data-dyn="${src}"]`);
+            if (existing) {
+                const loadedVersion = existing.getAttribute('data-version');
+                if (loadedVersion === ASSET_VERSION) {
+                    resolve();
+                    return;
+                }
+                existing.remove();
             }
+
             const s = document.createElement('script');
-            s.src = src;
+            s.src = versionedAsset(src);
             s.defer = true;
             s.dataset.dyn = src;
+            s.dataset.version = ASSET_VERSION;
             s.onload = () => resolve();
             s.onerror = (e) => reject(e);
             document.head.appendChild(s);
@@ -240,35 +338,70 @@ async function loadScriptOnce(src) {
 
 async function ensureLevelLoaded(levelNumber) {
     const idx = Math.max(1, Math.min(7, Number(levelNumber))) - 1;
-    if (Array.isArray(allLevels[idx].questions) && allLevels[idx].questions.length > 0) return;
+    
+    // Check if already loaded
+    if (Array.isArray(allLevels[idx].questions) && allLevels[idx].questions.length > 0) {
+        console.log(`[Loader] Level ${levelNumber} already loaded with ${allLevels[idx].questions.length} questions`);
+        return;
+    }
+    
     const file = `questions-level${idx + 1}.js`;
+    console.log(`[Loader] Loading Level ${levelNumber} from ${file}`);
+    
     try {
         await loadScriptOnce(file);
         const key = `level${idx + 1}Questions`;
-        if (Array.isArray(window[key])) {
+        console.log(`[Loader Checking] Looking for ${key} in window, found:`, !!window[key], 'is array:', Array.isArray(window[key]));
+        
+        if (Array.isArray(window[key]) && window[key].length > 0) {
             allLevels[idx].questions = window[key];
+            console.log(`[Loader] Successfully loaded Level ${levelNumber} with ${window[key].length} questions`);
+        } else {
+            console.error(`[Loader] Script loaded but ${key} not found or empty. Available level variables:`, Object.keys(window).filter(k => k.startsWith('level')));
         }
     } catch (e) {
-        console.warn(`[Loader] Failed to load ${file}:`, e);
+        console.error(`[Loader] Failed to load ${file}:`, e);
     }
 }
 
 async function ensureTutorialLoaded(levelNumber) {
     const idx = Math.max(1, Math.min(7, Number(levelNumber))) - 1;
+    
     // Ensure global tutorial array exists and is shared
     if (!Array.isArray(window.allTutorials)) {
         window.allTutorials = new Array(7).fill(null);
+        console.log("[Tutorial] Created window.allTutorials array");
     }
-    if (window.allTutorials[idx]) return;
+    
+    // Check if already loaded
+    if (window.allTutorials[idx]) {
+        console.log(`[Tutorial] Level ${levelNumber} tutorial already loaded`);
+        return;
+    }
+    
     const file = `tutorial-level${idx + 1}.js`;
+    console.log(`[Tutorial] Loading Level ${levelNumber} tutorial from ${file}`);
+    
     try {
         await loadScriptOnce(file);
         const key = `tutorialLevel${idx + 1}`;
+        console.log(`[Tutorial] Checking for ${key} in window, found:`, !!window[key]);
+        
         if (window[key]) {
             window.allTutorials[idx] = window[key];
+            console.log(`[Tutorial] Successfully loaded Level ${levelNumber} tutorial`);
+        } else {
+            console.error(`[Tutorial] Script loaded but ${key} not found. Available tutorial variables:`, Object.keys(window).filter(k => k.startsWith('tutorialLevel')));
+            
+            // Fallback: try to find any loaded tutorial in a different format
+            const altKey = `level${idx + 1}Tutorial`;
+            if (window[altKey]) {
+                window.allTutorials[idx] = window[altKey];
+                console.log(`[Tutorial] Found tutorial using alternative key ${altKey}`);
+            }
         }
     } catch (e) {
-        console.warn(`[Loader] Failed to load ${file}:`, e);
+        console.error(`[Tutorial] Failed to load ${file}:`, e);
     }
 }
 
@@ -2549,13 +2682,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Tutorial System ---
     const allTutorials = (window.allTutorials = window.allTutorials || [
-        typeof tutorialLevel1 !== 'undefined' ? tutorialLevel1 : null,
-        typeof tutorialLevel2 !== 'undefined' ? tutorialLevel2 : null,
-        typeof tutorialLevel3 !== 'undefined' ? tutorialLevel3 : null,
-        typeof tutorialLevel4 !== 'undefined' ? tutorialLevel4 : null,
-        typeof tutorialLevel5 !== 'undefined' ? tutorialLevel5 : null,
-        typeof tutorialLevel6 !== 'undefined' ? tutorialLevel6 : null,
-        typeof tutorialLevel7 !== 'undefined' ? tutorialLevel7 : null
+        typeof window.tutorialLevel1 !== 'undefined' ? window.tutorialLevel1 : null,
+        typeof window.tutorialLevel2 !== 'undefined' ? window.tutorialLevel2 : null,
+        typeof window.tutorialLevel3 !== 'undefined' ? window.tutorialLevel3 : null,
+        typeof window.tutorialLevel4 !== 'undefined' ? window.tutorialLevel4 : null,
+        typeof window.tutorialLevel5 !== 'undefined' ? window.tutorialLevel5 : null,
+        typeof window.tutorialLevel6 !== 'undefined' ? window.tutorialLevel6 : null,
+        typeof window.tutorialLevel7 !== 'undefined' ? window.tutorialLevel7 : null
     ]);
 
     function shouldShowTutorial(levelNumber) {
@@ -2614,13 +2747,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.showTutorial = function(levelNumber, mode, callback, options) {
         const isViewOnly = options && options.viewOnly === true;
-        const tutorial = window.allTutorials[levelNumber - 1];
-        if (!tutorial) {
-            console.warn(`Tutorial for level ${levelNumber} not found`);
-            callback();
-            return;
+        let tutorialData = window.allTutorials[levelNumber - 1];
+        
+        if (!tutorialData) {
+            console.warn(`Tutorial for level ${levelNumber} not found. Available tutorials:`, window.allTutorials.map((t, i) => t ? `Level ${i+1}` : null).filter(Boolean));
+            
+            // Try fallback to global variable as last resort
+            const globalKey = `tutorialLevel${levelNumber}`;
+            if (window[globalKey]) {
+                console.log(`[Tutorial] Using fallback global variable ${globalKey}`);
+                window.allTutorials[levelNumber - 1] = window[globalKey];
+                // Use the fallback tutorial
+                tutorialData = window.allTutorials[levelNumber - 1];
+            } else {
+                console.error(`[Tutorial] No tutorial found for level ${levelNumber} and no fallback available`);
+                callback();
+                return;
+            }
         }
 
+        // Use the tutorial (either original or fallback)
+        tutorialData = window.allTutorials[levelNumber - 1];
         const modal = document.getElementById('tutorial-modal');
         const title = document.getElementById('tutorial-title');
         const subtitle = document.getElementById('tutorial-subtitle');
@@ -2629,14 +2776,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const skipCheckbox = document.getElementById('skip-tutorials-checkbox');
 
         // Set title and subtitle
-        title.textContent = tutorial.title;
-        subtitle.textContent = tutorial.subtitle;
+        title.textContent = tutorialData.title;
+        subtitle.textContent = tutorialData.subtitle;
 
         // Clear previous sections
         sectionsContainer.innerHTML = '';
 
         // Create sections
-        const sections = [tutorial.mechanics, tutorial.content, tutorial.tools, tutorial.tips];
+        const sections = [tutorialData.mechanics, tutorialData.content, tutorialData.tools, tutorialData.tips];
         sections.forEach(section => {
             if (!section) return;
 
@@ -2766,10 +2913,27 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- NEW: CHECK FOR TIME ATTACK MODE ---
         isTimeAttackMode = false; // Force disable time attack mode
 
-        const level = allLevels.find(l => l.id === levelNumber);
+        // Get questions for the selected level - use the same check that ensureLevelLoaded uses
+        const levelIndex = Math.max(1, Math.min(7, Number(levelNumber))) - 1;
+        const level = allLevels[levelIndex];
+        
         if (!level) {
             console.error(`Level ${levelNumber} not found!`);
             return;
+        }
+        
+        // Double-check that questions are loaded after ensureLevelLoaded
+        if (!level.questions || level.questions.length === 0) {
+            // Try to load directly from global variable if it exists
+            const globalVarName = `level${levelNumber}Questions`;
+            if (window[globalVarName] && Array.isArray(window[globalVarName])) {
+                level.questions = window[globalVarName];
+                console.log(`Loaded level ${levelNumber} questions directly from global variable`);
+            } else {
+                console.error(`Level ${levelNumber} found but has no questions loaded!`);
+                console.log(`Available global vars:`, Object.keys(window).filter(k => k.startsWith('level')));
+                return;
+            }
         }
         
         // Load questions for the selected level and shuffle them
@@ -2816,12 +2980,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- NEW: CHECK FOR TIME ATTACK MODE ---
         isTimeAttackMode = false; // Force disable time attack mode
 
-        // Get questions for the selected level
-        const levelData = allLevels.find(level => level.id === levelNumber);
-        if (!levelData || !levelData.questions || levelData.questions.length === 0) {
-            console.error(`Level ${levelNumber} not found or has no questions!`);
-            return;
-        }
+        // At this point, level is already validated and loaded, so we can use it directly
+        const levelData = level; // Use the level we already verified
         
         let availableQuestions = [...levelData.questions];
         let numQuestions = Math.min(availableQuestions.length, 20); // Default to 20 or all questions if less
@@ -3314,34 +3474,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const currentQ = questions[currentQuestionIndex];
-        if (currentQ.explanation) {
-            // Handle the new explanation object structure
-            let explanationHTML = '<span style="color: #8B0000; font-weight: bold;">💡 Explanation:</span><br><br>';
-            
-            if (typeof currentQ.explanation === 'object') {
-                // New structured explanation format
-                if (currentQ.explanation.Relevance_and_Correctness) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Relevance & Correctness:</strong><br>${currentQ.explanation.Relevance_and_Correctness}</div>`;
-                }
-                if (currentQ.explanation.Importance_of_Wording) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Importance of Wording:</strong><br>${currentQ.explanation.Importance_of_Wording}</div>`;
-                }
-                if (currentQ.explanation.Factual_Explanation) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Factual Explanation:</strong><br>${currentQ.explanation.Factual_Explanation}</div>`;
-                }
-                if (currentQ.explanation.Theological_Meaning) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Theological Meaning:</strong><br>${currentQ.explanation.Theological_Meaning}</div>`;
-                }
-                if (currentQ.explanation.Christ_Centered_Meaning) {
-                    explanationHTML += `<div style="margin-bottom: 1rem;"><strong style="color: #FFD700; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Christ-Centered Meaning:</strong><br>${currentQ.explanation.Christ_Centered_Meaning}</div>`;
-                }
-            } else {
-                // Fallback for old string format
-                explanationHTML += currentQ.explanation;
-            }
-            
-            explanationDiv.innerHTML = explanationHTML;
+        const formattedExplanation = formatExplanationContent(currentQ.explanation);
+        if (formattedExplanation) {
+            explanationDiv.innerHTML = `<span style="color: #8B0000; font-weight: bold;">💡 Explanation:</span><br><br>${formattedExplanation}`;
             explanationDiv.style.display = 'block';
+            explanationDiv.scrollTop = 0;
+            try { explanationDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (_) {}
         }
         // Hide deep insight by default
         deepInsightDiv.style.display = 'none';

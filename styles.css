@@ -97,11 +97,14 @@ body, html {
         0 24px 60px rgba(0, 0, 0, 0.7),
         0 0 30px rgba(143, 21, 21, 0.25),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    overflow: hidden;
+    overflow: visible;
     padding: 2.5rem;
     isolation: isolate;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    min-height: auto;
+    max-height: none;
+    height: auto;
 }
 
 .quiz-background {
@@ -2592,10 +2595,12 @@ html, body {
 /* Horizontal game layout */
 .game {
     display: grid;
-    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-rows: auto auto auto 1fr auto auto;
     grid-template-columns: 1fr;
     gap: 1rem;
-    height: 100%;
+    min-height: auto;
+    height: auto;
+    max-height: none;
 }
 
 /* Game header - logo, tokens, timer */
@@ -2882,7 +2887,9 @@ html, body {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     align-items: start;
-    height: 100%;
+    min-height: auto;
+    height: auto;
+    max-height: none;
 }
 
 .question {
@@ -3228,6 +3235,9 @@ html, body {
     letter-spacing: 0.3px;
     grid-column: 1 / -1;
     transition: all 0.2s ease;
+    max-height: 50vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 #explanation[style*="display: block"] {
@@ -3300,6 +3310,26 @@ html, body {
 .game.options-phase .options {
     max-width: 800px;
     width: 100%;
+}
+
+/* Custom scrollbar styling for explanation */
+#explanation::-webkit-scrollbar {
+    width: 8px;
+}
+
+#explanation::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+#explanation::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.5);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+#explanation::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 215, 0, 0.7);
 }
 
 /* Question-only phase styling */

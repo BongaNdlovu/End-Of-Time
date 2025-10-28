@@ -7,7 +7,8 @@
   <title>End of Time Academy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{
@@ -15,6 +16,7 @@
       --blood-2:#b10f1a;
       --ink:#0b0b0c;
       --paper:#ffffff;
+      --hover-scale: 1.015;
       --grain: radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08) 0%, transparent 45%),
                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%),
                radial-gradient(circle at 50% 80%, rgba(255,255,255,0.06) 0%, transparent 40%);
@@ -139,38 +141,43 @@
       50% { background-position: 100% 50%; }
     }
 
+    .u-cta,
     .cta-btn{
       --accent: var(--blood-2);
       position: relative; 
       overflow: hidden; 
       border: 1px solid rgba(255,255,255,.14);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(127,10,10,.12));
-      box-shadow: 0 10px 40px rgba(177,15,26,.15), inset 0 0 0 1px rgba(255,255,255,.06);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 24px rgba(177,15,26,.12), inset 0 0 0 1px rgba(255,255,255,.06);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    .u-cta::before,
     .cta-btn::before{
       content:""; 
       position:absolute; 
       inset:-2px; 
       background: conic-gradient(from 180deg, var(--accent), transparent 30%, transparent 70%, var(--accent));
-      filter: blur(12px); 
-      opacity:.35; 
+      filter: blur(10px); 
+      opacity:.18; 
       transition: opacity .25s ease; 
       z-index:0;
     }
+    .u-cta:hover,
     .cta-btn:hover { 
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(var(--hover-scale));
       box-shadow: 0 15px 50px rgba(177,15,26,.25), inset 0 0 0 1px rgba(255,255,255,.1);
     }
+    .u-cta:hover::before,
     .cta-btn:hover::before{ opacity:.75; }
+    .u-cta:active,
     .cta-btn:active { transform: translateY(0); }
 
     /* Fade in animations */
     .fade-in {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(12px);
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                  transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .fade-in.visible {
       opacity: 1;
@@ -187,15 +194,32 @@
       position:relative; 
       background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0)); 
     }
+    /* Lazy-render below-the-fold sections to improve initial render */
+    .section-below-fold { content-visibility: auto; contain-intrinsic-size: 1px 1000px; }
+    /* Long grids may be heavy: hint to render lazily */
+    .long-grid {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 800px;
+      overflow: visible;
+    }
 
+    #studies .long-grid,
+    #series .long-grid {
+      content-visibility: visible;
+      contain: none;
+    }
+
+    .u-card,
     .card{ 
-      background: rgba(255,255,255,.04); 
-      border:1px solid rgba(255,255,255,.08); 
+      background: rgba(168,168,168,.02); 
+      border:1px solid rgba(168,168,168,.08); 
       border-radius: 1.25rem;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      will-change: transform;
     }
+    .u-card::before,
     .card::before {
       content: '';
       position: absolute;
@@ -203,16 +227,20 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(177,15,26,0.1), transparent);
+      background: linear-gradient(90deg, transparent, rgba(139,0,0,0.15), transparent);
       transition: left 0.5s;
+      pointer-events: none;
     }
+    .u-card:hover::before,
     .card:hover::before {
       left: 100%;
     }
+    .u-card:hover,
     .card:hover{ 
-      border-color: rgba(177,15,26,.35); 
-      box-shadow: 0 15px 45px rgba(177,15,26,.2);
-      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(139,0,0,.5); 
+      box-shadow: 0 15px 45px rgba(139,0,0,.3);
+      transform: translateY(-8px) scale(var(--hover-scale));
+      z-index: 2;
     }
 
     .scanlines{
@@ -228,7 +256,8 @@
     /* Scripture carousel */
     .scripture-carousel {
       background: linear-gradient(135deg, rgba(177,15,26,0.1), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.22);
       border-radius: 1.5rem;
       padding: 3rem 2rem;
       position: relative;
@@ -362,7 +391,8 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      /* remove baseline border to avoid clipping hover visuals */
+      border-bottom: none;
       padding: 0 1rem;
       margin: 2rem auto;
       max-width: 900px;
@@ -376,8 +406,7 @@
       padding: 1rem 2rem;
       background: transparent;
       color: rgba(255,255,255,0.6);
-      border: none;
-      border-bottom: 3px solid transparent;
+      border: none; /* remove bottom border to prevent cut-off */
       cursor: pointer;
       transition: all 0.3s ease;
       position: relative;
@@ -387,10 +416,7 @@
       color: rgba(255,255,255,0.9);
     }
 
-    .tab-button.active {
-      color: #ffffff;
-      border-bottom-color: var(--blood-2);
-    }
+    .tab-button.active { color: #ffffff; }
 
     .tab-content {
       display: none;
@@ -424,17 +450,20 @@
 
     .principle-card {
       background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.05);
       border-radius: 1rem;
       padding: 2rem;
       margin-bottom: 1.5rem;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 10px 32px rgba(0,0,0,0.18);
+      overflow: visible;
     }
 
     .principle-card:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(177,15,26,0.3);
-      transform: translateY(-2px);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(177,15,26,0.25);
+      box-shadow: 0 16px 44px rgba(0,0,0,0.26);
+      transform: translateY(-4px) scale(var(--hover-scale));
     }
 
     .principle-number {
@@ -526,9 +555,28 @@
       text-align: center;
       line-height: 1.4;
     }
+    /* Accessibility: Skip link for keyboard users */
+    .skip-link{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .skip-link:focus{ left:16px; top:16px; width:auto; height:auto; padding:8px 12px; background:#111; color:#fff; border-radius:6px; z-index:1000; }
+
+    /* Respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce){
+      .glitch, .gradient-text, .fade-in { animation: none !important; transition: none !important; }
+      #particleCanvas, #waveCanvas { display: none !important; }
+    }
+
+    /* Accessible focus states */
+    a:focus-visible,
+    button:focus-visible,
+    .cta-btn:focus-visible,
+    .tab-button:focus-visible {
+      outline: 2px solid var(--blood-2);
+      outline-offset: 3px;
+    }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <!-- Page Transition Overlay -->
   <div class="page-transition" id="pageTransition"></div>
 
@@ -583,7 +631,7 @@
           In‑depth, verse‑by‑verse studies presented cinematically. Read, reflect, and behold the story of redemption with clarity and conviction.
         </p>
         <div class="mt-10 flex flex-wrap gap-4">
-          <a href="#studies" class="cta-btn px-6 py-3.5 rounded-2xl font-semibold text-base">Explore Studies</a>
+          <a href="#studies" class="u-cta cta-btn px-6 py-3.5 rounded-2xl font-semibold text-base">Explore Studies</a>
           <a href="#series" class="px-6 py-3.5 rounded-2xl font-semibold border border-white/15 bg-white/5 hover:bg-white/10 transition-all hover:scale-105">Watch & Read Series</a>
         </div>
       </div>
@@ -596,12 +644,12 @@
     <button class="tab-button" onclick="switchTab('methodology')">How We Are Going To Study The Bible</button>
   </div>
 
-  <main>
+  <main id="main">
     <!-- Tab Content: Bible Studies -->
     <div id="studies-content" class="tab-content active">
       
     <!-- Scripture Carousel -->
-    <section id="verses" class="section py-16 md:py-20">
+    <section id="verses" class="section section-below-fold py-16 md:py-20">
       <div class="max-w-4xl mx-auto px-6">
         <div class="scripture-carousel fade-in">
           <div class="verse active relative z-10">
@@ -633,14 +681,14 @@
     </section>
 
     <!-- Featured Studies -->
-    <section id="studies" class="section py-16 md:py-24">
+    <section id="studies" class="section section-below-fold py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-6">
         <div class="flex items-end justify-between gap-6 mb-10">
           <h2 class="text-3xl md:text-4xl font-bold">Featured Studies</h2>
           <a href="#" class="text-sm text-white/70 hover:text-white transition-colors font-medium">View all →</a>
         </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <article class="card p-6 fade-in">
+          <div class="grid md:grid-cols-3 gap-6 long-grid">
+          <article class="card u-card p-6 fade-in">
             <h3 class="bible-book-title mb-3">Genesis</h3>
             <p class="mt-2 text-white/70 leading-relaxed">The beginning of all things—creation, fall, and God's redemptive plan unfolds from the first book of Scripture.</p>
             <a href="genesis.html" class="mt-5 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white font-semibold transition-colors group">
@@ -648,7 +696,7 @@
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </a>
           </article>
-          <article class="card p-6 fade-in">
+          <article class="card u-card p-6 fade-in">
             <h3 class="bible-book-title mb-3">Exodus</h3>
             <p class="mt-2 text-white/70 leading-relaxed">Deliverance from bondage, the law given at Sinai, and God's presence among His people in the wilderness journey.</p>
             <a href="#" class="mt-5 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white font-semibold transition-colors group">
@@ -656,7 +704,7 @@
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </a>
           </article>
-          <article class="card p-6 fade-in">
+          <article class="card u-card p-6 fade-in">
             <h3 class="bible-book-title mb-3">Leviticus</h3>
             <p class="mt-2 text-white/70 leading-relaxed">Holiness, sacrifice, and worship—understanding God's requirements for approaching Him in the sacrificial system.</p>
             <a href="#" class="mt-5 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white font-semibold transition-colors group">
@@ -670,14 +718,14 @@
 
     <!-- Series (feature-flagged) -->
     <template id="series-section-template">
-      <section id="series" class="section py-16 md:py-24">
+      <section id="series" class="section section-below-fold py-16 md:py-24">
         <div class="max-w-6xl mx-auto px-6">
           <div class="flex items-end justify-between gap-6 mb-10">
             <h2 class="text-3xl md:text-4xl font-bold">Series</h2>
             <a href="#" class="text-sm text-white/70 hover:text-white transition-colors font-medium">Browse all →</a>
           </div>
-          <div class="grid md:grid-cols-2 gap-6">
-            <article class="card p-8 fade-in">
+          <div class="grid md:grid-cols-2 gap-6 long-grid">
+            <article class="card u-card p-8 fade-in">
               <div class="mb-4 inline-flex px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold">12 Episodes</div>
               <h3 class="text-2xl font-bold mb-3">Watchmen on the Walls</h3>
               <p class="text-white/60 text-sm mb-3">Isaiah 62:6</p>
@@ -687,7 +735,7 @@
                 <span class="transition-transform group-hover:translate-x-1">→</span>
               </a>
             </article>
-            <article class="card p-8 fade-in">
+            <article class="card u-card p-8 fade-in">
               <div class="mb-4 inline-flex px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold">8 Episodes</div>
               <h3 class="text-2xl font-bold mb-3">The Everlasting Gospel</h3>
               <p class="text-white/60 text-sm mb-3">Revelation 14:6</p>
@@ -703,7 +751,7 @@
     </template>
 
     <!-- About -->
-    <section id="about" class="section py-16 md:py-24">
+    <section id="about" class="section section-below-fold py-16 md:py-24">
       <div class="max-w-3xl mx-auto px-6 text-white/85">
         <h2 class="text-3xl md:text-4xl font-bold mb-6 fade-in">About</h2>
         <div class="space-y-4 text-lg leading-relaxed fade-in">
@@ -719,7 +767,7 @@
     <!-- Tab Content: How We Are Going To Study The Bible -->
     <div id="methodology-content" class="tab-content">
       
-      <section class="section py-16 md:py-24">
+      <section class="section section-below-fold py-16 md:py-24">
         <div class="max-w-5xl mx-auto px-6">
           
           <!-- Introduction -->
@@ -877,13 +925,13 @@
 
     // Floating nav on scroll
     const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    });
+    // Passive scroll listener with light debounce
+    function debounce(fn, delay){ let t; return function(){ const ctx=this, args=arguments; clearTimeout(t); t=setTimeout(function(){ fn.apply(ctx,args); }, delay); }; }
+    let __supportsPassive = false; try { const opts = Object.defineProperty({}, 'passive', { get(){ __supportsPassive = true; } }); window.addEventListener('test', null, opts); } catch(e) {}
+    const onScrollNav = debounce(function(){
+      if (window.scrollY > 100) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    }, 50);
+    window.addEventListener('scroll', onScrollNav, __supportsPassive ? { passive: true } : false);
 
     // Intersection Observer for fade-ins
     const fadeElements = document.querySelectorAll('.fade-in');
@@ -907,23 +955,37 @@
       verses[currentVerse].classList.add('active');
     }, 6000);
 
-    // Parallax effect
+    // Parallax effect (rAF throttled)
     const parallaxElements = document.querySelectorAll('.parallax');
+    let __px = 0, __py = 0, __parallaxRAF = null;
+    function applyParallax(){
+      __parallaxRAF = null;
+      const x = ( __px / window.innerWidth - 0.5) * 20;
+      const y = ( __py / window.innerHeight - 0.5) * 20;
+      for (let i = 0; i < parallaxElements.length; i++){
+        const depth = (i + 1) * 0.5;
+        parallaxElements[i].style.transform = `translate(${x * depth}px, ${y * depth}px)`;
+      }
+    }
     window.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      
-      parallaxElements.forEach((el, index) => {
-        const depth = (index + 1) * 0.5;
-        el.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
-      });
-    });
+      __px = e.clientX; __py = e.clientY;
+      if (__parallaxRAF == null) __parallaxRAF = requestAnimationFrame(applyParallax);
+    }, __supportsPassive ? { passive: true } : false);
 
     // Particle system
+    const motionPref = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    const prefersReducedMotion = motionPref ? motionPref.matches : false;
+    const deviceMemory = typeof navigator.deviceMemory === 'number' ? navigator.deviceMemory : 8;
+    const isLowPerfDevice = prefersReducedMotion || deviceMemory <= 4;
+    const particleCount = isLowPerfDevice ? 40 : 80;
+    const waveLayerCount = isLowPerfDevice ? 4 : 6;
+    const waveStep = isLowPerfDevice ? 6 : 4;
+    const dprCap = isLowPerfDevice ? 1.5 : 2;
+    const glitchProbability = isLowPerfDevice ? 0.04 : 0.08;
+
     const particleCanvas = document.getElementById('particleCanvas');
     const pctx = particleCanvas.getContext('2d');
     const particles = [];
-    const particleCount = 80;
 
     function sizeParticleCanvas() {
       particleCanvas.width = particleCanvas.clientWidth;
@@ -967,6 +1029,7 @@
         p.update();
         p.draw();
       });
+      if (!window.__canvasesRunning) return;
       requestAnimationFrame(animateParticles);
     }
 
@@ -977,7 +1040,7 @@
     let mouseY = 0;
 
     function sizeCanvas() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
       canvas.width = Math.floor(canvas.clientWidth * dpr);
       canvas.height = Math.floor(canvas.clientHeight * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -986,7 +1049,7 @@
     canvas.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-    });
+    }, __supportsPassive ? { passive: true } : false);
 
     new ResizeObserver(() => {
       sizeCanvas();
@@ -1001,7 +1064,10 @@
     function draw() {
       const w = canvas.clientWidth;
       const h = canvas.clientHeight;
-      if (w === 0 || h === 0) return requestAnimationFrame(draw);
+      if (w === 0 || h === 0) {
+        if (window.__canvasesRunning) requestAnimationFrame(draw);
+        return;
+      }
 
       const phase = (Math.sin(t * 0.0006) + 1) / 2;
       const g = ctx.createLinearGradient(0, 0, 0, h);
@@ -1013,11 +1079,11 @@
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, w, h);
 
-      const layers = 6;
+      const layers = waveLayerCount;
       const mouseFactor = mouseX / w;
       
       for (let i = 0; i < layers; i++) {
-        const amp = lerp(40, 150, i / (layers - 1)) * (1 + mouseFactor * 0.3);
+        const amp = lerp(40, isLowPerfDevice ? 110 : 150, i / (layers - 1)) * (1 + mouseFactor * 0.3);
         const yBase = lerp(h * 0.35, h * 0.75, i / (layers - 1));
         const speed = 0.0007 + i * 0.00015;
         const k = 0.002 + i * 0.0006;
@@ -1029,8 +1095,8 @@
         
         ctx.beginPath();
         ctx.moveTo(0, yBase);
-        for (let x = 0; x <= w; x += 4) {
-          const mouseInfluence = Math.max(0, 1 - Math.abs(x - mouseX) / 200) * 30;
+        for (let x = 0; x <= w; x += waveStep) {
+          const mouseInfluence = Math.max(0, 1 - Math.abs(x - mouseX) / (isLowPerfDevice ? 260 : 200)) * (isLowPerfDevice ? 18 : 30);
           const y = yBase + Math.sin(x * k + t * speed) * amp * Math.sin(t * 0.0005 + i) + mouseInfluence;
           ctx.lineTo(x, y);
         }
@@ -1045,7 +1111,7 @@
         ctx.stroke();
       }
 
-      if (Math.random() < 0.08) {
+      if (Math.random() < glitchProbability) {
         const slices = 2 + Math.floor(Math.random() * 3);
         for (let s = 0; s < slices; s++) {
           const sh = 6 + Math.random() * 20;
@@ -1061,13 +1127,14 @@
       }
 
       t += 16;
+      if (!window.__canvasesRunning) return;
       requestAnimationFrame(draw);
     }
 
     let pressure = 0;
     canvas.addEventListener('pointermove', (e) => { 
       pressure = Math.min(1, (e.pressure || 0.3) + 0.1); 
-    });
+    }, __supportsPassive ? { passive: true } : false);
     setInterval(() => { 
       t += pressure * 4; 
       pressure *= 0.95; 
@@ -1076,8 +1143,26 @@
     // Initialize
     sizeCanvas();
     sizeParticleCanvas();
-    requestAnimationFrame(draw);
-    animateParticles();
+    // Idle/visibility safeguards for canvases
+    window.__canvasesRunning = false;
+    const __ric = window.requestIdleCallback || function(cb){ return setTimeout(cb, 1); };
+    window.startCanvases = function(){
+      if (window.__canvasesRunning) return; window.__canvasesRunning = true;
+      requestAnimationFrame(draw);
+      requestAnimationFrame(animateParticles);
+    };
+    window.pauseCanvases = function(){ window.__canvasesRunning = false; };
+    window.resumeCanvases = function(){ if (!window.__canvasesRunning) window.startCanvases(); };
+    __ric(function(){
+      const reduce = motionPref ? motionPref.matches : false;
+      if (!reduce) window.startCanvases();
+    });
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden) window.pauseCanvases(); else {
+        const reduce = motionPref ? motionPref.matches : false;
+        if (!reduce) window.resumeCanvases();
+      }
+    });
 
     // Smooth Page Transitions
     document.addEventListener('DOMContentLoaded', () => {
@@ -1110,18 +1195,20 @@
       const enabled = !!(window.EOTA_FEATURES && window.EOTA_FEATURES.seriesEnabled);
       const hasData = Array.isArray(window.SERIES) ? window.SERIES.length > 0 : false;
       const tpl = document.getElementById('series-section-template');
-      const seriesNav = document.querySelector('a[href="#series"]');
-      const heroCta = document.querySelector('a[href="#series"]:not(.nav-title)');
-      if (enabled && (hasData || !Array.isArray(window.SERIES))) {
-        if (tpl && 'content' in tpl) {
-          tpl.parentNode.insertBefore(document.importNode(tpl.content, true), tpl);
-        }
-      } else {
-        // Remove nav link and hero CTA if series disabled
-        if (seriesNav && seriesNav.parentNode) seriesNav.parentNode.removeChild(seriesNav);
-        if (heroCta && heroCta.parentNode) heroCta.parentNode.removeChild(heroCta);
+      if (enabled && tpl) {
+        const node = tpl.content.cloneNode(true);
+        const mainEl = document.querySelector('main');
+        if (mainEl) mainEl.appendChild(node);
       }
     })();
+  </script>
+  <script type="module">
+    import('./web-vitals.mjs')
+      .then(({ onCLS, onINP, onLCP }) => {
+        const log = (m) => console.log('[web-vitals]', m.name, Math.round(m.value), m);
+        onCLS(log); onINP(log); onLCP(log);
+      })
+      .catch(() => console.warn('web-vitals module failed to load'));
   </script>
 </body>
 </html>

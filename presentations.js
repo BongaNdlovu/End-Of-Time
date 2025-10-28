@@ -1,6 +1,37 @@
 // Year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Conditional video auto-play based on connection speed
+(function handleVideoPlayback(){
+  const video = document.querySelector('.genesis-y-video');
+  if (!video) return;
+
+  // Check effective connection type
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const effectiveType = connection ? connection.effectiveType : '4g';
+  const isSlowConnection = effectiveType === '2g' || effectiveType === '3g' || effectiveType === 'slow-2g';
+
+  // Check if user has reduced motion preference
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Only auto-play on fast connections and if not reduced-motion
+  if (!isSlowConnection && !prefersReducedMotion) {
+    // Set preload to auto for faster playback
+    video.preload = 'auto';
+    // Attempt auto-play
+    const playPromise = video.play();
+    if (playPromise) {
+      playPromise.catch(() => {
+        // Auto-play prevented by browser - this is expected on many mobile devices
+        // Video will still load on demand or when user interacts
+      });
+    }
+  } else {
+    // On slow connections, only load metadata
+    video.preload = 'metadata';
+  }
+})();
+
 // Floating nav on scroll
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {

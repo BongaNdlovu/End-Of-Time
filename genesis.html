@@ -1,340 +1,24 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Genesis - End of Time Academy</title>
+  <meta name="description" content="Explore the theological foundations of Scripture through the book of Genesis. Discover the origins of creation, humanity, sin, and God's redemptive plan at the End of Time Academy.">
+  <meta name="keywords" content="Genesis, Bible study, theology, creation, scripture, end of time academy">
+  <meta property="og:title" content="Genesis - End of Time Academy">
+  <meta property="og:description" content="Explore the theological foundations of Scripture through the book of Genesis.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://end-of-time-94cd3.web.app/genesis.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    :root{
-      --blood:#660000;
-      --blood-2:#8B0000;
-      --ink:#000000;
-      --paper:#ffffff;
-      --silver:#A8A8A8;
-      --silver-dim: #808080;
-      --grain: radial-gradient(circle at 20% 10%, rgba(168,168,168,0.08) 0%, transparent 45%),
-               radial-gradient(circle at 80% 20%, rgba(139,0,0,0.05) 0%, transparent 40%),
-               radial-gradient(circle at 50% 80%, rgba(192,192,192,0.06) 0%, transparent 40%);
-    }
-    html { scroll-behavior: smooth; }
-    html, body { height: 100%; margin: 0; padding: 0; }
-    body { 
-      font-family: 'Montserrat', system-ui, sans-serif; 
-      background: var(--ink); 
-      color: #f8f8f8; 
-      overflow-x: hidden;
-    }
-
-    /* HERO */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      overflow: hidden;
-      background: linear-gradient(180deg, #000000, #0a0a0a 50%, #000000 100%);
-      isolation: isolate;
-    }
-
-    /* Particles */
-    #particleCanvas { 
-      position: absolute; 
-      inset: 0; 
-      width: 100%; 
-      height: 100%; 
-      z-index: 0;
-      opacity: 0.6;
-    }
-
-    #waveCanvas { 
-      position: absolute; 
-      inset: 0; 
-      width: 100%; 
-      height: 100%; 
-      display: block; 
-      z-index: 1; 
-    }
-
-    .hero::after{
-      content: "";
-      position: absolute; 
-      inset: -10% -10% -10% -10%; 
-      z-index: 2;
-      background: var(--grain);
-      pointer-events: none;
-      mix-blend-mode: overlay;
-      opacity: .35;
-      filter: contrast(1.1) brightness(1.05);
-    }
-
-    /* Floating nav */
-    nav {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    nav.scrolled {
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 4px 30px rgba(177, 15, 26, 0.1);
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-    }
-
-    /* Glitch title with playfair */
-    .glitch {
-      position: relative; 
-      display: inline-block; 
-      line-height: 1; 
-      letter-spacing: -0.02em;
-      font-family: 'Playfair Display', serif;
-      text-shadow: 0 0 40px rgba(177,15,26,.4), 0 0 3px rgba(255,255,255,.7);
-    }
-    .glitch::before, .glitch::after {
-      content: attr(data-text);
-      position: absolute; 
-      left: 0; 
-      top: 0; 
-      width: 100%; 
-      overflow: hidden; 
-      white-space: nowrap;
-      clip-path: inset(0 0 0 0);
-    }
-    .glitch::before{ 
-      color: var(--blood-2); 
-      mix-blend-mode: screen; 
-      animation: glitchShift 3.2s infinite ease-in-out alternate; 
-    }
-    .glitch::after{  
-      color: var(--silver); 
-      mix-blend-mode: lighten; 
-      animation: glitchSlice 2.2s infinite steps(2, end); 
-    }
-
-    @keyframes glitchShift {
-      0%   { transform: translate(0,0); filter: hue-rotate(0deg) saturate(1.2); }
-      50%  { transform: translate(-2px,-1px); filter: hue-rotate(45deg) saturate(1.4); }
-      100% { transform: translate(2px,1.5px); filter: hue-rotate(-25deg) saturate(1.6); }
-    }
-    @keyframes glitchSlice {
-      0%   { clip-path: inset(0 0 0 0); transform: translate(0,0); }
-      20%  { clip-path: inset(10% 0 60% 0); transform: translate(2px,-1px); }
-      40%  { clip-path: inset(80% 0 4% 0);  transform: translate(-2px,2px); }
-      60%  { clip-path: inset(40% 0 35% 0); transform: translate(1px,0); }
-      80%  { clip-path: inset(5% 0 70% 0);  transform: translate(0,2px); }
-      100% { clip-path: inset(0 0 0 0);    transform: translate(0,0); }
-    }
-
-    /* Animated gradient text */
-    .gradient-text {
-      background: linear-gradient(90deg, var(--silver), var(--blood-2), var(--silver), var(--blood-2));
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradientShift 8s ease infinite;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    .cta-btn{
-      --accent: var(--blood-2);
-      position: relative; 
-      overflow: hidden; 
-      border: 1px solid rgba(168,168,168,.14);
-      background: linear-gradient(180deg, rgba(168,168,168,.03), rgba(139,0,0,.08));
-      box-shadow: 0 10px 40px rgba(139,0,0,.2), inset 0 0 0 1px rgba(192,192,192,.03);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .cta-btn::before{
-      content:""; 
-      position:absolute; 
-      inset:-2px; 
-      background: conic-gradient(from 180deg, var(--accent), transparent 30%, transparent 70%, var(--accent));
-      filter: blur(12px); 
-      opacity:.35; 
-      transition: opacity .25s ease; 
-      z-index:0;
-    }
-    .cta-btn:hover { 
-      transform: translateY(-2px);
-      box-shadow: 0 15px 50px rgba(139,0,0,.35), inset 0 0 0 1px rgba(192,192,192,.1);
-    }
-    .cta-btn:hover::before{ opacity:.75; }
-    .cta-btn:active { transform: translateY(0); }
-
-    /* Fade in animations */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Stagger delays */
-    .fade-in:nth-child(1) { transition-delay: 0.1s; }
-    .fade-in:nth-child(2) { transition-delay: 0.2s; }
-    .fade-in:nth-child(3) { transition-delay: 0.3s; }
-    .fade-in:nth-child(4) { transition-delay: 0.4s; }
-    .fade-in:nth-child(5) { transition-delay: 0.5s; }
-
-    .section{ 
-      position:relative; 
-      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0)); 
-    }
-
-    .card{ 
-      background: rgba(168,168,168,.02); 
-      border:1px solid rgba(168,168,168,.08); 
-      border-radius: 1.25rem;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(139,0,0,0.15), transparent);
-      transition: left 0.5s;
-    }
-    .card:hover::before {
-      left: 100%;
-    }
-    .card:hover{ 
-      border-color: rgba(139,0,0,.5); 
-      box-shadow: 0 15px 45px rgba(139,0,0,.3);
-      transform: translateY(-8px) scale(1.02);
-    }
-
-    .scanlines{
-      position:absolute; 
-      inset:0; 
-      z-index:3; 
-      pointer-events:none;
-      background: repeating-linear-gradient(to bottom, rgba(168,168,168,.03), rgba(168,168,168,.03) 1px, transparent 1px, transparent 3px);
-      mix-blend-mode: overlay; 
-      opacity:.04;
-    }
-
-    /* Parallax elements */
-    .parallax {
-      transition: transform 0.1s ease-out;
-    }
-
-
-    /* Gradient Title Effect */
-    .gradient-title {
-      position: relative;
-      color: var(--paper);
-      font-family: 'Playfair Display', serif;
-      text-shadow: 0 0 15px rgba(177,15,26,.3), 0 0 3px rgba(255,255,255,.5);
-      animation: titlePulse 6s ease-in-out infinite;
-    }
-
-    @keyframes titlePulse {
-      0%, 100% { 
-        text-shadow: 0 0 15px rgba(177,15,26,.3), 0 0 3px rgba(255,255,255,.5);
-        filter: brightness(1);
-      }
-      50% { 
-        text-shadow: 0 0 20px rgba(177,15,26,.4), 0 0 6px rgba(242,201,76,.3);
-        filter: brightness(1.05);
-      }
-    }
-
-    .title-glow {
-      animation: titleGlow 6s ease-in-out infinite alternate;
-    }
-
-    @keyframes titleGlow {
-      0%, 100% { 
-        text-shadow: 0 0 15px rgba(177,15,26,.3), 0 0 3px rgba(255,255,255,.5);
-        filter: brightness(1);
-      }
-      50% { 
-        text-shadow: 0 0 20px rgba(177,15,26,.4), 0 0 6px rgba(242,201,76,.3);
-        filter: brightness(1.05);
-      }
-    }
-
-    /* Navigation Title Styling */
-    .nav-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #f8f8f8;
-      letter-spacing: 0.5px;
-    }
-
-    /* Bible Book Title Styling */
-    .bible-book-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: #f8f8f8;
-      letter-spacing: 0.3px;
-      text-transform: none;
-    }
-
-    /* Ensure all headings use Playfair Display */
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Playfair Display', serif !important;
-    }
-
-    /* Ensure all buttons use Playfair Display */
-    button, .cta-btn, .nav-button, a[class*="button"], a[href*="#"], a[href*=".html"] {
-      font-family: 'Playfair Display', serif !important;
-    }
-
-    /* Smooth Page Transitions */
-    body {
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-
-    body.loaded {
-      opacity: 1;
-    }
-
-    /* Transition overlay */
-    .page-transition {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--ink);
-      z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease-in-out;
-    }
-
-    .page-transition.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .glitch { font-size: 2.5rem !important; }
-      .gradient-title { font-size: 3.5rem !important; }
-    }
-  </style>
+  <link rel="stylesheet" href="tailwind-output.css">
+  <link rel="stylesheet" href="genesis-styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#chapters">Skip to content</a>
   <!-- Page Transition Overlay -->
   <div class="page-transition" id="pageTransition"></div>
 
@@ -344,7 +28,7 @@
     <canvas id="waveCanvas" aria-hidden="true" willReadFrequently="true"></canvas>
 
     <!-- Genesis X Background Video -->
-    <video id="genesisVideo" autoplay loop muted playsinline style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; z-index: 0; opacity: 0.3; pointer-events: none;">
+    <video id="genesisVideo" loop muted playsinline preload="metadata" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; z-index: 0; opacity: 0.3; pointer-events: none;" aria-hidden="true">
       <source src="Genesis X.mp4" type="video/mp4">
     </video>
 
@@ -377,7 +61,7 @@
           The foundational book of Scripture reveals the origins of creation, humanity's fall, and God's redemptive plan. From the garden to the flood, from Abraham to Joseph—discover the beginning of God's story.
         </p>
         <div class="mt-10 flex flex-wrap gap-4">
-          <a href="#chapters" class="cta-btn px-6 py-3.5 rounded-2xl font-semibold text-base">Read Chapters</a>
+          <a href="#chapters" class="u-cta cta-btn px-6 py-3.5 rounded-2xl font-semibold text-base">Read Chapters</a>
           <a href="End Of Time Academy.html" class="px-6 py-3.5 rounded-2xl font-semibold border border-white/15 bg-white/5 hover:bg-white/10 transition-all hover:scale-105">← Back to Home</a>
         </div>
       </div>
@@ -392,7 +76,7 @@
           <h2 class="text-3xl md:text-4xl font-bold">Genesis Chapters</h2>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <article class="card p-6 fade-in">
+          <article class="card u-card p-6 fade-in">
             <div class="flex items-center justify-between mb-4">
               <h3 class="bible-book-title">Genesis 1</h3>
               <span class="text-white/50 text-sm">31 verses</span>
@@ -404,7 +88,7 @@
             </a>
           </article>
           
-          <article class="card p-6 fade-in">
+          <article class="card u-card p-6 fade-in">
             <div class="flex items-center justify-between mb-4">
               <h3 class="bible-book-title">Genesis 2</h3>
               <span class="text-white/50 text-sm">25 verses</span>
@@ -415,7 +99,7 @@
             </span>
           </article>
           
-          <article class="card p-6 fade-in">
+          <article class="card u-card p-6 fade-in">
             <div class="flex items-center justify-between mb-4">
               <h3 class="bible-book-title">Genesis 3</h3>
               <span class="text-white/50 text-sm">24 verses</span>
@@ -426,7 +110,7 @@
             </span>
           </article>
           
-          <article class="card p-6 fade-in">
+          <article class="card u-card p-6 fade-in">
             <div class="flex items-center justify-between mb-4">
               <h3 class="bible-book-title">Genesis 4</h3>
               <span class="text-white/50 text-sm">26 verses</span>
@@ -437,7 +121,7 @@
             </span>
           </article>
           
-          <article class="card p-6 fade-in">
+          <article class="card u-card p-6 fade-in">
             <div class="flex items-center justify-between mb-4">
               <h3 class="bible-book-title">Genesis 5</h3>
               <span class="text-white/50 text-sm">32 verses</span>
@@ -457,225 +141,14 @@
     <p class="italic">"In the beginning was the Word, and the Word was with God, and the Word was God." — John 1:1</p>
   </footer>
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Floating nav on scroll
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    });
-
-    // Intersection Observer for fade-ins
-    const fadeElements = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    fadeElements.forEach(el => observer.observe(el));
-
-    // Parallax effect
-    const parallaxElements = document.querySelectorAll('.parallax');
-    window.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      
-      parallaxElements.forEach((el, index) => {
-        const depth = (index + 1) * 0.5;
-        el.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
-      });
-    });
-
-    // Particle Canvas Animation
-    const particleCanvas = document.getElementById('particleCanvas');
-    const particleCtx = particleCanvas.getContext('2d');
-
-    function resizeParticleCanvas() {
-      particleCanvas.width = window.innerWidth;
-      particleCanvas.height = document.querySelector('.hero').offsetHeight;
-    }
-
-    resizeParticleCanvas();
-    window.addEventListener('resize', resizeParticleCanvas);
-
-    // Particle class
-    class Particle {
-      constructor() {
-        this.x = Math.random() * particleCanvas.width;
-        this.y = Math.random() * particleCanvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-        this.opacity = Math.random() * 0.5 + 0.2;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        // Wrap around edges
-        if (this.x > particleCanvas.width) this.x = 0;
-        if (this.x < 0) this.x = particleCanvas.width;
-        if (this.y > particleCanvas.height) this.y = 0;
-        if (this.y < 0) this.y = particleCanvas.height;
-      }
-
-      draw() {
-        particleCtx.fillStyle = `rgba(168, 168, 168, ${this.opacity})`;
-        particleCtx.beginPath();
-        particleCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        particleCtx.fill();
-      }
-    }
-
-    // Create particles
-    const particleCount = 100;
-    const particles = [];
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
-
-    function animateParticles() {
-      particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-
-      particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-      });
-
-      // Draw connections between nearby particles
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 100) {
-            particleCtx.strokeStyle = `rgba(168, 168, 168, ${0.1 * (1 - distance / 100)})`;
-            particleCtx.lineWidth = 0.5;
-            particleCtx.beginPath();
-            particleCtx.moveTo(particles[i].x, particles[i].y);
-            particleCtx.lineTo(particles[j].x, particles[j].y);
-            particleCtx.stroke();
-          }
-        }
-      }
-
-      requestAnimationFrame(animateParticles);
-    }
-
-    animateParticles();
-
-    // Wave Canvas Animation
-    const waveCanvas = document.getElementById('waveCanvas');
-    const waveCtx = waveCanvas.getContext('2d');
-
-    function resizeWaveCanvas() {
-      waveCanvas.width = window.innerWidth;
-      waveCanvas.height = document.querySelector('.hero').offsetHeight;
-    }
-
-    resizeWaveCanvas();
-    window.addEventListener('resize', resizeWaveCanvas);
-
-    // Wave animation
-    let waveOffset = 0;
-
-    function drawWave(offset, amplitude, frequency, color, alpha) {
-      waveCtx.beginPath();
-      waveCtx.moveTo(0, waveCanvas.height / 2);
-
-      for (let x = 0; x < waveCanvas.width; x++) {
-        const y = Math.sin((x + offset) * frequency) * amplitude + waveCanvas.height / 2;
-        waveCtx.lineTo(x, y);
-      }
-
-      waveCtx.lineTo(waveCanvas.width, waveCanvas.height);
-      waveCtx.lineTo(0, waveCanvas.height);
-      waveCtx.closePath();
-
-      const gradient = waveCtx.createLinearGradient(0, 0, 0, waveCanvas.height);
-      gradient.addColorStop(0, `rgba(${color}, 0)`);
-      gradient.addColorStop(0.5, `rgba(${color}, ${alpha * 0.5})`);
-      gradient.addColorStop(1, `rgba(${color}, ${alpha})`);
-
-      waveCtx.fillStyle = gradient;
-      waveCtx.fill();
-    }
-
-    function animateWaves() {
-      waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
-
-      // Multiple wave layers with blood-red theme
-      drawWave(waveOffset * 0.5, 30, 0.005, '177, 15, 26', 0.03);
-      drawWave(waveOffset * 0.8, 20, 0.008, '139, 0, 0', 0.02);
-      drawWave(waveOffset * 1.2, 40, 0.003, '102, 0, 0', 0.015);
-
-      waveOffset += 1;
-
-      requestAnimationFrame(animateWaves);
-    }
-
-    animateWaves();
-
-    // Mouse interaction with particles
-    let mouseX = 0;
-    let mouseY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      // Repel particles near mouse
-      particles.forEach(particle => {
-        const dx = particle.x - mouseX;
-        const dy = particle.y - mouseY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 100) {
-          const force = (100 - distance) / 100;
-          particle.x += (dx / distance) * force * 2;
-          particle.y += (dy / distance) * force * 2;
-        }
-      });
-    });
-
-    // Smooth Page Transitions
-    document.addEventListener('DOMContentLoaded', () => {
-      // Fade in page on load
-      document.body.classList.add('loaded');
-    });
-
-    // Handle navigation links with smooth transitions
-    const transitionLinks = document.querySelectorAll('a[href*=".html"]:not([href="#"]):not([href*="#"]), a[href="menu.html"]');
-    
-    transitionLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        const targetUrl = link.getAttribute('href');
-        const transitionOverlay = document.getElementById('pageTransition');
-        
-        // Show transition overlay
-        transitionOverlay.classList.add('active');
-        
-        // Navigate after transition
-        setTimeout(() => {
-          window.location.href = targetUrl;
-        }, 300);
-      });
-    });
-
+  <script defer src="genesis-animations.js"></script>
+  <script type="module">
+    import('./web-vitals.mjs')
+      .then(({ onCLS, onINP, onLCP }) => {
+        const log = (m) => console.log('[web-vitals]', m.name, Math.round(m.value), m);
+        onCLS(log); onINP(log); onLCP(log);
+      })
+      .catch(() => console.warn('web-vitals module failed to load'));
   </script>
 </body>
 </html>

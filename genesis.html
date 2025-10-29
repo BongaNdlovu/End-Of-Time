@@ -11,11 +11,26 @@
   <meta property="og:description" content="Explore the theological foundations of Scripture through the book of Genesis.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://end-of-time-94cd3.web.app/genesis.html">
+
+  <!-- DNS Prefetch for external services -->
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" as="style">
+  <link rel="preload" href="genesis-styles.min.css" as="style">
+  <link rel="preload" href="genesis-animations.min.js" as="script">
+
+  <!-- Stylesheets -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tailwind-output.css">
-  <link rel="stylesheet" href="genesis-styles.css">
+  <link rel="stylesheet" href="tailwind-output.min.css">
+  <link rel="stylesheet" href="genesis-styles.min.css">
+
+  <!-- Prefetch video for smooth playback -->
+  <link rel="prefetch" href="Genesis X.mp4">
 </head>
 <body>
   <a class="skip-link" href="#chapters">Skip to content</a>
@@ -28,7 +43,7 @@
     <canvas id="waveCanvas" aria-hidden="true" willReadFrequently="true"></canvas>
 
     <!-- Genesis X Background Video -->
-    <video id="genesisVideo" loop muted playsinline preload="metadata" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; z-index: 0; opacity: 0.3; pointer-events: none;" aria-hidden="true">
+    <video id="genesisVideo" loop muted playsinline preload="none" poster="images/genesis-x-poster.jpg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; z-index: 0; opacity: 0.3; pointer-events: none;" aria-hidden="true">
       <source src="Genesis X.mp4" type="video/mp4">
     </video>
 
@@ -141,7 +156,7 @@
     <p class="italic">"In the beginning was the Word, and the Word was with God, and the Word was God." — John 1:1</p>
   </footer>
 
-  <script defer src="genesis-animations.js"></script>
+  <script defer src="genesis-animations.min.js"></script>
   <script type="module">
     import('./web-vitals.mjs')
       .then(({ onCLS, onINP, onLCP }) => {

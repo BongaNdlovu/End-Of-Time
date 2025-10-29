@@ -3,7 +3,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 // Conditional video auto-play based on connection speed
 (function handleVideoPlayback(){
-  const video = document.querySelector('.genesis-y-video');
+  const video = document.getElementById('genesisVideoY') || document.querySelector('.genesis-y-video');
   if (!video) return;
 
   // Check effective connection type

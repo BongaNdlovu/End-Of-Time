@@ -264,6 +264,20 @@
     });
   }
 
+  // Intersection Observer for hero visibility (pause animations when off-screen)
+  if (heroEl && 'IntersectionObserver' in window) {
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          resumeVisuals();
+        } else {
+          pauseVisuals();
+        }
+      });
+    }, { threshold: 0 });
+    heroObserver.observe(heroEl);
+  }
+
   // Smooth Page Transitions
   document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('loaded');

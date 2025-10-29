@@ -11,11 +11,26 @@
   <meta property="og:description" content="Deep theological insights on the book of Genesis through interactive presentations.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://end-of-time-94cd3.web.app/index2.html">
+
+  <!-- DNS Prefetch for external services -->
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" as="style">
+  <link rel="preload" href="presentations-styles.min.css" as="style">
+  <link rel="preload" href="presentations.min.js" as="script">
+
+  <!-- Stylesheets -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tailwind-output.css">
-  <link rel="stylesheet" href="presentations-styles.css">
+  <link rel="stylesheet" href="tailwind-output.min.css">
+  <link rel="stylesheet" href="presentations-styles.min.css">
+
+  <!-- Prefetch video for smooth playback -->
+  <link rel="prefetch" href="Genesis Y.mp4">
 </head>
 <body>
   <a class="skip-link" href="#presentations">Skip to content</a>
@@ -24,8 +39,8 @@
 
   <!-- HERO -->
   <header class="hero">
-    <video class="genesis-y-video" muted loop playsinline aria-hidden="true" preload="metadata">
-      <source src="../Genesis Y.mp4" type="video/mp4">
+    <video id="genesisVideoY" class="genesis-y-video" muted loop playsinline aria-hidden="true" preload="none" poster="images/genesis-y-poster.jpg">
+      <source src="Genesis Y.mp4" type="video/mp4">
     </video>
     <canvas id="particleCanvas" aria-hidden="true" willReadFrequently="false"></canvas>
     <canvas id="waveCanvas" aria-hidden="true" willReadFrequently="true"></canvas>
@@ -267,7 +282,7 @@
     });
   </script>
 
-  <script src="presentations.js"></script>
+  <script src="presentations.min.js"></script>
   
   <script>
     // Ensure presentation functionality works

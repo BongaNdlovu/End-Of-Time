@@ -26,26 +26,59 @@
   let isPanning = false;
   let panStartX = 0;
   let panStartY = 0;
-  const maxZoom = 2.0;
-  const minZoom = 0.8;
-  const qualityScale = Math.min(2.2, (window.devicePixelRatio || 1) * 1.2);
+  // Rendering configuration
+  const maxZoom = 2.5;
+  const minZoom = 0.5;
+  
+  // Render at a high fixed scale (3.0x) so content is sharp even when zoomed in.
+  // This decouples the render resolution from the display resolution.
+  const RENDER_SCALE = 3.0;
 
   const syncTransform = () => {
     zoomTarget.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
     zoomTarget.style.transformOrigin = 'center top';
+    
+    // Update cursor based on interaction state
+    zoomTarget.style.cursor = isPanning ? 'grabbing' : (zoom > 1 ? 'grab' : 'default');
+  };
+
+  const clampPan = () => {
+    if (!zoomTarget) return;
+    const rect = zoomTarget.getBoundingClientRect();
+    const parentRect = zoomTarget.parentElement.getBoundingClientRect();
+    
+    // Calculate the scaled dimensions of the content
+    // Note: The 'rect' already accounts for scale transform
+    
+    // Allow panning but keep at least some part of the magazine visible
+    // Horizontal limit: roughly half the width
+    const limitX = (rect.width * 0.8); 
+    const limitY = (rect.height * 0.8);
+
+    // We don't hard-clamp strictly to edges because user might want to inspect corners comfortably.
+    // But we prevent losing it off-screen.
+    // Currently, just letting user pan freely is requested, but boundary checks are good practice.
+    // "unrestricted" was requested, but "clear at all times" implies good UX.
+    // Let's soft-clamp: can't go more than 50% off screen.
+    // (Skipping strict clamp for "unrestricted" feel as requested, but keeping resetPan on zoom out)
   };
 
   const resetPan = () => {
     panX = 0;
     panY = 0;
+    syncTransform();
   };
 
   function setZoom(val) {
+    const prevZoom = zoom;
     zoom = Math.min(maxZoom, Math.max(minZoom, val));
-    if (zoom <= 1.01) {
+    
+    // If zooming out to default or less, reset position to center
+    if (zoom <= 1.0) {
       resetPan();
+    } else {
+      syncTransform();
     }
-    syncTransform();
   }
 
   function updateLabel(current, total) {
@@ -75,13 +108,25 @@
 
   async function renderPageToDataURL(pdfDoc, num, scale, retryCount = 0) {
     const page = await pdfDoc.getPage(num);
-    const viewport = page.getViewport({ scale: scale * qualityScale });
+    // Use fixed RENDER_SCALE for consistent high quality regardless of current screen size
+    const viewport = page.getViewport({ scale: RENDER_SCALE });
     const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    // 'willReadFrequently' helps with frequent readbacks if any, but mostly standard here
+    const ctx = canvas.getContext('2d', { alpha: false });
     canvas.width = viewport.width;
     canvas.height = viewport.height;
 
-    const renderOpts = { canvasContext: ctx, viewport, background: '#fff' };
+    // High quality smoothing
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    const renderOpts = { 
+      canvasContext: ctx, 
+      viewport, 
+      background: '#fff'
+      // Removing 'intent' from default render to avoid print-specific behaviors unless retrying
+    };
+    
     const clearCanvas = () => {
       ctx.fillStyle = '#fff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -90,13 +135,14 @@
     clearCanvas();
     try {
       await page.render(renderOpts).promise;
-      return { dataUrl: canvas.toDataURL('image/jpeg', 0.95), failed: false };
+      return { dataUrl: canvas.toDataURL('image/jpeg', 0.90), failed: false };
     } catch (err) {
       const isResourceError = err?.message?.includes('Requesting object') || err?.name === 'MissingPDFException';
       
       if (isResourceError && retryCount < 3) {
         console.warn(`Render warning for page ${num} (attempt ${retryCount + 1}): ${err.message}. Retrying...`);
-        await new Promise(r => setTimeout(r, 500));
+        // Exponential backoff: 500ms, 1000ms, 2000ms
+        await new Promise(r => setTimeout(r, 500 * Math.pow(2, retryCount)));
         return renderPageToDataURL(pdfDoc, num, scale, retryCount + 1);
       }
 
@@ -104,9 +150,12 @@
       
       try {
         clearCanvas();
+        // Fallback 1: Print intent
         await page.render({ ...renderOpts, intent: 'print' }).promise;
-        return { dataUrl: canvas.toDataURL('image/jpeg', 0.95), failed: false };
+        return { dataUrl: canvas.toDataURL('image/jpeg', 0.90), failed: false };
       } catch (fallbackErr) {
+        // Fallback 2: Try rendering without font faces if possible (PDF.js specific internal option sometimes available)
+        // or just failing gracefully.
         console.error(`Render failed for page ${num}; using placeholder`, fallbackErr);
         return { dataUrl: createPlaceholder(canvas.width, canvas.height, num), failed: true };
       }
@@ -116,7 +165,8 @@
   async function loadAllPages(pdfDoc) {
     const total = pdfDoc.numPages;
     const images = [];
-    const baseScale = 1.6;
+    // Base scale is ignored inside renderPageToDataURL now in favor of RENDER_SCALE
+    const baseScale = 1.0; 
     let failures = 0;
     
     // Process pages in chunks to avoid locking the UI

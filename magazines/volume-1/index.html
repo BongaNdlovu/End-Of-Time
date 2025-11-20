@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Second Coming Magazine &middot; Volume 1 | End of Time Academy</title>
+  <meta name="description" content="Flip through Second Coming Magazine Volume 1 online with a realistic page-turn experience, zoom, and offline download." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/magazine-viewer.css?v=20250212">
+  <link rel="stylesheet" href="/magazines/volume-1/vendor/page-flip.css">
+</head>
+<body class="magazine-view">
+  <div class="magazine-shell" data-magazine-root>
+    <header class="magazine-header">
+      <a class="back-link" href="/index2.html" aria-label="Back to presentations">
+        <span aria-hidden="true">&larr;</span>
+        Back to Presentations
+      </a>
+      <div class="magazine-meta">
+        <p style="font-size:0.925rem;color:rgba(0,0,0,0.6);margin:0;">Digital Publication</p>
+        <h1>Second Coming Magazine &middot; Volume 1</h1>
+        <p>Read the full magazine online with realistic page turns and smooth zoom. Turn the pages, zoom in for fine details, or download the PDF for offline study.</p>
+      </div>
+      <a class="back-link" href="/magazines/volume-1/second-coming-magazine-volume-1.pdf" download>
+        Download PDF
+      </a>
+    </header>
+
+    <div class="viewer-toolbar">
+      <button type="button" data-prev>Previous Page</button>
+      <button type="button" data-next>Next Page</button>
+      <button type="button" data-zoom-out>Zoom Out</button>
+      <button type="button" data-zoom-in>Zoom In</button>
+      <span data-page-label>Page 1 / ?</span>
+      <a href="/magazines/volume-1/second-coming-magazine-volume-1.pdf" target="_blank" rel="noopener">Open Original</a>
+    </div>
+
+    <div class="viewer-area">
+      <div class="page-stage">
+        <div id="flipbook" class="flipbook"></div>
+        <div class="viewer-status" data-status>Preparing pages…</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/magazines/volume-1/vendor/pdf.min.js?v=20250212"></script>
+  <script src="/magazines/volume-1/vendor/page-flip.browser.js"></script>
+  <script src="/magazines/volume-1/magazine-viewer.js?v=20250212"></script>
+</body>
+</html>

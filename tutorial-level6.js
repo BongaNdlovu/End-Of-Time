@@ -3,7 +3,7 @@
  * Displays before starting Level 6
  */
 
-const tutorialLevel6 = {
+window.tutorialLevel6 = {
     level: 6,
     title: "Level 6: Character Quest",
     subtitle: "Who Am I? Questions",

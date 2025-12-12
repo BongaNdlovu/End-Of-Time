@@ -3,7 +3,7 @@
  * Displays before starting Level 2
  */
 
-const tutorialLevel2 = {
+window.tutorialLevel2 = {
     level: 2,
     title: "Level 2: Testing Truth",
     subtitle: "True or False Questions",

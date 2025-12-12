@@ -4,7 +4,7 @@
  * Focus: Character recognition and details
  */
 
-const level6Questions = [
+export const level6Questions = [
     {
         "id": "L6Q001",
         "question": "Who am I? I was the firstborn son of Jacob. I lost my birthright because I lay with my father's concubine, Bilhah. I also tried to save my brother Joseph from the pit.",
@@ -756,3 +756,7 @@ const level6Questions = [
         "explanation": "Manasseh was the firstborn who received the lesser blessing from Jacob in Genesis 48."
     }
 ];
+if (typeof window !== 'undefined') {
+    window.level6Questions = level6Questions;
+}
+export default level6Questions;

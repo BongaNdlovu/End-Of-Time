@@ -3,7 +3,7 @@
  * Displays before starting Level 7
  */
 
-const tutorialLevel7 = {
+window.tutorialLevel7 = {
     level: 7,
     title: "Level 7: The Ultimate Test",
     subtitle: "Which is the Right Verse?",

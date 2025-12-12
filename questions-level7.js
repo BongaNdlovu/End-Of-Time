@@ -4,7 +4,7 @@
  * Focus: Precise Scripture knowledge
  */
 
-const level7Questions = [
+export const level7Questions = [
     {
         "id": "L7Q001",
         "question": "The Psalmist David, surrounded by nations worshipping gods of wood and stone, looks to the heavens and the earth. He seeks the ultimate truth about origins, a foundation for true worship that counters the chaotic myths of his neighbors. What foundational declaration in the Law of Moses establishes the singular, purposeful origin of the universe?",
@@ -956,3 +956,7 @@ const level7Questions = [
         }
       }
 ];
+if (typeof window !== 'undefined') {
+    window.level7Questions = level7Questions;
+}
+export default level7Questions;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +6,43 @@
     <meta name="description" content="How God Created Everything... When There Was Nothing - An Interactive Presentation">
     <title>How God Created Everything... When There Was Nothing</title>
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="styles1.css">
-</head>
+    <!-- SEO Meta Tags -->
+    <link rel="canonical" href="https://end-of-time-94cd3.web.app/index1.html">
+    <meta property="og:title" content="How God Created Everything... When There Was Nothing">
+    <meta property="og:description" content="An Interactive Presentation - Explore the theological foundations of Scripture through the book of Genesis">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://end-of-time-94cd3.web.app/index1.html">
+    <meta property="og:image" content="https://end-of-time-94cd3.web.app/images/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How God Created Everything... When There Was Nothing">
+    <meta name="twitter:description" content="An Interactive Presentation - Explore the theological foundations of Scripture">
+    <meta name="twitter:image" content="https://end-of-time-94cd3.web.app/images/og-image.jpg">
+
+    <!-- Preconnect critical Firebase/auth domains -->
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://apis.google.com" crossorigin>
+    <link rel="preconnect" href="https://firebase.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://securetoken.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://apis.google.com">
+    <link rel="dns-prefetch" href="https://firebase.googleapis.com">
+    <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com">
+
+    <!-- Self-hosted fonts -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2" crossorigin fetchpriority="high">
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiunDXbtM.woff2" crossorigin fetchpriority="high">
+    <link rel="stylesheet" href="/fonts/fonts.css">
+    <!-- Font Preconnect for Performance -->
+
+    <!-- Resource Hints for Critical Assets -->
+    <link rel="preload" href="styles1.min.css?v=6" as="style" fetchpriority="high" onload="this.rel='stylesheet';this.onload=null;">
+    <noscript><link rel="stylesheet" href="styles1.min.css?v=6"></noscript>
+    <!-- Quiz UI overrides: neon dots and spacing -->
+    <link rel="stylesheet" href="quiz-ui.css?v=1">
+    <link rel="preload" href="app.js?v=6" as="script">
+  
+
 <body>
 
 <!-- Page Transition Overlay -->
@@ -52,19 +86,40 @@
         <div id="slide-content-area"></div>
     </div>
 
-    <!-- Font Size Controls -->
-    <div id="font-controls" class="font-controls" role="toolbar" aria-label="Font size controls">
-        <button class="font-btn" data-size="small" aria-label="Smaller text">A⁻</button>
-        <button class="font-btn" data-size="normal" aria-label="Normal text">A</button>
-        <button class="font-btn" data-size="large" aria-label="Larger text">A⁺</button>
+    <div id="annotation-panel" class="annotation-panel" aria-live="polite" aria-label="Slide annotations"></div>
+    <div id="annotation-modal" class="annotation-modal" hidden>
+      <div class="annotation-modal-content" role="dialog" aria-modal="true" aria-labelledby="annotation-modal-heading">
+        <button id="annotation-modal-close" class="annotation-modal-close" type="button" aria-label="Close annotations">&times;</button>
+        <h3 id="annotation-modal-heading" class="annotation-modal-heading">Slide annotations</h3>
+        <div id="annotation-modal-body" class="annotation-modal-body"></div>
+      </div>
     </div>
+
+    <!-- Font Size Controls -->
+        <div id="font-controls" class="font-controls" role="toolbar" aria-label="Font size controls">
+        <button class="font-btn" data-size="small" aria-label="Smaller text">A-</button>
+        <button class="font-btn" data-size="normal" aria-label="Normal text">A</button>
+        <button class="font-btn" data-size="large" aria-label="Larger text">A+</button>
+    </div>
+    <button id="battery-saver-toggle" class="battery-toggle" type="button" aria-pressed="false">
+        <span class="battery-label">Battery Saver</span>
+    </button>
 
     <!-- Navigation Controls -->
     <div id="navigation" role="navigation" aria-label="Slide navigation">
-        <a href="index2.html" class="nav-button back-button" aria-label="Back to Presentations page">← Back</a>
-        <button id="prev-btn" class="nav-button" aria-label="Previous slide">Prev</button>
+        <a href="index2.html" class="nav-button nav-button-secondary back-button" aria-label="Back to Presentations page">
+            <span class="nav-icon" aria-hidden="true">&larr;</span>
+            <span class="nav-label">Back</span>
+        </a>
+        <button id="prev-btn" class="nav-button nav-button-primary" aria-label="Previous slide (ArrowLeft or PageUp)" title="Previous slide (ArrowLeft or PageUp)">
+            <span class="nav-icon" aria-hidden="true">&larr;</span>
+            <span class="nav-label">Prev</span>
+        </button>
         <div id="slide-counter" aria-live="polite"></div>
-        <button id="next-btn" class="nav-button" aria-label="Next slide">Next</button>
+        <button id="next-btn" class="nav-button nav-button-primary" aria-label="Next slide (ArrowRight or PageDown)" title="Next slide (ArrowRight or PageDown)">
+            <span class="nav-label">Next</span>
+            <span class="nav-icon" aria-hidden="true">&rarr;</span>
+        </button>
     </div>
 
     <!-- Progress Bar -->
@@ -113,15 +168,56 @@
 
 <!-- Auto-Advance Controls -->
 <div id="autoadvance-controls" class="autoadvance-controls" role="toolbar" aria-label="Auto-advance controls">
-    <button id="autoadvance-toggle" class="autoadvance-btn" aria-label="Toggle auto-advance" aria-pressed="false">⏸ Auto</button>
+    <button id="autoadvance-toggle" class="autoadvance-btn" aria-label="Toggle auto-advance" aria-pressed="false">Auto</button>
     <input type="number" id="autoadvance-interval" value="15" min="5" max="60" aria-label="Auto-advance interval in seconds">
     <span class="autoadvance-label">sec</span>
 </div>
 
 
+<!-- Mobile HUD -->
+<div id="mobile-hud" class="mobile-hud" role="toolbar" aria-label="Mobile presentation controls" aria-hidden="true">
+    <button id="hud-prev" class="mobile-hud__btn" type="button" aria-label="Previous slide">
+        <span aria-hidden="true">&larr;</span>
+    </button>
+    <button id="hud-overview" class="mobile-hud__btn" type="button" aria-label="Toggle overview mode">
+        <span aria-hidden="true">&#9638;</span>
+    </button>
+    <button id="hud-timer" class="mobile-hud__btn" type="button" aria-pressed="false" aria-label="Toggle timer">
+        <span class="hud-timer-label">Timer</span>
+        <span id="hud-timer-value">00:00</span>
+    </button>
+    <button id="hud-battery" class="mobile-hud__btn" type="button" aria-pressed="false" aria-label="Toggle battery saver">
+        <span aria-hidden="true">&#9889;</span>
+    </button>
+    <button id="hud-next" class="mobile-hud__btn" type="button" aria-label="Next slide">
+        <span aria-hidden="true">&rarr;</span>
+    </button>
+    <button id="hud-orientation" class="mobile-hud__btn" type="button" aria-pressed="false" aria-label="Toggle landscape reminder">
+        <span aria-hidden="true">&#8635;</span>
+    </button>
+</div>
+
+<!-- Orientation Overlay -->
+<div id="orientation-overlay" class="orientation-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="orientation-card">
+        <p>Rotate your device for the full presentation experience.</p>
+        <div class="orientation-actions">
+            <button id="orientation-dismiss" type="button" class="primary-button">Continue</button>
+            <button id="orientation-disable" type="button" class="secondary-button">Don't remind me</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Firebase SDKs -->
+<script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<!-- Firebase Configuration -->
+<script defer src="firebase-config.js"></script>
 
 <!-- External JavaScript -->
-<script src="app.js?v=2"></script>
+<script defer src="app.js?v=6"></script>
 
 <script>
   // Smooth Page Transitions
@@ -153,3 +249,12 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@
  * Displays before starting Level 1
  */
 
-const tutorialLevel1 = {
+window.tutorialLevel1 = {
     level: 1,
     title: "Level 1: The Foundation",
     subtitle: "Multiple Choice Questions",

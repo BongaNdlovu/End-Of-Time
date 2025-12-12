@@ -4,7 +4,7 @@
  * Focus: Relationships and connections
  */
 
-const level4Questions = [
+export const level4Questions = [
     {
         "id": "L4Q001",
         "question": "Match the son of Jacob to his mother.",
@@ -706,3 +706,7 @@ const level4Questions = [
         "explanation": "Blessings are a major theme. This is tricky because it includes the unusual event of Jacob, a shepherd from Canaan, blessing the mighty Pharaoh of Egypt (Genesis 47:7)."
     }
 ];
+if (typeof window !== 'undefined') {
+    window.level4Questions = level4Questions;
+}
+export default level4Questions;

@@ -214,15 +214,21 @@
         }
     }
 
-    function showComingSoon() {
+    const getComingSoonLabel = (item) => {
+        if (!item) return 'This feature';
+        return item.dataset?.soonLabel || (item.querySelector('h2') && item.querySelector('h2').textContent.trim()) || 'This feature';
+    };
+
+    function showComingSoon(featureLabel) {
         playSelectSound();
+        const label = featureLabel ? `${featureLabel} is coming soon!` : 'This feature is coming soon!';
         const existing = document.querySelector('.coming-soon-toast');
         if (existing) {
             existing.remove();
         }
         const toast = document.createElement('div');
         toast.className = 'coming-soon-toast';
-        toast.textContent = 'Prayer Network is coming soon!';
+        toast.textContent = label;
         toast.style.cssText = 'position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(11,11,12,0.95); color: #fff; padding: 12px 24px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); font-weight: 600; letter-spacing: 0.02em; z-index: 9999;';
         document.body.appendChild(toast);
         setTimeout(() => {
@@ -283,7 +289,7 @@
                 } else if (action === 'openMagazine') {
                     openMagazine();
                 } else if (action === 'comingSoon') {
-                    showComingSoon();
+                    showComingSoon(getComingSoonLabel(item));
                 }
             });
 
@@ -304,7 +310,7 @@
 
             item.addEventListener('touchend', () => {
                 if (item.classList.contains('locked')) {
-                    showComingSoon();
+                    showComingSoon(getComingSoonLabel(item));
                     return;
                 }
                 item.click();

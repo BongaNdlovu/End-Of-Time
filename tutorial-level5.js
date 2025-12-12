@@ -3,7 +3,7 @@
  * Displays before starting Level 5
  */
 
-const tutorialLevel5 = {
+window.tutorialLevel5 = {
     level: 5,
     title: "Level 5: Timeline of Truth",
     subtitle: "Chronological Order Questions",

@@ -4057,6 +4057,21 @@ html, body {
     max-width: 1500px !important;
 }
 
+/* Make the glass game screen scrollable when content exceeds viewport */
+.quiz-shell {
+    max-height: 92vh !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure the explanation content can scroll within the card */
+#deep-insight-content {
+    max-height: 60vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
 /* Center header grid */
 .quiz-header {
     width: 100% !important;

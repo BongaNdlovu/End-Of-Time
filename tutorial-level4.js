@@ -3,7 +3,7 @@
  * Displays before starting Level 4
  */
 
-const tutorialLevel4 = {
+window.tutorialLevel4 = {
     level: 4,
     title: "Level 4: Divine Connections",
     subtitle: "Matching Questions",

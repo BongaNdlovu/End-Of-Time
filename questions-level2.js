@@ -4,7 +4,7 @@
  * Focus: Biblical facts and statements
  */
 
-const level2Questions = [
+export const level2Questions = [
     {
         "id": "L2Q001",
         "question": "True or False: The Bible identifies the forbidden fruit eaten by Adam and Eve as an apple.",
@@ -656,3 +656,7 @@ const level2Questions = [
         "explanation": "Genesis ends with the death of Joseph in Egypt. The story of the Israelites' exodus from Egypt and their journey to the promised land begins in the book of Exodus."
     }
 ];
+if (typeof window !== 'undefined') {
+    window.level2Questions = level2Questions;
+}
+export default level2Questions;

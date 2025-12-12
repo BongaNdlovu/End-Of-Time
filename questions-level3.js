@@ -4,7 +4,7 @@
  * Focus: Scripture memory and completion
  */
 
-const level3Questions = [
+export const level3Questions = [
     {
         "id": "L3Q001",
         "question": "Fill in the blank: 'And Lamech said unto his wives, Adah and Zillah, Hear my voice... for I have slain a man to my _______, and a young man to my _______.'",
@@ -890,3 +890,7 @@ const level3Questions = [
         "explanation": "Genesis 21:14 lists the meager provisions—bread and a bottle of water—that Abraham gave to Hagar as he sent her and Ishmael away."
     }
 ];
+if (typeof window !== 'undefined') {
+    window.level3Questions = level3Questions;
+}
+export default level3Questions;

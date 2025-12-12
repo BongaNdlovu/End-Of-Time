@@ -1,16 +1,18 @@
 /* Dark Theme - A flatter, darker theme for the trivia game. */
 
+@import "./styles/tokens.css";
+
 body, html {
-    background: #121212 !important; /* A very dark grey, not pure black */
+    background: var(--color-bg-subtle) !important; /* A very dark grey, not pure black */
 }
 
 /* --- Containers --- */
 .container, .game, .game-over {
-    background: rgba(18, 18, 18, 0.85); /* Darker, semi-transparent background */
-    border: 2px solid #6b0000; /* Dark blood red border */
-    box-shadow: 0 5px 20px rgba(0,0,0,0.6); /* Slightly deeper shadow */
-    backdrop-filter: blur(5px); /* Frosted glass effect */
-    -webkit-backdrop-filter: blur(5px);
+    background: var(--color-surface-strong); /* Darker, semi-transparent background */
+    border: 1px solid var(--color-border); /* Harmonized border */
+    box-shadow: var(--shadow-md); /* Slightly deeper shadow */
+    backdrop-filter: blur(18px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(18px);
 }
 
 .game {

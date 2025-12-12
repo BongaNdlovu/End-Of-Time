@@ -4,7 +4,7 @@
  * Type: Event ordering and timeline comprehension
  */
 
-const level5Questions = [
+export const level5Questions = [
     {
         "id": "L5Q001",
         "question": "Put these events in chronological order:",
@@ -306,3 +306,7 @@ const level5Questions = [
         "explanation": "Originally all humanity spoke one language, they united to build a tower to make a name for themselves, God confused their speech, and as a result they scattered across the earth."
     }
 ];
+if (typeof window !== 'undefined') {
+    window.level5Questions = level5Questions;
+}
+export default level5Questions;

@@ -15,10 +15,39 @@
  * @version 1.1.0
  */
 
+const __IS_LOCAL_DEV__ = typeof window !== 'undefined'
+    && ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+const devLog = (...args) => {
+    if (__IS_LOCAL_DEV__ && typeof window !== 'undefined' && window.console) {
+        window.console.log(...args);
+    }
+};
+const devWarn = (...args) => {
+    if (__IS_LOCAL_DEV__ && typeof window !== 'undefined' && window.console) {
+        window.console.warn(...args);
+    }
+};
+const devDebug = (...args) => {
+    if (__IS_LOCAL_DEV__ && typeof window !== 'undefined' && window.console) {
+        window.console.debug(...args);
+    }
+};
+
+if (typeof window !== 'undefined' && typeof window.debugAudioElements !== 'function') {
+    window.debugAudioElements = function() {
+        try {
+            if (typeof AudioManager !== 'undefined' && typeof AudioManager.debug === 'function') {
+                AudioManager.debug();
+            }
+        } catch (_) {}
+    };
+}
+
+
 // --- Firebase Global Variables (managed by auth-leaderboard.js) ---
 let db = null; // reserved (do not use directly)
 let auth = null; // reserved (do not use directly)
-
+let authBindingsApplied = false;
 // --- DOM Elements ---
 const soloBtn = document.getElementById('solo');
 const teamsBtn = document.getElementById('teams');
@@ -35,6 +64,7 @@ const showOptionsBtn = document.getElementById('show-options');
 const resultsSolo = document.getElementById('results-solo');
 const resultsTeams = document.getElementById('results-teams');
 const playAgainBtn = document.getElementById('play-again');
+const continueNextLevelBtn = document.getElementById('continue-next-level-btn');
 const downloadBtn = document.getElementById('download');
 const exitBtn = document.getElementById('exit');
 const mainMenuBtn = document.getElementById('main-menu');
@@ -45,6 +75,8 @@ const resetTutorialsBtn = document.getElementById('reset-tutorials-btn');
 const resetVideosBtn = document.getElementById('reset-videos-btn');
 const CONTENT_SKIP_PROMPT_ID = 'content-skip-alert';
 const CONTENT_SKIP_PROMPT_SESSION_KEY = 'endOfTime_skipPromptDismissed';
+const backgroundVideoElement = document.getElementById('background-video');
+const backgroundVideoToggleBtn = document.getElementById('background-video-toggle');
 
 // Video modal elements
 const levelVideoModal = document.getElementById('level-video-modal');
@@ -85,6 +117,95 @@ if (questionOptionsContainer) {
     questionOptionsContainer.parentNode.insertBefore(explanationDiv, questionOptionsContainer.nextSibling);
 } else {
     optionsDiv.parentNode.appendChild(explanationDiv);
+}
+
+const BACKGROUND_VIDEO_STORAGE_KEY = 'endOfTime_backgroundVideoEnabled';
+let backgroundVideoEnabled = true;
+let backgroundVideoLoaded = false;
+
+function readBackgroundVideoPreference() {
+    try {
+        const stored = localStorage.getItem(BACKGROUND_VIDEO_STORAGE_KEY);
+        if (stored === 'false') {
+            return false;
+        }
+        if (stored === 'true') {
+            return true;
+        }
+    } catch (_) {}
+    return true;
+}
+
+function updateBackgroundVideoToggleUI() {
+    if (backgroundVideoToggleBtn) {
+        backgroundVideoToggleBtn.textContent = backgroundVideoEnabled ? 'Background Video: On' : 'Background Video: Off';
+        backgroundVideoToggleBtn.setAttribute('aria-pressed', backgroundVideoEnabled ? 'true' : 'false');
+    }
+    if (backgroundVideoElement) {
+        backgroundVideoElement.style.display = backgroundVideoEnabled ? 'block' : 'none';
+        backgroundVideoElement.toggleAttribute('data-enabled', backgroundVideoEnabled);
+    }
+}
+
+function detachBackgroundVideoSource() {
+    if (!backgroundVideoElement) {
+        return;
+    }
+    backgroundVideoElement.pause();
+    backgroundVideoElement.onended = null;
+    delete backgroundVideoElement.dataset.currentSrc;
+    if (backgroundVideoLoaded) {
+        backgroundVideoElement.removeAttribute('src');
+        backgroundVideoElement.load();
+        backgroundVideoElement.removeAttribute('data-loaded');
+        backgroundVideoLoaded = false;
+    }
+}
+
+function ensureBackgroundVideoLoaded() {
+    if (!backgroundVideoEnabled || !backgroundVideoElement) {
+        return null;
+    }
+    if (!backgroundVideoLoaded) {
+        const currentSrc = backgroundVideoElement.dataset.currentSrc || backgroundVideoElement.dataset.defaultSrc;
+        if (currentSrc && backgroundVideoElement.src !== currentSrc) {
+            backgroundVideoElement.src = currentSrc;
+        }
+        backgroundVideoElement.load();
+        backgroundVideoElement.dataset.loaded = 'true';
+        backgroundVideoLoaded = true;
+    }
+    return backgroundVideoElement;
+}
+
+function playBackgroundVideo() {
+    const video = ensureBackgroundVideoLoaded();
+    if (!video) {
+        return;
+    }
+    const playResult = video.play();
+    if (playResult && typeof playResult.catch === 'function') {
+        playResult.catch(() => {});
+    }
+}
+
+function pauseBackgroundVideo() {
+    if (backgroundVideoElement) {
+        backgroundVideoElement.pause();
+    }
+}
+
+function setBackgroundVideoPreference(enabled) {
+    backgroundVideoEnabled = Boolean(enabled);
+    try {
+        localStorage.setItem(BACKGROUND_VIDEO_STORAGE_KEY, backgroundVideoEnabled ? 'true' : 'false');
+    } catch (_) {}
+    updateBackgroundVideoToggleUI();
+    if (backgroundVideoEnabled) {
+        playBackgroundVideo();
+    } else {
+        detachBackgroundVideoSource();
+    }
 }
 
 function escapeHtml(text) {
@@ -186,7 +307,7 @@ try {
 		// Not loaded yet; will be initialized lazily in ensureConfettiReady()
 	}
 } catch (e) {
-	console.warn('[Confetti] Initialization deferred; will use lazy load.', e);
+	devWarn('[Confetti] Initialization deferred; will use lazy load.', e);
 }
 
 async function ensureConfettiReady() {
@@ -198,7 +319,7 @@ async function ensureConfettiReady() {
             confetti = new window.ConfettiGenerator(confettiSettings);
         }
     } catch (e) {
-        console.warn('[Confetti] ensureConfettiReady failed:', e);
+        devWarn('[Confetti] ensureConfettiReady failed:', e);
     }
 }
 
@@ -256,7 +377,10 @@ let blueTeamQuestions = [];
 // --- NEW FOR LEVEL SYSTEM ---
 let currentGameLevel = 1;
 const LEVEL_PASS_PERCENTAGE = 0.7; // 70% to pass a level
-const ASSET_VERSION = '20250127a';
+const ASSET_VERSION = '20251102b';
+if (typeof window !== 'undefined') {
+    window.__ASSET_VERSION = ASSET_VERSION;
+}
 const allLevels = [
     { id: 1, questions: typeof level1Questions !== 'undefined' ? level1Questions : [], name: "Level 1" },
     { id: 2, questions: typeof level2Questions !== 'undefined' ? level2Questions : [], name: "Level 2" },
@@ -324,9 +448,9 @@ async function loadScriptOnce(src) {
 
             const s = document.createElement('script');
             s.src = versionedAsset(src);
-            s.defer = true;
             s.dataset.dyn = src;
             s.dataset.version = ASSET_VERSION;
+            s.async = true;
             s.onload = () => resolve();
             s.onerror = (e) => reject(e);
             document.head.appendChild(s);
@@ -336,31 +460,52 @@ async function loadScriptOnce(src) {
     });
 }
 
+async function loadQuestionsFromModule(idx) {
+    if (typeof window === 'undefined' || typeof window.__loadQuestionsModule !== 'function') {
+        return null;
+    }
+    try {
+        const data = await window.__loadQuestionsModule(idx);
+        if (!Array.isArray(data) || data.length === 0) {
+            return null;
+        }
+        return data;
+    } catch (error) {
+        devWarn(`[Loader] Failed to import module for level ${idx + 1}`, error);
+        return null;
+    }
+}
+
 async function ensureLevelLoaded(levelNumber) {
     const idx = Math.max(1, Math.min(7, Number(levelNumber))) - 1;
     
     // Check if already loaded
     if (Array.isArray(allLevels[idx].questions) && allLevels[idx].questions.length > 0) {
-        console.log(`[Loader] Level ${levelNumber} already loaded with ${allLevels[idx].questions.length} questions`);
+        devLog(`[Loader] Level ${levelNumber} already loaded with ${allLevels[idx].questions.length} questions`);
         return;
     }
     
-    const file = `questions-level${idx + 1}.js`;
-    console.log(`[Loader] Loading Level ${levelNumber} from ${file}`);
-    
     try {
-        await loadScriptOnce(file);
-        const key = `level${idx + 1}Questions`;
-        console.log(`[Loader Checking] Looking for ${key} in window, found:`, !!window[key], 'is array:', Array.isArray(window[key]));
-        
-        if (Array.isArray(window[key]) && window[key].length > 0) {
-            allLevels[idx].questions = window[key];
-            console.log(`[Loader] Successfully loaded Level ${levelNumber} with ${window[key].length} questions`);
+        let loadedQuestions = await loadQuestionsFromModule(idx);
+        if (!loadedQuestions || loadedQuestions.length === 0) {
+            const file = `questions-level${idx + 1}.js`;
+            devLog(`[Loader] Falling back to script injection for Level ${levelNumber} from ${file}`);
+            await loadScriptOnce(file);
+            const key = `level${idx + 1}Questions`;
+            devLog(`[Loader Checking] Looking for ${key} in window, found:`, !!window[key], 'is array:', Array.isArray(window[key]));
+            if (Array.isArray(window[key]) && window[key].length > 0) {
+                loadedQuestions = window[key];
+            }
+        }
+
+        if (Array.isArray(loadedQuestions) && loadedQuestions.length > 0) {
+            allLevels[idx].questions = loadedQuestions;
+            devLog(`[Loader] Successfully loaded Level ${levelNumber} with ${loadedQuestions.length} questions`);
         } else {
-            console.error(`[Loader] Script loaded but ${key} not found or empty. Available level variables:`, Object.keys(window).filter(k => k.startsWith('level')));
+            console.error(`[Loader] Level ${levelNumber} data not found or empty after loading attempts`);
         }
     } catch (e) {
-        console.error(`[Loader] Failed to load ${file}:`, e);
+        console.error(`[Loader] Failed to load Level ${levelNumber}:`, e);
     }
 }
 
@@ -370,26 +515,26 @@ async function ensureTutorialLoaded(levelNumber) {
     // Ensure global tutorial array exists and is shared
     if (!Array.isArray(window.allTutorials)) {
         window.allTutorials = new Array(7).fill(null);
-        console.log("[Tutorial] Created window.allTutorials array");
+        devLog("[Tutorial] Created window.allTutorials array");
     }
     
     // Check if already loaded
     if (window.allTutorials[idx]) {
-        console.log(`[Tutorial] Level ${levelNumber} tutorial already loaded`);
+        devLog(`[Tutorial] Level ${levelNumber} tutorial already loaded`);
         return;
     }
     
     const file = `tutorial-level${idx + 1}.js`;
-    console.log(`[Tutorial] Loading Level ${levelNumber} tutorial from ${file}`);
+    devLog(`[Tutorial] Loading Level ${levelNumber} tutorial from ${file}`);
     
     try {
         await loadScriptOnce(file);
         const key = `tutorialLevel${idx + 1}`;
-        console.log(`[Tutorial] Checking for ${key} in window, found:`, !!window[key]);
+        devLog(`[Tutorial] Checking for ${key} in window, found:`, !!window[key]);
         
         if (window[key]) {
             window.allTutorials[idx] = window[key];
-            console.log(`[Tutorial] Successfully loaded Level ${levelNumber} tutorial`);
+            devLog(`[Tutorial] Successfully loaded Level ${levelNumber} tutorial`);
         } else {
             console.error(`[Tutorial] Script loaded but ${key} not found. Available tutorial variables:`, Object.keys(window).filter(k => k.startsWith('tutorialLevel')));
             
@@ -397,7 +542,7 @@ async function ensureTutorialLoaded(levelNumber) {
             const altKey = `level${idx + 1}Tutorial`;
             if (window[altKey]) {
                 window.allTutorials[idx] = window[altKey];
-                console.log(`[Tutorial] Found tutorial using alternative key ${altKey}`);
+                devLog(`[Tutorial] Found tutorial using alternative key ${altKey}`);
             }
         }
     } catch (e) {
@@ -408,7 +553,7 @@ async function ensureTutorialLoaded(levelNumber) {
 async function ensureFirebaseReady() {
     // Wait for Firebase to be fully loaded
     if (typeof firebase === 'undefined') {
-        console.log('[Auth] Firebase not loaded, waiting...');
+        devLog('[Auth] Firebase not loaded, waiting...');
         let attempts = 0;
         while (typeof firebase === 'undefined' && attempts < 50) {
             await new Promise(resolve => setTimeout(resolve, 100));
@@ -418,33 +563,27 @@ async function ensureFirebaseReady() {
             throw new Error('Firebase SDK failed to load after timeout');
         }
     }
-    console.log('[Auth] Firebase is ready');
+    devLog('[Auth] Firebase is ready');
 }
 
 async function ensureAuthLoaded() {
     if (window.AuthManager) {
-        console.log('[Auth] AuthManager already loaded');
-        return;
+        devLog('[Auth] AuthManager already loaded');
+        return true;
     }
     try {
-        // First ensure Firebase is loaded
-        await ensureFirebaseReady();
-        
-        console.log('[Auth] Loading auth-leaderboard.js...');
+        devLog('[Auth] Loading auth-leaderboard.js...');
         await loadScriptOnce('auth-leaderboard.js');
-        console.log('[Auth] auth-leaderboard.js loaded, checking AuthManager...');
-        if (window.AuthManager && typeof window.AuthManager.init === 'function') {
-            console.log('[Auth] Initializing AuthManager...');
-            window.AuthManager.init();
-            console.log('[Auth] AuthManager initialized successfully');
-        } else {
-            console.error('[Auth] AuthManager not found after loading script');
+        devLog('[Auth] auth-leaderboard.js loaded');
+        if (window.AuthManager) {
+            return true;
         }
+        console.error('[Auth] AuthManager not found after loading script');
     } catch (e) {
         console.error('[Loader] Failed to load auth-leaderboard.js:', e);
     }
+    return !!window.AuthManager;
 }
-
 /**
  * Animation Effects Module
  * Handles all visual feedback animations without affecting core game logic
@@ -587,7 +726,7 @@ let animationEffects = null;
 
 // Add this test function to verify animations work
 window.testAnimations = function testAnimations() {
-  console.log('Testing animations...');
+  devLog('Testing animations...');
   if (animationEffects) {
     animationEffects.animateTokenEarn(1);
     setTimeout(() => {
@@ -597,19 +736,19 @@ window.testAnimations = function testAnimations() {
       }, 3000);
     }, 2000);
   } else {
-    console.warn('animationEffects is not initialized yet. Wait for DOMContentLoaded.');
+    devWarn('animationEffects is not initialized yet. Wait for DOMContentLoaded.');
   }
 };
 
 // Function to verify question randomization
 function verifyQuestionRandomization(questions, category) {
-    console.log(`=== Question Randomization Verification for ${category} ===`);
-    console.log(`Total questions selected: ${questions.length}`);
-    console.log(`Question IDs (in order): ${questions.map(q => q.id).join(', ')}`);
+    devLog(`=== Question Randomization Verification for ${category} ===`);
+    devLog(`Total questions selected: ${questions.length}`);
+    devLog(`Question IDs (in order): ${questions.map(q => q.id).join(', ')}`);
     
     // Check for any patterns or ordering
     const categories = [...new Set(questions.map(q => q.category))];
-    console.log(`Categories represented: ${categories.join(', ')}`);
+    devLog(`Categories represented: ${categories.join(', ')}`);
     
     // Check if questions are truly random by looking at consecutive patterns
     let consecutiveSameCategory = 0;
@@ -618,9 +757,9 @@ function verifyQuestionRandomization(questions, category) {
             consecutiveSameCategory++;
         }
     }
-    console.log(`Consecutive same-category questions: ${consecutiveSameCategory}/${questions.length-1}`);
+    devLog(`Consecutive same-category questions: ${consecutiveSameCategory}/${questions.length-1}`);
     
-    console.log('=== End Verification ===');
+    devLog('=== End Verification ===');
 }
 
 // --- REMOVED: Get Time Attack Questions function is no longer needed ---
@@ -799,7 +938,7 @@ function triggerConfetti(type = 'normal') {
                 setTimeout(() => { confetti.clear(); }, 3000);
             }
         }).catch(err => {
-            console.warn('[Confetti] Failed to trigger confetti:', err);
+            devWarn('[Confetti] Failed to trigger confetti:', err);
         });
     }
 }
@@ -821,7 +960,7 @@ function shakeElement(element) {
 // --- Firework and Alarm Effects ---
 function triggerComicFireworks(extra = false) {
     const panel = gameDiv;
-    const fireworks = ['💥','✨','🌟','🔥','⭐','💫','🎉','🧨'];
+    const fireworks = ['*', '+', 'x', '!', '~', '^', '#', '%'];
     const count = extra ? 12 : 6;
     for (let i = 0; i < count; i++) {
         const fw = document.createElement('div');
@@ -840,7 +979,7 @@ function triggerComicAlarm() {
     const panel = gameDiv;
     const alarm = document.createElement('div');
     alarm.className = 'comic-alarm';
-    alarm.innerText = '🚨';
+    alarm.innerText = 'ALERT';
     panel.appendChild(alarm);
     setTimeout(() => alarm.remove(), 800);
     panel.classList.add('red-flash');
@@ -1068,30 +1207,30 @@ function playStreakSound(streak) {
 
 // --- Category to icon mapping
 const CATEGORY_ICONS = {
-    'Bible People': '📖',
-    'Prophecy': '👓',
-    'General SDA': '🌍',
-    'Diet & Health': '🥗',
-    'Last Day Events': '⏳',
-    'Music': '🎵',
-    'The Great Controversy': '⚔️'
+    'Bible People': 'B',
+    'Prophecy': 'P',
+    'General SDA': 'S',
+    'Diet & Health': 'H',
+    'Last Day Events': 'L',
+    'Music': 'M',
+    'The Great Controversy': 'G'
 };
 
 // Fun facts, Bible verses, and health tips
 const FUN_FACTS = [
     // Bible Verses
-    '"I can do all things through Christ who strengthens me." — Philippians 4:13',
-    '"Trust in the Lord with all your heart and lean not on your own understanding." — Proverbs 3:5',
-    '"Beloved, I pray that you may prosper in all things and be in health, just as your soul prospers." — 3 John 1:2',
-    '"For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." — John 3:16',
-    '"Thy word is a lamp unto my feet, and a light unto my path." — Psalm 119:105',
-    '"Come unto me, all ye that labour and are heavy laden, and I will give you rest." — Matthew 11:28',
-    '"But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint." — Isaiah 40:31',
-    '"Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth." — 2 Timothy 2:15',
+    '"I can do all things through Christ who strengthens me." - Philippians 4:13',
+    '"Trust in the Lord with all your heart and lean not on your own understanding." - Proverbs 3:5',
+    '"Beloved, I pray that you may prosper in all things and be in health, just as your soul prospers." - 3 John 1:2',
+    '"For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." - John 3:16',
+    '"Thy word is a lamp unto my feet, and a light unto my path." - Psalm 119:105',
+    '"Come unto me, all ye that labour and are heavy laden, and I will give you rest." - Matthew 11:28',
+    '"But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint." - Isaiah 40:31',
+    '"Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth." - 2 Timothy 2:15',
     // Health Tips
-    '🥗 Health Tip: Drinking enough water each day is crucial for many reasons: to regulate body temperature, keep joints lubricated, and deliver nutrients to cells.',
-    '🥦 Health Tip: Eating a variety of colorful fruits and vegetables helps your body get a wide range of nutrients.',
-    '🚶‍♂️ Health Tip: Just 30 minutes of walking a day can boost your mood and improve your health.',
+    'Health Tip: Drinking enough water each day is crucial for many reasons: to regulate body temperature, keep joints lubricated, and deliver nutrients to cells.',
+    'Health Tip: Eating a variety of colorful fruits and vegetables helps your body get a wide range of nutrients.',
+    'Health Tip: Just 30 minutes of walking a day can boost your mood and improve your health.',
 
 ];
 
@@ -1115,14 +1254,14 @@ const ENCOURAGEMENTS_CORRECT = [
 const ENCOURAGEMENTS_INCORRECT = [
     "Even Batman misses sometimes!",
     "Plot twist! Try again.",
-    "Villains never win—heroes keep going!",
+    "Villains never win - heroes keep going!",
     "Shake it off, hero!",
     "Every hero has setbacks!",
-    "You dodged that one—next time, aim true!",
+    "You dodged that one - next time, aim true!",
     "Not all heroes get it right the first time!",
     "The comeback is always stronger!",
     "Zap! But you'll bounce back!",
-    "Keep your cape on—next one's yours!"
+    "Keep your cape on - next one's yours!"
 ];
 function getRandomEncouragement(isCorrect) {
     const arr = isCorrect ? ENCOURAGEMENTS_CORRECT : ENCOURAGEMENTS_INCORRECT;
@@ -1135,7 +1274,7 @@ const ACHIEVEMENTS = [
     id: 'novice_guardian',
     name: 'Novice Guardian',
     description: 'Complete your first game.',
-    icon: '🛡️',
+    icon: '*',
     color: '#4CAF50',
     rarity: 'common',
     check: (stats) => stats.completed,
@@ -1144,7 +1283,7 @@ const ACHIEVEMENTS = [
     id: 'accuracy_ace',
     name: 'Accuracy Ace',
     description: 'Get 90% or more correct answers in a game.',
-    icon: '🎯',
+    icon: '*',
     color: '#FF9800',
     rarity: 'rare',
     check: (stats) => stats.correctPct >= 90,
@@ -1153,7 +1292,7 @@ const ACHIEVEMENTS = [
     id: 'streak_master',
     name: 'Streak Master',
     description: 'Achieve a streak of 10 or more correct answers in a row.',
-    icon: '🔥',
+    icon: '*',
     color: '#F44336',
     rarity: 'epic',
     check: (stats) => stats.longestStreak >= 10,
@@ -1162,7 +1301,7 @@ const ACHIEVEMENTS = [
     id: 'speedster',
     name: 'Speedster',
     description: 'Average answer time under 7 seconds.',
-    icon: '⚡',
+    icon: '*',
     color: '#2196F3',
     rarity: 'rare',
     check: (stats) => stats.avgTime < 7,
@@ -1171,7 +1310,7 @@ const ACHIEVEMENTS = [
     id: 'faithful_finisher',
     name: 'Faithful Finisher',
     description: 'Finish a game without using any power-ups.',
-    icon: '✝️',
+    icon: '*',
     color: '#9C27B0',
     rarity: 'epic',
     check: (stats) => stats.powerUpsUsed === 0,
@@ -1180,7 +1319,7 @@ const ACHIEVEMENTS = [
     id: 'comeback_kid',
     name: 'Comeback Kid',
     description: 'Recover from a streak of 3+ wrong answers to finish with 80%+ accuracy.',
-    icon: '🔄',
+    icon: '#',
     color: '#FF5722',
     rarity: 'legendary',
     check: (stats) => stats.comeback && stats.correctPct >= 80,
@@ -1189,7 +1328,7 @@ const ACHIEVEMENTS = [
     id: 'token_tycoon',
     name: 'Token Tycoon',
     description: 'Earn 10 or more Faith Tokens in a single game.',
-    icon: '💎',
+    icon: '*',
     color: '#FFD700',
     rarity: 'legendary',
     check: (stats) => stats.faithTokens >= 10,
@@ -1198,7 +1337,7 @@ const ACHIEVEMENTS = [
     id: 'perfect_game',
     name: 'Perfect Game',
     description: 'Answer all questions correctly in a game.',
-    icon: '👑',
+    icon: '*',
     color: '#E91E63',
     rarity: 'mythic',
     check: (stats) => stats.correctAnswers === stats.totalQuestions,
@@ -1207,7 +1346,7 @@ const ACHIEVEMENTS = [
     id: 'prophecy_pro',
     name: 'Prophecy Pro',
     description: 'Answer 5 prophecy questions correctly in a row.',
-    icon: '🔮',
+    icon: '*',
     color: '#673AB7',
     rarity: 'epic',
     check: (stats) => stats.prophecyStreak >= 5,
@@ -1216,7 +1355,7 @@ const ACHIEVEMENTS = [
     id: 'health_guru',
     name: 'Health Guru',
     description: 'Answer 5 health questions correctly in a row.',
-    icon: '🥗',
+    icon: '*',
     color: '#4CAF50',
     rarity: 'rare',
     check: (stats) => stats.healthStreak >= 5,
@@ -1225,7 +1364,7 @@ const ACHIEVEMENTS = [
     id: 'bible_scholar',
     name: 'Bible Scholar',
     description: 'Answer 5 Bible People questions correctly in a row.',
-    icon: '📖',
+    icon: '*',
     color: '#795548',
     rarity: 'epic',
     check: (stats) => stats.bibleStreak >= 5,
@@ -1234,7 +1373,7 @@ const ACHIEVEMENTS = [
     id: 'time_master',
     name: 'Time Master',
     description: 'Answer 3 questions in under 10 seconds total.',
-    icon: '⏱️',
+    icon: '*',
     color: '#00BCD4',
     rarity: 'rare',
     check: (stats) => stats.fastAnswers >= 3,
@@ -1243,7 +1382,7 @@ const ACHIEVEMENTS = [
     id: 'wager_warrior',
     name: 'Wager Warrior',
     description: 'Win 3 high-stakes wagers in a single game.',
-    icon: '🎲',
+    icon: '#',
     color: '#FF5722',
     rarity: 'epic',
     check: (stats) => stats.highWagers >= 3,
@@ -1252,7 +1391,7 @@ const ACHIEVEMENTS = [
     id: 'perseverance',
     name: 'Perseverance',
     description: 'Complete a 50+ question game.',
-    icon: '🏃',
+    icon: '*',
     color: '#607D8B',
     rarity: 'rare',
     check: (stats) => stats.totalQuestions >= 50,
@@ -1261,7 +1400,7 @@ const ACHIEVEMENTS = [
     id: 'lightning_round',
     name: 'Lightning Round',
     description: 'Answer 5 questions in under 30 seconds.',
-    icon: '⚡',
+    icon: '*',
     color: '#FFC107',
     rarity: 'legendary',
     check: (stats) => stats.lightningRound,
@@ -1473,17 +1612,17 @@ function updateAchievementStats(data) {
  * Call this in the browser console to see all achievement badges
  */
 function testAchievementBadges() {
-    console.log('🎯 Testing Achievement Badges...');
+    devLog('Testing Achievement Badges...');
     
     // Show each achievement badge with a delay
     ACHIEVEMENTS.forEach((achievement, index) => {
         setTimeout(() => {
             showAchievementBadge(achievement);
-            console.log(`✅ Showing achievement: ${achievement.name}`);
+            devLog(`OK: Showing achievement: ${achievement.name}`);
         }, index * 2000); // Show each badge 2 seconds apart
     });
     
-    console.log('🎮 Achievement badges will appear in the top-right corner!');
+    devLog('Achievement badges will appear in the top-right corner!');
 }
 
 /**
@@ -1491,7 +1630,7 @@ function testAchievementBadges() {
  * Call this in the browser console to test team mode
  */
 function testTeamMode() {
-    console.log('🏈 Testing Team Mode...');
+    devLog('Testing Team Mode...');
     
     // Check if team mode elements exist
     const teamElements = {
@@ -1501,20 +1640,20 @@ function testTeamMode() {
         'teams-button': document.getElementById('teams')
     };
     
-    console.log('📋 Team Mode Elements Check:');
+    devLog('Team Mode Elements Check:');
     Object.entries(teamElements).forEach(([name, element]) => {
-        console.log(`${name}: ${element ? '✅ Found' : '❌ Missing'}`);
+        devLog(`${name}: ${element ? 'OK Found' : 'X Missing'}`);
     });
     
     // Check team mode variables
-    console.log('🔧 Team Mode Variables:');
-    console.log('gameMode:', typeof gameMode !== 'undefined' ? gameMode : 'undefined');
-    console.log('teamBlueScore:', typeof teamBlueScore !== 'undefined' ? teamBlueScore : 'undefined');
-    console.log('teamBlackScore:', typeof teamBlackScore !== 'undefined' ? teamBlackScore : 'undefined');
-    console.log('currentTeam:', typeof currentTeam !== 'undefined' ? currentTeam : 'undefined');
+    devLog('Team Mode Variables:');
+    devLog('gameMode:', typeof gameMode !== 'undefined' ? gameMode : 'undefined');
+    devLog('teamBlueScore:', typeof teamBlueScore !== 'undefined' ? teamBlueScore : 'undefined');
+    devLog('teamBlackScore:', typeof teamBlackScore !== 'undefined' ? teamBlackScore : 'undefined');
+    devLog('currentTeam:', typeof currentTeam !== 'undefined' ? currentTeam : 'undefined');
     
     // Test team mode initialization
-    console.log('🚀 Testing Team Mode Initialization...');
+    devLog('Testing Team Mode Initialization...');
     try {
         // Simulate team mode start
         const originalGameMode = gameMode;
@@ -1523,20 +1662,20 @@ function testTeamMode() {
         teamBlackScore = 0;
         currentTeam = 'blue';
         
-        console.log('✅ Team mode variables initialized successfully');
-        console.log('Current team:', currentTeam);
-        console.log('Blue score:', teamBlueScore);
-        console.log('Black score:', teamBlackScore);
+        devLog('OK: Team mode variables initialized successfully');
+        devLog('Current team:', currentTeam);
+        devLog('Blue score:', teamBlueScore);
+        devLog('Black score:', teamBlackScore);
         
         // Restore original state
         gameMode = originalGameMode;
-        console.log('🔄 Original game mode restored');
+        devLog('Original game mode restored');
         
     } catch (error) {
-        console.error('❌ Error testing team mode:', error);
+        console.error('Error testing team mode:', error);
     }
     
-    console.log('🎮 Team mode test complete! Start a team game to verify functionality.');
+    devLog('Team mode test complete! Start a team game to verify functionality.');
 }
 
 /**
@@ -1544,10 +1683,10 @@ function testTeamMode() {
  * Call this in the browser console to check for common issues
  */
 function comprehensiveBugCheck() {
-    console.log('🔍 Starting Comprehensive Bug Check...');
+    devLog('Starting Comprehensive Bug Check...');
     
     // Check 1: DOM Elements
-    console.log('\n📋 DOM Elements Check:');
+    devLog('\nDOM Elements Check:');
     const criticalElements = {
         'container': document.getElementById('container'),
         'game': document.getElementById('game'),
@@ -1566,15 +1705,15 @@ function comprehensiveBugCheck() {
     let missingElements = 0;
     Object.entries(criticalElements).forEach(([name, element]) => {
         if (element) {
-            console.log(`✅ ${name}: Found`);
+            devLog(`OK ${name}: Found`);
         } else {
-            console.log(`❌ ${name}: Missing`);
+            devLog(`X ${name}: Missing`);
             missingElements++;
         }
     });
     
     // Check 2: Game Variables
-    console.log('\n🔧 Game Variables Check:');
+    devLog('\nGame Variables Check:');
     const gameVariables = [
         'gameMode', 'playerScore', 'currentQuestionIndex', 'questions',
         'teamBlueScore', 'teamBlackScore', 'currentTeam', 'faithTokens',
@@ -1584,15 +1723,15 @@ function comprehensiveBugCheck() {
     let undefinedVariables = 0;
     gameVariables.forEach(varName => {
         if (typeof window[varName] !== 'undefined') {
-            console.log(`✅ ${varName}: Defined (${typeof window[varName]})`);
+            devLog(`OK ${varName}: Defined (${typeof window[varName]})`);
         } else {
-            console.log(`❌ ${varName}: Undefined`);
+            devLog(`X ${varName}: Undefined`);
             undefinedVariables++;
         }
     });
     
     // Check 3: Audio Elements
-    console.log('\n🎵 Audio Elements Check:');
+    devLog('\nAudio Elements Check:');
     const audioElements = [
         'audio-correct-1', 'audio-correct-2', 'audio-wrong', 'audio-timeup',
         'audio-riser', 'audio-bg-2', 'audio-bg-3', 'audio-bg-4', 'audio-bg-5'
@@ -1602,15 +1741,15 @@ function comprehensiveBugCheck() {
     audioElements.forEach(audioId => {
         const audio = document.getElementById(audioId);
         if (audio) {
-            console.log(`✅ ${audioId}: Found`);
+            devLog(`OK ${audioId}: Found`);
         } else {
-            console.log(`❌ ${audioId}: Missing`);
+            devLog(`X ${audioId}: Missing`);
             missingAudio++;
         }
     });
     
     // Check 4: CSS Classes
-    console.log('\n🎨 CSS Classes Check:');
+    devLog('\nCSS Classes Check:');
     const testElement = document.createElement('div');
     testElement.className = 'options button correct highlight-correct';
     document.body.appendChild(testElement);
@@ -1619,13 +1758,13 @@ function comprehensiveBugCheck() {
     const hasCorrectStyle = computedStyle.backgroundColor !== 'rgba(0, 0, 0, 0)' || 
                            computedStyle.borderColor !== 'rgba(0, 0, 0, 0)';
     
-    console.log(`✅ CSS Classes: ${hasCorrectStyle ? 'Working' : 'May have issues'}`);
+    devLog(`OK CSS Classes: ${hasCorrectStyle ? 'Working' : 'May have issues'}`);
     document.body.removeChild(testElement);
     
     // Check 5: Question Data
-    console.log('\n📚 Question Data Check:');
+    devLog('\nQuestion Data Check:');
     if (typeof gameQuestions !== 'undefined' && gameQuestions.length > 0) {
-        console.log(`✅ gameQuestions: ${gameQuestions.length} questions loaded`);
+        devLog(`OK gameQuestions: ${gameQuestions.length} questions loaded`);
         
         // Check first question structure
         const firstQuestion = gameQuestions[0];
@@ -1634,19 +1773,19 @@ function comprehensiveBugCheck() {
         
         requiredFields.forEach(field => {
             if (firstQuestion[field]) {
-                console.log(`✅ Question ${field}: Present`);
+                devLog(`OK Question ${field}: Present`);
             } else {
-                console.log(`❌ Question ${field}: Missing`);
+                devLog(`X Question ${field}: Missing`);
                 missingFields++;
             }
         });
     } else {
-        console.log('❌ gameQuestions: Not loaded or empty');
+        devLog('X gameQuestions: Not loaded or empty');
     }
     
     // Check 6: Answer Highlighting Logic
-    console.log('\n🎯 Answer Highlighting Check:');
-    console.log('Testing answer highlighting logic...');
+    devLog('\nAnswer Highlighting Check:');
+    devLog('Testing answer highlighting logic...');
     
     // Simulate a question scenario
     const testQuestion = {
@@ -1656,34 +1795,34 @@ function comprehensiveBugCheck() {
         category: 'Test'
     };
     
-    console.log(`Test question answer: "${testQuestion.answer}"`);
-    console.log(`Test options: ${testQuestion.options.join(', ')}`);
+    devLog(`Test question answer: "${testQuestion.answer}"`);
+    devLog(`Test options: ${testQuestion.options.join(', ')}`);
     
     // Check if the highlighting logic would work
     const correctOption = testQuestion.options.find(option => option === testQuestion.answer);
     if (correctOption) {
-        console.log('✅ Answer highlighting logic: Should work correctly');
+        devLog('OK Answer highlighting logic: Should work correctly');
     } else {
-        console.log('❌ Answer highlighting logic: May have issues');
+        devLog('X Answer highlighting logic: May have issues');
     }
     
     // Summary
-    console.log('\n📊 Bug Check Summary:');
-    console.log(`Missing DOM Elements: ${missingElements}`);
-    console.log(`Undefined Variables: ${undefinedVariables}`);
-    console.log(`Missing Audio Elements: ${missingAudio}`);
+    devLog('\nBug Check Summary:');
+    devLog(`Missing DOM Elements: ${missingElements}`);
+    devLog(`Undefined Variables: ${undefinedVariables}`);
+    devLog(`Missing Audio Elements: ${missingAudio}`);
     
     if (missingElements === 0 && undefinedVariables === 0 && missingAudio === 0) {
-        console.log('🎉 All checks passed! No obvious bugs detected.');
+        devLog('All checks passed! No obvious bugs detected.');
     } else {
-        console.log('⚠️ Some issues detected. Check the details above.');
+        devLog('WARN: Some issues detected. Check the details above.');
     }
     
-    console.log('\n💡 If you\'re experiencing issues:');
-    console.log('1. Check the browser console for JavaScript errors');
-    console.log('2. Verify all audio files are in the correct location');
-    console.log('3. Try refreshing the page');
-    console.log('4. Check if any browser extensions are interfering');
+    devLog('\nIf you\'re experiencing issues:');
+    devLog('1. Check the browser console for JavaScript errors');
+    devLog('2. Verify all audio files are in the correct location');
+    devLog('3. Try refreshing the page');
+    devLog('4. Check if any browser extensions are interfering');
 }
 
 /**
@@ -1691,80 +1830,80 @@ function comprehensiveBugCheck() {
  * Call this in the browser console to test answer highlighting
  */
 function testAnswerHighlighting() {
-    console.log('🎯 Testing Answer Highlighting...');
+    devLog('Testing Answer Highlighting...');
     
     // Check if we're in a game
     if (!document.getElementById('game') || document.getElementById('game').style.display === 'none') {
-        console.log('❌ Game is not active. Start a game first.');
+        devLog('X Game is not active. Start a game first.');
         return;
     }
     
     // Check if there are options buttons
     const optionsDiv = document.querySelector('.options');
     if (!optionsDiv || optionsDiv.children.length === 0) {
-        console.log('❌ No options buttons found. Make sure a question is displayed.');
+        devLog('X No options buttons found. Make sure a question is displayed.');
         return;
     }
     
-    console.log('✅ Game is active and options are present');
-    console.log('📋 Current options:');
+    devLog('OK Game is active and options are present');
+    devLog('Current options:');
     Array.from(optionsDiv.children).forEach((btn, index) => {
-        console.log(`  ${index + 1}. "${btn.innerText}"`);
-        console.log(`    Classes: ${btn.className}`);
-        console.log(`    Disabled: ${btn.disabled}`);
+        devLog(`  ${index + 1}. "${btn.innerText}"`);
+        devLog(`    Classes: ${btn.className}`);
+        devLog(`    Disabled: ${btn.disabled}`);
     });
     
     // Check if we have a current question
     if (typeof currentQuestionIndex !== 'undefined' && typeof questions !== 'undefined' && questions[currentQuestionIndex]) {
         const currentQuestion = questions[currentQuestionIndex];
-        console.log('📚 Current question answer:', currentQuestion.answer);
+        devLog('Current question answer:', currentQuestion.answer);
         
         // Test the highlighting logic
         const correctButton = Array.from(optionsDiv.children).find(btn => btn.innerText === currentQuestion.answer);
         if (correctButton) {
-            console.log('✅ Correct answer button found:', correctButton.innerText);
-            console.log('Current classes:', correctButton.className);
+            devLog('OK Correct answer button found:', correctButton.innerText);
+            devLog('Current classes:', correctButton.className);
             
             // Check if already highlighted
             const hasCorrect = correctButton.classList.contains('correct');
             const hasHighlight = correctButton.classList.contains('highlight-correct');
             
-            console.log(`Has 'correct' class: ${hasCorrect}`);
-            console.log(`Has 'highlight-correct' class: ${hasHighlight}`);
+            devLog(`Has 'correct' class: ${hasCorrect}`);
+            devLog(`Has 'highlight-correct' class: ${hasHighlight}`);
             
             // Apply highlighting for testing if not already present
             if (!hasCorrect || !hasHighlight) {
                 correctButton.classList.add('correct', 'highlight-correct');
-                console.log('🎨 Applied highlighting classes to correct answer');
+                devLog('Applied highlighting classes to correct answer');
             }
             
             // Check if CSS is working
             const computedStyle = window.getComputedStyle(correctButton);
-            console.log('🎨 Button styles after highlighting:');
-            console.log('  Background:', computedStyle.backgroundColor);
-            console.log('  Border:', computedStyle.border);
-            console.log('  Box-shadow:', computedStyle.boxShadow);
-            console.log('  Animation:', computedStyle.animation);
+            devLog('Button styles after highlighting:');
+            devLog('  Background:', computedStyle.backgroundColor);
+            devLog('  Border:', computedStyle.border);
+            devLog('  Box-shadow:', computedStyle.boxShadow);
+            devLog('  Animation:', computedStyle.animation);
             
         } else {
-            console.log('❌ Could not find button matching correct answer');
-            console.log('Expected answer:', currentQuestion.answer);
-            console.log('Available options:', Array.from(optionsDiv.children).map(btn => btn.innerText));
+            devLog('X Could not find button matching correct answer');
+            devLog('Expected answer:', currentQuestion.answer);
+            devLog('Available options:', Array.from(optionsDiv.children).map(btn => btn.innerText));
         }
     } else {
-        console.log('❌ No current question data available');
+        devLog('X No current question data available');
     }
     
-    console.log('💡 Fix Status:');
-    console.log('✅ Highlighting now works for both correct and incorrect answers');
-    console.log('✅ Removed duplicate highlighting logic');
-    console.log('✅ Added debugging for troubleshooting');
-    console.log('');
-    console.log('💡 If highlighting is still not working:');
-    console.log('1. Check if CSS classes are being applied correctly');
-    console.log('2. Verify the correct answer matches exactly');
-    console.log('3. Check for any CSS conflicts');
-    console.log('4. Look for JavaScript errors in the console');
+    devLog('Fix Status:');
+    devLog('OK Highlighting now works for both correct and incorrect answers');
+    devLog('OK Removed duplicate highlighting logic');
+    devLog('OK Added debugging for troubleshooting');
+    devLog('');
+    devLog('If highlighting is still not working:');
+    devLog('1. Check if CSS classes are being applied correctly');
+    devLog('2. Verify the correct answer matches exactly');
+    devLog('3. Check for any CSS conflicts');
+    devLog('4. Look for JavaScript errors in the console');
 }
 
 function calculateStars(stats) {
@@ -1784,11 +1923,11 @@ function calculateStars(stats) {
 
 function getStarExplanation(stars) {
   const explanations = [
-    'Beginner – Needs improvement.',
-    'Learner – Some knowledge, keep practicing.',
-    'Competent – Good performance, above average.',
-    'Expert – Excellent knowledge and consistency.',
-    'Master – Outstanding, near-perfect play.'
+    'Beginner - Needs improvement.',
+    'Learner - Some knowledge, keep practicing.',
+    'Competent - Good performance, above average.',
+    'Expert - Excellent knowledge and consistency.',
+    'Master - Outstanding, near-perfect play.'
   ];
   return explanations[stars - 1] || '';
 }
@@ -1815,30 +1954,65 @@ function setLoadingProgress(percent) {
 }
 
 // --- Asset Preload Logic ---
-const audioElements = [
+const PRELOAD_AUDIO_IDS = [
     'audio-correct-1','audio-correct-2','audio-wrong','audio-timeup','audio-riser',
-    'audio-bg-2','audio-bg-3','audio-bg-4','audio-bg-5','audio-timer-tick','audio-ticking-time',
-    'audio-transition', 'audio-transition2'
-].map(id => document.getElementById(id)).filter(Boolean);
+    'audio-timer-tick','audio-ticking-time','audio-transition','audio-transition2'
+];
+const preloadAudioElements = PRELOAD_AUDIO_IDS
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
 
 function preloadAudioAssets(onProgress, onComplete) {
+    const total = preloadAudioElements.length;
+    if (!total) {
+        if (typeof onProgress === 'function') onProgress(100);
+        if (typeof onComplete === 'function') onComplete();
+        return;
+    }
+
     let loaded = 0;
-    const total = audioElements.length;
-    audioElements.forEach(audio => {
-        audio.oncanplaythrough = () => {
-            loaded++;
-            onProgress(Math.round((loaded/total)*100));
-            if (loaded === total) onComplete();
+    const safeOnProgress = typeof onProgress === 'function' ? onProgress : () => {};
+    const safeOnComplete = typeof onComplete === 'function' ? onComplete : () => {};
+    const markLoaded = () => {
+        loaded = Math.min(loaded + 1, total);
+        safeOnProgress(Math.round((loaded / total) * 100));
+        if (loaded === total) {
+            safeOnComplete();
+        }
+    };
+
+    preloadAudioElements.forEach(audio => {
+        if (!audio) {
+            markLoaded();
+            return;
+        }
+
+        let settled = false;
+        const finalize = () => {
+            if (settled) return;
+            settled = true;
+            audio.removeEventListener('canplaythrough', onLoaded);
+            audio.removeEventListener('loadeddata', onLoaded);
+            clearTimeout(timeoutId);
+            markLoaded();
         };
-        // Start loading
-        audio.load();
+        const onLoaded = () => finalize();
+        const timeoutId = setTimeout(finalize, 5000);
+
+        audio.addEventListener('canplaythrough', onLoaded, { once: true });
+        audio.addEventListener('loadeddata', onLoaded, { once: true });
+
+        try {
+            audio.load();
+        } catch (_) {
+            finalize();
+        }
     });
 }
 
 // --- Video Preload Logic ---
 const allBackgroundVideos = [
-    'Background.mp4',
-    'Background_1.mp4'
+    'background 1.mp4'
 ];
 let videoPreloadCount = 0;
 function preloadVideoAssets(onProgress, onComplete) {
@@ -1953,20 +2127,40 @@ const debounce = (func, wait) => {
 
 // --- DOMContentLoaded for all DOM queries and listeners ---
 document.addEventListener('DOMContentLoaded', () => {
+    backgroundVideoEnabled = readBackgroundVideoPreference();
+    updateBackgroundVideoToggleUI();
+    // Start background video immediately to reduce initial still time
+    if (backgroundVideoEnabled) {
+        playBackgroundVideo();
+    }
+    if (backgroundVideoToggleBtn) {
+        backgroundVideoToggleBtn.addEventListener('click', () => {
+            setBackgroundVideoPreference(!backgroundVideoEnabled);
+        });
+    }
+    const primeBackgroundVideo = () => {
+        if (backgroundVideoEnabled) {
+            playBackgroundVideo();
+        }
+    };
+    document.addEventListener('click', primeBackgroundVideo, { once: true });
+    document.addEventListener('keydown', primeBackgroundVideo, { once: true });
+    document.addEventListener('touchstart', primeBackgroundVideo, { once: true, passive: true });
+
     // Debug function to check Firebase availability
     window.debugFirebase = function() {
-        console.log('=== Firebase Debug Info ===');
-        console.log('firebase available:', typeof firebase !== 'undefined');
-        console.log('firebase.auth available:', typeof firebase !== 'undefined' && typeof firebase.auth === 'function');
-        console.log('auth available:', typeof firebase !== 'undefined' && firebase.auth());
-        console.log('AuthManager available:', typeof window.AuthManager !== 'undefined');
-        console.log('Firebase apps:', typeof firebase !== 'undefined' ? firebase.apps.length : 'N/A');
-        console.log('==========================');
+        devLog('=== Firebase Debug Info ===');
+        devLog('firebase available:', typeof firebase !== 'undefined');
+        devLog('firebase.auth available:', typeof firebase !== 'undefined' && typeof firebase.auth === 'function');
+        devLog('auth available:', typeof firebase !== 'undefined' && firebase.auth());
+        devLog('AuthManager available:', typeof window.AuthManager !== 'undefined');
+        devLog('Firebase apps:', typeof firebase !== 'undefined' ? firebase.apps.length : 'N/A');
+        devLog('==========================');
     };
     
     // Function to manually show sign-in UI (useful for debugging)
     window.showAuthUI = function() {
-        console.log('[Auth] Manually showing auth UI elements...');
+        devLog('[Auth] Manually showing auth UI elements...');
         
         const signinButtons = document.getElementById('signin-buttons');
         if (signinButtons) {
@@ -1986,7 +2180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             leaderboardBtn.style.visibility = 'visible';
         }
         
-        console.log('[Auth] Auth UI elements forced visible');
+        devLog('[Auth] Auth UI elements forced visible');
     };
     
     // Helper: safely update sign-in status text without removing buttons/markup
@@ -2029,179 +2223,128 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to manually retry auth initialization if it failed
     window.retryAuth = async function() {
-        console.log('[Auth] Manually retrying auth initialization...');
-        setSigninStatusText('Retrying sign-in…');
-        
+        devLog('[Auth] Manually retrying auth initialization...');
+        setSigninStatusText('Retrying sign-in...');
         try {
-            await ensureAuthLoaded();
-            if (window.AuthManager && typeof window.AuthManager.init === 'function') {
-                window.AuthManager.init();
-                window.AuthManager.subscribe((user) => {
-                    updateUserInfoUI(user);
-                    if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
-                        window.LeaderboardService.refresh();
-                    }
-                });
-                
-                if (statusContainer) {
-                    const loadingText = statusContainer.querySelector('#signin-status-text');
-                    if (loadingText) {
-                        loadingText.remove();
-                    }
-                }
-                console.log('[Auth] Manual retry successful');
-                
-                // Force UI visibility
-                const signinButtons = document.getElementById('signin-buttons');
-                if (signinButtons) {
-                    signinButtons.style.display = 'flex';
-                }
-                
-                const leaderboardBtn = document.getElementById('view-leaderboard-btn');
-                if (leaderboardBtn) {
-                    leaderboardBtn.style.display = 'inline-block';
-                    leaderboardBtn.style.visibility = 'visible';
-                }
-            } else {
-                throw new Error('AuthManager still not available after retry');
-            }
-        } catch (e) {
-            console.error('[Auth] Manual retry failed:', e);
-            setSigninStatusText(`Retry failed: ${e.message}`);
-            
-            // Still show UI elements even if retry fails
-            const signinButtons = document.getElementById('signin-buttons');
-            if (signinButtons) {
-                signinButtons.style.display = 'flex';
-            }
-            
-            const leaderboardBtn = document.getElementById('view-leaderboard-btn');
-            if (leaderboardBtn) {
-                leaderboardBtn.style.display = 'inline-block';
-                leaderboardBtn.style.visibility = 'visible';
-            }
+            await initAuth();
+        } catch (error) {
+            console.error('[Auth] Manual retry failed:', error);
+            setSigninStatusText(`Retry failed: ${error && error.message ? error.message : 'Unknown error'}`);
         }
     };
     
     // Initialize Auth/Leaderboard module
     const initAuth = async () => {
-        const statusContainer = document.getElementById('signin-status-container');
-        
-        try {
-            console.log('[Auth] Starting auth initialization...');
-            
-            // If AuthManager is not loaded, try to load it
-            if (!window.AuthManager) {
-                console.log('[Auth] AuthManager not available, attempting to load...');
-                setSigninStatusText('Loading sign-in…');
-                await ensureAuthLoaded();
-                
-                // Give AuthManager a moment to initialize
-                await new Promise(resolve => setTimeout(resolve, 100));
-            }
-            
-            // If AuthManager is available after loading, initialize it
-            if (window.AuthManager && typeof window.AuthManager.init === 'function') {
-                console.log('[Auth] AuthManager available, initializing...');
-                window.AuthManager.init();
-                // Subscribe to auth changes to update UI
-                window.AuthManager.subscribe((user) => {
-                    console.log('[Auth] Auth state changed:', user ? user.displayName : 'No user');
-                    updateUserInfoUI(user);
-                    if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
-                        window.LeaderboardService.refresh();
-                    }
-                });
-                
-                // Initialize UI state immediately after subscription
-                const currentUser = window.AuthManager.getUser();
-                updateUserInfoUI(currentUser);
-                
-                // Clear loading message and ensure UI is visible
-                if (statusContainer) {
-                    const loadingText = statusContainer.querySelector('#signin-status-text');
-                    if (loadingText) {
-                        loadingText.remove();
-                    }
-                    
-                    // Make sure the sign-in buttons are visible
-                    const signinButtons = document.getElementById('signin-buttons');
-                    if (signinButtons) {
-                        signinButtons.style.display = 'flex';
-                    }
-                    
-                    // Make sure the sign-in status container is visible
-                    statusContainer.style.display = 'block';
-                    statusContainer.style.visibility = 'visible';
-                }
-                
-                // Ensure leaderboard button is visible
-                const leaderboardBtn = document.getElementById('view-leaderboard-btn');
-                if (leaderboardBtn) {
-                    leaderboardBtn.style.display = 'inline-block';
-                    leaderboardBtn.style.visibility = 'visible';
-                }
-                
-                console.log('[Auth] Auth initialization completed successfully');
-            } else {
-                console.warn('AuthManager not available after loading attempt. Sign-in and leaderboard disabled.');
-                setSigninStatusText('Auth not available in this environment.');
-                if (statusContainer) {
-                    // Still make sure buttons are visible even if auth fails
-                    const signinButtons = document.getElementById('signin-buttons');
-                    if (signinButtons) {
-                        signinButtons.style.display = 'flex';
-                    }
-                    
-                    const leaderboardBtn = document.getElementById('view-leaderboard-btn');
-                    if (leaderboardBtn) {
-                        leaderboardBtn.style.display = 'inline-block';
-                        leaderboardBtn.style.visibility = 'visible';
-                    }
-                }
-            }
-        } catch (e) {
-            console.error('[Auth] Auth initialization failed:', e);
-            setSigninStatusText(`Auth error: ${e.message}`);
+    const statusContainer = document.getElementById('signin-status-container');
+
+    try {
+        devLog('[Auth] Starting auth initialization...');
+        setSigninStatusText('Loading sign-in...');
+
+        const ready = await ensureAuthLoaded();
+        if (!ready || !window.AuthManager || typeof window.AuthManager.init !== 'function') {
+            devWarn('AuthManager not available after loading attempt. Sign-in and leaderboard disabled.');
+            setSigninStatusText('Auth not available in this environment.');
             if (statusContainer) {
-                // Still make sure buttons are visible even if auth fails
                 const signinButtons = document.getElementById('signin-buttons');
                 if (signinButtons) {
                     signinButtons.style.display = 'flex';
                 }
-                
                 const leaderboardBtn = document.getElementById('view-leaderboard-btn');
                 if (leaderboardBtn) {
                     leaderboardBtn.style.display = 'inline-block';
                     leaderboardBtn.style.visibility = 'visible';
                 }
             }
+            return;
         }
-    };
+
+        await window.AuthManager.init();
+
+        if (!authBindingsApplied) {
+            window.AuthManager.subscribe((user) => {
+                devLog('[Auth] Auth state changed:', user ? user.displayName : 'No user');
+                updateUserInfoUI(user || null);
+                if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
+                    window.LeaderboardService.refresh();
+                }
+            });
+            authBindingsApplied = true;
+        }
+
+        const currentUser = (typeof window.AuthManager.getUser === 'function') ? window.AuthManager.getUser() : null;
+        updateUserInfoUI(currentUser || null);
+
+        if (statusContainer) {
+            const loadingText = statusContainer.querySelector('#signin-status-text');
+            if (loadingText) {
+                loadingText.remove();
+            }
+            const signinButtons = document.getElementById('signin-buttons');
+            if (signinButtons) {
+                signinButtons.style.display = 'flex';
+            }
+            statusContainer.style.display = 'block';
+            statusContainer.style.visibility = 'visible';
+        }
+
+        const leaderboardBtn = document.getElementById('view-leaderboard-btn');
+        if (leaderboardBtn) {
+            leaderboardBtn.style.display = 'inline-block';
+            leaderboardBtn.style.visibility = 'visible';
+        }
+
+        if (window.LeaderboardService && typeof window.LeaderboardService.refresh === 'function') {
+            window.LeaderboardService.refresh();
+        }
+
+        devLog('[Auth] Auth initialization completed successfully');
+    } catch (e) {
+        console.error('[Auth] Auth initialization failed:', e);
+        setSigninStatusText(`Auth error: ${e && e.message ? e.message : 'Unknown error'}`);
+        if (statusContainer) {
+            const signinButtons = document.getElementById('signin-buttons');
+            if (signinButtons) {
+                signinButtons.style.display = 'flex';
+            }
+            statusContainer.style.display = 'block';
+            statusContainer.style.visibility = 'visible';
+        }
+    }
+};
     
     // Start auth initialization immediately
     initAuth();
     
-    // Initialize audio system
-    if (typeof AudioManager !== 'undefined' && AudioManager.init) {
-        AudioManager.init();
-        console.log("✅ Audio system initialized.");
-    } else {
-        console.warn("⚠️ AudioManager not available. Audio features may not work.");
+    // Initialize audio system lazily to avoid blocking first paint
+    let audioSystemInitialized = false;
+    let audioSystemWarned = false;
+    function requestAudioSystemInit() {
+        if (audioSystemInitialized) {
+            return;
+        }
+
+        if (typeof AudioManager !== 'undefined' && AudioManager && typeof AudioManager.init === 'function') {
+            AudioManager.init();
+            audioSystemInitialized = true;
+            devLog("OK Audio system initialized.");
+            if (__IS_LOCAL_DEV__ && typeof AudioManager.debug === 'function') {
+                try {
+                    AudioManager.debug();
+                } catch (_) {}
+            }
+        } else if (!audioSystemWarned) {
+            audioSystemWarned = true;
+            devWarn("AudioManager not available. Audio features may not work.");
+        }
     }
 
-    // Debug audio elements to check if they're properly loaded
-    debugAudioElements();
-    // Build the pool of correct-answer sounds (includes existing and optional Correct 1..10 files)
-    initCorrectSoundPool();
-    // Build the pool of incorrect-answer sounds (existing + optional Incorrect 1..10 files)
-    initIncorrectSoundPool();
     
     // Initialize animation effects
     try {
         animationEffects = new AnimationEffects();
     } catch (e) {
-        console.warn('AnimationEffects initialization failed:', e);
+        devWarn('AnimationEffects initialization failed:', e);
     }
 
     // Preload transition SVGs (1.svg .. 17.svg) to avoid flicker on first display
@@ -2286,7 +2429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!levelVideoPlayer) {
-            console.warn(`No video source found for level ${levelNumber} or player missing.`);
+            devWarn(`No video source found for level ${levelNumber} or player missing.`);
             if (typeof afterVideo === 'function') afterVideo();
             return;
         }
@@ -2335,7 +2478,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function tryNextCandidate() {
             idx += 1;
             if (idx >= candidates.length) {
-                console.warn('Video failed to play; keeping modal open with controls.');
+                devWarn('Video failed to play; keeping modal open with controls.');
                 levelVideoPlayer.removeEventListener('ended', onEnded);
                 levelVideoPlayer.removeEventListener('error', onError);
                 openLevelVideoModal();
@@ -2352,7 +2495,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     p.catch((err) => {
                         // If autoplay is blocked, keep modal open with controls and show user notification
                         if (err && err.name === 'NotAllowedError') {
-                            console.log('🎥 Autoplay blocked - showing video with controls');
+                            devLog('Autoplay blocked - showing video with controls');
                             try { 
                                 openLevelVideoModal(); 
                                 // Show user-friendly message about autoplay
@@ -2360,7 +2503,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if (modalContent) {
                                     const notification = document.createElement('div');
                                     notification.style.cssText = 'background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: center;';
-                                    notification.innerHTML = '🎥 Autoplay blocked by browser. Please click play to start the video.';
+                                    notification.innerHTML = 'Autoplay blocked by browser. Please click play to start the video.';
                                     modalContent.insertBefore(notification, modalContent.firstChild);
                                     // Auto-remove notification after 5 seconds
                                     setTimeout(() => {
@@ -2389,9 +2532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function ensureUserInteraction() {
-        if (typeof AudioManager !== 'undefined' && AudioManager && typeof AudioManager.init === 'function') {
-            AudioManager.init();
-        }
+        requestAudioSystemInit();
         document.body.removeEventListener('click', ensureUserInteraction);
         document.body.removeEventListener('keydown', ensureUserInteraction);
     }
@@ -2750,12 +2891,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let tutorialData = window.allTutorials[levelNumber - 1];
         
         if (!tutorialData) {
-            console.warn(`Tutorial for level ${levelNumber} not found. Available tutorials:`, window.allTutorials.map((t, i) => t ? `Level ${i+1}` : null).filter(Boolean));
+            devWarn(`Tutorial for level ${levelNumber} not found. Available tutorials:`, window.allTutorials.map((t, i) => t ? `Level ${i+1}` : null).filter(Boolean));
             
             // Try fallback to global variable as last resort
             const globalKey = `tutorialLevel${levelNumber}`;
             if (window[globalKey]) {
-                console.log(`[Tutorial] Using fallback global variable ${globalKey}`);
+                devLog(`[Tutorial] Using fallback global variable ${globalKey}`);
                 window.allTutorials[levelNumber - 1] = window[globalKey];
                 // Use the fallback tutorial
                 tutorialData = window.allTutorials[levelNumber - 1];
@@ -2829,11 +2970,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const label = skipCheckbox && skipCheckbox.parentElement;
             if (label && label.style) label.style.display = 'none';
             // Change CTA label for clarity
-            if (startBtn) startBtn.textContent = 'Play Video 🎬';
+            if (startBtn) startBtn.textContent = 'Play Video';
         } else {
             const label = skipCheckbox && skipCheckbox.parentElement;
             if (label && label.style) label.style.display = '';
-            if (startBtn) startBtn.textContent = 'Play Video 🎬';
+            if (startBtn) startBtn.textContent = 'Play Video';
         }
 
         // Show modal with animation
@@ -2891,7 +3032,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         ensureUserInteraction();
         await ensureLevelLoaded(levelNumber);
-        AudioManager.play(audioRiser);
+        if (typeof AudioManager !== 'undefined') {
+            if (typeof AudioManager.playRiser === 'function') {
+                AudioManager.playRiser();
+            } else if (AudioManager.audioRiser) {
+                AudioManager.play(AudioManager.audioRiser);
+            }
+        }
         setTimeout(() => AudioManager.playBgMusic(), 800);
         gameMode = mode;
         playerScore = 0;
@@ -2928,10 +3075,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const globalVarName = `level${levelNumber}Questions`;
             if (window[globalVarName] && Array.isArray(window[globalVarName])) {
                 level.questions = window[globalVarName];
-                console.log(`Loaded level ${levelNumber} questions directly from global variable`);
+                devLog(`Loaded level ${levelNumber} questions directly from global variable`);
             } else {
                 console.error(`Level ${levelNumber} found but has no questions loaded!`);
-                console.log(`Available global vars:`, Object.keys(window).filter(k => k.startsWith('level')));
+                devLog(`Available global vars:`, Object.keys(window).filter(k => k.startsWith('level')));
                 return;
             }
         }
@@ -2972,7 +3119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         TIME_LIMIT = getTimeLimitForLevel(currentGameLevel);
         
         // Update timer display to show current time limit
-        console.log(`🕒 Level ${currentGameLevel}: ${TIME_LIMIT} seconds per question`);
+        devLog(`Level ${currentGameLevel}: ${TIME_LIMIT} seconds per question`);
 
         // Hide main menu and show game screen
         if (container) container.style.display = 'none';
@@ -3010,7 +3157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        console.log('Questions selected (completely randomized):', questions.map(q => q.id));
+        devLog('Questions selected (completely randomized):', questions.map(q => q.id));
         
         // Verify that questions are truly randomized
         verifyQuestionRandomization(questions, `Level ${levelNumber}`);
@@ -3378,7 +3525,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (correct) {
             AudioManager.playCorrect();
             selectedBtn.classList.add('correct', 'highlight-correct');
-            console.log('🎯 Debug: Added highlight to correct answer:', selectedBtn.innerText);
+            devLog('Debug: Added highlight to correct answer:', selectedBtn.innerText);
             
             // Use computed points to ensure the awarded score matches the wager
             if (gameMode === 'solo') {
@@ -3394,7 +3541,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         animationEffects.animateTokenEarn(1);
                     }
                 }
-                console.log(`Score updated: ${oldScore} + ${points} = ${playerScore}`);
+                devLog(`Score updated: ${oldScore} + ${points} = ${playerScore}`);
             } else { // Teams
                 if (currentTeam === 'blue') teamBlueScore += points;
                 else teamBlackScore += points;
@@ -3428,7 +3575,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const oldScore = playerScore;
                 playerScore = Math.max(0, playerScore - wager);
                 currentStreak = 0;
-                console.log(`Score updated: ${oldScore} - ${wager} = ${playerScore}`);
+                devLog(`Score updated: ${oldScore} - ${wager} = ${playerScore}`);
             } else { // Teams
                 if (currentTeam === 'blue') teamBlueScore = Math.max(0, teamBlueScore - wager);
                 else teamBlackScore = Math.max(0, teamBlackScore - wager);
@@ -3444,12 +3591,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // Show correct answer with highlight
         const correctAnswer = questions[currentQuestionIndex].answer;
-        console.log('🎯 Debug: Correct answer should be:', correctAnswer);
+        devLog('Debug: Correct answer should be:', correctAnswer);
         
         Array.from(optionsDiv.children).forEach(btn => {
-            console.log('🎯 Debug: Checking button:', btn.innerText, 'against answer:', correctAnswer);
+            devLog('Debug: Checking button:', btn.innerText, 'against answer:', correctAnswer);
             if (btn.innerText === correctAnswer) {
-                console.log('🎯 Debug: Adding highlight-correct to button:', btn.innerText);
+                devLog('Debug: Adding highlight-correct to button:', btn.innerText);
                 btn.classList.add('correct', 'highlight-correct');
             }
         });
@@ -3476,7 +3623,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentQ = questions[currentQuestionIndex];
         const formattedExplanation = formatExplanationContent(currentQ.explanation);
         if (formattedExplanation) {
-            explanationDiv.innerHTML = `<span style="color: #8B0000; font-weight: bold;">💡 Explanation:</span><br><br>${formattedExplanation}`;
+            explanationDiv.innerHTML = `<span style="color: #8B0000; font-weight: bold;">Explanation:</span><br><br>${formattedExplanation}`;
             explanationDiv.style.display = 'block';
             explanationDiv.scrollTop = 0;
             try { explanationDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (_) {}
@@ -3489,7 +3636,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentQ.deepInsight) {
             setTimeout(() => {
                 explanationDiv.style.display = 'none';
-                deepInsightContent.innerHTML = `<span style="color: #8B0000; font-weight: bold;">🔎 Deep Insight:</span> ${currentQ.deepInsight}`;
+                deepInsightContent.innerHTML = `<span style="color: #8B0000; font-weight: bold;">Deep Insight:</span> ${currentQ.deepInsight}`;
                 deepInsightDiv.style.display = 'block';
             }, 800); // Show deep insight after a shorter delay
         } else {
@@ -3558,7 +3705,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Start the next team turn (Black Team) ---
     function startNextTeamTurn() {
-        console.log('startNextTeamTurn called');
+        devLog('startNextTeamTurn called');
         
         // Prepare the game for the Black team
         timeAttackTeamTurn = 'black';
@@ -3575,22 +3722,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         let availableQuestions = [...levelData.questions];
-        console.log('Using level questions for black team:', currentGameLevel);
+        devLog('Using level questions for black team:', currentGameLevel);
         
-        console.log('Available questions for black team:', availableQuestions.length);
+        devLog('Available questions for black team:', availableQuestions.length);
         
         // COMPLETELY RANDOMIZE - no exclusions, no ordering criteria
         questions = shuffle(availableQuestions).slice(0, gameQuestionCount);
         
-        console.log('Black team questions loaded (completely randomized):', questions.length, 'questions');
-        console.log('Black team question IDs:', questions.map(q => q.id));
+        devLog('Black team questions loaded (completely randomized):', questions.length, 'questions');
+        devLog('Black team question IDs:', questions.map(q => q.id));
         
         // Verify that questions are truly randomized for black team
         verifyQuestionRandomization(questions, `Level ${currentGameLevel}`);
         
         // Transition back to the game screen and start the new round
         slideOut(document.getElementById('intermission-screen'), () => {
-            console.log('Transitioning to game screen for black team');
+            devLog('Transitioning to game screen for black team');
             slideIn(gameDiv);
             updateScoreDisplay(); // Update display for the new turn
             startGlobalTimer();
@@ -3614,7 +3761,13 @@ document.addEventListener('DOMContentLoaded', () => {
             currentStreak = 0;
             updateSoloStats();
         }
-        AudioManager.play(audioTimeup);
+        if (typeof AudioManager !== 'undefined') {
+            if (typeof AudioManager.playTimeup === 'function') {
+                AudioManager.playTimeup();
+            } else if (AudioManager.audioTimeup) {
+                AudioManager.play(AudioManager.audioTimeup);
+            }
+        }
         AudioManager.stopTicking();
     }
 
@@ -3666,7 +3819,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleGlobalTimeUp() {
         stopGlobalTimer();
-        AudioManager.play(audioTimeup);
+        if (typeof AudioManager !== 'undefined') {
+            if (typeof AudioManager.playTimeup === 'function') {
+                AudioManager.playTimeup();
+            } else if (AudioManager.audioTimeup) {
+                AudioManager.play(AudioManager.audioTimeup);
+            }
+        }
         timeRanOut = true;
 
         if (gameMode === 'teams' && timeAttackTeamTurn === 'blue') {
@@ -3733,6 +3892,10 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsTeams.style.display = 'none';
         document.getElementById('results-solo-time').style.display = 'none';
         document.getElementById('results-teams-time').style.display = 'none';
+        if (continueNextLevelBtn) {
+            continueNextLevelBtn.style.display = 'none';
+            continueNextLevelBtn.dataset.nextLevel = '';
+        }
 
         if (isTimeAttackMode) {
             // Ensure gameStartTime is valid before calculating elapsed time
@@ -3740,7 +3903,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 gameElapsedTime = timeRanOut ? TOTAL_TIME_LIMIT : (Date.now() - gameStartTime) / 1000;
             } else {
                 gameElapsedTime = timeRanOut ? TOTAL_TIME_LIMIT : 0;
-                console.warn('gameStartTime was null or invalid, using fallback time calculation');
+                devWarn('gameStartTime was null or invalid, using fallback time calculation');
             }
             const timeTakenStr = `Time Taken: ${formatTime(Math.round(gameElapsedTime))}`;
 
@@ -3749,7 +3912,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (resultsSolo.children[0]) {
                     resultsSolo.children[0].innerText = `Your Score: ${playerScore}`;
                 }
-                console.log(`Time attack mode - Final score displayed: ${playerScore}`);
+                devLog(`Time attack mode - Final score displayed: ${playerScore}`);
                 const attempted = timeRanOut ? currentQuestionIndex + 1 : 30;
                 if (resultsSolo.children[1]) {
                     resultsSolo.children[1].innerText = `Correct Answers: ${correctAnswers}/${attempted}`;
@@ -3786,11 +3949,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Determine winner by comparing the final scores
                 let winnerText = '';
                 if (timeAttackBlueTeamFinalScore > teamBlackScore) {
-                    winnerText = '🏆 Blue Team Triumphs!';
+                    winnerText = 'Blue Team Triumphs!';
                 } else if (teamBlackScore > timeAttackBlueTeamFinalScore) {
-                    winnerText = '🏆 Black Team Dominates!';
+                    winnerText = 'Black Team Dominates!';
                 } else {
-                    winnerText = "🤝 It's a Tie!";
+                    winnerText = "It's a Tie!";
                 }
                 if (teamWinner) {
                     teamWinner.innerText = winnerText;
@@ -3840,21 +4003,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     lightningRound: currentGameStats.lightningRound,
                 };
                 
+                const passedLevel = stats.correctPct >= LEVEL_PASS_PERCENTAGE;
+                const nextLevelCandidate = (currentGameLevel < allLevels.length) ? currentGameLevel + 1 : null;
+
                 // Check and award achievements
                 const newAchievements = checkAchievements(stats);
                 
                 // --- NEW: LEVEL UNLOCK LOGIC ---
-                if (stats.correctPct >= LEVEL_PASS_PERCENTAGE && currentGameLevel < allLevels.length) {
+                if (passedLevel && nextLevelCandidate) {
                     const progress = getPlayerProgress();
-                    const nextLevel = currentGameLevel + 1;
-                    if (nextLevel > progress.highestLevelUnlocked) {
-                        progress.highestLevelUnlocked = nextLevel;
+                    if (nextLevelCandidate > progress.highestLevelUnlocked) {
+                        progress.highestLevelUnlocked = nextLevelCandidate;
                         savePlayerProgress(progress);
                         // Display unlock message if no other achievement was shown
                         if (newAchievements.length === 0) {
-                            achievementTitle.textContent = `Congratulations! You've unlocked Level ${nextLevel}!`;
+                            achievementTitle.textContent = `Congratulations! You've unlocked Level ${nextLevelCandidate}!`;
                             achievementTitle.style.display = 'block';
                         }
+                    }
+                }
+
+                if (continueNextLevelBtn) {
+                    if (passedLevel && nextLevelCandidate) {
+                        continueNextLevelBtn.style.display = 'inline-block';
+                        continueNextLevelBtn.textContent = `Continue to Level ${nextLevelCandidate}`;
+                        continueNextLevelBtn.dataset.nextLevel = String(nextLevelCandidate);
+                    } else {
+                        continueNextLevelBtn.style.display = 'none';
+                        continueNextLevelBtn.dataset.nextLevel = '';
                     }
                 }
                 
@@ -3873,7 +4049,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         resultsSolo.children[0].innerText = `Your Score: ${playerScore}`;
                         resultsSolo.children[0].classList.add('score-animate-up');
                     }
-                    console.log(`Final score displayed: ${playerScore}`);
+                    devLog(`Final score displayed: ${playerScore}`);
                 }, 200);
                 
                 setTimeout(() => {
@@ -3893,8 +4069,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Calculate and display stars with animation
                 const stars = calculateStars(stats);
                 let starStr = '';
-                for (let i = 0; i < stars; i++) starStr += '★';
-                for (let i = stars; i < 5; i++) starStr += '☆';
+                for (let i = 0; i < stars; i++) starStr += '*';
+                for (let i = stars; i < 5; i++) starStr += '.';
                 
                 setTimeout(() => {
                     resultsSolo.querySelector('.stars').innerText = starStr;
@@ -3905,7 +4081,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const unlocked = ACHIEVEMENTS.filter(a => a.check(stats));
                 if (unlocked.length > 0) {
                     setTimeout(() => {
-                        achievementTitle.innerText = `🏆 Achievement Unlocked: ${unlocked[0].name}!`;
+                        achievementTitle.innerText = `Achievement Unlocked: ${unlocked[0].name}!`;
                         achievementTitle.classList.add('fade-in');
                     }, 1000);
                 }
@@ -3920,9 +4096,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     // Fallback: estimate time based on question count and average time per question
                     normalModeTime = questions.length * 10; // Assume 10 seconds per question average
-                    console.warn('gameStartTime was null, using estimated time for leaderboard');
+                    devWarn('gameStartTime was null, using estimated time for leaderboard');
                 }
-                showLeaderboardAfterGame(playerScore, Math.round(normalModeTime));
+                showLeaderboardAfterGame(playerScore, Math.round(normalModeTime), { submitScore: passedLevel });
                 
             } else {
                 // Enhanced team mode end screen
@@ -3937,10 +4113,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     winnerText = ' Blue Team Triumphs!';
                     celebrationType = 'excellent';
                 } else if (teamBlackScore > teamBlueScore) {
-                    winnerText = '⚫ Black Team Dominates!';
+                    winnerText = 'Black Team Dominates!';
                     celebrationType = 'excellent';
                 } else {
-                    winnerText = '🤝 Epic Tie - Rematch Needed!';
+                    winnerText = 'Epic Tie - Rematch Needed!';
                     celebrationType = 'good';
                 }
                 
@@ -4268,7 +4444,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             window.location.href = 'menu.html';
         } catch (e) {
-            console.warn('Menu navigation failed, staying on page:', e);
+            devWarn('Menu navigation failed, staying on page:', e);
         }
     };
 
@@ -4344,6 +4520,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Transition from question-only to options-with-timer phase
         showOptionsWithTimer();
     };
+
+    if (continueNextLevelBtn) {
+        continueNextLevelBtn.addEventListener('click', () => {
+            const nextLevelValue = parseInt(continueNextLevelBtn.dataset.nextLevel || '', 10);
+            if (!nextLevelValue || nextLevelValue > allLevels.length) {
+                return;
+            }
+            currentGameLevel = nextLevelValue;
+            continueNextLevelBtn.style.display = 'none';
+            continueNextLevelBtn.dataset.nextLevel = '';
+            const modeToResume = gameMode === 'teams' ? 'teams' : 'solo';
+            checkSignInAndStartGame(modeToResume);
+        });
+    }
     
     // Skip button removed - manual advancement only
     playAgainBtn.onclick = () => {
@@ -4398,15 +4588,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const startNextTurnBtn = document.getElementById('start-next-turn-btn');
     if(startNextTurnBtn) {
-        console.log('Attaching event listener to Start Your Turn button');
+        devLog('Attaching event listener to Start Your Turn button');
         startNextTurnBtn.onclick = startNextTeamTurn;
     } else {
-        console.warn('Start Your Turn button not found in DOM');
+        devWarn('Start Your Turn button not found in DOM');
     }
     
     // --- MOBILE OPTIMIZATIONS ---
     if (isMobileDevice()) {
-        console.log('📱 Mobile device detected - applying optimizations');
+        devLog('Mobile device detected - applying optimizations');
         
         // Apply touch optimizations to all buttons
         const allButtons = document.querySelectorAll('button, .comic-button, .level-button');
@@ -4485,14 +4675,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 // Tab is now hidden - could pause intensive operations
-                console.log('🔄 Tab hidden - game continues in background');
+                devLog('Tab hidden - game continues in background');
             } else {
                 // Tab is now visible - resume operations
-                console.log('👁️ Tab visible - game active');
+                devLog('Tab visible - game active');
             }
         });
         
-        console.log('✅ Mobile optimizations applied');
+        devLog('OK Mobile optimizations applied');
     }
 });
 
@@ -4609,10 +4799,10 @@ if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('service-worker.js')
       .then(registration => {
-        console.log('ServiceWorker registration successful');
+        devLog('ServiceWorker registration successful');
       })
       .catch(error => {
-        console.log('ServiceWorker registration failed:', error);
+        devLog('ServiceWorker registration failed:', error);
       });
   });
 }
@@ -4683,57 +4873,59 @@ nextBtn.addEventListener('click', () => setNextButtonGlow(false));
 // --- Animated backgrounds and category-based backgrounds ---
 function setCategoryBackground(category) {
     document.body.classList.remove('prophecy-bg', 'diet-health-bg', 'animated-gradient');
-    const video = document.getElementById('background-video');
-    if (video) {
-        video.style.filter = '';
+    if (!backgroundVideoEnabled) {
+        const overlay = document.getElementById('prophecy-overlay');
+        if (overlay) overlay.remove();
+        return;
+    }
+    const video = ensureBackgroundVideoLoaded();
+    if (!video) {
+        return;
+    }
+    video.style.filter = '';
+    try {
+        if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+            video.style.opacity = '0.35';
+        } else {
+            video.style.opacity = '0.45';
+        }
+    } catch (_) {
+        video.style.opacity = '0.45';
+    }
+    video.style.mixBlendMode = 'screen';
+    if (category === 'Prophecy' || category === 'The Great Controversy') {
         try {
             if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
-                video.style.opacity = '0.35';
+                video.style.filter = 'contrast(1.2) brightness(0.8) grayscale(0.1)';
             } else {
-                video.style.opacity = '0.45';
-            }
-        } catch (_) {
-            video.style.opacity = '0.45';
-        }
-        video.style.mixBlendMode = 'screen';
-        // Always show video, but adjust for prophecy
-        if (category === 'Prophecy' || category === 'The Great Controversy') {
-            try {
-                if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
-                    video.style.filter = 'contrast(1.2) brightness(0.8) grayscale(0.1)';
-                } else {
-                    video.style.filter = 'contrast(1.5) brightness(0.7) grayscale(0.2)';
-                }
-            } catch (_) {
                 video.style.filter = 'contrast(1.5) brightness(0.7) grayscale(0.2)';
             }
-            video.style.opacity = '0.7';
-            video.style.mixBlendMode = 'multiply';
-            // Add a dark overlay for drama
-            if (!document.getElementById('prophecy-overlay')) {
-                const overlay = document.createElement('div');
-                overlay.id = 'prophecy-overlay';
-                overlay.style.position = 'fixed';
-                overlay.style.top = '0';
-                overlay.style.left = '0';
-                overlay.style.width = '100vw';
-                overlay.style.height = '100vh';
-                overlay.style.background = 'rgba(10,10,20,0.55)';
-                overlay.style.zIndex = '1';
-                overlay.style.pointerEvents = 'none';
-                document.body.appendChild(overlay);
-            }
-        } else {
-            video.style.filter = '';
-            video.style.opacity = '0.45';
-            video.style.mixBlendMode = 'screen';
-            const overlay = document.getElementById('prophecy-overlay');
-            if (overlay) overlay.remove();
+        } catch (_) {
+            video.style.filter = 'contrast(1.5) brightness(0.7) grayscale(0.2)';
         }
-        // Ensure video is always looped and playing
-        if (video.paused) video.play();
-        video.loop = true;
+        video.style.opacity = '0.7';
+        video.style.mixBlendMode = 'multiply';
+        if (!document.getElementById('prophecy-overlay')) {
+            const overlay = document.createElement('div');
+            overlay.id = 'prophecy-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.background = 'rgba(10,10,20,0.55)';
+            overlay.style.zIndex = '1';
+            overlay.style.pointerEvents = 'none';
+            document.body.appendChild(overlay);
+        }
+    } else {
+        video.style.filter = '';
+        video.style.opacity = '0.45';
+        video.style.mixBlendMode = 'screen';
+        const overlay = document.getElementById('prophecy-overlay');
+        if (overlay) overlay.remove();
     }
+    playBackgroundVideo();
 }
 // Removed particle animation function
 // --- Patch showQuestion to set category background ---
@@ -4754,20 +4946,20 @@ function showGlitchTransition(isProphecy, cb) {
     const overlay = document.createElement('div');
     overlay.id = 'glitch-transition-overlay';
     overlay.className = 'glitch-effect';
-    // Transition art: randomly use 1.svg–17.svg across all levels
+    // Transition art: randomly use 1.svg-17.svg across all levels
     try {
         const img = document.createElement('img');
         const idx = 1 + Math.floor(Math.random() * TRANSITION_SVG_COUNT);
         img.src = idx + '.svg';
         img.alt = 'Transition';
-        img.onerror = () => { overlay.innerText = '✝️'; };
+        img.onerror = () => { overlay.innerText = 'x'; };
         img.style.width = '100vw';
         img.style.height = '100vh';
         img.style.objectFit = 'cover';
         img.style.display = 'block';
         overlay.appendChild(img);
     } catch (e) {
-        overlay.innerText = '✝️';
+        overlay.innerText = 'x';
     }
     overlay.style.position = 'fixed';
     overlay.style.left = '50%';
@@ -4825,7 +5017,13 @@ let currentBgVideoIndex = 0;
 let currentBgVideoSet = [];
 
 function setSequentialBackgroundVideo(videoSet) {
-    const bgVideo = document.getElementById('background-video');
+    if (!backgroundVideoEnabled) {
+        return;
+    }
+    if (!Array.isArray(videoSet) || videoSet.length === 0) {
+        return;
+    }
+    const bgVideo = ensureBackgroundVideoLoaded();
     if (!bgVideo) return;
     // If the set has changed, reset index
     if (currentBgVideoSet.join(',') !== videoSet.join(',')) {
@@ -4833,10 +5031,10 @@ function setSequentialBackgroundVideo(videoSet) {
         currentBgVideoIndex = 0;
     }
     const selectedBg = currentBgVideoSet[currentBgVideoIndex];
-    if (!bgVideo.src.endsWith(selectedBg)) {
+    if (bgVideo.dataset.currentSrc !== selectedBg) {
+        bgVideo.dataset.currentSrc = selectedBg;
         bgVideo.src = selectedBg;
         bgVideo.load();
-        bgVideo.play().catch(()=>{});
     }
     // Remove previous event
     bgVideo.onended = null;
@@ -4845,6 +5043,7 @@ function setSequentialBackgroundVideo(videoSet) {
         currentBgVideoIndex = (currentBgVideoIndex + 1) % currentBgVideoSet.length;
         setSequentialBackgroundVideo(currentBgVideoSet);
     };
+    playBackgroundVideo();
 }
 
 // --- Background video cycling per question ---
@@ -4856,26 +5055,20 @@ const prophecyBackgrounds = [];
 const normalBackgrounds = [];
 
 function setBackgroundVideoForQuestion(isProphecy) {
-    const bgVideo = document.getElementById('background-video');
+    if (!backgroundVideoEnabled) {
+        return;
+    }
+    const bgVideo = ensureBackgroundVideoLoaded();
     if (!bgVideo) return;
     
-    // Use Background 1 for all backgrounds (Background.mp4 as fallback handled via onerror)
-    const backgroundFile = 'Background 1.mp4';
-    if (!bgVideo.src.endsWith(backgroundFile)) {
-        // Attach a temporary error handler for this assignment to fallback gracefully
-        const previousOnError = bgVideo.onerror;
-        bgVideo.onerror = () => {
-            bgVideo.onerror = previousOnError || null;
-            if (!bgVideo.src.endsWith('Background.mp4')) {
-                bgVideo.src = 'Background.mp4';
-                bgVideo.load();
-                bgVideo.play().catch(()=>{});
-            }
-        };
+    // Use background 1 for all backgrounds
+    const backgroundFile = 'background 1.mp4';
+    if (bgVideo.dataset.currentSrc !== backgroundFile) {
+        bgVideo.dataset.currentSrc = backgroundFile;
         bgVideo.src = backgroundFile;
         bgVideo.load();
-        bgVideo.play().catch(()=>{});
     }
+    playBackgroundVideo();
 }
 
 const deepInsightDiv = document.getElementById('deep-insight-div');
@@ -4903,16 +5096,20 @@ let isPageActive = true;
 document.addEventListener('visibilitychange', () => {
   isPageActive = !document.hidden;
   if (!isPageActive) {
-    console.log('⚠️ Page became hidden - pausing async operations');
+    devLog('WARN Page became hidden - pausing async operations');
+    pauseBackgroundVideo();
   } else {
-    console.log('✅ Page became visible - resuming operations');
+    devLog('OK Page became visible - resuming operations');
+    if (backgroundVideoEnabled) {
+      playBackgroundVideo();
+    }
   }
 });
 
 // Handle page unload to clean up async operations
 window.addEventListener('beforeunload', () => {
   isPageActive = false;
-  console.log('🔄 Page unloading - cleaning up async operations');
+  devLog('Page unloading - cleaning up async operations');
 });
 
 // Firebase initialization is now handled in the DOMContentLoaded event listener above
@@ -4926,13 +5123,41 @@ const userInfoDiv = document.getElementById('user-info');
 const optoutCheckbox = document.getElementById('optout-leaderboard');
 const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
 
-function showLeaderboardModal() {
-  if (window.LeaderboardService && typeof window.LeaderboardService.openModal === 'function') {
-    window.LeaderboardService.openModal();
-    if (typeof window.LeaderboardService.refresh === 'function') {
-      window.LeaderboardService.refresh();
+async function showLeaderboardModal() {
+    const ready = await ensureAuthLoaded();
+    if (!ready) {
+        showNotification('Leaderboard is unavailable right now. Please try again later.', { variant: 'error', duration: 4000 });
+        return;
     }
-  }
+
+    let initFailed = false;
+    if (window.AuthManager && typeof window.AuthManager.init === 'function') {
+        try {
+            await window.AuthManager.init();
+        } catch (error) {
+            initFailed = true;
+            devWarn('[Leaderboard] AuthManager init failed:', error);
+        }
+    }
+
+    if (window.LeaderboardService && typeof window.LeaderboardService.openModal === 'function') {
+        window.LeaderboardService.openModal();
+        if (typeof window.LeaderboardService.refresh === 'function') {
+            try {
+                await window.LeaderboardService.refresh();
+            } catch (refreshError) {
+                initFailed = true;
+                devWarn('[Leaderboard] Refresh failed:', refreshError);
+            }
+        }
+    } else {
+        showNotification('Leaderboard is unavailable right now. Please try again later.', { variant: 'error', duration: 4000 });
+        return;
+    }
+
+    if (initFailed) {
+        showNotification('Leaderboard data might be stale; please try again shortly.', { variant: 'warning', duration: 5000 });
+    }
 }
 function hideLeaderboardModal() {
   if (window.LeaderboardService && typeof window.LeaderboardService.closeModal === 'function') {
@@ -4942,7 +5167,7 @@ function hideLeaderboardModal() {
 if (closeLeaderboardBtn) closeLeaderboardBtn.onclick = hideLeaderboardModal;
 
 function updateUserInfoUI(user) {
-  console.log('updateUserInfoUI called with user:', user);
+  devLog('updateUserInfoUI called with user:', user);
   currentUser = user || null;
   const mainSigninBtn = document.getElementById('main-signin-btn');
   const mainSignoutBtn = document.getElementById('main-signout-btn');
@@ -5033,8 +5258,7 @@ if (mainSignoutBtn) {
 const viewLeaderboardBtn = document.getElementById('view-leaderboard-btn');
 if (viewLeaderboardBtn) {
   viewLeaderboardBtn.onclick = async function() {
-    await ensureAuthLoaded();
-    showLeaderboardModal();
+    await showLeaderboardModal();
   };
   viewLeaderboardBtn.addEventListener('mouseenter', function() {
     this.style.transform = 'translateY(-2px) scale(1.02)';
@@ -5051,31 +5275,31 @@ if (viewLeaderboardBtn) {
  * Call this in the browser console to verify Firebase setup
  */
 function comprehensiveFirebaseCheck() {
-    console.log('🔥 Starting Comprehensive Firebase Check...');
+    devLog('Starting Comprehensive Firebase Check...');
     
     // Check 1: Firebase SDK Loading
-    console.log('\n📦 Firebase SDK Check:');
+    devLog('\nFirebase SDK Check:');
     if (typeof firebase === 'undefined') {
-        console.error('❌ Firebase SDK not loaded! Check script tags in index.html');
+        console.error('X Firebase SDK not loaded! Check script tags in index.html');
         return;
     }
-    console.log('✅ Firebase SDK loaded successfully');
+    devLog('OK Firebase SDK loaded successfully');
     
     // Check 2: Firebase Configuration
-    console.log('\n⚙️ Firebase Configuration Check:');
+    devLog('\nFirebase Configuration Check:');
     const requiredConfigFields = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
     let configIssues = 0;
     
     requiredConfigFields.forEach(field => {
         if (firebaseConfig[field]) {
-            console.log(`✅ ${field}: Configured`);
+            devLog(`OK ${field}: Configured`);
         } else {
-            console.log(`❌ ${field}: Missing`);
+            devLog(`X ${field}: Missing`);
             configIssues++;
         }
     });
     
-    console.log('📋 Firebase config summary:', {
+    devLog('Firebase config summary:', {
         projectId: firebaseConfig.projectId,
         authDomain: firebaseConfig.authDomain,
         apiKey: firebaseConfig.apiKey ? '***' + firebaseConfig.apiKey.slice(-4) : 'MISSING',
@@ -5083,79 +5307,79 @@ function comprehensiveFirebaseCheck() {
     });
     
     // Check 3: Environment Detection
-    console.log('\n🌐 Environment Check:');
+    devLog('\nEnvironment Check:');
     if (window.location.protocol === 'file:') {
-        console.log('⚠️ Running locally - Firebase features are disabled for security');
-        console.log('💡 To test Firebase features, deploy to a web server or use Firebase Hosting');
+        devLog('WARN Running locally - Firebase features are disabled for security');
+        devLog('To test Firebase features, deploy to a web server or use Firebase Hosting');
         return;
     }
-    console.log('✅ Running on web server - Firebase features enabled');
+    devLog('OK Running on web server - Firebase features enabled');
     
     // Check 4: Firebase App Initialization
-    console.log('\n🚀 Firebase App Initialization Check:');
+    devLog('\nFirebase App Initialization Check:');
     try {
         if (firebase.apps.length > 0) {
-            console.log('✅ Firebase app initialized successfully');
-            console.log('📱 App name:', firebase.apps[0].name);
+            devLog('OK Firebase app initialized successfully');
+            devLog('App name:', firebase.apps[0].name);
         } else {
-            console.log('❌ Firebase app not initialized');
+            devLog('X Firebase app not initialized');
         }
     } catch (error) {
-        console.error('❌ Error checking Firebase app:', error);
+        console.error('Error checking Firebase app:', error);
     }
     
     // Check 5: Authentication Service
-    console.log('\n🔐 Authentication Service Check:');
+    devLog('\nAuthentication Service Check:');
     if (auth && typeof auth.onAuthStateChanged === 'function') {
-        console.log('✅ Auth service available');
+        devLog('OK Auth service available');
         
         // Test auth state
         auth.onAuthStateChanged(user => {
             if (user) {
-                console.log('✅ User is signed in:', {
+                devLog('OK User is signed in:', {
                     displayName: user.displayName,
                     email: user.email,
                     uid: user.uid
                 });
             } else {
-                console.log('ℹ️ No user currently signed in');
+                devLog('No user currently signed in');
             }
         }, error => {
-            console.error('❌ Auth state change error:', error);
+            console.error('Auth state change error:', error);
         });
     } else {
-        console.log('❌ Auth service not available');
+        devLog('X Auth service not available');
     }
     
     // Check 6: Firestore Database
-    console.log('Firestore Database Check:');
+    devLog('Firestore Database Check:');
     if (typeof db !== 'undefined' && db) {
-        console.log('Firestore database object available');
+        devLog('Firestore database object available');
 
         // Test Firestore connection with a simple read
         db.collection('leaderboard').limit(1).get()
             .then(() => {
-                console.log('Firestore read test successful');
-                console.log('Leaderboard collection accessible');
+                devLog('Firestore read test successful');
+                devLog('Leaderboard collection accessible');
             })
             .catch(error => {
                 console.error('Firestore read test failed:', error);
                 if (error.code === 'permission-denied') {
-                    console.log('Permission denied - Check Firestore security rules');
+                    devLog('Permission denied - Check Firestore security rules');
                     showFirebaseErrorMessage('Firestore denied access. Deploy the latest security rules and make sure you are signed in.', false);
                 } else if (error.code === 'unavailable') {
-                    console.log('Service unavailable - Check internet connection');
+                    devLog('Service unavailable - Check internet connection');
                     showFirebaseErrorMessage('Firestore service is unavailable. Check your connection and try again.', true);
                 } else {
-                    console.log('Other Firestore error - Verify Firebase project configuration');
+                    devLog('Other Firestore error - Verify Firebase project configuration');
                 }
             });
     } else {
-        console.log('Firestore database object not available');
+        devLog('Firestore database object not available');
     }
 
     // Check 7: DOM Elements for Firebase Features
-    console.log('\n🎮 Firebase UI Elements Check:');
+    devLog('\nFirebase UI Elements Check:');
     const firebaseElements = {
         'leaderboard-modal': document.getElementById('leaderboard-modal'),
         'google-signin-btn': document.getElementById('google-signin-btn'),
@@ -5169,50 +5393,50 @@ function comprehensiveFirebaseCheck() {
     let missingElements = 0;
     Object.entries(firebaseElements).forEach(([name, element]) => {
         if (element) {
-            console.log(`✅ ${name}: Found`);
+            devLog(`OK ${name}: Found`);
         } else {
-            console.log(`❌ ${name}: Missing`);
+            devLog(`X ${name}: Missing`);
             missingElements++;
         }
     });
     
     // Check 8: Firebase Functions Test
-    console.log('\n🧪 Firebase Functions Test:');
+    devLog('\nFirebase Functions Test:');
     
     // Test sign-in function
     if (typeof signInWithGoogle === 'function') {
-        console.log('✅ signInWithGoogle function: Available');
+        devLog('OK signInWithGoogle function: Available');
     } else {
-        console.log('❌ signInWithGoogle function: Missing');
+        devLog('X signInWithGoogle function: Missing');
     }
     
     // Test save score function
     if (typeof saveScoreToLeaderboard === 'function') {
-        console.log('✅ saveScoreToLeaderboard function: Available');
+        devLog('OK saveScoreToLeaderboard function: Available');
     } else {
-        console.log('❌ saveScoreToLeaderboard function: Missing');
+        devLog('X saveScoreToLeaderboard function: Missing');
     }
     
     // Summary
-    console.log('\n📊 Firebase System Summary:');
-    console.log(`Configuration Issues: ${configIssues}`);
-    console.log(`Missing UI Elements: ${missingElements}`);
+    devLog('\nFirebase System Summary:');
+    devLog(`Configuration Issues: ${configIssues}`);
+    devLog(`Missing UI Elements: ${missingElements}`);
     
     if (window.location.protocol === 'file:') {
-        console.log('⚠️ Local environment - Deploy to test Firebase features');
+        devLog('WARN Local environment - Deploy to test Firebase features');
     } else if (configIssues === 0 && missingElements === 0) {
-        console.log('🎉 Firebase system appears to be properly configured!');
-        console.log('💡 Test sign-in and leaderboard features in the game');
+        devLog('Firebase system appears to be properly configured!');
+        devLog('Test sign-in and leaderboard features in the game');
     } else {
-        console.log('⚠️ Some issues detected - see details above');
+        devLog('WARN Some issues detected - see details above');
     }
     
-    console.log('\n🔧 Troubleshooting Tips:');
-    console.log('1. Make sure Firebase project is created and configured');
-    console.log('2. Check that Google Sign-In is enabled in Firebase Console');
-    console.log('3. Verify your domain is in the authorized domains list');
-    console.log('4. Ensure Firestore database is created with proper rules');
-    console.log('5. Check browser console for any JavaScript errors');
+    devLog('\nTroubleshooting Tips:');
+    devLog('1. Make sure Firebase project is created and configured');
+    devLog('2. Check that Google Sign-In is enabled in Firebase Console');
+    devLog('3. Verify your domain is in the authorized domains list');
+    devLog('4. Ensure Firestore database is created with proper rules');
+    devLog('5. Check browser console for any JavaScript errors');
 }
 
 // Wait for Firestore to be ready with proper connection
@@ -5222,7 +5446,7 @@ function waitForFirestoreReady(maxAttempts = 10, delayMs = 300) {
 
     function attemptConnection() {
       attempts++;
-      console.log(`🔄 Attempting Firestore connection (${attempts}/${maxAttempts})...`);
+      devLog(`Attempting Firestore connection (${attempts}/${maxAttempts})...`);
 
       if (!db) {
         if (attempts < maxAttempts) {
@@ -5236,20 +5460,20 @@ function waitForFirestoreReady(maxAttempts = 10, delayMs = 300) {
       // Try a simple read to verify connection
       db.collection('leaderboard').limit(1).get()
         .then(() => {
-          console.log(`✅ Firestore connected successfully on attempt ${attempts}`);
+          devLog(`OK Firestore connected successfully on attempt ${attempts}`);
           resolve();
         })
         .catch((error) => {
           if (error.code === 'permission-denied') {
             // Permission denied means we're connected, just no access to this specific query
             // This is actually fine - the connection works
-            console.log(`✅ Firestore connected (permission check on attempt ${attempts})`);
+            devLog(`OK Firestore connected (permission check on attempt ${attempts})`);
             resolve();
           } else if (attempts < maxAttempts) {
-            console.log(`⚠️ Connection attempt ${attempts} failed, retrying...`);
+            devLog(`WARN Connection attempt ${attempts} failed, retrying...`);
             setTimeout(attemptConnection, delayMs);
           } else {
-            console.error('❌ Firestore connection failed after maximum attempts');
+            console.error('Firestore connection failed after maximum attempts');
             reject(error);
           }
         });
@@ -5261,61 +5485,61 @@ function waitForFirestoreReady(maxAttempts = 10, delayMs = 300) {
 
 // Test Firebase connection (for debugging)
 function testFirebaseConnection() {
-  console.log('🔍 Testing Firebase connection...');
+  devLog('Testing Firebase connection...');
   if (typeof firebase === 'undefined') {
-    console.error('❌ Firebase is not loaded! Check if Firebase SDKs are properly included.');
+    console.error('Firebase is not loaded! Check if Firebase SDKs are properly included.');
     showFirebaseErrorMessage('Firebase SDK not loaded. Please refresh the page.', true);
     return;
   }
 
-  console.log('✅ Firebase SDK loaded successfully');
-  console.log('📋 Firebase config:', {
+  devLog('OK Firebase SDK loaded successfully');
+  devLog('Firebase config:', {
     projectId: firebaseConfig.projectId,
     authDomain: firebaseConfig.authDomain,
     apiKey: firebaseConfig.apiKey ? '***' + firebaseConfig.apiKey.slice(-4) : 'MISSING'
   });
 
   if (window.location.protocol === 'file:') {
-    console.log('⚠️ Running locally - Firebase features will be limited');
+    devLog('WARN Running locally - Firebase features will be limited');
     return;
   }
 
   if (!db) {
-    console.error('❌ Firestore (db) is not initialized!');
+    console.error('Firestore (db) is not initialized!');
     return;
   }
 
   // Try to access leaderboard collection (only if connection is ready)
   db.collection('leaderboard').limit(1).get()
     .then((snapshot) => {
-      console.log('✅ Firestore connection successful!');
-      console.log(`📊 Leaderboard has ${snapshot.size} entries`);
+      devLog('OK Firestore connection successful!');
+      devLog(`Leaderboard has ${snapshot.size} entries`);
     })
     .catch(error => {
       // Don't show error to user during initial connection test
       // Only log it for debugging (reduced verbosity since waitForFirestoreReady handles this)
       if (error.code === 'permission-denied') {
-        console.log('ℹ️ Firestore connection confirmed (permission check passed)');
+        devLog('INFO Firestore connection confirmed (permission check passed)');
       } else if (error.code !== 'unavailable') {
         // Only log if it's not a temporary unavailable error
-        console.warn('⚠️ Firestore test query failed:', error.code);
+        devWarn('WARN Firestore test query failed:', error.code);
       }
     });
 
   // Test Auth connection
   if (!auth) {
-    console.error('❌ Auth is not initialized!');
+    console.error('Auth is not initialized!');
     return;
   }
 
   auth.onAuthStateChanged(user => {
     if (user) {
-      console.log('✅ Auth connection successful! User:', user.displayName);
+      devLog('OK Auth connection successful! User:', user.displayName);
     } else {
-      console.log('✅ Auth connection successful! No user signed in.');
+      devLog('OK Auth connection successful! No user signed in.');
     }
   }, error => {
-    console.error('❌ Auth connection failed:', error);
+    console.error('Auth connection failed:', error);
     handleFirebaseError(error, 'Auth connection test');
   });
 }
@@ -5327,58 +5551,58 @@ function testFirebaseConnection() {
 
 // --- Enhanced Firebase Error Handling ---
 function handleFirebaseError(error, context = 'Firebase operation') {
-    console.error(`❌ ${context} failed:`, error);
+    console.error(`${context} failed:`, error);
     
     let userMessage = '';
     let shouldRetry = false;
     
     switch (error.code) {
         case 'unavailable':
-            userMessage = '⚠️ Network connection issue. Please check your internet connection and try again.';
+            userMessage = 'Network connection issue. Please check your internet connection and try again.';
             shouldRetry = true;
             break;
         case 'permission-denied':
-            userMessage = '❌ Access denied. Please sign in again.';
+            userMessage = 'Access denied. Please sign in again.';
             shouldRetry = false;
             break;
         case 'not-found':
-            userMessage = '❌ Resource not found. Please refresh the page.';
+            userMessage = 'Resource not found. Please refresh the page.';
             shouldRetry = false;
             break;
         case 'already-exists':
-            userMessage = '⚠️ Resource already exists.';
+            userMessage = 'Resource already exists.';
             shouldRetry = false;
             break;
         case 'resource-exhausted':
-            userMessage = '⚠️ Service temporarily unavailable. Please try again later.';
+            userMessage = 'Service temporarily unavailable. Please try again later.';
             shouldRetry = true;
             break;
         case 'failed-precondition':
-            userMessage = '❌ Operation failed. Please refresh and try again.';
+            userMessage = 'Operation failed. Please refresh and try again.';
             shouldRetry = false;
             break;
         case 'aborted':
-            userMessage = '⚠️ Operation was cancelled.';
+            userMessage = 'Operation was cancelled.';
             shouldRetry = true;
             break;
         case 'out-of-range':
-            userMessage = '❌ Invalid data. Please check your input.';
+            userMessage = 'Invalid data. Please check your input.';
             shouldRetry = false;
             break;
         case 'unimplemented':
-            userMessage = '❌ Feature not available.';
+            userMessage = 'Feature not available.';
             shouldRetry = false;
             break;
         case 'internal':
-            userMessage = '⚠️ Internal error. Please try again later.';
+            userMessage = 'Internal error. Please try again later.';
             shouldRetry = true;
             break;
         case 'unauthenticated':
-            userMessage = '❌ Please sign in to continue.';
+            userMessage = 'Please sign in to continue.';
             shouldRetry = false;
             break;
         default:
-            userMessage = `⚠️ ${error.message || 'An unexpected error occurred.'}`;
+            userMessage = `${error.message || 'An unexpected error occurred.'}`;
             shouldRetry = true;
     }
     
@@ -5411,13 +5635,13 @@ function showFirebaseErrorMessage(message, canRetry = false) {
     
     errorDiv.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 18px;">⚠️</span>
+            <span style="font-size: 18px;">!</span>
             <div>
                 <div style="font-weight: bold; margin-bottom: 5px;">Firebase Error</div>
                 <div>${message}</div>
                 ${canRetry ? '<button onclick="retryFirebaseOperation()" style="margin-top: 10px; padding: 5px 10px; background: white; color: #f44336; border: none; border-radius: 4px; cursor: pointer;">Retry</button>' : ''}
             </div>
-            <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; margin-left: auto;">×</button>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; margin-left: auto;">x</button>
         </div>
     `;
     
@@ -5432,7 +5656,7 @@ function showFirebaseErrorMessage(message, canRetry = false) {
 }
 
 function retryFirebaseOperation() {
-    console.log('🔄 Retrying Firebase operation...');
+    devLog('Retrying Firebase operation...');
     
     // Test connection
     testFirebaseConnection();
@@ -5445,7 +5669,7 @@ function retryFirebaseOperation() {
 
 // Enhanced connection test with detailed diagnostics
 function enhancedFirebaseConnectionTest() {
-    console.log('🔍 Running Enhanced Firebase Connection Test...');
+    devLog('Running Enhanced Firebase Connection Test...');
     
     const tests = {
         internet: false,
@@ -5459,19 +5683,19 @@ function enhancedFirebaseConnectionTest() {
     fetch('https://www.google.com/favicon.ico', { mode: 'no-cors' })
         .then(() => {
             tests.internet = true;
-            console.log('✅ Internet connectivity: OK');
+            devLog('OK Internet connectivity: OK');
         })
         .catch(() => {
-            console.error('❌ Internet connectivity: FAILED');
+            console.error('Internet connectivity: FAILED');
             showFirebaseErrorMessage('No internet connection detected. Please check your network.', true);
         });
     
     // Test 2: Firebase SDK
     if (typeof firebase !== 'undefined') {
         tests.firebaseSDK = true;
-        console.log('✅ Firebase SDK: Loaded');
+        devLog('OK Firebase SDK: Loaded');
     } else {
-        console.error('❌ Firebase SDK: Not loaded');
+        console.error('Firebase SDK: Not loaded');
         showFirebaseErrorMessage('Firebase SDK not loaded. Please refresh the page.', true);
         return;
     }
@@ -5479,9 +5703,9 @@ function enhancedFirebaseConnectionTest() {
     // Test 3: Firebase Configuration
     if (firebaseConfig && firebaseConfig.apiKey && firebaseConfig.projectId) {
         tests.firebaseConfig = true;
-        console.log('✅ Firebase Configuration: Valid');
+        devLog('OK Firebase Configuration: Valid');
     } else {
-        console.error('❌ Firebase Configuration: Invalid');
+        console.error('Firebase Configuration: Invalid');
         showFirebaseErrorMessage('Firebase configuration is invalid.', false);
         return;
     }
@@ -5491,39 +5715,39 @@ function enhancedFirebaseConnectionTest() {
         db.collection('test').doc('connection-test').get()
             .then(() => {
                 tests.firestore = true;
-                console.log('✅ Firestore Connection: OK');
+                devLog('OK Firestore Connection: OK');
             })
             .catch(error => {
-                console.error('❌ Firestore Connection: FAILED', error);
+                console.error('Firestore Connection: FAILED', error);
                 handleFirebaseError(error, 'Firestore connection test');
             });
     } else {
-        console.error('❌ Firestore: Not initialized');
+        console.error('Firestore: Not initialized');
     }
     
     // Test 5: Auth Connection
     if (auth) {
         auth.onAuthStateChanged(user => {
             tests.auth = true;
-            console.log('✅ Auth Connection: OK', user ? `User: ${user.displayName}` : 'No user');
+            devLog('OK Auth Connection: OK', user ? `User: ${user.displayName}` : 'No user');
         }, error => {
-            console.error('❌ Auth Connection: FAILED', error);
+            console.error('Auth Connection: FAILED', error);
             handleFirebaseError(error, 'Auth connection test');
         });
     } else {
-        console.error('❌ Auth: Not initialized');
+        console.error('Auth: Not initialized');
     }
     
     // Summary after 3 seconds
     setTimeout(() => {
-        console.log('📊 Connection Test Summary:', tests);
+        devLog('Connection Test Summary:', tests);
         const failedTests = Object.entries(tests).filter(([key, value]) => !value).map(([key]) => key);
         
         if (failedTests.length > 0) {
-            console.warn('⚠️ Failed tests:', failedTests);
+            devWarn('WARN Failed tests:', failedTests);
             showFirebaseErrorMessage(`Connection issues detected: ${failedTests.join(', ')}. Some features may not work properly.`, true);
         } else {
-            console.log('🎉 All connection tests passed!');
+            devLog('All connection tests passed!');
         }
     }, 3000);
 }
@@ -5707,49 +5931,81 @@ function fetchAndDisplayLeaderboard() {
     }
 }
 
-// Removed local rendering helpers; handled by LeaderboardService
+// Show the leaderboard modal after a game completes (handles submission + refresh)
+async function showLeaderboardAfterGame(score, time, options = {}) {
+    const { submitScore = true, levelNumber } = options;
+    const finalScore = parseInt(score, 10) || 0;
+    const finalTime = parseInt(time, 10) || 0;
+    const resolvedLevel = levelNumber || currentGameLevel || 1;
 
-// Removed error handler; service will report
+    devLog('[Leaderboard] showLeaderboardAfterGame invoked', {
+        level: resolvedLevel,
+        finalScore,
+        finalTime,
+        submitScore
+    });
 
+    if (typeof ensureAuthLoaded === 'function') {
+        try {
+            await ensureAuthLoaded();
+        } catch (error) {
+            devWarn('[Leaderboard] ensureAuthLoaded failed:', error);
+        }
+    }
 
+    const authManager = window.AuthManager;
+    const user = authManager && typeof authManager.getUser === 'function'
+        ? authManager.getUser()
+        : null;
 
-// Removed deprecated local submission
+    if (submitScore && !user) {
+        devLog('[Leaderboard] No signed-in user; prompting via modal.');
+    }
 
-// This function is no longer needed to submit the score, just to show the modal
+    if (submitScore && user) {
+        try {
+            await updateLeaderboardScore(resolvedLevel, finalScore);
+            devLog('[Leaderboard] Score submitted', {
+                level: resolvedLevel,
+                score: finalScore,
+                time: finalTime,
+                user: user.displayName || user.email || user.uid
+            });
+        } catch (error) {
+            console.error('[Leaderboard] Score submission failed:', error);
+            devWarn('[Leaderboard] Score submission failed:', error);
+        }
+    }
+
+    if (typeof window.LeaderboardService !== 'undefined' && typeof window.LeaderboardService.refresh === 'function') {
+        window.LeaderboardService.refresh();
+    }
+
+    if (submitScore && typeof showLeaderboardModal === 'function') {
+        setTimeout(async () => {
+            try {
+                await showLeaderboardModal();
+            } catch (error) {
+                devWarn('[Leaderboard] Failed to open leaderboard modal:', error);
+            }
+        }, 250);
+    }
+}
+
+if (typeof window !== 'undefined') {
+    window.showLeaderboardAfterGame = showLeaderboardAfterGame;
+}
+
 // --- END LEADERBOARD LOGIC ---
 
-// --- AUTHENTICATION SETUP ---
-// Removed legacy auth listener; handled by AuthManager
 
-// ... existing code ...
-function showEndScreen(stats) {
-// ... existing code ...
-    // Check and award achievements
-    const newAchievements = checkAchievements(stats);
 
-    // --- NEW: LEVEL UNLOCK & LEADERBOARD LOGIC ---
-    if (stats.correctPct >= LEVEL_PASS_PERCENTAGE) {
-        // Unlock next level if applicable
-        if (currentGameLevel < allLevels.length) {
-            const progress = getPlayerProgress();
-            const nextLevel = currentGameLevel + 1;
-            if (nextLevel > progress.highestLevelUnlocked) {
-                progress.highestLevelUnlocked = nextLevel;
-                savePlayerProgress(progress);
-                // Display unlock message if no other achievement was shown
-                if (newAchievements.length === 0) {
-                    const achievementTitle = document.getElementById('achievement-title');
-                    if(achievementTitle) {
-                        achievementTitle.textContent = `Congratulations! You've unlocked Level ${nextLevel}!`;
-                    }
-                }
-            }
-        }
-        // Update leaderboard with the score from the completed level
-        updateLeaderboardScore(currentGameLevel, stats.score);
-    }
-    
-    // Display the end screen
-    const gameScreen = document.getElementById('game');
-// ... existing code ...
-}
+
+
+
+
+
+
+
+
+

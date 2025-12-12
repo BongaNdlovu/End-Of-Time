@@ -3,7 +3,7 @@
  * Displays before starting Level 3
  */
 
-const tutorialLevel3 = {
+window.tutorialLevel3 = {
     level: 3,
     title: "Level 3: Scripture Memory",
     subtitle: "Fill in the Blanks",

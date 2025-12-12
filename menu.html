@@ -15,7 +15,7 @@
     <link rel="dns-prefetch" href="https://securetoken.googleapis.com">
 
     <link rel="preload" href="menu-styles.min.css?v=20250201a" as="style">
-<link rel="preload" href="menu.min.js" as="script">
+<link rel="preload" href="menu.js" as="script">
 
     <title>End of Time - Hub Menu</title>
     <link rel="stylesheet" href="menu-styles.min.css?v=20250201a" data-fallback="menu-styles.css?v=20250201a" onerror="if(!this.dataset.fallbackApplied){this.dataset.fallbackApplied='true';this.href=this.dataset.fallback;}">
@@ -82,11 +82,12 @@
                     <div class="menu-glow"></div>
                 </div>
                 
-                <div class="menu-item" data-action="openAcademy" tabindex="0">
+                <div class="menu-item locked coming-soon" data-action="comingSoon" tabindex="-1" aria-disabled="true" data-soon-label="End of Time Academy">
                     <div class="menu-icon" aria-hidden="true"></div>
                     <h2>End of Time Academy</h2>
-                    <p>Study mode - Learn and practice your faith</p>
+                    <p>Study mode - Launching soon</p>
                     <div class="menu-glow"></div>
+                    <div class="badge">Coming Soon</div>
                 </div>
 
                 <div class="menu-item" data-action="openMagazine" tabindex="0">
@@ -96,7 +97,7 @@
                     <div class="menu-glow"></div>
                 </div>
                 
-                <div class="menu-item locked coming-soon" data-action="comingSoon" tabindex="-1" aria-disabled="true">
+                <div class="menu-item locked coming-soon" data-action="comingSoon" tabindex="-1" aria-disabled="true" data-soon-label="End of Time Prayer Network">
                     <div class="menu-icon" aria-hidden="true"></div>
                     <h2>End of Time Prayer Network</h2>
                     <p>Unite in prayer with believers worldwide</p>
@@ -124,7 +125,7 @@
     <audio id="audio-hover" src="Transition.wav" preload="none"></audio>
     <audio id="audio-select" src="Transition 2.wav" preload="none"></audio>
     <audio id="audio-bg" src="soundtrack 2.mp3" preload="none" loop></audio>
-    <script src="menu.min.js" defer data-fallback="menu.js" onerror="if(!this.dataset.fallbackApplied){this.dataset.fallbackApplied='true';this.src=this.dataset.fallback;}"></script>
+    <script src="menu.js" defer></script>
 
 </body>
 </html>

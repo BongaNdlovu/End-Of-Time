@@ -1,6 +1,11 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Helper to ensure requests include a valid App Check token
+    function hasValidAppCheck() {
+      return request.app == null || request.app.token == null || request.app.token.valid;
+    }
+
     // ============================================
     // GAME COLLECTIONS (Used by trivia game)
     // ============================================
@@ -16,55 +21,60 @@ service cloud.firestore {
     }
 
     // ============================================
-    // FIREBASE FUNCTIONS COLLECTIONS
-    // (Used by server-side Cloud Functions only - not accessed by game client)
+    // Prayer Network collections have been removed
     // ============================================
-    // Note: The following collections are managed by Cloud Functions for the
-    // "End of Time Prayer Network" feature. If you're not using that feature,
-    // you can safely remove these rules.
-
-    // Global rule for collectionGroup queries on 'interactions'
-    match /{path=**}/interactions/{interactionId} {
-      allow read: if true;
-    }
-
-    // Prayers collection
-    match /prayers/{prayerId} {
-      allow read: if true;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
-    }
-
-    // Interactions subcollection
-    match /prayers/{prayerId}/interactions/{interactionId} {
-      allow read: if true;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
-    }
-
-    // Notifications
-    match /notifications/{notificationId} {
-      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
-      // Allow creating a notification for another user if authenticated and actorId matches caller
-      allow create: if request.auth != null && request.resource.data.actorId == request.auth.uid && request.resource.data.userId is string;
-      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
-    }
-
-    // Email queue (write-only for authenticated clients; reads by Admin SDK)
-    match /emailQueue/{docId} {
-      allow read: if false; // clients should not read the email queue
-      allow create: if request.auth != null
-                    && request.resource.data.actorId == request.auth.uid
-                    && request.resource.data.recipientUserId is string
-                    && request.resource.data.to is string
-                    && request.resource.data.type in ['prayer_received', 'comment_received']
-                    && request.resource.data.createdAt == request.time;
-      allow update, delete: if false; // updates done by Admin SDK
-    }
 
     // User profiles
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, write: if request.auth != null
+                          && hasValidAppCheck()
+                          && request.auth.uid == userId;
+    }
+
+    // ============================================
+    // PRESENTATION/ACADEMY COLLECTIONS
+    // ============================================
+
+    // Comments collection for presentations
+    match /comments/{commentId} {
+      // Anyone can read comments (public visibility)
+      allow read: if true;
+
+      // Authenticated users (including anonymous) can create comments with validation
+      allow create: if request.auth != null
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 1000
+        && request.resource.data.author is string
+        && request.resource.data.author.size() > 0
+        && request.resource.data.author.size() <= 100
+        && request.resource.data.presentationId is string
+        && request.resource.data.presentationId.matches('presentation-[0-9]+')
+        && (request.resource.data.userId == request.auth.uid || request.resource.data.userId == 'anonymous');
+
+      // Users can update/delete only their own comments
+      allow update, delete: if request.auth != null
+        && request.auth.uid == resource.data.userId;
+    }
+
+    // Quiz completions collection
+    match /quiz_completions/{completionId} {
+      // Anyone can read aggregated stats (for analytics)
+      allow read: if true;
+
+      // Authenticated users can create their own completion records
+      allow create: if request.auth != null
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.score is int
+        && request.resource.data.score >= 0
+        && request.resource.data.total is int
+        && request.resource.data.total > 0
+        && request.resource.data.score <= request.resource.data.total
+        && request.resource.data.presentationId is string
+        && request.resource.data.timestamp == request.time;
+
+      // No updates or deletes allowed (preserve historical data)
+      allow update, delete: if false;
     }
 
     // Test collection for validation (optional - can be removed in production)

@@ -4,7 +4,7 @@
  * Focus: Basic biblical knowledge
  */
 
-const level1Questions = [
+export const level1Questions = [
     {
         "id": "L1Q001",
         "question": "In the beginning, God created what two main things?",
@@ -756,3 +756,7 @@ const level1Questions = [
         "explanation": "Genesis 50:26, the last verse of the book, states, 'So Joseph died, being an hundred and ten years old: and they embalmed him, and he was put in a coffin in Egypt.'"
     }
 ];
+if (typeof window !== 'undefined') {
+    window.level1Questions = level1Questions;
+}
+export default level1Questions;

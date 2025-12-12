@@ -1034,33 +1034,35 @@ if (doublePointsBtn) {
     };
 }
 
-freezeTimeBtn.onclick = function() {
-    if (faithTokens < 1 || freezeTimeActive) return;
-    faithTokens--;
-    powerUpsUsed++;
-    freezeTimeActive = true;
-    updateFaithTokens(true);
-    freezeTimeBtn.classList.add('hint-highlight');
-    timerDiv.style.color = '#2196f3';
-    timerDiv.style.textShadow = '0 0 10px #2196f3';
+if (freezeTimeBtn) {
+    freezeTimeBtn.onclick = function() {
+        if (faithTokens < 1 || freezeTimeActive) return;
+        faithTokens--;
+        powerUpsUsed++;
+        freezeTimeActive = true;
+        updateFaithTokens(true);
+        freezeTimeBtn.classList.add('hint-highlight');
+        timerDiv.style.color = '#2196f3';
+        timerDiv.style.textShadow = '0 0 10px #2196f3';
 
-    const timerToPause = isTimeAttackMode ? globalTimer : timer;
-    clearInterval(timerToPause);
-    
-    setTimeout(() => {
-        freezeTimeBtn.classList.remove('hint-highlight');
-        timerDiv.style.color = '';
-        timerDiv.style.textShadow = '';
+        const timerToPause = isTimeAttackMode ? globalTimer : timer;
+        clearInterval(timerToPause);
         
-        if (isTimeAttackMode) {
-            startGlobalTimer(); // Resume global timer
-        } else {
-            startTimer();
-        }
-        freezeTimeActive = false;
-        updateFaithTokens();
-    }, 5000);
-};
+        setTimeout(() => {
+            freezeTimeBtn.classList.remove('hint-highlight');
+            timerDiv.style.color = '';
+            timerDiv.style.textShadow = '';
+            
+            if (isTimeAttackMode) {
+                startGlobalTimer(); // Resume global timer
+            } else {
+                startTimer();
+            }
+            freezeTimeActive = false;
+            updateFaithTokens();
+        }, 5000);
+    };
+}
 
 // Removed revive button onclick function
 
@@ -1073,7 +1075,9 @@ wagerFeedback.style.marginTop = '0.25rem';
 wagerFeedback.style.fontStyle = 'italic';
 wagerFeedback.style.color = '#ffd700';
 wagerFeedback.style.textAlign = 'center';
-wagerInput.parentNode.appendChild(wagerFeedback);
+if (wagerInput && wagerInput.parentNode) {
+    wagerInput.parentNode.appendChild(wagerFeedback);
+}
 
 let currentWager = 5;
 let maxWagerValue = 20;
@@ -1109,42 +1113,44 @@ function updateWagerFeedback() {
  * Validates and updates the wager input value
  * Ensures the wager is within valid range and provides visual feedback
  */
-wagerInput.addEventListener('input', () => {
-    // Remove non-numeric characters
-    wagerInput.value = wagerInput.value.replace(/[^0-9]/g, '');
-    
-    // Parse and validate the value
-    let val = parseInt(wagerInput.value, 10);
-    
-    // Handle empty or invalid input
-    if (wagerInput.value === '' || isNaN(val)) {
-        val = 1;
-        wagerInput.value = '1';
-    }
-    
-    // Enforce min/max constraints
-    if (val < 1) {
-        val = 1;
-        wagerInput.value = '1';
-    }
-    
-    if (val > maxWagerValue) {
-        val = maxWagerValue;
-        wagerInput.value = maxWagerValue.toString();
-    }
-    
-    currentWager = val;
-    updateWagerFeedback();
-});
-
-// Add a blur event to ensure valid value when focus leaves the input
-wagerInput.addEventListener('blur', () => {
-    if (wagerInput.value === '' || isNaN(parseInt(wagerInput.value, 10))) {
-        wagerInput.value = '1';
-        currentWager = 1;
+if (wagerInput) {
+    wagerInput.addEventListener('input', () => {
+        // Remove non-numeric characters
+        wagerInput.value = wagerInput.value.replace(/[^0-9]/g, '');
+        
+        // Parse and validate the value
+        let val = parseInt(wagerInput.value, 10);
+        
+        // Handle empty or invalid input
+        if (wagerInput.value === '' || isNaN(val)) {
+            val = 1;
+            wagerInput.value = '1';
+        }
+        
+        // Enforce min/max constraints
+        if (val < 1) {
+            val = 1;
+            wagerInput.value = '1';
+        }
+        
+        if (val > maxWagerValue) {
+            val = maxWagerValue;
+            wagerInput.value = maxWagerValue.toString();
+        }
+        
+        currentWager = val;
         updateWagerFeedback();
-    }
-});
+    });
+
+    // Add a blur event to ensure valid value when focus leaves the input
+    wagerInput.addEventListener('blur', () => {
+        if (wagerInput.value === '' || isNaN(parseInt(wagerInput.value, 10))) {
+            wagerInput.value = '1';
+            currentWager = 1;
+            updateWagerFeedback();
+        }
+    });
+}
 
 // --- Game Logic Modifications ---
 let roundSize = 20;

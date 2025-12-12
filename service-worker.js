@@ -1,303 +1,116 @@
-﻿const CACHE_NAME = 'sda-trivia-v17';
+﻿// Minimal Service Worker for End of Time
+// Caches core assets and serves cache-first for same-origin static files
 
+const CACHE_NAME = 'sda-trivia-v29';
 const CORE_ASSETS = [
   '/',
   '/menu.html',
   '/index.html',
-  '/styles.css',
-  '/dark-theme.css',
-  '/menu-styles.css',
-  '/menu-dark-theme.css',
-  '/audio-manager.js',
-  '/script.js',
-  '/polyfills.js',
-  '/firebase-config.js',
-  '/questions.js',
-  // questions-level*.js are lazy-loaded per level selection
+  '/index1.html',
+  '/End Of Time Academy.html',
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
-  '/Fear God.png'
-];
-
-const MEDIA_ASSETS = [
-  // Background videos (exact casing)
-  '/Background.mp4',
-  '/Background_1.mp4',
-  // Level videos (exact casing)
-  '/video 1.mp4',
-  '/video 2.mp4',
-  '/video 3.mp4',
-  '/video 4.mp4',
-  '/video 5.mp4',
-  '/video 6.mp4',
-  '/video 7.mp4',
-  // UI/FX audio
-  '/Transition.wav',
-  '/Transition 2.wav',
-  '/correct_answer_1.wav',
-  '/correct_answer_2.wav',
-  '/WRONG BUZZER 7.wav',
-  '/Motionarray_Floraphonic_Gameshow_Buzzer_1.wav',
-  '/Semi Impact Risers-001.wav',
+  '/slides.json',
+  '/firebase-config.js',
+  // CSS
+  '/styles.min.css',
+  '/dark-theme.min.css',
+  '/menu-styles.min.css',
+  '/menu-dark-theme.min.css',
+  '/styles1.min.css',
+  '/styles1.min.css.map',
+  '/tailwind-output.min.css',
+  // JS
+  '/polyfills.js',
+  '/script.min.js',
+  '/app.min.js',
+  '/app.min.js.map',
+  '/auth-leaderboard.js',
+  '/menu.min.js',
+  '/manifest-loader.min.js',
+  '/level-video-map.min.js',
+  '/genesis-web-vitals.min.js',
+  '/genesis-animations.min.js',
+  // Audio assets
   '/ticking_time.wav',
-  '/Key Facts.wav',
-  // Gameplay SFX pools
-  '/Correct 1.wav',
-  '/Correct 2.wav',
-  '/Correct 3.wav',
-  '/Correct 4.wav',
-  '/Correct_5.wav',
-  '/Correct 6.wav',
-  '/Correct 7.wav',
-  '/Correct 8.wav',
-  '/Correct 9.wav',
-  '/Correct 10.wav',
-  '/Incorrect 1.wav',
-  '/Incorrect 2.wav',
-  '/Incorrect 3.wav',
-  '/Incorrect 4.wav',
-  '/Incorrect 5.wav',
-  '/Incorrect 6.wav',
-  '/Incorrect 7.wav',
-  '/Incorrect 8.wav',
-  '/Incorrect 9.wav',
-  '/Incorrect 10.wav',
-  // Background music tracks
-  '/soundtrack 2.mp3',
-  '/soundtrack 3.mp3',
-  '/soundtrack 4.mp3',
-  '/soundtrack 5.mp3',
-  '/soundtrack 6.mp3',
-  '/soundtrack 7.mp3',
-  '/soundtrack 8.mp3'
+  // EOTA bundles
+  '/dist/eota/index.html',
+  '/dist/eota/styles-compiled.css',
+  '/dist/eota/styles-inline.css',
+  '/dist/eota/core.js',
+  '/dist/eota/tabs.js',
+  '/dist/eota/analytics.js'
 ];
-
-const TRANSITION_SVGS = [
-  '/1.svg',
-  '/2.svg',
-  '/3.svg',
-  '/4.svg',
-  '/5.svg',
-  '/6.svg',
-  '/7.svg',
-  '/8.svg',
-  '/9.svg',
-  '/10.svg',
-  '/11.svg',
-  '/12.svg',
-  '/13.svg',
-  '/14.svg',
-  '/15.svg',
-  '/16.svg',
-  '/17.svg'
-];
-
-function isSupportedProtocol(protocol) {
-  return protocol === 'http:' || protocol === 'https:';
-}
-
-async function precacheAssets(cache, urls, options = {}) {
-  const { skipPartial = true } = options;
-  for (const url of urls) {
-    const request = new Request(url, { cache: 'reload' });
-    try {
-      const response = await fetch(request);
-      if (!response.ok) {
-        throw new Error(`Request for ${url} failed with status ${response.status}`);
-      }
-      if (skipPartial && response.status === 206) {
-        console.warn(`[SW] Skipping ${url} due to partial (206) response.`);
-        continue;
-      }
-      await cache.put(request, response.clone());
-    } catch (error) {
-      console.warn(`[SW] Precaching skipped for ${url}:`, error);
-    }
-  }
-}
-
-function shouldCache(request, response) {
-  if (!response || !response.ok || response.status === 206) {
-    return false;
-  }
-  if (response.type !== 'basic') {
-    return false;
-  }
-  const requestURL = new URL(request.url);
-  return requestURL.origin === self.location.origin;
-}
-
-async function handleNavigationRequest(request) {
-  const cache = await caches.open(CACHE_NAME);
-  try {
-    const networkResponse = await fetch(request);
-    if (shouldCache(request, networkResponse)) {
-      cache.put(request, networkResponse.clone()).catch(() => {});
-    }
-    return networkResponse;
-  } catch (error) {
-    console.warn('[SW] Navigation request failed, using cached fallback.', error);
-    const cachedResponse = await cache.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-    const menuFallback = await cache.match('/menu.html');
-    const gameFallback = await cache.match('/index.html');
-    if (menuFallback) {
-      return menuFallback;
-    }
-    if (gameFallback) {
-      return gameFallback;
-    }
-    return new Response('Offline', { status: 503, statusText: 'Offline' });
-  }
-}
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
-    const cache = await caches.open(CACHE_NAME);
-    await precacheAssets(cache, CORE_ASSETS);
-    await self.skipWaiting();
+    try {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.addAll(CORE_ASSETS.filter(Boolean));
+    } catch (e) {
+      // best-effort
+    }
+    self.skipWaiting();
   })());
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)));
-    await self.clients.claim();
+    await Promise.all(keys.map((k) => { if (k !== CACHE_NAME) return caches.delete(k); }));
+    self.clients.claim();
   })());
 });
 
 self.addEventListener('fetch', (event) => {
-  const { request } = event;
+  const req = event.request;
+  const url = new URL(req.url);
+  if (req.method !== 'GET') return;
 
-  if (request.method !== 'GET') {
-    return;
-  }
-
-  const requestURL = new URL(request.url);
-  // Ignore requests with non-HTTP(S) protocols (e.g., chrome-extension://, moz-extension://, data:, blob:)
-  if (!isSupportedProtocol(requestURL.protocol)) {
-    return;
-  }
-  const sameOrigin = requestURL.origin === self.location.origin;
-
-  // Allow Firebase reserved endpoints to pass through untouched (e.g., /__/auth/*)
-  const isFirebaseReservedPath = requestURL.pathname.startsWith('/__/');
-  if (isFirebaseReservedPath) {
-    return;
-  }
-
-  // Skip Firebase Auth URLs completely (Google OAuth, Firebase domains)
-  const isAuthURL = requestURL.hostname.includes('google.com') ||
-                    requestURL.hostname.includes('googleapis.com') ||
-                    requestURL.hostname.includes('firebase.com') ||
-                    requestURL.hostname.includes('firebaseapp.com') ||
-                    requestURL.hostname.includes('gstatic.com');
-
-  if (isAuthURL || !sameOrigin) {
-    // Let cross-origin requests and auth requests pass through untouched
-    return;
-  }
-
-  if (request.headers.has('range')) {
-    event.respondWith(
-      fetch(request).catch(async () => {
-        const cache = await caches.open(CACHE_NAME);
-        const cached = await cache.match(request);
-        if (cached) return cached;
-        const pathname = new URL(request.url).pathname;
-        const ext = (pathname.split('.').pop() || '').toLowerCase();
-        const types = { wav: 'audio/wav', mp3: 'audio/mpeg', m4a: 'audio/mp4', mp4: 'video/mp4', webm: 'video/webm', ogg: 'application/octet-stream' };
-        return new Response('', { status: 404, statusText: 'Not Found', headers: types[ext] ? { 'Content-Type': types[ext] } : {} });
-      })
-    );
-    return;
-  }
-
-  if (request.mode === 'navigate') {
-    event.respondWith(handleNavigationRequest(request));
-    return;
-  }
-
-  // Stale-While-Revalidate for JS/CSS
-  const pathname = requestURL.pathname || '';
-  const isJSorCSS = /\.(js|css)$/i.test(pathname);
-  if (isJSorCSS) {
+  // Navigation requests: network-first, fall back to cache
+  if (req.mode === 'navigate') {
     event.respondWith((async () => {
-      const cache = await caches.open(CACHE_NAME);
-      const cached = await cache.match(request);
-      const networkPromise = fetch(request).then(async (response) => {
-        if (shouldCache(request, response)) {
-          try { await cache.put(request, response.clone()); } catch (_) {}
-        }
-        return response;
-      }).catch(() => cached);
-      return cached || networkPromise;
+      try {
+        const net = await fetch(req);
+        const cache = await caches.open(CACHE_NAME);
+        cache.put(req, net.clone()).catch(() => {});
+        return net;
+      } catch (e) {
+        const cache = await caches.open(CACHE_NAME);
+        const cached = await cache.match(req, { ignoreSearch: true });
+        return cached || Response.error();
+      }
     })());
     return;
   }
 
-  event.respondWith((async () => {
-    const cached = await caches.match(request);
-    if (cached) {
-      return cached;
-    }
-
-    try {
-      const response = await fetch(request);
-      if (shouldCache(request, response)) {
-        const cache = await caches.open(CACHE_NAME);
-        cache.put(request, response.clone()).catch(() => {});
-      }
-      return response;
-    } catch (error) {
-      const url = new URL(request.url);
-      const pathname = url.pathname;
-      const isAudioFile = /\.(wav|mp3|ogg|m4a)$/i.test(pathname);
-      const isVideoFile = /\.(mp4|webm|ogg)$/i.test(pathname);
-
-      if (isAudioFile || isVideoFile) {
-        console.warn('[SW] Media file failed to load (non-critical):', pathname);
-        const ext = (pathname.split('.').pop() || '').toLowerCase();
-        const typeByExt = {
-          wav: 'audio/wav',
-          mp3: 'audio/mpeg',
-          ogg: isAudioFile ? 'audio/ogg' : 'video/ogg',
-          m4a: 'audio/mp4',
-          mp4: 'video/mp4',
-          webm: 'video/webm'
-        };
-        const headers = typeByExt[ext] ? { 'Content-Type': typeByExt[ext] } : {};
-        return new Response('', { status: 404, statusText: 'Not Found', headers });
-      }
-
-      console.warn('[SW] Fetch failed, attempting fallback.', error);
+  // Same-origin static: cache-first
+  if (url.origin === self.location.origin) {
+    event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
-      const fallback = await cache.match('/menu.html') || await cache.match('/index.html');
-      if (fallback) {
-        return fallback;
+      const cached = await cache.match(req, { ignoreSearch: true });
+      if (cached) return cached;
+      try {
+        const net = await fetch(req);
+        if (net && net.ok) cache.put(req, net.clone()).catch(() => {});
+        return net;
+      } catch (e) {
+        // Return cached version if available, otherwise return an empty response
+        // instead of Response.error() to avoid console warnings
+        if (cached) return cached;
+        // For audio/video files, return an empty response with proper content type
+        const ext = url.pathname.split('.').pop().toLowerCase();
+        if (['wav', 'mp3', 'ogg', 'mp4', 'webm'].includes(ext)) {
+          return new Response(new ArrayBuffer(0), {
+            status: 200,
+            statusText: 'OK (offline placeholder)',
+            headers: { 'Content-Type': ext === 'mp4' || ext === 'webm' ? 'video/' + ext : 'audio/' + ext }
+          });
+        }
+        // For other resources, return a basic offline response
+        return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
       }
-      // Return a generic 404 response instead of throwing
-      return new Response('Not Found', { status: 404, statusText: 'Not Found' });
-    }
-  })());
-});
-
-self.addEventListener('message', (event) => {
-  try {
-    if (event.ports && event.ports[0]) {
-      event.ports[0].postMessage({ status: 'received' });
-    } else if (self.clients && self.clients.matchAll) {
-      event.waitUntil(
-        self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
-          clients.forEach((client) => client.postMessage({ status: 'received' }));
-        })
-      );
-    }
-  } catch (error) {
-    console.warn('[SW] Message handler error:', error);
+    })());
   }
 });

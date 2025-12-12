@@ -27,7 +27,6 @@
  *
  * DEPENDENCIES:
  * -----------
- * - questions.js: Contains the trivia question database
  * - script.js: Main game logic and functionality
  * - styles.css: Styling for the game interface
  * - confetti-js: External library for confetti animations
@@ -51,6 +50,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Removed: meta refresh was causing immediate redirect back to menu -->
     <meta name="theme-color" content="#000000">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -58,55 +58,52 @@
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://apis.google.com" crossorigin>
     <link rel="preconnect" href="https://firebase.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://securetoken.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://apis.google.com">
+    <link rel="dns-prefetch" href="https://firebase.googleapis.com">
+    <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com">
+    <link rel="dns-prefetch" href="https://securetoken.googleapis.com">
+
+    <link rel="preload" href="styles.min.css?v=20250127a" as="style" fetchpriority="high">
 
     <title>End of Time</title>
-    <script src="polyfills.js" defer></script>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="dark-theme.css">
+    <script type="module" src="polyfills.js"></script>
+    <link rel="stylesheet" href="styles.min.css?v=20250127a" data-fallback="styles.css?v=20250127a" onerror="if(!this.dataset.fallbackApplied){this.dataset.fallbackApplied='true';this.href=this.dataset.fallback;}">
+    <link rel="stylesheet" href="dark-theme.min.css?v=20250127a" data-fallback="dark-theme.css?v=20250127a" onerror="if(!this.dataset.fallbackApplied){this.dataset.fallbackApplied='true';this.href=this.dataset.fallback;}">
+    <style id="mobile-form-quick-wins">
+        @media (max-width: 640px) {
+            .touch-form-control {
+                min-height: 48px;
+                padding: 0.65rem 0.85rem;
+                border-radius: 14px;
+                font-size: 1rem;
+                line-height: 1.2;
+            }
+            .touch-form-control:focus {
+                outline: 2px solid rgba(212, 175, 55, 0.6);
+                outline-offset: 2px;
+            }
+            .touch-checkbox {
+                width: 28px !important;
+                height: 28px !important;
+            }
+        }
+    </style>
     <!-- App Icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
     <link rel="shortcut icon" href="icon-192.png">
     <link rel="apple-touch-icon" href="icon-192.png">
     <!-- Remove Google Fonts, we will use local Montserrat fonts -->
-    <script src="questions.js" defer></script>
     <!-- questions-level*.js will be lazy-loaded per level selection -->
 
     <!-- Tutorial files -->
     <!-- tutorial-level*.js will be lazy-loaded when opened -->
-
-    <!-- Firebase Config MUST be loaded before auth-leaderboard.js and script.js -->
-    <script src="firebase-config.js" defer></script>
-
-    <script src="audio-manager.js" defer></script>
-    <script src="key-facts.js" defer></script>
-    <!-- auth-leaderboard.js will be lazy-loaded on demand -->
-    <script>
-        // Explicit level-to-video mapping based on your filenames
-        window.LEVEL_VIDEO_MAP = {
-            1: 'video 1.mp4',
-            2: 'video 2.mp4',
-            3: 'video 3.mp4',
-            4: 'video 4.mp4',
-            5: 'video 5.mp4',
-            6: 'video 6.mp4',
-            7: 'video 7.mp4'
-        };
-    </script>
-    <script src="script.js?v=8" defer></script>
-    <!-- Confetti library will be lazy-loaded when celebration triggers -->
-    <!-- Manifest only loaded when not running locally -->
-    <script>
-        if (window.location.protocol !== 'file:') {
-            const link = document.createElement('link');
-            link.rel = 'manifest';
-            link.href = 'manifest.json';
-            document.head.appendChild(link);
-        }
-    </script>
 </head>
 <body>
-<video id="background-video" src="Background.mp4" autoplay loop muted playsinline preload="metadata" poster="1.jpg" style="position:fixed;top:0;left:0;width:100vw;height:100svh;object-fit:cover;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen;"></video>
+<video id="background-video" data-default-src="background 1.mp4" loop muted autoplay playsinline preload="metadata" style="position:fixed;top:0;left:0;width:100vw;height:100svh;object-fit:cover;z-index:0;pointer-events:none;opacity:0.45;mix-blend-mode:screen;"></video>
     <div id="loading-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(30,32,40,0.95);display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.4s;">
                     <div style="color:#ffffff;font-family:'Montserrat-Regular', Arial, sans-serif;font-size:2.2rem;text-shadow:0 0 12px #111;">Loading End of Time...</div>
         <div id="loading-progress" style="margin-top:1.2rem;width:60vw;max-width:320px;height:12px;background:#333;border-radius:8px;overflow:hidden;">
@@ -115,7 +112,7 @@
     </div>
     <div id="logo-container" style="display: flex; align-items: center; justify-content: center; margin-top: 2rem; margin-bottom: 1.5rem; gap: 0.7rem;">
         <span style="font-family: 'Inter', Arial, sans-serif; font-size: 1.2rem; color: #fff; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">Powered By</span>
-        <img src="Fear God.png" alt="Fear God Imprints Logo" style="height: 80px; width: auto; vertical-align: middle; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));" class="logo-pulse" />
+        <img src="Fear God.png" alt="Fear God Imprints Logo" style="height: 80px; width: auto; vertical-align: middle; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));" class="logo-pulse" decoding="async" />
     </div>
     <div class="feedback-overlay"></div>
     <div id="key-fact-overlay" aria-live="polite" aria-atomic="true" style="display:none;"></div>
@@ -138,7 +135,7 @@
         <!-- Time Attack Mode (Disabled) -->
         <div id="time-attack-container" style="margin-bottom: 1.2rem; text-align: center; display: none; justify-content: center; align-items: center; gap: 0.5rem;">
             <label for="time-attack-checkbox" style="font-family: 'Montserrat-Regular', Arial, sans-serif; font-size: 1.1rem; color: #8B0000; opacity: 0.5; pointer-events: none; user-select: none;">Time Attack Mode (disabled)</label>
-            <input type="checkbox" id="time-attack-checkbox" style="width: 20px; height: 20px; cursor: not-allowed; opacity: 0.5;" disabled>
+            <input type="checkbox" id="time-attack-checkbox" class="touch-checkbox" style="width: 20px; height: 20px; cursor: not-allowed; opacity: 0.5;" disabled>
         </div>
 
         <!-- Sign-in status section -->
@@ -148,7 +145,7 @@
             </div>
             <div id="signin-buttons" style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
                 <button id="main-signin-btn" class="comic-button" style="background: #4285f4; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 1rem; cursor: pointer;">
-                    <img src="https://developers.google.com/identity/images/g-logo.png" style="width:16px;height:16px;vertical-align:middle;margin-right:0.4rem;">Sign In
+                    <img src="https://developers.google.com/identity/images/g-logo.png" style="width:16px;height:16px;vertical-align:middle;margin-right:0.4rem;" loading="lazy" decoding="async">Sign In
                 </button>
                 <button id="main-signout-btn" class="comic-button" style="background: #666; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 1rem; cursor: pointer; display: none;">Sign Out</button>
                 <button id="view-leaderboard-btn" class="comic-button" style="background: #388e3c; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 1rem; cursor: pointer;">View Leaderboard</button>
@@ -171,9 +168,9 @@
                 <div class="quiz-header__grid">
                     <div class="quiz-card quiz-card--tokens">
                         <div class="quiz-card__body">
-                            <span class="quiz-card__label">💰 Faith Tokens</span>
+                            <span class="quiz-card__label">?? Faith Tokens</span>
                             <div class="game-logo-container">
-                                <img src="Fear God.png" alt="Fear God Imprints Logo" class="game-logo logo-pulse" />
+                                <img src="Fear God.png" alt="Fear God Imprints Logo" class="game-logo logo-pulse" decoding="async" />
                             </div>
                             <div class="quiz-card__metric">
                                 <div id="faith-tokens">0</div>
@@ -183,7 +180,7 @@
 
                     <div class="quiz-card quiz-card--score">
                         <div class="quiz-card__body">
-                            <span class="quiz-card__label">📊 Score</span>
+                            <span class="quiz-card__label">Score</span>
                             <div class="score-solo" id="score-solo">
                                 <p>Score: 0</p>
                                 <p>Streak: 0</p>
@@ -201,7 +198,7 @@
 
                       <div class="quiz-card quiz-card--timer">
                         <div class="quiz-card__body">
-                            <span class="quiz-card__label">⏱️ Time</span>
+                            <span class="quiz-card__label">Time</span>
                             <div class="timer">
                                 <div class="digital-timer">
                                     <div class="timer-display">
@@ -215,7 +212,7 @@
 
                     <div class="quiz-card quiz-card--category">
                         <div class="quiz-card__body">
-                            <span class="quiz-card__label">📚 Category</span>
+                            <span class="quiz-card__label">Category</span>
                             <div class="quiz-card__metric">
                                 <div id="current-category">Genesis</div>
                             </div>
@@ -236,7 +233,7 @@
                 <div class="quiz-toolbar__wager">
                     <div id="wager-container">
                         <label for="wager-input">Wager:</label>
-                        <input type="number" id="wager-input" min="1" max="20" value="5">
+                        <input type="number" id="wager-input" class="touch-form-control" min="1" max="20" value="5" inputmode="numeric" pattern="[0-9]*" autocomplete="off" enterkeyhint="done">
                     </div>
                 </div>
             </section>
@@ -246,11 +243,11 @@
                     <aside class="quiz-visual" aria-hidden="true">
                         <div class="quiz-card quiz-card--visual">
                             <div class="quiz-card__body">
-                                <span class="quiz-card__label">🖼️ Visual Aid</span>
+                                <span class="quiz-card__label">Visual Aid</span>
                                 <div class="quiz-visual__body">
                                     <div class="quiz-visual__overlay"></div>
                                     <div class="quiz-visual__placeholder">
-                                        <div class="visual-icon">📖</div>
+                                        <div class="visual-icon"></div>
                                         <p>Scripture Illustration</p>
                                     </div>
                                 </div>
@@ -262,13 +259,13 @@
                     <section class="quiz-interaction">
                         <div class="quiz-card quiz-card--question">
                         <div class="quiz-card__body">
-                            <span class="quiz-card__label">❓ Question</span>
+                            <span class="quiz-card__label">Question</span>
                             <div class="question-options-container">
                                 <div class="question">
                                     <p>Question text goes here...</p>
                                 </div>
                                 <button id="show-options" class="comic-button quiz-action-button" style="display: none;">
-                                    <span>🔄</span> Show Options
+                                    <span>??</span> Show Options
                                 </button>
                                 <div class="options"></div>
                             </div>
@@ -276,12 +273,10 @@
                         </div>
                         <div id="deep-insight-div" class="quiz-card quiz-card--explanation" style="display:none;">
                             <div class="quiz-card__body">
-                                <h4 class="explanation-title">💡 Explanation:</h4>
+                                <h4 class="explanation-title">Explanation:</h4>
                                 <div id="deep-insight-content"></div>
                                 <div class="explanation-actions">
-                                    <button id="deep-insight-next-btn" class="comic-button">
-                                        <span>➡️</span> Continue
-                                    </button>
+                                    <button id="deep-insight-next-btn" class="comic-button">Continue</button>
                                 </div>
                             </div>
                         </div>
@@ -299,7 +294,7 @@
     <div class="game-over" id="game-over" style="display:none;">
         <!-- Add logo to game-over screen -->
         <div class="game-logo-container">
-            <img src="Fear God.png" alt="Fear God Imprints Logo" class="game-logo logo-pulse" />
+            <img src="Fear God.png" alt="Fear God Imprints Logo" class="game-logo logo-pulse" decoding="async" />
         </div>
         <h2>Game Over!</h2>
         <div id="fun-fact-box-end"></div>
@@ -308,7 +303,7 @@
             <p>Correct Answers: 0/100</p>
             <p>Longest Streak: 0</p>
             <p id="results-solo-time" style="display: none;"></p>
-            <div class="stars">★ ★ ★ ★ ★</div>
+            <div class="stars">? ? ? ? ?</div>
             <p id="achievement-title">Achievement Unlocked: Novice Guardian!</p>
         </div>
         <div class="results-teams" id="results-teams" style="display:none;">
@@ -332,6 +327,7 @@
             <ul class="leaderboard-list"></ul>
         </div>
         <div class="buttons">
+            <button id="continue-next-level-btn" class="comic-button" style="display:none;">Continue to Next Level</button>
             <button id="play-again" class="comic-button">Play Again</button>
             <button id="download" class="comic-button">Download Answers</button>
         </div>
@@ -345,15 +341,16 @@
     </div>
 
     <div id="top-right-controls">
-        <button id="main-menu" class="comic-button" aria-label="Go to hub menu" style="display: block;">🏠 Hub</button>
-        <button id="back-to-game-menu" class="comic-button" aria-label="Back to game menu" style="display:none;">⬅ Game Menu</button>
+        <button id="main-menu" class="comic-button" aria-label="Go to hub menu" style="display: block;">Hub</button>
+        <button id="back-to-game-menu" class="comic-button" aria-label="Back to game menu" style="display:none;">Back to Game Menu</button>
         <button id="exit" class="comic-button" style="display:none;">Exit Game</button>
-        <button id="mute-toggle" class="comic-button" aria-label="Mute or unmute sound" style="display: none;">🔊</button>
-        <button id="contrast-toggle" class="comic-button" aria-label="Toggle high contrast mode" style="display: block;">🌓</button>
-        <button id="reset-tutorials-btn" class="comic-button" aria-label="Reset tutorials" style="display: block;">♻ Reset Tutorials</button>
-        <button id="reset-videos-btn" class="comic-button" aria-label="Reset videos" style="display: block;">♻ Reset Videos</button>
+        <button id="mute-toggle" class="comic-button" aria-label="Mute or unmute sound" style="display: none;">Sound</button>
+        <button id="contrast-toggle" class="comic-button" aria-label="Toggle high contrast mode" style="display: block;">Contrast</button>
+        <button id="reset-tutorials-btn" class="comic-button" aria-label="Reset tutorials" style="display: block;">Reset Tutorials</button>
+        <button id="reset-videos-btn" class="comic-button" aria-label="Reset videos" style="display: block;">Reset Videos</button>
+        <button id="background-video-toggle" class="comic-button" aria-label="Toggle animated background video" style="display: block;">Background Video: On</button>
         <div id="volume-control" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; padding: 0.35rem 0.6rem; border-radius: 12px; background: rgba(0,0,0,0.35); backdrop-filter: blur(8px);">
-            <span id="volume-icon" aria-hidden="true" style="font-size: 1.1rem;">🔊</span>
+            <span id="volume-icon" aria-hidden="true" style="font-size: 1.1rem;"></span>
             <input type="range" id="volume-slider" min="0" max="100" value="100" step="1" aria-label="Master volume" style="width: 120px;">
         </div>
     </div>
@@ -364,33 +361,29 @@
     <audio id="audio-timeup" src="Motionarray_Floraphonic_Gameshow_Buzzer_1.wav" preload="none"></audio>
     <audio id="audio-riser" src="Semi Impact Risers-001.wav" preload="none"></audio>
     <!-- Remove old background music -->
-    <!-- <audio id="audio-bg" src="2024-12-08_-_Detective_Revelation_-_www.FesliyanStudios.com.mp3" preload="auto" loop></audio> -->
+    <!-- <audio id="audio-bg" src="2024-12-08_-_Detective_Revelation_-_www.FesliyanStudios.com.mp3" preload="metadata" loop></audio> -->
     <!-- Background music tracks -->
-    <audio id="audio-bg-2" src="soundtrack 2.mp3" preload="none"></audio>
-    <audio id="audio-bg-3" src="soundtrack 3.mp3" preload="none"></audio>
-    <audio id="audio-bg-4" src="soundtrack 4.mp3" preload="none"></audio>
-    <audio id="audio-bg-5" src="soundtrack 5.mp3" preload="none"></audio>
-    <audio id="audio-bg-6" src="soundtrack 6.mp3" preload="none"></audio>
-    <audio id="audio-bg-7" src="soundtrack 7.mp3" preload="none"></audio>
-    <audio id="audio-bg-8" src="soundtrack 8.mp3" preload="none"></audio>
-    <audio id="audio-timer-tick" src="Motionarray_Floraphonic_Gameshow_Buzzer_1.wav" preload="none"></audio>
+    <audio id="audio-bg-2" data-bg-track="true" src="soundtrack 2.mp3" preload="none"></audio>
+    <audio id="audio-bg-3" data-bg-track="true" src="soundtrack 3.mp3" preload="none"></audio>
+    <audio id="audio-bg-4" data-bg-track="true" src="soundtrack 4.mp3" preload="none"></audio>
+    <audio id="audio-bg-5" data-bg-track="true" src="soundtrack 5.mp3" preload="none"></audio>
+    <audio id="audio-bg-6" data-bg-track="true" src="soundtrack 6.mp3" preload="none"></audio>
+    <audio id="audio-bg-7" data-bg-track="true" src="soundtrack 7.mp3" preload="none"></audio>
+    <audio id="audio-bg-8" data-bg-track="true" src="soundtrack 8.mp3" preload="none"></audio>
+    <audio id="audio-timer-tick" src="ticking_time.wav" preload="none"></audio>
     <audio id="audio-ticking-time" src="ticking_time.wav" preload="none"></audio>
     <audio id="audio-transition" src="Transition.wav" preload="none"></audio>
     <audio id="audio-transition2" src="Transition 2.wav" preload="none"></audio>
     <audio id="audio-key-fact" src="Key Facts.wav" preload="none"></audio>
     <!-- Firebase App (the core Firebase SDK) -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <!-- Firebase Auth -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <!-- Firebase Firestore -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <!-- Firebase Analytics (optional, used if measurementId is present) -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
     <!-- Leaderboard Modal -->
     <div id="leaderboard-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;background:linear-gradient(135deg,rgba(40,44,52,0.95),rgba(30,34,42,0.97));align-items:center;justify-content:center;flex-direction:column;backdrop-filter:blur(10px);">
       <div style="background:linear-gradient(145deg,#1a1a1a,#2a2a2a);border-radius:24px;box-shadow:0 8px 32px rgba(139,0,0,0.4),0 0 0 1px rgba(139,0,0,0.2);padding:2.5rem 3rem;max-width:95vw;width:900px;max-height:90vh;text-align:center;position:relative;display:flex;flex-direction:column;border:2px solid rgba(139,0,0,0.3);">
         <div style="position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:60%;height:4px;background:linear-gradient(90deg,transparent,#ffffff,transparent);border-radius:2px;"></div>
-        <h2 style="color:#ffffff;font-family:'Montserrat-Bold',Arial,sans-serif;margin-bottom:1.5rem;font-size:2.2rem;text-shadow:0 0 20px rgba(255,255,255,0.6);letter-spacing:1px;">🏆 Global Leaderboard</h2>
+        <h2 style="color:#ffffff;font-family:'Montserrat-Bold',Arial,sans-serif;margin-bottom:1.5rem;font-size:2.2rem;text-shadow:0 0 20px rgba(255,255,255,0.6);letter-spacing:1px;">Global Leaderboard</h2>
         <p style="color:#d1d8e0;font-size:1rem;margin-bottom:2rem;font-family:'Montserrat-Regular',Arial,sans-serif;">Top 100 Champions of Faith</p>
         
         <div id="auth-section" style="margin-bottom:1.5rem;padding:1rem;background:rgba(139,0,0,0.1);border-radius:12px;border:1px solid rgba(139,0,0,0.3);">
@@ -400,7 +393,7 @@
         </div>
         
         <label style="display:flex;align-items:center;justify-content:center;gap:0.5em;margin-bottom:1.5rem;color:#ffffff;font-family:'Montserrat-Regular',Arial,sans-serif;font-size:0.9rem;">
-          <input type="checkbox" id="optout-leaderboard" style="width:18px;height:18px;accent-color:#8B0000;"> Opt out of leaderboard
+          <input type="checkbox" id="optout-leaderboard" class="touch-checkbox" style="width:18px;height:18px;accent-color:#8B0000;"> Opt out of leaderboard
         </label>
         
         <div id="leaderboard-table-container" style="flex:1;overflow-y:auto;max-height:55vh;border:2px solid rgba(139,0,0,0.4);border-radius:16px;background:rgba(30,30,30,0.08);backdrop-filter:blur(10px);box-shadow:inset 0 2px 10px rgba(0,0,0,0.2);">
@@ -440,12 +433,12 @@
         <!-- Tutorial footer with buttons -->
         <div style="margin-top:2rem;padding-top:1.5rem;border-top:2px solid rgba(139,0,0,0.3);display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
           <label style="display:flex;align-items:center;gap:0.5rem;color:#cccccc;font-family:'Montserrat-Regular',Arial,sans-serif;font-size:0.95rem;cursor:pointer;">
-            <input type="checkbox" id="skip-tutorials-checkbox" style="width:18px;height:18px;accent-color:#8B0000;cursor:pointer;">
+            <input type="checkbox" id="skip-tutorials-checkbox" class="touch-checkbox" style="width:18px;height:18px;accent-color:#8B0000;cursor:pointer;">
             Don't show tutorials again
           </label>
         </div>
         <div style="display:flex;gap:1rem;justify-content:center;margin-top:1rem;">
-          <button id="start-level-btn" class="comic-button" style="background:linear-gradient(45deg,#8B0000,#6b0000);color:#fff;border:none;padding:1rem 2.5rem;border-radius:12px;font-size:1.2rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 20px rgba(139,0,0,0.5);transition:all 0.3s ease;font-family:'Montserrat-Bold',Arial,sans-serif;">Start Level! 🚀</button>
+          <button id="start-level-btn" class="comic-button" style="background:linear-gradient(45deg,#8B0000,#6b0000);color:#fff;border:none;padding:1rem 2.5rem;border-radius:12px;font-size:1.2rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 20px rgba(139,0,0,0.5);transition:all 0.3s ease;font-family:'Montserrat-Bold',Arial,sans-serif;">Start Level!</button>
         </div>
       </div>
     </div>
@@ -461,12 +454,17 @@
         </div>
         <div style="display:flex;gap:1rem;justify-content:center;align-items:center;flex-wrap:wrap;">
           <label id="skip-videos-label" style="display:flex;align-items:center;gap:0.5rem;color:#cccccc;font-family:'Montserrat-Regular',Arial,sans-serif;font-size:0.95rem;cursor:pointer;">
-            <input type="checkbox" id="skip-videos-checkbox" style="width:18px;height:18px;accent-color:#8B0000;cursor:pointer;">
+            <input type="checkbox" id="skip-videos-checkbox" class="touch-checkbox" style="width:18px;height:18px;accent-color:#8B0000;cursor:pointer;">
             Don't show videos again
           </label>
-          <button id="skip-video-btn" class="comic-button" style="background:linear-gradient(45deg,#8B0000,#6b0000);color:#fff;border:none;padding:0.8rem 1.4rem;border-radius:12px;font-size:1rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 20px rgba(139,0,0,0.5);transition:all 0.3s ease;font-family:'Montserrat-Bold',Arial,sans-serif;">Skip Video ▶️</button>
+          <button id="skip-video-btn" class="comic-button" style="background:linear-gradient(45deg,#8B0000,#6b0000);color:#fff;border:none;padding:0.8rem 1.4rem;border-radius:12px;font-size:1rem;cursor:pointer;font-weight:bold;box-shadow:0 4px 20px rgba(139,0,0,0.5);transition:all 0.3s ease;font-family:'Montserrat-Bold',Arial,sans-serif;">Skip Video</button>
         </div>
       </div>
     </div>
+
+    <script type="module" src="main-entry.js"></script>
 </body>
 </html>
+
+
+

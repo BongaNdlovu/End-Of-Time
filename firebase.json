@@ -11,16 +11,33 @@
       ".firebaserc",
       ".git/**",
       "node_modules/**",
+      "**/node_modules/**",
       "functions/**",
       "**/*.md",
       "**/*-debug.html",
       "**/*-test.html",
       "**/*.backup",
       "**/*.bak",
+      "**/.env*",
       "backups/**",
       "temp-playwright/**",
       "src/**",
       "scripts/**",
+      "academy/node_modules/**",
+      "academy/components/**",
+      "academy/services/**",
+      "academy/src/**",
+      "academy/assets/**",
+      "academy/data/**",
+      "academy/*.ts",
+      "academy/*.tsx",
+      "academy/*.json",
+      "academy/*.html",
+      "academy-app/**",
+      ".claude/**",
+      ".firebase/**",
+      ".factory/**",
+      ".github/**",
       ".cursor/**",
       "*.plan.md"
     ],
@@ -31,7 +48,7 @@
         "headers": [
           {
             "key": "Content-Security-Policy",
-              "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://www.google.com https://www.recaptcha.net https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.paperturn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.googleapis.com https://firebase.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://apis.google.com https://www.gstatic.com https://*.gstatic.com https://www.google.com https://www.recaptcha.net https://us-central1-end-of-time-94cd3.cloudfunctions.net https://*.cloudfunctions.net; frame-src 'self' https://accounts.google.com https://*.google.com https://www.google.com/recaptcha/ https://www.recaptcha.net/recaptcha/ https://*.gstatic.com https://*.firebaseapp.com https://*.web.app https://*.paperturn-view.com https://heyzine.com https://*.heyzine.com;"
+            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://www.google.com https://www.recaptcha.net https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.paperturn.com https://cdn.tailwindcss.com https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.googleapis.com https://firebase.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://apis.google.com https://www.gstatic.com https://*.gstatic.com https://www.google.com https://www.recaptcha.net https://us-central1-end-of-time-94cd3.cloudfunctions.net https://*.cloudfunctions.net; frame-src 'self' https://accounts.google.com https://*.google.com https://www.google.com/recaptcha/ https://www.recaptcha.net/recaptcha/ https://*.gstatic.com https://*.firebaseapp.com https://*.web.app https://*.paperturn-view.com https://heyzine.com https://*.heyzine.com;"
           },
           {
             "key": "X-Content-Type-Options",
@@ -100,7 +117,17 @@
       },
       {
         "source": "/academy",
-        "destination": "/End Of Time Academy.html",
+        "destination": "/academy/dist/index.html",
+        "type": 301
+      },
+      {
+        "source": "/End Of Time Academy.html",
+        "destination": "/academy/dist/index.html",
+        "type": 301
+      },
+      {
+        "source": "/End%20Of%20Time%20Academy.html",
+        "destination": "/academy/dist/index.html",
         "type": 301
       }
     ]

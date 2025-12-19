@@ -8,13 +8,14 @@ importScripts('https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-comp
 self.skipWaiting && self.skipWaiting();
 
 firebase.initializeApp({
-  apiKey: "AIzaSyA78bvzjP-b7K9TPCbIL3ttzPJr07VR8kY",
+  apiKey: "AIzaSyAl6zWpFj8Y2RmAiMaR8jauD1SahRTcld4",
   authDomain: "end-of-time-94cd3.firebaseapp.com",
+  databaseURL: "https://end-of-time-94cd3-default-rtdb.firebaseio.com",
   projectId: "end-of-time-94cd3",
-  storageBucket: "end-of-time-94cd3.appspot.com",
+  storageBucket: "end-of-time-94cd3.firebasestorage.app",
   messagingSenderId: "628602476853",
-  appId: "1:628602476853:web:181df03c3374465811147c",
-  measurementId: "G-E5R3NG1533"
+  appId: "1:628602476853:web:40e3a9fb40963e8811147c",
+  measurementId: "G-6L3NKYJFR5"
 });
 
 const messaging = firebase.messaging();

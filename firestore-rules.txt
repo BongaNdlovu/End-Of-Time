@@ -35,6 +35,45 @@ service cloud.firestore {
     // PRESENTATION/ACADEMY COLLECTIONS
     // ============================================
 
+    // ============================================
+    // END OF TIME ACADEMY (React app in /academy)
+    // ============================================
+
+    // User profile (private to the signed-in user)
+    match /academy_users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow create, update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if false;
+    }
+
+    // Study progress (authoritative - only server writes)
+    match /academy_progress/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    // Leaderboard (public read, server write only)
+    match /academy_leaderboard/{userId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Course library (readable by all, writable by authenticated contributors)
+    match /academy_courses/{courseId} {
+      allow read: if true;
+      allow create, update: if request.auth != null
+        && request.resource.data.id is string
+        && request.resource.data.id == courseId;
+      allow delete: if false;
+    }
+
+    // Curriculum courses (admin-managed, persisted)
+    match /academy_courses/{courseId} {
+      allow read: if true;
+      allow create, update: if request.auth != null;
+      allow delete: if false;
+    }
+
     // Comments collection for presentations
     match /comments/{commentId} {
       // Anyone can read comments (public visibility)

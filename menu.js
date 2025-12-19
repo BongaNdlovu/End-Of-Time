@@ -264,7 +264,7 @@
     function openAcademy() {
         playSelectSound();
         window.setTimeout(() => {
-            window.location.href = 'End Of Time Academy.html';
+            window.location.href = 'academy/dist/index.html';
         }, 500);
     }
 

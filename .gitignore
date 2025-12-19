@@ -17,6 +17,7 @@ firebase-debug.log
 Thumbs.db
 .vscode/
 .idea/
+.claude/
 
 # Tooling/workspace
 .cursor/
@@ -95,6 +96,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.env*
 
 # dataconnect generated files
 .dataconnect

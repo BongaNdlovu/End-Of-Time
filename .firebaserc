@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "end-of-time-94cd3"
-  }
+  },
+  "targets": {
+    "end-of-time-94cd3": {
+      "hosting": {
+        "production": [
+          "end-of-time-94cd3"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

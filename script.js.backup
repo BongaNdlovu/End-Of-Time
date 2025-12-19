@@ -1338,7 +1338,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let celebrationType = 'good';
             
             if (teamBlueScore > teamBlackScore) {
-                winnerText = '�� Blue Team Triumphs!';
+                winnerText = ' Blue Team Triumphs!';
                 celebrationType = 'excellent';
             } else if (teamBlackScore > teamBlueScore) {
                 winnerText = '⚫ Black Team Dominates!';
@@ -1453,7 +1453,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let icon = '';
             if (idx === 0) icon = '🥇';
             else if (idx === 1) icon = '🥈';
-            else if (idx === 2) icon = '��';
+            else if (idx === 2) icon = '';
             else icon = `${idx + 1}.`;
             
             // Check if current player

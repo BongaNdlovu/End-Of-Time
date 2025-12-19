@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
     "module": "commonjs",
-    "lib": ["ES2020"],
+    "target": "es2017",
     "outDir": "lib",
-    "strict": true,
-    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": false,
     "skipLibCheck": true
   },
-  "include": ["index.ts"]
+  "include": ["*.js"],
+  "exclude": ["node_modules", "lib"]
 }
-
